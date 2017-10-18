@@ -18,11 +18,18 @@
 //#define USE_MQTT_LIB
 //#define USE_GPS
 //#define USE_GSM
-#define USE_GSM_GATEWAY
+// #define USE_GSM_GATEWAY
+#define USE_REDONDA_BASIC
 
 //#define WIFI_TO_MQTT_BROKER
 //#define USE_CERT_PROGRAM
 //#define USE_PROD_PROGRAM
+
+#ifdef USE_REDONDA_BASIC
+#define WITH_1_TO_10_VOLTS
+#define WITH_HYST
+// #define WITH_TEMP_CONTROL
+#endif
 
 //-------- End Of Defines For Configuration ------
 
@@ -198,4 +205,3 @@ typedef enum {
 
 
 #endif /* HARD_H_ */
-

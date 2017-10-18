@@ -299,13 +299,135 @@ int main(void)
 	LED_OFF;
 //	EN_GPS_OFF;
 	EN_GPS_ON;
-	RELAY_ON;
-	//RELAY_OFF;
+	//RELAY_ON;
+	RELAY_OFF;
 
 	USART1Config();
 	USART2Config();
 
 	EXTIOff();
+
+#ifdef USE_REDONDA_BASIC
+//---------- Inicio Programa de Produccion Redonda Basic --------//
+	USART1Config();
+	AdcConfig();		//recordar habilitar sensor en adc.h
+
+#ifdef WITH_1_TO_10_VOLTS
+	TIM_3_Init ();
+#endif
+
+	TIM_16_Init();
+	TIM16Enable();
+
+	Usart1Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
+	Usart1Send((char *) (const char *) "  Features:\r\n");
+	#ifdef WITH_1_TO_10_VOLTS
+	Usart1Send((char *) (const char *) "  Dimmer 1 to 10V\r\n");
+	#endif
+	#ifdef WITH_HYST
+	Usart1Send((char *) (const char *) "  Night Hysteresis\r\n");
+	#endif
+	#ifdef WITH_TEMP_CONTROL
+	Usart1Send((char *) (const char *) "  Temp Control\r\n");
+	#endif
+
+	for (i = 0; i < 8; i++)
+	{
+		if (LED)
+			LED_OFF;
+		else
+			LED_ON;
+
+		Wait_ms (250);
+	}
+
+
+	timer_standby = 2000;
+
+	while (1)
+	{
+		switch (main_state)
+		{
+			case MAIN_INIT:
+				RelayOff();
+				LED_OFF;
+				FillPhotoBuffer();
+				FillTempBuffer();
+	#ifdef WITH_1_TO_10_VOLTS
+				Update_TIM3_CH1 (0);
+	#endif
+				main_state = LAMP_OFF;
+				break;
+
+			case LAMP_OFF:
+				if (!tt_relay_on_off)
+				{
+					if (GetPhoto() > VOLTAGE_PHOTO_ON)
+					{
+						main_state = LAMP_ON;
+						tt_relay_on_off = 10000;
+	#ifdef WITH_1_TO_10_VOLTS
+						Update_TIM3_CH1 (PWM_MIN);
+	#endif
+
+						RelayOn();
+						LED_ON;
+	#ifdef WITH_HYST
+						hours = 0;
+	#endif
+					}
+				}
+				break;
+
+			case LAMP_ON:
+				if (!tt_relay_on_off)
+				{
+	#ifdef WITH_HYST		//con Hysteresis apaga casi en el mismo punto en el que prende
+					hyst = GetHysteresis (hours);
+					if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+	#else
+					if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+	#endif
+					{
+						main_state = LAMP_OFF;
+	#ifdef WITH_1_TO_10_VOLTS
+						Update_TIM3_CH1 (0);
+	#endif
+						tt_relay_on_off = 10000;
+						RelayOff();
+						LED_OFF;
+					}
+				}
+
+	#ifdef WITH_1_TO_10_VOLTS
+				if (main_state == LAMP_ON)
+				{
+					one_to_ten = GetNew1to10 (GetPhoto());
+					Update_TIM3_CH1 (one_to_ten);
+				}
+	#endif
+				break;
+
+			default:
+				main_state = MAIN_INIT;
+				break;
+		}
+
+		if (!timer_standby)
+		{
+			sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), GetPhoto());
+			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
+			Usart1Send(s_lcd);
+			timer_standby = 2000;
+		}
+
+		//Cosas que no dependen del estado del programa
+		UpdateRelay ();
+		UpdateTemp();
+		UpdatePhotoTransistor();
+	}	//end while 1
+//---------- Fin Programa de Procduccion Redonda Basic--------//
+#endif	//USE_REDONDA_BASIC
 
 
 #ifdef USE_MQTT_LIB
