@@ -1,0 +1,4718 @@
+ARM GAS  /tmp/ccXup38D.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1	@ Tag_ABI_FP_denormal
+   5              		.eabi_attribute 21, 1	@ Tag_ABI_FP_exceptions
+   6              		.eabi_attribute 23, 3	@ Tag_ABI_FP_number_model
+   7              		.eabi_attribute 24, 1	@ Tag_ABI_align8_needed
+   8              		.eabi_attribute 25, 1	@ Tag_ABI_align8_preserved
+   9              		.eabi_attribute 26, 1	@ Tag_ABI_enum_size
+  10              		.eabi_attribute 30, 6	@ Tag_ABI_optimization_goals
+  11              		.eabi_attribute 34, 0	@ Tag_CPU_unaligned_access
+  12              		.eabi_attribute 18, 4	@ Tag_ABI_PCS_wchar_t
+  13              		.file	"tcp_transceiver.c"
+  14              	@ GNU C11 (GNU Tools for ARM Embedded Processors) version 5.2.1 20151202 (release) [ARM/embedded-5-
+  15              	@	compiled by GNU C version 4.7.4, GMP version 4.3.2, MPFR version 2.4.2, MPC version 0.8.1
+  16              	@ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+  17              	@ options passed:  -I . -I ./src -I ./cmsis_boot -I ./cmsis_core
+  18              	@ -I ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/inc
+  19              	@ -I ./inc -I ./cmsis_boot -imultilib armv6-m
+  20              	@ -iprefix /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/
+  21              	@ -isysroot /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../arm-none-eabi
+  22              	@ -D__USES_INITFINI__ src/tcp_transceiver.c -mcpu=cortex-m0 -mthumb
+  23              	@ -auxbase-strip src/tcp_transceiver.o -g -gdwarf-2 -O0 -Wall
+  24              	@ -fomit-frame-pointer -fdata-sections -ffunction-sections -fverbose-asm
+  25              	@ options enabled:  -faggressive-loop-optimizations -fauto-inc-dec
+  26              	@ -fchkp-check-incomplete-type -fchkp-check-read -fchkp-check-write
+  27              	@ -fchkp-instrument-calls -fchkp-narrow-bounds -fchkp-optimize
+  28              	@ -fchkp-store-bounds -fchkp-use-static-bounds
+  29              	@ -fchkp-use-static-const-bounds -fchkp-use-wrappers -fcommon
+  30              	@ -fdata-sections -fdelete-null-pointer-checks -fdwarf2-cfi-asm
+  31              	@ -fearly-inlining -feliminate-unused-debug-types -ffunction-cse
+  32              	@ -ffunction-sections -fgcse-lm -fgnu-runtime -fgnu-unique -fident
+  33              	@ -finline-atomics -fira-hoist-pressure -fira-share-save-slots
+  34              	@ -fira-share-spill-slots -fivopts -fkeep-static-consts
+  35              	@ -fleading-underscore -flifetime-dse -flto-odr-type-merging -fmath-errno
+  36              	@ -fmerge-debug-strings -fomit-frame-pointer -fpeephole
+  37              	@ -fprefetch-loop-arrays -freg-struct-return
+  38              	@ -fsched-critical-path-heuristic -fsched-dep-count-heuristic
+  39              	@ -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
+  40              	@ -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
+  41              	@ -fsched-stalled-insns-dep -fsemantic-interposition -fshow-column
+  42              	@ -fsigned-zeros -fsplit-ivs-in-unroller -fstdarg-opt
+  43              	@ -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+  44              	@ -ftree-coalesce-vars -ftree-cselim -ftree-forwprop -ftree-loop-if-convert
+  45              	@ -ftree-loop-im -ftree-loop-ivcanon -ftree-loop-optimize
+  46              	@ -ftree-parallelize-loops= -ftree-phiprop -ftree-reassoc -ftree-scev-cprop
+  47              	@ -funit-at-a-time -fverbose-asm -fzero-initialized-in-bss -mlittle-endian
+  48              	@ -mpic-data-is-text-relative -msched-prolog -mthumb
+  49              	@ -mvectorize-with-neon-quad
+  50              	
+  51              		.text
+  52              	.Ltext0:
+  53              		.cfi_sections	.debug_frame
+  54              		.comm	bufftcpsend,640,4
+  55              		.comm	ptcp,4,4
+  56              		.global	tcp_tx_state
+  57              		.section	.bss.tcp_tx_state,"aw",%nobits
+ARM GAS  /tmp/ccXup38D.s 			page 2
+
+
+  58              		.type	tcp_tx_state, %object
+  59              		.size	tcp_tx_state, 1
+  60              	tcp_tx_state:
+  61 0000 00       		.space	1
+  62              		.section	.rodata
+  63              		.align	2
+  64              	.LC0:
+  65 0000 6B416C69 		.ascii	"kAlive;\000"
+  65      76653B00 
+  66              		.align	2
+  67              	.LC2:
+  68 0008 67657461 		.ascii	"geta;\000"
+  68      3B00
+  69 000e 0000     		.align	2
+  70              	.LC4:
+  71 0010 6F302C30 		.ascii	"o0,0;\000"
+  71      3B00
+  72 0016 0000     		.align	2
+  73              	.LC6:
+  74 0018 6F302C31 		.ascii	"o0,1;\000"
+  74      3B00
+  75              		.section	.text.CheckTCPMessage,"ax",%progbits
+  76              		.align	2
+  77              		.global	CheckTCPMessage
+  78              		.code	16
+  79              		.thumb_func
+  80              		.type	CheckTCPMessage, %function
+  81              	CheckTCPMessage:
+  82              	.LFB0:
+  83              		.file 1 "src/tcp_transceiver.c"
+   1:src/tcp_transceiver.c **** /*
+   2:src/tcp_transceiver.c ****  * tcp_transceiver.c
+   3:src/tcp_transceiver.c ****  *
+   4:src/tcp_transceiver.c ****  *  Created on: 13/06/2016
+   5:src/tcp_transceiver.c ****  *      Author: Mariano
+   6:src/tcp_transceiver.c ****  */
+   7:src/tcp_transceiver.c **** 
+   8:src/tcp_transceiver.c **** #include "tcp_transceiver.h"
+   9:src/tcp_transceiver.c **** #include <string.h>
+  10:src/tcp_transceiver.c **** #include <stdio.h>
+  11:src/tcp_transceiver.c **** #include <stdlib.h>
+  12:src/tcp_transceiver.c **** #include "main_menu.h"
+  13:src/tcp_transceiver.c **** #include "ESP8266.h"
+  14:src/tcp_transceiver.c **** #include "uart.h"
+  15:src/tcp_transceiver.c **** 
+  16:src/tcp_transceiver.c **** 
+  17:src/tcp_transceiver.c **** 
+  18:src/tcp_transceiver.c **** 
+  19:src/tcp_transceiver.c **** //--- Externals -----------------------------------//
+  20:src/tcp_transceiver.c **** 
+  21:src/tcp_transceiver.c **** //extern volatile unsigned char data1[];
+  22:src/tcp_transceiver.c **** extern volatile unsigned char data[];
+  23:src/tcp_transceiver.c **** //
+  24:src/tcp_transceiver.c **** //#define data512		data1
+  25:src/tcp_transceiver.c **** #define data256		data
+  26:src/tcp_transceiver.c **** 
+  27:src/tcp_transceiver.c **** extern volatile unsigned short tcp_send_timeout;
+ARM GAS  /tmp/ccXup38D.s 			page 3
+
+
+  28:src/tcp_transceiver.c **** extern unsigned char esp_answer;
+  29:src/tcp_transceiver.c **** 
+  30:src/tcp_transceiver.c **** //--- Globals -------------------------------------//
+  31:src/tcp_transceiver.c **** char bufftcpsend [5] [SIZEOF_BUFFTCP_SEND];
+  32:src/tcp_transceiver.c **** char * ptcp;
+  33:src/tcp_transceiver.c **** unsigned char tcp_tx_state = 0;
+  34:src/tcp_transceiver.c **** 
+  35:src/tcp_transceiver.c **** 
+  36:src/tcp_transceiver.c **** //--- Module Functions ----------------------------//
+  37:src/tcp_transceiver.c **** 
+  38:src/tcp_transceiver.c **** enum TcpMessages CheckTCPMessage(char * d, unsigned char * new_room_bright, unsigned char * new_lam
+  39:src/tcp_transceiver.c **** {
+  84              		.loc 1 39 0
+  85              		.cfi_startproc
+  86 0000 00B5     		push	{lr}	@
+  87              	.LCFI0:
+  88              		.cfi_def_cfa_offset 4
+  89              		.cfi_offset 14, -4
+  90 0002 85B0     		sub	sp, sp, #20	@,,
+  91              	.LCFI1:
+  92              		.cfi_def_cfa_offset 24
+  93 0004 0390     		str	r0, [sp, #12]	@ d, d
+  94 0006 0291     		str	r1, [sp, #8]	@ new_room_bright, new_room_bright
+  95 0008 0192     		str	r2, [sp, #4]	@ new_lamp_bright, new_lamp_bright
+  96 000a 0093     		str	r3, [sp]	@ bytes, bytes
+  40:src/tcp_transceiver.c **** 	//reviso que tipo de mensaje tengo en data
+  41:src/tcp_transceiver.c **** 	if (strncmp((char *) (const char *) "kAlive;", (char *)d, (sizeof((char *) (const char *) "kAlive;
+  97              		.loc 1 41 0
+  98 000c 0399     		ldr	r1, [sp, #12]	@ tmp131, d
+  99 000e 474B     		ldr	r3, .L10	@ tmp132,
+ 100 0010 0322     		movs	r2, #3	@,
+ 101 0012 1800     		movs	r0, r3	@, tmp132
+ 102 0014 FFF7FEFF 		bl	strncmp	@
+ 103 0018 031E     		subs	r3, r0, #0	@ D.6459,,
+ 104 001a 0BD1     		bne	.L2	@,
+  42:src/tcp_transceiver.c **** 	{
+  43:src/tcp_transceiver.c **** 		strcpy ((char *) d, (char *) (d + 7));
+ 105              		.loc 1 43 0
+ 106 001c 039B     		ldr	r3, [sp, #12]	@ tmp133, d
+ 107 001e DA1D     		adds	r2, r3, #7	@ D.6460, tmp133,
+ 108 0020 039B     		ldr	r3, [sp, #12]	@ tmp134, d
+ 109 0022 1100     		movs	r1, r2	@, D.6460
+ 110 0024 1800     		movs	r0, r3	@, tmp134
+ 111 0026 FFF7FEFF 		bl	strcpy	@
+  44:src/tcp_transceiver.c **** 		*bytes = 7;
+ 112              		.loc 1 44 0
+ 113 002a 009B     		ldr	r3, [sp]	@ tmp135, bytes
+ 114 002c 0722     		movs	r2, #7	@ tmp136,
+ 115 002e 1A70     		strb	r2, [r3]	@ tmp137, *bytes_8(D)
+  45:src/tcp_transceiver.c **** 		return KEEP_ALIVE;
+ 116              		.loc 1 45 0
+ 117 0030 0123     		movs	r3, #1	@ D.6458,
+ 118 0032 77E0     		b	.L3	@
+ 119              	.L2:
+  46:src/tcp_transceiver.c **** 	}
+  47:src/tcp_transceiver.c **** 
+  48:src/tcp_transceiver.c **** 	if (strncmp((char *) (const char *) "geta;", (char *)d, (sizeof((char *) (const char *) "geta;") -
+ARM GAS  /tmp/ccXup38D.s 			page 4
+
+
+ 120              		.loc 1 48 0
+ 121 0034 0399     		ldr	r1, [sp, #12]	@ tmp138, d
+ 122 0036 3E4B     		ldr	r3, .L10+4	@ tmp139,
+ 123 0038 0322     		movs	r2, #3	@,
+ 124 003a 1800     		movs	r0, r3	@, tmp139
+ 125 003c FFF7FEFF 		bl	strncmp	@
+ 126 0040 031E     		subs	r3, r0, #0	@ D.6459,,
+ 127 0042 0BD1     		bne	.L4	@,
+  49:src/tcp_transceiver.c **** 	{
+  50:src/tcp_transceiver.c **** 		strcpy ((char *) d, (char *) (d + 5));
+ 128              		.loc 1 50 0
+ 129 0044 039B     		ldr	r3, [sp, #12]	@ tmp140, d
+ 130 0046 5A1D     		adds	r2, r3, #5	@ D.6460, tmp140,
+ 131 0048 039B     		ldr	r3, [sp, #12]	@ tmp141, d
+ 132 004a 1100     		movs	r1, r2	@, D.6460
+ 133 004c 1800     		movs	r0, r3	@, tmp141
+ 134 004e FFF7FEFF 		bl	strcpy	@
+  51:src/tcp_transceiver.c **** 		*bytes = 5;
+ 135              		.loc 1 51 0
+ 136 0052 009B     		ldr	r3, [sp]	@ tmp142, bytes
+ 137 0054 0522     		movs	r2, #5	@ tmp143,
+ 138 0056 1A70     		strb	r2, [r3]	@ tmp144, *bytes_8(D)
+  52:src/tcp_transceiver.c **** 		return GET_A;
+ 139              		.loc 1 52 0
+ 140 0058 0423     		movs	r3, #4	@ D.6458,
+ 141 005a 63E0     		b	.L3	@
+ 142              	.L4:
+  53:src/tcp_transceiver.c **** 	}
+  54:src/tcp_transceiver.c **** 
+  55:src/tcp_transceiver.c **** 	if ((*d == 'r') && (*(d + 2) == ','))
+ 143              		.loc 1 55 0
+ 144 005c 039B     		ldr	r3, [sp, #12]	@ tmp145, d
+ 145 005e 1B78     		ldrb	r3, [r3]	@ D.6461, *d_4(D)
+ 146 0060 722B     		cmp	r3, #114	@ D.6461,
+ 147 0062 1BD1     		bne	.L5	@,
+ 148              		.loc 1 55 0 is_stmt 0 discriminator 1
+ 149 0064 039B     		ldr	r3, [sp, #12]	@ tmp146, d
+ 150 0066 0233     		adds	r3, r3, #2	@ D.6460,
+ 151 0068 1B78     		ldrb	r3, [r3]	@ D.6461, *_17
+ 152 006a 2C2B     		cmp	r3, #44	@ D.6461,
+ 153 006c 16D1     		bne	.L5	@,
+  56:src/tcp_transceiver.c **** 	{
+  57:src/tcp_transceiver.c **** 		if (ReadPcktR(d, 1, new_room_bright, bytes) == RESP_OK)
+ 154              		.loc 1 57 0 is_stmt 1
+ 155 006e 009B     		ldr	r3, [sp]	@ tmp147, bytes
+ 156 0070 029A     		ldr	r2, [sp, #8]	@ tmp148, new_room_bright
+ 157 0072 0398     		ldr	r0, [sp, #12]	@ tmp149, d
+ 158 0074 0121     		movs	r1, #1	@,
+ 159 0076 FFF7FEFF 		bl	ReadPcktR	@
+ 160 007a 031E     		subs	r3, r0, #0	@ tmp150,,
+ 161 007c 142B     		cmp	r3, #20	@ tmp150,
+ 162 007e 0BD1     		bne	.L6	@,
+  58:src/tcp_transceiver.c **** 		{
+  59:src/tcp_transceiver.c **** 			strcpy ((char *) d, (char *) (d + *bytes));
+ 163              		.loc 1 59 0
+ 164 0080 009B     		ldr	r3, [sp]	@ tmp152, bytes
+ 165 0082 1B78     		ldrb	r3, [r3]	@ D.6462, *bytes_8(D)
+ARM GAS  /tmp/ccXup38D.s 			page 5
+
+
+ 166 0084 1A00     		movs	r2, r3	@ D.6463, D.6462
+ 167 0086 039B     		ldr	r3, [sp, #12]	@ tmp153, d
+ 168 0088 9A18     		adds	r2, r3, r2	@ D.6460, tmp153, D.6463
+ 169 008a 039B     		ldr	r3, [sp, #12]	@ tmp154, d
+ 170 008c 1100     		movs	r1, r2	@, D.6460
+ 171 008e 1800     		movs	r0, r3	@, tmp154
+ 172 0090 FFF7FEFF 		bl	strcpy	@
+  60:src/tcp_transceiver.c **** 			return ROOM_BRIGHT;
+ 173              		.loc 1 60 0
+ 174 0094 0223     		movs	r3, #2	@ D.6458,
+ 175 0096 45E0     		b	.L3	@
+ 176              	.L6:
+  61:src/tcp_transceiver.c **** 		}
+  62:src/tcp_transceiver.c **** 		else
+  63:src/tcp_transceiver.c **** 			return NONE_MSG;
+ 177              		.loc 1 63 0
+ 178 0098 0023     		movs	r3, #0	@ D.6458,
+ 179 009a 43E0     		b	.L3	@
+ 180              	.L5:
+  64:src/tcp_transceiver.c **** 
+  65:src/tcp_transceiver.c **** 	}
+  66:src/tcp_transceiver.c **** 
+  67:src/tcp_transceiver.c **** 	if ((*d == 's') && (*(d + 2) == ','))
+ 181              		.loc 1 67 0
+ 182 009c 039B     		ldr	r3, [sp, #12]	@ tmp155, d
+ 183 009e 1B78     		ldrb	r3, [r3]	@ D.6461, *d_4(D)
+ 184 00a0 732B     		cmp	r3, #115	@ D.6461,
+ 185 00a2 13D1     		bne	.L7	@,
+ 186              		.loc 1 67 0 is_stmt 0 discriminator 1
+ 187 00a4 039B     		ldr	r3, [sp, #12]	@ tmp156, d
+ 188 00a6 0233     		adds	r3, r3, #2	@ D.6460,
+ 189 00a8 1B78     		ldrb	r3, [r3]	@ D.6461, *_29
+ 190 00aa 2C2B     		cmp	r3, #44	@ D.6461,
+ 191 00ac 0ED1     		bne	.L7	@,
+  68:src/tcp_transceiver.c **** 	{
+  69:src/tcp_transceiver.c **** 		strcpy ((char *) d, (char *) (d + 7));
+ 192              		.loc 1 69 0 is_stmt 1
+ 193 00ae 039B     		ldr	r3, [sp, #12]	@ tmp157, d
+ 194 00b0 DA1D     		adds	r2, r3, #7	@ D.6460, tmp157,
+ 195 00b2 039B     		ldr	r3, [sp, #12]	@ tmp158, d
+ 196 00b4 1100     		movs	r1, r2	@, D.6460
+ 197 00b6 1800     		movs	r0, r3	@, tmp158
+ 198 00b8 FFF7FEFF 		bl	strcpy	@
+  70:src/tcp_transceiver.c **** 		*bytes = 7;
+ 199              		.loc 1 70 0
+ 200 00bc 009B     		ldr	r3, [sp]	@ tmp159, bytes
+ 201 00be 0722     		movs	r2, #7	@ tmp160,
+ 202 00c0 1A70     		strb	r2, [r3]	@ tmp161, *bytes_8(D)
+  71:src/tcp_transceiver.c **** 		*new_room_bright = 20;
+ 203              		.loc 1 71 0
+ 204 00c2 029B     		ldr	r3, [sp, #8]	@ tmp162, new_room_bright
+ 205 00c4 1422     		movs	r2, #20	@ tmp163,
+ 206 00c6 1A70     		strb	r2, [r3]	@ tmp164, *new_room_bright_19(D)
+  72:src/tcp_transceiver.c **** 		return LAMP_BRIGHT;
+ 207              		.loc 1 72 0
+ 208 00c8 0323     		movs	r3, #3	@ D.6458,
+ 209 00ca 2BE0     		b	.L3	@
+ARM GAS  /tmp/ccXup38D.s 			page 6
+
+
+ 210              	.L7:
+  73:src/tcp_transceiver.c **** 	}
+  74:src/tcp_transceiver.c **** 
+  75:src/tcp_transceiver.c **** 	if (strncmp((char *) (const char *) "o0,0;", (char *)d, sizeof((char *) (const char *) "o0,0;")) =
+ 211              		.loc 1 75 0
+ 212 00cc 0399     		ldr	r1, [sp, #12]	@ tmp165, d
+ 213 00ce 194B     		ldr	r3, .L10+8	@ tmp166,
+ 214 00d0 0422     		movs	r2, #4	@,
+ 215 00d2 1800     		movs	r0, r3	@, tmp166
+ 216 00d4 FFF7FEFF 		bl	strncmp	@
+ 217 00d8 031E     		subs	r3, r0, #0	@ D.6459,,
+ 218 00da 0ED1     		bne	.L8	@,
+  76:src/tcp_transceiver.c **** 	{
+  77:src/tcp_transceiver.c **** 		strcpy ((char *) d, (char *) (d + 5));
+ 219              		.loc 1 77 0
+ 220 00dc 039B     		ldr	r3, [sp, #12]	@ tmp167, d
+ 221 00de 5A1D     		adds	r2, r3, #5	@ D.6460, tmp167,
+ 222 00e0 039B     		ldr	r3, [sp, #12]	@ tmp168, d
+ 223 00e2 1100     		movs	r1, r2	@, D.6460
+ 224 00e4 1800     		movs	r0, r3	@, tmp168
+ 225 00e6 FFF7FEFF 		bl	strcpy	@
+  78:src/tcp_transceiver.c **** 		*bytes = 5;
+ 226              		.loc 1 78 0
+ 227 00ea 009B     		ldr	r3, [sp]	@ tmp169, bytes
+ 228 00ec 0522     		movs	r2, #5	@ tmp170,
+ 229 00ee 1A70     		strb	r2, [r3]	@ tmp171, *bytes_8(D)
+  79:src/tcp_transceiver.c **** 		*new_room_bright = 0;
+ 230              		.loc 1 79 0
+ 231 00f0 029B     		ldr	r3, [sp, #8]	@ tmp172, new_room_bright
+ 232 00f2 0022     		movs	r2, #0	@ tmp173,
+ 233 00f4 1A70     		strb	r2, [r3]	@ tmp174, *new_room_bright_19(D)
+  80:src/tcp_transceiver.c **** 		return LIGHTS_OFF;
+ 234              		.loc 1 80 0
+ 235 00f6 0523     		movs	r3, #5	@ D.6458,
+ 236 00f8 14E0     		b	.L3	@
+ 237              	.L8:
+  81:src/tcp_transceiver.c **** 	}
+  82:src/tcp_transceiver.c **** 
+  83:src/tcp_transceiver.c **** 	if (strncmp((char *) (const char *) "o0,1;", (char *)d, sizeof((char *) (const char *) "o0,1;")) =
+ 238              		.loc 1 83 0
+ 239 00fa 0399     		ldr	r1, [sp, #12]	@ tmp175, d
+ 240 00fc 0E4B     		ldr	r3, .L10+12	@ tmp176,
+ 241 00fe 0422     		movs	r2, #4	@,
+ 242 0100 1800     		movs	r0, r3	@, tmp176
+ 243 0102 FFF7FEFF 		bl	strncmp	@
+ 244 0106 031E     		subs	r3, r0, #0	@ D.6459,,
+ 245 0108 0BD1     		bne	.L9	@,
+  84:src/tcp_transceiver.c **** 	{
+  85:src/tcp_transceiver.c **** 		strcpy ((char *) d, (char *) (d + 5));
+ 246              		.loc 1 85 0
+ 247 010a 039B     		ldr	r3, [sp, #12]	@ tmp177, d
+ 248 010c 5A1D     		adds	r2, r3, #5	@ D.6460, tmp177,
+ 249 010e 039B     		ldr	r3, [sp, #12]	@ tmp178, d
+ 250 0110 1100     		movs	r1, r2	@, D.6460
+ 251 0112 1800     		movs	r0, r3	@, tmp178
+ 252 0114 FFF7FEFF 		bl	strcpy	@
+  86:src/tcp_transceiver.c **** 		*bytes = 5;
+ARM GAS  /tmp/ccXup38D.s 			page 7
+
+
+ 253              		.loc 1 86 0
+ 254 0118 009B     		ldr	r3, [sp]	@ tmp179, bytes
+ 255 011a 0522     		movs	r2, #5	@ tmp180,
+ 256 011c 1A70     		strb	r2, [r3]	@ tmp181, *bytes_8(D)
+  87:src/tcp_transceiver.c **** 		return LIGHTS_ON;
+ 257              		.loc 1 87 0
+ 258 011e 0623     		movs	r3, #6	@ D.6458,
+ 259 0120 00E0     		b	.L3	@
+ 260              	.L9:
+  88:src/tcp_transceiver.c **** 	}
+  89:src/tcp_transceiver.c **** 
+  90:src/tcp_transceiver.c **** 	return NONE_MSG;
+ 261              		.loc 1 90 0
+ 262 0122 0023     		movs	r3, #0	@ D.6458,
+ 263              	.L3:
+  91:src/tcp_transceiver.c **** }
+ 264              		.loc 1 91 0
+ 265 0124 1800     		movs	r0, r3	@, <retval>
+ 266 0126 05B0     		add	sp, sp, #20	@,,
+ 267              		@ sp needed	@
+ 268 0128 00BD     		pop	{pc}
+ 269              	.L11:
+ 270 012a C046     		.align	2
+ 271              	.L10:
+ 272 012c 00000000 		.word	.LC0
+ 273 0130 08000000 		.word	.LC2
+ 274 0134 10000000 		.word	.LC4
+ 275 0138 18000000 		.word	.LC6
+ 276              		.cfi_endproc
+ 277              	.LFE0:
+ 278              		.size	CheckTCPMessage, .-CheckTCPMessage
+ 279              		.section	.text.TCPProcessInit,"ax",%progbits
+ 280              		.align	2
+ 281              		.global	TCPProcessInit
+ 282              		.code	16
+ 283              		.thumb_func
+ 284              		.type	TCPProcessInit, %function
+ 285              	TCPProcessInit:
+ 286              	.LFB1:
+  92:src/tcp_transceiver.c **** 
+  93:src/tcp_transceiver.c **** void TCPProcessInit (void)
+  94:src/tcp_transceiver.c **** {
+ 287              		.loc 1 94 0
+ 288              		.cfi_startproc
+ 289 0000 82B0     		sub	sp, sp, #8	@,,
+ 290              	.LCFI2:
+ 291              		.cfi_def_cfa_offset 8
+  95:src/tcp_transceiver.c **** 	unsigned char i;
+  96:src/tcp_transceiver.c **** 
+  97:src/tcp_transceiver.c **** 	for (i = 0; i < 5; i++)
+ 292              		.loc 1 97 0
+ 293 0002 6B46     		mov	r3, sp	@ tmp131,
+ 294 0004 0733     		adds	r3, r3, #7	@ tmp115,
+ 295 0006 0022     		movs	r2, #0	@ tmp116,
+ 296 0008 1A70     		strb	r2, [r3]	@ tmp117, i
+ 297 000a 13E0     		b	.L13	@
+ 298              	.L14:
+ARM GAS  /tmp/ccXup38D.s 			page 8
+
+
+  98:src/tcp_transceiver.c **** 	{
+  99:src/tcp_transceiver.c **** 		ptcp = &bufftcpsend[i] [0];
+ 299              		.loc 1 99 0 discriminator 3
+ 300 000c 6B46     		mov	r3, sp	@ tmp132,
+ 301 000e 0733     		adds	r3, r3, #7	@ tmp118,
+ 302 0010 1B78     		ldrb	r3, [r3]	@ D.6468, i
+ 303 0012 DA01     		lsls	r2, r3, #7	@ tmp119, D.6468,
+ 304 0014 0B4B     		ldr	r3, .L15	@ tmp120,
+ 305 0016 D218     		adds	r2, r2, r3	@ D.6469, tmp119, tmp120
+ 306 0018 0B4B     		ldr	r3, .L15+4	@ tmp121,
+ 307 001a 1A60     		str	r2, [r3]	@ D.6469, ptcp
+ 100:src/tcp_transceiver.c **** 		*(ptcp+1) = 0;
+ 308              		.loc 1 100 0 discriminator 3
+ 309 001c 0A4B     		ldr	r3, .L15+4	@ tmp122,
+ 310 001e 1B68     		ldr	r3, [r3]	@ D.6469, ptcp
+ 311 0020 0133     		adds	r3, r3, #1	@ D.6469,
+ 312 0022 0022     		movs	r2, #0	@ tmp123,
+ 313 0024 1A70     		strb	r2, [r3]	@ tmp124, *_9
+  97:src/tcp_transceiver.c **** 	{
+ 314              		.loc 1 97 0 discriminator 3
+ 315 0026 6B46     		mov	r3, sp	@ tmp133,
+ 316 0028 0733     		adds	r3, r3, #7	@ tmp125,
+ 317 002a 1A78     		ldrb	r2, [r3]	@ D.6470, i
+ 318 002c 6B46     		mov	r3, sp	@ tmp134,
+ 319 002e 0733     		adds	r3, r3, #7	@ tmp126,
+ 320 0030 0132     		adds	r2, r2, #1	@ tmp127,
+ 321 0032 1A70     		strb	r2, [r3]	@ tmp128, i
+ 322              	.L13:
+  97:src/tcp_transceiver.c **** 	{
+ 323              		.loc 1 97 0 is_stmt 0 discriminator 1
+ 324 0034 6B46     		mov	r3, sp	@ tmp135,
+ 325 0036 0733     		adds	r3, r3, #7	@ tmp129,
+ 326 0038 1B78     		ldrb	r3, [r3]	@ tmp130, i
+ 327 003a 042B     		cmp	r3, #4	@ tmp130,
+ 328 003c E6D9     		bls	.L14	@,
+ 101:src/tcp_transceiver.c **** 	}
+ 102:src/tcp_transceiver.c **** }
+ 329              		.loc 1 102 0 is_stmt 1
+ 330 003e C046     		nop
+ 331 0040 02B0     		add	sp, sp, #8	@,,
+ 332              		@ sp needed	@
+ 333 0042 7047     		bx	lr
+ 334              	.L16:
+ 335              		.align	2
+ 336              	.L15:
+ 337 0044 00000000 		.word	bufftcpsend
+ 338 0048 00000000 		.word	ptcp
+ 339              		.cfi_endproc
+ 340              	.LFE1:
+ 341              		.size	TCPProcessInit, .-TCPProcessInit
+ 342              		.section	.text.TCPProcess,"ax",%progbits
+ 343              		.align	2
+ 344              		.global	TCPProcess
+ 345              		.code	16
+ 346              		.thumb_func
+ 347              		.type	TCPProcess, %function
+ 348              	TCPProcess:
+ARM GAS  /tmp/ccXup38D.s 			page 9
+
+
+ 349              	.LFB2:
+ 103:src/tcp_transceiver.c **** 
+ 104:src/tcp_transceiver.c **** //me llaman continuamente para avanzar las maquinas de estado
+ 105:src/tcp_transceiver.c **** //mayormente en transmision
+ 106:src/tcp_transceiver.c **** void TCPProcess (void)
+ 107:src/tcp_transceiver.c **** {
+ 350              		.loc 1 107 0
+ 351              		.cfi_startproc
+ 352 0000 10B5     		push	{r4, lr}	@
+ 353              	.LCFI3:
+ 354              		.cfi_def_cfa_offset 8
+ 355              		.cfi_offset 4, -8
+ 356              		.cfi_offset 14, -4
+ 357 0002 82B0     		sub	sp, sp, #8	@,,
+ 358              	.LCFI4:
+ 359              		.cfi_def_cfa_offset 16
+ 108:src/tcp_transceiver.c **** 	//char * ptcp; a global
+ 109:src/tcp_transceiver.c **** 	unsigned char i;
+ 110:src/tcp_transceiver.c **** 	unsigned char resp = RESP_CONTINUE;
+ 360              		.loc 1 110 0
+ 361 0004 6B46     		mov	r3, sp	@ tmp190,
+ 362 0006 0633     		adds	r3, r3, #6	@ tmp129,
+ 363 0008 0022     		movs	r2, #0	@ tmp130,
+ 364 000a 1A70     		strb	r2, [r3]	@ tmp131, resp
+ 111:src/tcp_transceiver.c **** 
+ 112:src/tcp_transceiver.c **** 	switch (tcp_tx_state)
+ 365              		.loc 1 112 0
+ 366 000c 3A4B     		ldr	r3, .L31	@ tmp132,
+ 367 000e 1B78     		ldrb	r3, [r3]	@ D.6471, tcp_tx_state
+ 368 0010 012B     		cmp	r3, #1	@ D.6472,
+ 369 0012 2DD0     		beq	.L19	@,
+ 370 0014 022B     		cmp	r3, #2	@ D.6472,
+ 371 0016 34D0     		beq	.L20	@,
+ 372 0018 002B     		cmp	r3, #0	@ D.6472,
+ 373 001a 64D1     		bne	.L29	@,
+ 113:src/tcp_transceiver.c **** 	{
+ 114:src/tcp_transceiver.c **** 		case TCP_TX_IDLE:
+ 115:src/tcp_transceiver.c **** 			//reviso si tengo algo que enviar
+ 116:src/tcp_transceiver.c **** 			for (i = 0; i < 5; i++)
+ 374              		.loc 1 116 0
+ 375 001c 6B46     		mov	r3, sp	@ tmp191,
+ 376 001e 0733     		adds	r3, r3, #7	@ tmp133,
+ 377 0020 0022     		movs	r2, #0	@ tmp134,
+ 378 0022 1A70     		strb	r2, [r3]	@ tmp135, i
+ 379 0024 1EE0     		b	.L22	@
+ 380              	.L24:
+ 117:src/tcp_transceiver.c **** 			{
+ 118:src/tcp_transceiver.c **** 				ptcp = &bufftcpsend[i] [0];
+ 381              		.loc 1 118 0
+ 382 0026 6B46     		mov	r3, sp	@ tmp192,
+ 383 0028 0733     		adds	r3, r3, #7	@ tmp136,
+ 384 002a 1B78     		ldrb	r3, [r3]	@ D.6472, i
+ 385 002c DA01     		lsls	r2, r3, #7	@ tmp137, D.6472,
+ 386 002e 334B     		ldr	r3, .L31+4	@ tmp138,
+ 387 0030 D218     		adds	r2, r2, r3	@ D.6473, tmp137, tmp138
+ 388 0032 334B     		ldr	r3, .L31+8	@ tmp139,
+ 389 0034 1A60     		str	r2, [r3]	@ D.6473, ptcp
+ARM GAS  /tmp/ccXup38D.s 			page 10
+
+
+ 119:src/tcp_transceiver.c **** 				if (*(ptcp+1) != 0)
+ 390              		.loc 1 119 0
+ 391 0036 324B     		ldr	r3, .L31+8	@ tmp140,
+ 392 0038 1B68     		ldr	r3, [r3]	@ D.6473, ptcp
+ 393 003a 0133     		adds	r3, r3, #1	@ D.6473,
+ 394 003c 1B78     		ldrb	r3, [r3]	@ D.6474, *_18
+ 395 003e 002B     		cmp	r3, #0	@ D.6474,
+ 396 0040 09D0     		beq	.L23	@,
+ 120:src/tcp_transceiver.c **** 				{
+ 121:src/tcp_transceiver.c **** 					tcp_tx_state++;
+ 397              		.loc 1 121 0
+ 398 0042 2D4B     		ldr	r3, .L31	@ tmp141,
+ 399 0044 1B78     		ldrb	r3, [r3]	@ D.6471, tcp_tx_state
+ 400 0046 0133     		adds	r3, r3, #1	@ tmp142,
+ 401 0048 DAB2     		uxtb	r2, r3	@ D.6471, tmp142
+ 402 004a 2B4B     		ldr	r3, .L31	@ tmp143,
+ 403 004c 1A70     		strb	r2, [r3]	@ tmp144, tcp_tx_state
+ 122:src/tcp_transceiver.c **** 					i = 10;
+ 404              		.loc 1 122 0
+ 405 004e 6B46     		mov	r3, sp	@ tmp193,
+ 406 0050 0733     		adds	r3, r3, #7	@ tmp145,
+ 407 0052 0A22     		movs	r2, #10	@ tmp146,
+ 408 0054 1A70     		strb	r2, [r3]	@ tmp147, i
+ 409              	.L23:
+ 116:src/tcp_transceiver.c **** 			{
+ 410              		.loc 1 116 0 discriminator 2
+ 411 0056 6B46     		mov	r3, sp	@ tmp194,
+ 412 0058 0733     		adds	r3, r3, #7	@ tmp148,
+ 413 005a 1A78     		ldrb	r2, [r3]	@ D.6471, i
+ 414 005c 6B46     		mov	r3, sp	@ tmp195,
+ 415 005e 0733     		adds	r3, r3, #7	@ tmp149,
+ 416 0060 0132     		adds	r2, r2, #1	@ tmp150,
+ 417 0062 1A70     		strb	r2, [r3]	@ tmp151, i
+ 418              	.L22:
+ 116:src/tcp_transceiver.c **** 			{
+ 419              		.loc 1 116 0 is_stmt 0 discriminator 1
+ 420 0064 6B46     		mov	r3, sp	@ tmp196,
+ 421 0066 0733     		adds	r3, r3, #7	@ tmp152,
+ 422 0068 1B78     		ldrb	r3, [r3]	@ tmp153, i
+ 423 006a 042B     		cmp	r3, #4	@ tmp153,
+ 424 006c DBD9     		bls	.L24	@,
+ 123:src/tcp_transceiver.c **** 				}
+ 124:src/tcp_transceiver.c **** 			}
+ 125:src/tcp_transceiver.c **** 			break;
+ 425              		.loc 1 125 0 is_stmt 1
+ 426 006e 3FE0     		b	.L25	@
+ 427              	.L19:
+ 126:src/tcp_transceiver.c **** 
+ 127:src/tcp_transceiver.c **** 		case TCP_TX_READY_TO_SEND:
+ 128:src/tcp_transceiver.c **** 			//tengo el puntero al buffer que quiero enviar
+ 129:src/tcp_transceiver.c **** 			//pido la transmision al ESP, me contesta RESP_OK, RESP_CONTINUE, RESP_TIMEOUT
+ 130:src/tcp_transceiver.c **** 			//veo despues que hago en cada caso
+ 131:src/tcp_transceiver.c **** 			ESP_SendDataResetSM();
+ 428              		.loc 1 131 0
+ 429 0070 FFF7FEFF 		bl	ESP_SendDataResetSM	@
+ 132:src/tcp_transceiver.c **** 			tcp_tx_state++;
+ 430              		.loc 1 132 0
+ARM GAS  /tmp/ccXup38D.s 			page 11
+
+
+ 431 0074 204B     		ldr	r3, .L31	@ tmp154,
+ 432 0076 1B78     		ldrb	r3, [r3]	@ D.6471, tcp_tx_state
+ 433 0078 0133     		adds	r3, r3, #1	@ tmp155,
+ 434 007a DAB2     		uxtb	r2, r3	@ D.6471, tmp155
+ 435 007c 1E4B     		ldr	r3, .L31	@ tmp156,
+ 436 007e 1A70     		strb	r2, [r3]	@ tmp157, tcp_tx_state
+ 133:src/tcp_transceiver.c **** 			break;
+ 437              		.loc 1 133 0
+ 438 0080 36E0     		b	.L25	@
+ 439              	.L20:
+ 134:src/tcp_transceiver.c **** 
+ 135:src/tcp_transceiver.c **** 		case TCP_TX_SENDING:
+ 136:src/tcp_transceiver.c **** 			//me quedo esperando el signo de envio o timeout
+ 137:src/tcp_transceiver.c **** 			resp = ESP_SendData(0, ptcp);
+ 440              		.loc 1 137 0
+ 441 0082 1F4B     		ldr	r3, .L31+8	@ tmp158,
+ 442 0084 1B68     		ldr	r3, [r3]	@ D.6473, ptcp
+ 443 0086 6A46     		mov	r2, sp	@ tmp197,
+ 444 0088 941D     		adds	r4, r2, #6	@ tmp159, tmp197,
+ 445 008a 1900     		movs	r1, r3	@, D.6473
+ 446 008c 0020     		movs	r0, #0	@,
+ 447 008e FFF7FEFF 		bl	ESP_SendData	@
+ 448 0092 0300     		movs	r3, r0	@ tmp160,
+ 449 0094 2370     		strb	r3, [r4]	@ tmp162, resp
+ 138:src/tcp_transceiver.c **** 
+ 139:src/tcp_transceiver.c **** 			if (resp == RESP_OK)
+ 450              		.loc 1 139 0
+ 451 0096 6B46     		mov	r3, sp	@ tmp198,
+ 452 0098 0633     		adds	r3, r3, #6	@ tmp163,
+ 453 009a 1B78     		ldrb	r3, [r3]	@ tmp164, resp
+ 454 009c 142B     		cmp	r3, #20	@ tmp164,
+ 455 009e 07D1     		bne	.L26	@,
+ 140:src/tcp_transceiver.c **** 			{
+ 141:src/tcp_transceiver.c **** 				//termino de enviar limpio buffer
+ 142:src/tcp_transceiver.c **** 				*(ptcp+1) = 0;
+ 456              		.loc 1 142 0
+ 457 00a0 174B     		ldr	r3, .L31+8	@ tmp165,
+ 458 00a2 1B68     		ldr	r3, [r3]	@ D.6473, ptcp
+ 459 00a4 0133     		adds	r3, r3, #1	@ D.6473,
+ 460 00a6 0022     		movs	r2, #0	@ tmp166,
+ 461 00a8 1A70     		strb	r2, [r3]	@ tmp167, *_36
+ 143:src/tcp_transceiver.c **** //				LCD_2DO_RENGLON;
+ 144:src/tcp_transceiver.c **** //				LCDTransmitStr((char *) (const char *) "Sended tcp ok   ");
+ 145:src/tcp_transceiver.c **** 				tcp_tx_state = TCP_TX_IDLE;
+ 462              		.loc 1 145 0
+ 463 00aa 134B     		ldr	r3, .L31	@ tmp168,
+ 464 00ac 0022     		movs	r2, #0	@ tmp169,
+ 465 00ae 1A70     		strb	r2, [r3]	@ tmp170, tcp_tx_state
+ 466              	.L26:
+ 146:src/tcp_transceiver.c **** 			}
+ 147:src/tcp_transceiver.c **** 
+ 148:src/tcp_transceiver.c **** 			if (resp == RESP_NOK)
+ 467              		.loc 1 148 0
+ 468 00b0 6B46     		mov	r3, sp	@ tmp199,
+ 469 00b2 0633     		adds	r3, r3, #6	@ tmp171,
+ 470 00b4 1B78     		ldrb	r3, [r3]	@ tmp172, resp
+ 471 00b6 152B     		cmp	r3, #21	@ tmp172,
+ARM GAS  /tmp/ccXup38D.s 			page 12
+
+
+ 472 00b8 07D1     		bne	.L27	@,
+ 149:src/tcp_transceiver.c **** 			{
+ 150:src/tcp_transceiver.c **** 				//no encontro el SEND OK  limpio buffer
+ 151:src/tcp_transceiver.c **** 				//TODO: ver despues si no debo intentar un par de veces mas antes de descartar
+ 152:src/tcp_transceiver.c **** 				*(ptcp+1) = 0;
+ 473              		.loc 1 152 0
+ 474 00ba 114B     		ldr	r3, .L31+8	@ tmp173,
+ 475 00bc 1B68     		ldr	r3, [r3]	@ D.6473, ptcp
+ 476 00be 0133     		adds	r3, r3, #1	@ D.6473,
+ 477 00c0 0022     		movs	r2, #0	@ tmp174,
+ 478 00c2 1A70     		strb	r2, [r3]	@ tmp175, *_40
+ 153:src/tcp_transceiver.c **** //				LCD_2DO_RENGLON;
+ 154:src/tcp_transceiver.c **** //				LCDTransmitStr((char *) (const char *) "Error on tcp tx ");
+ 155:src/tcp_transceiver.c **** 				tcp_tx_state = TCP_TX_IDLE;
+ 479              		.loc 1 155 0
+ 480 00c4 0C4B     		ldr	r3, .L31	@ tmp176,
+ 481 00c6 0022     		movs	r2, #0	@ tmp177,
+ 482 00c8 1A70     		strb	r2, [r3]	@ tmp178, tcp_tx_state
+ 483              	.L27:
+ 156:src/tcp_transceiver.c **** 			}
+ 157:src/tcp_transceiver.c **** 
+ 158:src/tcp_transceiver.c **** 			if (resp == RESP_TIMEOUT)
+ 484              		.loc 1 158 0
+ 485 00ca 6B46     		mov	r3, sp	@ tmp200,
+ 486 00cc 0633     		adds	r3, r3, #6	@ tmp179,
+ 487 00ce 1B78     		ldrb	r3, [r3]	@ tmp180, resp
+ 488 00d0 172B     		cmp	r3, #23	@ tmp180,
+ 489 00d2 0CD1     		bne	.L30	@,
+ 159:src/tcp_transceiver.c **** 			{
+ 160:src/tcp_transceiver.c **** 				//no pudo enviar  limpio buffer
+ 161:src/tcp_transceiver.c **** 				//TODO: ver despues si no debo intentar un par de veces mas antes de descartar
+ 162:src/tcp_transceiver.c **** 				*(ptcp+1) = 0;
+ 490              		.loc 1 162 0
+ 491 00d4 0A4B     		ldr	r3, .L31+8	@ tmp181,
+ 492 00d6 1B68     		ldr	r3, [r3]	@ D.6473, ptcp
+ 493 00d8 0133     		adds	r3, r3, #1	@ D.6473,
+ 494 00da 0022     		movs	r2, #0	@ tmp182,
+ 495 00dc 1A70     		strb	r2, [r3]	@ tmp183, *_44
+ 163:src/tcp_transceiver.c **** //				LCD_2DO_RENGLON;
+ 164:src/tcp_transceiver.c **** //				LCDTransmitStr((char *) (const char *) "Timeout tcp tx  ");
+ 165:src/tcp_transceiver.c **** 				tcp_tx_state = TCP_TX_IDLE;
+ 496              		.loc 1 165 0
+ 497 00de 064B     		ldr	r3, .L31	@ tmp184,
+ 498 00e0 0022     		movs	r2, #0	@ tmp185,
+ 499 00e2 1A70     		strb	r2, [r3]	@ tmp186, tcp_tx_state
+ 166:src/tcp_transceiver.c **** 			}
+ 167:src/tcp_transceiver.c **** 			break;
+ 500              		.loc 1 167 0
+ 501 00e4 03E0     		b	.L30	@
+ 502              	.L29:
+ 168:src/tcp_transceiver.c **** 
+ 169:src/tcp_transceiver.c **** 		default:
+ 170:src/tcp_transceiver.c **** 			tcp_tx_state = TCP_TX_IDLE;
+ 503              		.loc 1 170 0
+ 504 00e6 044B     		ldr	r3, .L31	@ tmp187,
+ 505 00e8 0022     		movs	r2, #0	@ tmp188,
+ 506 00ea 1A70     		strb	r2, [r3]	@ tmp189, tcp_tx_state
+ARM GAS  /tmp/ccXup38D.s 			page 13
+
+
+ 171:src/tcp_transceiver.c **** 			break;
+ 507              		.loc 1 171 0
+ 508 00ec 00E0     		b	.L25	@
+ 509              	.L30:
+ 167:src/tcp_transceiver.c **** 
+ 510              		.loc 1 167 0
+ 511 00ee C046     		nop
+ 512              	.L25:
+ 172:src/tcp_transceiver.c **** 	}
+ 173:src/tcp_transceiver.c **** }
+ 513              		.loc 1 173 0
+ 514 00f0 C046     		nop
+ 515 00f2 02B0     		add	sp, sp, #8	@,,
+ 516              		@ sp needed	@
+ 517 00f4 10BD     		pop	{r4, pc}
+ 518              	.L32:
+ 519 00f6 C046     		.align	2
+ 520              	.L31:
+ 521 00f8 00000000 		.word	tcp_tx_state
+ 522 00fc 00000000 		.word	bufftcpsend
+ 523 0100 00000000 		.word	ptcp
+ 524              		.cfi_endproc
+ 525              	.LFE2:
+ 526              		.size	TCPProcess, .-TCPProcess
+ 527              		.section	.rodata
+ 528 001e 0000     		.align	2
+ 529              	.LC13:
+ 530 0020 2B495044 		.ascii	"+IPD,\000"
+ 530      2C00
+ 531              		.section	.text.TCPPreProcess,"ax",%progbits
+ 532              		.align	2
+ 533              		.global	TCPPreProcess
+ 534              		.code	16
+ 535              		.thumb_func
+ 536              		.type	TCPPreProcess, %function
+ 537              	TCPPreProcess:
+ 538              	.LFB3:
+ 174:src/tcp_transceiver.c **** 
+ 175:src/tcp_transceiver.c **** //Revisa tipo de mensaje y puerto (0 a 4)
+ 176:src/tcp_transceiver.c **** //procesa el buffer en crudo y lo copia en un buffer de salida con solo numeros y letras
+ 177:src/tcp_transceiver.c **** //devuelve length
+ 178:src/tcp_transceiver.c **** unsigned char TCPPreProcess(unsigned char * d, unsigned char * output, unsigned char * length)
+ 179:src/tcp_transceiver.c **** {
+ 539              		.loc 1 179 0
+ 540              		.cfi_startproc
+ 541 0000 00B5     		push	{lr}	@
+ 542              	.LCFI5:
+ 543              		.cfi_def_cfa_offset 4
+ 544              		.cfi_offset 14, -4
+ 545 0002 89B0     		sub	sp, sp, #36	@,,
+ 546              	.LCFI6:
+ 547              		.cfi_def_cfa_offset 40
+ 548 0004 0390     		str	r0, [sp, #12]	@ d, d
+ 549 0006 0291     		str	r1, [sp, #8]	@ output, output
+ 550 0008 0192     		str	r2, [sp, #4]	@ length, length
+ 180:src/tcp_transceiver.c **** 	unsigned char port = 0xFF;
+ 551              		.loc 1 180 0
+ARM GAS  /tmp/ccXup38D.s 			page 14
+
+
+ 552 000a 1F23     		movs	r3, #31	@ tmp135,
+ 553 000c 6B44     		add	r3, r3, sp	@ tmp135,
+ 554 000e FF22     		movs	r2, #255	@ tmp136,
+ 555 0010 1A70     		strb	r2, [r3]	@ tmp137, port
+ 181:src/tcp_transceiver.c **** 	unsigned char len_index = 0;
+ 556              		.loc 1 181 0
+ 557 0012 1E23     		movs	r3, #30	@ tmp138,
+ 558 0014 6B44     		add	r3, r3, sp	@ tmp138,
+ 559 0016 0022     		movs	r2, #0	@ tmp139,
+ 560 0018 1A70     		strb	r2, [r3]	@ tmp140, len_index
+ 182:src/tcp_transceiver.c **** 	unsigned char i;
+ 183:src/tcp_transceiver.c **** 	unsigned char max_len = 0;
+ 561              		.loc 1 183 0
+ 562 001a 1623     		movs	r3, #22	@ tmp141,
+ 563 001c 6B44     		add	r3, r3, sp	@ tmp141,
+ 564 001e 0022     		movs	r2, #0	@ tmp142,
+ 565 0020 1A70     		strb	r2, [r3]	@ tmp143, max_len
+ 184:src/tcp_transceiver.c **** 	unsigned char * d_offset;
+ 185:src/tcp_transceiver.c **** 	unsigned char bytes_cnt = 0;
+ 566              		.loc 1 185 0
+ 567 0022 1723     		movs	r3, #23	@ tmp144,
+ 568 0024 6B44     		add	r3, r3, sp	@ tmp144,
+ 569 0026 0022     		movs	r2, #0	@ tmp145,
+ 570 0028 1A70     		strb	r2, [r3]	@ tmp146, bytes_cnt
+ 186:src/tcp_transceiver.c **** 
+ 187:src/tcp_transceiver.c **** 	//reviso que tipo de mensaje tengo en data
+ 188:src/tcp_transceiver.c **** 	//primero reviso estados de conexiones
+ 189:src/tcp_transceiver.c **** //	if ((*d >= '0') && (*d <= '4') && (*(d+1) == ','))
+ 190:src/tcp_transceiver.c **** //	{
+ 191:src/tcp_transceiver.c **** //		if (strncmp((char *) (const char *) "CONNECT\r", (char *) (d + 2), sizeof((char *) (const char 
+ 192:src/tcp_transceiver.c **** //			return KEEP_ALIVE;
+ 193:src/tcp_transceiver.c **** //
+ 194:src/tcp_transceiver.c **** //		if (strncmp((char *) (const char *) "CLOSED\r", (char *) (d + 2), sizeof((char *) (const char *
+ 195:src/tcp_transceiver.c **** //			return KEEP_ALIVE;
+ 196:src/tcp_transceiver.c **** //	}
+ 197:src/tcp_transceiver.c **** 
+ 198:src/tcp_transceiver.c **** 	//llega:
+ 199:src/tcp_transceiver.c **** 	//+IPD,0,6:geta;\n
+ 200:src/tcp_transceiver.c **** 	if (strncmp((char *) (const char *) "+IPD,", (char *) d, sizeof((char *) (const char *) "+IPD,")) 
+ 571              		.loc 1 200 0
+ 572 002a 0399     		ldr	r1, [sp, #12]	@ tmp147, d
+ 573 002c 4D4B     		ldr	r3, .L47	@ tmp148,
+ 574 002e 0422     		movs	r2, #4	@,
+ 575 0030 1800     		movs	r0, r3	@, tmp148
+ 576 0032 FFF7FEFF 		bl	strncmp	@
+ 577 0036 031E     		subs	r3, r0, #0	@ D.6475,,
+ 578 0038 00D0     		beq	.LCB454	@
+ 579 003a 8CE0     		b	.L34	@long jump	@
+ 580              	.LCB454:
+ 201:src/tcp_transceiver.c **** 	{
+ 202:src/tcp_transceiver.c **** 		if ((*(d+5) >= '0') && (*(d+5) <= '4'))
+ 581              		.loc 1 202 0
+ 582 003c 039B     		ldr	r3, [sp, #12]	@ tmp149, d
+ 583 003e 0533     		adds	r3, r3, #5	@ D.6476,
+ 584 0040 1B78     		ldrb	r3, [r3]	@ D.6477, *_22
+ 585 0042 2F2B     		cmp	r3, #47	@ D.6477,
+ 586 0044 00D8     		bhi	.LCB459	@
+ARM GAS  /tmp/ccXup38D.s 			page 15
+
+
+ 587 0046 86E0     		b	.L34	@long jump	@
+ 588              	.LCB459:
+ 589              		.loc 1 202 0 is_stmt 0 discriminator 1
+ 590 0048 039B     		ldr	r3, [sp, #12]	@ tmp150, d
+ 591 004a 0533     		adds	r3, r3, #5	@ D.6476,
+ 592 004c 1B78     		ldrb	r3, [r3]	@ D.6477, *_24
+ 593 004e 342B     		cmp	r3, #52	@ D.6477,
+ 594 0050 00D9     		bls	.LCB464	@
+ 595 0052 80E0     		b	.L34	@long jump	@
+ 596              	.LCB464:
+ 203:src/tcp_transceiver.c **** 		{
+ 204:src/tcp_transceiver.c **** 			port = *(d+5) - '0';
+ 597              		.loc 1 204 0 is_stmt 1
+ 598 0054 039B     		ldr	r3, [sp, #12]	@ tmp151, d
+ 599 0056 0533     		adds	r3, r3, #5	@ D.6476,
+ 600 0058 1A78     		ldrb	r2, [r3]	@ D.6477, *_26
+ 601 005a 1F23     		movs	r3, #31	@ tmp152,
+ 602 005c 6B44     		add	r3, r3, sp	@ tmp152,
+ 603 005e 303A     		subs	r2, r2, #48	@ tmp153,
+ 604 0060 1A70     		strb	r2, [r3]	@ tmp154, port
+ 205:src/tcp_transceiver.c **** 			for (i = 0; i < 4; i++)	//busco length
+ 605              		.loc 1 205 0
+ 606 0062 1D23     		movs	r3, #29	@ tmp155,
+ 607 0064 6B44     		add	r3, r3, sp	@ tmp155,
+ 608 0066 0022     		movs	r2, #0	@ tmp156,
+ 609 0068 1A70     		strb	r2, [r3]	@ tmp157, i
+ 610 006a 1AE0     		b	.L35	@
+ 611              	.L37:
+ 206:src/tcp_transceiver.c **** 			{
+ 207:src/tcp_transceiver.c **** 				if (*(d+7+i) == ':')
+ 612              		.loc 1 207 0
+ 613 006c 1D23     		movs	r3, #29	@ tmp158,
+ 614 006e 6B44     		add	r3, r3, sp	@ tmp158,
+ 615 0070 1B78     		ldrb	r3, [r3]	@ D.6478, i
+ 616 0072 0733     		adds	r3, r3, #7	@ D.6478,
+ 617 0074 039A     		ldr	r2, [sp, #12]	@ tmp159, d
+ 618 0076 D318     		adds	r3, r2, r3	@ D.6476, tmp159, D.6478
+ 619 0078 1B78     		ldrb	r3, [r3]	@ D.6477, *_32
+ 620 007a 3A2B     		cmp	r3, #58	@ D.6477,
+ 621 007c 03D1     		bne	.L36	@,
+ 208:src/tcp_transceiver.c **** 					i = 4;
+ 622              		.loc 1 208 0
+ 623 007e 1D23     		movs	r3, #29	@ tmp160,
+ 624 0080 6B44     		add	r3, r3, sp	@ tmp160,
+ 625 0082 0422     		movs	r2, #4	@ tmp161,
+ 626 0084 1A70     		strb	r2, [r3]	@ tmp162, i
+ 627              	.L36:
+ 209:src/tcp_transceiver.c **** 
+ 210:src/tcp_transceiver.c **** 				len_index++;
+ 628              		.loc 1 210 0 discriminator 2
+ 629 0086 1E23     		movs	r3, #30	@ tmp163,
+ 630 0088 6B44     		add	r3, r3, sp	@ tmp163,
+ 631 008a 1A78     		ldrb	r2, [r3]	@ D.6477, len_index
+ 632 008c 1E23     		movs	r3, #30	@ tmp164,
+ 633 008e 6B44     		add	r3, r3, sp	@ tmp164,
+ 634 0090 0132     		adds	r2, r2, #1	@ tmp165,
+ 635 0092 1A70     		strb	r2, [r3]	@ tmp166, len_index
+ARM GAS  /tmp/ccXup38D.s 			page 16
+
+
+ 205:src/tcp_transceiver.c **** 			{
+ 636              		.loc 1 205 0 discriminator 2
+ 637 0094 1D23     		movs	r3, #29	@ tmp167,
+ 638 0096 6B44     		add	r3, r3, sp	@ tmp167,
+ 639 0098 1A78     		ldrb	r2, [r3]	@ D.6477, i
+ 640 009a 1D23     		movs	r3, #29	@ tmp168,
+ 641 009c 6B44     		add	r3, r3, sp	@ tmp168,
+ 642 009e 0132     		adds	r2, r2, #1	@ tmp169,
+ 643 00a0 1A70     		strb	r2, [r3]	@ tmp170, i
+ 644              	.L35:
+ 205:src/tcp_transceiver.c **** 			{
+ 645              		.loc 1 205 0 is_stmt 0 discriminator 1
+ 646 00a2 1D23     		movs	r3, #29	@ tmp171,
+ 647 00a4 6B44     		add	r3, r3, sp	@ tmp171,
+ 648 00a6 1B78     		ldrb	r3, [r3]	@ tmp172, i
+ 649 00a8 032B     		cmp	r3, #3	@ tmp172,
+ 650 00aa DFD9     		bls	.L37	@,
+ 211:src/tcp_transceiver.c **** 			}
+ 212:src/tcp_transceiver.c **** 
+ 213:src/tcp_transceiver.c **** 			max_len = (unsigned char) atoi ((char *) (d+7));
+ 651              		.loc 1 213 0 is_stmt 1
+ 652 00ac 039B     		ldr	r3, [sp, #12]	@ tmp173, d
+ 653 00ae 0733     		adds	r3, r3, #7	@ D.6479,
+ 654 00b0 1800     		movs	r0, r3	@, D.6479
+ 655 00b2 FFF7FEFF 		bl	atoi	@
+ 656 00b6 0200     		movs	r2, r0	@ D.6475,
+ 657 00b8 1623     		movs	r3, #22	@ tmp174,
+ 658 00ba 6B44     		add	r3, r3, sp	@ tmp174,
+ 659 00bc 1A70     		strb	r2, [r3]	@ tmp175, max_len
+ 214:src/tcp_transceiver.c **** 
+ 215:src/tcp_transceiver.c **** 			if (max_len > 0)
+ 660              		.loc 1 215 0
+ 661 00be 1623     		movs	r3, #22	@ tmp176,
+ 662 00c0 6B44     		add	r3, r3, sp	@ tmp176,
+ 663 00c2 1B78     		ldrb	r3, [r3]	@ tmp177, max_len
+ 664 00c4 002B     		cmp	r3, #0	@ tmp177,
+ 665 00c6 42D0     		beq	.L38	@,
+ 216:src/tcp_transceiver.c **** 			{
+ 217:src/tcp_transceiver.c **** 				d_offset = (d+7+len_index);
+ 666              		.loc 1 217 0
+ 667 00c8 1E23     		movs	r3, #30	@ tmp178,
+ 668 00ca 6B44     		add	r3, r3, sp	@ tmp178,
+ 669 00cc 1B78     		ldrb	r3, [r3]	@ D.6478, len_index
+ 670 00ce 0733     		adds	r3, r3, #7	@ D.6478,
+ 671 00d0 039A     		ldr	r2, [sp, #12]	@ tmp180, d
+ 672 00d2 D318     		adds	r3, r2, r3	@ tmp179, tmp180, D.6478
+ 673 00d4 0693     		str	r3, [sp, #24]	@ tmp179, d_offset
+ 218:src/tcp_transceiver.c **** 
+ 219:src/tcp_transceiver.c **** 				for (i = 0; i < max_len; i++)	//copio todos los codigos numeros y letras
+ 674              		.loc 1 219 0
+ 675 00d6 1D23     		movs	r3, #29	@ tmp181,
+ 676 00d8 6B44     		add	r3, r3, sp	@ tmp181,
+ 677 00da 0022     		movs	r2, #0	@ tmp182,
+ 678 00dc 1A70     		strb	r2, [r3]	@ tmp183, i
+ 679 00de 28E0     		b	.L39	@
+ 680              	.L44:
+ 220:src/tcp_transceiver.c **** 				{
+ARM GAS  /tmp/ccXup38D.s 			page 17
+
+
+ 221:src/tcp_transceiver.c **** 					if (*d_offset != '\0')
+ 681              		.loc 1 221 0
+ 682 00e0 069B     		ldr	r3, [sp, #24]	@ tmp184, d_offset
+ 683 00e2 1B78     		ldrb	r3, [r3]	@ D.6477, *d_offset_8
+ 684 00e4 002B     		cmp	r3, #0	@ D.6477,
+ 685 00e6 19D0     		beq	.L40	@,
+ 222:src/tcp_transceiver.c **** 					{
+ 223:src/tcp_transceiver.c **** 						if ((*d_offset > 31) && (*d_offset < 127))		//todos los codigos numeros y letras
+ 686              		.loc 1 223 0
+ 687 00e8 069B     		ldr	r3, [sp, #24]	@ tmp185, d_offset
+ 688 00ea 1B78     		ldrb	r3, [r3]	@ D.6477, *d_offset_8
+ 689 00ec 1F2B     		cmp	r3, #31	@ D.6477,
+ 690 00ee 11D9     		bls	.L41	@,
+ 691              		.loc 1 223 0 is_stmt 0 discriminator 1
+ 692 00f0 069B     		ldr	r3, [sp, #24]	@ tmp186, d_offset
+ 693 00f2 1B78     		ldrb	r3, [r3]	@ D.6477, *d_offset_8
+ 694 00f4 7E2B     		cmp	r3, #126	@ D.6477,
+ 695 00f6 0DD8     		bhi	.L41	@,
+ 224:src/tcp_transceiver.c **** 						{
+ 225:src/tcp_transceiver.c **** 							*output = *d_offset;
+ 696              		.loc 1 225 0 is_stmt 1
+ 697 00f8 069B     		ldr	r3, [sp, #24]	@ tmp187, d_offset
+ 698 00fa 1A78     		ldrb	r2, [r3]	@ D.6477, *d_offset_8
+ 699 00fc 029B     		ldr	r3, [sp, #8]	@ tmp188, output
+ 700 00fe 1A70     		strb	r2, [r3]	@ tmp189, *output_2
+ 226:src/tcp_transceiver.c **** 							output++;
+ 701              		.loc 1 226 0
+ 702 0100 029B     		ldr	r3, [sp, #8]	@ tmp191, output
+ 703 0102 0133     		adds	r3, r3, #1	@ tmp190,
+ 704 0104 0293     		str	r3, [sp, #8]	@ tmp190, output
+ 227:src/tcp_transceiver.c **** 							bytes_cnt++;
+ 705              		.loc 1 227 0
+ 706 0106 1723     		movs	r3, #23	@ tmp192,
+ 707 0108 6B44     		add	r3, r3, sp	@ tmp192,
+ 708 010a 1A78     		ldrb	r2, [r3]	@ D.6477, bytes_cnt
+ 709 010c 1723     		movs	r3, #23	@ tmp193,
+ 710 010e 6B44     		add	r3, r3, sp	@ tmp193,
+ 711 0110 0132     		adds	r2, r2, #1	@ tmp194,
+ 712 0112 1A70     		strb	r2, [r3]	@ tmp195, bytes_cnt
+ 713              	.L41:
+ 228:src/tcp_transceiver.c **** 						}
+ 229:src/tcp_transceiver.c **** 						d_offset++;
+ 714              		.loc 1 229 0
+ 715 0114 069B     		ldr	r3, [sp, #24]	@ tmp197, d_offset
+ 716 0116 0133     		adds	r3, r3, #1	@ tmp196,
+ 717 0118 0693     		str	r3, [sp, #24]	@ tmp196, d_offset
+ 718 011a 03E0     		b	.L46	@
+ 719              	.L40:
+ 230:src/tcp_transceiver.c **** 					}
+ 231:src/tcp_transceiver.c **** 					else
+ 232:src/tcp_transceiver.c **** 					{
+ 233:src/tcp_transceiver.c **** 						*output = '\0';
+ 720              		.loc 1 233 0
+ 721 011c 029B     		ldr	r3, [sp, #8]	@ tmp198, output
+ 722 011e 0022     		movs	r2, #0	@ tmp199,
+ 723 0120 1A70     		strb	r2, [r3]	@ tmp200, *output_2
+ 234:src/tcp_transceiver.c **** 						break;
+ARM GAS  /tmp/ccXup38D.s 			page 18
+
+
+ 724              		.loc 1 234 0
+ 725 0122 0EE0     		b	.L43	@
+ 726              	.L46:
+ 219:src/tcp_transceiver.c **** 				{
+ 727              		.loc 1 219 0 discriminator 2
+ 728 0124 1D23     		movs	r3, #29	@ tmp201,
+ 729 0126 6B44     		add	r3, r3, sp	@ tmp201,
+ 730 0128 1A78     		ldrb	r2, [r3]	@ D.6477, i
+ 731 012a 1D23     		movs	r3, #29	@ tmp202,
+ 732 012c 6B44     		add	r3, r3, sp	@ tmp202,
+ 733 012e 0132     		adds	r2, r2, #1	@ tmp203,
+ 734 0130 1A70     		strb	r2, [r3]	@ tmp204, i
+ 735              	.L39:
+ 219:src/tcp_transceiver.c **** 				{
+ 736              		.loc 1 219 0 is_stmt 0 discriminator 1
+ 737 0132 1D22     		movs	r2, #29	@ tmp205,
+ 738 0134 6A44     		add	r2, r2, sp	@ tmp205,
+ 739 0136 1623     		movs	r3, #22	@ tmp206,
+ 740 0138 6B44     		add	r3, r3, sp	@ tmp206,
+ 741 013a 1278     		ldrb	r2, [r2]	@ tmp207, i
+ 742 013c 1B78     		ldrb	r3, [r3]	@ tmp208, max_len
+ 743 013e 9A42     		cmp	r2, r3	@ tmp207, tmp208
+ 744 0140 CED3     		bcc	.L44	@,
+ 745              	.L43:
+ 235:src/tcp_transceiver.c **** 					}
+ 236:src/tcp_transceiver.c **** 				}
+ 237:src/tcp_transceiver.c **** 				*length = bytes_cnt;
+ 746              		.loc 1 237 0 is_stmt 1
+ 747 0142 019B     		ldr	r3, [sp, #4]	@ tmp209, length
+ 748 0144 1722     		movs	r2, #23	@ tmp210,
+ 749 0146 6A44     		add	r2, r2, sp	@ tmp210,
+ 750 0148 1278     		ldrb	r2, [r2]	@ tmp211, bytes_cnt
+ 751 014a 1A70     		strb	r2, [r3]	@ tmp211, *length_60(D)
+ 752 014c 03E0     		b	.L34	@
+ 753              	.L38:
+ 238:src/tcp_transceiver.c **** 			}
+ 239:src/tcp_transceiver.c **** 			else
+ 240:src/tcp_transceiver.c **** 				port = 0xFF;
+ 754              		.loc 1 240 0
+ 755 014e 1F23     		movs	r3, #31	@ tmp212,
+ 756 0150 6B44     		add	r3, r3, sp	@ tmp212,
+ 757 0152 FF22     		movs	r2, #255	@ tmp213,
+ 758 0154 1A70     		strb	r2, [r3]	@ tmp214, port
+ 759              	.L34:
+ 241:src/tcp_transceiver.c **** 		}
+ 242:src/tcp_transceiver.c **** 	}
+ 243:src/tcp_transceiver.c **** 	return port;
+ 760              		.loc 1 243 0
+ 761 0156 1F23     		movs	r3, #31	@ tmp215,
+ 762 0158 6B44     		add	r3, r3, sp	@ tmp215,
+ 763 015a 1B78     		ldrb	r3, [r3]	@ D.6477, port
+ 244:src/tcp_transceiver.c **** }
+ 764              		.loc 1 244 0
+ 765 015c 1800     		movs	r0, r3	@, <retval>
+ 766 015e 09B0     		add	sp, sp, #36	@,,
+ 767              		@ sp needed	@
+ 768 0160 00BD     		pop	{pc}
+ARM GAS  /tmp/ccXup38D.s 			page 19
+
+
+ 769              	.L48:
+ 770 0162 C046     		.align	2
+ 771              	.L47:
+ 772 0164 20000000 		.word	.LC13
+ 773              		.cfi_endproc
+ 774              	.LFE3:
+ 775              		.size	TCPPreProcess, .-TCPPreProcess
+ 776              		.section	.text.TCPSendData,"ax",%progbits
+ 777              		.align	2
+ 778              		.global	TCPSendData
+ 779              		.code	16
+ 780              		.thumb_func
+ 781              		.type	TCPSendData, %function
+ 782              	TCPSendData:
+ 783              	.LFB4:
+ 245:src/tcp_transceiver.c **** 
+ 246:src/tcp_transceiver.c **** //el bufftcpsend de transmision es port,lenght,data
+ 247:src/tcp_transceiver.c **** unsigned char TCPSendData (unsigned char port, char * data)
+ 248:src/tcp_transceiver.c **** {
+ 784              		.loc 1 248 0
+ 785              		.cfi_startproc
+ 786 0000 00B5     		push	{lr}	@
+ 787              	.LCFI7:
+ 788              		.cfi_def_cfa_offset 4
+ 789              		.cfi_offset 14, -4
+ 790 0002 85B0     		sub	sp, sp, #20	@,,
+ 791              	.LCFI8:
+ 792              		.cfi_def_cfa_offset 24
+ 793 0004 0200     		movs	r2, r0	@ tmp119, port
+ 794 0006 0091     		str	r1, [sp]	@ data, data
+ 795 0008 6B46     		mov	r3, sp	@ tmp167,
+ 796 000a 0733     		adds	r3, r3, #7	@ tmp120,
+ 797 000c 1A70     		strb	r2, [r3]	@ tmp121, port
+ 249:src/tcp_transceiver.c **** 	char * p;
+ 250:src/tcp_transceiver.c **** 	unsigned char length = 0;
+ 798              		.loc 1 250 0
+ 799 000e 0923     		movs	r3, #9	@ tmp122,
+ 800 0010 6B44     		add	r3, r3, sp	@ tmp122,
+ 801 0012 0022     		movs	r2, #0	@ tmp123,
+ 802 0014 1A70     		strb	r2, [r3]	@ tmp124, length
+ 251:src/tcp_transceiver.c **** 	unsigned char i;
+ 252:src/tcp_transceiver.c **** 	unsigned char resp = RESP_NOK;
+ 803              		.loc 1 252 0
+ 804 0016 0A23     		movs	r3, #10	@ tmp125,
+ 805 0018 6B44     		add	r3, r3, sp	@ tmp125,
+ 806 001a 1522     		movs	r2, #21	@ tmp126,
+ 807 001c 1A70     		strb	r2, [r3]	@ tmp127, resp
+ 253:src/tcp_transceiver.c **** 
+ 254:src/tcp_transceiver.c **** 	//aca reviso si el puerto esta conectado
+ 255:src/tcp_transceiver.c **** 	if ((port >= 0) && (port <= 4))
+ 808              		.loc 1 255 0
+ 809 001e 6B46     		mov	r3, sp	@ tmp170,
+ 810 0020 0733     		adds	r3, r3, #7	@ tmp128,
+ 811 0022 1B78     		ldrb	r3, [r3]	@ tmp129, port
+ 812 0024 042B     		cmp	r3, #4	@ tmp129,
+ 813 0026 48D8     		bhi	.L50	@,
+ 256:src/tcp_transceiver.c **** 	{
+ARM GAS  /tmp/ccXup38D.s 			page 20
+
+
+ 257:src/tcp_transceiver.c **** 		length = strlen(data);
+ 814              		.loc 1 257 0
+ 815 0028 009B     		ldr	r3, [sp]	@ tmp130, data
+ 816 002a 1800     		movs	r0, r3	@, tmp130
+ 817 002c FFF7FEFF 		bl	strlen	@
+ 818 0030 0200     		movs	r2, r0	@ D.6481,
+ 819 0032 0923     		movs	r3, #9	@ tmp131,
+ 820 0034 6B44     		add	r3, r3, sp	@ tmp131,
+ 821 0036 1A70     		strb	r2, [r3]	@ tmp132, length
+ 258:src/tcp_transceiver.c **** 
+ 259:src/tcp_transceiver.c **** 		//busco buffer tcp vacio
+ 260:src/tcp_transceiver.c **** 		for (i = 0; i < 5; i++)
+ 822              		.loc 1 260 0
+ 823 0038 0B23     		movs	r3, #11	@ tmp133,
+ 824 003a 6B44     		add	r3, r3, sp	@ tmp133,
+ 825 003c 0022     		movs	r2, #0	@ tmp134,
+ 826 003e 1A70     		strb	r2, [r3]	@ tmp135, i
+ 827 0040 16E0     		b	.L51	@
+ 828              	.L53:
+ 261:src/tcp_transceiver.c **** 		{
+ 262:src/tcp_transceiver.c **** 			p = &bufftcpsend [i] [0];
+ 829              		.loc 1 262 0
+ 830 0042 0B23     		movs	r3, #11	@ tmp136,
+ 831 0044 6B44     		add	r3, r3, sp	@ tmp136,
+ 832 0046 1B78     		ldrb	r3, [r3]	@ D.6482, i
+ 833 0048 DA01     		lsls	r2, r3, #7	@ tmp137, D.6482,
+ 834 004a 1F4B     		ldr	r3, .L55	@ tmp139,
+ 835 004c D318     		adds	r3, r2, r3	@ tmp138, tmp137, tmp139
+ 836 004e 0393     		str	r3, [sp, #12]	@ tmp138, p
+ 263:src/tcp_transceiver.c **** 			if (*(p+1) == 0)
+ 837              		.loc 1 263 0
+ 838 0050 039B     		ldr	r3, [sp, #12]	@ tmp140, p
+ 839 0052 0133     		adds	r3, r3, #1	@ D.6483,
+ 840 0054 1B78     		ldrb	r3, [r3]	@ D.6484, *_17
+ 841 0056 002B     		cmp	r3, #0	@ D.6484,
+ 842 0058 03D1     		bne	.L52	@,
+ 264:src/tcp_transceiver.c **** 				i = 10;				//buffer vacio, lo uso
+ 843              		.loc 1 264 0
+ 844 005a 0B23     		movs	r3, #11	@ tmp141,
+ 845 005c 6B44     		add	r3, r3, sp	@ tmp141,
+ 846 005e 0A22     		movs	r2, #10	@ tmp142,
+ 847 0060 1A70     		strb	r2, [r3]	@ tmp143, i
+ 848              	.L52:
+ 260:src/tcp_transceiver.c **** 		{
+ 849              		.loc 1 260 0 discriminator 2
+ 850 0062 0B23     		movs	r3, #11	@ tmp144,
+ 851 0064 6B44     		add	r3, r3, sp	@ tmp144,
+ 852 0066 1A78     		ldrb	r2, [r3]	@ D.6485, i
+ 853 0068 0B23     		movs	r3, #11	@ tmp145,
+ 854 006a 6B44     		add	r3, r3, sp	@ tmp145,
+ 855 006c 0132     		adds	r2, r2, #1	@ tmp146,
+ 856 006e 1A70     		strb	r2, [r3]	@ tmp147, i
+ 857              	.L51:
+ 260:src/tcp_transceiver.c **** 		{
+ 858              		.loc 1 260 0 is_stmt 0 discriminator 1
+ 859 0070 0B23     		movs	r3, #11	@ tmp148,
+ 860 0072 6B44     		add	r3, r3, sp	@ tmp148,
+ARM GAS  /tmp/ccXup38D.s 			page 21
+
+
+ 861 0074 1B78     		ldrb	r3, [r3]	@ tmp149, i
+ 862 0076 042B     		cmp	r3, #4	@ tmp149,
+ 863 0078 E3D9     		bls	.L53	@,
+ 265:src/tcp_transceiver.c **** 		}
+ 266:src/tcp_transceiver.c **** 
+ 267:src/tcp_transceiver.c **** 		if ((i >= 10) && (length < (SIZEOF_BUFFTCP_SEND - 2)))
+ 864              		.loc 1 267 0 is_stmt 1
+ 865 007a 0B23     		movs	r3, #11	@ tmp150,
+ 866 007c 6B44     		add	r3, r3, sp	@ tmp150,
+ 867 007e 1B78     		ldrb	r3, [r3]	@ tmp151, i
+ 868 0080 092B     		cmp	r3, #9	@ tmp151,
+ 869 0082 1AD9     		bls	.L50	@,
+ 870              		.loc 1 267 0 is_stmt 0 discriminator 1
+ 871 0084 0923     		movs	r3, #9	@ tmp152,
+ 872 0086 6B44     		add	r3, r3, sp	@ tmp152,
+ 873 0088 1B78     		ldrb	r3, [r3]	@ tmp153, length
+ 874 008a 7D2B     		cmp	r3, #125	@ tmp153,
+ 875 008c 15D8     		bhi	.L50	@,
+ 268:src/tcp_transceiver.c **** 		{
+ 269:src/tcp_transceiver.c **** 			*p = port;
+ 876              		.loc 1 269 0 is_stmt 1
+ 877 008e 039B     		ldr	r3, [sp, #12]	@ tmp154, p
+ 878 0090 6A46     		mov	r2, sp	@ tmp180,
+ 879 0092 0732     		adds	r2, r2, #7	@ tmp155,
+ 880 0094 1278     		ldrb	r2, [r2]	@ tmp156, port
+ 881 0096 1A70     		strb	r2, [r3]	@ tmp156, *p_1
+ 270:src/tcp_transceiver.c **** 			*(p+1) = length;
+ 882              		.loc 1 270 0
+ 883 0098 039B     		ldr	r3, [sp, #12]	@ tmp157, p
+ 884 009a 0133     		adds	r3, r3, #1	@ D.6483,
+ 885 009c 0922     		movs	r2, #9	@ tmp158,
+ 886 009e 6A44     		add	r2, r2, sp	@ tmp158,
+ 887 00a0 1278     		ldrb	r2, [r2]	@ tmp159, length
+ 888 00a2 1A70     		strb	r2, [r3]	@ tmp159, *_23
+ 271:src/tcp_transceiver.c **** 			strcpy ((p+2), data);
+ 889              		.loc 1 271 0
+ 890 00a4 039B     		ldr	r3, [sp, #12]	@ tmp160, p
+ 891 00a6 0233     		adds	r3, r3, #2	@ D.6483,
+ 892 00a8 009A     		ldr	r2, [sp]	@ tmp161, data
+ 893 00aa 1100     		movs	r1, r2	@, tmp161
+ 894 00ac 1800     		movs	r0, r3	@, D.6483
+ 895 00ae FFF7FEFF 		bl	strcpy	@
+ 272:src/tcp_transceiver.c **** 			resp = RESP_OK;
+ 896              		.loc 1 272 0
+ 897 00b2 0A23     		movs	r3, #10	@ tmp162,
+ 898 00b4 6B44     		add	r3, r3, sp	@ tmp162,
+ 899 00b6 1422     		movs	r2, #20	@ tmp163,
+ 900 00b8 1A70     		strb	r2, [r3]	@ tmp164, resp
+ 901              	.L50:
+ 273:src/tcp_transceiver.c **** 		}
+ 274:src/tcp_transceiver.c **** 	}
+ 275:src/tcp_transceiver.c **** 
+ 276:src/tcp_transceiver.c **** 	return resp;
+ 902              		.loc 1 276 0
+ 903 00ba 0A23     		movs	r3, #10	@ tmp165,
+ 904 00bc 6B44     		add	r3, r3, sp	@ tmp165,
+ 905 00be 1B78     		ldrb	r3, [r3]	@ D.6485, resp
+ARM GAS  /tmp/ccXup38D.s 			page 22
+
+
+ 277:src/tcp_transceiver.c **** }
+ 906              		.loc 1 277 0
+ 907 00c0 1800     		movs	r0, r3	@, <retval>
+ 908 00c2 05B0     		add	sp, sp, #20	@,,
+ 909              		@ sp needed	@
+ 910 00c4 00BD     		pop	{pc}
+ 911              	.L56:
+ 912 00c6 C046     		.align	2
+ 913              	.L55:
+ 914 00c8 00000000 		.word	bufftcpsend
+ 915              		.cfi_endproc
+ 916              	.LFE4:
+ 917              		.size	TCPSendData, .-TCPSendData
+ 918              		.section	.text.TCPSendDataSocket,"ax",%progbits
+ 919              		.align	2
+ 920              		.global	TCPSendDataSocket
+ 921              		.code	16
+ 922              		.thumb_func
+ 923              		.type	TCPSendDataSocket, %function
+ 924              	TCPSendDataSocket:
+ 925              	.LFB5:
+ 278:src/tcp_transceiver.c **** 
+ 279:src/tcp_transceiver.c **** //el bufftcpsend de transmision es port,lenght,data
+ 280:src/tcp_transceiver.c **** unsigned char TCPSendDataSocket (unsigned char length, unsigned char * data)
+ 281:src/tcp_transceiver.c **** {
+ 926              		.loc 1 281 0
+ 927              		.cfi_startproc
+ 928 0000 84B0     		sub	sp, sp, #16	@,,
+ 929              	.LCFI9:
+ 930              		.cfi_def_cfa_offset 16
+ 931 0002 0200     		movs	r2, r0	@ tmp124, length
+ 932 0004 0091     		str	r1, [sp]	@ data, data
+ 933 0006 6B46     		mov	r3, sp	@ tmp183,
+ 934 0008 0733     		adds	r3, r3, #7	@ tmp125,
+ 935 000a 1A70     		strb	r2, [r3]	@ tmp126, length
+ 282:src/tcp_transceiver.c **** 	char * p;
+ 283:src/tcp_transceiver.c **** 	unsigned char i;
+ 284:src/tcp_transceiver.c **** 	unsigned char resp = RESP_NOK;
+ 936              		.loc 1 284 0
+ 937 000c 0A23     		movs	r3, #10	@ tmp127,
+ 938 000e 6B44     		add	r3, r3, sp	@ tmp127,
+ 939 0010 1522     		movs	r2, #21	@ tmp128,
+ 940 0012 1A70     		strb	r2, [r3]	@ tmp129, resp
+ 285:src/tcp_transceiver.c **** 
+ 286:src/tcp_transceiver.c **** 	unsigned char port = 0;
+ 941              		.loc 1 286 0
+ 942 0014 0923     		movs	r3, #9	@ tmp130,
+ 943 0016 6B44     		add	r3, r3, sp	@ tmp130,
+ 944 0018 0022     		movs	r2, #0	@ tmp131,
+ 945 001a 1A70     		strb	r2, [r3]	@ tmp132, port
+ 287:src/tcp_transceiver.c **** 	//aca reviso si el puerto esta conectado
+ 288:src/tcp_transceiver.c **** 	if ((port >= 0) && (port <= 4))
+ 946              		.loc 1 288 0
+ 947 001c 0923     		movs	r3, #9	@ tmp133,
+ 948 001e 6B44     		add	r3, r3, sp	@ tmp133,
+ 949 0020 1B78     		ldrb	r3, [r3]	@ tmp134, port
+ 950 0022 042B     		cmp	r3, #4	@ tmp134,
+ARM GAS  /tmp/ccXup38D.s 			page 23
+
+
+ 951 0024 5AD8     		bhi	.L58	@,
+ 289:src/tcp_transceiver.c **** 	{
+ 290:src/tcp_transceiver.c **** 		//length = strlen(data);
+ 291:src/tcp_transceiver.c **** 
+ 292:src/tcp_transceiver.c **** 		//busco buffer tcp vacio
+ 293:src/tcp_transceiver.c **** 		for (i = 0; i < 5; i++)
+ 952              		.loc 1 293 0
+ 953 0026 0B23     		movs	r3, #11	@ tmp135,
+ 954 0028 6B44     		add	r3, r3, sp	@ tmp135,
+ 955 002a 0022     		movs	r2, #0	@ tmp136,
+ 956 002c 1A70     		strb	r2, [r3]	@ tmp137, i
+ 957 002e 16E0     		b	.L59	@
+ 958              	.L61:
+ 294:src/tcp_transceiver.c **** 		{
+ 295:src/tcp_transceiver.c **** 			p = &bufftcpsend [i] [0];
+ 959              		.loc 1 295 0
+ 960 0030 0B23     		movs	r3, #11	@ tmp138,
+ 961 0032 6B44     		add	r3, r3, sp	@ tmp138,
+ 962 0034 1B78     		ldrb	r3, [r3]	@ D.6486, i
+ 963 0036 DA01     		lsls	r2, r3, #7	@ tmp139, D.6486,
+ 964 0038 2B4B     		ldr	r3, .L65	@ tmp141,
+ 965 003a D318     		adds	r3, r2, r3	@ tmp140, tmp139, tmp141
+ 966 003c 0393     		str	r3, [sp, #12]	@ tmp140, p
+ 296:src/tcp_transceiver.c **** 			if (*(p+1) == 0)
+ 967              		.loc 1 296 0
+ 968 003e 039B     		ldr	r3, [sp, #12]	@ tmp142, p
+ 969 0040 0133     		adds	r3, r3, #1	@ D.6487,
+ 970 0042 1B78     		ldrb	r3, [r3]	@ D.6488, *_15
+ 971 0044 002B     		cmp	r3, #0	@ D.6488,
+ 972 0046 03D1     		bne	.L60	@,
+ 297:src/tcp_transceiver.c **** 				i = 10;				//buffer vacio, lo uso
+ 973              		.loc 1 297 0
+ 974 0048 0B23     		movs	r3, #11	@ tmp143,
+ 975 004a 6B44     		add	r3, r3, sp	@ tmp143,
+ 976 004c 0A22     		movs	r2, #10	@ tmp144,
+ 977 004e 1A70     		strb	r2, [r3]	@ tmp145, i
+ 978              	.L60:
+ 293:src/tcp_transceiver.c **** 		{
+ 979              		.loc 1 293 0 discriminator 2
+ 980 0050 0B23     		movs	r3, #11	@ tmp146,
+ 981 0052 6B44     		add	r3, r3, sp	@ tmp146,
+ 982 0054 1A78     		ldrb	r2, [r3]	@ D.6489, i
+ 983 0056 0B23     		movs	r3, #11	@ tmp147,
+ 984 0058 6B44     		add	r3, r3, sp	@ tmp147,
+ 985 005a 0132     		adds	r2, r2, #1	@ tmp148,
+ 986 005c 1A70     		strb	r2, [r3]	@ tmp149, i
+ 987              	.L59:
+ 293:src/tcp_transceiver.c **** 		{
+ 988              		.loc 1 293 0 is_stmt 0 discriminator 1
+ 989 005e 0B23     		movs	r3, #11	@ tmp150,
+ 990 0060 6B44     		add	r3, r3, sp	@ tmp150,
+ 991 0062 1B78     		ldrb	r3, [r3]	@ tmp151, i
+ 992 0064 042B     		cmp	r3, #4	@ tmp151,
+ 993 0066 E3D9     		bls	.L61	@,
+ 298:src/tcp_transceiver.c **** 		}
+ 299:src/tcp_transceiver.c **** 
+ 300:src/tcp_transceiver.c **** 		if ((i >= 10) && (length < (SIZEOF_BUFFTCP_SEND - 2)))
+ARM GAS  /tmp/ccXup38D.s 			page 24
+
+
+ 994              		.loc 1 300 0 is_stmt 1
+ 995 0068 0B23     		movs	r3, #11	@ tmp152,
+ 996 006a 6B44     		add	r3, r3, sp	@ tmp152,
+ 997 006c 1B78     		ldrb	r3, [r3]	@ tmp153, i
+ 998 006e 092B     		cmp	r3, #9	@ tmp153,
+ 999 0070 34D9     		bls	.L58	@,
+ 1000              		.loc 1 300 0 is_stmt 0 discriminator 1
+ 1001 0072 6B46     		mov	r3, sp	@ tmp194,
+ 1002 0074 0733     		adds	r3, r3, #7	@ tmp154,
+ 1003 0076 1B78     		ldrb	r3, [r3]	@ tmp155, length
+ 1004 0078 7D2B     		cmp	r3, #125	@ tmp155,
+ 1005 007a 2FD8     		bhi	.L58	@,
+ 301:src/tcp_transceiver.c **** 		{
+ 302:src/tcp_transceiver.c **** 			*p = port;
+ 1006              		.loc 1 302 0 is_stmt 1
+ 1007 007c 039B     		ldr	r3, [sp, #12]	@ tmp156, p
+ 1008 007e 0922     		movs	r2, #9	@ tmp157,
+ 1009 0080 6A44     		add	r2, r2, sp	@ tmp157,
+ 1010 0082 1278     		ldrb	r2, [r2]	@ tmp158, port
+ 1011 0084 1A70     		strb	r2, [r3]	@ tmp158, *p_1
+ 303:src/tcp_transceiver.c **** 			*(p+1) = length;
+ 1012              		.loc 1 303 0
+ 1013 0086 039B     		ldr	r3, [sp, #12]	@ tmp159, p
+ 1014 0088 0133     		adds	r3, r3, #1	@ D.6487,
+ 1015 008a 6A46     		mov	r2, sp	@ tmp196,
+ 1016 008c 0732     		adds	r2, r2, #7	@ tmp160,
+ 1017 008e 1278     		ldrb	r2, [r2]	@ tmp161, length
+ 1018 0090 1A70     		strb	r2, [r3]	@ tmp161, *_22
+ 304:src/tcp_transceiver.c **** 			//strcpy ((p+2), (char *) data);
+ 305:src/tcp_transceiver.c **** 			for (i = 0; i < length; i++)
+ 1019              		.loc 1 305 0
+ 1020 0092 0B23     		movs	r3, #11	@ tmp162,
+ 1021 0094 6B44     		add	r3, r3, sp	@ tmp162,
+ 1022 0096 0022     		movs	r2, #0	@ tmp163,
+ 1023 0098 1A70     		strb	r2, [r3]	@ tmp164, i
+ 1024 009a 13E0     		b	.L62	@
+ 1025              	.L63:
+ 306:src/tcp_transceiver.c **** 				*(p + 2 + i) = *(data + i);
+ 1026              		.loc 1 306 0 discriminator 3
+ 1027 009c 0B23     		movs	r3, #11	@ tmp165,
+ 1028 009e 6B44     		add	r3, r3, sp	@ tmp165,
+ 1029 00a0 1B78     		ldrb	r3, [r3]	@ D.6490, i
+ 1030 00a2 0233     		adds	r3, r3, #2	@ D.6490,
+ 1031 00a4 039A     		ldr	r2, [sp, #12]	@ tmp166, p
+ 1032 00a6 D318     		adds	r3, r2, r3	@ D.6487, tmp166, D.6490
+ 1033 00a8 0B22     		movs	r2, #11	@ tmp167,
+ 1034 00aa 6A44     		add	r2, r2, sp	@ tmp167,
+ 1035 00ac 1278     		ldrb	r2, [r2]	@ D.6490, i
+ 1036 00ae 0099     		ldr	r1, [sp]	@ tmp168, data
+ 1037 00b0 8A18     		adds	r2, r1, r2	@ D.6491, tmp168, D.6490
+ 1038 00b2 1278     		ldrb	r2, [r2]	@ D.6489, *_30
+ 1039 00b4 1A70     		strb	r2, [r3]	@ tmp169, *_27
+ 305:src/tcp_transceiver.c **** 				*(p + 2 + i) = *(data + i);
+ 1040              		.loc 1 305 0 discriminator 3
+ 1041 00b6 0B23     		movs	r3, #11	@ tmp170,
+ 1042 00b8 6B44     		add	r3, r3, sp	@ tmp170,
+ 1043 00ba 1A78     		ldrb	r2, [r3]	@ D.6489, i
+ARM GAS  /tmp/ccXup38D.s 			page 25
+
+
+ 1044 00bc 0B23     		movs	r3, #11	@ tmp171,
+ 1045 00be 6B44     		add	r3, r3, sp	@ tmp171,
+ 1046 00c0 0132     		adds	r2, r2, #1	@ tmp172,
+ 1047 00c2 1A70     		strb	r2, [r3]	@ tmp173, i
+ 1048              	.L62:
+ 305:src/tcp_transceiver.c **** 				*(p + 2 + i) = *(data + i);
+ 1049              		.loc 1 305 0 is_stmt 0 discriminator 1
+ 1050 00c4 0B22     		movs	r2, #11	@ tmp174,
+ 1051 00c6 6A44     		add	r2, r2, sp	@ tmp174,
+ 1052 00c8 6B46     		mov	r3, sp	@ tmp203,
+ 1053 00ca 0733     		adds	r3, r3, #7	@ tmp175,
+ 1054 00cc 1278     		ldrb	r2, [r2]	@ tmp176, i
+ 1055 00ce 1B78     		ldrb	r3, [r3]	@ tmp177, length
+ 1056 00d0 9A42     		cmp	r2, r3	@ tmp176, tmp177
+ 1057 00d2 E3D3     		bcc	.L63	@,
+ 307:src/tcp_transceiver.c **** 			resp = RESP_OK;
+ 1058              		.loc 1 307 0 is_stmt 1
+ 1059 00d4 0A23     		movs	r3, #10	@ tmp178,
+ 1060 00d6 6B44     		add	r3, r3, sp	@ tmp178,
+ 1061 00d8 1422     		movs	r2, #20	@ tmp179,
+ 1062 00da 1A70     		strb	r2, [r3]	@ tmp180, resp
+ 1063              	.L58:
+ 308:src/tcp_transceiver.c **** 		}
+ 309:src/tcp_transceiver.c **** 	}
+ 310:src/tcp_transceiver.c **** 
+ 311:src/tcp_transceiver.c **** 	return resp;
+ 1064              		.loc 1 311 0
+ 1065 00dc 0A23     		movs	r3, #10	@ tmp181,
+ 1066 00de 6B44     		add	r3, r3, sp	@ tmp181,
+ 1067 00e0 1B78     		ldrb	r3, [r3]	@ D.6489, resp
+ 312:src/tcp_transceiver.c **** }
+ 1068              		.loc 1 312 0
+ 1069 00e2 1800     		movs	r0, r3	@, <retval>
+ 1070 00e4 04B0     		add	sp, sp, #16	@,,
+ 1071              		@ sp needed	@
+ 1072 00e6 7047     		bx	lr
+ 1073              	.L66:
+ 1074              		.align	2
+ 1075              	.L65:
+ 1076 00e8 00000000 		.word	bufftcpsend
+ 1077              		.cfi_endproc
+ 1078              	.LFE5:
+ 1079              		.size	TCPSendDataSocket, .-TCPSendDataSocket
+ 1080              		.section	.text.ReadPcktR,"ax",%progbits
+ 1081              		.align	2
+ 1082              		.global	ReadPcktR
+ 1083              		.code	16
+ 1084              		.thumb_func
+ 1085              		.type	ReadPcktR, %function
+ 1086              	ReadPcktR:
+ 1087              	.LFB6:
+ 313:src/tcp_transceiver.c **** 
+ 314:src/tcp_transceiver.c **** unsigned char ReadPcktR(unsigned char * p, unsigned short own_addr, unsigned char * new_r, unsigned
+ 315:src/tcp_transceiver.c **** {
+ 1088              		.loc 1 315 0
+ 1089              		.cfi_startproc
+ 1090 0000 00B5     		push	{lr}	@
+ARM GAS  /tmp/ccXup38D.s 			page 26
+
+
+ 1091              	.LCFI10:
+ 1092              		.cfi_def_cfa_offset 4
+ 1093              		.cfi_offset 14, -4
+ 1094 0002 87B0     		sub	sp, sp, #28	@,,
+ 1095              	.LCFI11:
+ 1096              		.cfi_def_cfa_offset 32
+ 1097 0004 0390     		str	r0, [sp, #12]	@ p, p
+ 1098 0006 0192     		str	r2, [sp, #4]	@ new_r, new_r
+ 1099 0008 0093     		str	r3, [sp]	@ len, len
+ 1100 000a 0A23     		movs	r3, #10	@ tmp122,
+ 1101 000c 6B44     		add	r3, r3, sp	@ tmp122,
+ 1102 000e 0A1C     		adds	r2, r1, #0	@ tmp123, tmp121
+ 1103 0010 1A80     		strh	r2, [r3]	@ tmp123, own_addr
+ 316:src/tcp_transceiver.c **** 	unsigned char new_shine;
+ 317:src/tcp_transceiver.c **** 
+ 318:src/tcp_transceiver.c **** 	if (*(p+2) != ',')
+ 1104              		.loc 1 318 0
+ 1105 0012 039B     		ldr	r3, [sp, #12]	@ tmp124, p
+ 1106 0014 0233     		adds	r3, r3, #2	@ D.6493,
+ 1107 0016 1B78     		ldrb	r3, [r3]	@ D.6492, *_10
+ 1108 0018 2C2B     		cmp	r3, #44	@ D.6492,
+ 1109 001a 01D0     		beq	.L68	@,
+ 319:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1110              		.loc 1 319 0
+ 1111 001c 1523     		movs	r3, #21	@ D.6492,
+ 1112 001e 80E0     		b	.L69	@
+ 1113              	.L68:
+ 320:src/tcp_transceiver.c **** 
+ 321:src/tcp_transceiver.c **** 	if (GetValue(p + 3) == 0xffff)
+ 1114              		.loc 1 321 0
+ 1115 0020 039B     		ldr	r3, [sp, #12]	@ tmp125, p
+ 1116 0022 0333     		adds	r3, r3, #3	@ D.6493,
+ 1117 0024 1800     		movs	r0, r3	@, D.6493
+ 1118 0026 FFF7FEFF 		bl	GetValue	@
+ 1119 002a 0300     		movs	r3, r0	@ tmp126,
+ 1120 002c 1A1E     		subs	r2, r3, #0	@ D.6494, tmp127,
+ 1121 002e 3E4B     		ldr	r3, .L89	@ tmp128,
+ 1122 0030 9A42     		cmp	r2, r3	@ D.6494, tmp128
+ 1123 0032 01D1     		bne	.L70	@,
+ 322:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1124              		.loc 1 322 0
+ 1125 0034 1523     		movs	r3, #21	@ D.6492,
+ 1126 0036 74E0     		b	.L69	@
+ 1127              	.L70:
+ 323:src/tcp_transceiver.c **** 
+ 324:src/tcp_transceiver.c **** 	new_shine = GetValue(p + 3);
+ 1128              		.loc 1 324 0
+ 1129 0038 039B     		ldr	r3, [sp, #12]	@ tmp129, p
+ 1130 003a 0333     		adds	r3, r3, #3	@ D.6493,
+ 1131 003c 1800     		movs	r0, r3	@, D.6493
+ 1132 003e FFF7FEFF 		bl	GetValue	@
+ 1133 0042 0300     		movs	r3, r0	@ tmp130,
+ 1134 0044 1A00     		movs	r2, r3	@ D.6494, tmp131
+ 1135 0046 1723     		movs	r3, #23	@ tmp132,
+ 1136 0048 6B44     		add	r3, r3, sp	@ tmp132,
+ 1137 004a 1A70     		strb	r2, [r3]	@ tmp133, new_shine
+ 325:src/tcp_transceiver.c **** 
+ARM GAS  /tmp/ccXup38D.s 			page 27
+
+
+ 326:src/tcp_transceiver.c **** 	switch (*(p+1))
+ 1138              		.loc 1 326 0
+ 1139 004c 039B     		ldr	r3, [sp, #12]	@ tmp134, p
+ 1140 004e 0133     		adds	r3, r3, #1	@ D.6493,
+ 1141 0050 1B78     		ldrb	r3, [r3]	@ D.6492, *_22
+ 1142 0052 312B     		cmp	r3, #49	@ D.6495,
+ 1143 0054 18D0     		beq	.L72	@,
+ 1144 0056 02DC     		bgt	.L73	@,
+ 1145 0058 302B     		cmp	r3, #48	@ D.6495,
+ 1146 005a 05D0     		beq	.L74	@,
+ 327:src/tcp_transceiver.c **** 	{
+ 328:src/tcp_transceiver.c **** 		case '0':
+ 329:src/tcp_transceiver.c **** 			if ((own_addr >= 1) && (own_addr < 31))
+ 330:src/tcp_transceiver.c **** 			{
+ 331:src/tcp_transceiver.c **** 				*new_r = new_shine;
+ 332:src/tcp_transceiver.c **** 			}
+ 333:src/tcp_transceiver.c **** 			break;
+ 334:src/tcp_transceiver.c **** 
+ 335:src/tcp_transceiver.c **** 		case '1':
+ 336:src/tcp_transceiver.c **** 			if ((own_addr >= 31) && (own_addr < 61))
+ 337:src/tcp_transceiver.c **** 			{
+ 338:src/tcp_transceiver.c **** 				*new_r = new_shine;
+ 339:src/tcp_transceiver.c **** 			}
+ 340:src/tcp_transceiver.c **** 			break;
+ 341:src/tcp_transceiver.c **** 
+ 342:src/tcp_transceiver.c **** 		case '2':
+ 343:src/tcp_transceiver.c **** 			if ((own_addr >= 61) && (own_addr < 91))
+ 344:src/tcp_transceiver.c **** 			{
+ 345:src/tcp_transceiver.c **** 				*new_r = new_shine;
+ 346:src/tcp_transceiver.c **** 			}
+ 347:src/tcp_transceiver.c **** 			break;
+ 348:src/tcp_transceiver.c **** 
+ 349:src/tcp_transceiver.c **** 		case '3':
+ 350:src/tcp_transceiver.c **** 			if ((own_addr >= 91) && (own_addr < 121))
+ 351:src/tcp_transceiver.c **** 			{
+ 352:src/tcp_transceiver.c **** 				*new_r = new_shine;
+ 353:src/tcp_transceiver.c **** 			}
+ 354:src/tcp_transceiver.c **** 			break;
+ 355:src/tcp_transceiver.c **** 
+ 356:src/tcp_transceiver.c **** 		default:
+ 357:src/tcp_transceiver.c **** 			break;
+ 1147              		.loc 1 357 0
+ 1148 005c 4BE0     		b	.L78	@
+ 1149              	.L73:
+ 326:src/tcp_transceiver.c **** 	{
+ 1150              		.loc 1 326 0
+ 1151 005e 322B     		cmp	r3, #50	@ D.6495,
+ 1152 0060 22D0     		beq	.L75	@,
+ 1153 0062 332B     		cmp	r3, #51	@ D.6495,
+ 1154 0064 30D0     		beq	.L76	@,
+ 1155              		.loc 1 357 0
+ 1156 0066 46E0     		b	.L78	@
+ 1157              	.L74:
+ 329:src/tcp_transceiver.c **** 			{
+ 1158              		.loc 1 329 0
+ 1159 0068 0A23     		movs	r3, #10	@ tmp135,
+ 1160 006a 6B44     		add	r3, r3, sp	@ tmp135,
+ARM GAS  /tmp/ccXup38D.s 			page 28
+
+
+ 1161 006c 1B88     		ldrh	r3, [r3]	@ tmp136, own_addr
+ 1162 006e 002B     		cmp	r3, #0	@ tmp136,
+ 1163 0070 3AD0     		beq	.L85	@,
+ 329:src/tcp_transceiver.c **** 			{
+ 1164              		.loc 1 329 0 is_stmt 0 discriminator 1
+ 1165 0072 0A23     		movs	r3, #10	@ tmp137,
+ 1166 0074 6B44     		add	r3, r3, sp	@ tmp137,
+ 1167 0076 1B88     		ldrh	r3, [r3]	@ tmp138, own_addr
+ 1168 0078 1E2B     		cmp	r3, #30	@ tmp138,
+ 1169 007a 35D8     		bhi	.L85	@,
+ 331:src/tcp_transceiver.c **** 			}
+ 1170              		.loc 1 331 0 is_stmt 1
+ 1171 007c 019B     		ldr	r3, [sp, #4]	@ tmp139, new_r
+ 1172 007e 1722     		movs	r2, #23	@ tmp140,
+ 1173 0080 6A44     		add	r2, r2, sp	@ tmp140,
+ 1174 0082 1278     		ldrb	r2, [r2]	@ tmp141, new_shine
+ 1175 0084 1A70     		strb	r2, [r3]	@ tmp141, *new_r_26(D)
+ 333:src/tcp_transceiver.c **** 
+ 1176              		.loc 1 333 0
+ 1177 0086 2FE0     		b	.L85	@
+ 1178              	.L72:
+ 336:src/tcp_transceiver.c **** 			{
+ 1179              		.loc 1 336 0
+ 1180 0088 0A23     		movs	r3, #10	@ tmp142,
+ 1181 008a 6B44     		add	r3, r3, sp	@ tmp142,
+ 1182 008c 1B88     		ldrh	r3, [r3]	@ tmp143, own_addr
+ 1183 008e 1E2B     		cmp	r3, #30	@ tmp143,
+ 1184 0090 2CD9     		bls	.L86	@,
+ 336:src/tcp_transceiver.c **** 			{
+ 1185              		.loc 1 336 0 is_stmt 0 discriminator 1
+ 1186 0092 0A23     		movs	r3, #10	@ tmp144,
+ 1187 0094 6B44     		add	r3, r3, sp	@ tmp144,
+ 1188 0096 1B88     		ldrh	r3, [r3]	@ tmp145, own_addr
+ 1189 0098 3C2B     		cmp	r3, #60	@ tmp145,
+ 1190 009a 27D8     		bhi	.L86	@,
+ 338:src/tcp_transceiver.c **** 			}
+ 1191              		.loc 1 338 0 is_stmt 1
+ 1192 009c 019B     		ldr	r3, [sp, #4]	@ tmp146, new_r
+ 1193 009e 1722     		movs	r2, #23	@ tmp147,
+ 1194 00a0 6A44     		add	r2, r2, sp	@ tmp147,
+ 1195 00a2 1278     		ldrb	r2, [r2]	@ tmp148, new_shine
+ 1196 00a4 1A70     		strb	r2, [r3]	@ tmp148, *new_r_26(D)
+ 340:src/tcp_transceiver.c **** 
+ 1197              		.loc 1 340 0
+ 1198 00a6 21E0     		b	.L86	@
+ 1199              	.L75:
+ 343:src/tcp_transceiver.c **** 			{
+ 1200              		.loc 1 343 0
+ 1201 00a8 0A23     		movs	r3, #10	@ tmp149,
+ 1202 00aa 6B44     		add	r3, r3, sp	@ tmp149,
+ 1203 00ac 1B88     		ldrh	r3, [r3]	@ tmp150, own_addr
+ 1204 00ae 3C2B     		cmp	r3, #60	@ tmp150,
+ 1205 00b0 1ED9     		bls	.L87	@,
+ 343:src/tcp_transceiver.c **** 			{
+ 1206              		.loc 1 343 0 is_stmt 0 discriminator 1
+ 1207 00b2 0A23     		movs	r3, #10	@ tmp151,
+ 1208 00b4 6B44     		add	r3, r3, sp	@ tmp151,
+ARM GAS  /tmp/ccXup38D.s 			page 29
+
+
+ 1209 00b6 1B88     		ldrh	r3, [r3]	@ tmp152, own_addr
+ 1210 00b8 5A2B     		cmp	r3, #90	@ tmp152,
+ 1211 00ba 19D8     		bhi	.L87	@,
+ 345:src/tcp_transceiver.c **** 			}
+ 1212              		.loc 1 345 0 is_stmt 1
+ 1213 00bc 019B     		ldr	r3, [sp, #4]	@ tmp153, new_r
+ 1214 00be 1722     		movs	r2, #23	@ tmp154,
+ 1215 00c0 6A44     		add	r2, r2, sp	@ tmp154,
+ 1216 00c2 1278     		ldrb	r2, [r2]	@ tmp155, new_shine
+ 1217 00c4 1A70     		strb	r2, [r3]	@ tmp155, *new_r_26(D)
+ 347:src/tcp_transceiver.c **** 
+ 1218              		.loc 1 347 0
+ 1219 00c6 13E0     		b	.L87	@
+ 1220              	.L76:
+ 350:src/tcp_transceiver.c **** 			{
+ 1221              		.loc 1 350 0
+ 1222 00c8 0A23     		movs	r3, #10	@ tmp156,
+ 1223 00ca 6B44     		add	r3, r3, sp	@ tmp156,
+ 1224 00cc 1B88     		ldrh	r3, [r3]	@ tmp157, own_addr
+ 1225 00ce 5A2B     		cmp	r3, #90	@ tmp157,
+ 1226 00d0 10D9     		bls	.L88	@,
+ 350:src/tcp_transceiver.c **** 			{
+ 1227              		.loc 1 350 0 is_stmt 0 discriminator 1
+ 1228 00d2 0A23     		movs	r3, #10	@ tmp158,
+ 1229 00d4 6B44     		add	r3, r3, sp	@ tmp158,
+ 1230 00d6 1B88     		ldrh	r3, [r3]	@ tmp159, own_addr
+ 1231 00d8 782B     		cmp	r3, #120	@ tmp159,
+ 1232 00da 0BD8     		bhi	.L88	@,
+ 352:src/tcp_transceiver.c **** 			}
+ 1233              		.loc 1 352 0 is_stmt 1
+ 1234 00dc 019B     		ldr	r3, [sp, #4]	@ tmp160, new_r
+ 1235 00de 1722     		movs	r2, #23	@ tmp161,
+ 1236 00e0 6A44     		add	r2, r2, sp	@ tmp161,
+ 1237 00e2 1278     		ldrb	r2, [r2]	@ tmp162, new_shine
+ 1238 00e4 1A70     		strb	r2, [r3]	@ tmp162, *new_r_26(D)
+ 354:src/tcp_transceiver.c **** 
+ 1239              		.loc 1 354 0
+ 1240 00e6 05E0     		b	.L88	@
+ 1241              	.L85:
+ 333:src/tcp_transceiver.c **** 
+ 1242              		.loc 1 333 0
+ 1243 00e8 C046     		nop
+ 1244 00ea 04E0     		b	.L78	@
+ 1245              	.L86:
+ 340:src/tcp_transceiver.c **** 
+ 1246              		.loc 1 340 0
+ 1247 00ec C046     		nop
+ 1248 00ee 02E0     		b	.L78	@
+ 1249              	.L87:
+ 347:src/tcp_transceiver.c **** 
+ 1250              		.loc 1 347 0
+ 1251 00f0 C046     		nop
+ 1252 00f2 00E0     		b	.L78	@
+ 1253              	.L88:
+ 354:src/tcp_transceiver.c **** 
+ 1254              		.loc 1 354 0
+ 1255 00f4 C046     		nop
+ARM GAS  /tmp/ccXup38D.s 			page 30
+
+
+ 1256              	.L78:
+ 358:src/tcp_transceiver.c **** 	}
+ 359:src/tcp_transceiver.c **** 
+ 360:src/tcp_transceiver.c **** 	if (new_shine < 10)
+ 1257              		.loc 1 360 0
+ 1258 00f6 1723     		movs	r3, #23	@ tmp163,
+ 1259 00f8 6B44     		add	r3, r3, sp	@ tmp163,
+ 1260 00fa 1B78     		ldrb	r3, [r3]	@ tmp164, new_shine
+ 1261 00fc 092B     		cmp	r3, #9	@ tmp164,
+ 1262 00fe 03D8     		bhi	.L82	@,
+ 361:src/tcp_transceiver.c **** 		*len = 5;
+ 1263              		.loc 1 361 0
+ 1264 0100 009B     		ldr	r3, [sp]	@ tmp165, len
+ 1265 0102 0522     		movs	r2, #5	@ tmp166,
+ 1266 0104 1A70     		strb	r2, [r3]	@ tmp167, *len_31(D)
+ 1267 0106 0BE0     		b	.L83	@
+ 1268              	.L82:
+ 362:src/tcp_transceiver.c **** 	else if (new_shine < 100)
+ 1269              		.loc 1 362 0
+ 1270 0108 1723     		movs	r3, #23	@ tmp168,
+ 1271 010a 6B44     		add	r3, r3, sp	@ tmp168,
+ 1272 010c 1B78     		ldrb	r3, [r3]	@ tmp169, new_shine
+ 1273 010e 632B     		cmp	r3, #99	@ tmp169,
+ 1274 0110 03D8     		bhi	.L84	@,
+ 363:src/tcp_transceiver.c **** 		*len = 6;
+ 1275              		.loc 1 363 0
+ 1276 0112 009B     		ldr	r3, [sp]	@ tmp170, len
+ 1277 0114 0622     		movs	r2, #6	@ tmp171,
+ 1278 0116 1A70     		strb	r2, [r3]	@ tmp172, *len_31(D)
+ 1279 0118 02E0     		b	.L83	@
+ 1280              	.L84:
+ 364:src/tcp_transceiver.c **** 	else
+ 365:src/tcp_transceiver.c **** 		*len = 7;
+ 1281              		.loc 1 365 0
+ 1282 011a 009B     		ldr	r3, [sp]	@ tmp173, len
+ 1283 011c 0722     		movs	r2, #7	@ tmp174,
+ 1284 011e 1A70     		strb	r2, [r3]	@ tmp175, *len_31(D)
+ 1285              	.L83:
+ 366:src/tcp_transceiver.c **** 
+ 367:src/tcp_transceiver.c **** 	return RESP_OK;
+ 1286              		.loc 1 367 0
+ 1287 0120 1423     		movs	r3, #20	@ D.6492,
+ 1288              	.L69:
+ 368:src/tcp_transceiver.c **** }
+ 1289              		.loc 1 368 0
+ 1290 0122 1800     		movs	r0, r3	@, <retval>
+ 1291 0124 07B0     		add	sp, sp, #28	@,,
+ 1292              		@ sp needed	@
+ 1293 0126 00BD     		pop	{pc}
+ 1294              	.L90:
+ 1295              		.align	2
+ 1296              	.L89:
+ 1297 0128 FFFF0000 		.word	65535
+ 1298              		.cfi_endproc
+ 1299              	.LFE6:
+ 1300              		.size	ReadPcktR, .-ReadPcktR
+ 1301              		.section	.text.ReadPcktS,"ax",%progbits
+ARM GAS  /tmp/ccXup38D.s 			page 31
+
+
+ 1302              		.align	2
+ 1303              		.global	ReadPcktS
+ 1304              		.code	16
+ 1305              		.thumb_func
+ 1306              		.type	ReadPcktS, %function
+ 1307              	ReadPcktS:
+ 1308              	.LFB7:
+ 369:src/tcp_transceiver.c **** 
+ 370:src/tcp_transceiver.c **** //en S me llega un parametro particular
+ 371:src/tcp_transceiver.c **** //del brillo de esa lampara pero indicando cada habitacion
+ 372:src/tcp_transceiver.c **** //s0,0,255;\r\n
+ 373:src/tcp_transceiver.c **** void ReadPcktS(unsigned char * p)
+ 374:src/tcp_transceiver.c **** {
+ 1309              		.loc 1 374 0
+ 1310              		.cfi_startproc
+ 1311 0000 82B0     		sub	sp, sp, #8	@,,
+ 1312              	.LCFI12:
+ 1313              		.cfi_def_cfa_offset 8
+ 1314 0002 0190     		str	r0, [sp, #4]	@ p, p
+ 375:src/tcp_transceiver.c **** 	/*
+ 376:src/tcp_transceiver.c **** 	unsigned char room;
+ 377:src/tcp_transceiver.c **** 	unsigned char slider;
+ 378:src/tcp_transceiver.c **** 	unsigned char new_shine;
+ 379:src/tcp_transceiver.c **** 	unsigned short ii;
+ 380:src/tcp_transceiver.c **** 
+ 381:src/tcp_transceiver.c **** 	if (*(p+2) != ',')
+ 382:src/tcp_transceiver.c **** 		return;
+ 383:src/tcp_transceiver.c **** 
+ 384:src/tcp_transceiver.c **** 	room = *(p+1) - '0';
+ 385:src/tcp_transceiver.c **** 
+ 386:src/tcp_transceiver.c **** 	if ((room < 0) || (room > 3))
+ 387:src/tcp_transceiver.c **** 		return;
+ 388:src/tcp_transceiver.c **** 
+ 389:src/tcp_transceiver.c **** 	ii = GetValue(p + 3);
+ 390:src/tcp_transceiver.c **** 	if (ii == 0xffff)
+ 391:src/tcp_transceiver.c **** 		return;
+ 392:src/tcp_transceiver.c **** 	else
+ 393:src/tcp_transceiver.c **** 		slider = (unsigned char) ii;
+ 394:src/tcp_transceiver.c **** 
+ 395:src/tcp_transceiver.c **** 	if (slider < 10)
+ 396:src/tcp_transceiver.c **** 	{
+ 397:src/tcp_transceiver.c **** 		ii = GetValue(p + 5);
+ 398:src/tcp_transceiver.c **** 		if (ii == 0xffff)
+ 399:src/tcp_transceiver.c **** 			return;
+ 400:src/tcp_transceiver.c **** 		else
+ 401:src/tcp_transceiver.c **** 			new_shine = (unsigned char) ii;
+ 402:src/tcp_transceiver.c **** 	}
+ 403:src/tcp_transceiver.c **** 	else if (slider < 30)
+ 404:src/tcp_transceiver.c **** 	{
+ 405:src/tcp_transceiver.c **** 		ii = GetValue(p + 6);
+ 406:src/tcp_transceiver.c **** 		if (ii == 0xffff)
+ 407:src/tcp_transceiver.c **** 			return;
+ 408:src/tcp_transceiver.c **** 		else
+ 409:src/tcp_transceiver.c **** 			new_shine = (unsigned char) ii;
+ 410:src/tcp_transceiver.c **** 	}
+ 411:src/tcp_transceiver.c **** 	else
+ 412:src/tcp_transceiver.c **** 		return;
+ARM GAS  /tmp/ccXup38D.s 			page 32
+
+
+ 413:src/tcp_transceiver.c **** 
+ 414:src/tcp_transceiver.c **** 	ii = (room * 30) + slider + 1;
+ 415:src/tcp_transceiver.c **** 	orig_shine_slider[ii] = new_shine;
+ 416:src/tcp_transceiver.c **** 	data1[ii] = ((new_shine + 1) * orig_shine_room[room]) >> 8;
+ 417:src/tcp_transceiver.c **** 	*/
+ 418:src/tcp_transceiver.c **** }
+ 1315              		.loc 1 418 0
+ 1316 0004 C046     		nop
+ 1317 0006 02B0     		add	sp, sp, #8	@,,
+ 1318              		@ sp needed	@
+ 1319 0008 7047     		bx	lr
+ 1320              		.cfi_endproc
+ 1321              	.LFE7:
+ 1322              		.size	ReadPcktS, .-ReadPcktS
+ 1323 000a C046     		.section	.text.GetValue,"ax",%progbits
+ 1324              		.align	2
+ 1325              		.global	GetValue
+ 1326              		.code	16
+ 1327              		.thumb_func
+ 1328              		.type	GetValue, %function
+ 1329              	GetValue:
+ 1330              	.LFB8:
+ 419:src/tcp_transceiver.c **** 
+ 420:src/tcp_transceiver.c **** unsigned short GetValue (unsigned char * pn)
+ 421:src/tcp_transceiver.c **** {
+ 1331              		.loc 1 421 0
+ 1332              		.cfi_startproc
+ 1333 0000 84B0     		sub	sp, sp, #16	@,,
+ 1334              	.LCFI13:
+ 1335              		.cfi_def_cfa_offset 16
+ 1336 0002 0190     		str	r0, [sp, #4]	@ pn, pn
+ 422:src/tcp_transceiver.c **** 	unsigned char i;
+ 423:src/tcp_transceiver.c **** 	unsigned char colon = 0;
+ 1337              		.loc 1 423 0
+ 1338 0004 0E23     		movs	r3, #14	@ tmp170,
+ 1339 0006 6B44     		add	r3, r3, sp	@ tmp170,
+ 1340 0008 0022     		movs	r2, #0	@ tmp171,
+ 1341 000a 1A70     		strb	r2, [r3]	@ tmp172, colon
+ 424:src/tcp_transceiver.c **** 	unsigned short new_val = 0xffff;
+ 1342              		.loc 1 424 0
+ 1343 000c 03AB     		add	r3, sp, #12	@ tmp173,,
+ 1344 000e 0122     		movs	r2, #1	@ tmp258,
+ 1345 0010 5242     		rsbs	r2, r2, #0	@ tmp174, tmp258
+ 1346 0012 1A80     		strh	r2, [r3]	@ tmp175, new_val
+ 425:src/tcp_transceiver.c **** 
+ 426:src/tcp_transceiver.c **** 	//me fijo la posiciones de la , o ;
+ 427:src/tcp_transceiver.c **** 	for (i = 0; i < 6; i++)
+ 1347              		.loc 1 427 0
+ 1348 0014 0F23     		movs	r3, #15	@ tmp176,
+ 1349 0016 6B44     		add	r3, r3, sp	@ tmp176,
+ 1350 0018 0022     		movs	r2, #0	@ tmp177,
+ 1351 001a 1A70     		strb	r2, [r3]	@ tmp178, i
+ 1352 001c 20E0     		b	.L93	@
+ 1353              	.L96:
+ 428:src/tcp_transceiver.c **** 	{
+ 429:src/tcp_transceiver.c **** 		if ((*(pn + i) == ',') || ((*(pn + i) == ';')))
+ 1354              		.loc 1 429 0
+ARM GAS  /tmp/ccXup38D.s 			page 33
+
+
+ 1355 001e 0F23     		movs	r3, #15	@ tmp179,
+ 1356 0020 6B44     		add	r3, r3, sp	@ tmp179,
+ 1357 0022 1B78     		ldrb	r3, [r3]	@ D.6498, i
+ 1358 0024 019A     		ldr	r2, [sp, #4]	@ tmp180, pn
+ 1359 0026 D318     		adds	r3, r2, r3	@ D.6499, tmp180, D.6498
+ 1360 0028 1B78     		ldrb	r3, [r3]	@ D.6500, *_12
+ 1361 002a 2C2B     		cmp	r3, #44	@ D.6500,
+ 1362 002c 07D0     		beq	.L94	@,
+ 1363              		.loc 1 429 0 is_stmt 0 discriminator 1
+ 1364 002e 0F23     		movs	r3, #15	@ tmp181,
+ 1365 0030 6B44     		add	r3, r3, sp	@ tmp181,
+ 1366 0032 1B78     		ldrb	r3, [r3]	@ D.6498, i
+ 1367 0034 019A     		ldr	r2, [sp, #4]	@ tmp182, pn
+ 1368 0036 D318     		adds	r3, r2, r3	@ D.6499, tmp182, D.6498
+ 1369 0038 1B78     		ldrb	r3, [r3]	@ D.6500, *_16
+ 1370 003a 3B2B     		cmp	r3, #59	@ D.6500,
+ 1371 003c 09D1     		bne	.L95	@,
+ 1372              	.L94:
+ 430:src/tcp_transceiver.c **** 		{
+ 431:src/tcp_transceiver.c **** 			colon = i;
+ 1373              		.loc 1 431 0 is_stmt 1
+ 1374 003e 0E23     		movs	r3, #14	@ tmp183,
+ 1375 0040 6B44     		add	r3, r3, sp	@ tmp183,
+ 1376 0042 0F22     		movs	r2, #15	@ tmp184,
+ 1377 0044 6A44     		add	r2, r2, sp	@ tmp184,
+ 1378 0046 1278     		ldrb	r2, [r2]	@ tmp185, i
+ 1379 0048 1A70     		strb	r2, [r3]	@ tmp185, colon
+ 432:src/tcp_transceiver.c **** 			i = 6;
+ 1380              		.loc 1 432 0
+ 1381 004a 0F23     		movs	r3, #15	@ tmp186,
+ 1382 004c 6B44     		add	r3, r3, sp	@ tmp186,
+ 1383 004e 0622     		movs	r2, #6	@ tmp187,
+ 1384 0050 1A70     		strb	r2, [r3]	@ tmp188, i
+ 1385              	.L95:
+ 427:src/tcp_transceiver.c **** 	{
+ 1386              		.loc 1 427 0 discriminator 2
+ 1387 0052 0F23     		movs	r3, #15	@ tmp189,
+ 1388 0054 6B44     		add	r3, r3, sp	@ tmp189,
+ 1389 0056 1A78     		ldrb	r2, [r3]	@ D.6500, i
+ 1390 0058 0F23     		movs	r3, #15	@ tmp190,
+ 1391 005a 6B44     		add	r3, r3, sp	@ tmp190,
+ 1392 005c 0132     		adds	r2, r2, #1	@ tmp191,
+ 1393 005e 1A70     		strb	r2, [r3]	@ tmp192, i
+ 1394              	.L93:
+ 427:src/tcp_transceiver.c **** 	{
+ 1395              		.loc 1 427 0 is_stmt 0 discriminator 1
+ 1396 0060 0F23     		movs	r3, #15	@ tmp193,
+ 1397 0062 6B44     		add	r3, r3, sp	@ tmp193,
+ 1398 0064 1B78     		ldrb	r3, [r3]	@ tmp194, i
+ 1399 0066 052B     		cmp	r3, #5	@ tmp194,
+ 1400 0068 D9D9     		bls	.L96	@,
+ 433:src/tcp_transceiver.c **** 		}
+ 434:src/tcp_transceiver.c **** 	}
+ 435:src/tcp_transceiver.c **** 
+ 436:src/tcp_transceiver.c **** 	if ((colon == 0) || (colon >= 5))
+ 1401              		.loc 1 436 0 is_stmt 1
+ 1402 006a 0E23     		movs	r3, #14	@ tmp195,
+ARM GAS  /tmp/ccXup38D.s 			page 34
+
+
+ 1403 006c 6B44     		add	r3, r3, sp	@ tmp195,
+ 1404 006e 1B78     		ldrb	r3, [r3]	@ tmp196, colon
+ 1405 0070 002B     		cmp	r3, #0	@ tmp196,
+ 1406 0072 04D0     		beq	.L97	@,
+ 1407              		.loc 1 436 0 is_stmt 0 discriminator 1
+ 1408 0074 0E23     		movs	r3, #14	@ tmp197,
+ 1409 0076 6B44     		add	r3, r3, sp	@ tmp197,
+ 1410 0078 1B78     		ldrb	r3, [r3]	@ tmp198, colon
+ 1411 007a 042B     		cmp	r3, #4	@ tmp198,
+ 1412 007c 01D9     		bls	.L98	@,
+ 1413              	.L97:
+ 437:src/tcp_transceiver.c **** 		return 0;
+ 1414              		.loc 1 437 0 is_stmt 1
+ 1415 007e 0023     		movs	r3, #0	@ D.6497,
+ 1416 0080 6EE0     		b	.L99	@
+ 1417              	.L98:
+ 438:src/tcp_transceiver.c **** 
+ 439:src/tcp_transceiver.c **** 	switch (colon)
+ 1418              		.loc 1 439 0
+ 1419 0082 0E23     		movs	r3, #14	@ tmp199,
+ 1420 0084 6B44     		add	r3, r3, sp	@ tmp199,
+ 1421 0086 1B78     		ldrb	r3, [r3]	@ D.6501, colon
+ 1422 0088 022B     		cmp	r3, #2	@ D.6501,
+ 1423 008a 0FD0     		beq	.L101	@,
+ 1424 008c 02DC     		bgt	.L102	@,
+ 1425 008e 012B     		cmp	r3, #1	@ D.6501,
+ 1426 0090 05D0     		beq	.L103	@,
+ 1427 0092 63E0     		b	.L100	@
+ 1428              	.L102:
+ 1429 0094 032B     		cmp	r3, #3	@ D.6501,
+ 1430 0096 1CD0     		beq	.L104	@,
+ 1431 0098 042B     		cmp	r3, #4	@ D.6501,
+ 1432 009a 37D0     		beq	.L105	@,
+ 1433 009c 5EE0     		b	.L100	@
+ 1434              	.L103:
+ 440:src/tcp_transceiver.c **** 	{
+ 441:src/tcp_transceiver.c **** 		case 1:
+ 442:src/tcp_transceiver.c **** 			new_val = *pn - '0';
+ 1435              		.loc 1 442 0
+ 1436 009e 019B     		ldr	r3, [sp, #4]	@ tmp200, pn
+ 1437 00a0 1B78     		ldrb	r3, [r3]	@ D.6500, *pn_11(D)
+ 1438 00a2 9AB2     		uxth	r2, r3	@ D.6497, D.6500
+ 1439 00a4 03AB     		add	r3, sp, #12	@ tmp201,,
+ 1440 00a6 303A     		subs	r2, r2, #48	@ tmp202,
+ 1441 00a8 1A80     		strh	r2, [r3]	@ tmp203, new_val
+ 443:src/tcp_transceiver.c **** 			break;
+ 1442              		.loc 1 443 0
+ 1443 00aa 57E0     		b	.L100	@
+ 1444              	.L101:
+ 444:src/tcp_transceiver.c **** 
+ 445:src/tcp_transceiver.c **** 		case 2:
+ 446:src/tcp_transceiver.c **** 			new_val = (*pn - '0') * 10 + (*(pn + 1) - '0');
+ 1445              		.loc 1 446 0
+ 1446 00ac 019B     		ldr	r3, [sp, #4]	@ tmp204, pn
+ 1447 00ae 1B78     		ldrb	r3, [r3]	@ D.6500, *pn_11(D)
+ 1448 00b0 303B     		subs	r3, r3, #48	@ D.6501,
+ 1449 00b2 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ARM GAS  /tmp/ccXup38D.s 			page 35
+
+
+ 1450 00b4 1A1C     		adds	r2, r3, #0	@ tmp206, tmp205
+ 1451 00b6 9200     		lsls	r2, r2, #2	@ tmp207, tmp206,
+ 1452 00b8 D318     		adds	r3, r2, r3	@ tmp209, tmp208, tmp205
+ 1453 00ba DB18     		adds	r3, r3, r3	@ tmp211, tmp210, tmp210
+ 1454 00bc 9AB2     		uxth	r2, r3	@ D.6497, tmp209
+ 1455 00be 019B     		ldr	r3, [sp, #4]	@ tmp212, pn
+ 1456 00c0 0133     		adds	r3, r3, #1	@ D.6499,
+ 1457 00c2 1B78     		ldrb	r3, [r3]	@ D.6500, *_31
+ 1458 00c4 9BB2     		uxth	r3, r3	@ D.6497, D.6500
+ 1459 00c6 D318     		adds	r3, r2, r3	@ tmp213, D.6497, D.6497
+ 1460 00c8 9AB2     		uxth	r2, r3	@ D.6497, tmp213
+ 1461 00ca 03AB     		add	r3, sp, #12	@ tmp214,,
+ 1462 00cc 303A     		subs	r2, r2, #48	@ tmp215,
+ 1463 00ce 1A80     		strh	r2, [r3]	@ tmp216, new_val
+ 447:src/tcp_transceiver.c **** 			break;
+ 1464              		.loc 1 447 0
+ 1465 00d0 44E0     		b	.L100	@
+ 1466              	.L104:
+ 448:src/tcp_transceiver.c **** 
+ 449:src/tcp_transceiver.c **** 		case 3:
+ 450:src/tcp_transceiver.c **** 			new_val = (*pn - '0') * 100 + (*(pn + 1) - '0') * 10 + (*(pn + 2) - '0');
+ 1467              		.loc 1 450 0
+ 1468 00d2 019B     		ldr	r3, [sp, #4]	@ tmp217, pn
+ 1469 00d4 1B78     		ldrb	r3, [r3]	@ D.6500, *pn_11(D)
+ 1470 00d6 303B     		subs	r3, r3, #48	@ D.6501,
+ 1471 00d8 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ 1472 00da 6422     		movs	r2, #100	@ tmp219,
+ 1473 00dc 5343     		muls	r3, r2	@ tmp218, tmp219
+ 1474 00de 9AB2     		uxth	r2, r3	@ D.6497, tmp218
+ 1475 00e0 019B     		ldr	r3, [sp, #4]	@ tmp220, pn
+ 1476 00e2 0133     		adds	r3, r3, #1	@ D.6499,
+ 1477 00e4 1B78     		ldrb	r3, [r3]	@ D.6500, *_41
+ 1478 00e6 303B     		subs	r3, r3, #48	@ D.6501,
+ 1479 00e8 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ 1480 00ea 191C     		adds	r1, r3, #0	@ tmp222, tmp221
+ 1481 00ec 8900     		lsls	r1, r1, #2	@ tmp223, tmp222,
+ 1482 00ee CB18     		adds	r3, r1, r3	@ tmp225, tmp224, tmp221
+ 1483 00f0 DB18     		adds	r3, r3, r3	@ tmp227, tmp226, tmp226
+ 1484 00f2 9BB2     		uxth	r3, r3	@ D.6497, tmp225
+ 1485 00f4 D318     		adds	r3, r2, r3	@ tmp228, D.6497, D.6497
+ 1486 00f6 9AB2     		uxth	r2, r3	@ D.6497, tmp228
+ 1487 00f8 019B     		ldr	r3, [sp, #4]	@ tmp229, pn
+ 1488 00fa 0233     		adds	r3, r3, #2	@ D.6499,
+ 1489 00fc 1B78     		ldrb	r3, [r3]	@ D.6500, *_48
+ 1490 00fe 9BB2     		uxth	r3, r3	@ D.6497, D.6500
+ 1491 0100 D318     		adds	r3, r2, r3	@ tmp230, D.6497, D.6497
+ 1492 0102 9AB2     		uxth	r2, r3	@ D.6497, tmp230
+ 1493 0104 03AB     		add	r3, sp, #12	@ tmp231,,
+ 1494 0106 303A     		subs	r2, r2, #48	@ tmp232,
+ 1495 0108 1A80     		strh	r2, [r3]	@ tmp233, new_val
+ 451:src/tcp_transceiver.c **** 			break;
+ 1496              		.loc 1 451 0
+ 1497 010a 27E0     		b	.L100	@
+ 1498              	.L105:
+ 452:src/tcp_transceiver.c **** 
+ 453:src/tcp_transceiver.c **** 		case 4:
+ 454:src/tcp_transceiver.c **** 			new_val = (*pn - '0') * 1000 + (*(pn + 1) - '0') * 100 + (*(pn + 2) - '0') * 10 + (*(pn + 2) - '
+ARM GAS  /tmp/ccXup38D.s 			page 36
+
+
+ 1499              		.loc 1 454 0
+ 1500 010c 019B     		ldr	r3, [sp, #4]	@ tmp234, pn
+ 1501 010e 1B78     		ldrb	r3, [r3]	@ D.6500, *pn_11(D)
+ 1502 0110 303B     		subs	r3, r3, #48	@ D.6501,
+ 1503 0112 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ 1504 0114 FA22     		movs	r2, #250	@ tmp257,
+ 1505 0116 9200     		lsls	r2, r2, #2	@ tmp236, tmp257,
+ 1506 0118 5343     		muls	r3, r2	@ tmp235, tmp236
+ 1507 011a 9AB2     		uxth	r2, r3	@ D.6497, tmp235
+ 1508 011c 019B     		ldr	r3, [sp, #4]	@ tmp237, pn
+ 1509 011e 0133     		adds	r3, r3, #1	@ D.6499,
+ 1510 0120 1B78     		ldrb	r3, [r3]	@ D.6500, *_58
+ 1511 0122 303B     		subs	r3, r3, #48	@ D.6501,
+ 1512 0124 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ 1513 0126 6421     		movs	r1, #100	@ tmp239,
+ 1514 0128 4B43     		muls	r3, r1	@ tmp238, tmp239
+ 1515 012a 9BB2     		uxth	r3, r3	@ D.6497, tmp238
+ 1516 012c D318     		adds	r3, r2, r3	@ tmp240, D.6497, D.6497
+ 1517 012e 9AB2     		uxth	r2, r3	@ D.6497, tmp240
+ 1518 0130 019B     		ldr	r3, [sp, #4]	@ tmp241, pn
+ 1519 0132 0233     		adds	r3, r3, #2	@ D.6499,
+ 1520 0134 1B78     		ldrb	r3, [r3]	@ D.6500, *_65
+ 1521 0136 303B     		subs	r3, r3, #48	@ D.6501,
+ 1522 0138 9BB2     		uxth	r3, r3	@ D.6497, D.6501
+ 1523 013a 191C     		adds	r1, r3, #0	@ tmp243, tmp242
+ 1524 013c 8900     		lsls	r1, r1, #2	@ tmp244, tmp243,
+ 1525 013e CB18     		adds	r3, r1, r3	@ tmp246, tmp245, tmp242
+ 1526 0140 DB18     		adds	r3, r3, r3	@ tmp248, tmp247, tmp247
+ 1527 0142 9BB2     		uxth	r3, r3	@ D.6497, tmp246
+ 1528 0144 D318     		adds	r3, r2, r3	@ tmp249, D.6497, D.6497
+ 1529 0146 9AB2     		uxth	r2, r3	@ D.6497, tmp249
+ 1530 0148 019B     		ldr	r3, [sp, #4]	@ tmp250, pn
+ 1531 014a 0233     		adds	r3, r3, #2	@ D.6499,
+ 1532 014c 1B78     		ldrb	r3, [r3]	@ D.6500, *_72
+ 1533 014e 9BB2     		uxth	r3, r3	@ D.6497, D.6500
+ 1534 0150 D318     		adds	r3, r2, r3	@ tmp251, D.6497, D.6497
+ 1535 0152 9AB2     		uxth	r2, r3	@ D.6497, tmp251
+ 1536 0154 03AB     		add	r3, sp, #12	@ tmp252,,
+ 1537 0156 303A     		subs	r2, r2, #48	@ tmp253,
+ 1538 0158 1A80     		strh	r2, [r3]	@ tmp254, new_val
+ 455:src/tcp_transceiver.c **** 			break;
+ 1539              		.loc 1 455 0
+ 1540 015a C046     		nop
+ 1541              	.L100:
+ 456:src/tcp_transceiver.c **** 
+ 457:src/tcp_transceiver.c **** 	}
+ 458:src/tcp_transceiver.c **** 	return new_val;
+ 1542              		.loc 1 458 0
+ 1543 015c 03AB     		add	r3, sp, #12	@ tmp255,,
+ 1544 015e 1B88     		ldrh	r3, [r3]	@ D.6497, new_val
+ 1545              	.L99:
+ 459:src/tcp_transceiver.c **** }
+ 1546              		.loc 1 459 0
+ 1547 0160 1800     		movs	r0, r3	@, <retval>
+ 1548 0162 04B0     		add	sp, sp, #16	@,,
+ 1549              		@ sp needed	@
+ 1550 0164 7047     		bx	lr
+ARM GAS  /tmp/ccXup38D.s 			page 37
+
+
+ 1551              		.cfi_endproc
+ 1552              	.LFE8:
+ 1553              		.size	GetValue, .-GetValue
+ 1554 0166 C046     		.section	.text.IpIsValid,"ax",%progbits
+ 1555              		.align	2
+ 1556              		.global	IpIsValid
+ 1557              		.code	16
+ 1558              		.thumb_func
+ 1559              		.type	IpIsValid, %function
+ 1560              	IpIsValid:
+ 1561              	.LFB9:
+ 460:src/tcp_transceiver.c **** 
+ 461:src/tcp_transceiver.c **** unsigned char IpIsValid (char * ip)
+ 462:src/tcp_transceiver.c **** {
+ 1562              		.loc 1 462 0
+ 1563              		.cfi_startproc
+ 1564 0000 00B5     		push	{lr}	@
+ 1565              	.LCFI14:
+ 1566              		.cfi_def_cfa_offset 4
+ 1567              		.cfi_offset 14, -4
+ 1568 0002 87B0     		sub	sp, sp, #28	@,,
+ 1569              	.LCFI15:
+ 1570              		.cfi_def_cfa_offset 32
+ 1571 0004 0190     		str	r0, [sp, #4]	@ ip, ip
+ 463:src/tcp_transceiver.c **** 	unsigned char i;
+ 464:src/tcp_transceiver.c **** 	unsigned char dot1 = 0;
+ 1572              		.loc 1 464 0
+ 1573 0006 1623     		movs	r3, #22	@ tmp139,
+ 1574 0008 6B44     		add	r3, r3, sp	@ tmp139,
+ 1575 000a 0022     		movs	r2, #0	@ tmp140,
+ 1576 000c 1A70     		strb	r2, [r3]	@ tmp141, dot1
+ 465:src/tcp_transceiver.c **** 	unsigned char dot2 = 0;
+ 1577              		.loc 1 465 0
+ 1578 000e 1523     		movs	r3, #21	@ tmp142,
+ 1579 0010 6B44     		add	r3, r3, sp	@ tmp142,
+ 1580 0012 0022     		movs	r2, #0	@ tmp143,
+ 1581 0014 1A70     		strb	r2, [r3]	@ tmp144, dot2
+ 466:src/tcp_transceiver.c **** 	unsigned char dot3 = 0;
+ 1582              		.loc 1 466 0
+ 1583 0016 05AB     		add	r3, sp, #20	@ tmp145,,
+ 1584 0018 0022     		movs	r2, #0	@ tmp146,
+ 1585 001a 1A70     		strb	r2, [r3]	@ tmp147, dot3
+ 467:src/tcp_transceiver.c **** 	unsigned char dot4 = 0;
+ 1586              		.loc 1 467 0
+ 1587 001c 1323     		movs	r3, #19	@ tmp148,
+ 1588 001e 6B44     		add	r3, r3, sp	@ tmp148,
+ 1589 0020 0022     		movs	r2, #0	@ tmp149,
+ 1590 0022 1A70     		strb	r2, [r3]	@ tmp150, dot4
+ 468:src/tcp_transceiver.c **** 	unsigned char size1 = 0;
+ 1591              		.loc 1 468 0
+ 1592 0024 1223     		movs	r3, #18	@ tmp151,
+ 1593 0026 6B44     		add	r3, r3, sp	@ tmp151,
+ 1594 0028 0022     		movs	r2, #0	@ tmp152,
+ 1595 002a 1A70     		strb	r2, [r3]	@ tmp153, size1
+ 469:src/tcp_transceiver.c **** 	unsigned char size2 = 0;
+ 1596              		.loc 1 469 0
+ 1597 002c 1123     		movs	r3, #17	@ tmp154,
+ARM GAS  /tmp/ccXup38D.s 			page 38
+
+
+ 1598 002e 6B44     		add	r3, r3, sp	@ tmp154,
+ 1599 0030 0022     		movs	r2, #0	@ tmp155,
+ 1600 0032 1A70     		strb	r2, [r3]	@ tmp156, size2
+ 470:src/tcp_transceiver.c **** 	unsigned char size3 = 0;
+ 1601              		.loc 1 470 0
+ 1602 0034 04AB     		add	r3, sp, #16	@ tmp157,,
+ 1603 0036 0022     		movs	r2, #0	@ tmp158,
+ 1604 0038 1A70     		strb	r2, [r3]	@ tmp159, size3
+ 471:src/tcp_transceiver.c **** 	unsigned char size4 = 0;
+ 1605              		.loc 1 471 0
+ 1606 003a 0F23     		movs	r3, #15	@ tmp160,
+ 1607 003c 6B44     		add	r3, r3, sp	@ tmp160,
+ 1608 003e 0022     		movs	r2, #0	@ tmp161,
+ 1609 0040 1A70     		strb	r2, [r3]	@ tmp162, size4
+ 472:src/tcp_transceiver.c **** 
+ 473:src/tcp_transceiver.c **** 	unsigned char new_val = 0;
+ 1610              		.loc 1 473 0
+ 1611 0042 0E23     		movs	r3, #14	@ tmp163,
+ 1612 0044 6B44     		add	r3, r3, sp	@ tmp163,
+ 1613 0046 0022     		movs	r2, #0	@ tmp164,
+ 1614 0048 1A70     		strb	r2, [r3]	@ tmp165, new_val
+ 474:src/tcp_transceiver.c **** 	char s_octet [4];
+ 475:src/tcp_transceiver.c **** 
+ 476:src/tcp_transceiver.c **** 	//me fijo las posiciones del .
+ 477:src/tcp_transceiver.c **** 	for (i = 0; i < 15; i++)
+ 1615              		.loc 1 477 0
+ 1616 004a 1723     		movs	r3, #23	@ tmp166,
+ 1617 004c 6B44     		add	r3, r3, sp	@ tmp166,
+ 1618 004e 0022     		movs	r2, #0	@ tmp167,
+ 1619 0050 1A70     		strb	r2, [r3]	@ tmp168, i
+ 1620 0052 45E0     		b	.L107	@
+ 1621              	.L114:
+ 478:src/tcp_transceiver.c **** 	{
+ 479:src/tcp_transceiver.c **** 		if (*(ip + i) == '\0')
+ 1622              		.loc 1 479 0
+ 1623 0054 1723     		movs	r3, #23	@ tmp169,
+ 1624 0056 6B44     		add	r3, r3, sp	@ tmp169,
+ 1625 0058 1B78     		ldrb	r3, [r3]	@ D.6504, i
+ 1626 005a 019A     		ldr	r2, [sp, #4]	@ tmp170, ip
+ 1627 005c D318     		adds	r3, r2, r3	@ D.6505, tmp170, D.6504
+ 1628 005e 1B78     		ldrb	r3, [r3]	@ D.6506, *_27
+ 1629 0060 002B     		cmp	r3, #0	@ D.6506,
+ 1630 0062 0AD1     		bne	.L108	@,
+ 480:src/tcp_transceiver.c **** 		{
+ 481:src/tcp_transceiver.c **** 			dot4 = i;
+ 1631              		.loc 1 481 0
+ 1632 0064 1323     		movs	r3, #19	@ tmp171,
+ 1633 0066 6B44     		add	r3, r3, sp	@ tmp171,
+ 1634 0068 1722     		movs	r2, #23	@ tmp172,
+ 1635 006a 6A44     		add	r2, r2, sp	@ tmp172,
+ 1636 006c 1278     		ldrb	r2, [r2]	@ tmp173, i
+ 1637 006e 1A70     		strb	r2, [r3]	@ tmp173, dot4
+ 482:src/tcp_transceiver.c **** 			i = 15;
+ 1638              		.loc 1 482 0
+ 1639 0070 1723     		movs	r3, #23	@ tmp174,
+ 1640 0072 6B44     		add	r3, r3, sp	@ tmp174,
+ 1641 0074 0F22     		movs	r2, #15	@ tmp175,
+ARM GAS  /tmp/ccXup38D.s 			page 39
+
+
+ 1642 0076 1A70     		strb	r2, [r3]	@ tmp176, i
+ 1643 0078 2BE0     		b	.L109	@
+ 1644              	.L108:
+ 483:src/tcp_transceiver.c **** 		}
+ 484:src/tcp_transceiver.c **** 		else
+ 485:src/tcp_transceiver.c **** 		{
+ 486:src/tcp_transceiver.c **** 			if (*(ip + i) == '.')
+ 1645              		.loc 1 486 0
+ 1646 007a 1723     		movs	r3, #23	@ tmp177,
+ 1647 007c 6B44     		add	r3, r3, sp	@ tmp177,
+ 1648 007e 1B78     		ldrb	r3, [r3]	@ D.6504, i
+ 1649 0080 019A     		ldr	r2, [sp, #4]	@ tmp178, ip
+ 1650 0082 D318     		adds	r3, r2, r3	@ D.6505, tmp178, D.6504
+ 1651 0084 1B78     		ldrb	r3, [r3]	@ D.6506, *_34
+ 1652 0086 2E2B     		cmp	r3, #46	@ D.6506,
+ 1653 0088 23D1     		bne	.L109	@,
+ 487:src/tcp_transceiver.c **** 			{
+ 488:src/tcp_transceiver.c **** 				if (!dot1)
+ 1654              		.loc 1 488 0
+ 1655 008a 1623     		movs	r3, #22	@ tmp179,
+ 1656 008c 6B44     		add	r3, r3, sp	@ tmp179,
+ 1657 008e 1B78     		ldrb	r3, [r3]	@ tmp180, dot1
+ 1658 0090 002B     		cmp	r3, #0	@ tmp180,
+ 1659 0092 06D1     		bne	.L110	@,
+ 489:src/tcp_transceiver.c **** 					dot1 = i;
+ 1660              		.loc 1 489 0
+ 1661 0094 1623     		movs	r3, #22	@ tmp181,
+ 1662 0096 6B44     		add	r3, r3, sp	@ tmp181,
+ 1663 0098 1722     		movs	r2, #23	@ tmp182,
+ 1664 009a 6A44     		add	r2, r2, sp	@ tmp182,
+ 1665 009c 1278     		ldrb	r2, [r2]	@ tmp183, i
+ 1666 009e 1A70     		strb	r2, [r3]	@ tmp183, dot1
+ 1667 00a0 17E0     		b	.L109	@
+ 1668              	.L110:
+ 490:src/tcp_transceiver.c **** 				else if (!dot2)
+ 1669              		.loc 1 490 0
+ 1670 00a2 1523     		movs	r3, #21	@ tmp184,
+ 1671 00a4 6B44     		add	r3, r3, sp	@ tmp184,
+ 1672 00a6 1B78     		ldrb	r3, [r3]	@ tmp185, dot2
+ 1673 00a8 002B     		cmp	r3, #0	@ tmp185,
+ 1674 00aa 06D1     		bne	.L111	@,
+ 491:src/tcp_transceiver.c **** 					dot2 = i;
+ 1675              		.loc 1 491 0
+ 1676 00ac 1523     		movs	r3, #21	@ tmp186,
+ 1677 00ae 6B44     		add	r3, r3, sp	@ tmp186,
+ 1678 00b0 1722     		movs	r2, #23	@ tmp187,
+ 1679 00b2 6A44     		add	r2, r2, sp	@ tmp187,
+ 1680 00b4 1278     		ldrb	r2, [r2]	@ tmp188, i
+ 1681 00b6 1A70     		strb	r2, [r3]	@ tmp188, dot2
+ 1682 00b8 0BE0     		b	.L109	@
+ 1683              	.L111:
+ 492:src/tcp_transceiver.c **** 				else if (!dot3)
+ 1684              		.loc 1 492 0
+ 1685 00ba 05AB     		add	r3, sp, #20	@ tmp189,,
+ 1686 00bc 1B78     		ldrb	r3, [r3]	@ tmp190, dot3
+ 1687 00be 002B     		cmp	r3, #0	@ tmp190,
+ 1688 00c0 05D1     		bne	.L112	@,
+ARM GAS  /tmp/ccXup38D.s 			page 40
+
+
+ 493:src/tcp_transceiver.c **** 					dot3 = i;
+ 1689              		.loc 1 493 0
+ 1690 00c2 05AB     		add	r3, sp, #20	@ tmp191,,
+ 1691 00c4 1722     		movs	r2, #23	@ tmp192,
+ 1692 00c6 6A44     		add	r2, r2, sp	@ tmp192,
+ 1693 00c8 1278     		ldrb	r2, [r2]	@ tmp193, i
+ 1694 00ca 1A70     		strb	r2, [r3]	@ tmp193, dot3
+ 1695 00cc 01E0     		b	.L109	@
+ 1696              	.L112:
+ 494:src/tcp_transceiver.c **** 				else
+ 495:src/tcp_transceiver.c **** 					return RESP_NOK;
+ 1697              		.loc 1 495 0
+ 1698 00ce 1523     		movs	r3, #21	@ D.6503,
+ 1699 00d0 D6E0     		b	.L124	@
+ 1700              	.L109:
+ 477:src/tcp_transceiver.c **** 	{
+ 1701              		.loc 1 477 0 discriminator 2
+ 1702 00d2 1723     		movs	r3, #23	@ tmp194,
+ 1703 00d4 6B44     		add	r3, r3, sp	@ tmp194,
+ 1704 00d6 1A78     		ldrb	r2, [r3]	@ D.6503, i
+ 1705 00d8 1723     		movs	r3, #23	@ tmp195,
+ 1706 00da 6B44     		add	r3, r3, sp	@ tmp195,
+ 1707 00dc 0132     		adds	r2, r2, #1	@ tmp196,
+ 1708 00de 1A70     		strb	r2, [r3]	@ tmp197, i
+ 1709              	.L107:
+ 477:src/tcp_transceiver.c **** 	{
+ 1710              		.loc 1 477 0 is_stmt 0 discriminator 1
+ 1711 00e0 1723     		movs	r3, #23	@ tmp198,
+ 1712 00e2 6B44     		add	r3, r3, sp	@ tmp198,
+ 1713 00e4 1B78     		ldrb	r3, [r3]	@ tmp199, i
+ 1714 00e6 0E2B     		cmp	r3, #14	@ tmp199,
+ 1715 00e8 B4D9     		bls	.L114	@,
+ 496:src/tcp_transceiver.c **** 			}
+ 497:src/tcp_transceiver.c **** 		}
+ 498:src/tcp_transceiver.c **** 	}
+ 499:src/tcp_transceiver.c **** 
+ 500:src/tcp_transceiver.c **** 	if (!dot4)
+ 1716              		.loc 1 500 0 is_stmt 1
+ 1717 00ea 1323     		movs	r3, #19	@ tmp200,
+ 1718 00ec 6B44     		add	r3, r3, sp	@ tmp200,
+ 1719 00ee 1B78     		ldrb	r3, [r3]	@ tmp201, dot4
+ 1720 00f0 002B     		cmp	r3, #0	@ tmp201,
+ 1721 00f2 03D1     		bne	.L115	@,
+ 501:src/tcp_transceiver.c **** 		dot4 = 15;
+ 1722              		.loc 1 501 0
+ 1723 00f4 1323     		movs	r3, #19	@ tmp202,
+ 1724 00f6 6B44     		add	r3, r3, sp	@ tmp202,
+ 1725 00f8 0F22     		movs	r2, #15	@ tmp203,
+ 1726 00fa 1A70     		strb	r2, [r3]	@ tmp204, dot4
+ 1727              	.L115:
+ 502:src/tcp_transceiver.c **** 
+ 503:src/tcp_transceiver.c **** 	//me fijo si tiene los tres .
+ 504:src/tcp_transceiver.c **** 	if ((dot1 == 0) || (dot2 == 0) || (dot3 == 0))
+ 1728              		.loc 1 504 0
+ 1729 00fc 1623     		movs	r3, #22	@ tmp205,
+ 1730 00fe 6B44     		add	r3, r3, sp	@ tmp205,
+ 1731 0100 1B78     		ldrb	r3, [r3]	@ tmp206, dot1
+ARM GAS  /tmp/ccXup38D.s 			page 41
+
+
+ 1732 0102 002B     		cmp	r3, #0	@ tmp206,
+ 1733 0104 08D0     		beq	.L116	@,
+ 1734              		.loc 1 504 0 is_stmt 0 discriminator 1
+ 1735 0106 1523     		movs	r3, #21	@ tmp207,
+ 1736 0108 6B44     		add	r3, r3, sp	@ tmp207,
+ 1737 010a 1B78     		ldrb	r3, [r3]	@ tmp208, dot2
+ 1738 010c 002B     		cmp	r3, #0	@ tmp208,
+ 1739 010e 03D0     		beq	.L116	@,
+ 1740              		.loc 1 504 0 discriminator 2
+ 1741 0110 05AB     		add	r3, sp, #20	@ tmp209,,
+ 1742 0112 1B78     		ldrb	r3, [r3]	@ tmp210, dot3
+ 1743 0114 002B     		cmp	r3, #0	@ tmp210,
+ 1744 0116 01D1     		bne	.L117	@,
+ 1745              	.L116:
+ 505:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1746              		.loc 1 505 0 is_stmt 1
+ 1747 0118 1523     		movs	r3, #21	@ D.6503,
+ 1748 011a B1E0     		b	.L124	@
+ 1749              	.L117:
+ 506:src/tcp_transceiver.c **** 
+ 507:src/tcp_transceiver.c **** 	size1 = dot1;
+ 1750              		.loc 1 507 0
+ 1751 011c 1223     		movs	r3, #18	@ tmp211,
+ 1752 011e 6B44     		add	r3, r3, sp	@ tmp211,
+ 1753 0120 1622     		movs	r2, #22	@ tmp212,
+ 1754 0122 6A44     		add	r2, r2, sp	@ tmp212,
+ 1755 0124 1278     		ldrb	r2, [r2]	@ tmp213, dot1
+ 1756 0126 1A70     		strb	r2, [r3]	@ tmp213, size1
+ 508:src/tcp_transceiver.c **** 	size2 = dot2 - dot1 - 1;
+ 1757              		.loc 1 508 0
+ 1758 0128 1522     		movs	r2, #21	@ tmp214,
+ 1759 012a 6A44     		add	r2, r2, sp	@ tmp214,
+ 1760 012c 1623     		movs	r3, #22	@ tmp215,
+ 1761 012e 6B44     		add	r3, r3, sp	@ tmp215,
+ 1762 0130 1278     		ldrb	r2, [r2]	@ tmp216, dot2
+ 1763 0132 1B78     		ldrb	r3, [r3]	@ tmp217, dot1
+ 1764 0134 D31A     		subs	r3, r2, r3	@ tmp218, tmp216, tmp217
+ 1765 0136 DAB2     		uxtb	r2, r3	@ D.6503, tmp218
+ 1766 0138 1123     		movs	r3, #17	@ tmp219,
+ 1767 013a 6B44     		add	r3, r3, sp	@ tmp219,
+ 1768 013c 013A     		subs	r2, r2, #1	@ tmp220,
+ 1769 013e 1A70     		strb	r2, [r3]	@ tmp221, size2
+ 509:src/tcp_transceiver.c **** 	size3 = dot3 - dot2 - 1;
+ 1770              		.loc 1 509 0
+ 1771 0140 05AA     		add	r2, sp, #20	@ tmp222,,
+ 1772 0142 1523     		movs	r3, #21	@ tmp223,
+ 1773 0144 6B44     		add	r3, r3, sp	@ tmp223,
+ 1774 0146 1278     		ldrb	r2, [r2]	@ tmp224, dot3
+ 1775 0148 1B78     		ldrb	r3, [r3]	@ tmp225, dot2
+ 1776 014a D31A     		subs	r3, r2, r3	@ tmp226, tmp224, tmp225
+ 1777 014c DAB2     		uxtb	r2, r3	@ D.6503, tmp226
+ 1778 014e 04AB     		add	r3, sp, #16	@ tmp227,,
+ 1779 0150 013A     		subs	r2, r2, #1	@ tmp228,
+ 1780 0152 1A70     		strb	r2, [r3]	@ tmp229, size3
+ 510:src/tcp_transceiver.c **** 	size4 = dot4 - dot3 - 1;
+ 1781              		.loc 1 510 0
+ 1782 0154 1322     		movs	r2, #19	@ tmp230,
+ARM GAS  /tmp/ccXup38D.s 			page 42
+
+
+ 1783 0156 6A44     		add	r2, r2, sp	@ tmp230,
+ 1784 0158 05AB     		add	r3, sp, #20	@ tmp231,,
+ 1785 015a 1278     		ldrb	r2, [r2]	@ tmp232, dot4
+ 1786 015c 1B78     		ldrb	r3, [r3]	@ tmp233, dot3
+ 1787 015e D31A     		subs	r3, r2, r3	@ tmp234, tmp232, tmp233
+ 1788 0160 DAB2     		uxtb	r2, r3	@ D.6503, tmp234
+ 1789 0162 0F23     		movs	r3, #15	@ tmp235,
+ 1790 0164 6B44     		add	r3, r3, sp	@ tmp235,
+ 1791 0166 013A     		subs	r2, r2, #1	@ tmp236,
+ 1792 0168 1A70     		strb	r2, [r3]	@ tmp237, size4
+ 511:src/tcp_transceiver.c **** 
+ 512:src/tcp_transceiver.c **** 	//me fijo que no tengan mucho espacio
+ 513:src/tcp_transceiver.c **** 	if ((size1 > 3) || (size2 > 3) || (size3 > 3) || (size4 > 3))
+ 1793              		.loc 1 513 0
+ 1794 016a 1223     		movs	r3, #18	@ tmp238,
+ 1795 016c 6B44     		add	r3, r3, sp	@ tmp238,
+ 1796 016e 1B78     		ldrb	r3, [r3]	@ tmp239, size1
+ 1797 0170 032B     		cmp	r3, #3	@ tmp239,
+ 1798 0172 0DD8     		bhi	.L118	@,
+ 1799              		.loc 1 513 0 is_stmt 0 discriminator 1
+ 1800 0174 1123     		movs	r3, #17	@ tmp240,
+ 1801 0176 6B44     		add	r3, r3, sp	@ tmp240,
+ 1802 0178 1B78     		ldrb	r3, [r3]	@ tmp241, size2
+ 1803 017a 032B     		cmp	r3, #3	@ tmp241,
+ 1804 017c 08D8     		bhi	.L118	@,
+ 1805              		.loc 1 513 0 discriminator 2
+ 1806 017e 04AB     		add	r3, sp, #16	@ tmp242,,
+ 1807 0180 1B78     		ldrb	r3, [r3]	@ tmp243, size3
+ 1808 0182 032B     		cmp	r3, #3	@ tmp243,
+ 1809 0184 04D8     		bhi	.L118	@,
+ 1810              		.loc 1 513 0 discriminator 3
+ 1811 0186 0F23     		movs	r3, #15	@ tmp244,
+ 1812 0188 6B44     		add	r3, r3, sp	@ tmp244,
+ 1813 018a 1B78     		ldrb	r3, [r3]	@ tmp245, size4
+ 1814 018c 032B     		cmp	r3, #3	@ tmp245,
+ 1815 018e 01D9     		bls	.L119	@,
+ 1816              	.L118:
+ 514:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1817              		.loc 1 514 0 is_stmt 1
+ 1818 0190 1523     		movs	r3, #21	@ D.6503,
+ 1819 0192 75E0     		b	.L124	@
+ 1820              	.L119:
+ 515:src/tcp_transceiver.c **** 
+ 516:src/tcp_transceiver.c **** 	//los puntos son validos, ahora reviso los numeros
+ 517:src/tcp_transceiver.c **** 	memset (s_octet, '\0', sizeof(s_octet));
+ 1821              		.loc 1 517 0
+ 1822 0194 02AB     		add	r3, sp, #8	@ tmp246,,
+ 1823 0196 0422     		movs	r2, #4	@,
+ 1824 0198 0021     		movs	r1, #0	@,
+ 1825 019a 1800     		movs	r0, r3	@, tmp246
+ 1826 019c FFF7FEFF 		bl	memset	@
+ 518:src/tcp_transceiver.c **** 	strncpy (s_octet, ip, size1);
+ 1827              		.loc 1 518 0
+ 1828 01a0 1223     		movs	r3, #18	@ tmp247,
+ 1829 01a2 6B44     		add	r3, r3, sp	@ tmp247,
+ 1830 01a4 1A78     		ldrb	r2, [r3]	@ D.6507, size1
+ 1831 01a6 0199     		ldr	r1, [sp, #4]	@ tmp248, ip
+ARM GAS  /tmp/ccXup38D.s 			page 43
+
+
+ 1832 01a8 02AB     		add	r3, sp, #8	@ tmp249,,
+ 1833 01aa 1800     		movs	r0, r3	@, tmp249
+ 1834 01ac FFF7FEFF 		bl	strncpy	@
+ 519:src/tcp_transceiver.c **** 	if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
+ 1835              		.loc 1 519 0
+ 1836 01b0 0E22     		movs	r2, #14	@ tmp250,
+ 1837 01b2 6A44     		add	r2, r2, sp	@ tmp250,
+ 1838 01b4 02AB     		add	r3, sp, #8	@ tmp251,,
+ 1839 01b6 1100     		movs	r1, r2	@, tmp250
+ 1840 01b8 1800     		movs	r0, r3	@, tmp251
+ 1841 01ba FFF7FEFF 		bl	OctetIsValid	@
+ 1842 01be 031E     		subs	r3, r0, #0	@ tmp252,,
+ 1843 01c0 152B     		cmp	r3, #21	@ tmp252,
+ 1844 01c2 01D1     		bne	.L120	@,
+ 520:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1845              		.loc 1 520 0
+ 1846 01c4 1523     		movs	r3, #21	@ D.6503,
+ 1847 01c6 5BE0     		b	.L124	@
+ 1848              	.L120:
+ 521:src/tcp_transceiver.c **** 
+ 522:src/tcp_transceiver.c **** 	memset (s_octet, '\0', sizeof(s_octet));
+ 1849              		.loc 1 522 0
+ 1850 01c8 02AB     		add	r3, sp, #8	@ tmp254,,
+ 1851 01ca 0422     		movs	r2, #4	@,
+ 1852 01cc 0021     		movs	r1, #0	@,
+ 1853 01ce 1800     		movs	r0, r3	@, tmp254
+ 1854 01d0 FFF7FEFF 		bl	memset	@
+ 523:src/tcp_transceiver.c **** 	strncpy (s_octet, ip + dot1 + 1, size2);
+ 1855              		.loc 1 523 0
+ 1856 01d4 1623     		movs	r3, #22	@ tmp255,
+ 1857 01d6 6B44     		add	r3, r3, sp	@ tmp255,
+ 1858 01d8 1B78     		ldrb	r3, [r3]	@ D.6504, dot1
+ 1859 01da 0133     		adds	r3, r3, #1	@ D.6504,
+ 1860 01dc 019A     		ldr	r2, [sp, #4]	@ tmp256, ip
+ 1861 01de D118     		adds	r1, r2, r3	@ D.6505, tmp256, D.6504
+ 1862 01e0 1123     		movs	r3, #17	@ tmp257,
+ 1863 01e2 6B44     		add	r3, r3, sp	@ tmp257,
+ 1864 01e4 1A78     		ldrb	r2, [r3]	@ D.6507, size2
+ 1865 01e6 02AB     		add	r3, sp, #8	@ tmp258,,
+ 1866 01e8 1800     		movs	r0, r3	@, tmp258
+ 1867 01ea FFF7FEFF 		bl	strncpy	@
+ 524:src/tcp_transceiver.c **** 	if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
+ 1868              		.loc 1 524 0
+ 1869 01ee 0E22     		movs	r2, #14	@ tmp259,
+ 1870 01f0 6A44     		add	r2, r2, sp	@ tmp259,
+ 1871 01f2 02AB     		add	r3, sp, #8	@ tmp260,,
+ 1872 01f4 1100     		movs	r1, r2	@, tmp259
+ 1873 01f6 1800     		movs	r0, r3	@, tmp260
+ 1874 01f8 FFF7FEFF 		bl	OctetIsValid	@
+ 1875 01fc 031E     		subs	r3, r0, #0	@ tmp261,,
+ 1876 01fe 152B     		cmp	r3, #21	@ tmp261,
+ 1877 0200 01D1     		bne	.L121	@,
+ 525:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1878              		.loc 1 525 0
+ 1879 0202 1523     		movs	r3, #21	@ D.6503,
+ 1880 0204 3CE0     		b	.L124	@
+ 1881              	.L121:
+ARM GAS  /tmp/ccXup38D.s 			page 44
+
+
+ 526:src/tcp_transceiver.c **** 
+ 527:src/tcp_transceiver.c **** 	memset (s_octet, '\0', sizeof(s_octet));
+ 1882              		.loc 1 527 0
+ 1883 0206 02AB     		add	r3, sp, #8	@ tmp263,,
+ 1884 0208 0422     		movs	r2, #4	@,
+ 1885 020a 0021     		movs	r1, #0	@,
+ 1886 020c 1800     		movs	r0, r3	@, tmp263
+ 1887 020e FFF7FEFF 		bl	memset	@
+ 528:src/tcp_transceiver.c **** 	strncpy (s_octet, ip + dot2 + 1, size3);
+ 1888              		.loc 1 528 0
+ 1889 0212 1523     		movs	r3, #21	@ tmp264,
+ 1890 0214 6B44     		add	r3, r3, sp	@ tmp264,
+ 1891 0216 1B78     		ldrb	r3, [r3]	@ D.6504, dot2
+ 1892 0218 0133     		adds	r3, r3, #1	@ D.6504,
+ 1893 021a 019A     		ldr	r2, [sp, #4]	@ tmp265, ip
+ 1894 021c D118     		adds	r1, r2, r3	@ D.6505, tmp265, D.6504
+ 1895 021e 04AB     		add	r3, sp, #16	@ tmp266,,
+ 1896 0220 1A78     		ldrb	r2, [r3]	@ D.6507, size3
+ 1897 0222 02AB     		add	r3, sp, #8	@ tmp267,,
+ 1898 0224 1800     		movs	r0, r3	@, tmp267
+ 1899 0226 FFF7FEFF 		bl	strncpy	@
+ 529:src/tcp_transceiver.c **** 	if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
+ 1900              		.loc 1 529 0
+ 1901 022a 0E22     		movs	r2, #14	@ tmp268,
+ 1902 022c 6A44     		add	r2, r2, sp	@ tmp268,
+ 1903 022e 02AB     		add	r3, sp, #8	@ tmp269,,
+ 1904 0230 1100     		movs	r1, r2	@, tmp268
+ 1905 0232 1800     		movs	r0, r3	@, tmp269
+ 1906 0234 FFF7FEFF 		bl	OctetIsValid	@
+ 1907 0238 031E     		subs	r3, r0, #0	@ tmp270,,
+ 1908 023a 152B     		cmp	r3, #21	@ tmp270,
+ 1909 023c 01D1     		bne	.L122	@,
+ 530:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1910              		.loc 1 530 0
+ 1911 023e 1523     		movs	r3, #21	@ D.6503,
+ 1912 0240 1EE0     		b	.L124	@
+ 1913              	.L122:
+ 531:src/tcp_transceiver.c **** 
+ 532:src/tcp_transceiver.c **** 	memset (s_octet, '\0', sizeof(s_octet));
+ 1914              		.loc 1 532 0
+ 1915 0242 02AB     		add	r3, sp, #8	@ tmp272,,
+ 1916 0244 0422     		movs	r2, #4	@,
+ 1917 0246 0021     		movs	r1, #0	@,
+ 1918 0248 1800     		movs	r0, r3	@, tmp272
+ 1919 024a FFF7FEFF 		bl	memset	@
+ 533:src/tcp_transceiver.c **** 	strncpy (s_octet, ip + dot3 + 1, size4);
+ 1920              		.loc 1 533 0
+ 1921 024e 05AB     		add	r3, sp, #20	@ tmp273,,
+ 1922 0250 1B78     		ldrb	r3, [r3]	@ D.6504, dot3
+ 1923 0252 0133     		adds	r3, r3, #1	@ D.6504,
+ 1924 0254 019A     		ldr	r2, [sp, #4]	@ tmp274, ip
+ 1925 0256 D118     		adds	r1, r2, r3	@ D.6505, tmp274, D.6504
+ 1926 0258 0F23     		movs	r3, #15	@ tmp275,
+ 1927 025a 6B44     		add	r3, r3, sp	@ tmp275,
+ 1928 025c 1A78     		ldrb	r2, [r3]	@ D.6507, size4
+ 1929 025e 02AB     		add	r3, sp, #8	@ tmp276,,
+ 1930 0260 1800     		movs	r0, r3	@, tmp276
+ARM GAS  /tmp/ccXup38D.s 			page 45
+
+
+ 1931 0262 FFF7FEFF 		bl	strncpy	@
+ 534:src/tcp_transceiver.c **** 	if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
+ 1932              		.loc 1 534 0
+ 1933 0266 0E22     		movs	r2, #14	@ tmp277,
+ 1934 0268 6A44     		add	r2, r2, sp	@ tmp277,
+ 1935 026a 02AB     		add	r3, sp, #8	@ tmp278,,
+ 1936 026c 1100     		movs	r1, r2	@, tmp277
+ 1937 026e 1800     		movs	r0, r3	@, tmp278
+ 1938 0270 FFF7FEFF 		bl	OctetIsValid	@
+ 1939 0274 031E     		subs	r3, r0, #0	@ tmp279,,
+ 1940 0276 152B     		cmp	r3, #21	@ tmp279,
+ 1941 0278 01D1     		bne	.L123	@,
+ 535:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 1942              		.loc 1 535 0
+ 1943 027a 1523     		movs	r3, #21	@ D.6503,
+ 1944 027c 00E0     		b	.L124	@
+ 1945              	.L123:
+ 536:src/tcp_transceiver.c **** 
+ 537:src/tcp_transceiver.c **** 	return RESP_OK;
+ 1946              		.loc 1 537 0
+ 1947 027e 1423     		movs	r3, #20	@ D.6503,
+ 1948              	.L124:
+ 538:src/tcp_transceiver.c **** }
+ 1949              		.loc 1 538 0 discriminator 1
+ 1950 0280 1800     		movs	r0, r3	@, <retval>
+ 1951 0282 07B0     		add	sp, sp, #28	@,,
+ 1952              		@ sp needed	@
+ 1953 0284 00BD     		pop	{pc}
+ 1954              		.cfi_endproc
+ 1955              	.LFE9:
+ 1956              		.size	IpIsValid, .-IpIsValid
+ 1957 0286 C046     		.section	.text.OctetIsValid,"ax",%progbits
+ 1958              		.align	2
+ 1959              		.global	OctetIsValid
+ 1960              		.code	16
+ 1961              		.thumb_func
+ 1962              		.type	OctetIsValid, %function
+ 1963              	OctetIsValid:
+ 1964              	.LFB10:
+ 539:src/tcp_transceiver.c **** 
+ 540:src/tcp_transceiver.c **** unsigned char OctetIsValid (char * ip, unsigned char * octet_val)
+ 541:src/tcp_transceiver.c **** {
+ 1965              		.loc 1 541 0
+ 1966              		.cfi_startproc
+ 1967 0000 84B0     		sub	sp, sp, #16	@,,
+ 1968              	.LCFI16:
+ 1969              		.cfi_def_cfa_offset 16
+ 1970 0002 0190     		str	r0, [sp, #4]	@ ip, ip
+ 1971 0004 0091     		str	r1, [sp]	@ octet_val, octet_val
+ 542:src/tcp_transceiver.c **** 	unsigned char i;
+ 543:src/tcp_transceiver.c **** 	unsigned char dot = 0;
+ 1972              		.loc 1 543 0
+ 1973 0006 0E23     		movs	r3, #14	@ tmp151,
+ 1974 0008 6B44     		add	r3, r3, sp	@ tmp151,
+ 1975 000a 0022     		movs	r2, #0	@ tmp152,
+ 1976 000c 1A70     		strb	r2, [r3]	@ tmp153, dot
+ 544:src/tcp_transceiver.c **** 	short new_val = 0;
+ARM GAS  /tmp/ccXup38D.s 			page 46
+
+
+ 1977              		.loc 1 544 0
+ 1978 000e 03AB     		add	r3, sp, #12	@ tmp154,,
+ 1979 0010 0022     		movs	r2, #0	@ tmp155,
+ 1980 0012 1A80     		strh	r2, [r3]	@ tmp156, new_val
+ 545:src/tcp_transceiver.c **** 
+ 546:src/tcp_transceiver.c **** 	//me fijo la posiciones del . o null
+ 547:src/tcp_transceiver.c **** 	for (i = 0; i < 4; i++)
+ 1981              		.loc 1 547 0
+ 1982 0014 0F23     		movs	r3, #15	@ tmp157,
+ 1983 0016 6B44     		add	r3, r3, sp	@ tmp157,
+ 1984 0018 0022     		movs	r2, #0	@ tmp158,
+ 1985 001a 1A70     		strb	r2, [r3]	@ tmp159, i
+ 1986 001c 20E0     		b	.L126	@
+ 1987              	.L129:
+ 548:src/tcp_transceiver.c **** 	{
+ 549:src/tcp_transceiver.c **** 		if ((*(ip + i) == '.') || (*(ip + i) == '\0'))
+ 1988              		.loc 1 549 0
+ 1989 001e 0F23     		movs	r3, #15	@ tmp160,
+ 1990 0020 6B44     		add	r3, r3, sp	@ tmp160,
+ 1991 0022 1B78     		ldrb	r3, [r3]	@ D.6509, i
+ 1992 0024 019A     		ldr	r2, [sp, #4]	@ tmp161, ip
+ 1993 0026 D318     		adds	r3, r2, r3	@ D.6510, tmp161, D.6509
+ 1994 0028 1B78     		ldrb	r3, [r3]	@ D.6511, *_13
+ 1995 002a 2E2B     		cmp	r3, #46	@ D.6511,
+ 1996 002c 07D0     		beq	.L127	@,
+ 1997              		.loc 1 549 0 is_stmt 0 discriminator 1
+ 1998 002e 0F23     		movs	r3, #15	@ tmp162,
+ 1999 0030 6B44     		add	r3, r3, sp	@ tmp162,
+ 2000 0032 1B78     		ldrb	r3, [r3]	@ D.6509, i
+ 2001 0034 019A     		ldr	r2, [sp, #4]	@ tmp163, ip
+ 2002 0036 D318     		adds	r3, r2, r3	@ D.6510, tmp163, D.6509
+ 2003 0038 1B78     		ldrb	r3, [r3]	@ D.6511, *_17
+ 2004 003a 002B     		cmp	r3, #0	@ D.6511,
+ 2005 003c 09D1     		bne	.L128	@,
+ 2006              	.L127:
+ 550:src/tcp_transceiver.c **** 		{
+ 551:src/tcp_transceiver.c **** 			dot = i;
+ 2007              		.loc 1 551 0 is_stmt 1
+ 2008 003e 0E23     		movs	r3, #14	@ tmp164,
+ 2009 0040 6B44     		add	r3, r3, sp	@ tmp164,
+ 2010 0042 0F22     		movs	r2, #15	@ tmp165,
+ 2011 0044 6A44     		add	r2, r2, sp	@ tmp165,
+ 2012 0046 1278     		ldrb	r2, [r2]	@ tmp166, i
+ 2013 0048 1A70     		strb	r2, [r3]	@ tmp166, dot
+ 552:src/tcp_transceiver.c **** 			i = 10;
+ 2014              		.loc 1 552 0
+ 2015 004a 0F23     		movs	r3, #15	@ tmp167,
+ 2016 004c 6B44     		add	r3, r3, sp	@ tmp167,
+ 2017 004e 0A22     		movs	r2, #10	@ tmp168,
+ 2018 0050 1A70     		strb	r2, [r3]	@ tmp169, i
+ 2019              	.L128:
+ 547:src/tcp_transceiver.c **** 	{
+ 2020              		.loc 1 547 0 discriminator 2
+ 2021 0052 0F23     		movs	r3, #15	@ tmp170,
+ 2022 0054 6B44     		add	r3, r3, sp	@ tmp170,
+ 2023 0056 1A78     		ldrb	r2, [r3]	@ D.6508, i
+ 2024 0058 0F23     		movs	r3, #15	@ tmp171,
+ARM GAS  /tmp/ccXup38D.s 			page 47
+
+
+ 2025 005a 6B44     		add	r3, r3, sp	@ tmp171,
+ 2026 005c 0132     		adds	r2, r2, #1	@ tmp172,
+ 2027 005e 1A70     		strb	r2, [r3]	@ tmp173, i
+ 2028              	.L126:
+ 547:src/tcp_transceiver.c **** 	{
+ 2029              		.loc 1 547 0 is_stmt 0 discriminator 1
+ 2030 0060 0F23     		movs	r3, #15	@ tmp174,
+ 2031 0062 6B44     		add	r3, r3, sp	@ tmp174,
+ 2032 0064 1B78     		ldrb	r3, [r3]	@ tmp175, i
+ 2033 0066 032B     		cmp	r3, #3	@ tmp175,
+ 2034 0068 D9D9     		bls	.L129	@,
+ 553:src/tcp_transceiver.c **** 		}
+ 554:src/tcp_transceiver.c **** 	}
+ 555:src/tcp_transceiver.c **** 
+ 556:src/tcp_transceiver.c **** 	//si tiene . me fijo el numero
+ 557:src/tcp_transceiver.c **** 	if (dot == 0)
+ 2035              		.loc 1 557 0 is_stmt 1
+ 2036 006a 0E23     		movs	r3, #14	@ tmp176,
+ 2037 006c 6B44     		add	r3, r3, sp	@ tmp176,
+ 2038 006e 1B78     		ldrb	r3, [r3]	@ tmp177, dot
+ 2039 0070 002B     		cmp	r3, #0	@ tmp177,
+ 2040 0072 04D1     		bne	.L130	@,
+ 558:src/tcp_transceiver.c **** 	{
+ 559:src/tcp_transceiver.c **** 		*octet_val = 0;
+ 2041              		.loc 1 559 0
+ 2042 0074 009B     		ldr	r3, [sp]	@ tmp178, octet_val
+ 2043 0076 0022     		movs	r2, #0	@ tmp179,
+ 2044 0078 1A70     		strb	r2, [r3]	@ tmp180, *octet_val_23(D)
+ 560:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 2045              		.loc 1 560 0
+ 2046 007a 1523     		movs	r3, #21	@ D.6508,
+ 2047 007c 57E0     		b	.L131	@
+ 2048              	.L130:
+ 561:src/tcp_transceiver.c **** 	}
+ 562:src/tcp_transceiver.c **** 
+ 563:src/tcp_transceiver.c **** 
+ 564:src/tcp_transceiver.c **** 	switch (dot)
+ 2049              		.loc 1 564 0
+ 2050 007e 0E23     		movs	r3, #14	@ tmp181,
+ 2051 0080 6B44     		add	r3, r3, sp	@ tmp181,
+ 2052 0082 1B78     		ldrb	r3, [r3]	@ D.6512, dot
+ 2053 0084 022B     		cmp	r3, #2	@ D.6512,
+ 2054 0086 0BD0     		beq	.L133	@,
+ 2055 0088 032B     		cmp	r3, #3	@ D.6512,
+ 2056 008a 1DD0     		beq	.L134	@,
+ 2057 008c 012B     		cmp	r3, #1	@ D.6512,
+ 2058 008e 39D1     		bne	.L132	@,
+ 565:src/tcp_transceiver.c **** 	{
+ 566:src/tcp_transceiver.c **** 		case 1:
+ 567:src/tcp_transceiver.c **** 			new_val = *ip - '0';
+ 2059              		.loc 1 567 0
+ 2060 0090 019B     		ldr	r3, [sp, #4]	@ tmp182, ip
+ 2061 0092 1B78     		ldrb	r3, [r3]	@ D.6511, *ip_12(D)
+ 2062 0094 9BB2     		uxth	r3, r3	@ D.6513, D.6511
+ 2063 0096 303B     		subs	r3, r3, #48	@ tmp183,
+ 2064 0098 9AB2     		uxth	r2, r3	@ D.6513, tmp183
+ 2065 009a 03AB     		add	r3, sp, #12	@ tmp184,,
+ARM GAS  /tmp/ccXup38D.s 			page 48
+
+
+ 2066 009c 1A80     		strh	r2, [r3]	@ tmp185, new_val
+ 568:src/tcp_transceiver.c **** 			break;
+ 2067              		.loc 1 568 0
+ 2068 009e 31E0     		b	.L132	@
+ 2069              	.L133:
+ 569:src/tcp_transceiver.c **** 
+ 570:src/tcp_transceiver.c **** 		case 2:
+ 571:src/tcp_transceiver.c **** 			new_val = (*ip - '0') * 10 + (*(ip + 1) - '0');
+ 2070              		.loc 1 571 0
+ 2071 00a0 019B     		ldr	r3, [sp, #4]	@ tmp186, ip
+ 2072 00a2 1B78     		ldrb	r3, [r3]	@ D.6511, *ip_12(D)
+ 2073 00a4 303B     		subs	r3, r3, #48	@ D.6512,
+ 2074 00a6 9BB2     		uxth	r3, r3	@ D.6513, D.6512
+ 2075 00a8 1A1C     		adds	r2, r3, #0	@ tmp188, tmp187
+ 2076 00aa 9200     		lsls	r2, r2, #2	@ tmp189, tmp188,
+ 2077 00ac D318     		adds	r3, r2, r3	@ tmp191, tmp190, tmp187
+ 2078 00ae DB18     		adds	r3, r3, r3	@ tmp193, tmp192, tmp192
+ 2079 00b0 9AB2     		uxth	r2, r3	@ D.6513, tmp191
+ 2080 00b2 019B     		ldr	r3, [sp, #4]	@ tmp194, ip
+ 2081 00b4 0133     		adds	r3, r3, #1	@ D.6510,
+ 2082 00b6 1B78     		ldrb	r3, [r3]	@ D.6511, *_36
+ 2083 00b8 9BB2     		uxth	r3, r3	@ D.6513, D.6511
+ 2084 00ba D318     		adds	r3, r2, r3	@ tmp195, D.6513, D.6513
+ 2085 00bc 9BB2     		uxth	r3, r3	@ D.6513, tmp195
+ 2086 00be 303B     		subs	r3, r3, #48	@ tmp196,
+ 2087 00c0 9AB2     		uxth	r2, r3	@ D.6513, tmp196
+ 2088 00c2 03AB     		add	r3, sp, #12	@ tmp197,,
+ 2089 00c4 1A80     		strh	r2, [r3]	@ tmp198, new_val
+ 572:src/tcp_transceiver.c **** 			break;
+ 2090              		.loc 1 572 0
+ 2091 00c6 1DE0     		b	.L132	@
+ 2092              	.L134:
+ 573:src/tcp_transceiver.c **** 
+ 574:src/tcp_transceiver.c **** 		case 3:
+ 575:src/tcp_transceiver.c **** 			new_val = (*ip - '0') * 100 + (*(ip + 1) - '0') * 10 + (*(ip + 2) - '0');
+ 2093              		.loc 1 575 0
+ 2094 00c8 019B     		ldr	r3, [sp, #4]	@ tmp199, ip
+ 2095 00ca 1B78     		ldrb	r3, [r3]	@ D.6511, *ip_12(D)
+ 2096 00cc 303B     		subs	r3, r3, #48	@ D.6512,
+ 2097 00ce 9BB2     		uxth	r3, r3	@ D.6513, D.6512
+ 2098 00d0 6422     		movs	r2, #100	@ tmp201,
+ 2099 00d2 5343     		muls	r3, r2	@ tmp200, tmp201
+ 2100 00d4 9AB2     		uxth	r2, r3	@ D.6513, tmp200
+ 2101 00d6 019B     		ldr	r3, [sp, #4]	@ tmp202, ip
+ 2102 00d8 0133     		adds	r3, r3, #1	@ D.6510,
+ 2103 00da 1B78     		ldrb	r3, [r3]	@ D.6511, *_47
+ 2104 00dc 303B     		subs	r3, r3, #48	@ D.6512,
+ 2105 00de 9BB2     		uxth	r3, r3	@ D.6513, D.6512
+ 2106 00e0 191C     		adds	r1, r3, #0	@ tmp204, tmp203
+ 2107 00e2 8900     		lsls	r1, r1, #2	@ tmp205, tmp204,
+ 2108 00e4 CB18     		adds	r3, r1, r3	@ tmp207, tmp206, tmp203
+ 2109 00e6 DB18     		adds	r3, r3, r3	@ tmp209, tmp208, tmp208
+ 2110 00e8 9BB2     		uxth	r3, r3	@ D.6513, tmp207
+ 2111 00ea D318     		adds	r3, r2, r3	@ tmp210, D.6513, D.6513
+ 2112 00ec 9AB2     		uxth	r2, r3	@ D.6513, tmp210
+ 2113 00ee 019B     		ldr	r3, [sp, #4]	@ tmp211, ip
+ 2114 00f0 0233     		adds	r3, r3, #2	@ D.6510,
+ARM GAS  /tmp/ccXup38D.s 			page 49
+
+
+ 2115 00f2 1B78     		ldrb	r3, [r3]	@ D.6511, *_54
+ 2116 00f4 9BB2     		uxth	r3, r3	@ D.6513, D.6511
+ 2117 00f6 D318     		adds	r3, r2, r3	@ tmp212, D.6513, D.6513
+ 2118 00f8 9BB2     		uxth	r3, r3	@ D.6513, tmp212
+ 2119 00fa 303B     		subs	r3, r3, #48	@ tmp213,
+ 2120 00fc 9AB2     		uxth	r2, r3	@ D.6513, tmp213
+ 2121 00fe 03AB     		add	r3, sp, #12	@ tmp214,,
+ 2122 0100 1A80     		strh	r2, [r3]	@ tmp215, new_val
+ 576:src/tcp_transceiver.c **** 			break;
+ 2123              		.loc 1 576 0
+ 2124 0102 C046     		nop
+ 2125              	.L132:
+ 577:src/tcp_transceiver.c **** 	}
+ 578:src/tcp_transceiver.c **** 
+ 579:src/tcp_transceiver.c **** 	if ((new_val < 0) || (new_val > 255))
+ 2126              		.loc 1 579 0
+ 2127 0104 03AB     		add	r3, sp, #12	@ tmp216,,
+ 2128 0106 0022     		movs	r2, #0	@ tmp229,
+ 2129 0108 9B5E     		ldrsh	r3, [r3, r2]	@ tmp217, tmp216, tmp229
+ 2130 010a 002B     		cmp	r3, #0	@ tmp217,
+ 2131 010c 04DB     		blt	.L136	@,
+ 2132              		.loc 1 579 0 is_stmt 0 discriminator 1
+ 2133 010e 03AB     		add	r3, sp, #12	@ tmp218,,
+ 2134 0110 0022     		movs	r2, #0	@ tmp230,
+ 2135 0112 9B5E     		ldrsh	r3, [r3, r2]	@ tmp219, tmp218, tmp230
+ 2136 0114 FF2B     		cmp	r3, #255	@ tmp219,
+ 2137 0116 04DD     		ble	.L137	@,
+ 2138              	.L136:
+ 580:src/tcp_transceiver.c **** 	{
+ 581:src/tcp_transceiver.c **** 		*octet_val = 0;
+ 2139              		.loc 1 581 0 is_stmt 1
+ 2140 0118 009B     		ldr	r3, [sp]	@ tmp220, octet_val
+ 2141 011a 0022     		movs	r2, #0	@ tmp221,
+ 2142 011c 1A70     		strb	r2, [r3]	@ tmp222, *octet_val_23(D)
+ 582:src/tcp_transceiver.c **** 		return RESP_NOK;
+ 2143              		.loc 1 582 0
+ 2144 011e 1523     		movs	r3, #21	@ D.6508,
+ 2145 0120 05E0     		b	.L131	@
+ 2146              	.L137:
+ 583:src/tcp_transceiver.c **** 	}
+ 584:src/tcp_transceiver.c **** 
+ 585:src/tcp_transceiver.c **** 	*octet_val = new_val;
+ 2147              		.loc 1 585 0
+ 2148 0122 03AB     		add	r3, sp, #12	@ tmp223,,
+ 2149 0124 1B88     		ldrh	r3, [r3]	@ tmp225, new_val
+ 2150 0126 DAB2     		uxtb	r2, r3	@ D.6508, tmp224
+ 2151 0128 009B     		ldr	r3, [sp]	@ tmp226, octet_val
+ 2152 012a 1A70     		strb	r2, [r3]	@ tmp227, *octet_val_23(D)
+ 586:src/tcp_transceiver.c **** 	return RESP_OK;
+ 2153              		.loc 1 586 0
+ 2154 012c 1423     		movs	r3, #20	@ D.6508,
+ 2155              	.L131:
+ 587:src/tcp_transceiver.c **** }
+ 2156              		.loc 1 587 0
+ 2157 012e 1800     		movs	r0, r3	@, <retval>
+ 2158 0130 04B0     		add	sp, sp, #16	@,,
+ 2159              		@ sp needed	@
+ARM GAS  /tmp/ccXup38D.s 			page 50
+
+
+ 2160 0132 7047     		bx	lr
+ 2161              		.cfi_endproc
+ 2162              	.LFE10:
+ 2163              		.size	OctetIsValid, .-OctetIsValid
+ 2164              		.text
+ 2165              	.Letext0:
+ 2166              		.file 2 "src/tcp_transceiver.h"
+ 2167              		.section	.debug_info,"",%progbits
+ 2168              	.Ldebug_info0:
+ 2169 0000 77050000 		.4byte	0x577
+ 2170 0004 0200     		.2byte	0x2
+ 2171 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 2172 000a 04       		.byte	0x4
+ 2173 000b 01       		.uleb128 0x1
+ 2174 000c B1020000 		.4byte	.LASF60
+ 2175 0010 0C       		.byte	0xc
+ 2176 0011 B0000000 		.4byte	.LASF61
+ 2177 0015 74010000 		.4byte	.LASF62
+ 2178 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 2179 001d 00000000 		.4byte	0
+ 2180 0021 00000000 		.4byte	0
+ 2181 0025 00000000 		.4byte	.Ldebug_line0
+ 2182 0029 02       		.uleb128 0x2
+ 2183 002a 0A000000 		.4byte	.LASF63
+ 2184 002e 01       		.byte	0x1
+ 2185 002f 64000000 		.4byte	0x64
+ 2186 0033 02       		.byte	0x2
+ 2187 0034 0D       		.byte	0xd
+ 2188 0035 64000000 		.4byte	0x64
+ 2189 0039 03       		.uleb128 0x3
+ 2190 003a 6F000000 		.4byte	.LASF0
+ 2191 003e 00       		.byte	0
+ 2192 003f 03       		.uleb128 0x3
+ 2193 0040 71020000 		.4byte	.LASF1
+ 2194 0044 01       		.byte	0x1
+ 2195 0045 03       		.uleb128 0x3
+ 2196 0046 0E010000 		.4byte	.LASF2
+ 2197 004a 02       		.byte	0x2
+ 2198 004b 03       		.uleb128 0x3
+ 2199 004c 35010000 		.4byte	.LASF3
+ 2200 0050 03       		.byte	0x3
+ 2201 0051 03       		.uleb128 0x3
+ 2202 0052 9B020000 		.4byte	.LASF4
+ 2203 0056 04       		.byte	0x4
+ 2204 0057 03       		.uleb128 0x3
+ 2205 0058 A5000000 		.4byte	.LASF5
+ 2206 005c 05       		.byte	0x5
+ 2207 005d 03       		.uleb128 0x3
+ 2208 005e 1A010000 		.4byte	.LASF6
+ 2209 0062 06       		.byte	0x6
+ 2210 0063 00       		.byte	0
+ 2211 0064 04       		.uleb128 0x4
+ 2212 0065 01       		.byte	0x1
+ 2213 0066 08       		.byte	0x8
+ 2214 0067 C1010000 		.4byte	.LASF7
+ 2215 006b 05       		.uleb128 0x5
+ 2216 006c 04       		.byte	0x4
+ARM GAS  /tmp/ccXup38D.s 			page 51
+
+
+ 2217 006d 05       		.byte	0x5
+ 2218 006e 696E7400 		.ascii	"int\000"
+ 2219 0072 04       		.uleb128 0x4
+ 2220 0073 04       		.byte	0x4
+ 2221 0074 07       		.byte	0x7
+ 2222 0075 EA000000 		.4byte	.LASF8
+ 2223 0079 04       		.uleb128 0x4
+ 2224 007a 08       		.byte	0x8
+ 2225 007b 05       		.byte	0x5
+ 2226 007c 55000000 		.4byte	.LASF9
+ 2227 0080 04       		.uleb128 0x4
+ 2228 0081 08       		.byte	0x8
+ 2229 0082 04       		.byte	0x4
+ 2230 0083 51010000 		.4byte	.LASF10
+ 2231 0087 04       		.uleb128 0x4
+ 2232 0088 01       		.byte	0x1
+ 2233 0089 06       		.byte	0x6
+ 2234 008a 63000000 		.4byte	.LASF11
+ 2235 008e 04       		.uleb128 0x4
+ 2236 008f 02       		.byte	0x2
+ 2237 0090 05       		.byte	0x5
+ 2238 0091 DA010000 		.4byte	.LASF12
+ 2239 0095 04       		.uleb128 0x4
+ 2240 0096 02       		.byte	0x2
+ 2241 0097 07       		.byte	0x7
+ 2242 0098 4E020000 		.4byte	.LASF13
+ 2243 009c 04       		.uleb128 0x4
+ 2244 009d 04       		.byte	0x4
+ 2245 009e 05       		.byte	0x5
+ 2246 009f 80000000 		.4byte	.LASF14
+ 2247 00a3 04       		.uleb128 0x4
+ 2248 00a4 04       		.byte	0x4
+ 2249 00a5 07       		.byte	0x7
+ 2250 00a6 FC000000 		.4byte	.LASF15
+ 2251 00aa 04       		.uleb128 0x4
+ 2252 00ab 08       		.byte	0x8
+ 2253 00ac 07       		.byte	0x7
+ 2254 00ad 16000000 		.4byte	.LASF16
+ 2255 00b1 04       		.uleb128 0x4
+ 2256 00b2 04       		.byte	0x4
+ 2257 00b3 07       		.byte	0x7
+ 2258 00b4 48010000 		.4byte	.LASF17
+ 2259 00b8 06       		.uleb128 0x6
+ 2260 00b9 04       		.byte	0x4
+ 2261 00ba 64000000 		.4byte	0x64
+ 2262 00be 06       		.uleb128 0x6
+ 2263 00bf 04       		.byte	0x4
+ 2264 00c0 C4000000 		.4byte	0xc4
+ 2265 00c4 04       		.uleb128 0x4
+ 2266 00c5 01       		.byte	0x1
+ 2267 00c6 08       		.byte	0x8
+ 2268 00c7 16020000 		.4byte	.LASF18
+ 2269 00cb 07       		.uleb128 0x7
+ 2270 00cc 01       		.byte	0x1
+ 2271 00cd 61020000 		.4byte	.LASF25
+ 2272 00d1 01       		.byte	0x1
+ 2273 00d2 26       		.byte	0x26
+ARM GAS  /tmp/ccXup38D.s 			page 52
+
+
+ 2274 00d3 01       		.byte	0x1
+ 2275 00d4 29000000 		.4byte	0x29
+ 2276 00d8 00000000 		.4byte	.LFB0
+ 2277 00dc 3C010000 		.4byte	.LFE0
+ 2278 00e0 00000000 		.4byte	.LLST0
+ 2279 00e4 01       		.byte	0x1
+ 2280 00e5 20010000 		.4byte	0x120
+ 2281 00e9 08       		.uleb128 0x8
+ 2282 00ea 6400     		.ascii	"d\000"
+ 2283 00ec 01       		.byte	0x1
+ 2284 00ed 26       		.byte	0x26
+ 2285 00ee BE000000 		.4byte	0xbe
+ 2286 00f2 02       		.byte	0x2
+ 2287 00f3 91       		.byte	0x91
+ 2288 00f4 74       		.sleb128 -12
+ 2289 00f5 09       		.uleb128 0x9
+ 2290 00f6 A1020000 		.4byte	.LASF19
+ 2291 00fa 01       		.byte	0x1
+ 2292 00fb 26       		.byte	0x26
+ 2293 00fc B8000000 		.4byte	0xb8
+ 2294 0100 02       		.byte	0x2
+ 2295 0101 91       		.byte	0x91
+ 2296 0102 70       		.sleb128 -16
+ 2297 0103 09       		.uleb128 0x9
+ 2298 0104 F4010000 		.4byte	.LASF20
+ 2299 0108 01       		.byte	0x1
+ 2300 0109 26       		.byte	0x26
+ 2301 010a B8000000 		.4byte	0xb8
+ 2302 010e 02       		.byte	0x2
+ 2303 010f 91       		.byte	0x91
+ 2304 0110 6C       		.sleb128 -20
+ 2305 0111 09       		.uleb128 0x9
+ 2306 0112 C6000000 		.4byte	.LASF21
+ 2307 0116 01       		.byte	0x1
+ 2308 0117 26       		.byte	0x26
+ 2309 0118 B8000000 		.4byte	0xb8
+ 2310 011c 02       		.byte	0x2
+ 2311 011d 91       		.byte	0x91
+ 2312 011e 68       		.sleb128 -24
+ 2313 011f 00       		.byte	0
+ 2314 0120 0A       		.uleb128 0xa
+ 2315 0121 01       		.byte	0x1
+ 2316 0122 65010000 		.4byte	.LASF22
+ 2317 0126 01       		.byte	0x1
+ 2318 0127 5D       		.byte	0x5d
+ 2319 0128 01       		.byte	0x1
+ 2320 0129 00000000 		.4byte	.LFB1
+ 2321 012d 4C000000 		.4byte	.LFE1
+ 2322 0131 2C000000 		.4byte	.LLST1
+ 2323 0135 01       		.byte	0x1
+ 2324 0136 47010000 		.4byte	0x147
+ 2325 013a 0B       		.uleb128 0xb
+ 2326 013b 6900     		.ascii	"i\000"
+ 2327 013d 01       		.byte	0x1
+ 2328 013e 5F       		.byte	0x5f
+ 2329 013f 64000000 		.4byte	0x64
+ 2330 0143 02       		.byte	0x2
+ARM GAS  /tmp/ccXup38D.s 			page 53
+
+
+ 2331 0144 91       		.byte	0x91
+ 2332 0145 7F       		.sleb128 -1
+ 2333 0146 00       		.byte	0
+ 2334 0147 0C       		.uleb128 0xc
+ 2335 0148 01       		.byte	0x1
+ 2336 0149 CF010000 		.4byte	.LASF23
+ 2337 014d 01       		.byte	0x1
+ 2338 014e 6A       		.byte	0x6a
+ 2339 014f 01       		.byte	0x1
+ 2340 0150 00000000 		.4byte	.LFB2
+ 2341 0154 04010000 		.4byte	.LFE2
+ 2342 0158 4C000000 		.4byte	.LLST2
+ 2343 015c 01       		.byte	0x1
+ 2344 015d 7C010000 		.4byte	0x17c
+ 2345 0161 0B       		.uleb128 0xb
+ 2346 0162 6900     		.ascii	"i\000"
+ 2347 0164 01       		.byte	0x1
+ 2348 0165 6D       		.byte	0x6d
+ 2349 0166 64000000 		.4byte	0x64
+ 2350 016a 02       		.byte	0x2
+ 2351 016b 91       		.byte	0x91
+ 2352 016c 77       		.sleb128 -9
+ 2353 016d 0D       		.uleb128 0xd
+ 2354 016e E5000000 		.4byte	.LASF24
+ 2355 0172 01       		.byte	0x1
+ 2356 0173 6E       		.byte	0x6e
+ 2357 0174 64000000 		.4byte	0x64
+ 2358 0178 02       		.byte	0x2
+ 2359 0179 91       		.byte	0x91
+ 2360 017a 76       		.sleb128 -10
+ 2361 017b 00       		.byte	0
+ 2362 017c 07       		.uleb128 0x7
+ 2363 017d 01       		.byte	0x1
+ 2364 017e 32000000 		.4byte	.LASF26
+ 2365 0182 01       		.byte	0x1
+ 2366 0183 B2       		.byte	0xb2
+ 2367 0184 01       		.byte	0x1
+ 2368 0185 64000000 		.4byte	0x64
+ 2369 0189 00000000 		.4byte	.LFB3
+ 2370 018d 68010000 		.4byte	.LFE3
+ 2371 0191 78000000 		.4byte	.LLST3
+ 2372 0195 01       		.byte	0x1
+ 2373 0196 15020000 		.4byte	0x215
+ 2374 019a 08       		.uleb128 0x8
+ 2375 019b 6400     		.ascii	"d\000"
+ 2376 019d 01       		.byte	0x1
+ 2377 019e B2       		.byte	0xb2
+ 2378 019f B8000000 		.4byte	0xb8
+ 2379 01a3 02       		.byte	0x2
+ 2380 01a4 91       		.byte	0x91
+ 2381 01a5 64       		.sleb128 -28
+ 2382 01a6 09       		.uleb128 0x9
+ 2383 01a7 41010000 		.4byte	.LASF27
+ 2384 01ab 01       		.byte	0x1
+ 2385 01ac B2       		.byte	0xb2
+ 2386 01ad B8000000 		.4byte	0xb8
+ 2387 01b1 02       		.byte	0x2
+ARM GAS  /tmp/ccXup38D.s 			page 54
+
+
+ 2388 01b2 91       		.byte	0x91
+ 2389 01b3 60       		.sleb128 -32
+ 2390 01b4 09       		.uleb128 0x9
+ 2391 01b5 0A020000 		.4byte	.LASF28
+ 2392 01b9 01       		.byte	0x1
+ 2393 01ba B2       		.byte	0xb2
+ 2394 01bb B8000000 		.4byte	0xb8
+ 2395 01bf 02       		.byte	0x2
+ 2396 01c0 91       		.byte	0x91
+ 2397 01c1 5C       		.sleb128 -36
+ 2398 01c2 0D       		.uleb128 0xd
+ 2399 01c3 E0000000 		.4byte	.LASF29
+ 2400 01c7 01       		.byte	0x1
+ 2401 01c8 B4       		.byte	0xb4
+ 2402 01c9 64000000 		.4byte	0x64
+ 2403 01cd 02       		.byte	0x2
+ 2404 01ce 91       		.byte	0x91
+ 2405 01cf 77       		.sleb128 -9
+ 2406 01d0 0D       		.uleb128 0xd
+ 2407 01d1 44020000 		.4byte	.LASF30
+ 2408 01d5 01       		.byte	0x1
+ 2409 01d6 B5       		.byte	0xb5
+ 2410 01d7 64000000 		.4byte	0x64
+ 2411 01db 02       		.byte	0x2
+ 2412 01dc 91       		.byte	0x91
+ 2413 01dd 76       		.sleb128 -10
+ 2414 01de 0B       		.uleb128 0xb
+ 2415 01df 6900     		.ascii	"i\000"
+ 2416 01e1 01       		.byte	0x1
+ 2417 01e2 B6       		.byte	0xb6
+ 2418 01e3 64000000 		.4byte	0x64
+ 2419 01e7 02       		.byte	0x2
+ 2420 01e8 91       		.byte	0x91
+ 2421 01e9 75       		.sleb128 -11
+ 2422 01ea 0D       		.uleb128 0xd
+ 2423 01eb 7C020000 		.4byte	.LASF31
+ 2424 01ef 01       		.byte	0x1
+ 2425 01f0 B7       		.byte	0xb7
+ 2426 01f1 64000000 		.4byte	0x64
+ 2427 01f5 02       		.byte	0x2
+ 2428 01f6 91       		.byte	0x91
+ 2429 01f7 6E       		.sleb128 -18
+ 2430 01f8 0D       		.uleb128 0xd
+ 2431 01f9 B2010000 		.4byte	.LASF32
+ 2432 01fd 01       		.byte	0x1
+ 2433 01fe B8       		.byte	0xb8
+ 2434 01ff B8000000 		.4byte	0xb8
+ 2435 0203 02       		.byte	0x2
+ 2436 0204 91       		.byte	0x91
+ 2437 0205 70       		.sleb128 -16
+ 2438 0206 0D       		.uleb128 0xd
+ 2439 0207 91020000 		.4byte	.LASF33
+ 2440 020b 01       		.byte	0x1
+ 2441 020c B9       		.byte	0xb9
+ 2442 020d 64000000 		.4byte	0x64
+ 2443 0211 02       		.byte	0x2
+ 2444 0212 91       		.byte	0x91
+ARM GAS  /tmp/ccXup38D.s 			page 55
+
+
+ 2445 0213 6F       		.sleb128 -17
+ 2446 0214 00       		.byte	0
+ 2447 0215 07       		.uleb128 0x7
+ 2448 0216 01       		.byte	0x1
+ 2449 0217 49000000 		.4byte	.LASF34
+ 2450 021b 01       		.byte	0x1
+ 2451 021c F7       		.byte	0xf7
+ 2452 021d 01       		.byte	0x1
+ 2453 021e 64000000 		.4byte	0x64
+ 2454 0222 00000000 		.4byte	.LFB4
+ 2455 0226 CC000000 		.4byte	.LFE4
+ 2456 022a A4000000 		.4byte	.LLST4
+ 2457 022e 01       		.byte	0x1
+ 2458 022f 84020000 		.4byte	0x284
+ 2459 0233 09       		.uleb128 0x9
+ 2460 0234 E0000000 		.4byte	.LASF29
+ 2461 0238 01       		.byte	0x1
+ 2462 0239 F7       		.byte	0xf7
+ 2463 023a 64000000 		.4byte	0x64
+ 2464 023e 02       		.byte	0x2
+ 2465 023f 91       		.byte	0x91
+ 2466 0240 6F       		.sleb128 -17
+ 2467 0241 09       		.uleb128 0x9
+ 2468 0242 2D000000 		.4byte	.LASF35
+ 2469 0246 01       		.byte	0x1
+ 2470 0247 F7       		.byte	0xf7
+ 2471 0248 BE000000 		.4byte	0xbe
+ 2472 024c 02       		.byte	0x2
+ 2473 024d 91       		.byte	0x91
+ 2474 024e 68       		.sleb128 -24
+ 2475 024f 0B       		.uleb128 0xb
+ 2476 0250 7000     		.ascii	"p\000"
+ 2477 0252 01       		.byte	0x1
+ 2478 0253 F9       		.byte	0xf9
+ 2479 0254 BE000000 		.4byte	0xbe
+ 2480 0258 02       		.byte	0x2
+ 2481 0259 91       		.byte	0x91
+ 2482 025a 74       		.sleb128 -12
+ 2483 025b 0D       		.uleb128 0xd
+ 2484 025c 0A020000 		.4byte	.LASF28
+ 2485 0260 01       		.byte	0x1
+ 2486 0261 FA       		.byte	0xfa
+ 2487 0262 64000000 		.4byte	0x64
+ 2488 0266 02       		.byte	0x2
+ 2489 0267 91       		.byte	0x91
+ 2490 0268 71       		.sleb128 -15
+ 2491 0269 0B       		.uleb128 0xb
+ 2492 026a 6900     		.ascii	"i\000"
+ 2493 026c 01       		.byte	0x1
+ 2494 026d FB       		.byte	0xfb
+ 2495 026e 64000000 		.4byte	0x64
+ 2496 0272 02       		.byte	0x2
+ 2497 0273 91       		.byte	0x91
+ 2498 0274 73       		.sleb128 -13
+ 2499 0275 0D       		.uleb128 0xd
+ 2500 0276 E5000000 		.4byte	.LASF24
+ 2501 027a 01       		.byte	0x1
+ARM GAS  /tmp/ccXup38D.s 			page 56
+
+
+ 2502 027b FC       		.byte	0xfc
+ 2503 027c 64000000 		.4byte	0x64
+ 2504 0280 02       		.byte	0x2
+ 2505 0281 91       		.byte	0x91
+ 2506 0282 72       		.sleb128 -14
+ 2507 0283 00       		.byte	0
+ 2508 0284 0E       		.uleb128 0xe
+ 2509 0285 01       		.byte	0x1
+ 2510 0286 89000000 		.4byte	.LASF36
+ 2511 028a 01       		.byte	0x1
+ 2512 028b 1801     		.2byte	0x118
+ 2513 028d 01       		.byte	0x1
+ 2514 028e 64000000 		.4byte	0x64
+ 2515 0292 00000000 		.4byte	.LFB5
+ 2516 0296 EC000000 		.4byte	.LFE5
+ 2517 029a D0000000 		.4byte	.LLST5
+ 2518 029e 01       		.byte	0x1
+ 2519 029f FA020000 		.4byte	0x2fa
+ 2520 02a3 0F       		.uleb128 0xf
+ 2521 02a4 0A020000 		.4byte	.LASF28
+ 2522 02a8 01       		.byte	0x1
+ 2523 02a9 1801     		.2byte	0x118
+ 2524 02ab 64000000 		.4byte	0x64
+ 2525 02af 02       		.byte	0x2
+ 2526 02b0 91       		.byte	0x91
+ 2527 02b1 77       		.sleb128 -9
+ 2528 02b2 0F       		.uleb128 0xf
+ 2529 02b3 2D000000 		.4byte	.LASF35
+ 2530 02b7 01       		.byte	0x1
+ 2531 02b8 1801     		.2byte	0x118
+ 2532 02ba B8000000 		.4byte	0xb8
+ 2533 02be 02       		.byte	0x2
+ 2534 02bf 91       		.byte	0x91
+ 2535 02c0 70       		.sleb128 -16
+ 2536 02c1 10       		.uleb128 0x10
+ 2537 02c2 7000     		.ascii	"p\000"
+ 2538 02c4 01       		.byte	0x1
+ 2539 02c5 1A01     		.2byte	0x11a
+ 2540 02c7 BE000000 		.4byte	0xbe
+ 2541 02cb 02       		.byte	0x2
+ 2542 02cc 91       		.byte	0x91
+ 2543 02cd 7C       		.sleb128 -4
+ 2544 02ce 10       		.uleb128 0x10
+ 2545 02cf 6900     		.ascii	"i\000"
+ 2546 02d1 01       		.byte	0x1
+ 2547 02d2 1B01     		.2byte	0x11b
+ 2548 02d4 64000000 		.4byte	0x64
+ 2549 02d8 02       		.byte	0x2
+ 2550 02d9 91       		.byte	0x91
+ 2551 02da 7B       		.sleb128 -5
+ 2552 02db 11       		.uleb128 0x11
+ 2553 02dc E5000000 		.4byte	.LASF24
+ 2554 02e0 01       		.byte	0x1
+ 2555 02e1 1C01     		.2byte	0x11c
+ 2556 02e3 64000000 		.4byte	0x64
+ 2557 02e7 02       		.byte	0x2
+ 2558 02e8 91       		.byte	0x91
+ARM GAS  /tmp/ccXup38D.s 			page 57
+
+
+ 2559 02e9 7A       		.sleb128 -6
+ 2560 02ea 11       		.uleb128 0x11
+ 2561 02eb E0000000 		.4byte	.LASF29
+ 2562 02ef 01       		.byte	0x1
+ 2563 02f0 1E01     		.2byte	0x11e
+ 2564 02f2 64000000 		.4byte	0x64
+ 2565 02f6 02       		.byte	0x2
+ 2566 02f7 91       		.byte	0x91
+ 2567 02f8 79       		.sleb128 -7
+ 2568 02f9 00       		.byte	0
+ 2569 02fa 12       		.uleb128 0x12
+ 2570 02fb 01       		.byte	0x1
+ 2571 02fc CC000000 		.4byte	.LASF37
+ 2572 0300 01       		.byte	0x1
+ 2573 0301 3A01     		.2byte	0x13a
+ 2574 0303 01       		.byte	0x1
+ 2575 0304 64000000 		.4byte	0x64
+ 2576 0308 00000000 		.4byte	.LFB6
+ 2577 030c 2C010000 		.4byte	.LFE6
+ 2578 0310 F0000000 		.4byte	.LLST6
+ 2579 0314 01       		.byte	0x1
+ 2580 0315 63030000 		.4byte	0x363
+ 2581 0319 13       		.uleb128 0x13
+ 2582 031a 7000     		.ascii	"p\000"
+ 2583 031c 01       		.byte	0x1
+ 2584 031d 3A01     		.2byte	0x13a
+ 2585 031f B8000000 		.4byte	0xb8
+ 2586 0323 02       		.byte	0x2
+ 2587 0324 91       		.byte	0x91
+ 2588 0325 6C       		.sleb128 -20
+ 2589 0326 0F       		.uleb128 0xf
+ 2590 0327 40000000 		.4byte	.LASF38
+ 2591 032b 01       		.byte	0x1
+ 2592 032c 3A01     		.2byte	0x13a
+ 2593 032e 95000000 		.4byte	0x95
+ 2594 0332 02       		.byte	0x2
+ 2595 0333 91       		.byte	0x91
+ 2596 0334 6A       		.sleb128 -22
+ 2597 0335 0F       		.uleb128 0xf
+ 2598 0336 E4010000 		.4byte	.LASF39
+ 2599 033a 01       		.byte	0x1
+ 2600 033b 3A01     		.2byte	0x13a
+ 2601 033d B8000000 		.4byte	0xb8
+ 2602 0341 02       		.byte	0x2
+ 2603 0342 91       		.byte	0x91
+ 2604 0343 64       		.sleb128 -28
+ 2605 0344 13       		.uleb128 0x13
+ 2606 0345 6C656E00 		.ascii	"len\000"
+ 2607 0349 01       		.byte	0x1
+ 2608 034a 3A01     		.2byte	0x13a
+ 2609 034c B8000000 		.4byte	0xb8
+ 2610 0350 02       		.byte	0x2
+ 2611 0351 91       		.byte	0x91
+ 2612 0352 60       		.sleb128 -32
+ 2613 0353 11       		.uleb128 0x11
+ 2614 0354 9B000000 		.4byte	.LASF40
+ 2615 0358 01       		.byte	0x1
+ARM GAS  /tmp/ccXup38D.s 			page 58
+
+
+ 2616 0359 3C01     		.2byte	0x13c
+ 2617 035b 64000000 		.4byte	0x64
+ 2618 035f 02       		.byte	0x2
+ 2619 0360 91       		.byte	0x91
+ 2620 0361 77       		.sleb128 -9
+ 2621 0362 00       		.byte	0
+ 2622 0363 14       		.uleb128 0x14
+ 2623 0364 01       		.byte	0x1
+ 2624 0365 D6000000 		.4byte	.LASF41
+ 2625 0369 01       		.byte	0x1
+ 2626 036a 7501     		.2byte	0x175
+ 2627 036c 01       		.byte	0x1
+ 2628 036d 00000000 		.4byte	.LFB7
+ 2629 0371 0A000000 		.4byte	.LFE7
+ 2630 0375 1C010000 		.4byte	.LLST7
+ 2631 0379 01       		.byte	0x1
+ 2632 037a 8C030000 		.4byte	0x38c
+ 2633 037e 13       		.uleb128 0x13
+ 2634 037f 7000     		.ascii	"p\000"
+ 2635 0381 01       		.byte	0x1
+ 2636 0382 7501     		.2byte	0x175
+ 2637 0384 B8000000 		.4byte	0xb8
+ 2638 0388 02       		.byte	0x2
+ 2639 0389 91       		.byte	0x91
+ 2640 038a 7C       		.sleb128 -4
+ 2641 038b 00       		.byte	0
+ 2642 038c 0E       		.uleb128 0xe
+ 2643 038d 01       		.byte	0x1
+ 2644 038e A9010000 		.4byte	.LASF42
+ 2645 0392 01       		.byte	0x1
+ 2646 0393 A401     		.2byte	0x1a4
+ 2647 0395 01       		.byte	0x1
+ 2648 0396 95000000 		.4byte	0x95
+ 2649 039a 00000000 		.4byte	.LFB8
+ 2650 039e 66010000 		.4byte	.LFE8
+ 2651 03a2 3C010000 		.4byte	.LLST8
+ 2652 03a6 01       		.byte	0x1
+ 2653 03a7 E5030000 		.4byte	0x3e5
+ 2654 03ab 13       		.uleb128 0x13
+ 2655 03ac 706E00   		.ascii	"pn\000"
+ 2656 03af 01       		.byte	0x1
+ 2657 03b0 A401     		.2byte	0x1a4
+ 2658 03b2 B8000000 		.4byte	0xb8
+ 2659 03b6 02       		.byte	0x2
+ 2660 03b7 91       		.byte	0x91
+ 2661 03b8 74       		.sleb128 -12
+ 2662 03b9 10       		.uleb128 0x10
+ 2663 03ba 6900     		.ascii	"i\000"
+ 2664 03bc 01       		.byte	0x1
+ 2665 03bd A601     		.2byte	0x1a6
+ 2666 03bf 64000000 		.4byte	0x64
+ 2667 03c3 02       		.byte	0x2
+ 2668 03c4 91       		.byte	0x91
+ 2669 03c5 7F       		.sleb128 -1
+ 2670 03c6 11       		.uleb128 0x11
+ 2671 03c7 04020000 		.4byte	.LASF43
+ 2672 03cb 01       		.byte	0x1
+ARM GAS  /tmp/ccXup38D.s 			page 59
+
+
+ 2673 03cc A701     		.2byte	0x1a7
+ 2674 03ce 64000000 		.4byte	0x64
+ 2675 03d2 02       		.byte	0x2
+ 2676 03d3 91       		.byte	0x91
+ 2677 03d4 7E       		.sleb128 -2
+ 2678 03d5 11       		.uleb128 0x11
+ 2679 03d6 5D010000 		.4byte	.LASF44
+ 2680 03da 01       		.byte	0x1
+ 2681 03db A801     		.2byte	0x1a8
+ 2682 03dd 95000000 		.4byte	0x95
+ 2683 03e1 02       		.byte	0x2
+ 2684 03e2 91       		.byte	0x91
+ 2685 03e3 7C       		.sleb128 -4
+ 2686 03e4 00       		.byte	0
+ 2687 03e5 12       		.uleb128 0x12
+ 2688 03e6 01       		.byte	0x1
+ 2689 03e7 EA010000 		.4byte	.LASF45
+ 2690 03eb 01       		.byte	0x1
+ 2691 03ec CD01     		.2byte	0x1cd
+ 2692 03ee 01       		.byte	0x1
+ 2693 03ef 64000000 		.4byte	0x64
+ 2694 03f3 00000000 		.4byte	.LFB9
+ 2695 03f7 86020000 		.4byte	.LFE9
+ 2696 03fb 5C010000 		.4byte	.LLST9
+ 2697 03ff 01       		.byte	0x1
+ 2698 0400 B6040000 		.4byte	0x4b6
+ 2699 0404 13       		.uleb128 0x13
+ 2700 0405 697000   		.ascii	"ip\000"
+ 2701 0408 01       		.byte	0x1
+ 2702 0409 CD01     		.2byte	0x1cd
+ 2703 040b BE000000 		.4byte	0xbe
+ 2704 040f 02       		.byte	0x2
+ 2705 0410 91       		.byte	0x91
+ 2706 0411 64       		.sleb128 -28
+ 2707 0412 10       		.uleb128 0x10
+ 2708 0413 6900     		.ascii	"i\000"
+ 2709 0415 01       		.byte	0x1
+ 2710 0416 CF01     		.2byte	0x1cf
+ 2711 0418 64000000 		.4byte	0x64
+ 2712 041c 02       		.byte	0x2
+ 2713 041d 91       		.byte	0x91
+ 2714 041e 77       		.sleb128 -9
+ 2715 041f 11       		.uleb128 0x11
+ 2716 0420 11020000 		.4byte	.LASF46
+ 2717 0424 01       		.byte	0x1
+ 2718 0425 D001     		.2byte	0x1d0
+ 2719 0427 64000000 		.4byte	0x64
+ 2720 042b 02       		.byte	0x2
+ 2721 042c 91       		.byte	0x91
+ 2722 042d 76       		.sleb128 -10
+ 2723 042e 11       		.uleb128 0x11
+ 2724 042f F7000000 		.4byte	.LASF47
+ 2725 0433 01       		.byte	0x1
+ 2726 0434 D101     		.2byte	0x1d1
+ 2727 0436 64000000 		.4byte	0x64
+ 2728 043a 02       		.byte	0x2
+ 2729 043b 91       		.byte	0x91
+ARM GAS  /tmp/ccXup38D.s 			page 60
+
+
+ 2730 043c 75       		.sleb128 -11
+ 2731 043d 11       		.uleb128 0x11
+ 2732 043e 1B020000 		.4byte	.LASF48
+ 2733 0442 01       		.byte	0x1
+ 2734 0443 D201     		.2byte	0x1d2
+ 2735 0445 64000000 		.4byte	0x64
+ 2736 0449 02       		.byte	0x2
+ 2737 044a 91       		.byte	0x91
+ 2738 044b 74       		.sleb128 -12
+ 2739 044c 11       		.uleb128 0x11
+ 2740 044d 20020000 		.4byte	.LASF49
+ 2741 0451 01       		.byte	0x1
+ 2742 0452 D301     		.2byte	0x1d3
+ 2743 0454 64000000 		.4byte	0x64
+ 2744 0458 02       		.byte	0x2
+ 2745 0459 91       		.byte	0x91
+ 2746 045a 73       		.sleb128 -13
+ 2747 045b 11       		.uleb128 0x11
+ 2748 045c 32020000 		.4byte	.LASF50
+ 2749 0460 01       		.byte	0x1
+ 2750 0461 D401     		.2byte	0x1d4
+ 2751 0463 64000000 		.4byte	0x64
+ 2752 0467 02       		.byte	0x2
+ 2753 0468 91       		.byte	0x91
+ 2754 0469 72       		.sleb128 -14
+ 2755 046a 11       		.uleb128 0x11
+ 2756 046b 38020000 		.4byte	.LASF51
+ 2757 046f 01       		.byte	0x1
+ 2758 0470 D501     		.2byte	0x1d5
+ 2759 0472 64000000 		.4byte	0x64
+ 2760 0476 02       		.byte	0x2
+ 2761 0477 91       		.byte	0x91
+ 2762 0478 71       		.sleb128 -15
+ 2763 0479 11       		.uleb128 0x11
+ 2764 047a 3E020000 		.4byte	.LASF52
+ 2765 047e 01       		.byte	0x1
+ 2766 047f D601     		.2byte	0x1d6
+ 2767 0481 64000000 		.4byte	0x64
+ 2768 0485 02       		.byte	0x2
+ 2769 0486 91       		.byte	0x91
+ 2770 0487 70       		.sleb128 -16
+ 2771 0488 11       		.uleb128 0x11
+ 2772 0489 BB010000 		.4byte	.LASF53
+ 2773 048d 01       		.byte	0x1
+ 2774 048e D701     		.2byte	0x1d7
+ 2775 0490 64000000 		.4byte	0x64
+ 2776 0494 02       		.byte	0x2
+ 2777 0495 91       		.byte	0x91
+ 2778 0496 6F       		.sleb128 -17
+ 2779 0497 11       		.uleb128 0x11
+ 2780 0498 5D010000 		.4byte	.LASF44
+ 2781 049c 01       		.byte	0x1
+ 2782 049d D901     		.2byte	0x1d9
+ 2783 049f 64000000 		.4byte	0x64
+ 2784 04a3 02       		.byte	0x2
+ 2785 04a4 91       		.byte	0x91
+ 2786 04a5 6E       		.sleb128 -18
+ARM GAS  /tmp/ccXup38D.s 			page 61
+
+
+ 2787 04a6 11       		.uleb128 0x11
+ 2788 04a7 78000000 		.4byte	.LASF54
+ 2789 04ab 01       		.byte	0x1
+ 2790 04ac DA01     		.2byte	0x1da
+ 2791 04ae B6040000 		.4byte	0x4b6
+ 2792 04b2 02       		.byte	0x2
+ 2793 04b3 91       		.byte	0x91
+ 2794 04b4 68       		.sleb128 -24
+ 2795 04b5 00       		.byte	0
+ 2796 04b6 15       		.uleb128 0x15
+ 2797 04b7 C4000000 		.4byte	0xc4
+ 2798 04bb C6040000 		.4byte	0x4c6
+ 2799 04bf 16       		.uleb128 0x16
+ 2800 04c0 B1000000 		.4byte	0xb1
+ 2801 04c4 03       		.byte	0x3
+ 2802 04c5 00       		.byte	0
+ 2803 04c6 0E       		.uleb128 0xe
+ 2804 04c7 01       		.byte	0x1
+ 2805 04c8 84020000 		.4byte	.LASF55
+ 2806 04cc 01       		.byte	0x1
+ 2807 04cd 1C02     		.2byte	0x21c
+ 2808 04cf 01       		.byte	0x1
+ 2809 04d0 64000000 		.4byte	0x64
+ 2810 04d4 00000000 		.4byte	.LFB10
+ 2811 04d8 34010000 		.4byte	.LFE10
+ 2812 04dc 88010000 		.4byte	.LLST10
+ 2813 04e0 01       		.byte	0x1
+ 2814 04e1 2E050000 		.4byte	0x52e
+ 2815 04e5 13       		.uleb128 0x13
+ 2816 04e6 697000   		.ascii	"ip\000"
+ 2817 04e9 01       		.byte	0x1
+ 2818 04ea 1C02     		.2byte	0x21c
+ 2819 04ec BE000000 		.4byte	0xbe
+ 2820 04f0 02       		.byte	0x2
+ 2821 04f1 91       		.byte	0x91
+ 2822 04f2 74       		.sleb128 -12
+ 2823 04f3 0F       		.uleb128 0xf
+ 2824 04f4 00000000 		.4byte	.LASF56
+ 2825 04f8 01       		.byte	0x1
+ 2826 04f9 1C02     		.2byte	0x21c
+ 2827 04fb B8000000 		.4byte	0xb8
+ 2828 04ff 02       		.byte	0x2
+ 2829 0500 91       		.byte	0x91
+ 2830 0501 70       		.sleb128 -16
+ 2831 0502 10       		.uleb128 0x10
+ 2832 0503 6900     		.ascii	"i\000"
+ 2833 0505 01       		.byte	0x1
+ 2834 0506 1E02     		.2byte	0x21e
+ 2835 0508 64000000 		.4byte	0x64
+ 2836 050c 02       		.byte	0x2
+ 2837 050d 91       		.byte	0x91
+ 2838 050e 7F       		.sleb128 -1
+ 2839 050f 10       		.uleb128 0x10
+ 2840 0510 646F7400 		.ascii	"dot\000"
+ 2841 0514 01       		.byte	0x1
+ 2842 0515 1F02     		.2byte	0x21f
+ 2843 0517 64000000 		.4byte	0x64
+ARM GAS  /tmp/ccXup38D.s 			page 62
+
+
+ 2844 051b 02       		.byte	0x2
+ 2845 051c 91       		.byte	0x91
+ 2846 051d 7E       		.sleb128 -2
+ 2847 051e 11       		.uleb128 0x11
+ 2848 051f 5D010000 		.4byte	.LASF44
+ 2849 0523 01       		.byte	0x1
+ 2850 0524 2002     		.2byte	0x220
+ 2851 0526 8E000000 		.4byte	0x8e
+ 2852 052a 02       		.byte	0x2
+ 2853 052b 91       		.byte	0x91
+ 2854 052c 7C       		.sleb128 -4
+ 2855 052d 00       		.byte	0
+ 2856 052e 15       		.uleb128 0x15
+ 2857 052f C4000000 		.4byte	0xc4
+ 2858 0533 44050000 		.4byte	0x544
+ 2859 0537 16       		.uleb128 0x16
+ 2860 0538 B1000000 		.4byte	0xb1
+ 2861 053c 04       		.byte	0x4
+ 2862 053d 16       		.uleb128 0x16
+ 2863 053e B1000000 		.4byte	0xb1
+ 2864 0542 7F       		.byte	0x7f
+ 2865 0543 00       		.byte	0
+ 2866 0544 17       		.uleb128 0x17
+ 2867 0545 24010000 		.4byte	.LASF57
+ 2868 0549 01       		.byte	0x1
+ 2869 054a 1F       		.byte	0x1f
+ 2870 054b 2E050000 		.4byte	0x52e
+ 2871 054f 01       		.byte	0x1
+ 2872 0550 05       		.byte	0x5
+ 2873 0551 03       		.byte	0x3
+ 2874 0552 00000000 		.4byte	bufftcpsend
+ 2875 0556 17       		.uleb128 0x17
+ 2876 0557 30010000 		.4byte	.LASF58
+ 2877 055b 01       		.byte	0x1
+ 2878 055c 20       		.byte	0x20
+ 2879 055d BE000000 		.4byte	0xbe
+ 2880 0561 01       		.byte	0x1
+ 2881 0562 05       		.byte	0x5
+ 2882 0563 03       		.byte	0x3
+ 2883 0564 00000000 		.4byte	ptcp
+ 2884 0568 17       		.uleb128 0x17
+ 2885 0569 25020000 		.4byte	.LASF59
+ 2886 056d 01       		.byte	0x1
+ 2887 056e 21       		.byte	0x21
+ 2888 056f 64000000 		.4byte	0x64
+ 2889 0573 01       		.byte	0x1
+ 2890 0574 05       		.byte	0x5
+ 2891 0575 03       		.byte	0x3
+ 2892 0576 00000000 		.4byte	tcp_tx_state
+ 2893 057a 00       		.byte	0
+ 2894              		.section	.debug_abbrev,"",%progbits
+ 2895              	.Ldebug_abbrev0:
+ 2896 0000 01       		.uleb128 0x1
+ 2897 0001 11       		.uleb128 0x11
+ 2898 0002 01       		.byte	0x1
+ 2899 0003 25       		.uleb128 0x25
+ 2900 0004 0E       		.uleb128 0xe
+ARM GAS  /tmp/ccXup38D.s 			page 63
+
+
+ 2901 0005 13       		.uleb128 0x13
+ 2902 0006 0B       		.uleb128 0xb
+ 2903 0007 03       		.uleb128 0x3
+ 2904 0008 0E       		.uleb128 0xe
+ 2905 0009 1B       		.uleb128 0x1b
+ 2906 000a 0E       		.uleb128 0xe
+ 2907 000b 55       		.uleb128 0x55
+ 2908 000c 06       		.uleb128 0x6
+ 2909 000d 11       		.uleb128 0x11
+ 2910 000e 01       		.uleb128 0x1
+ 2911 000f 52       		.uleb128 0x52
+ 2912 0010 01       		.uleb128 0x1
+ 2913 0011 10       		.uleb128 0x10
+ 2914 0012 06       		.uleb128 0x6
+ 2915 0013 00       		.byte	0
+ 2916 0014 00       		.byte	0
+ 2917 0015 02       		.uleb128 0x2
+ 2918 0016 04       		.uleb128 0x4
+ 2919 0017 01       		.byte	0x1
+ 2920 0018 03       		.uleb128 0x3
+ 2921 0019 0E       		.uleb128 0xe
+ 2922 001a 0B       		.uleb128 0xb
+ 2923 001b 0B       		.uleb128 0xb
+ 2924 001c 49       		.uleb128 0x49
+ 2925 001d 13       		.uleb128 0x13
+ 2926 001e 3A       		.uleb128 0x3a
+ 2927 001f 0B       		.uleb128 0xb
+ 2928 0020 3B       		.uleb128 0x3b
+ 2929 0021 0B       		.uleb128 0xb
+ 2930 0022 01       		.uleb128 0x1
+ 2931 0023 13       		.uleb128 0x13
+ 2932 0024 00       		.byte	0
+ 2933 0025 00       		.byte	0
+ 2934 0026 03       		.uleb128 0x3
+ 2935 0027 28       		.uleb128 0x28
+ 2936 0028 00       		.byte	0
+ 2937 0029 03       		.uleb128 0x3
+ 2938 002a 0E       		.uleb128 0xe
+ 2939 002b 1C       		.uleb128 0x1c
+ 2940 002c 0B       		.uleb128 0xb
+ 2941 002d 00       		.byte	0
+ 2942 002e 00       		.byte	0
+ 2943 002f 04       		.uleb128 0x4
+ 2944 0030 24       		.uleb128 0x24
+ 2945 0031 00       		.byte	0
+ 2946 0032 0B       		.uleb128 0xb
+ 2947 0033 0B       		.uleb128 0xb
+ 2948 0034 3E       		.uleb128 0x3e
+ 2949 0035 0B       		.uleb128 0xb
+ 2950 0036 03       		.uleb128 0x3
+ 2951 0037 0E       		.uleb128 0xe
+ 2952 0038 00       		.byte	0
+ 2953 0039 00       		.byte	0
+ 2954 003a 05       		.uleb128 0x5
+ 2955 003b 24       		.uleb128 0x24
+ 2956 003c 00       		.byte	0
+ 2957 003d 0B       		.uleb128 0xb
+ARM GAS  /tmp/ccXup38D.s 			page 64
+
+
+ 2958 003e 0B       		.uleb128 0xb
+ 2959 003f 3E       		.uleb128 0x3e
+ 2960 0040 0B       		.uleb128 0xb
+ 2961 0041 03       		.uleb128 0x3
+ 2962 0042 08       		.uleb128 0x8
+ 2963 0043 00       		.byte	0
+ 2964 0044 00       		.byte	0
+ 2965 0045 06       		.uleb128 0x6
+ 2966 0046 0F       		.uleb128 0xf
+ 2967 0047 00       		.byte	0
+ 2968 0048 0B       		.uleb128 0xb
+ 2969 0049 0B       		.uleb128 0xb
+ 2970 004a 49       		.uleb128 0x49
+ 2971 004b 13       		.uleb128 0x13
+ 2972 004c 00       		.byte	0
+ 2973 004d 00       		.byte	0
+ 2974 004e 07       		.uleb128 0x7
+ 2975 004f 2E       		.uleb128 0x2e
+ 2976 0050 01       		.byte	0x1
+ 2977 0051 3F       		.uleb128 0x3f
+ 2978 0052 0C       		.uleb128 0xc
+ 2979 0053 03       		.uleb128 0x3
+ 2980 0054 0E       		.uleb128 0xe
+ 2981 0055 3A       		.uleb128 0x3a
+ 2982 0056 0B       		.uleb128 0xb
+ 2983 0057 3B       		.uleb128 0x3b
+ 2984 0058 0B       		.uleb128 0xb
+ 2985 0059 27       		.uleb128 0x27
+ 2986 005a 0C       		.uleb128 0xc
+ 2987 005b 49       		.uleb128 0x49
+ 2988 005c 13       		.uleb128 0x13
+ 2989 005d 11       		.uleb128 0x11
+ 2990 005e 01       		.uleb128 0x1
+ 2991 005f 12       		.uleb128 0x12
+ 2992 0060 01       		.uleb128 0x1
+ 2993 0061 40       		.uleb128 0x40
+ 2994 0062 06       		.uleb128 0x6
+ 2995 0063 9642     		.uleb128 0x2116
+ 2996 0065 0C       		.uleb128 0xc
+ 2997 0066 01       		.uleb128 0x1
+ 2998 0067 13       		.uleb128 0x13
+ 2999 0068 00       		.byte	0
+ 3000 0069 00       		.byte	0
+ 3001 006a 08       		.uleb128 0x8
+ 3002 006b 05       		.uleb128 0x5
+ 3003 006c 00       		.byte	0
+ 3004 006d 03       		.uleb128 0x3
+ 3005 006e 08       		.uleb128 0x8
+ 3006 006f 3A       		.uleb128 0x3a
+ 3007 0070 0B       		.uleb128 0xb
+ 3008 0071 3B       		.uleb128 0x3b
+ 3009 0072 0B       		.uleb128 0xb
+ 3010 0073 49       		.uleb128 0x49
+ 3011 0074 13       		.uleb128 0x13
+ 3012 0075 02       		.uleb128 0x2
+ 3013 0076 0A       		.uleb128 0xa
+ 3014 0077 00       		.byte	0
+ARM GAS  /tmp/ccXup38D.s 			page 65
+
+
+ 3015 0078 00       		.byte	0
+ 3016 0079 09       		.uleb128 0x9
+ 3017 007a 05       		.uleb128 0x5
+ 3018 007b 00       		.byte	0
+ 3019 007c 03       		.uleb128 0x3
+ 3020 007d 0E       		.uleb128 0xe
+ 3021 007e 3A       		.uleb128 0x3a
+ 3022 007f 0B       		.uleb128 0xb
+ 3023 0080 3B       		.uleb128 0x3b
+ 3024 0081 0B       		.uleb128 0xb
+ 3025 0082 49       		.uleb128 0x49
+ 3026 0083 13       		.uleb128 0x13
+ 3027 0084 02       		.uleb128 0x2
+ 3028 0085 0A       		.uleb128 0xa
+ 3029 0086 00       		.byte	0
+ 3030 0087 00       		.byte	0
+ 3031 0088 0A       		.uleb128 0xa
+ 3032 0089 2E       		.uleb128 0x2e
+ 3033 008a 01       		.byte	0x1
+ 3034 008b 3F       		.uleb128 0x3f
+ 3035 008c 0C       		.uleb128 0xc
+ 3036 008d 03       		.uleb128 0x3
+ 3037 008e 0E       		.uleb128 0xe
+ 3038 008f 3A       		.uleb128 0x3a
+ 3039 0090 0B       		.uleb128 0xb
+ 3040 0091 3B       		.uleb128 0x3b
+ 3041 0092 0B       		.uleb128 0xb
+ 3042 0093 27       		.uleb128 0x27
+ 3043 0094 0C       		.uleb128 0xc
+ 3044 0095 11       		.uleb128 0x11
+ 3045 0096 01       		.uleb128 0x1
+ 3046 0097 12       		.uleb128 0x12
+ 3047 0098 01       		.uleb128 0x1
+ 3048 0099 40       		.uleb128 0x40
+ 3049 009a 06       		.uleb128 0x6
+ 3050 009b 9742     		.uleb128 0x2117
+ 3051 009d 0C       		.uleb128 0xc
+ 3052 009e 01       		.uleb128 0x1
+ 3053 009f 13       		.uleb128 0x13
+ 3054 00a0 00       		.byte	0
+ 3055 00a1 00       		.byte	0
+ 3056 00a2 0B       		.uleb128 0xb
+ 3057 00a3 34       		.uleb128 0x34
+ 3058 00a4 00       		.byte	0
+ 3059 00a5 03       		.uleb128 0x3
+ 3060 00a6 08       		.uleb128 0x8
+ 3061 00a7 3A       		.uleb128 0x3a
+ 3062 00a8 0B       		.uleb128 0xb
+ 3063 00a9 3B       		.uleb128 0x3b
+ 3064 00aa 0B       		.uleb128 0xb
+ 3065 00ab 49       		.uleb128 0x49
+ 3066 00ac 13       		.uleb128 0x13
+ 3067 00ad 02       		.uleb128 0x2
+ 3068 00ae 0A       		.uleb128 0xa
+ 3069 00af 00       		.byte	0
+ 3070 00b0 00       		.byte	0
+ 3071 00b1 0C       		.uleb128 0xc
+ARM GAS  /tmp/ccXup38D.s 			page 66
+
+
+ 3072 00b2 2E       		.uleb128 0x2e
+ 3073 00b3 01       		.byte	0x1
+ 3074 00b4 3F       		.uleb128 0x3f
+ 3075 00b5 0C       		.uleb128 0xc
+ 3076 00b6 03       		.uleb128 0x3
+ 3077 00b7 0E       		.uleb128 0xe
+ 3078 00b8 3A       		.uleb128 0x3a
+ 3079 00b9 0B       		.uleb128 0xb
+ 3080 00ba 3B       		.uleb128 0x3b
+ 3081 00bb 0B       		.uleb128 0xb
+ 3082 00bc 27       		.uleb128 0x27
+ 3083 00bd 0C       		.uleb128 0xc
+ 3084 00be 11       		.uleb128 0x11
+ 3085 00bf 01       		.uleb128 0x1
+ 3086 00c0 12       		.uleb128 0x12
+ 3087 00c1 01       		.uleb128 0x1
+ 3088 00c2 40       		.uleb128 0x40
+ 3089 00c3 06       		.uleb128 0x6
+ 3090 00c4 9642     		.uleb128 0x2116
+ 3091 00c6 0C       		.uleb128 0xc
+ 3092 00c7 01       		.uleb128 0x1
+ 3093 00c8 13       		.uleb128 0x13
+ 3094 00c9 00       		.byte	0
+ 3095 00ca 00       		.byte	0
+ 3096 00cb 0D       		.uleb128 0xd
+ 3097 00cc 34       		.uleb128 0x34
+ 3098 00cd 00       		.byte	0
+ 3099 00ce 03       		.uleb128 0x3
+ 3100 00cf 0E       		.uleb128 0xe
+ 3101 00d0 3A       		.uleb128 0x3a
+ 3102 00d1 0B       		.uleb128 0xb
+ 3103 00d2 3B       		.uleb128 0x3b
+ 3104 00d3 0B       		.uleb128 0xb
+ 3105 00d4 49       		.uleb128 0x49
+ 3106 00d5 13       		.uleb128 0x13
+ 3107 00d6 02       		.uleb128 0x2
+ 3108 00d7 0A       		.uleb128 0xa
+ 3109 00d8 00       		.byte	0
+ 3110 00d9 00       		.byte	0
+ 3111 00da 0E       		.uleb128 0xe
+ 3112 00db 2E       		.uleb128 0x2e
+ 3113 00dc 01       		.byte	0x1
+ 3114 00dd 3F       		.uleb128 0x3f
+ 3115 00de 0C       		.uleb128 0xc
+ 3116 00df 03       		.uleb128 0x3
+ 3117 00e0 0E       		.uleb128 0xe
+ 3118 00e1 3A       		.uleb128 0x3a
+ 3119 00e2 0B       		.uleb128 0xb
+ 3120 00e3 3B       		.uleb128 0x3b
+ 3121 00e4 05       		.uleb128 0x5
+ 3122 00e5 27       		.uleb128 0x27
+ 3123 00e6 0C       		.uleb128 0xc
+ 3124 00e7 49       		.uleb128 0x49
+ 3125 00e8 13       		.uleb128 0x13
+ 3126 00e9 11       		.uleb128 0x11
+ 3127 00ea 01       		.uleb128 0x1
+ 3128 00eb 12       		.uleb128 0x12
+ARM GAS  /tmp/ccXup38D.s 			page 67
+
+
+ 3129 00ec 01       		.uleb128 0x1
+ 3130 00ed 40       		.uleb128 0x40
+ 3131 00ee 06       		.uleb128 0x6
+ 3132 00ef 9742     		.uleb128 0x2117
+ 3133 00f1 0C       		.uleb128 0xc
+ 3134 00f2 01       		.uleb128 0x1
+ 3135 00f3 13       		.uleb128 0x13
+ 3136 00f4 00       		.byte	0
+ 3137 00f5 00       		.byte	0
+ 3138 00f6 0F       		.uleb128 0xf
+ 3139 00f7 05       		.uleb128 0x5
+ 3140 00f8 00       		.byte	0
+ 3141 00f9 03       		.uleb128 0x3
+ 3142 00fa 0E       		.uleb128 0xe
+ 3143 00fb 3A       		.uleb128 0x3a
+ 3144 00fc 0B       		.uleb128 0xb
+ 3145 00fd 3B       		.uleb128 0x3b
+ 3146 00fe 05       		.uleb128 0x5
+ 3147 00ff 49       		.uleb128 0x49
+ 3148 0100 13       		.uleb128 0x13
+ 3149 0101 02       		.uleb128 0x2
+ 3150 0102 0A       		.uleb128 0xa
+ 3151 0103 00       		.byte	0
+ 3152 0104 00       		.byte	0
+ 3153 0105 10       		.uleb128 0x10
+ 3154 0106 34       		.uleb128 0x34
+ 3155 0107 00       		.byte	0
+ 3156 0108 03       		.uleb128 0x3
+ 3157 0109 08       		.uleb128 0x8
+ 3158 010a 3A       		.uleb128 0x3a
+ 3159 010b 0B       		.uleb128 0xb
+ 3160 010c 3B       		.uleb128 0x3b
+ 3161 010d 05       		.uleb128 0x5
+ 3162 010e 49       		.uleb128 0x49
+ 3163 010f 13       		.uleb128 0x13
+ 3164 0110 02       		.uleb128 0x2
+ 3165 0111 0A       		.uleb128 0xa
+ 3166 0112 00       		.byte	0
+ 3167 0113 00       		.byte	0
+ 3168 0114 11       		.uleb128 0x11
+ 3169 0115 34       		.uleb128 0x34
+ 3170 0116 00       		.byte	0
+ 3171 0117 03       		.uleb128 0x3
+ 3172 0118 0E       		.uleb128 0xe
+ 3173 0119 3A       		.uleb128 0x3a
+ 3174 011a 0B       		.uleb128 0xb
+ 3175 011b 3B       		.uleb128 0x3b
+ 3176 011c 05       		.uleb128 0x5
+ 3177 011d 49       		.uleb128 0x49
+ 3178 011e 13       		.uleb128 0x13
+ 3179 011f 02       		.uleb128 0x2
+ 3180 0120 0A       		.uleb128 0xa
+ 3181 0121 00       		.byte	0
+ 3182 0122 00       		.byte	0
+ 3183 0123 12       		.uleb128 0x12
+ 3184 0124 2E       		.uleb128 0x2e
+ 3185 0125 01       		.byte	0x1
+ARM GAS  /tmp/ccXup38D.s 			page 68
+
+
+ 3186 0126 3F       		.uleb128 0x3f
+ 3187 0127 0C       		.uleb128 0xc
+ 3188 0128 03       		.uleb128 0x3
+ 3189 0129 0E       		.uleb128 0xe
+ 3190 012a 3A       		.uleb128 0x3a
+ 3191 012b 0B       		.uleb128 0xb
+ 3192 012c 3B       		.uleb128 0x3b
+ 3193 012d 05       		.uleb128 0x5
+ 3194 012e 27       		.uleb128 0x27
+ 3195 012f 0C       		.uleb128 0xc
+ 3196 0130 49       		.uleb128 0x49
+ 3197 0131 13       		.uleb128 0x13
+ 3198 0132 11       		.uleb128 0x11
+ 3199 0133 01       		.uleb128 0x1
+ 3200 0134 12       		.uleb128 0x12
+ 3201 0135 01       		.uleb128 0x1
+ 3202 0136 40       		.uleb128 0x40
+ 3203 0137 06       		.uleb128 0x6
+ 3204 0138 9642     		.uleb128 0x2116
+ 3205 013a 0C       		.uleb128 0xc
+ 3206 013b 01       		.uleb128 0x1
+ 3207 013c 13       		.uleb128 0x13
+ 3208 013d 00       		.byte	0
+ 3209 013e 00       		.byte	0
+ 3210 013f 13       		.uleb128 0x13
+ 3211 0140 05       		.uleb128 0x5
+ 3212 0141 00       		.byte	0
+ 3213 0142 03       		.uleb128 0x3
+ 3214 0143 08       		.uleb128 0x8
+ 3215 0144 3A       		.uleb128 0x3a
+ 3216 0145 0B       		.uleb128 0xb
+ 3217 0146 3B       		.uleb128 0x3b
+ 3218 0147 05       		.uleb128 0x5
+ 3219 0148 49       		.uleb128 0x49
+ 3220 0149 13       		.uleb128 0x13
+ 3221 014a 02       		.uleb128 0x2
+ 3222 014b 0A       		.uleb128 0xa
+ 3223 014c 00       		.byte	0
+ 3224 014d 00       		.byte	0
+ 3225 014e 14       		.uleb128 0x14
+ 3226 014f 2E       		.uleb128 0x2e
+ 3227 0150 01       		.byte	0x1
+ 3228 0151 3F       		.uleb128 0x3f
+ 3229 0152 0C       		.uleb128 0xc
+ 3230 0153 03       		.uleb128 0x3
+ 3231 0154 0E       		.uleb128 0xe
+ 3232 0155 3A       		.uleb128 0x3a
+ 3233 0156 0B       		.uleb128 0xb
+ 3234 0157 3B       		.uleb128 0x3b
+ 3235 0158 05       		.uleb128 0x5
+ 3236 0159 27       		.uleb128 0x27
+ 3237 015a 0C       		.uleb128 0xc
+ 3238 015b 11       		.uleb128 0x11
+ 3239 015c 01       		.uleb128 0x1
+ 3240 015d 12       		.uleb128 0x12
+ 3241 015e 01       		.uleb128 0x1
+ 3242 015f 40       		.uleb128 0x40
+ARM GAS  /tmp/ccXup38D.s 			page 69
+
+
+ 3243 0160 06       		.uleb128 0x6
+ 3244 0161 9742     		.uleb128 0x2117
+ 3245 0163 0C       		.uleb128 0xc
+ 3246 0164 01       		.uleb128 0x1
+ 3247 0165 13       		.uleb128 0x13
+ 3248 0166 00       		.byte	0
+ 3249 0167 00       		.byte	0
+ 3250 0168 15       		.uleb128 0x15
+ 3251 0169 01       		.uleb128 0x1
+ 3252 016a 01       		.byte	0x1
+ 3253 016b 49       		.uleb128 0x49
+ 3254 016c 13       		.uleb128 0x13
+ 3255 016d 01       		.uleb128 0x1
+ 3256 016e 13       		.uleb128 0x13
+ 3257 016f 00       		.byte	0
+ 3258 0170 00       		.byte	0
+ 3259 0171 16       		.uleb128 0x16
+ 3260 0172 21       		.uleb128 0x21
+ 3261 0173 00       		.byte	0
+ 3262 0174 49       		.uleb128 0x49
+ 3263 0175 13       		.uleb128 0x13
+ 3264 0176 2F       		.uleb128 0x2f
+ 3265 0177 0B       		.uleb128 0xb
+ 3266 0178 00       		.byte	0
+ 3267 0179 00       		.byte	0
+ 3268 017a 17       		.uleb128 0x17
+ 3269 017b 34       		.uleb128 0x34
+ 3270 017c 00       		.byte	0
+ 3271 017d 03       		.uleb128 0x3
+ 3272 017e 0E       		.uleb128 0xe
+ 3273 017f 3A       		.uleb128 0x3a
+ 3274 0180 0B       		.uleb128 0xb
+ 3275 0181 3B       		.uleb128 0x3b
+ 3276 0182 0B       		.uleb128 0xb
+ 3277 0183 49       		.uleb128 0x49
+ 3278 0184 13       		.uleb128 0x13
+ 3279 0185 3F       		.uleb128 0x3f
+ 3280 0186 0C       		.uleb128 0xc
+ 3281 0187 02       		.uleb128 0x2
+ 3282 0188 0A       		.uleb128 0xa
+ 3283 0189 00       		.byte	0
+ 3284 018a 00       		.byte	0
+ 3285 018b 00       		.byte	0
+ 3286              		.section	.debug_loc,"",%progbits
+ 3287              	.Ldebug_loc0:
+ 3288              	.LLST0:
+ 3289 0000 00000000 		.4byte	.LFB0
+ 3290 0004 02000000 		.4byte	.LCFI0
+ 3291 0008 0200     		.2byte	0x2
+ 3292 000a 7D       		.byte	0x7d
+ 3293 000b 00       		.sleb128 0
+ 3294 000c 02000000 		.4byte	.LCFI0
+ 3295 0010 04000000 		.4byte	.LCFI1
+ 3296 0014 0200     		.2byte	0x2
+ 3297 0016 7D       		.byte	0x7d
+ 3298 0017 04       		.sleb128 4
+ 3299 0018 04000000 		.4byte	.LCFI1
+ARM GAS  /tmp/ccXup38D.s 			page 70
+
+
+ 3300 001c 3C010000 		.4byte	.LFE0
+ 3301 0020 0200     		.2byte	0x2
+ 3302 0022 7D       		.byte	0x7d
+ 3303 0023 18       		.sleb128 24
+ 3304 0024 00000000 		.4byte	0
+ 3305 0028 00000000 		.4byte	0
+ 3306              	.LLST1:
+ 3307 002c 00000000 		.4byte	.LFB1
+ 3308 0030 02000000 		.4byte	.LCFI2
+ 3309 0034 0200     		.2byte	0x2
+ 3310 0036 7D       		.byte	0x7d
+ 3311 0037 00       		.sleb128 0
+ 3312 0038 02000000 		.4byte	.LCFI2
+ 3313 003c 4C000000 		.4byte	.LFE1
+ 3314 0040 0200     		.2byte	0x2
+ 3315 0042 7D       		.byte	0x7d
+ 3316 0043 08       		.sleb128 8
+ 3317 0044 00000000 		.4byte	0
+ 3318 0048 00000000 		.4byte	0
+ 3319              	.LLST2:
+ 3320 004c 00000000 		.4byte	.LFB2
+ 3321 0050 02000000 		.4byte	.LCFI3
+ 3322 0054 0200     		.2byte	0x2
+ 3323 0056 7D       		.byte	0x7d
+ 3324 0057 00       		.sleb128 0
+ 3325 0058 02000000 		.4byte	.LCFI3
+ 3326 005c 04000000 		.4byte	.LCFI4
+ 3327 0060 0200     		.2byte	0x2
+ 3328 0062 7D       		.byte	0x7d
+ 3329 0063 08       		.sleb128 8
+ 3330 0064 04000000 		.4byte	.LCFI4
+ 3331 0068 04010000 		.4byte	.LFE2
+ 3332 006c 0200     		.2byte	0x2
+ 3333 006e 7D       		.byte	0x7d
+ 3334 006f 10       		.sleb128 16
+ 3335 0070 00000000 		.4byte	0
+ 3336 0074 00000000 		.4byte	0
+ 3337              	.LLST3:
+ 3338 0078 00000000 		.4byte	.LFB3
+ 3339 007c 02000000 		.4byte	.LCFI5
+ 3340 0080 0200     		.2byte	0x2
+ 3341 0082 7D       		.byte	0x7d
+ 3342 0083 00       		.sleb128 0
+ 3343 0084 02000000 		.4byte	.LCFI5
+ 3344 0088 04000000 		.4byte	.LCFI6
+ 3345 008c 0200     		.2byte	0x2
+ 3346 008e 7D       		.byte	0x7d
+ 3347 008f 04       		.sleb128 4
+ 3348 0090 04000000 		.4byte	.LCFI6
+ 3349 0094 68010000 		.4byte	.LFE3
+ 3350 0098 0200     		.2byte	0x2
+ 3351 009a 7D       		.byte	0x7d
+ 3352 009b 28       		.sleb128 40
+ 3353 009c 00000000 		.4byte	0
+ 3354 00a0 00000000 		.4byte	0
+ 3355              	.LLST4:
+ 3356 00a4 00000000 		.4byte	.LFB4
+ARM GAS  /tmp/ccXup38D.s 			page 71
+
+
+ 3357 00a8 02000000 		.4byte	.LCFI7
+ 3358 00ac 0200     		.2byte	0x2
+ 3359 00ae 7D       		.byte	0x7d
+ 3360 00af 00       		.sleb128 0
+ 3361 00b0 02000000 		.4byte	.LCFI7
+ 3362 00b4 04000000 		.4byte	.LCFI8
+ 3363 00b8 0200     		.2byte	0x2
+ 3364 00ba 7D       		.byte	0x7d
+ 3365 00bb 04       		.sleb128 4
+ 3366 00bc 04000000 		.4byte	.LCFI8
+ 3367 00c0 CC000000 		.4byte	.LFE4
+ 3368 00c4 0200     		.2byte	0x2
+ 3369 00c6 7D       		.byte	0x7d
+ 3370 00c7 18       		.sleb128 24
+ 3371 00c8 00000000 		.4byte	0
+ 3372 00cc 00000000 		.4byte	0
+ 3373              	.LLST5:
+ 3374 00d0 00000000 		.4byte	.LFB5
+ 3375 00d4 02000000 		.4byte	.LCFI9
+ 3376 00d8 0200     		.2byte	0x2
+ 3377 00da 7D       		.byte	0x7d
+ 3378 00db 00       		.sleb128 0
+ 3379 00dc 02000000 		.4byte	.LCFI9
+ 3380 00e0 EC000000 		.4byte	.LFE5
+ 3381 00e4 0200     		.2byte	0x2
+ 3382 00e6 7D       		.byte	0x7d
+ 3383 00e7 10       		.sleb128 16
+ 3384 00e8 00000000 		.4byte	0
+ 3385 00ec 00000000 		.4byte	0
+ 3386              	.LLST6:
+ 3387 00f0 00000000 		.4byte	.LFB6
+ 3388 00f4 02000000 		.4byte	.LCFI10
+ 3389 00f8 0200     		.2byte	0x2
+ 3390 00fa 7D       		.byte	0x7d
+ 3391 00fb 00       		.sleb128 0
+ 3392 00fc 02000000 		.4byte	.LCFI10
+ 3393 0100 04000000 		.4byte	.LCFI11
+ 3394 0104 0200     		.2byte	0x2
+ 3395 0106 7D       		.byte	0x7d
+ 3396 0107 04       		.sleb128 4
+ 3397 0108 04000000 		.4byte	.LCFI11
+ 3398 010c 2C010000 		.4byte	.LFE6
+ 3399 0110 0200     		.2byte	0x2
+ 3400 0112 7D       		.byte	0x7d
+ 3401 0113 20       		.sleb128 32
+ 3402 0114 00000000 		.4byte	0
+ 3403 0118 00000000 		.4byte	0
+ 3404              	.LLST7:
+ 3405 011c 00000000 		.4byte	.LFB7
+ 3406 0120 02000000 		.4byte	.LCFI12
+ 3407 0124 0200     		.2byte	0x2
+ 3408 0126 7D       		.byte	0x7d
+ 3409 0127 00       		.sleb128 0
+ 3410 0128 02000000 		.4byte	.LCFI12
+ 3411 012c 0A000000 		.4byte	.LFE7
+ 3412 0130 0200     		.2byte	0x2
+ 3413 0132 7D       		.byte	0x7d
+ARM GAS  /tmp/ccXup38D.s 			page 72
+
+
+ 3414 0133 08       		.sleb128 8
+ 3415 0134 00000000 		.4byte	0
+ 3416 0138 00000000 		.4byte	0
+ 3417              	.LLST8:
+ 3418 013c 00000000 		.4byte	.LFB8
+ 3419 0140 02000000 		.4byte	.LCFI13
+ 3420 0144 0200     		.2byte	0x2
+ 3421 0146 7D       		.byte	0x7d
+ 3422 0147 00       		.sleb128 0
+ 3423 0148 02000000 		.4byte	.LCFI13
+ 3424 014c 66010000 		.4byte	.LFE8
+ 3425 0150 0200     		.2byte	0x2
+ 3426 0152 7D       		.byte	0x7d
+ 3427 0153 10       		.sleb128 16
+ 3428 0154 00000000 		.4byte	0
+ 3429 0158 00000000 		.4byte	0
+ 3430              	.LLST9:
+ 3431 015c 00000000 		.4byte	.LFB9
+ 3432 0160 02000000 		.4byte	.LCFI14
+ 3433 0164 0200     		.2byte	0x2
+ 3434 0166 7D       		.byte	0x7d
+ 3435 0167 00       		.sleb128 0
+ 3436 0168 02000000 		.4byte	.LCFI14
+ 3437 016c 04000000 		.4byte	.LCFI15
+ 3438 0170 0200     		.2byte	0x2
+ 3439 0172 7D       		.byte	0x7d
+ 3440 0173 04       		.sleb128 4
+ 3441 0174 04000000 		.4byte	.LCFI15
+ 3442 0178 86020000 		.4byte	.LFE9
+ 3443 017c 0200     		.2byte	0x2
+ 3444 017e 7D       		.byte	0x7d
+ 3445 017f 20       		.sleb128 32
+ 3446 0180 00000000 		.4byte	0
+ 3447 0184 00000000 		.4byte	0
+ 3448              	.LLST10:
+ 3449 0188 00000000 		.4byte	.LFB10
+ 3450 018c 02000000 		.4byte	.LCFI16
+ 3451 0190 0200     		.2byte	0x2
+ 3452 0192 7D       		.byte	0x7d
+ 3453 0193 00       		.sleb128 0
+ 3454 0194 02000000 		.4byte	.LCFI16
+ 3455 0198 34010000 		.4byte	.LFE10
+ 3456 019c 0200     		.2byte	0x2
+ 3457 019e 7D       		.byte	0x7d
+ 3458 019f 10       		.sleb128 16
+ 3459 01a0 00000000 		.4byte	0
+ 3460 01a4 00000000 		.4byte	0
+ 3461              		.section	.debug_aranges,"",%progbits
+ 3462 0000 6C000000 		.4byte	0x6c
+ 3463 0004 0200     		.2byte	0x2
+ 3464 0006 00000000 		.4byte	.Ldebug_info0
+ 3465 000a 04       		.byte	0x4
+ 3466 000b 00       		.byte	0
+ 3467 000c 0000     		.2byte	0
+ 3468 000e 0000     		.2byte	0
+ 3469 0010 00000000 		.4byte	.LFB0
+ 3470 0014 3C010000 		.4byte	.LFE0-.LFB0
+ARM GAS  /tmp/ccXup38D.s 			page 73
+
+
+ 3471 0018 00000000 		.4byte	.LFB1
+ 3472 001c 4C000000 		.4byte	.LFE1-.LFB1
+ 3473 0020 00000000 		.4byte	.LFB2
+ 3474 0024 04010000 		.4byte	.LFE2-.LFB2
+ 3475 0028 00000000 		.4byte	.LFB3
+ 3476 002c 68010000 		.4byte	.LFE3-.LFB3
+ 3477 0030 00000000 		.4byte	.LFB4
+ 3478 0034 CC000000 		.4byte	.LFE4-.LFB4
+ 3479 0038 00000000 		.4byte	.LFB5
+ 3480 003c EC000000 		.4byte	.LFE5-.LFB5
+ 3481 0040 00000000 		.4byte	.LFB6
+ 3482 0044 2C010000 		.4byte	.LFE6-.LFB6
+ 3483 0048 00000000 		.4byte	.LFB7
+ 3484 004c 0A000000 		.4byte	.LFE7-.LFB7
+ 3485 0050 00000000 		.4byte	.LFB8
+ 3486 0054 66010000 		.4byte	.LFE8-.LFB8
+ 3487 0058 00000000 		.4byte	.LFB9
+ 3488 005c 86020000 		.4byte	.LFE9-.LFB9
+ 3489 0060 00000000 		.4byte	.LFB10
+ 3490 0064 34010000 		.4byte	.LFE10-.LFB10
+ 3491 0068 00000000 		.4byte	0
+ 3492 006c 00000000 		.4byte	0
+ 3493              		.section	.debug_ranges,"",%progbits
+ 3494              	.Ldebug_ranges0:
+ 3495 0000 00000000 		.4byte	.LFB0
+ 3496 0004 3C010000 		.4byte	.LFE0
+ 3497 0008 00000000 		.4byte	.LFB1
+ 3498 000c 4C000000 		.4byte	.LFE1
+ 3499 0010 00000000 		.4byte	.LFB2
+ 3500 0014 04010000 		.4byte	.LFE2
+ 3501 0018 00000000 		.4byte	.LFB3
+ 3502 001c 68010000 		.4byte	.LFE3
+ 3503 0020 00000000 		.4byte	.LFB4
+ 3504 0024 CC000000 		.4byte	.LFE4
+ 3505 0028 00000000 		.4byte	.LFB5
+ 3506 002c EC000000 		.4byte	.LFE5
+ 3507 0030 00000000 		.4byte	.LFB6
+ 3508 0034 2C010000 		.4byte	.LFE6
+ 3509 0038 00000000 		.4byte	.LFB7
+ 3510 003c 0A000000 		.4byte	.LFE7
+ 3511 0040 00000000 		.4byte	.LFB8
+ 3512 0044 66010000 		.4byte	.LFE8
+ 3513 0048 00000000 		.4byte	.LFB9
+ 3514 004c 86020000 		.4byte	.LFE9
+ 3515 0050 00000000 		.4byte	.LFB10
+ 3516 0054 34010000 		.4byte	.LFE10
+ 3517 0058 00000000 		.4byte	0
+ 3518 005c 00000000 		.4byte	0
+ 3519              		.section	.debug_line,"",%progbits
+ 3520              	.Ldebug_line0:
+ 3521 0000 14030000 		.section	.debug_str,"MS",%progbits,1
+ 3521      02004100 
+ 3521      00000201 
+ 3521      FB0E0D00 
+ 3521      01010101 
+ 3522              	.LASF56:
+ 3523 0000 6F637465 		.ascii	"octet_val\000"
+ARM GAS  /tmp/ccXup38D.s 			page 74
+
+
+ 3523      745F7661 
+ 3523      6C00
+ 3524              	.LASF63:
+ 3525 000a 5463704D 		.ascii	"TcpMessages\000"
+ 3525      65737361 
+ 3525      67657300 
+ 3526              	.LASF16:
+ 3527 0016 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 3527      206C6F6E 
+ 3527      6720756E 
+ 3527      7369676E 
+ 3527      65642069 
+ 3528              	.LASF35:
+ 3529 002d 64617461 		.ascii	"data\000"
+ 3529      00
+ 3530              	.LASF26:
+ 3531 0032 54435050 		.ascii	"TCPPreProcess\000"
+ 3531      72655072 
+ 3531      6F636573 
+ 3531      7300
+ 3532              	.LASF38:
+ 3533 0040 6F776E5F 		.ascii	"own_addr\000"
+ 3533      61646472 
+ 3533      00
+ 3534              	.LASF34:
+ 3535 0049 54435053 		.ascii	"TCPSendData\000"
+ 3535      656E6444 
+ 3535      61746100 
+ 3536              	.LASF9:
+ 3537 0055 6C6F6E67 		.ascii	"long long int\000"
+ 3537      206C6F6E 
+ 3537      6720696E 
+ 3537      7400
+ 3538              	.LASF11:
+ 3539 0063 7369676E 		.ascii	"signed char\000"
+ 3539      65642063 
+ 3539      68617200 
+ 3540              	.LASF0:
+ 3541 006f 4E4F4E45 		.ascii	"NONE_MSG\000"
+ 3541      5F4D5347 
+ 3541      00
+ 3542              	.LASF54:
+ 3543 0078 735F6F63 		.ascii	"s_octet\000"
+ 3543      74657400 
+ 3544              	.LASF14:
+ 3545 0080 6C6F6E67 		.ascii	"long int\000"
+ 3545      20696E74 
+ 3545      00
+ 3546              	.LASF36:
+ 3547 0089 54435053 		.ascii	"TCPSendDataSocket\000"
+ 3547      656E6444 
+ 3547      61746153 
+ 3547      6F636B65 
+ 3547      7400
+ 3548              	.LASF40:
+ 3549 009b 6E65775F 		.ascii	"new_shine\000"
+ 3549      7368696E 
+ARM GAS  /tmp/ccXup38D.s 			page 75
+
+
+ 3549      6500
+ 3550              	.LASF5:
+ 3551 00a5 4C494748 		.ascii	"LIGHTS_OFF\000"
+ 3551      54535F4F 
+ 3551      464600
+ 3552              	.LASF61:
+ 3553 00b0 7372632F 		.ascii	"src/tcp_transceiver.c\000"
+ 3553      7463705F 
+ 3553      7472616E 
+ 3553      73636569 
+ 3553      7665722E 
+ 3554              	.LASF21:
+ 3555 00c6 62797465 		.ascii	"bytes\000"
+ 3555      7300
+ 3556              	.LASF37:
+ 3557 00cc 52656164 		.ascii	"ReadPcktR\000"
+ 3557      50636B74 
+ 3557      5200
+ 3558              	.LASF41:
+ 3559 00d6 52656164 		.ascii	"ReadPcktS\000"
+ 3559      50636B74 
+ 3559      5300
+ 3560              	.LASF29:
+ 3561 00e0 706F7274 		.ascii	"port\000"
+ 3561      00
+ 3562              	.LASF24:
+ 3563 00e5 72657370 		.ascii	"resp\000"
+ 3563      00
+ 3564              	.LASF8:
+ 3565 00ea 756E7369 		.ascii	"unsigned int\000"
+ 3565      676E6564 
+ 3565      20696E74 
+ 3565      00
+ 3566              	.LASF47:
+ 3567 00f7 646F7432 		.ascii	"dot2\000"
+ 3567      00
+ 3568              	.LASF15:
+ 3569 00fc 6C6F6E67 		.ascii	"long unsigned int\000"
+ 3569      20756E73 
+ 3569      69676E65 
+ 3569      6420696E 
+ 3569      7400
+ 3570              	.LASF2:
+ 3571 010e 524F4F4D 		.ascii	"ROOM_BRIGHT\000"
+ 3571      5F425249 
+ 3571      47485400 
+ 3572              	.LASF6:
+ 3573 011a 4C494748 		.ascii	"LIGHTS_ON\000"
+ 3573      54535F4F 
+ 3573      4E00
+ 3574              	.LASF57:
+ 3575 0124 62756666 		.ascii	"bufftcpsend\000"
+ 3575      74637073 
+ 3575      656E6400 
+ 3576              	.LASF58:
+ 3577 0130 70746370 		.ascii	"ptcp\000"
+ 3577      00
+ARM GAS  /tmp/ccXup38D.s 			page 76
+
+
+ 3578              	.LASF3:
+ 3579 0135 4C414D50 		.ascii	"LAMP_BRIGHT\000"
+ 3579      5F425249 
+ 3579      47485400 
+ 3580              	.LASF27:
+ 3581 0141 6F757470 		.ascii	"output\000"
+ 3581      757400
+ 3582              	.LASF17:
+ 3583 0148 73697A65 		.ascii	"sizetype\000"
+ 3583      74797065 
+ 3583      00
+ 3584              	.LASF10:
+ 3585 0151 6C6F6E67 		.ascii	"long double\000"
+ 3585      20646F75 
+ 3585      626C6500 
+ 3586              	.LASF44:
+ 3587 015d 6E65775F 		.ascii	"new_val\000"
+ 3587      76616C00 
+ 3588              	.LASF22:
+ 3589 0165 54435050 		.ascii	"TCPProcessInit\000"
+ 3589      726F6365 
+ 3589      7373496E 
+ 3589      697400
+ 3590              	.LASF62:
+ 3591 0174 2F686F6D 		.ascii	"/home/med/Documents/stm32_proj/atom_planolux_redond"
+ 3591      652F6D65 
+ 3591      642F446F 
+ 3591      63756D65 
+ 3591      6E74732F 
+ 3592 01a7 6100     		.ascii	"a\000"
+ 3593              	.LASF42:
+ 3594 01a9 47657456 		.ascii	"GetValue\000"
+ 3594      616C7565 
+ 3594      00
+ 3595              	.LASF32:
+ 3596 01b2 645F6F66 		.ascii	"d_offset\000"
+ 3596      66736574 
+ 3596      00
+ 3597              	.LASF53:
+ 3598 01bb 73697A65 		.ascii	"size4\000"
+ 3598      3400
+ 3599              	.LASF7:
+ 3600 01c1 756E7369 		.ascii	"unsigned char\000"
+ 3600      676E6564 
+ 3600      20636861 
+ 3600      7200
+ 3601              	.LASF23:
+ 3602 01cf 54435050 		.ascii	"TCPProcess\000"
+ 3602      726F6365 
+ 3602      737300
+ 3603              	.LASF12:
+ 3604 01da 73686F72 		.ascii	"short int\000"
+ 3604      7420696E 
+ 3604      7400
+ 3605              	.LASF39:
+ 3606 01e4 6E65775F 		.ascii	"new_r\000"
+ 3606      7200
+ARM GAS  /tmp/ccXup38D.s 			page 77
+
+
+ 3607              	.LASF45:
+ 3608 01ea 49704973 		.ascii	"IpIsValid\000"
+ 3608      56616C69 
+ 3608      6400
+ 3609              	.LASF20:
+ 3610 01f4 6E65775F 		.ascii	"new_lamp_bright\000"
+ 3610      6C616D70 
+ 3610      5F627269 
+ 3610      67687400 
+ 3611              	.LASF43:
+ 3612 0204 636F6C6F 		.ascii	"colon\000"
+ 3612      6E00
+ 3613              	.LASF28:
+ 3614 020a 6C656E67 		.ascii	"length\000"
+ 3614      746800
+ 3615              	.LASF46:
+ 3616 0211 646F7431 		.ascii	"dot1\000"
+ 3616      00
+ 3617              	.LASF18:
+ 3618 0216 63686172 		.ascii	"char\000"
+ 3618      00
+ 3619              	.LASF48:
+ 3620 021b 646F7433 		.ascii	"dot3\000"
+ 3620      00
+ 3621              	.LASF49:
+ 3622 0220 646F7434 		.ascii	"dot4\000"
+ 3622      00
+ 3623              	.LASF59:
+ 3624 0225 7463705F 		.ascii	"tcp_tx_state\000"
+ 3624      74785F73 
+ 3624      74617465 
+ 3624      00
+ 3625              	.LASF50:
+ 3626 0232 73697A65 		.ascii	"size1\000"
+ 3626      3100
+ 3627              	.LASF51:
+ 3628 0238 73697A65 		.ascii	"size2\000"
+ 3628      3200
+ 3629              	.LASF52:
+ 3630 023e 73697A65 		.ascii	"size3\000"
+ 3630      3300
+ 3631              	.LASF30:
+ 3632 0244 6C656E5F 		.ascii	"len_index\000"
+ 3632      696E6465 
+ 3632      7800
+ 3633              	.LASF13:
+ 3634 024e 73686F72 		.ascii	"short unsigned int\000"
+ 3634      7420756E 
+ 3634      7369676E 
+ 3634      65642069 
+ 3634      6E7400
+ 3635              	.LASF25:
+ 3636 0261 43686563 		.ascii	"CheckTCPMessage\000"
+ 3636      6B544350 
+ 3636      4D657373 
+ 3636      61676500 
+ 3637              	.LASF1:
+ARM GAS  /tmp/ccXup38D.s 			page 78
+
+
+ 3638 0271 4B454550 		.ascii	"KEEP_ALIVE\000"
+ 3638      5F414C49 
+ 3638      564500
+ 3639              	.LASF31:
+ 3640 027c 6D61785F 		.ascii	"max_len\000"
+ 3640      6C656E00 
+ 3641              	.LASF55:
+ 3642 0284 4F637465 		.ascii	"OctetIsValid\000"
+ 3642      74497356 
+ 3642      616C6964 
+ 3642      00
+ 3643              	.LASF33:
+ 3644 0291 62797465 		.ascii	"bytes_cnt\000"
+ 3644      735F636E 
+ 3644      7400
+ 3645              	.LASF4:
+ 3646 029b 4745545F 		.ascii	"GET_A\000"
+ 3646      4100
+ 3647              	.LASF19:
+ 3648 02a1 6E65775F 		.ascii	"new_room_bright\000"
+ 3648      726F6F6D 
+ 3648      5F627269 
+ 3648      67687400 
+ 3649              	.LASF60:
+ 3650 02b1 474E5520 		.ascii	"GNU C11 5.2.1 20151202 (release) [ARM/embedded-5-br"
+ 3650      43313120 
+ 3650      352E322E 
+ 3650      31203230 
+ 3650      31353132 
+ 3651 02e4 616E6368 		.ascii	"anch revision 231848] -mcpu=cortex-m0 -mthumb -g -g"
+ 3651      20726576 
+ 3651      6973696F 
+ 3651      6E203233 
+ 3651      31383438 
+ 3652 0317 64776172 		.ascii	"dwarf-2 -O0 -fomit-frame-pointer -fdata-sections -f"
+ 3652      662D3220 
+ 3652      2D4F3020 
+ 3652      2D666F6D 
+ 3652      69742D66 
+ 3653 034a 66756E63 		.ascii	"function-sections\000"
+ 3653      74696F6E 
+ 3653      2D736563 
+ 3653      74696F6E 
+ 3653      7300
+ 3654              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
+ARM GAS  /tmp/ccXup38D.s 			page 79
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 tcp_transceiver.c
+                            *COM*:00000280 bufftcpsend
+                            *COM*:00000004 ptcp
+     /tmp/ccXup38D.s:60     .bss.tcp_tx_state:00000000 tcp_tx_state
+     /tmp/ccXup38D.s:61     .bss.tcp_tx_state:00000000 $d
+     /tmp/ccXup38D.s:63     .rodata:00000000 $d
+     /tmp/ccXup38D.s:76     .text.CheckTCPMessage:00000000 $t
+     /tmp/ccXup38D.s:81     .text.CheckTCPMessage:00000000 CheckTCPMessage
+     /tmp/ccXup38D.s:1086   .text.ReadPcktR:00000000 ReadPcktR
+     /tmp/ccXup38D.s:272    .text.CheckTCPMessage:0000012c $d
+     /tmp/ccXup38D.s:280    .text.TCPProcessInit:00000000 $t
+     /tmp/ccXup38D.s:285    .text.TCPProcessInit:00000000 TCPProcessInit
+     /tmp/ccXup38D.s:337    .text.TCPProcessInit:00000044 $d
+     /tmp/ccXup38D.s:343    .text.TCPProcess:00000000 $t
+     /tmp/ccXup38D.s:348    .text.TCPProcess:00000000 TCPProcess
+     /tmp/ccXup38D.s:521    .text.TCPProcess:000000f8 $d
+     /tmp/ccXup38D.s:532    .text.TCPPreProcess:00000000 $t
+     /tmp/ccXup38D.s:537    .text.TCPPreProcess:00000000 TCPPreProcess
+     /tmp/ccXup38D.s:772    .text.TCPPreProcess:00000164 $d
+     /tmp/ccXup38D.s:777    .text.TCPSendData:00000000 $t
+     /tmp/ccXup38D.s:782    .text.TCPSendData:00000000 TCPSendData
+     /tmp/ccXup38D.s:914    .text.TCPSendData:000000c8 $d
+     /tmp/ccXup38D.s:919    .text.TCPSendDataSocket:00000000 $t
+     /tmp/ccXup38D.s:924    .text.TCPSendDataSocket:00000000 TCPSendDataSocket
+     /tmp/ccXup38D.s:1076   .text.TCPSendDataSocket:000000e8 $d
+     /tmp/ccXup38D.s:1081   .text.ReadPcktR:00000000 $t
+     /tmp/ccXup38D.s:1329   .text.GetValue:00000000 GetValue
+     /tmp/ccXup38D.s:1297   .text.ReadPcktR:00000128 $d
+     /tmp/ccXup38D.s:1302   .text.ReadPcktS:00000000 $t
+     /tmp/ccXup38D.s:1307   .text.ReadPcktS:00000000 ReadPcktS
+     /tmp/ccXup38D.s:1324   .text.GetValue:00000000 $t
+     /tmp/ccXup38D.s:1555   .text.IpIsValid:00000000 $t
+     /tmp/ccXup38D.s:1560   .text.IpIsValid:00000000 IpIsValid
+     /tmp/ccXup38D.s:1963   .text.OctetIsValid:00000000 OctetIsValid
+     /tmp/ccXup38D.s:1958   .text.OctetIsValid:00000000 $t
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+strncmp
+strcpy
+ESP_SendDataResetSM
+ESP_SendData
+atoi
+strlen
+memset
+strncpy

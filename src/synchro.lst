@@ -1,0 +1,1519 @@
+ARM GAS  /tmp/ccU3iXzy.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1	@ Tag_ABI_FP_denormal
+   5              		.eabi_attribute 21, 1	@ Tag_ABI_FP_exceptions
+   6              		.eabi_attribute 23, 3	@ Tag_ABI_FP_number_model
+   7              		.eabi_attribute 24, 1	@ Tag_ABI_align8_needed
+   8              		.eabi_attribute 25, 1	@ Tag_ABI_align8_preserved
+   9              		.eabi_attribute 26, 1	@ Tag_ABI_enum_size
+  10              		.eabi_attribute 30, 6	@ Tag_ABI_optimization_goals
+  11              		.eabi_attribute 34, 0	@ Tag_CPU_unaligned_access
+  12              		.eabi_attribute 18, 4	@ Tag_ABI_PCS_wchar_t
+  13              		.file	"synchro.c"
+  14              	@ GNU C11 (GNU Tools for ARM Embedded Processors) version 5.2.1 20151202 (release) [ARM/embedded-5-
+  15              	@	compiled by GNU C version 4.7.4, GMP version 4.3.2, MPFR version 2.4.2, MPC version 0.8.1
+  16              	@ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+  17              	@ options passed:  -I . -I ./src -I ./cmsis_boot -I ./cmsis_core
+  18              	@ -I ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/inc
+  19              	@ -I ./inc -I ./cmsis_boot -imultilib armv6-m
+  20              	@ -iprefix /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/
+  21              	@ -isysroot /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../arm-none-eabi
+  22              	@ -D__USES_INITFINI__ src/synchro.c -mcpu=cortex-m0 -mthumb
+  23              	@ -auxbase-strip src/synchro.o -g -gdwarf-2 -O0 -Wall -fomit-frame-pointer
+  24              	@ -fdata-sections -ffunction-sections -fverbose-asm
+  25              	@ options enabled:  -faggressive-loop-optimizations -fauto-inc-dec
+  26              	@ -fchkp-check-incomplete-type -fchkp-check-read -fchkp-check-write
+  27              	@ -fchkp-instrument-calls -fchkp-narrow-bounds -fchkp-optimize
+  28              	@ -fchkp-store-bounds -fchkp-use-static-bounds
+  29              	@ -fchkp-use-static-const-bounds -fchkp-use-wrappers -fcommon
+  30              	@ -fdata-sections -fdelete-null-pointer-checks -fdwarf2-cfi-asm
+  31              	@ -fearly-inlining -feliminate-unused-debug-types -ffunction-cse
+  32              	@ -ffunction-sections -fgcse-lm -fgnu-runtime -fgnu-unique -fident
+  33              	@ -finline-atomics -fira-hoist-pressure -fira-share-save-slots
+  34              	@ -fira-share-spill-slots -fivopts -fkeep-static-consts
+  35              	@ -fleading-underscore -flifetime-dse -flto-odr-type-merging -fmath-errno
+  36              	@ -fmerge-debug-strings -fomit-frame-pointer -fpeephole
+  37              	@ -fprefetch-loop-arrays -freg-struct-return
+  38              	@ -fsched-critical-path-heuristic -fsched-dep-count-heuristic
+  39              	@ -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
+  40              	@ -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
+  41              	@ -fsched-stalled-insns-dep -fsemantic-interposition -fshow-column
+  42              	@ -fsigned-zeros -fsplit-ivs-in-unroller -fstdarg-opt
+  43              	@ -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+  44              	@ -ftree-coalesce-vars -ftree-cselim -ftree-forwprop -ftree-loop-if-convert
+  45              	@ -ftree-loop-im -ftree-loop-ivcanon -ftree-loop-optimize
+  46              	@ -ftree-parallelize-loops= -ftree-phiprop -ftree-reassoc -ftree-scev-cprop
+  47              	@ -funit-at-a-time -fverbose-asm -fzero-initialized-in-bss -mlittle-endian
+  48              	@ -mpic-data-is-text-relative -msched-prolog -mthumb
+  49              	@ -mvectorize-with-neon-quad
+  50              	
+  51              		.text
+  52              	.Ltext0:
+  53              		.cfi_sections	.debug_frame
+  54              		.global	max_vgrid_last
+  55              		.section	.bss.max_vgrid_last,"aw",%nobits
+  56              		.align	1
+  57              		.type	max_vgrid_last, %object
+ARM GAS  /tmp/ccU3iXzy.s 			page 2
+
+
+  58              		.size	max_vgrid_last, 2
+  59              	max_vgrid_last:
+  60 0000 0000     		.space	2
+  61              		.global	max_vgrid
+  62              		.section	.bss.max_vgrid,"aw",%nobits
+  63              		.align	1
+  64              		.type	max_vgrid, %object
+  65              		.size	max_vgrid, 2
+  66              	max_vgrid:
+  67 0000 0000     		.space	2
+  68              		.global	vgrid_update_samples
+  69              		.section	.bss.vgrid_update_samples,"aw",%nobits
+  70              		.align	1
+  71              		.type	vgrid_update_samples, %object
+  72              		.size	vgrid_update_samples, 2
+  73              	vgrid_update_samples:
+  74 0000 0000     		.space	2
+  75              		.global	max_igrid_last
+  76              		.section	.bss.max_igrid_last,"aw",%nobits
+  77              		.align	1
+  78              		.type	max_igrid_last, %object
+  79              		.size	max_igrid_last, 2
+  80              	max_igrid_last:
+  81 0000 0000     		.space	2
+  82              		.global	min_igrid_last
+  83              		.section	.bss.min_igrid_last,"aw",%nobits
+  84              		.align	1
+  85              		.type	min_igrid_last, %object
+  86              		.size	min_igrid_last, 2
+  87              	min_igrid_last:
+  88 0000 0000     		.space	2
+  89              		.global	max_igrid
+  90              		.section	.bss.max_igrid,"aw",%nobits
+  91              		.align	1
+  92              		.type	max_igrid, %object
+  93              		.size	max_igrid, 2
+  94              	max_igrid:
+  95 0000 0000     		.space	2
+  96              		.global	min_igrid
+  97              		.section	.bss.min_igrid,"aw",%nobits
+  98              		.align	1
+  99              		.type	min_igrid, %object
+ 100              		.size	min_igrid, 2
+ 101              	min_igrid:
+ 102 0000 0000     		.space	2
+ 103              		.global	igrid_update_samples
+ 104              		.section	.bss.igrid_update_samples,"aw",%nobits
+ 105              		.type	igrid_update_samples, %object
+ 106              		.size	igrid_update_samples, 1
+ 107              	igrid_update_samples:
+ 108 0000 00       		.space	1
+ 109              		.section	.text.UpdateIGrid,"ax",%progbits
+ 110              		.align	2
+ 111              		.global	UpdateIGrid
+ 112              		.code	16
+ 113              		.thumb_func
+ 114              		.type	UpdateIGrid, %function
+ARM GAS  /tmp/ccU3iXzy.s 			page 3
+
+
+ 115              	UpdateIGrid:
+ 116              	.LFB20:
+ 117              		.file 1 "src/synchro.c"
+   1:src/synchro.c **** /*
+   2:src/synchro.c ****  * synchro.c
+   3:src/synchro.c ****  *
+   4:src/synchro.c ****  *  Created on: 02/12/2015
+   5:src/synchro.c ****  *      Author: Mariano
+   6:src/synchro.c ****  */
+   7:src/synchro.c **** 
+   8:src/synchro.c **** #include "synchro.h"
+   9:src/synchro.c **** #include "hard.h"
+  10:src/synchro.c **** //#include "dsp.h"
+  11:src/synchro.c **** #include "stm32f0xx_gpio.h"
+  12:src/synchro.c **** #include "adc.h"
+  13:src/synchro.c **** #include "stm32f0xx.h"
+  14:src/synchro.c **** #include "stm32f0xx_adc.h"
+  15:src/synchro.c **** 
+  16:src/synchro.c **** /*
+  17:src/synchro.c **** extern volatile unsigned short adc_ch [4];
+  18:src/synchro.c **** extern volatile unsigned char need_to_sync;
+  19:src/synchro.c **** extern volatile unsigned char freq_ready;
+  20:src/synchro.c **** extern volatile unsigned short lastC0V;
+  21:src/synchro.c **** extern volatile unsigned char zero_cross;
+  22:src/synchro.c **** extern volatile unsigned char slips_state;
+  23:src/synchro.c **** */
+  24:src/synchro.c **** // ------- para determinar VGrid() -------
+  25:src/synchro.c **** unsigned short max_vgrid_last = 0;
+  26:src/synchro.c **** unsigned short max_vgrid = 0;
+  27:src/synchro.c **** unsigned short vgrid_update_samples = 0;
+  28:src/synchro.c **** 
+  29:src/synchro.c **** // ------- para determinar timer vgrid & igrid -------
+  30:src/synchro.c **** extern volatile unsigned char igrid_timer;
+  31:src/synchro.c **** extern volatile unsigned char vgrid_timer;
+  32:src/synchro.c **** 
+  33:src/synchro.c **** // ------- Globales para determinar IGrid() -------
+  34:src/synchro.c **** unsigned short max_igrid_last = 0;
+  35:src/synchro.c **** unsigned short min_igrid_last = 0;
+  36:src/synchro.c **** unsigned short max_igrid = 0;
+  37:src/synchro.c **** unsigned short min_igrid = 0;
+  38:src/synchro.c **** unsigned char igrid_update_samples = 0;
+  39:src/synchro.c **** 
+  40:src/synchro.c **** 
+  41:src/synchro.c **** 
+  42:src/synchro.c **** /*
+  43:src/synchro.c **** // ------- para determinar frecuencia -------
+  44:src/synchro.c **** extern unsigned short fgrid_mean;
+  45:src/synchro.c **** extern unsigned short v_fgrid [32];	//largo del filtro para MA32
+  46:src/synchro.c **** //extern unsigned short v_fgrid [4];	//largo del filtro con fast es justo
+  47:src/synchro.c **** //unsigned short v_fgrid [8];	//largo del filtro para MA8
+  48:src/synchro.c **** 
+  49:src/synchro.c **** // ------- para determinar ruidos de cruce -------
+  50:src/synchro.c **** extern volatile unsigned short timer_zero_cross;
+  51:src/synchro.c **** extern unsigned char noise_z3;
+  52:src/synchro.c **** extern unsigned char noise_z2;
+  53:src/synchro.c **** extern unsigned char noise_z1;
+  54:src/synchro.c **** extern unsigned char noise;
+ARM GAS  /tmp/ccU3iXzy.s 			page 4
+
+
+  55:src/synchro.c **** extern unsigned short total_noise;
+  56:src/synchro.c **** 
+  57:src/synchro.c **** // ------- para determinar vin -------
+  58:src/synchro.c **** unsigned short vin_mean;
+  59:src/synchro.c **** unsigned short v_vin [8];
+  60:src/synchro.c **** */
+  61:src/synchro.c **** 
+  62:src/synchro.c **** /*
+  63:src/synchro.c **** unsigned char CheckVGrid (void)
+  64:src/synchro.c **** {
+  65:src/synchro.c **** 	unsigned short medida;
+  66:src/synchro.c **** 
+  67:src/synchro.c **** 	if (max_vgrid_last > min_vgrid_last)
+  68:src/synchro.c **** 	{
+  69:src/synchro.c **** 		medida = max_vgrid_last - min_vgrid_last;	//valor de tension pico a pico
+  70:src/synchro.c **** 
+  71:src/synchro.c **** 		if ((medida > VGRID_MIN) && (medida < VGRID_MAX))
+  72:src/synchro.c **** 			return GOOD;
+  73:src/synchro.c **** 	}
+  74:src/synchro.c **** 	return BAD;
+  75:src/synchro.c **** }
+  76:src/synchro.c **** 
+  77:src/synchro.c **** unsigned char CheckFGrid (void)
+  78:src/synchro.c **** {
+  79:src/synchro.c **** 	if ((fgrid_mean < GRID_FREQ_MIN) && (fgrid_mean > GRID_FREQ_MAX))	//cambia la inecuacion porque so
+  80:src/synchro.c **** 	//if (fgrid_mean > GRID_FREQ_MAX)
+  81:src/synchro.c **** 		return GOOD;
+  82:src/synchro.c **** 	else
+  83:src/synchro.c **** 		return BAD;
+  84:src/synchro.c **** }
+  85:src/synchro.c **** 
+  86:src/synchro.c **** unsigned char CheckFGridFast (unsigned short f)
+  87:src/synchro.c **** {
+  88:src/synchro.c **** 	if ((f < GRID_FREQ_MIN_REALLY_GOOD) && (f > GRID_FREQ_MAX_REALLY_GOOD))	//cambia la inecuacion por
+  89:src/synchro.c **** 	{
+  90:src/synchro.c **** 		return REALLY_GOOD;
+  91:src/synchro.c **** 	}
+  92:src/synchro.c **** 	else if ((f < GRID_FREQ_MIN) && (f > GRID_FREQ_MAX))	//cambia la inecuacion porque son tiempos
+  93:src/synchro.c **** 	{
+  94:src/synchro.c **** 		return GOOD;
+  95:src/synchro.c **** 	}
+  96:src/synchro.c **** 	return BAD;
+  97:src/synchro.c **** }
+  98:src/synchro.c **** 
+  99:src/synchro.c **** unsigned char CheckGridNoise (void)
+ 100:src/synchro.c **** {
+ 101:src/synchro.c **** 	//tuve que haber tenido mas de 48 cruces, sino ni contesto
+ 102:src/synchro.c **** 	if (total_noise == 50)
+ 103:src/synchro.c **** 		return REALLY_GOOD;
+ 104:src/synchro.c **** 
+ 105:src/synchro.c **** 	if ((total_noise > 48) && (total_noise < 52))	//desde 49 a 51
+ 106:src/synchro.c **** 		return GOOD;
+ 107:src/synchro.c **** 
+ 108:src/synchro.c **** 	if ((total_noise > 46) && (total_noise < 54))	//desde 47 a 53
+ 109:src/synchro.c **** 		return REGULAR;
+ 110:src/synchro.c **** 
+ 111:src/synchro.c **** 	return BAD;
+ARM GAS  /tmp/ccU3iXzy.s 			page 5
+
+
+ 112:src/synchro.c **** }
+ 113:src/synchro.c **** 
+ 114:src/synchro.c **** unsigned char CheckVin (void)
+ 115:src/synchro.c **** {
+ 116:src/synchro.c **** 	if ((vin_mean < VIN_MAX) && (vin_mean > VIN_MIN))
+ 117:src/synchro.c **** 	{
+ 118:src/synchro.c **** 		return GOOD;
+ 119:src/synchro.c **** 	}
+ 120:src/synchro.c **** 	return BAD;
+ 121:src/synchro.c **** }
+ 122:src/synchro.c **** 
+ 123:src/synchro.c **** void UpdateVGrid (void)
+ 124:src/synchro.c **** {
+ 125:src/synchro.c **** 	unsigned short medida;
+ 126:src/synchro.c **** 
+ 127:src/synchro.c **** 	//miro la ultima medicion
+ 128:src/synchro.c **** 	//promedio 4 mediciones para evitar problemas de ruido
+ 129:src/synchro.c **** 	medida = MAFilterFast(V_GRID_SENSE, v_vgrid);
+ 130:src/synchro.c **** 	//medida = V_GRID_SENSE;
+ 131:src/synchro.c **** 
+ 132:src/synchro.c **** 	if (vgrid_update_samples < VGRID_SAMPLES_RESET)	//512 es toda la senoidal 576 es un ciclo y un oct
+ 133:src/synchro.c **** 	{
+ 134:src/synchro.c **** 		//reviso si es un maximo
+ 135:src/synchro.c **** 		if (medida > max_vgrid)
+ 136:src/synchro.c **** 			max_vgrid = medida;
+ 137:src/synchro.c **** 
+ 138:src/synchro.c **** 		//reviso si es un minimo
+ 139:src/synchro.c **** 		if (medida < min_vgrid)
+ 140:src/synchro.c **** 			min_vgrid = medida;
+ 141:src/synchro.c **** 
+ 142:src/synchro.c **** 		vgrid_update_samples++;
+ 143:src/synchro.c **** 	}
+ 144:src/synchro.c **** 	else
+ 145:src/synchro.c **** 	{
+ 146:src/synchro.c **** 		//if (LED2)
+ 147:src/synchro.c **** 		//	LED2_OFF;
+ 148:src/synchro.c **** 		//else
+ 149:src/synchro.c **** 		//	LED2_ON;
+ 150:src/synchro.c **** 
+ 151:src/synchro.c **** 		//paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
+ 152:src/synchro.c **** 		max_vgrid_last = max_vgrid;
+ 153:src/synchro.c **** 		min_vgrid_last = min_vgrid;
+ 154:src/synchro.c **** 		max_vgrid = 2048;
+ 155:src/synchro.c **** 		min_vgrid = 2048;
+ 156:src/synchro.c **** 		vgrid_update_samples = 0;
+ 157:src/synchro.c **** 	}
+ 158:src/synchro.c **** }
+ 159:src/synchro.c **** 
+ 160:src/synchro.c **** void UpdateFGrid (void)
+ 161:src/synchro.c **** {
+ 162:src/synchro.c **** 	//miro la ultima medicion
+ 163:src/synchro.c **** 	if (freq_ready)
+ 164:src/synchro.c **** 	{
+ 165:src/synchro.c **** 		freq_ready = 0;
+ 166:src/synchro.c **** 		fgrid_mean = MAFilter32(lastC0V, v_fgrid);		//TODO: Demora 12us
+ 167:src/synchro.c **** 		//fgrid_mean = MAFilterFast(lastC0V, v_fgrid);
+ 168:src/synchro.c **** 		//fgrid_mean = MAFilter8(lastC0V, v_fgrid);
+ARM GAS  /tmp/ccU3iXzy.s 			page 6
+
+
+ 169:src/synchro.c **** 		//fgrid_mean = lastC0V;
+ 170:src/synchro.c **** 
+ 171:src/synchro.c **** 		//if (LED2)
+ 172:src/synchro.c **** 		//	LED2_OFF;
+ 173:src/synchro.c **** 		//else
+ 174:src/synchro.c **** 		//	LED2_ON;
+ 175:src/synchro.c **** 	}
+ 176:src/synchro.c **** }
+ 177:src/synchro.c **** 
+ 178:src/synchro.c **** void UpdateSyncNoise (void)
+ 179:src/synchro.c **** {
+ 180:src/synchro.c **** 	//miro la ultima medicion
+ 181:src/synchro.c **** 	if (!timer_zero_cross)
+ 182:src/synchro.c **** 	{
+ 183:src/synchro.c **** 		noise_z3 = noise_z2;
+ 184:src/synchro.c **** 		noise_z2 = noise_z1;
+ 185:src/synchro.c **** 		noise_z1 = noise;
+ 186:src/synchro.c **** 		noise = zero_cross;
+ 187:src/synchro.c **** 
+ 188:src/synchro.c **** 		zero_cross = 0;
+ 189:src/synchro.c **** 
+ 190:src/synchro.c **** 		total_noise = noise + noise_z1 + noise_z2 + noise_z3;
+ 191:src/synchro.c **** 
+ 192:src/synchro.c **** 		timer_zero_cross = 250;		//250ms
+ 193:src/synchro.c **** 	}
+ 194:src/synchro.c **** }
+ 195:src/synchro.c **** 
+ 196:src/synchro.c **** void UpdateVin (unsigned short v)
+ 197:src/synchro.c **** {
+ 198:src/synchro.c **** 	//miro la ultima medicion
+ 199:src/synchro.c **** 	vin_mean = MAFilter8 (v, v_vin);
+ 200:src/synchro.c **** }
+ 201:src/synchro.c **** 
+ 202:src/synchro.c **** */
+ 203:src/synchro.c **** 
+ 204:src/synchro.c **** void UpdateIGrid (void)
+ 205:src/synchro.c **** {
+ 118              		.loc 1 205 0
+ 119              		.cfi_startproc
+ 120 0000 82B0     		sub	sp, sp, #8	@,,
+ 121              	.LCFI0:
+ 122              		.cfi_def_cfa_offset 8
+ 206:src/synchro.c **** 	unsigned short medida = 0;
+ 123              		.loc 1 206 0
+ 124 0002 6B46     		mov	r3, sp	@ tmp160,
+ 125 0004 0633     		adds	r3, r3, #6	@ tmp118,
+ 126 0006 0022     		movs	r2, #0	@ tmp119,
+ 127 0008 1A80     		strh	r2, [r3]	@ tmp120, medida
+ 207:src/synchro.c **** 
+ 208:src/synchro.c **** 	if (igrid_timer)	//cada 400us
+ 128              		.loc 1 208 0
+ 129 000a 204B     		ldr	r3, .L7	@ tmp121,
+ 130 000c 1B78     		ldrb	r3, [r3]	@ tmp122, igrid_timer
+ 131 000e DBB2     		uxtb	r3, r3	@ D.4992, tmp122
+ 132 0010 002B     		cmp	r3, #0	@ D.4992,
+ 133 0012 38D0     		beq	.L6	@,
+ 209:src/synchro.c **** 	{
+ARM GAS  /tmp/ccU3iXzy.s 			page 7
+
+
+ 210:src/synchro.c **** 		igrid_timer = 0;
+ 134              		.loc 1 210 0
+ 135 0014 1D4B     		ldr	r3, .L7	@ tmp123,
+ 136 0016 0022     		movs	r2, #0	@ tmp124,
+ 137 0018 1A70     		strb	r2, [r3]	@ tmp125, igrid_timer
+ 211:src/synchro.c **** 		if (igrid_update_samples < IGRID_SAMPLES_RESET)	//50 es toda la senoidal 60 es un ciclo y un octa
+ 138              		.loc 1 211 0
+ 139 001a 1D4B     		ldr	r3, .L7+4	@ tmp126,
+ 140 001c 1B78     		ldrb	r3, [r3]	@ D.4992, igrid_update_samples
+ 141 001e 3B2B     		cmp	r3, #59	@ D.4992,
+ 142 0020 1ED8     		bhi	.L3	@,
+ 212:src/synchro.c **** 		{
+ 213:src/synchro.c **** #ifdef VER_1_3
+ 214:src/synchro.c **** 			medida = ReadADC1_SameSampleTime(ADC_Channel_0);
+ 215:src/synchro.c **** #endif
+ 216:src/synchro.c **** #ifdef VER_1_2
+ 217:src/synchro.c **** 			medida = ReadADC1_SameSampleTime(ADC_Channel_8);
+ 218:src/synchro.c **** #endif
+ 219:src/synchro.c **** 
+ 220:src/synchro.c **** 			//reviso si es un maximo
+ 221:src/synchro.c **** 			if (medida > max_igrid)
+ 143              		.loc 1 221 0
+ 144 0022 1C4B     		ldr	r3, .L7+8	@ tmp127,
+ 145 0024 1B88     		ldrh	r3, [r3]	@ D.4993, max_igrid
+ 146 0026 6A46     		mov	r2, sp	@ tmp161,
+ 147 0028 0632     		adds	r2, r2, #6	@ tmp128,
+ 148 002a 1288     		ldrh	r2, [r2]	@ tmp129, medida
+ 149 002c 9A42     		cmp	r2, r3	@ tmp129, D.4993
+ 150 002e 04D9     		bls	.L4	@,
+ 222:src/synchro.c **** 				max_igrid = medida;
+ 151              		.loc 1 222 0
+ 152 0030 184B     		ldr	r3, .L7+8	@ tmp130,
+ 153 0032 6A46     		mov	r2, sp	@ tmp162,
+ 154 0034 0632     		adds	r2, r2, #6	@ tmp131,
+ 155 0036 1288     		ldrh	r2, [r2]	@ tmp132, medida
+ 156 0038 1A80     		strh	r2, [r3]	@ tmp132, max_igrid
+ 157              	.L4:
+ 223:src/synchro.c **** 
+ 224:src/synchro.c **** 			//reviso si es un minimo
+ 225:src/synchro.c **** 			if (medida < min_igrid)
+ 158              		.loc 1 225 0
+ 159 003a 174B     		ldr	r3, .L7+12	@ tmp133,
+ 160 003c 1B88     		ldrh	r3, [r3]	@ D.4993, min_igrid
+ 161 003e 6A46     		mov	r2, sp	@ tmp163,
+ 162 0040 0632     		adds	r2, r2, #6	@ tmp134,
+ 163 0042 1288     		ldrh	r2, [r2]	@ tmp135, medida
+ 164 0044 9A42     		cmp	r2, r3	@ tmp135, D.4993
+ 165 0046 04D2     		bcs	.L5	@,
+ 226:src/synchro.c **** 				min_igrid = medida;
+ 166              		.loc 1 226 0
+ 167 0048 134B     		ldr	r3, .L7+12	@ tmp136,
+ 168 004a 6A46     		mov	r2, sp	@ tmp164,
+ 169 004c 0632     		adds	r2, r2, #6	@ tmp137,
+ 170 004e 1288     		ldrh	r2, [r2]	@ tmp138, medida
+ 171 0050 1A80     		strh	r2, [r3]	@ tmp138, min_igrid
+ 172              	.L5:
+ 227:src/synchro.c **** 
+ARM GAS  /tmp/ccU3iXzy.s 			page 8
+
+
+ 228:src/synchro.c **** 			igrid_update_samples++;
+ 173              		.loc 1 228 0
+ 174 0052 0F4B     		ldr	r3, .L7+4	@ tmp139,
+ 175 0054 1B78     		ldrb	r3, [r3]	@ D.4992, igrid_update_samples
+ 176 0056 0133     		adds	r3, r3, #1	@ tmp140,
+ 177 0058 DAB2     		uxtb	r2, r3	@ D.4992, tmp140
+ 178 005a 0D4B     		ldr	r3, .L7+4	@ tmp141,
+ 179 005c 1A70     		strb	r2, [r3]	@ tmp142, igrid_update_samples
+ 229:src/synchro.c **** 		}
+ 230:src/synchro.c **** 		else
+ 231:src/synchro.c **** 		{
+ 232:src/synchro.c **** 			//paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
+ 233:src/synchro.c **** 			max_igrid_last = max_igrid;
+ 234:src/synchro.c **** 			min_igrid_last = min_igrid;
+ 235:src/synchro.c **** 			max_igrid = 2048;
+ 236:src/synchro.c **** 			min_igrid = 2048;
+ 237:src/synchro.c **** 
+ 238:src/synchro.c **** 			//ajusto para referencia en 1.81V
+ 239:src/synchro.c **** 			//max_igrid = 2256;
+ 240:src/synchro.c **** 			//min_igrid = 2256;
+ 241:src/synchro.c **** 
+ 242:src/synchro.c **** 			igrid_update_samples = 0;
+ 243:src/synchro.c **** 		}
+ 244:src/synchro.c **** 	}
+ 245:src/synchro.c **** }
+ 180              		.loc 1 245 0
+ 181 005e 12E0     		b	.L6	@
+ 182              	.L3:
+ 233:src/synchro.c **** 			min_igrid_last = min_igrid;
+ 183              		.loc 1 233 0
+ 184 0060 0C4B     		ldr	r3, .L7+8	@ tmp143,
+ 185 0062 1A88     		ldrh	r2, [r3]	@ D.4993, max_igrid
+ 186 0064 0D4B     		ldr	r3, .L7+16	@ tmp144,
+ 187 0066 1A80     		strh	r2, [r3]	@ tmp145, max_igrid_last
+ 234:src/synchro.c **** 			max_igrid = 2048;
+ 188              		.loc 1 234 0
+ 189 0068 0B4B     		ldr	r3, .L7+12	@ tmp146,
+ 190 006a 1A88     		ldrh	r2, [r3]	@ D.4993, min_igrid
+ 191 006c 0C4B     		ldr	r3, .L7+20	@ tmp147,
+ 192 006e 1A80     		strh	r2, [r3]	@ tmp148, min_igrid_last
+ 235:src/synchro.c **** 			min_igrid = 2048;
+ 193              		.loc 1 235 0
+ 194 0070 084B     		ldr	r3, .L7+8	@ tmp149,
+ 195 0072 8022     		movs	r2, #128	@ tmp158,
+ 196 0074 1201     		lsls	r2, r2, #4	@ tmp150, tmp158,
+ 197 0076 1A80     		strh	r2, [r3]	@ tmp151, max_igrid
+ 236:src/synchro.c **** 
+ 198              		.loc 1 236 0
+ 199 0078 074B     		ldr	r3, .L7+12	@ tmp152,
+ 200 007a 8022     		movs	r2, #128	@ tmp159,
+ 201 007c 1201     		lsls	r2, r2, #4	@ tmp153, tmp159,
+ 202 007e 1A80     		strh	r2, [r3]	@ tmp154, min_igrid
+ 242:src/synchro.c **** 		}
+ 203              		.loc 1 242 0
+ 204 0080 034B     		ldr	r3, .L7+4	@ tmp155,
+ 205 0082 0022     		movs	r2, #0	@ tmp156,
+ 206 0084 1A70     		strb	r2, [r3]	@ tmp157, igrid_update_samples
+ARM GAS  /tmp/ccU3iXzy.s 			page 9
+
+
+ 207              	.L6:
+ 208              		.loc 1 245 0
+ 209 0086 C046     		nop
+ 210 0088 02B0     		add	sp, sp, #8	@,,
+ 211              		@ sp needed	@
+ 212 008a 7047     		bx	lr
+ 213              	.L8:
+ 214              		.align	2
+ 215              	.L7:
+ 216 008c 00000000 		.word	igrid_timer
+ 217 0090 00000000 		.word	igrid_update_samples
+ 218 0094 00000000 		.word	max_igrid
+ 219 0098 00000000 		.word	min_igrid
+ 220 009c 00000000 		.word	max_igrid_last
+ 221 00a0 00000000 		.word	min_igrid_last
+ 222              		.cfi_endproc
+ 223              	.LFE20:
+ 224              		.size	UpdateIGrid, .-UpdateIGrid
+ 225              		.section	.text.GetIGrid,"ax",%progbits
+ 226              		.align	2
+ 227              		.global	GetIGrid
+ 228              		.code	16
+ 229              		.thumb_func
+ 230              		.type	GetIGrid, %function
+ 231              	GetIGrid:
+ 232              	.LFB21:
+ 246:src/synchro.c **** 
+ 247:src/synchro.c **** unsigned short GetIGrid (void)
+ 248:src/synchro.c **** {
+ 233              		.loc 1 248 0
+ 234              		.cfi_startproc
+ 235 0000 82B0     		sub	sp, sp, #8	@,,
+ 236              	.LCFI1:
+ 237              		.cfi_def_cfa_offset 8
+ 249:src/synchro.c **** 	unsigned short medida;
+ 250:src/synchro.c **** 
+ 251:src/synchro.c **** 	if (max_igrid_last > min_igrid_last)
+ 238              		.loc 1 251 0
+ 239 0002 0C4B     		ldr	r3, .L13	@ tmp116,
+ 240 0004 1A88     		ldrh	r2, [r3]	@ D.4994, max_igrid_last
+ 241 0006 0C4B     		ldr	r3, .L13+4	@ tmp117,
+ 242 0008 1B88     		ldrh	r3, [r3]	@ D.4994, min_igrid_last
+ 243 000a 9A42     		cmp	r2, r3	@ D.4994, D.4994
+ 244 000c 08D9     		bls	.L10	@,
+ 252:src/synchro.c **** 	{
+ 253:src/synchro.c **** 		medida = max_igrid_last - min_igrid_last;	//valor de corriente pico a pico
+ 245              		.loc 1 253 0
+ 246 000e 094B     		ldr	r3, .L13	@ tmp118,
+ 247 0010 1988     		ldrh	r1, [r3]	@ D.4994, max_igrid_last
+ 248 0012 094B     		ldr	r3, .L13+4	@ tmp119,
+ 249 0014 1A88     		ldrh	r2, [r3]	@ D.4994, min_igrid_last
+ 250 0016 6B46     		mov	r3, sp	@ tmp128,
+ 251 0018 0633     		adds	r3, r3, #6	@ tmp120,
+ 252 001a 8A1A     		subs	r2, r1, r2	@ tmp121, D.4994, D.4994
+ 253 001c 1A80     		strh	r2, [r3]	@ tmp122, medida
+ 254 001e 03E0     		b	.L11	@
+ 255              	.L10:
+ARM GAS  /tmp/ccU3iXzy.s 			page 10
+
+
+ 254:src/synchro.c **** 	}
+ 255:src/synchro.c **** 	else
+ 256:src/synchro.c **** 		medida = 0;
+ 256              		.loc 1 256 0
+ 257 0020 6B46     		mov	r3, sp	@ tmp129,
+ 258 0022 0633     		adds	r3, r3, #6	@ tmp123,
+ 259 0024 0022     		movs	r2, #0	@ tmp124,
+ 260 0026 1A80     		strh	r2, [r3]	@ tmp125, medida
+ 261              	.L11:
+ 257:src/synchro.c **** 
+ 258:src/synchro.c **** 	return medida;
+ 262              		.loc 1 258 0
+ 263 0028 6B46     		mov	r3, sp	@ tmp130,
+ 264 002a 0633     		adds	r3, r3, #6	@ tmp126,
+ 265 002c 1B88     		ldrh	r3, [r3]	@ D.4994, medida
+ 259:src/synchro.c **** }
+ 266              		.loc 1 259 0
+ 267 002e 1800     		movs	r0, r3	@, <retval>
+ 268 0030 02B0     		add	sp, sp, #8	@,,
+ 269              		@ sp needed	@
+ 270 0032 7047     		bx	lr
+ 271              	.L14:
+ 272              		.align	2
+ 273              	.L13:
+ 274 0034 00000000 		.word	max_igrid_last
+ 275 0038 00000000 		.word	min_igrid_last
+ 276              		.cfi_endproc
+ 277              	.LFE21:
+ 278              		.size	GetIGrid, .-GetIGrid
+ 279              		.section	.text.UpdateVGrid,"ax",%progbits
+ 280              		.align	2
+ 281              		.global	UpdateVGrid
+ 282              		.code	16
+ 283              		.thumb_func
+ 284              		.type	UpdateVGrid, %function
+ 285              	UpdateVGrid:
+ 286              	.LFB22:
+ 260:src/synchro.c **** 
+ 261:src/synchro.c **** void UpdateVGrid (void)		//es una senial rectificada solo positiva
+ 262:src/synchro.c **** {
+ 287              		.loc 1 262 0
+ 288              		.cfi_startproc
+ 289 0000 10B5     		push	{r4, lr}	@
+ 290              	.LCFI2:
+ 291              		.cfi_def_cfa_offset 8
+ 292              		.cfi_offset 4, -8
+ 293              		.cfi_offset 14, -4
+ 294 0002 82B0     		sub	sp, sp, #8	@,,
+ 295              	.LCFI3:
+ 296              		.cfi_def_cfa_offset 16
+ 263:src/synchro.c **** 	unsigned short medida;
+ 264:src/synchro.c **** 
+ 265:src/synchro.c **** 	if (vgrid_timer)	//cada 400us
+ 297              		.loc 1 265 0
+ 298 0004 194B     		ldr	r3, .L20	@ tmp116,
+ 299 0006 1B78     		ldrb	r3, [r3]	@ tmp117, vgrid_timer
+ 300 0008 DBB2     		uxtb	r3, r3	@ D.4995, tmp117
+ARM GAS  /tmp/ccU3iXzy.s 			page 11
+
+
+ 301 000a 002B     		cmp	r3, #0	@ D.4995,
+ 302 000c 2AD0     		beq	.L19	@,
+ 266:src/synchro.c **** 	{
+ 267:src/synchro.c **** 		vgrid_timer = 0;
+ 303              		.loc 1 267 0
+ 304 000e 174B     		ldr	r3, .L20	@ tmp118,
+ 305 0010 0022     		movs	r2, #0	@ tmp119,
+ 306 0012 1A70     		strb	r2, [r3]	@ tmp120, vgrid_timer
+ 268:src/synchro.c **** 
+ 269:src/synchro.c **** 		medida = ReadADC1_SameSampleTime(ADC_Channel_1);
+ 307              		.loc 1 269 0
+ 308 0014 6B46     		mov	r3, sp	@ tmp145,
+ 309 0016 9C1D     		adds	r4, r3, #6	@ tmp121, tmp145,
+ 310 0018 0220     		movs	r0, #2	@,
+ 311 001a FFF7FEFF 		bl	ReadADC1_SameSampleTime	@
+ 312 001e 0300     		movs	r3, r0	@ tmp122,
+ 313 0020 2380     		strh	r3, [r4]	@ tmp124, medida
+ 270:src/synchro.c **** 		//medida = MAFilterFast(V_GRID_SENSE, v_vgrid);
+ 271:src/synchro.c **** 
+ 272:src/synchro.c **** 		if (vgrid_update_samples < VGRID_SAMPLES_RESET)	//512 es toda la senoidal 576 es un ciclo y un oc
+ 314              		.loc 1 272 0
+ 315 0022 134B     		ldr	r3, .L20+4	@ tmp125,
+ 316 0024 1B88     		ldrh	r3, [r3]	@ D.4996, vgrid_update_samples
+ 317 0026 3B2B     		cmp	r3, #59	@ D.4996,
+ 318 0028 12D8     		bhi	.L17	@,
+ 273:src/synchro.c **** 		{
+ 274:src/synchro.c **** 			//reviso si es un maximo
+ 275:src/synchro.c **** 			if (medida > max_vgrid)
+ 319              		.loc 1 275 0
+ 320 002a 124B     		ldr	r3, .L20+8	@ tmp126,
+ 321 002c 1B88     		ldrh	r3, [r3]	@ D.4996, max_vgrid
+ 322 002e 6A46     		mov	r2, sp	@ tmp146,
+ 323 0030 0632     		adds	r2, r2, #6	@ tmp127,
+ 324 0032 1288     		ldrh	r2, [r2]	@ tmp128, medida
+ 325 0034 9A42     		cmp	r2, r3	@ tmp128, D.4996
+ 326 0036 04D9     		bls	.L18	@,
+ 276:src/synchro.c **** 				max_vgrid = medida;
+ 327              		.loc 1 276 0
+ 328 0038 0E4B     		ldr	r3, .L20+8	@ tmp129,
+ 329 003a 6A46     		mov	r2, sp	@ tmp147,
+ 330 003c 0632     		adds	r2, r2, #6	@ tmp130,
+ 331 003e 1288     		ldrh	r2, [r2]	@ tmp131, medida
+ 332 0040 1A80     		strh	r2, [r3]	@ tmp131, max_vgrid
+ 333              	.L18:
+ 277:src/synchro.c **** 
+ 278:src/synchro.c **** 			vgrid_update_samples++;
+ 334              		.loc 1 278 0
+ 335 0042 0B4B     		ldr	r3, .L20+4	@ tmp132,
+ 336 0044 1B88     		ldrh	r3, [r3]	@ D.4996, vgrid_update_samples
+ 337 0046 0133     		adds	r3, r3, #1	@ tmp133,
+ 338 0048 9AB2     		uxth	r2, r3	@ D.4996, tmp133
+ 339 004a 094B     		ldr	r3, .L20+4	@ tmp134,
+ 340 004c 1A80     		strh	r2, [r3]	@ tmp135, vgrid_update_samples
+ 279:src/synchro.c **** 		}
+ 280:src/synchro.c **** 		else
+ 281:src/synchro.c **** 		{
+ 282:src/synchro.c **** 		//paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
+ARM GAS  /tmp/ccU3iXzy.s 			page 12
+
+
+ 283:src/synchro.c **** 			max_vgrid_last = max_vgrid;
+ 284:src/synchro.c **** 			max_vgrid = 0;
+ 285:src/synchro.c **** 			vgrid_update_samples = 0;
+ 286:src/synchro.c **** 		}
+ 287:src/synchro.c **** 	}
+ 288:src/synchro.c **** }
+ 341              		.loc 1 288 0
+ 342 004e 09E0     		b	.L19	@
+ 343              	.L17:
+ 283:src/synchro.c **** 			max_vgrid = 0;
+ 344              		.loc 1 283 0
+ 345 0050 084B     		ldr	r3, .L20+8	@ tmp136,
+ 346 0052 1A88     		ldrh	r2, [r3]	@ D.4996, max_vgrid
+ 347 0054 084B     		ldr	r3, .L20+12	@ tmp137,
+ 348 0056 1A80     		strh	r2, [r3]	@ tmp138, max_vgrid_last
+ 284:src/synchro.c **** 			vgrid_update_samples = 0;
+ 349              		.loc 1 284 0
+ 350 0058 064B     		ldr	r3, .L20+8	@ tmp139,
+ 351 005a 0022     		movs	r2, #0	@ tmp140,
+ 352 005c 1A80     		strh	r2, [r3]	@ tmp141, max_vgrid
+ 285:src/synchro.c **** 		}
+ 353              		.loc 1 285 0
+ 354 005e 044B     		ldr	r3, .L20+4	@ tmp142,
+ 355 0060 0022     		movs	r2, #0	@ tmp143,
+ 356 0062 1A80     		strh	r2, [r3]	@ tmp144, vgrid_update_samples
+ 357              	.L19:
+ 358              		.loc 1 288 0
+ 359 0064 C046     		nop
+ 360 0066 02B0     		add	sp, sp, #8	@,,
+ 361              		@ sp needed	@
+ 362 0068 10BD     		pop	{r4, pc}
+ 363              	.L21:
+ 364 006a C046     		.align	2
+ 365              	.L20:
+ 366 006c 00000000 		.word	vgrid_timer
+ 367 0070 00000000 		.word	vgrid_update_samples
+ 368 0074 00000000 		.word	max_vgrid
+ 369 0078 00000000 		.word	max_vgrid_last
+ 370              		.cfi_endproc
+ 371              	.LFE22:
+ 372              		.size	UpdateVGrid, .-UpdateVGrid
+ 373              		.section	.text.GetVGrid,"ax",%progbits
+ 374              		.align	2
+ 375              		.global	GetVGrid
+ 376              		.code	16
+ 377              		.thumb_func
+ 378              		.type	GetVGrid, %function
+ 379              	GetVGrid:
+ 380              	.LFB23:
+ 289:src/synchro.c **** 
+ 290:src/synchro.c **** unsigned short GetVGrid (void)
+ 291:src/synchro.c **** {
+ 381              		.loc 1 291 0
+ 382              		.cfi_startproc
+ 292:src/synchro.c **** 	return max_vgrid_last;
+ 383              		.loc 1 292 0
+ 384 0000 014B     		ldr	r3, .L24	@ tmp112,
+ARM GAS  /tmp/ccU3iXzy.s 			page 13
+
+
+ 385 0002 1B88     		ldrh	r3, [r3]	@ D.4997, max_vgrid_last
+ 293:src/synchro.c **** }
+ 386              		.loc 1 293 0
+ 387 0004 1800     		movs	r0, r3	@, <retval>
+ 388              		@ sp needed	@
+ 389 0006 7047     		bx	lr
+ 390              	.L25:
+ 391              		.align	2
+ 392              	.L24:
+ 393 0008 00000000 		.word	max_vgrid_last
+ 394              		.cfi_endproc
+ 395              	.LFE23:
+ 396              		.size	GetVGrid, .-GetVGrid
+ 397              		.text
+ 398              	.Letext0:
+ 399              		.file 2 "/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/arm-none-eabi/include/machine/_default_types
+ 400              		.file 3 "/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/arm-none-eabi/include/sys/_stdint.h"
+ 401              		.section	.debug_info,"",%progbits
+ 402              	.Ldebug_info0:
+ 403 0000 D3010000 		.4byte	0x1d3
+ 404 0004 0200     		.2byte	0x2
+ 405 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 406 000a 04       		.byte	0x4
+ 407 000b 01       		.uleb128 0x1
+ 408 000c 54010000 		.4byte	.LASF25
+ 409 0010 0C       		.byte	0xc
+ 410 0011 30010000 		.4byte	.LASF26
+ 411 0015 54000000 		.4byte	.LASF27
+ 412 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 413 001d 00000000 		.4byte	0
+ 414 0021 00000000 		.4byte	0
+ 415 0025 00000000 		.4byte	.Ldebug_line0
+ 416 0029 02       		.uleb128 0x2
+ 417 002a 01       		.byte	0x1
+ 418 002b 08       		.byte	0x8
+ 419 002c 3D000000 		.4byte	.LASF0
+ 420 0030 02       		.uleb128 0x2
+ 421 0031 01       		.byte	0x1
+ 422 0032 06       		.byte	0x6
+ 423 0033 26020000 		.4byte	.LASF1
+ 424 0037 02       		.uleb128 0x2
+ 425 0038 02       		.byte	0x2
+ 426 0039 05       		.byte	0x5
+ 427 003a 3E010000 		.4byte	.LASF2
+ 428 003e 02       		.uleb128 0x2
+ 429 003f 02       		.byte	0x2
+ 430 0040 07       		.byte	0x7
+ 431 0041 9B000000 		.4byte	.LASF3
+ 432 0045 02       		.uleb128 0x2
+ 433 0046 04       		.byte	0x4
+ 434 0047 05       		.byte	0x5
+ 435 0048 1D020000 		.4byte	.LASF4
+ 436 004c 03       		.uleb128 0x3
+ 437 004d BF000000 		.4byte	.LASF9
+ 438 0051 02       		.byte	0x2
+ 439 0052 41       		.byte	0x41
+ 440 0053 57000000 		.4byte	0x57
+ARM GAS  /tmp/ccU3iXzy.s 			page 14
+
+
+ 441 0057 02       		.uleb128 0x2
+ 442 0058 04       		.byte	0x4
+ 443 0059 07       		.byte	0x7
+ 444 005a 89000000 		.4byte	.LASF5
+ 445 005e 02       		.uleb128 0x2
+ 446 005f 08       		.byte	0x8
+ 447 0060 05       		.byte	0x5
+ 448 0061 22010000 		.4byte	.LASF6
+ 449 0065 02       		.uleb128 0x2
+ 450 0066 08       		.byte	0x8
+ 451 0067 07       		.byte	0x7
+ 452 0068 EC000000 		.4byte	.LASF7
+ 453 006c 04       		.uleb128 0x4
+ 454 006d 04       		.byte	0x4
+ 455 006e 05       		.byte	0x5
+ 456 006f 696E7400 		.ascii	"int\000"
+ 457 0073 02       		.uleb128 0x2
+ 458 0074 04       		.byte	0x4
+ 459 0075 07       		.byte	0x7
+ 460 0076 DF000000 		.4byte	.LASF8
+ 461 007a 03       		.uleb128 0x3
+ 462 007b 14020000 		.4byte	.LASF10
+ 463 007f 03       		.byte	0x3
+ 464 0080 20       		.byte	0x20
+ 465 0081 4C000000 		.4byte	0x4c
+ 466 0085 02       		.uleb128 0x2
+ 467 0086 04       		.byte	0x4
+ 468 0087 07       		.byte	0x7
+ 469 0088 19010000 		.4byte	.LASF11
+ 470 008c 05       		.uleb128 0x5
+ 471 008d 01       		.byte	0x1
+ 472 008e 0D010000 		.4byte	.LASF13
+ 473 0092 01       		.byte	0x1
+ 474 0093 CC       		.byte	0xcc
+ 475 0094 01       		.byte	0x1
+ 476 0095 00000000 		.4byte	.LFB20
+ 477 0099 A4000000 		.4byte	.LFE20
+ 478 009d 00000000 		.4byte	.LLST0
+ 479 00a1 01       		.byte	0x1
+ 480 00a2 B5000000 		.4byte	0xb5
+ 481 00a6 06       		.uleb128 0x6
+ 482 00a7 AE000000 		.4byte	.LASF12
+ 483 00ab 01       		.byte	0x1
+ 484 00ac CE       		.byte	0xce
+ 485 00ad 3E000000 		.4byte	0x3e
+ 486 00b1 02       		.byte	0x2
+ 487 00b2 91       		.byte	0x91
+ 488 00b3 7E       		.sleb128 -2
+ 489 00b4 00       		.byte	0
+ 490 00b5 07       		.uleb128 0x7
+ 491 00b6 01       		.byte	0x1
+ 492 00b7 19000000 		.4byte	.LASF28
+ 493 00bb 01       		.byte	0x1
+ 494 00bc F7       		.byte	0xf7
+ 495 00bd 01       		.byte	0x1
+ 496 00be 3E000000 		.4byte	0x3e
+ 497 00c2 00000000 		.4byte	.LFB21
+ARM GAS  /tmp/ccU3iXzy.s 			page 15
+
+
+ 498 00c6 3C000000 		.4byte	.LFE21
+ 499 00ca 20000000 		.4byte	.LLST1
+ 500 00ce 01       		.byte	0x1
+ 501 00cf E2000000 		.4byte	0xe2
+ 502 00d3 06       		.uleb128 0x6
+ 503 00d4 AE000000 		.4byte	.LASF12
+ 504 00d8 01       		.byte	0x1
+ 505 00d9 F9       		.byte	0xf9
+ 506 00da 3E000000 		.4byte	0x3e
+ 507 00de 02       		.byte	0x2
+ 508 00df 91       		.byte	0x91
+ 509 00e0 7E       		.sleb128 -2
+ 510 00e1 00       		.byte	0
+ 511 00e2 08       		.uleb128 0x8
+ 512 00e3 01       		.byte	0x1
+ 513 00e4 48010000 		.4byte	.LASF14
+ 514 00e8 01       		.byte	0x1
+ 515 00e9 0501     		.2byte	0x105
+ 516 00eb 01       		.byte	0x1
+ 517 00ec 00000000 		.4byte	.LFB22
+ 518 00f0 7C000000 		.4byte	.LFE22
+ 519 00f4 40000000 		.4byte	.LLST2
+ 520 00f8 01       		.byte	0x1
+ 521 00f9 0D010000 		.4byte	0x10d
+ 522 00fd 09       		.uleb128 0x9
+ 523 00fe AE000000 		.4byte	.LASF12
+ 524 0102 01       		.byte	0x1
+ 525 0103 0701     		.2byte	0x107
+ 526 0105 3E000000 		.4byte	0x3e
+ 527 0109 02       		.byte	0x2
+ 528 010a 91       		.byte	0x91
+ 529 010b 76       		.sleb128 -10
+ 530 010c 00       		.byte	0
+ 531 010d 0A       		.uleb128 0xa
+ 532 010e 01       		.byte	0x1
+ 533 010f 4B000000 		.4byte	.LASF29
+ 534 0113 01       		.byte	0x1
+ 535 0114 2201     		.2byte	0x122
+ 536 0116 01       		.byte	0x1
+ 537 0117 3E000000 		.4byte	0x3e
+ 538 011b 00000000 		.4byte	.LFB23
+ 539 011f 0C000000 		.4byte	.LFE23
+ 540 0123 02       		.byte	0x2
+ 541 0124 7D       		.byte	0x7d
+ 542 0125 00       		.sleb128 0
+ 543 0126 01       		.byte	0x1
+ 544 0127 0B       		.uleb128 0xb
+ 545 0128 22000000 		.4byte	.LASF15
+ 546 012c 01       		.byte	0x1
+ 547 012d 19       		.byte	0x19
+ 548 012e 3E000000 		.4byte	0x3e
+ 549 0132 01       		.byte	0x1
+ 550 0133 05       		.byte	0x5
+ 551 0134 03       		.byte	0x3
+ 552 0135 00000000 		.4byte	max_vgrid_last
+ 553 0139 0B       		.uleb128 0xb
+ 554 013a 03010000 		.4byte	.LASF16
+ARM GAS  /tmp/ccU3iXzy.s 			page 16
+
+
+ 555 013e 01       		.byte	0x1
+ 556 013f 1A       		.byte	0x1a
+ 557 0140 3E000000 		.4byte	0x3e
+ 558 0144 01       		.byte	0x1
+ 559 0145 05       		.byte	0x5
+ 560 0146 03       		.byte	0x3
+ 561 0147 00000000 		.4byte	max_vgrid
+ 562 014b 0B       		.uleb128 0xb
+ 563 014c CA000000 		.4byte	.LASF17
+ 564 0150 01       		.byte	0x1
+ 565 0151 1B       		.byte	0x1b
+ 566 0152 3E000000 		.4byte	0x3e
+ 567 0156 01       		.byte	0x1
+ 568 0157 05       		.byte	0x5
+ 569 0158 03       		.byte	0x3
+ 570 0159 00000000 		.4byte	vgrid_update_samples
+ 571 015d 0C       		.uleb128 0xc
+ 572 015e 32020000 		.4byte	.LASF18
+ 573 0162 01       		.byte	0x1
+ 574 0163 1E       		.byte	0x1e
+ 575 0164 6A010000 		.4byte	0x16a
+ 576 0168 01       		.byte	0x1
+ 577 0169 01       		.byte	0x1
+ 578 016a 0D       		.uleb128 0xd
+ 579 016b 29000000 		.4byte	0x29
+ 580 016f 0C       		.uleb128 0xc
+ 581 0170 31000000 		.4byte	.LASF19
+ 582 0174 01       		.byte	0x1
+ 583 0175 1F       		.byte	0x1f
+ 584 0176 6A010000 		.4byte	0x16a
+ 585 017a 01       		.byte	0x1
+ 586 017b 01       		.byte	0x1
+ 587 017c 0B       		.uleb128 0xb
+ 588 017d 00000000 		.4byte	.LASF20
+ 589 0181 01       		.byte	0x1
+ 590 0182 22       		.byte	0x22
+ 591 0183 3E000000 		.4byte	0x3e
+ 592 0187 01       		.byte	0x1
+ 593 0188 05       		.byte	0x5
+ 594 0189 03       		.byte	0x3
+ 595 018a 00000000 		.4byte	max_igrid_last
+ 596 018e 0B       		.uleb128 0xb
+ 597 018f 3E020000 		.4byte	.LASF21
+ 598 0193 01       		.byte	0x1
+ 599 0194 23       		.byte	0x23
+ 600 0195 3E000000 		.4byte	0x3e
+ 601 0199 01       		.byte	0x1
+ 602 019a 05       		.byte	0x5
+ 603 019b 03       		.byte	0x3
+ 604 019c 00000000 		.4byte	min_igrid_last
+ 605 01a0 0B       		.uleb128 0xb
+ 606 01a1 B5000000 		.4byte	.LASF22
+ 607 01a5 01       		.byte	0x1
+ 608 01a6 24       		.byte	0x24
+ 609 01a7 3E000000 		.4byte	0x3e
+ 610 01ab 01       		.byte	0x1
+ 611 01ac 05       		.byte	0x5
+ARM GAS  /tmp/ccU3iXzy.s 			page 17
+
+
+ 612 01ad 03       		.byte	0x3
+ 613 01ae 00000000 		.4byte	max_igrid
+ 614 01b2 0B       		.uleb128 0xb
+ 615 01b3 0F000000 		.4byte	.LASF23
+ 616 01b7 01       		.byte	0x1
+ 617 01b8 25       		.byte	0x25
+ 618 01b9 3E000000 		.4byte	0x3e
+ 619 01bd 01       		.byte	0x1
+ 620 01be 05       		.byte	0x5
+ 621 01bf 03       		.byte	0x3
+ 622 01c0 00000000 		.4byte	min_igrid
+ 623 01c4 0B       		.uleb128 0xb
+ 624 01c5 FF010000 		.4byte	.LASF24
+ 625 01c9 01       		.byte	0x1
+ 626 01ca 26       		.byte	0x26
+ 627 01cb 29000000 		.4byte	0x29
+ 628 01cf 01       		.byte	0x1
+ 629 01d0 05       		.byte	0x5
+ 630 01d1 03       		.byte	0x3
+ 631 01d2 00000000 		.4byte	igrid_update_samples
+ 632 01d6 00       		.byte	0
+ 633              		.section	.debug_abbrev,"",%progbits
+ 634              	.Ldebug_abbrev0:
+ 635 0000 01       		.uleb128 0x1
+ 636 0001 11       		.uleb128 0x11
+ 637 0002 01       		.byte	0x1
+ 638 0003 25       		.uleb128 0x25
+ 639 0004 0E       		.uleb128 0xe
+ 640 0005 13       		.uleb128 0x13
+ 641 0006 0B       		.uleb128 0xb
+ 642 0007 03       		.uleb128 0x3
+ 643 0008 0E       		.uleb128 0xe
+ 644 0009 1B       		.uleb128 0x1b
+ 645 000a 0E       		.uleb128 0xe
+ 646 000b 55       		.uleb128 0x55
+ 647 000c 06       		.uleb128 0x6
+ 648 000d 11       		.uleb128 0x11
+ 649 000e 01       		.uleb128 0x1
+ 650 000f 52       		.uleb128 0x52
+ 651 0010 01       		.uleb128 0x1
+ 652 0011 10       		.uleb128 0x10
+ 653 0012 06       		.uleb128 0x6
+ 654 0013 00       		.byte	0
+ 655 0014 00       		.byte	0
+ 656 0015 02       		.uleb128 0x2
+ 657 0016 24       		.uleb128 0x24
+ 658 0017 00       		.byte	0
+ 659 0018 0B       		.uleb128 0xb
+ 660 0019 0B       		.uleb128 0xb
+ 661 001a 3E       		.uleb128 0x3e
+ 662 001b 0B       		.uleb128 0xb
+ 663 001c 03       		.uleb128 0x3
+ 664 001d 0E       		.uleb128 0xe
+ 665 001e 00       		.byte	0
+ 666 001f 00       		.byte	0
+ 667 0020 03       		.uleb128 0x3
+ 668 0021 16       		.uleb128 0x16
+ARM GAS  /tmp/ccU3iXzy.s 			page 18
+
+
+ 669 0022 00       		.byte	0
+ 670 0023 03       		.uleb128 0x3
+ 671 0024 0E       		.uleb128 0xe
+ 672 0025 3A       		.uleb128 0x3a
+ 673 0026 0B       		.uleb128 0xb
+ 674 0027 3B       		.uleb128 0x3b
+ 675 0028 0B       		.uleb128 0xb
+ 676 0029 49       		.uleb128 0x49
+ 677 002a 13       		.uleb128 0x13
+ 678 002b 00       		.byte	0
+ 679 002c 00       		.byte	0
+ 680 002d 04       		.uleb128 0x4
+ 681 002e 24       		.uleb128 0x24
+ 682 002f 00       		.byte	0
+ 683 0030 0B       		.uleb128 0xb
+ 684 0031 0B       		.uleb128 0xb
+ 685 0032 3E       		.uleb128 0x3e
+ 686 0033 0B       		.uleb128 0xb
+ 687 0034 03       		.uleb128 0x3
+ 688 0035 08       		.uleb128 0x8
+ 689 0036 00       		.byte	0
+ 690 0037 00       		.byte	0
+ 691 0038 05       		.uleb128 0x5
+ 692 0039 2E       		.uleb128 0x2e
+ 693 003a 01       		.byte	0x1
+ 694 003b 3F       		.uleb128 0x3f
+ 695 003c 0C       		.uleb128 0xc
+ 696 003d 03       		.uleb128 0x3
+ 697 003e 0E       		.uleb128 0xe
+ 698 003f 3A       		.uleb128 0x3a
+ 699 0040 0B       		.uleb128 0xb
+ 700 0041 3B       		.uleb128 0x3b
+ 701 0042 0B       		.uleb128 0xb
+ 702 0043 27       		.uleb128 0x27
+ 703 0044 0C       		.uleb128 0xc
+ 704 0045 11       		.uleb128 0x11
+ 705 0046 01       		.uleb128 0x1
+ 706 0047 12       		.uleb128 0x12
+ 707 0048 01       		.uleb128 0x1
+ 708 0049 40       		.uleb128 0x40
+ 709 004a 06       		.uleb128 0x6
+ 710 004b 9742     		.uleb128 0x2117
+ 711 004d 0C       		.uleb128 0xc
+ 712 004e 01       		.uleb128 0x1
+ 713 004f 13       		.uleb128 0x13
+ 714 0050 00       		.byte	0
+ 715 0051 00       		.byte	0
+ 716 0052 06       		.uleb128 0x6
+ 717 0053 34       		.uleb128 0x34
+ 718 0054 00       		.byte	0
+ 719 0055 03       		.uleb128 0x3
+ 720 0056 0E       		.uleb128 0xe
+ 721 0057 3A       		.uleb128 0x3a
+ 722 0058 0B       		.uleb128 0xb
+ 723 0059 3B       		.uleb128 0x3b
+ 724 005a 0B       		.uleb128 0xb
+ 725 005b 49       		.uleb128 0x49
+ARM GAS  /tmp/ccU3iXzy.s 			page 19
+
+
+ 726 005c 13       		.uleb128 0x13
+ 727 005d 02       		.uleb128 0x2
+ 728 005e 0A       		.uleb128 0xa
+ 729 005f 00       		.byte	0
+ 730 0060 00       		.byte	0
+ 731 0061 07       		.uleb128 0x7
+ 732 0062 2E       		.uleb128 0x2e
+ 733 0063 01       		.byte	0x1
+ 734 0064 3F       		.uleb128 0x3f
+ 735 0065 0C       		.uleb128 0xc
+ 736 0066 03       		.uleb128 0x3
+ 737 0067 0E       		.uleb128 0xe
+ 738 0068 3A       		.uleb128 0x3a
+ 739 0069 0B       		.uleb128 0xb
+ 740 006a 3B       		.uleb128 0x3b
+ 741 006b 0B       		.uleb128 0xb
+ 742 006c 27       		.uleb128 0x27
+ 743 006d 0C       		.uleb128 0xc
+ 744 006e 49       		.uleb128 0x49
+ 745 006f 13       		.uleb128 0x13
+ 746 0070 11       		.uleb128 0x11
+ 747 0071 01       		.uleb128 0x1
+ 748 0072 12       		.uleb128 0x12
+ 749 0073 01       		.uleb128 0x1
+ 750 0074 40       		.uleb128 0x40
+ 751 0075 06       		.uleb128 0x6
+ 752 0076 9742     		.uleb128 0x2117
+ 753 0078 0C       		.uleb128 0xc
+ 754 0079 01       		.uleb128 0x1
+ 755 007a 13       		.uleb128 0x13
+ 756 007b 00       		.byte	0
+ 757 007c 00       		.byte	0
+ 758 007d 08       		.uleb128 0x8
+ 759 007e 2E       		.uleb128 0x2e
+ 760 007f 01       		.byte	0x1
+ 761 0080 3F       		.uleb128 0x3f
+ 762 0081 0C       		.uleb128 0xc
+ 763 0082 03       		.uleb128 0x3
+ 764 0083 0E       		.uleb128 0xe
+ 765 0084 3A       		.uleb128 0x3a
+ 766 0085 0B       		.uleb128 0xb
+ 767 0086 3B       		.uleb128 0x3b
+ 768 0087 05       		.uleb128 0x5
+ 769 0088 27       		.uleb128 0x27
+ 770 0089 0C       		.uleb128 0xc
+ 771 008a 11       		.uleb128 0x11
+ 772 008b 01       		.uleb128 0x1
+ 773 008c 12       		.uleb128 0x12
+ 774 008d 01       		.uleb128 0x1
+ 775 008e 40       		.uleb128 0x40
+ 776 008f 06       		.uleb128 0x6
+ 777 0090 9642     		.uleb128 0x2116
+ 778 0092 0C       		.uleb128 0xc
+ 779 0093 01       		.uleb128 0x1
+ 780 0094 13       		.uleb128 0x13
+ 781 0095 00       		.byte	0
+ 782 0096 00       		.byte	0
+ARM GAS  /tmp/ccU3iXzy.s 			page 20
+
+
+ 783 0097 09       		.uleb128 0x9
+ 784 0098 34       		.uleb128 0x34
+ 785 0099 00       		.byte	0
+ 786 009a 03       		.uleb128 0x3
+ 787 009b 0E       		.uleb128 0xe
+ 788 009c 3A       		.uleb128 0x3a
+ 789 009d 0B       		.uleb128 0xb
+ 790 009e 3B       		.uleb128 0x3b
+ 791 009f 05       		.uleb128 0x5
+ 792 00a0 49       		.uleb128 0x49
+ 793 00a1 13       		.uleb128 0x13
+ 794 00a2 02       		.uleb128 0x2
+ 795 00a3 0A       		.uleb128 0xa
+ 796 00a4 00       		.byte	0
+ 797 00a5 00       		.byte	0
+ 798 00a6 0A       		.uleb128 0xa
+ 799 00a7 2E       		.uleb128 0x2e
+ 800 00a8 00       		.byte	0
+ 801 00a9 3F       		.uleb128 0x3f
+ 802 00aa 0C       		.uleb128 0xc
+ 803 00ab 03       		.uleb128 0x3
+ 804 00ac 0E       		.uleb128 0xe
+ 805 00ad 3A       		.uleb128 0x3a
+ 806 00ae 0B       		.uleb128 0xb
+ 807 00af 3B       		.uleb128 0x3b
+ 808 00b0 05       		.uleb128 0x5
+ 809 00b1 27       		.uleb128 0x27
+ 810 00b2 0C       		.uleb128 0xc
+ 811 00b3 49       		.uleb128 0x49
+ 812 00b4 13       		.uleb128 0x13
+ 813 00b5 11       		.uleb128 0x11
+ 814 00b6 01       		.uleb128 0x1
+ 815 00b7 12       		.uleb128 0x12
+ 816 00b8 01       		.uleb128 0x1
+ 817 00b9 40       		.uleb128 0x40
+ 818 00ba 0A       		.uleb128 0xa
+ 819 00bb 9742     		.uleb128 0x2117
+ 820 00bd 0C       		.uleb128 0xc
+ 821 00be 00       		.byte	0
+ 822 00bf 00       		.byte	0
+ 823 00c0 0B       		.uleb128 0xb
+ 824 00c1 34       		.uleb128 0x34
+ 825 00c2 00       		.byte	0
+ 826 00c3 03       		.uleb128 0x3
+ 827 00c4 0E       		.uleb128 0xe
+ 828 00c5 3A       		.uleb128 0x3a
+ 829 00c6 0B       		.uleb128 0xb
+ 830 00c7 3B       		.uleb128 0x3b
+ 831 00c8 0B       		.uleb128 0xb
+ 832 00c9 49       		.uleb128 0x49
+ 833 00ca 13       		.uleb128 0x13
+ 834 00cb 3F       		.uleb128 0x3f
+ 835 00cc 0C       		.uleb128 0xc
+ 836 00cd 02       		.uleb128 0x2
+ 837 00ce 0A       		.uleb128 0xa
+ 838 00cf 00       		.byte	0
+ 839 00d0 00       		.byte	0
+ARM GAS  /tmp/ccU3iXzy.s 			page 21
+
+
+ 840 00d1 0C       		.uleb128 0xc
+ 841 00d2 34       		.uleb128 0x34
+ 842 00d3 00       		.byte	0
+ 843 00d4 03       		.uleb128 0x3
+ 844 00d5 0E       		.uleb128 0xe
+ 845 00d6 3A       		.uleb128 0x3a
+ 846 00d7 0B       		.uleb128 0xb
+ 847 00d8 3B       		.uleb128 0x3b
+ 848 00d9 0B       		.uleb128 0xb
+ 849 00da 49       		.uleb128 0x49
+ 850 00db 13       		.uleb128 0x13
+ 851 00dc 3F       		.uleb128 0x3f
+ 852 00dd 0C       		.uleb128 0xc
+ 853 00de 3C       		.uleb128 0x3c
+ 854 00df 0C       		.uleb128 0xc
+ 855 00e0 00       		.byte	0
+ 856 00e1 00       		.byte	0
+ 857 00e2 0D       		.uleb128 0xd
+ 858 00e3 35       		.uleb128 0x35
+ 859 00e4 00       		.byte	0
+ 860 00e5 49       		.uleb128 0x49
+ 861 00e6 13       		.uleb128 0x13
+ 862 00e7 00       		.byte	0
+ 863 00e8 00       		.byte	0
+ 864 00e9 00       		.byte	0
+ 865              		.section	.debug_loc,"",%progbits
+ 866              	.Ldebug_loc0:
+ 867              	.LLST0:
+ 868 0000 00000000 		.4byte	.LFB20
+ 869 0004 02000000 		.4byte	.LCFI0
+ 870 0008 0200     		.2byte	0x2
+ 871 000a 7D       		.byte	0x7d
+ 872 000b 00       		.sleb128 0
+ 873 000c 02000000 		.4byte	.LCFI0
+ 874 0010 A4000000 		.4byte	.LFE20
+ 875 0014 0200     		.2byte	0x2
+ 876 0016 7D       		.byte	0x7d
+ 877 0017 08       		.sleb128 8
+ 878 0018 00000000 		.4byte	0
+ 879 001c 00000000 		.4byte	0
+ 880              	.LLST1:
+ 881 0020 00000000 		.4byte	.LFB21
+ 882 0024 02000000 		.4byte	.LCFI1
+ 883 0028 0200     		.2byte	0x2
+ 884 002a 7D       		.byte	0x7d
+ 885 002b 00       		.sleb128 0
+ 886 002c 02000000 		.4byte	.LCFI1
+ 887 0030 3C000000 		.4byte	.LFE21
+ 888 0034 0200     		.2byte	0x2
+ 889 0036 7D       		.byte	0x7d
+ 890 0037 08       		.sleb128 8
+ 891 0038 00000000 		.4byte	0
+ 892 003c 00000000 		.4byte	0
+ 893              	.LLST2:
+ 894 0040 00000000 		.4byte	.LFB22
+ 895 0044 02000000 		.4byte	.LCFI2
+ 896 0048 0200     		.2byte	0x2
+ARM GAS  /tmp/ccU3iXzy.s 			page 22
+
+
+ 897 004a 7D       		.byte	0x7d
+ 898 004b 00       		.sleb128 0
+ 899 004c 02000000 		.4byte	.LCFI2
+ 900 0050 04000000 		.4byte	.LCFI3
+ 901 0054 0200     		.2byte	0x2
+ 902 0056 7D       		.byte	0x7d
+ 903 0057 08       		.sleb128 8
+ 904 0058 04000000 		.4byte	.LCFI3
+ 905 005c 7C000000 		.4byte	.LFE22
+ 906 0060 0200     		.2byte	0x2
+ 907 0062 7D       		.byte	0x7d
+ 908 0063 10       		.sleb128 16
+ 909 0064 00000000 		.4byte	0
+ 910 0068 00000000 		.4byte	0
+ 911              		.section	.debug_aranges,"",%progbits
+ 912 0000 34000000 		.4byte	0x34
+ 913 0004 0200     		.2byte	0x2
+ 914 0006 00000000 		.4byte	.Ldebug_info0
+ 915 000a 04       		.byte	0x4
+ 916 000b 00       		.byte	0
+ 917 000c 0000     		.2byte	0
+ 918 000e 0000     		.2byte	0
+ 919 0010 00000000 		.4byte	.LFB20
+ 920 0014 A4000000 		.4byte	.LFE20-.LFB20
+ 921 0018 00000000 		.4byte	.LFB21
+ 922 001c 3C000000 		.4byte	.LFE21-.LFB21
+ 923 0020 00000000 		.4byte	.LFB22
+ 924 0024 7C000000 		.4byte	.LFE22-.LFB22
+ 925 0028 00000000 		.4byte	.LFB23
+ 926 002c 0C000000 		.4byte	.LFE23-.LFB23
+ 927 0030 00000000 		.4byte	0
+ 928 0034 00000000 		.4byte	0
+ 929              		.section	.debug_ranges,"",%progbits
+ 930              	.Ldebug_ranges0:
+ 931 0000 00000000 		.4byte	.LFB20
+ 932 0004 A4000000 		.4byte	.LFE20
+ 933 0008 00000000 		.4byte	.LFB21
+ 934 000c 3C000000 		.4byte	.LFE21
+ 935 0010 00000000 		.4byte	.LFB22
+ 936 0014 7C000000 		.4byte	.LFE22
+ 937 0018 00000000 		.4byte	.LFB23
+ 938 001c 0C000000 		.4byte	.LFE23
+ 939 0020 00000000 		.4byte	0
+ 940 0024 00000000 		.4byte	0
+ 941              		.section	.debug_line,"",%progbits
+ 942              	.Ldebug_line0:
+ 943 0000 48010000 		.section	.debug_str,"MS",%progbits,1
+ 943      0200D700 
+ 943      00000201 
+ 943      FB0E0D00 
+ 943      01010101 
+ 944              	.LASF20:
+ 945 0000 6D61785F 		.ascii	"max_igrid_last\000"
+ 945      69677269 
+ 945      645F6C61 
+ 945      737400
+ 946              	.LASF23:
+ARM GAS  /tmp/ccU3iXzy.s 			page 23
+
+
+ 947 000f 6D696E5F 		.ascii	"min_igrid\000"
+ 947      69677269 
+ 947      6400
+ 948              	.LASF28:
+ 949 0019 47657449 		.ascii	"GetIGrid\000"
+ 949      47726964 
+ 949      00
+ 950              	.LASF15:
+ 951 0022 6D61785F 		.ascii	"max_vgrid_last\000"
+ 951      76677269 
+ 951      645F6C61 
+ 951      737400
+ 952              	.LASF19:
+ 953 0031 76677269 		.ascii	"vgrid_timer\000"
+ 953      645F7469 
+ 953      6D657200 
+ 954              	.LASF0:
+ 955 003d 756E7369 		.ascii	"unsigned char\000"
+ 955      676E6564 
+ 955      20636861 
+ 955      7200
+ 956              	.LASF29:
+ 957 004b 47657456 		.ascii	"GetVGrid\000"
+ 957      47726964 
+ 957      00
+ 958              	.LASF27:
+ 959 0054 2F686F6D 		.ascii	"/home/med/Documents/stm32_proj/atom_planolux_redond"
+ 959      652F6D65 
+ 959      642F446F 
+ 959      63756D65 
+ 959      6E74732F 
+ 960 0087 6100     		.ascii	"a\000"
+ 961              	.LASF5:
+ 962 0089 6C6F6E67 		.ascii	"long unsigned int\000"
+ 962      20756E73 
+ 962      69676E65 
+ 962      6420696E 
+ 962      7400
+ 963              	.LASF3:
+ 964 009b 73686F72 		.ascii	"short unsigned int\000"
+ 964      7420756E 
+ 964      7369676E 
+ 964      65642069 
+ 964      6E7400
+ 965              	.LASF12:
+ 966 00ae 6D656469 		.ascii	"medida\000"
+ 966      646100
+ 967              	.LASF22:
+ 968 00b5 6D61785F 		.ascii	"max_igrid\000"
+ 968      69677269 
+ 968      6400
+ 969              	.LASF9:
+ 970 00bf 5F5F7569 		.ascii	"__uint32_t\000"
+ 970      6E743332 
+ 970      5F7400
+ 971              	.LASF17:
+ 972 00ca 76677269 		.ascii	"vgrid_update_samples\000"
+ARM GAS  /tmp/ccU3iXzy.s 			page 24
+
+
+ 972      645F7570 
+ 972      64617465 
+ 972      5F73616D 
+ 972      706C6573 
+ 973              	.LASF8:
+ 974 00df 756E7369 		.ascii	"unsigned int\000"
+ 974      676E6564 
+ 974      20696E74 
+ 974      00
+ 975              	.LASF7:
+ 976 00ec 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 976      206C6F6E 
+ 976      6720756E 
+ 976      7369676E 
+ 976      65642069 
+ 977              	.LASF16:
+ 978 0103 6D61785F 		.ascii	"max_vgrid\000"
+ 978      76677269 
+ 978      6400
+ 979              	.LASF13:
+ 980 010d 55706461 		.ascii	"UpdateIGrid\000"
+ 980      74654947 
+ 980      72696400 
+ 981              	.LASF11:
+ 982 0119 73697A65 		.ascii	"sizetype\000"
+ 982      74797065 
+ 982      00
+ 983              	.LASF6:
+ 984 0122 6C6F6E67 		.ascii	"long long int\000"
+ 984      206C6F6E 
+ 984      6720696E 
+ 984      7400
+ 985              	.LASF26:
+ 986 0130 7372632F 		.ascii	"src/synchro.c\000"
+ 986      73796E63 
+ 986      68726F2E 
+ 986      6300
+ 987              	.LASF2:
+ 988 013e 73686F72 		.ascii	"short int\000"
+ 988      7420696E 
+ 988      7400
+ 989              	.LASF14:
+ 990 0148 55706461 		.ascii	"UpdateVGrid\000"
+ 990      74655647 
+ 990      72696400 
+ 991              	.LASF25:
+ 992 0154 474E5520 		.ascii	"GNU C11 5.2.1 20151202 (release) [ARM/embedded-5-br"
+ 992      43313120 
+ 992      352E322E 
+ 992      31203230 
+ 992      31353132 
+ 993 0187 616E6368 		.ascii	"anch revision 231848] -mcpu=cortex-m0 -mthumb -g -g"
+ 993      20726576 
+ 993      6973696F 
+ 993      6E203233 
+ 993      31383438 
+ 994 01ba 64776172 		.ascii	"dwarf-2 -O0 -fomit-frame-pointer -fdata-sections -f"
+ARM GAS  /tmp/ccU3iXzy.s 			page 25
+
+
+ 994      662D3220 
+ 994      2D4F3020 
+ 994      2D666F6D 
+ 994      69742D66 
+ 995 01ed 66756E63 		.ascii	"function-sections\000"
+ 995      74696F6E 
+ 995      2D736563 
+ 995      74696F6E 
+ 995      7300
+ 996              	.LASF24:
+ 997 01ff 69677269 		.ascii	"igrid_update_samples\000"
+ 997      645F7570 
+ 997      64617465 
+ 997      5F73616D 
+ 997      706C6573 
+ 998              	.LASF10:
+ 999 0214 75696E74 		.ascii	"uint32_t\000"
+ 999      33325F74 
+ 999      00
+ 1000              	.LASF4:
+ 1001 021d 6C6F6E67 		.ascii	"long int\000"
+ 1001      20696E74 
+ 1001      00
+ 1002              	.LASF1:
+ 1003 0226 7369676E 		.ascii	"signed char\000"
+ 1003      65642063 
+ 1003      68617200 
+ 1004              	.LASF18:
+ 1005 0232 69677269 		.ascii	"igrid_timer\000"
+ 1005      645F7469 
+ 1005      6D657200 
+ 1006              	.LASF21:
+ 1007 023e 6D696E5F 		.ascii	"min_igrid_last\000"
+ 1007      69677269 
+ 1007      645F6C61 
+ 1007      737400
+ 1008              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
+ARM GAS  /tmp/ccU3iXzy.s 			page 26
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 synchro.c
+     /tmp/ccU3iXzy.s:59     .bss.max_vgrid_last:00000000 max_vgrid_last
+     /tmp/ccU3iXzy.s:56     .bss.max_vgrid_last:00000000 $d
+     /tmp/ccU3iXzy.s:66     .bss.max_vgrid:00000000 max_vgrid
+     /tmp/ccU3iXzy.s:63     .bss.max_vgrid:00000000 $d
+     /tmp/ccU3iXzy.s:73     .bss.vgrid_update_samples:00000000 vgrid_update_samples
+     /tmp/ccU3iXzy.s:70     .bss.vgrid_update_samples:00000000 $d
+     /tmp/ccU3iXzy.s:80     .bss.max_igrid_last:00000000 max_igrid_last
+     /tmp/ccU3iXzy.s:77     .bss.max_igrid_last:00000000 $d
+     /tmp/ccU3iXzy.s:87     .bss.min_igrid_last:00000000 min_igrid_last
+     /tmp/ccU3iXzy.s:84     .bss.min_igrid_last:00000000 $d
+     /tmp/ccU3iXzy.s:94     .bss.max_igrid:00000000 max_igrid
+     /tmp/ccU3iXzy.s:91     .bss.max_igrid:00000000 $d
+     /tmp/ccU3iXzy.s:101    .bss.min_igrid:00000000 min_igrid
+     /tmp/ccU3iXzy.s:98     .bss.min_igrid:00000000 $d
+     /tmp/ccU3iXzy.s:107    .bss.igrid_update_samples:00000000 igrid_update_samples
+     /tmp/ccU3iXzy.s:108    .bss.igrid_update_samples:00000000 $d
+     /tmp/ccU3iXzy.s:110    .text.UpdateIGrid:00000000 $t
+     /tmp/ccU3iXzy.s:115    .text.UpdateIGrid:00000000 UpdateIGrid
+     /tmp/ccU3iXzy.s:216    .text.UpdateIGrid:0000008c $d
+     /tmp/ccU3iXzy.s:226    .text.GetIGrid:00000000 $t
+     /tmp/ccU3iXzy.s:231    .text.GetIGrid:00000000 GetIGrid
+     /tmp/ccU3iXzy.s:274    .text.GetIGrid:00000034 $d
+     /tmp/ccU3iXzy.s:280    .text.UpdateVGrid:00000000 $t
+     /tmp/ccU3iXzy.s:285    .text.UpdateVGrid:00000000 UpdateVGrid
+     /tmp/ccU3iXzy.s:366    .text.UpdateVGrid:0000006c $d
+     /tmp/ccU3iXzy.s:374    .text.GetVGrid:00000000 $t
+     /tmp/ccU3iXzy.s:379    .text.GetVGrid:00000000 GetVGrid
+     /tmp/ccU3iXzy.s:393    .text.GetVGrid:00000008 $d
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+igrid_timer
+ReadADC1_SameSampleTime
+vgrid_timer

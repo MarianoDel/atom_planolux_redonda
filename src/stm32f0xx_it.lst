@@ -1,0 +1,674 @@
+ARM GAS  /tmp/ccd26BFe.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1	@ Tag_ABI_FP_denormal
+   5              		.eabi_attribute 21, 1	@ Tag_ABI_FP_exceptions
+   6              		.eabi_attribute 23, 3	@ Tag_ABI_FP_number_model
+   7              		.eabi_attribute 24, 1	@ Tag_ABI_align8_needed
+   8              		.eabi_attribute 25, 1	@ Tag_ABI_align8_preserved
+   9              		.eabi_attribute 26, 1	@ Tag_ABI_enum_size
+  10              		.eabi_attribute 30, 6	@ Tag_ABI_optimization_goals
+  11              		.eabi_attribute 34, 0	@ Tag_CPU_unaligned_access
+  12              		.eabi_attribute 18, 4	@ Tag_ABI_PCS_wchar_t
+  13              		.file	"stm32f0xx_it.c"
+  14              	@ GNU C11 (GNU Tools for ARM Embedded Processors) version 5.2.1 20151202 (release) [ARM/embedded-5-
+  15              	@	compiled by GNU C version 4.7.4, GMP version 4.3.2, MPFR version 2.4.2, MPC version 0.8.1
+  16              	@ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+  17              	@ options passed:  -I . -I ./src -I ./cmsis_boot -I ./cmsis_core
+  18              	@ -I ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/inc
+  19              	@ -I ./inc -I ./cmsis_boot -imultilib armv6-m
+  20              	@ -iprefix /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/
+  21              	@ -isysroot /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../arm-none-eabi
+  22              	@ -D__USES_INITFINI__ src/stm32f0xx_it.c -mcpu=cortex-m0 -mthumb
+  23              	@ -auxbase-strip src/stm32f0xx_it.o -g -gdwarf-2 -O0 -Wall
+  24              	@ -fomit-frame-pointer -fdata-sections -ffunction-sections -fverbose-asm
+  25              	@ options enabled:  -faggressive-loop-optimizations -fauto-inc-dec
+  26              	@ -fchkp-check-incomplete-type -fchkp-check-read -fchkp-check-write
+  27              	@ -fchkp-instrument-calls -fchkp-narrow-bounds -fchkp-optimize
+  28              	@ -fchkp-store-bounds -fchkp-use-static-bounds
+  29              	@ -fchkp-use-static-const-bounds -fchkp-use-wrappers -fcommon
+  30              	@ -fdata-sections -fdelete-null-pointer-checks -fdwarf2-cfi-asm
+  31              	@ -fearly-inlining -feliminate-unused-debug-types -ffunction-cse
+  32              	@ -ffunction-sections -fgcse-lm -fgnu-runtime -fgnu-unique -fident
+  33              	@ -finline-atomics -fira-hoist-pressure -fira-share-save-slots
+  34              	@ -fira-share-spill-slots -fivopts -fkeep-static-consts
+  35              	@ -fleading-underscore -flifetime-dse -flto-odr-type-merging -fmath-errno
+  36              	@ -fmerge-debug-strings -fomit-frame-pointer -fpeephole
+  37              	@ -fprefetch-loop-arrays -freg-struct-return
+  38              	@ -fsched-critical-path-heuristic -fsched-dep-count-heuristic
+  39              	@ -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
+  40              	@ -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
+  41              	@ -fsched-stalled-insns-dep -fsemantic-interposition -fshow-column
+  42              	@ -fsigned-zeros -fsplit-ivs-in-unroller -fstdarg-opt
+  43              	@ -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+  44              	@ -ftree-coalesce-vars -ftree-cselim -ftree-forwprop -ftree-loop-if-convert
+  45              	@ -ftree-loop-im -ftree-loop-ivcanon -ftree-loop-optimize
+  46              	@ -ftree-parallelize-loops= -ftree-phiprop -ftree-reassoc -ftree-scev-cprop
+  47              	@ -funit-at-a-time -fverbose-asm -fzero-initialized-in-bss -mlittle-endian
+  48              	@ -mpic-data-is-text-relative -msched-prolog -mthumb
+  49              	@ -mvectorize-with-neon-quad
+  50              	
+  51              		.text
+  52              	.Ltext0:
+  53              		.cfi_sections	.debug_frame
+  54              		.section	.text.NMI_Handler,"ax",%progbits
+  55              		.align	2
+  56              		.global	NMI_Handler
+  57              		.code	16
+ARM GAS  /tmp/ccd26BFe.s 			page 2
+
+
+  58              		.thumb_func
+  59              		.type	NMI_Handler, %function
+  60              	NMI_Handler:
+  61              	.LFB20:
+  62              		.file 1 "src/stm32f0xx_it.c"
+   1:src/stm32f0xx_it.c **** /**
+   2:src/stm32f0xx_it.c ****   ******************************************************************************
+   3:src/stm32f0xx_it.c ****   * @file    GPIO/GPIO_IOToggle/stm32f0xx_it.c 
+   4:src/stm32f0xx_it.c ****   * @author  MCD Application Team
+   5:src/stm32f0xx_it.c ****   * @version V1.3.0
+   6:src/stm32f0xx_it.c ****   * @date    16-January-2014
+   7:src/stm32f0xx_it.c ****   * @brief   Main Interrupt Service Routines.
+   8:src/stm32f0xx_it.c ****   *          This file provides template for all exceptions handler and 
+   9:src/stm32f0xx_it.c ****   *          peripherals interrupt service routine.
+  10:src/stm32f0xx_it.c ****   ******************************************************************************
+  11:src/stm32f0xx_it.c ****   * @attention
+  12:src/stm32f0xx_it.c ****   *
+  13:src/stm32f0xx_it.c ****   * <h2><center>&copy; COPYRIGHT 2014 STMicroelectronics</center></h2>
+  14:src/stm32f0xx_it.c ****   *
+  15:src/stm32f0xx_it.c ****   * Licensed under MCD-ST Liberty SW License Agreement V2, (the "License");
+  16:src/stm32f0xx_it.c ****   * You may not use this file except in compliance with the License.
+  17:src/stm32f0xx_it.c ****   * You may obtain a copy of the License at:
+  18:src/stm32f0xx_it.c ****   *
+  19:src/stm32f0xx_it.c ****   *        http://www.st.com/software_license_agreement_liberty_v2
+  20:src/stm32f0xx_it.c ****   *
+  21:src/stm32f0xx_it.c ****   * Unless required by applicable law or agreed to in writing, software 
+  22:src/stm32f0xx_it.c ****   * distributed under the License is distributed on an "AS IS" BASIS, 
+  23:src/stm32f0xx_it.c ****   * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  24:src/stm32f0xx_it.c ****   * See the License for the specific language governing permissions and
+  25:src/stm32f0xx_it.c ****   * limitations under the License.
+  26:src/stm32f0xx_it.c ****   *
+  27:src/stm32f0xx_it.c ****   ******************************************************************************
+  28:src/stm32f0xx_it.c ****   */
+  29:src/stm32f0xx_it.c **** 
+  30:src/stm32f0xx_it.c **** /* Includes ------------------------------------------------------------------*/
+  31:src/stm32f0xx_it.c **** #include "stm32f0xx_it.h"
+  32:src/stm32f0xx_it.c **** //#include "main.h"
+  33:src/stm32f0xx_it.c **** 
+  34:src/stm32f0xx_it.c **** /** @addtogroup STM32F0xx_StdPeriph_Examples
+  35:src/stm32f0xx_it.c ****   * @{
+  36:src/stm32f0xx_it.c ****   */
+  37:src/stm32f0xx_it.c **** 
+  38:src/stm32f0xx_it.c **** /** @addtogroup GPIO_IOToggle
+  39:src/stm32f0xx_it.c ****   * @{
+  40:src/stm32f0xx_it.c ****   */
+  41:src/stm32f0xx_it.c **** extern void TimingDelay_Decrement(void);
+  42:src/stm32f0xx_it.c **** /* Private typedef -----------------------------------------------------------*/
+  43:src/stm32f0xx_it.c **** /* Private define ------------------------------------------------------------*/
+  44:src/stm32f0xx_it.c **** /* Private macro -------------------------------------------------------------*/
+  45:src/stm32f0xx_it.c **** /* Private variables ---------------------------------------------------------*/
+  46:src/stm32f0xx_it.c **** /* Private function prototypes -----------------------------------------------*/
+  47:src/stm32f0xx_it.c **** /* Private functions ---------------------------------------------------------*/
+  48:src/stm32f0xx_it.c **** 
+  49:src/stm32f0xx_it.c **** /******************************************************************************/
+  50:src/stm32f0xx_it.c **** /*            Cortex-M0 Processor Exceptions Handlers                         */
+  51:src/stm32f0xx_it.c **** /******************************************************************************/
+  52:src/stm32f0xx_it.c **** 
+ARM GAS  /tmp/ccd26BFe.s 			page 3
+
+
+  53:src/stm32f0xx_it.c **** /**
+  54:src/stm32f0xx_it.c ****   * @brief  This function handles NMI exception.
+  55:src/stm32f0xx_it.c ****   * @param  None
+  56:src/stm32f0xx_it.c ****   * @retval None
+  57:src/stm32f0xx_it.c ****   */
+  58:src/stm32f0xx_it.c **** void NMI_Handler(void)
+  59:src/stm32f0xx_it.c **** {
+  63              		.loc 1 59 0
+  64              		.cfi_startproc
+  60:src/stm32f0xx_it.c **** }
+  65              		.loc 1 60 0
+  66 0000 C046     		nop
+  67              		@ sp needed	@
+  68 0002 7047     		bx	lr
+  69              		.cfi_endproc
+  70              	.LFE20:
+  71              		.size	NMI_Handler, .-NMI_Handler
+  72              		.section	.text.HardFault_Handler,"ax",%progbits
+  73              		.align	2
+  74              		.global	HardFault_Handler
+  75              		.code	16
+  76              		.thumb_func
+  77              		.type	HardFault_Handler, %function
+  78              	HardFault_Handler:
+  79              	.LFB21:
+  61:src/stm32f0xx_it.c **** 
+  62:src/stm32f0xx_it.c **** /**
+  63:src/stm32f0xx_it.c ****   * @brief  This function handles Hard Fault exception.
+  64:src/stm32f0xx_it.c ****   * @param  None
+  65:src/stm32f0xx_it.c ****   * @retval None
+  66:src/stm32f0xx_it.c ****   */
+  67:src/stm32f0xx_it.c **** void HardFault_Handler(void)
+  68:src/stm32f0xx_it.c **** {
+  80              		.loc 1 68 0
+  81              		.cfi_startproc
+  82              	.L3:
+  69:src/stm32f0xx_it.c ****   /* Go to infinite loop when Hard Fault exception occurs */
+  70:src/stm32f0xx_it.c ****   while (1)
+  71:src/stm32f0xx_it.c ****   {
+  72:src/stm32f0xx_it.c ****   }
+  83              		.loc 1 72 0 discriminator 1
+  84 0000 FEE7     		b	.L3	@
+  85              		.cfi_endproc
+  86              	.LFE21:
+  87              		.size	HardFault_Handler, .-HardFault_Handler
+  88 0002 C046     		.section	.text.SVC_Handler,"ax",%progbits
+  89              		.align	2
+  90              		.global	SVC_Handler
+  91              		.code	16
+  92              		.thumb_func
+  93              		.type	SVC_Handler, %function
+  94              	SVC_Handler:
+  95              	.LFB22:
+  73:src/stm32f0xx_it.c **** }
+  74:src/stm32f0xx_it.c **** 
+  75:src/stm32f0xx_it.c **** /**
+  76:src/stm32f0xx_it.c ****   * @brief  This function handles SVCall exception.
+ARM GAS  /tmp/ccd26BFe.s 			page 4
+
+
+  77:src/stm32f0xx_it.c ****   * @param  None
+  78:src/stm32f0xx_it.c ****   * @retval None
+  79:src/stm32f0xx_it.c ****   */
+  80:src/stm32f0xx_it.c **** void SVC_Handler(void)
+  81:src/stm32f0xx_it.c **** {
+  96              		.loc 1 81 0
+  97              		.cfi_startproc
+  82:src/stm32f0xx_it.c **** }
+  98              		.loc 1 82 0
+  99 0000 C046     		nop
+ 100              		@ sp needed	@
+ 101 0002 7047     		bx	lr
+ 102              		.cfi_endproc
+ 103              	.LFE22:
+ 104              		.size	SVC_Handler, .-SVC_Handler
+ 105              		.section	.text.PendSV_Handler,"ax",%progbits
+ 106              		.align	2
+ 107              		.global	PendSV_Handler
+ 108              		.code	16
+ 109              		.thumb_func
+ 110              		.type	PendSV_Handler, %function
+ 111              	PendSV_Handler:
+ 112              	.LFB23:
+  83:src/stm32f0xx_it.c **** 
+  84:src/stm32f0xx_it.c **** /**
+  85:src/stm32f0xx_it.c ****   * @brief  This function handles PendSVC exception.
+  86:src/stm32f0xx_it.c ****   * @param  None
+  87:src/stm32f0xx_it.c ****   * @retval None
+  88:src/stm32f0xx_it.c ****   */
+  89:src/stm32f0xx_it.c **** void PendSV_Handler(void)
+  90:src/stm32f0xx_it.c **** {
+ 113              		.loc 1 90 0
+ 114              		.cfi_startproc
+  91:src/stm32f0xx_it.c **** }
+ 115              		.loc 1 91 0
+ 116 0000 C046     		nop
+ 117              		@ sp needed	@
+ 118 0002 7047     		bx	lr
+ 119              		.cfi_endproc
+ 120              	.LFE23:
+ 121              		.size	PendSV_Handler, .-PendSV_Handler
+ 122              		.section	.text.SysTick_Handler,"ax",%progbits
+ 123              		.align	2
+ 124              		.global	SysTick_Handler
+ 125              		.code	16
+ 126              		.thumb_func
+ 127              		.type	SysTick_Handler, %function
+ 128              	SysTick_Handler:
+ 129              	.LFB24:
+  92:src/stm32f0xx_it.c **** 
+  93:src/stm32f0xx_it.c **** /**
+  94:src/stm32f0xx_it.c ****   * @brief  This function handles SysTick Handler.
+  95:src/stm32f0xx_it.c ****   * @param  None
+  96:src/stm32f0xx_it.c ****   * @retval None
+  97:src/stm32f0xx_it.c ****   */
+  98:src/stm32f0xx_it.c **** void SysTick_Handler(void)
+  99:src/stm32f0xx_it.c **** {
+ARM GAS  /tmp/ccd26BFe.s 			page 5
+
+
+ 130              		.loc 1 99 0
+ 131              		.cfi_startproc
+ 132 0000 10B5     		push	{r4, lr}	@
+ 133              	.LCFI0:
+ 134              		.cfi_def_cfa_offset 8
+ 135              		.cfi_offset 4, -8
+ 136              		.cfi_offset 14, -4
+ 100:src/stm32f0xx_it.c **** 	TimingDelay_Decrement();
+ 137              		.loc 1 100 0
+ 138 0002 FFF7FEFF 		bl	TimingDelay_Decrement	@
+ 101:src/stm32f0xx_it.c **** }
+ 139              		.loc 1 101 0
+ 140 0006 C046     		nop
+ 141              		@ sp needed	@
+ 142 0008 10BD     		pop	{r4, pc}
+ 143              		.cfi_endproc
+ 144              	.LFE24:
+ 145              		.size	SysTick_Handler, .-SysTick_Handler
+ 146 000a C046     		.text
+ 147              	.Letext0:
+ 148              		.section	.debug_info,"",%progbits
+ 149              	.Ldebug_info0:
+ 150 0000 DD000000 		.4byte	0xdd
+ 151 0004 0200     		.2byte	0x2
+ 152 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 153 000a 04       		.byte	0x4
+ 154 000b 01       		.uleb128 0x1
+ 155 000c 9A000000 		.4byte	.LASF15
+ 156 0010 0C       		.byte	0xc
+ 157 0011 0E000000 		.4byte	.LASF16
+ 158 0015 3C000000 		.4byte	.LASF17
+ 159 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 160 001d 00000000 		.4byte	0
+ 161 0021 00000000 		.4byte	0
+ 162 0025 00000000 		.4byte	.Ldebug_line0
+ 163 0029 02       		.uleb128 0x2
+ 164 002a 01       		.byte	0x1
+ 165 002b 06       		.byte	0x6
+ 166 002c 9E010000 		.4byte	.LASF0
+ 167 0030 02       		.uleb128 0x2
+ 168 0031 01       		.byte	0x1
+ 169 0032 08       		.byte	0x8
+ 170 0033 2E000000 		.4byte	.LASF1
+ 171 0037 02       		.uleb128 0x2
+ 172 0038 02       		.byte	0x2
+ 173 0039 05       		.byte	0x5
+ 174 003a B6010000 		.4byte	.LASF2
+ 175 003e 02       		.uleb128 0x2
+ 176 003f 02       		.byte	0x2
+ 177 0040 07       		.byte	0x7
+ 178 0041 8B010000 		.4byte	.LASF3
+ 179 0045 02       		.uleb128 0x2
+ 180 0046 04       		.byte	0x4
+ 181 0047 05       		.byte	0x5
+ 182 0048 82010000 		.4byte	.LASF4
+ 183 004c 02       		.uleb128 0x2
+ 184 004d 04       		.byte	0x4
+ARM GAS  /tmp/ccd26BFe.s 			page 6
+
+
+ 185 004e 07       		.byte	0x7
+ 186 004f 71000000 		.4byte	.LASF5
+ 187 0053 02       		.uleb128 0x2
+ 188 0054 08       		.byte	0x8
+ 189 0055 05       		.byte	0x5
+ 190 0056 00000000 		.4byte	.LASF6
+ 191 005a 02       		.uleb128 0x2
+ 192 005b 08       		.byte	0x8
+ 193 005c 07       		.byte	0x7
+ 194 005d 83000000 		.4byte	.LASF7
+ 195 0061 03       		.uleb128 0x3
+ 196 0062 04       		.byte	0x4
+ 197 0063 05       		.byte	0x5
+ 198 0064 696E7400 		.ascii	"int\000"
+ 199 0068 02       		.uleb128 0x2
+ 200 0069 04       		.byte	0x4
+ 201 006a 07       		.byte	0x7
+ 202 006b 21000000 		.4byte	.LASF8
+ 203 006f 02       		.uleb128 0x2
+ 204 0070 04       		.byte	0x4
+ 205 0071 07       		.byte	0x7
+ 206 0072 C0010000 		.4byte	.LASF9
+ 207 0076 04       		.uleb128 0x4
+ 208 0077 01       		.byte	0x1
+ 209 0078 57010000 		.4byte	.LASF10
+ 210 007c 01       		.byte	0x1
+ 211 007d 3A       		.byte	0x3a
+ 212 007e 01       		.byte	0x1
+ 213 007f 00000000 		.4byte	.LFB20
+ 214 0083 04000000 		.4byte	.LFE20
+ 215 0087 02       		.byte	0x2
+ 216 0088 7D       		.byte	0x7d
+ 217 0089 00       		.sleb128 0
+ 218 008a 01       		.byte	0x1
+ 219 008b 04       		.uleb128 0x4
+ 220 008c 01       		.byte	0x1
+ 221 008d 45010000 		.4byte	.LASF11
+ 222 0091 01       		.byte	0x1
+ 223 0092 43       		.byte	0x43
+ 224 0093 01       		.byte	0x1
+ 225 0094 00000000 		.4byte	.LFB21
+ 226 0098 02000000 		.4byte	.LFE21
+ 227 009c 02       		.byte	0x2
+ 228 009d 7D       		.byte	0x7d
+ 229 009e 00       		.sleb128 0
+ 230 009f 01       		.byte	0x1
+ 231 00a0 04       		.uleb128 0x4
+ 232 00a1 01       		.byte	0x1
+ 233 00a2 AA010000 		.4byte	.LASF12
+ 234 00a6 01       		.byte	0x1
+ 235 00a7 50       		.byte	0x50
+ 236 00a8 01       		.byte	0x1
+ 237 00a9 00000000 		.4byte	.LFB22
+ 238 00ad 04000000 		.4byte	.LFE22
+ 239 00b1 02       		.byte	0x2
+ 240 00b2 7D       		.byte	0x7d
+ 241 00b3 00       		.sleb128 0
+ARM GAS  /tmp/ccd26BFe.s 			page 7
+
+
+ 242 00b4 01       		.byte	0x1
+ 243 00b5 04       		.uleb128 0x4
+ 244 00b6 01       		.byte	0x1
+ 245 00b7 63010000 		.4byte	.LASF13
+ 246 00bb 01       		.byte	0x1
+ 247 00bc 59       		.byte	0x59
+ 248 00bd 01       		.byte	0x1
+ 249 00be 00000000 		.4byte	.LFB23
+ 250 00c2 04000000 		.4byte	.LFE23
+ 251 00c6 02       		.byte	0x2
+ 252 00c7 7D       		.byte	0x7d
+ 253 00c8 00       		.sleb128 0
+ 254 00c9 01       		.byte	0x1
+ 255 00ca 05       		.uleb128 0x5
+ 256 00cb 01       		.byte	0x1
+ 257 00cc 72010000 		.4byte	.LASF14
+ 258 00d0 01       		.byte	0x1
+ 259 00d1 62       		.byte	0x62
+ 260 00d2 01       		.byte	0x1
+ 261 00d3 00000000 		.4byte	.LFB24
+ 262 00d7 0A000000 		.4byte	.LFE24
+ 263 00db 00000000 		.4byte	.LLST0
+ 264 00df 01       		.byte	0x1
+ 265 00e0 00       		.byte	0
+ 266              		.section	.debug_abbrev,"",%progbits
+ 267              	.Ldebug_abbrev0:
+ 268 0000 01       		.uleb128 0x1
+ 269 0001 11       		.uleb128 0x11
+ 270 0002 01       		.byte	0x1
+ 271 0003 25       		.uleb128 0x25
+ 272 0004 0E       		.uleb128 0xe
+ 273 0005 13       		.uleb128 0x13
+ 274 0006 0B       		.uleb128 0xb
+ 275 0007 03       		.uleb128 0x3
+ 276 0008 0E       		.uleb128 0xe
+ 277 0009 1B       		.uleb128 0x1b
+ 278 000a 0E       		.uleb128 0xe
+ 279 000b 55       		.uleb128 0x55
+ 280 000c 06       		.uleb128 0x6
+ 281 000d 11       		.uleb128 0x11
+ 282 000e 01       		.uleb128 0x1
+ 283 000f 52       		.uleb128 0x52
+ 284 0010 01       		.uleb128 0x1
+ 285 0011 10       		.uleb128 0x10
+ 286 0012 06       		.uleb128 0x6
+ 287 0013 00       		.byte	0
+ 288 0014 00       		.byte	0
+ 289 0015 02       		.uleb128 0x2
+ 290 0016 24       		.uleb128 0x24
+ 291 0017 00       		.byte	0
+ 292 0018 0B       		.uleb128 0xb
+ 293 0019 0B       		.uleb128 0xb
+ 294 001a 3E       		.uleb128 0x3e
+ 295 001b 0B       		.uleb128 0xb
+ 296 001c 03       		.uleb128 0x3
+ 297 001d 0E       		.uleb128 0xe
+ 298 001e 00       		.byte	0
+ARM GAS  /tmp/ccd26BFe.s 			page 8
+
+
+ 299 001f 00       		.byte	0
+ 300 0020 03       		.uleb128 0x3
+ 301 0021 24       		.uleb128 0x24
+ 302 0022 00       		.byte	0
+ 303 0023 0B       		.uleb128 0xb
+ 304 0024 0B       		.uleb128 0xb
+ 305 0025 3E       		.uleb128 0x3e
+ 306 0026 0B       		.uleb128 0xb
+ 307 0027 03       		.uleb128 0x3
+ 308 0028 08       		.uleb128 0x8
+ 309 0029 00       		.byte	0
+ 310 002a 00       		.byte	0
+ 311 002b 04       		.uleb128 0x4
+ 312 002c 2E       		.uleb128 0x2e
+ 313 002d 00       		.byte	0
+ 314 002e 3F       		.uleb128 0x3f
+ 315 002f 0C       		.uleb128 0xc
+ 316 0030 03       		.uleb128 0x3
+ 317 0031 0E       		.uleb128 0xe
+ 318 0032 3A       		.uleb128 0x3a
+ 319 0033 0B       		.uleb128 0xb
+ 320 0034 3B       		.uleb128 0x3b
+ 321 0035 0B       		.uleb128 0xb
+ 322 0036 27       		.uleb128 0x27
+ 323 0037 0C       		.uleb128 0xc
+ 324 0038 11       		.uleb128 0x11
+ 325 0039 01       		.uleb128 0x1
+ 326 003a 12       		.uleb128 0x12
+ 327 003b 01       		.uleb128 0x1
+ 328 003c 40       		.uleb128 0x40
+ 329 003d 0A       		.uleb128 0xa
+ 330 003e 9742     		.uleb128 0x2117
+ 331 0040 0C       		.uleb128 0xc
+ 332 0041 00       		.byte	0
+ 333 0042 00       		.byte	0
+ 334 0043 05       		.uleb128 0x5
+ 335 0044 2E       		.uleb128 0x2e
+ 336 0045 00       		.byte	0
+ 337 0046 3F       		.uleb128 0x3f
+ 338 0047 0C       		.uleb128 0xc
+ 339 0048 03       		.uleb128 0x3
+ 340 0049 0E       		.uleb128 0xe
+ 341 004a 3A       		.uleb128 0x3a
+ 342 004b 0B       		.uleb128 0xb
+ 343 004c 3B       		.uleb128 0x3b
+ 344 004d 0B       		.uleb128 0xb
+ 345 004e 27       		.uleb128 0x27
+ 346 004f 0C       		.uleb128 0xc
+ 347 0050 11       		.uleb128 0x11
+ 348 0051 01       		.uleb128 0x1
+ 349 0052 12       		.uleb128 0x12
+ 350 0053 01       		.uleb128 0x1
+ 351 0054 40       		.uleb128 0x40
+ 352 0055 06       		.uleb128 0x6
+ 353 0056 9642     		.uleb128 0x2116
+ 354 0058 0C       		.uleb128 0xc
+ 355 0059 00       		.byte	0
+ARM GAS  /tmp/ccd26BFe.s 			page 9
+
+
+ 356 005a 00       		.byte	0
+ 357 005b 00       		.byte	0
+ 358              		.section	.debug_loc,"",%progbits
+ 359              	.Ldebug_loc0:
+ 360              	.LLST0:
+ 361 0000 00000000 		.4byte	.LFB24
+ 362 0004 02000000 		.4byte	.LCFI0
+ 363 0008 0200     		.2byte	0x2
+ 364 000a 7D       		.byte	0x7d
+ 365 000b 00       		.sleb128 0
+ 366 000c 02000000 		.4byte	.LCFI0
+ 367 0010 0A000000 		.4byte	.LFE24
+ 368 0014 0200     		.2byte	0x2
+ 369 0016 7D       		.byte	0x7d
+ 370 0017 08       		.sleb128 8
+ 371 0018 00000000 		.4byte	0
+ 372 001c 00000000 		.4byte	0
+ 373              		.section	.debug_aranges,"",%progbits
+ 374 0000 3C000000 		.4byte	0x3c
+ 375 0004 0200     		.2byte	0x2
+ 376 0006 00000000 		.4byte	.Ldebug_info0
+ 377 000a 04       		.byte	0x4
+ 378 000b 00       		.byte	0
+ 379 000c 0000     		.2byte	0
+ 380 000e 0000     		.2byte	0
+ 381 0010 00000000 		.4byte	.LFB20
+ 382 0014 04000000 		.4byte	.LFE20-.LFB20
+ 383 0018 00000000 		.4byte	.LFB21
+ 384 001c 02000000 		.4byte	.LFE21-.LFB21
+ 385 0020 00000000 		.4byte	.LFB22
+ 386 0024 04000000 		.4byte	.LFE22-.LFB22
+ 387 0028 00000000 		.4byte	.LFB23
+ 388 002c 04000000 		.4byte	.LFE23-.LFB23
+ 389 0030 00000000 		.4byte	.LFB24
+ 390 0034 0A000000 		.4byte	.LFE24-.LFB24
+ 391 0038 00000000 		.4byte	0
+ 392 003c 00000000 		.4byte	0
+ 393              		.section	.debug_ranges,"",%progbits
+ 394              	.Ldebug_ranges0:
+ 395 0000 00000000 		.4byte	.LFB20
+ 396 0004 04000000 		.4byte	.LFE20
+ 397 0008 00000000 		.4byte	.LFB21
+ 398 000c 02000000 		.4byte	.LFE21
+ 399 0010 00000000 		.4byte	.LFB22
+ 400 0014 04000000 		.4byte	.LFE22
+ 401 0018 00000000 		.4byte	.LFB23
+ 402 001c 04000000 		.4byte	.LFE23
+ 403 0020 00000000 		.4byte	.LFB24
+ 404 0024 0A000000 		.4byte	.LFE24
+ 405 0028 00000000 		.4byte	0
+ 406 002c 00000000 		.4byte	0
+ 407              		.section	.debug_line,"",%progbits
+ 408              	.Ldebug_line0:
+ 409 0000 88000000 		.section	.debug_str,"MS",%progbits,1
+ 409      02002900 
+ 409      00000201 
+ 409      FB0E0D00 
+ARM GAS  /tmp/ccd26BFe.s 			page 10
+
+
+ 409      01010101 
+ 410              	.LASF6:
+ 411 0000 6C6F6E67 		.ascii	"long long int\000"
+ 411      206C6F6E 
+ 411      6720696E 
+ 411      7400
+ 412              	.LASF16:
+ 413 000e 7372632F 		.ascii	"src/stm32f0xx_it.c\000"
+ 413      73746D33 
+ 413      32663078 
+ 413      785F6974 
+ 413      2E6300
+ 414              	.LASF8:
+ 415 0021 756E7369 		.ascii	"unsigned int\000"
+ 415      676E6564 
+ 415      20696E74 
+ 415      00
+ 416              	.LASF1:
+ 417 002e 756E7369 		.ascii	"unsigned char\000"
+ 417      676E6564 
+ 417      20636861 
+ 417      7200
+ 418              	.LASF17:
+ 419 003c 2F686F6D 		.ascii	"/home/med/Documents/stm32_proj/atom_planolux_redond"
+ 419      652F6D65 
+ 419      642F446F 
+ 419      63756D65 
+ 419      6E74732F 
+ 420 006f 6100     		.ascii	"a\000"
+ 421              	.LASF5:
+ 422 0071 6C6F6E67 		.ascii	"long unsigned int\000"
+ 422      20756E73 
+ 422      69676E65 
+ 422      6420696E 
+ 422      7400
+ 423              	.LASF7:
+ 424 0083 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 424      206C6F6E 
+ 424      6720756E 
+ 424      7369676E 
+ 424      65642069 
+ 425              	.LASF15:
+ 426 009a 474E5520 		.ascii	"GNU C11 5.2.1 20151202 (release) [ARM/embedded-5-br"
+ 426      43313120 
+ 426      352E322E 
+ 426      31203230 
+ 426      31353132 
+ 427 00cd 616E6368 		.ascii	"anch revision 231848] -mcpu=cortex-m0 -mthumb -g -g"
+ 427      20726576 
+ 427      6973696F 
+ 427      6E203233 
+ 427      31383438 
+ 428 0100 64776172 		.ascii	"dwarf-2 -O0 -fomit-frame-pointer -fdata-sections -f"
+ 428      662D3220 
+ 428      2D4F3020 
+ 428      2D666F6D 
+ 428      69742D66 
+ARM GAS  /tmp/ccd26BFe.s 			page 11
+
+
+ 429 0133 66756E63 		.ascii	"function-sections\000"
+ 429      74696F6E 
+ 429      2D736563 
+ 429      74696F6E 
+ 429      7300
+ 430              	.LASF11:
+ 431 0145 48617264 		.ascii	"HardFault_Handler\000"
+ 431      4661756C 
+ 431      745F4861 
+ 431      6E646C65 
+ 431      7200
+ 432              	.LASF10:
+ 433 0157 4E4D495F 		.ascii	"NMI_Handler\000"
+ 433      48616E64 
+ 433      6C657200 
+ 434              	.LASF13:
+ 435 0163 50656E64 		.ascii	"PendSV_Handler\000"
+ 435      53565F48 
+ 435      616E646C 
+ 435      657200
+ 436              	.LASF14:
+ 437 0172 53797354 		.ascii	"SysTick_Handler\000"
+ 437      69636B5F 
+ 437      48616E64 
+ 437      6C657200 
+ 438              	.LASF4:
+ 439 0182 6C6F6E67 		.ascii	"long int\000"
+ 439      20696E74 
+ 439      00
+ 440              	.LASF3:
+ 441 018b 73686F72 		.ascii	"short unsigned int\000"
+ 441      7420756E 
+ 441      7369676E 
+ 441      65642069 
+ 441      6E7400
+ 442              	.LASF0:
+ 443 019e 7369676E 		.ascii	"signed char\000"
+ 443      65642063 
+ 443      68617200 
+ 444              	.LASF12:
+ 445 01aa 5356435F 		.ascii	"SVC_Handler\000"
+ 445      48616E64 
+ 445      6C657200 
+ 446              	.LASF2:
+ 447 01b6 73686F72 		.ascii	"short int\000"
+ 447      7420696E 
+ 447      7400
+ 448              	.LASF9:
+ 449 01c0 73697A65 		.ascii	"sizetype\000"
+ 449      74797065 
+ 449      00
+ 450              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
+ARM GAS  /tmp/ccd26BFe.s 			page 12
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 stm32f0xx_it.c
+     /tmp/ccd26BFe.s:55     .text.NMI_Handler:00000000 $t
+     /tmp/ccd26BFe.s:60     .text.NMI_Handler:00000000 NMI_Handler
+     /tmp/ccd26BFe.s:73     .text.HardFault_Handler:00000000 $t
+     /tmp/ccd26BFe.s:78     .text.HardFault_Handler:00000000 HardFault_Handler
+     /tmp/ccd26BFe.s:89     .text.SVC_Handler:00000000 $t
+     /tmp/ccd26BFe.s:94     .text.SVC_Handler:00000000 SVC_Handler
+     /tmp/ccd26BFe.s:106    .text.PendSV_Handler:00000000 $t
+     /tmp/ccd26BFe.s:111    .text.PendSV_Handler:00000000 PendSV_Handler
+     /tmp/ccd26BFe.s:123    .text.SysTick_Handler:00000000 $t
+     /tmp/ccd26BFe.s:128    .text.SysTick_Handler:00000000 SysTick_Handler
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+TimingDelay_Decrement

@@ -1,0 +1,2737 @@
+ARM GAS  /tmp/ccNauqbt.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m0
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1	@ Tag_ABI_FP_denormal
+   5              		.eabi_attribute 21, 1	@ Tag_ABI_FP_exceptions
+   6              		.eabi_attribute 23, 3	@ Tag_ABI_FP_number_model
+   7              		.eabi_attribute 24, 1	@ Tag_ABI_align8_needed
+   8              		.eabi_attribute 25, 1	@ Tag_ABI_align8_preserved
+   9              		.eabi_attribute 26, 1	@ Tag_ABI_enum_size
+  10              		.eabi_attribute 30, 6	@ Tag_ABI_optimization_goals
+  11              		.eabi_attribute 34, 0	@ Tag_CPU_unaligned_access
+  12              		.eabi_attribute 18, 4	@ Tag_ABI_PCS_wchar_t
+  13              		.file	"flash_program.c"
+  14              	@ GNU C11 (GNU Tools for ARM Embedded Processors) version 5.2.1 20151202 (release) [ARM/embedded-5-
+  15              	@	compiled by GNU C version 4.7.4, GMP version 4.3.2, MPFR version 2.4.2, MPC version 0.8.1
+  16              	@ GGC heuristics: --param ggc-min-expand=100 --param ggc-min-heapsize=131072
+  17              	@ options passed:  -I . -I ./src -I ./cmsis_boot -I ./cmsis_core
+  18              	@ -I ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/inc
+  19              	@ -I ./inc -I ./cmsis_boot -imultilib armv6-m
+  20              	@ -iprefix /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/
+  21              	@ -isysroot /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../arm-none-eabi
+  22              	@ -D__USES_INITFINI__ src/flash_program.c -mcpu=cortex-m0 -mthumb
+  23              	@ -auxbase-strip src/flash_program.o -g -gdwarf-2 -O0 -Wall
+  24              	@ -fomit-frame-pointer -fdata-sections -ffunction-sections -fverbose-asm
+  25              	@ options enabled:  -faggressive-loop-optimizations -fauto-inc-dec
+  26              	@ -fchkp-check-incomplete-type -fchkp-check-read -fchkp-check-write
+  27              	@ -fchkp-instrument-calls -fchkp-narrow-bounds -fchkp-optimize
+  28              	@ -fchkp-store-bounds -fchkp-use-static-bounds
+  29              	@ -fchkp-use-static-const-bounds -fchkp-use-wrappers -fcommon
+  30              	@ -fdata-sections -fdelete-null-pointer-checks -fdwarf2-cfi-asm
+  31              	@ -fearly-inlining -feliminate-unused-debug-types -ffunction-cse
+  32              	@ -ffunction-sections -fgcse-lm -fgnu-runtime -fgnu-unique -fident
+  33              	@ -finline-atomics -fira-hoist-pressure -fira-share-save-slots
+  34              	@ -fira-share-spill-slots -fivopts -fkeep-static-consts
+  35              	@ -fleading-underscore -flifetime-dse -flto-odr-type-merging -fmath-errno
+  36              	@ -fmerge-debug-strings -fomit-frame-pointer -fpeephole
+  37              	@ -fprefetch-loop-arrays -freg-struct-return
+  38              	@ -fsched-critical-path-heuristic -fsched-dep-count-heuristic
+  39              	@ -fsched-group-heuristic -fsched-interblock -fsched-last-insn-heuristic
+  40              	@ -fsched-rank-heuristic -fsched-spec -fsched-spec-insn-heuristic
+  41              	@ -fsched-stalled-insns-dep -fsemantic-interposition -fshow-column
+  42              	@ -fsigned-zeros -fsplit-ivs-in-unroller -fstdarg-opt
+  43              	@ -fstrict-volatile-bitfields -fsync-libcalls -ftrapping-math
+  44              	@ -ftree-coalesce-vars -ftree-cselim -ftree-forwprop -ftree-loop-if-convert
+  45              	@ -ftree-loop-im -ftree-loop-ivcanon -ftree-loop-optimize
+  46              	@ -ftree-parallelize-loops= -ftree-phiprop -ftree-reassoc -ftree-scev-cprop
+  47              	@ -funit-at-a-time -fverbose-asm -fzero-initialized-in-bss -mlittle-endian
+  48              	@ -mpic-data-is-text-relative -msched-prolog -mthumb
+  49              	@ -mvectorize-with-neon-quad
+  50              	
+  51              		.text
+  52              	.Ltext0:
+  53              		.cfi_sections	.debug_frame
+  54              		.global	pmem
+  55              		.section	.data.pmem,"aw",%progbits
+  56              		.align	2
+  57              		.type	pmem, %object
+ARM GAS  /tmp/ccNauqbt.s 			page 2
+
+
+  58              		.size	pmem, 4
+  59              	pmem:
+  60 0000 00700008 		.word	134246400
+  61              		.section	.text.ReadMem,"ax",%progbits
+  62              		.align	2
+  63              		.global	ReadMem
+  64              		.code	16
+  65              		.thumb_func
+  66              		.type	ReadMem, %function
+  67              	ReadMem:
+  68              	.LFB20:
+  69              		.file 1 "src/flash_program.c"
+   1:src/flash_program.c **** /**
+   2:src/flash_program.c ****   *****************************************************************************
+   3:src/flash_program.c ****   * @title   FLASH_Program.c
+   4:src/flash_program.c ****   * @author  CooCox
+   5:src/flash_program.c ****   * @date    31 Oct 2012
+   6:src/flash_program.c ****   * @brief   This example provides a description of how to program the STM32F
+   7:src/flash_program.c ****   *          10x FLASH.
+   8:src/flash_program.c ****   *          the result of the programming operation is stored in
+   9:src/flash_program.c ****   *          to the MemoryProgramStatus variable.
+  10:src/flash_program.c ****   *          Four LEDs are toggled if t
+  11:src/flash_program.c ****   *          he flash program has been down.
+  12:src/flash_program.c ****   *          This example has been tested on
+  13:src/flash_program.c ****   *           KEIL MCBSTM32 board, STM32F103RBT6 device.
+  14:src/flash_program.c ****   *******************************************************************************
+  15:src/flash_program.c ****   */
+  16:src/flash_program.c **** ////// The above comment is automatically generated by CoIDE ///////////////////
+  17:src/flash_program.c **** 
+  18:src/flash_program.c **** 
+  19:src/flash_program.c **** #include "flash_program.h"
+  20:src/flash_program.c **** #include "stm32f0xx_flash.h"
+  21:src/flash_program.c **** 
+  22:src/flash_program.c **** 
+  23:src/flash_program.c **** 
+  24:src/flash_program.c **** /* Externals variables ---------------------------------------------------------*/
+  25:src/flash_program.c **** #ifdef CONFIGURATION_IN_FLASH
+  26:src/flash_program.c **** extern unsigned char b1t;
+  27:src/flash_program.c **** extern unsigned char b1r;
+  28:src/flash_program.c **** extern unsigned char b2t;
+  29:src/flash_program.c **** extern unsigned char b2r;
+  30:src/flash_program.c **** extern unsigned char b3t;
+  31:src/flash_program.c **** extern unsigned char b3r;
+  32:src/flash_program.c **** extern unsigned char b4t;
+  33:src/flash_program.c **** extern unsigned char b4r;
+  34:src/flash_program.c **** 
+  35:src/flash_program.c **** extern parameters_typedef param_struct;
+  36:src/flash_program.c **** #endif
+  37:src/flash_program.c **** 
+  38:src/flash_program.c **** #ifdef CONFIGURATION_IN_SST
+  39:src/flash_program.c **** extern parameters_typedef param_struct;
+  40:src/flash_program.c **** #endif
+  41:src/flash_program.c **** 
+  42:src/flash_program.c **** /* Private typedef -----------------------------------------------------------*/
+  43:src/flash_program.c **** 
+  44:src/flash_program.c **** 
+  45:src/flash_program.c **** /* Private define ------------------------------------------------------------*/
+ARM GAS  /tmp/ccNauqbt.s 			page 3
+
+
+  46:src/flash_program.c **** 
+  47:src/flash_program.c **** 
+  48:src/flash_program.c **** extern parameters_typedef param_struct;
+  49:src/flash_program.c **** extern mem_bkp_typedef memory_backup;
+  50:src/flash_program.c **** extern filesystem_typedef files;
+  51:src/flash_program.c **** //extern unsigned int v_bkp [];
+  52:src/flash_program.c **** 
+  53:src/flash_program.c **** /* Private macro -------------------------------------------------------------*/
+  54:src/flash_program.c **** /* Private variables ---------------------------------------------------------*/
+  55:src/flash_program.c **** 
+  56:src/flash_program.c **** //const int vmem [1024] ;
+  57:src/flash_program.c **** unsigned int * pmem = (unsigned int *)0x08007000;	//Sector 7 Page 28
+  58:src/flash_program.c **** 
+  59:src/flash_program.c **** 
+  60:src/flash_program.c **** /* Private function prototypes -----------------------------------------------*/
+  61:src/flash_program.c **** /* Private functions ---------------------------------------------------------*/
+  62:src/flash_program.c **** unsigned char ReadMem (void)
+  63:src/flash_program.c **** {
+  70              		.loc 1 63 0
+  71              		.cfi_startproc
+  64:src/flash_program.c **** 	if (*pmem == 0xffffffff)
+  72              		.loc 1 64 0
+  73 0000 044B     		ldr	r3, .L4	@ tmp114,
+  74 0002 1B68     		ldr	r3, [r3]	@ D.5072, pmem
+  75 0004 1B68     		ldr	r3, [r3]	@ D.5073, *_3
+  76 0006 0133     		adds	r3, r3, #1	@ tmp116, D.5073,
+  77 0008 01D1     		bne	.L2	@,
+  65:src/flash_program.c **** 		return 1;
+  78              		.loc 1 65 0
+  79 000a 0123     		movs	r3, #1	@ D.5071,
+  80 000c 00E0     		b	.L3	@
+  81              	.L2:
+  66:src/flash_program.c **** 	else
+  67:src/flash_program.c **** 		return 0;
+  82              		.loc 1 67 0
+  83 000e 0023     		movs	r3, #0	@ D.5071,
+  84              	.L3:
+  68:src/flash_program.c **** }
+  85              		.loc 1 68 0
+  86 0010 1800     		movs	r0, r3	@, <retval>
+  87              		@ sp needed	@
+  88 0012 7047     		bx	lr
+  89              	.L5:
+  90              		.align	2
+  91              	.L4:
+  92 0014 00000000 		.word	pmem
+  93              		.cfi_endproc
+  94              	.LFE20:
+  95              		.size	ReadMem, .-ReadMem
+  96              		.section	.text.EraseAllMemory_FLASH,"ax",%progbits
+  97              		.align	2
+  98              		.global	EraseAllMemory_FLASH
+  99              		.code	16
+ 100              		.thumb_func
+ 101              		.type	EraseAllMemory_FLASH, %function
+ 102              	EraseAllMemory_FLASH:
+ 103              	.LFB21:
+ARM GAS  /tmp/ccNauqbt.s 			page 4
+
+
+  69:src/flash_program.c **** 
+  70:src/flash_program.c **** unsigned char EraseAllMemory_FLASH(void)
+  71:src/flash_program.c **** {
+ 104              		.loc 1 71 0
+ 105              		.cfi_startproc
+ 106 0000 00B5     		push	{lr}	@
+ 107              	.LCFI0:
+ 108              		.cfi_def_cfa_offset 4
+ 109              		.cfi_offset 14, -4
+ 110 0002 83B0     		sub	sp, sp, #12	@,,
+ 111              	.LCFI1:
+ 112              		.cfi_def_cfa_offset 16
+  72:src/flash_program.c **** 	unsigned char resp = 0;
+ 113              		.loc 1 72 0
+ 114 0004 6B46     		mov	r3, sp	@ tmp127,
+ 115 0006 0733     		adds	r3, r3, #7	@ tmp115,
+ 116 0008 0022     		movs	r2, #0	@ tmp116,
+ 117 000a 1A70     		strb	r2, [r3]	@ tmp117, resp
+  73:src/flash_program.c **** 
+  74:src/flash_program.c **** 	ErasePage(PAGE31,1);
+ 118              		.loc 1 74 0
+ 119 000c 0D4B     		ldr	r3, .L10	@ tmp118,
+ 120 000e 0121     		movs	r1, #1	@,
+ 121 0010 1800     		movs	r0, r3	@, tmp118
+ 122 0012 FFF7FEFF 		bl	ErasePage	@
+  75:src/flash_program.c **** 	//reviso si borre
+  76:src/flash_program.c **** 
+  77:src/flash_program.c **** 	if (*(unsigned int *) PAGE31 == 0xFFFFFFFF)
+ 123              		.loc 1 77 0
+ 124 0016 0B4B     		ldr	r3, .L10	@ D.5075,
+ 125 0018 1B68     		ldr	r3, [r3]	@ D.5076, *_6
+ 126 001a 0133     		adds	r3, r3, #1	@ tmp126, D.5076,
+ 127 001c 06D1     		bne	.L7	@,
+  78:src/flash_program.c **** 		resp++;
+ 128              		.loc 1 78 0
+ 129 001e 6B46     		mov	r3, sp	@ tmp128,
+ 130 0020 0733     		adds	r3, r3, #7	@ tmp119,
+ 131 0022 1A78     		ldrb	r2, [r3]	@ D.5074, resp
+ 132 0024 6B46     		mov	r3, sp	@ tmp129,
+ 133 0026 0733     		adds	r3, r3, #7	@ tmp120,
+ 134 0028 0132     		adds	r2, r2, #1	@ tmp121,
+ 135 002a 1A70     		strb	r2, [r3]	@ tmp122, resp
+ 136              	.L7:
+  79:src/flash_program.c **** 
+  80:src/flash_program.c **** 	if (resp)
+ 137              		.loc 1 80 0
+ 138 002c 6B46     		mov	r3, sp	@ tmp130,
+ 139 002e 0733     		adds	r3, r3, #7	@ tmp123,
+ 140 0030 1B78     		ldrb	r3, [r3]	@ tmp124, resp
+ 141 0032 002B     		cmp	r3, #0	@ tmp124,
+ 142 0034 01D0     		beq	.L8	@,
+  81:src/flash_program.c **** 		return PASSED;
+ 143              		.loc 1 81 0
+ 144 0036 0123     		movs	r3, #1	@ D.5074,
+ 145 0038 00E0     		b	.L9	@
+ 146              	.L8:
+  82:src/flash_program.c **** 	else
+ARM GAS  /tmp/ccNauqbt.s 			page 5
+
+
+  83:src/flash_program.c **** 		return FAILED;
+ 147              		.loc 1 83 0
+ 148 003a 0023     		movs	r3, #0	@ D.5074,
+ 149              	.L9:
+  84:src/flash_program.c **** }
+ 150              		.loc 1 84 0
+ 151 003c 1800     		movs	r0, r3	@, <retval>
+ 152 003e 03B0     		add	sp, sp, #12	@,,
+ 153              		@ sp needed	@
+ 154 0040 00BD     		pop	{pc}
+ 155              	.L11:
+ 156 0042 C046     		.align	2
+ 157              	.L10:
+ 158 0044 007C0008 		.word	134249472
+ 159              		.cfi_endproc
+ 160              	.LFE21:
+ 161              		.size	EraseAllMemory_FLASH, .-EraseAllMemory_FLASH
+ 162              		.section	.text.Write_Code_To_Memory_FLASH,"ax",%progbits
+ 163              		.align	2
+ 164              		.global	Write_Code_To_Memory_FLASH
+ 165              		.code	16
+ 166              		.thumb_func
+ 167              		.type	Write_Code_To_Memory_FLASH, %function
+ 168              	Write_Code_To_Memory_FLASH:
+ 169              	.LFB22:
+  85:src/flash_program.c **** 
+  86:src/flash_program.c **** /*
+  87:src/flash_program.c **** unsigned short Look_Code_In_Memory(unsigned int code_to_look_for)
+  88:src/flash_program.c **** {
+  89:src/flash_program.c **** 	unsigned short i;
+  90:src/flash_program.c **** 
+  91:src/flash_program.c **** 	for (i = 0; i < FLASH_PAGE_SIZE; i++)
+  92:src/flash_program.c **** 	{
+  93:src/flash_program.c **** 		if (*(unsigned int*) (PAGE28_START + i) == code_to_look_for)
+  94:src/flash_program.c **** 			return i;
+  95:src/flash_program.c **** 	}
+  96:src/flash_program.c **** 
+  97:src/flash_program.c **** 	return 0xFFFF;
+  98:src/flash_program.c **** }
+  99:src/flash_program.c **** */
+ 100:src/flash_program.c **** 
+ 101:src/flash_program.c **** unsigned char Write_Code_To_Memory_FLASH(unsigned short position, unsigned int new_code)
+ 102:src/flash_program.c **** {
+ 170              		.loc 1 102 0
+ 171              		.cfi_startproc
+ 172 0000 00B5     		push	{lr}	@
+ 173              	.LCFI2:
+ 174              		.cfi_def_cfa_offset 4
+ 175              		.cfi_offset 14, -4
+ 176 0002 83B0     		sub	sp, sp, #12	@,,
+ 177              	.LCFI3:
+ 178              		.cfi_def_cfa_offset 16
+ 179 0004 0200     		movs	r2, r0	@ tmp123, position
+ 180 0006 0091     		str	r1, [sp]	@ new_code, new_code
+ 181 0008 6B46     		mov	r3, sp	@ tmp193,
+ 182 000a 0633     		adds	r3, r3, #6	@ tmp124,
+ 183 000c 1A80     		strh	r2, [r3]	@ tmp125, position
+ARM GAS  /tmp/ccNauqbt.s 			page 6
+
+
+ 103:src/flash_program.c **** 	//check if possition is good
+ 104:src/flash_program.c **** 	if (position > PAGE31_END)
+ 184              		.loc 1 104 0
+ 185 000e 6B46     		mov	r3, sp	@ tmp194,
+ 186 0010 0633     		adds	r3, r3, #6	@ tmp126,
+ 187 0012 1B88     		ldrh	r3, [r3]	@ tmp127, position
+ 188 0014 544A     		ldr	r2, .L23	@ tmp128,
+ 189 0016 9342     		cmp	r3, r2	@ tmp127, tmp128
+ 190 0018 01D9     		bls	.L13	@,
+ 105:src/flash_program.c **** 		return FAILED;
+ 191              		.loc 1 105 0
+ 192 001a 0023     		movs	r3, #0	@ D.5077,
+ 193 001c A1E0     		b	.L14	@
+ 194              	.L13:
+ 106:src/flash_program.c **** 
+ 107:src/flash_program.c **** 	if (position >= PAGE31_START)
+ 195              		.loc 1 107 0
+ 196 001e 6B46     		mov	r3, sp	@ tmp195,
+ 197 0020 0633     		adds	r3, r3, #6	@ tmp129,
+ 198 0022 1B88     		ldrh	r3, [r3]	@ tmp130, position
+ 199 0024 514A     		ldr	r2, .L23+4	@ tmp131,
+ 200 0026 9342     		cmp	r3, r2	@ tmp130, tmp131
+ 201 0028 25D9     		bls	.L15	@,
+ 108:src/flash_program.c **** 	{
+ 109:src/flash_program.c **** 		BackupPage(memory_backup.v_bkp, (unsigned int *) PAGE31);
+ 202              		.loc 1 109 0
+ 203 002a 514A     		ldr	r2, .L23+8	@ tmp132,
+ 204 002c 514B     		ldr	r3, .L23+12	@ tmp133,
+ 205 002e 1100     		movs	r1, r2	@, tmp132
+ 206 0030 1800     		movs	r0, r3	@, tmp133
+ 207 0032 FFF7FEFF 		bl	BackupPage	@
+ 110:src/flash_program.c **** 		ErasePage(PAGE31,0);
+ 208              		.loc 1 110 0
+ 209 0036 4E4B     		ldr	r3, .L23+8	@ tmp134,
+ 210 0038 0021     		movs	r1, #0	@,
+ 211 003a 1800     		movs	r0, r3	@, tmp134
+ 212 003c FFF7FEFF 		bl	ErasePage	@
+ 111:src/flash_program.c **** 		if (UpdateNewCode(memory_backup.v_bkp, position - PAGE31_START, new_code) == FAILED)
+ 213              		.loc 1 111 0
+ 214 0040 6B46     		mov	r3, sp	@ tmp196,
+ 215 0042 0633     		adds	r3, r3, #6	@ tmp135,
+ 216 0044 1B88     		ldrh	r3, [r3]	@ tmp136, position
+ 217 0046 4C4A     		ldr	r2, .L23+16	@ tmp197,
+ 218 0048 9446     		mov	ip, r2	@ tmp197, tmp197
+ 219 004a 6344     		add	r3, r3, ip	@ tmp137, tmp197
+ 220 004c 99B2     		uxth	r1, r3	@ D.5078, tmp137
+ 221 004e 009A     		ldr	r2, [sp]	@ tmp138, new_code
+ 222 0050 484B     		ldr	r3, .L23+12	@ tmp139,
+ 223 0052 1800     		movs	r0, r3	@, tmp139
+ 224 0054 FFF7FEFF 		bl	UpdateNewCode	@
+ 225 0058 031E     		subs	r3, r0, #0	@ tmp140,,
+ 226 005a 01D1     		bne	.L16	@,
+ 112:src/flash_program.c **** 			return FAILED;
+ 227              		.loc 1 112 0
+ 228 005c 0023     		movs	r3, #0	@ D.5077,
+ 229 005e 80E0     		b	.L14	@
+ 230              	.L16:
+ARM GAS  /tmp/ccNauqbt.s 			page 7
+
+
+ 113:src/flash_program.c **** 
+ 114:src/flash_program.c **** 		if (WritePage(memory_backup.v_bkp, PAGE31, 1) == FAILED)
+ 231              		.loc 1 114 0
+ 232 0060 4349     		ldr	r1, .L23+8	@ tmp142,
+ 233 0062 444B     		ldr	r3, .L23+12	@ tmp143,
+ 234 0064 0122     		movs	r2, #1	@,
+ 235 0066 1800     		movs	r0, r3	@, tmp143
+ 236 0068 FFF7FEFF 		bl	WritePage	@
+ 237 006c 031E     		subs	r3, r0, #0	@ tmp144,,
+ 238 006e 00D0     		beq	.LCB159	@
+ 239 0070 76E0     		b	.L17	@long jump	@
+ 240              	.LCB159:
+ 115:src/flash_program.c **** 			return FAILED;
+ 241              		.loc 1 115 0
+ 242 0072 0023     		movs	r3, #0	@ D.5077,
+ 243 0074 75E0     		b	.L14	@
+ 244              	.L15:
+ 116:src/flash_program.c **** 	}
+ 117:src/flash_program.c **** 	else if (position >= PAGE30_START)
+ 245              		.loc 1 117 0
+ 246 0076 6B46     		mov	r3, sp	@ tmp199,
+ 247 0078 0633     		adds	r3, r3, #6	@ tmp146,
+ 248 007a 1B88     		ldrh	r3, [r3]	@ tmp147, position
+ 249 007c 3F4A     		ldr	r2, .L23+20	@ tmp148,
+ 250 007e 9342     		cmp	r3, r2	@ tmp147, tmp148
+ 251 0080 24D9     		bls	.L18	@,
+ 118:src/flash_program.c **** 	{
+ 119:src/flash_program.c **** 		BackupPage(memory_backup.v_bkp, (unsigned int *) PAGE30);
+ 252              		.loc 1 119 0
+ 253 0082 3F4A     		ldr	r2, .L23+24	@ tmp149,
+ 254 0084 3B4B     		ldr	r3, .L23+12	@ tmp150,
+ 255 0086 1100     		movs	r1, r2	@, tmp149
+ 256 0088 1800     		movs	r0, r3	@, tmp150
+ 257 008a FFF7FEFF 		bl	BackupPage	@
+ 120:src/flash_program.c **** 		ErasePage(PAGE30,0);
+ 258              		.loc 1 120 0
+ 259 008e 3C4B     		ldr	r3, .L23+24	@ tmp151,
+ 260 0090 0021     		movs	r1, #0	@,
+ 261 0092 1800     		movs	r0, r3	@, tmp151
+ 262 0094 FFF7FEFF 		bl	ErasePage	@
+ 121:src/flash_program.c **** 		if (UpdateNewCode(memory_backup.v_bkp, position - PAGE30_START, new_code) == FAILED)
+ 263              		.loc 1 121 0
+ 264 0098 6B46     		mov	r3, sp	@ tmp200,
+ 265 009a 0633     		adds	r3, r3, #6	@ tmp152,
+ 266 009c 1B88     		ldrh	r3, [r3]	@ tmp153, position
+ 267 009e 394A     		ldr	r2, .L23+28	@ tmp201,
+ 268 00a0 9446     		mov	ip, r2	@ tmp201, tmp201
+ 269 00a2 6344     		add	r3, r3, ip	@ tmp154, tmp201
+ 270 00a4 99B2     		uxth	r1, r3	@ D.5078, tmp154
+ 271 00a6 009A     		ldr	r2, [sp]	@ tmp155, new_code
+ 272 00a8 324B     		ldr	r3, .L23+12	@ tmp156,
+ 273 00aa 1800     		movs	r0, r3	@, tmp156
+ 274 00ac FFF7FEFF 		bl	UpdateNewCode	@
+ 275 00b0 031E     		subs	r3, r0, #0	@ tmp157,,
+ 276 00b2 01D1     		bne	.L19	@,
+ 122:src/flash_program.c **** 			return FAILED;
+ 277              		.loc 1 122 0
+ARM GAS  /tmp/ccNauqbt.s 			page 8
+
+
+ 278 00b4 0023     		movs	r3, #0	@ D.5077,
+ 279 00b6 54E0     		b	.L14	@
+ 280              	.L19:
+ 123:src/flash_program.c **** 
+ 124:src/flash_program.c **** 		if (WritePage(memory_backup.v_bkp, PAGE30, 1) == FAILED)
+ 281              		.loc 1 124 0
+ 282 00b8 3149     		ldr	r1, .L23+24	@ tmp159,
+ 283 00ba 2E4B     		ldr	r3, .L23+12	@ tmp160,
+ 284 00bc 0122     		movs	r2, #1	@,
+ 285 00be 1800     		movs	r0, r3	@, tmp160
+ 286 00c0 FFF7FEFF 		bl	WritePage	@
+ 287 00c4 031E     		subs	r3, r0, #0	@ tmp161,,
+ 288 00c6 4BD1     		bne	.L17	@,
+ 125:src/flash_program.c **** 			return FAILED;
+ 289              		.loc 1 125 0
+ 290 00c8 0023     		movs	r3, #0	@ D.5077,
+ 291 00ca 4AE0     		b	.L14	@
+ 292              	.L18:
+ 126:src/flash_program.c **** 	}
+ 127:src/flash_program.c **** 	else if (position >= PAGE29_START)
+ 293              		.loc 1 127 0
+ 294 00cc 6B46     		mov	r3, sp	@ tmp203,
+ 295 00ce 0633     		adds	r3, r3, #6	@ tmp163,
+ 296 00d0 1B88     		ldrh	r3, [r3]	@ tmp164, position
+ 297 00d2 FF2B     		cmp	r3, #255	@ tmp164,
+ 298 00d4 23D9     		bls	.L20	@,
+ 128:src/flash_program.c **** 	{
+ 129:src/flash_program.c **** 		BackupPage(memory_backup.v_bkp, (unsigned int *) PAGE29);
+ 299              		.loc 1 129 0
+ 300 00d6 2C4A     		ldr	r2, .L23+32	@ tmp165,
+ 301 00d8 264B     		ldr	r3, .L23+12	@ tmp166,
+ 302 00da 1100     		movs	r1, r2	@, tmp165
+ 303 00dc 1800     		movs	r0, r3	@, tmp166
+ 304 00de FFF7FEFF 		bl	BackupPage	@
+ 130:src/flash_program.c **** 		ErasePage(PAGE29,0);
+ 305              		.loc 1 130 0
+ 306 00e2 294B     		ldr	r3, .L23+32	@ tmp167,
+ 307 00e4 0021     		movs	r1, #0	@,
+ 308 00e6 1800     		movs	r0, r3	@, tmp167
+ 309 00e8 FFF7FEFF 		bl	ErasePage	@
+ 131:src/flash_program.c **** 		if (UpdateNewCode(memory_backup.v_bkp, position - PAGE29_START, new_code) == FAILED)
+ 310              		.loc 1 131 0
+ 311 00ec 6B46     		mov	r3, sp	@ tmp204,
+ 312 00ee 0633     		adds	r3, r3, #6	@ tmp168,
+ 313 00f0 1B88     		ldrh	r3, [r3]	@ tmp169, position
+ 314 00f2 013B     		subs	r3, r3, #1	@ tmp170,
+ 315 00f4 FF3B     		subs	r3, r3, #255	@ tmp170,
+ 316 00f6 99B2     		uxth	r1, r3	@ D.5078, tmp170
+ 317 00f8 009A     		ldr	r2, [sp]	@ tmp171, new_code
+ 318 00fa 1E4B     		ldr	r3, .L23+12	@ tmp172,
+ 319 00fc 1800     		movs	r0, r3	@, tmp172
+ 320 00fe FFF7FEFF 		bl	UpdateNewCode	@
+ 321 0102 031E     		subs	r3, r0, #0	@ tmp173,,
+ 322 0104 01D1     		bne	.L21	@,
+ 132:src/flash_program.c **** 			return FAILED;
+ 323              		.loc 1 132 0
+ 324 0106 0023     		movs	r3, #0	@ D.5077,
+ARM GAS  /tmp/ccNauqbt.s 			page 9
+
+
+ 325 0108 2BE0     		b	.L14	@
+ 326              	.L21:
+ 133:src/flash_program.c **** 
+ 134:src/flash_program.c **** 		if (WritePage(memory_backup.v_bkp, PAGE29, 1) == FAILED)
+ 327              		.loc 1 134 0
+ 328 010a 1F49     		ldr	r1, .L23+32	@ tmp175,
+ 329 010c 194B     		ldr	r3, .L23+12	@ tmp176,
+ 330 010e 0122     		movs	r2, #1	@,
+ 331 0110 1800     		movs	r0, r3	@, tmp176
+ 332 0112 FFF7FEFF 		bl	WritePage	@
+ 333 0116 031E     		subs	r3, r0, #0	@ tmp177,,
+ 334 0118 22D1     		bne	.L17	@,
+ 135:src/flash_program.c **** 			return FAILED;
+ 335              		.loc 1 135 0
+ 336 011a 0023     		movs	r3, #0	@ D.5077,
+ 337 011c 21E0     		b	.L14	@
+ 338              	.L20:
+ 136:src/flash_program.c **** 	}
+ 137:src/flash_program.c **** 	else if (position >= PAGE28_START)
+ 138:src/flash_program.c **** 	{
+ 139:src/flash_program.c **** 		BackupPage(memory_backup.v_bkp, (unsigned int *) PAGE28);
+ 339              		.loc 1 139 0
+ 340 011e 1B4A     		ldr	r2, .L23+36	@ tmp179,
+ 341 0120 144B     		ldr	r3, .L23+12	@ tmp180,
+ 342 0122 1100     		movs	r1, r2	@, tmp179
+ 343 0124 1800     		movs	r0, r3	@, tmp180
+ 344 0126 FFF7FEFF 		bl	BackupPage	@
+ 140:src/flash_program.c **** 		ErasePage(PAGE28,0);
+ 345              		.loc 1 140 0
+ 346 012a 184B     		ldr	r3, .L23+36	@ tmp181,
+ 347 012c 0021     		movs	r1, #0	@,
+ 348 012e 1800     		movs	r0, r3	@, tmp181
+ 349 0130 FFF7FEFF 		bl	ErasePage	@
+ 141:src/flash_program.c **** 		if (UpdateNewCode(memory_backup.v_bkp, position, new_code) == FAILED)
+ 350              		.loc 1 141 0
+ 351 0134 009A     		ldr	r2, [sp]	@ tmp182, new_code
+ 352 0136 6B46     		mov	r3, sp	@ tmp205,
+ 353 0138 0633     		adds	r3, r3, #6	@ tmp183,
+ 354 013a 1988     		ldrh	r1, [r3]	@ tmp184, position
+ 355 013c 0D4B     		ldr	r3, .L23+12	@ tmp185,
+ 356 013e 1800     		movs	r0, r3	@, tmp185
+ 357 0140 FFF7FEFF 		bl	UpdateNewCode	@
+ 358 0144 031E     		subs	r3, r0, #0	@ tmp186,,
+ 359 0146 01D1     		bne	.L22	@,
+ 142:src/flash_program.c **** 			return FAILED;
+ 360              		.loc 1 142 0
+ 361 0148 0023     		movs	r3, #0	@ D.5077,
+ 362 014a 0AE0     		b	.L14	@
+ 363              	.L22:
+ 143:src/flash_program.c **** 
+ 144:src/flash_program.c **** 		if (WritePage(memory_backup.v_bkp, PAGE28, 1) == FAILED)
+ 364              		.loc 1 144 0
+ 365 014c 0F49     		ldr	r1, .L23+36	@ tmp188,
+ 366 014e 094B     		ldr	r3, .L23+12	@ tmp189,
+ 367 0150 0122     		movs	r2, #1	@,
+ 368 0152 1800     		movs	r0, r3	@, tmp189
+ 369 0154 FFF7FEFF 		bl	WritePage	@
+ARM GAS  /tmp/ccNauqbt.s 			page 10
+
+
+ 370 0158 031E     		subs	r3, r0, #0	@ tmp190,,
+ 371 015a 01D1     		bne	.L17	@,
+ 145:src/flash_program.c **** 			return FAILED;
+ 372              		.loc 1 145 0
+ 373 015c 0023     		movs	r3, #0	@ D.5077,
+ 374 015e 00E0     		b	.L14	@
+ 375              	.L17:
+ 146:src/flash_program.c **** 	}
+ 147:src/flash_program.c **** 
+ 148:src/flash_program.c **** 	return PASSED;
+ 376              		.loc 1 148 0
+ 377 0160 0123     		movs	r3, #1	@ D.5077,
+ 378              	.L14:
+ 149:src/flash_program.c **** }
+ 379              		.loc 1 149 0
+ 380 0162 1800     		movs	r0, r3	@, <retval>
+ 381 0164 03B0     		add	sp, sp, #12	@,,
+ 382              		@ sp needed	@
+ 383 0166 00BD     		pop	{pc}
+ 384              	.L24:
+ 385              		.align	2
+ 386              	.L23:
+ 387 0168 FF030000 		.word	1023
+ 388 016c FF020000 		.word	767
+ 389 0170 007C0008 		.word	134249472
+ 390 0174 00000000 		.word	memory_backup
+ 391 0178 00FDFFFF 		.word	-768
+ 392 017c FF010000 		.word	511
+ 393 0180 00780008 		.word	134248448
+ 394 0184 00FEFFFF 		.word	-512
+ 395 0188 00740008 		.word	134247424
+ 396 018c 00700008 		.word	134246400
+ 397              		.cfi_endproc
+ 398              	.LFE22:
+ 399              		.size	Write_Code_To_Memory_FLASH, .-Write_Code_To_Memory_FLASH
+ 400              		.section	.text.BackupPage,"ax",%progbits
+ 401              		.align	2
+ 402              		.global	BackupPage
+ 403              		.code	16
+ 404              		.thumb_func
+ 405              		.type	BackupPage, %function
+ 406              	BackupPage:
+ 407              	.LFB23:
+ 150:src/flash_program.c **** /**
+ 151:src/flash_program.c ****   * @brief    After Reset, the Flash memory Program/Erase Controller is locked.
+ 152:src/flash_program.c ****   * To unlock it, the FLASH_Unlock function is used. Before programming the
+ 153:src/flash_program.c ****   * desired addresses, an erase operation is performed using the flash erase
+ 154:src/flash_program.c ****   * page feature. The erase procedure starts with the calculation of the number
+ 155:src/flash_program.c ****   * of pages to be used. Then all these pages will be erased one by one by
+ 156:src/flash_program.c ****   * calling FLASH_ErasePage function.
+ 157:src/flash_program.c ****   * Once this operation is finished, the programming operation will be performed by
+ 158:src/flash_program.c ****   * using the FLASH_ProgramWord function. The written data is then checked and the
+ 159:src/flash_program.c ****   * result of the programming operation is stored into the MemoryProgramStatus variable.
+ 160:src/flash_program.c ****   * @param  None
+ 161:src/flash_program.c ****   * @retval None
+ 162:src/flash_program.c ****   */
+ 163:src/flash_program.c **** 
+ARM GAS  /tmp/ccNauqbt.s 			page 11
+
+
+ 164:src/flash_program.c **** void BackupPage(unsigned int * p, unsigned int * page_addr)
+ 165:src/flash_program.c **** {
+ 408              		.loc 1 165 0
+ 409              		.cfi_startproc
+ 410 0000 84B0     		sub	sp, sp, #16	@,,
+ 411              	.LCFI4:
+ 412              		.cfi_def_cfa_offset 16
+ 413 0002 0190     		str	r0, [sp, #4]	@ p, p
+ 414 0004 0091     		str	r1, [sp]	@ page_addr, page_addr
+ 166:src/flash_program.c **** 	unsigned short i;
+ 167:src/flash_program.c **** 
+ 168:src/flash_program.c **** 	for (i = 0; i < 255; i++)
+ 415              		.loc 1 168 0
+ 416 0006 0E23     		movs	r3, #14	@ tmp118,
+ 417 0008 6B44     		add	r3, r3, sp	@ tmp118,
+ 418 000a 0022     		movs	r2, #0	@ tmp119,
+ 419 000c 1A80     		strh	r2, [r3]	@ tmp120, i
+ 420 000e 14E0     		b	.L26	@
+ 421              	.L27:
+ 169:src/flash_program.c **** 	{
+ 170:src/flash_program.c **** 		*(p + i) = *(page_addr + i);
+ 422              		.loc 1 170 0 discriminator 3
+ 423 0010 0E23     		movs	r3, #14	@ tmp121,
+ 424 0012 6B44     		add	r3, r3, sp	@ tmp121,
+ 425 0014 1B88     		ldrh	r3, [r3]	@ D.5079, i
+ 426 0016 9B00     		lsls	r3, r3, #2	@ D.5079, D.5079,
+ 427 0018 019A     		ldr	r2, [sp, #4]	@ tmp122, p
+ 428 001a D318     		adds	r3, r2, r3	@ D.5080, tmp122, D.5079
+ 429 001c 0E22     		movs	r2, #14	@ tmp123,
+ 430 001e 6A44     		add	r2, r2, sp	@ tmp123,
+ 431 0020 1288     		ldrh	r2, [r2]	@ D.5079, i
+ 432 0022 9200     		lsls	r2, r2, #2	@ D.5079, D.5079,
+ 433 0024 0099     		ldr	r1, [sp]	@ tmp124, page_addr
+ 434 0026 8A18     		adds	r2, r1, r2	@ D.5080, tmp124, D.5079
+ 435 0028 1268     		ldr	r2, [r2]	@ D.5079, *_12
+ 436 002a 1A60     		str	r2, [r3]	@ D.5079, *_8
+ 168:src/flash_program.c **** 	{
+ 437              		.loc 1 168 0 discriminator 3
+ 438 002c 0E23     		movs	r3, #14	@ tmp125,
+ 439 002e 6B44     		add	r3, r3, sp	@ tmp125,
+ 440 0030 1A88     		ldrh	r2, [r3]	@ D.5081, i
+ 441 0032 0E23     		movs	r3, #14	@ tmp126,
+ 442 0034 6B44     		add	r3, r3, sp	@ tmp126,
+ 443 0036 0132     		adds	r2, r2, #1	@ tmp127,
+ 444 0038 1A80     		strh	r2, [r3]	@ tmp128, i
+ 445              	.L26:
+ 168:src/flash_program.c **** 	{
+ 446              		.loc 1 168 0 is_stmt 0 discriminator 1
+ 447 003a 0E23     		movs	r3, #14	@ tmp129,
+ 448 003c 6B44     		add	r3, r3, sp	@ tmp129,
+ 449 003e 1B88     		ldrh	r3, [r3]	@ tmp130, i
+ 450 0040 FE2B     		cmp	r3, #254	@ tmp130,
+ 451 0042 E5D9     		bls	.L27	@,
+ 171:src/flash_program.c **** 	}
+ 172:src/flash_program.c **** }
+ 452              		.loc 1 172 0 is_stmt 1
+ 453 0044 C046     		nop
+ARM GAS  /tmp/ccNauqbt.s 			page 12
+
+
+ 454 0046 04B0     		add	sp, sp, #16	@,,
+ 455              		@ sp needed	@
+ 456 0048 7047     		bx	lr
+ 457              		.cfi_endproc
+ 458              	.LFE23:
+ 459              		.size	BackupPage, .-BackupPage
+ 460 004a C046     		.section	.text.ErasePage,"ax",%progbits
+ 461              		.align	2
+ 462              		.global	ErasePage
+ 463              		.code	16
+ 464              		.thumb_func
+ 465              		.type	ErasePage, %function
+ 466              	ErasePage:
+ 467              	.LFB24:
+ 173:src/flash_program.c **** 
+ 174:src/flash_program.c **** void ErasePage(uint32_t p_addr, unsigned char with_lock)
+ 175:src/flash_program.c **** {
+ 468              		.loc 1 175 0
+ 469              		.cfi_startproc
+ 470 0000 00B5     		push	{lr}	@
+ 471              	.LCFI5:
+ 472              		.cfi_def_cfa_offset 4
+ 473              		.cfi_offset 14, -4
+ 474 0002 83B0     		sub	sp, sp, #12	@,,
+ 475              	.LCFI6:
+ 476              		.cfi_def_cfa_offset 16
+ 477 0004 0190     		str	r0, [sp, #4]	@ p_addr, p_addr
+ 478 0006 0A00     		movs	r2, r1	@ tmp110, with_lock
+ 479 0008 6B46     		mov	r3, sp	@ tmp116,
+ 480 000a 0333     		adds	r3, r3, #3	@ tmp111,
+ 481 000c 1A70     		strb	r2, [r3]	@ tmp112, with_lock
+ 176:src/flash_program.c **** 	FLASH_Unlock();
+ 482              		.loc 1 176 0
+ 483 000e FFF7FEFF 		bl	FLASH_Unlock	@
+ 177:src/flash_program.c **** 	FLASH_ErasePage(p_addr);
+ 484              		.loc 1 177 0
+ 485 0012 019B     		ldr	r3, [sp, #4]	@ tmp113, p_addr
+ 486 0014 1800     		movs	r0, r3	@, tmp113
+ 487 0016 FFF7FEFF 		bl	FLASH_ErasePage	@
+ 178:src/flash_program.c **** 	if (with_lock)
+ 488              		.loc 1 178 0
+ 489 001a 6B46     		mov	r3, sp	@ tmp117,
+ 490 001c 0333     		adds	r3, r3, #3	@ tmp114,
+ 491 001e 1B78     		ldrb	r3, [r3]	@ tmp115, with_lock
+ 492 0020 002B     		cmp	r3, #0	@ tmp115,
+ 493 0022 01D0     		beq	.L30	@,
+ 179:src/flash_program.c **** 		FLASH_Lock();
+ 494              		.loc 1 179 0
+ 495 0024 FFF7FEFF 		bl	FLASH_Lock	@
+ 496              	.L30:
+ 180:src/flash_program.c **** }
+ 497              		.loc 1 180 0
+ 498 0028 C046     		nop
+ 499 002a 03B0     		add	sp, sp, #12	@,,
+ 500              		@ sp needed	@
+ 501 002c 00BD     		pop	{pc}
+ 502              		.cfi_endproc
+ARM GAS  /tmp/ccNauqbt.s 			page 13
+
+
+ 503              	.LFE24:
+ 504              		.size	ErasePage, .-ErasePage
+ 505 002e C046     		.section	.text.UpdateNewCode,"ax",%progbits
+ 506              		.align	2
+ 507              		.global	UpdateNewCode
+ 508              		.code	16
+ 509              		.thumb_func
+ 510              		.type	UpdateNewCode, %function
+ 511              	UpdateNewCode:
+ 512              	.LFB25:
+ 181:src/flash_program.c **** 
+ 182:src/flash_program.c **** unsigned char UpdateNewCode(unsigned int * p, unsigned short posi, unsigned int new_code)
+ 183:src/flash_program.c **** {
+ 513              		.loc 1 183 0
+ 514              		.cfi_startproc
+ 515 0000 84B0     		sub	sp, sp, #16	@,,
+ 516              	.LCFI7:
+ 517              		.cfi_def_cfa_offset 16
+ 518 0002 0390     		str	r0, [sp, #12]	@ p, p
+ 519 0004 0192     		str	r2, [sp, #4]	@ new_code, new_code
+ 520 0006 0A23     		movs	r3, #10	@ tmp116,
+ 521 0008 6B44     		add	r3, r3, sp	@ tmp116,
+ 522 000a 0A1C     		adds	r2, r1, #0	@ tmp117, tmp115
+ 523 000c 1A80     		strh	r2, [r3]	@ tmp117, posi
+ 184:src/flash_program.c **** 	if (posi > 255)
+ 524              		.loc 1 184 0
+ 525 000e 0A23     		movs	r3, #10	@ tmp118,
+ 526 0010 6B44     		add	r3, r3, sp	@ tmp118,
+ 527 0012 1B88     		ldrh	r3, [r3]	@ tmp119, posi
+ 528 0014 FF2B     		cmp	r3, #255	@ tmp119,
+ 529 0016 01D9     		bls	.L32	@,
+ 185:src/flash_program.c **** 		return FAILED;
+ 530              		.loc 1 185 0
+ 531 0018 0023     		movs	r3, #0	@ D.5082,
+ 532 001a 08E0     		b	.L33	@
+ 533              	.L32:
+ 186:src/flash_program.c **** 
+ 187:src/flash_program.c **** 	*(p + posi ) = new_code;
+ 534              		.loc 1 187 0
+ 535 001c 0A23     		movs	r3, #10	@ tmp120,
+ 536 001e 6B44     		add	r3, r3, sp	@ tmp120,
+ 537 0020 1B88     		ldrh	r3, [r3]	@ D.5083, posi
+ 538 0022 9B00     		lsls	r3, r3, #2	@ D.5083, D.5083,
+ 539 0024 039A     		ldr	r2, [sp, #12]	@ tmp121, p
+ 540 0026 D318     		adds	r3, r2, r3	@ D.5084, tmp121, D.5083
+ 541 0028 019A     		ldr	r2, [sp, #4]	@ tmp122, new_code
+ 542 002a 1A60     		str	r2, [r3]	@ tmp122, *_9
+ 188:src/flash_program.c **** 
+ 189:src/flash_program.c **** 	return PASSED;
+ 543              		.loc 1 189 0
+ 544 002c 0123     		movs	r3, #1	@ D.5082,
+ 545              	.L33:
+ 190:src/flash_program.c **** }
+ 546              		.loc 1 190 0
+ 547 002e 1800     		movs	r0, r3	@, <retval>
+ 548 0030 04B0     		add	sp, sp, #16	@,,
+ 549              		@ sp needed	@
+ARM GAS  /tmp/ccNauqbt.s 			page 14
+
+
+ 550 0032 7047     		bx	lr
+ 551              		.cfi_endproc
+ 552              	.LFE25:
+ 553              		.size	UpdateNewCode, .-UpdateNewCode
+ 554              		.section	.text.WritePage,"ax",%progbits
+ 555              		.align	2
+ 556              		.global	WritePage
+ 557              		.code	16
+ 558              		.thumb_func
+ 559              		.type	WritePage, %function
+ 560              	WritePage:
+ 561              	.LFB26:
+ 191:src/flash_program.c **** 
+ 192:src/flash_program.c **** unsigned char WritePage(unsigned int * p, uint32_t p_addr, unsigned char with_lock)
+ 193:src/flash_program.c **** {
+ 562              		.loc 1 193 0
+ 563              		.cfi_startproc
+ 564 0000 00B5     		push	{lr}	@
+ 565              	.LCFI8:
+ 566              		.cfi_def_cfa_offset 4
+ 567              		.cfi_offset 14, -4
+ 568 0002 87B0     		sub	sp, sp, #28	@,,
+ 569              	.LCFI9:
+ 570              		.cfi_def_cfa_offset 32
+ 571 0004 0390     		str	r0, [sp, #12]	@ p, p
+ 572 0006 0291     		str	r1, [sp, #8]	@ p_addr, p_addr
+ 573 0008 6B46     		mov	r3, sp	@ tmp160,
+ 574 000a 0733     		adds	r3, r3, #7	@ tmp127,
+ 575 000c 1A70     		strb	r2, [r3]	@ tmp128, with_lock
+ 194:src/flash_program.c **** 	unsigned short i;
+ 195:src/flash_program.c **** 	unsigned int * p_verif;
+ 196:src/flash_program.c **** 
+ 197:src/flash_program.c **** 	p_verif = (unsigned int *) p_addr;
+ 576              		.loc 1 197 0
+ 577 000e 029B     		ldr	r3, [sp, #8]	@ tmp129, p_addr
+ 578 0010 0493     		str	r3, [sp, #16]	@ tmp129, p_verif
+ 198:src/flash_program.c **** 
+ 199:src/flash_program.c **** 	for (i = 0; i < 255; i++)
+ 579              		.loc 1 199 0
+ 580 0012 1623     		movs	r3, #22	@ tmp130,
+ 581 0014 6B44     		add	r3, r3, sp	@ tmp130,
+ 582 0016 0022     		movs	r2, #0	@ tmp131,
+ 583 0018 1A80     		strh	r2, [r3]	@ tmp132, i
+ 584 001a 15E0     		b	.L35	@
+ 585              	.L36:
+ 200:src/flash_program.c **** 	{
+ 201:src/flash_program.c **** 		FLASH_ProgramWord(p_addr, *(p + i));
+ 586              		.loc 1 201 0 discriminator 3
+ 587 001c 1623     		movs	r3, #22	@ tmp133,
+ 588 001e 6B44     		add	r3, r3, sp	@ tmp133,
+ 589 0020 1B88     		ldrh	r3, [r3]	@ D.5086, i
+ 590 0022 9B00     		lsls	r3, r3, #2	@ D.5086, D.5086,
+ 591 0024 039A     		ldr	r2, [sp, #12]	@ tmp134, p
+ 592 0026 D318     		adds	r3, r2, r3	@ D.5087, tmp134, D.5086
+ 593 0028 1A68     		ldr	r2, [r3]	@ D.5086, *_14
+ 594 002a 029B     		ldr	r3, [sp, #8]	@ tmp135, p_addr
+ 595 002c 1100     		movs	r1, r2	@, D.5086
+ARM GAS  /tmp/ccNauqbt.s 			page 15
+
+
+ 596 002e 1800     		movs	r0, r3	@, tmp135
+ 597 0030 FFF7FEFF 		bl	FLASH_ProgramWord	@
+ 202:src/flash_program.c **** 		p_addr += 4;
+ 598              		.loc 1 202 0 discriminator 3
+ 599 0034 029B     		ldr	r3, [sp, #8]	@ tmp137, p_addr
+ 600 0036 0433     		adds	r3, r3, #4	@ tmp136,
+ 601 0038 0293     		str	r3, [sp, #8]	@ tmp136, p_addr
+ 199:src/flash_program.c **** 	{
+ 602              		.loc 1 199 0 discriminator 3
+ 603 003a 1623     		movs	r3, #22	@ tmp138,
+ 604 003c 6B44     		add	r3, r3, sp	@ tmp138,
+ 605 003e 1A88     		ldrh	r2, [r3]	@ D.5088, i
+ 606 0040 1623     		movs	r3, #22	@ tmp139,
+ 607 0042 6B44     		add	r3, r3, sp	@ tmp139,
+ 608 0044 0132     		adds	r2, r2, #1	@ tmp140,
+ 609 0046 1A80     		strh	r2, [r3]	@ tmp141, i
+ 610              	.L35:
+ 199:src/flash_program.c **** 	{
+ 611              		.loc 1 199 0 is_stmt 0 discriminator 1
+ 612 0048 1623     		movs	r3, #22	@ tmp142,
+ 613 004a 6B44     		add	r3, r3, sp	@ tmp142,
+ 614 004c 1B88     		ldrh	r3, [r3]	@ tmp143, i
+ 615 004e FE2B     		cmp	r3, #254	@ tmp143,
+ 616 0050 E4D9     		bls	.L36	@,
+ 203:src/flash_program.c **** 	}
+ 204:src/flash_program.c **** 
+ 205:src/flash_program.c **** 	if (with_lock)
+ 617              		.loc 1 205 0 is_stmt 1
+ 618 0052 6B46     		mov	r3, sp	@ tmp166,
+ 619 0054 0733     		adds	r3, r3, #7	@ tmp144,
+ 620 0056 1B78     		ldrb	r3, [r3]	@ tmp145, with_lock
+ 621 0058 002B     		cmp	r3, #0	@ tmp145,
+ 622 005a 01D0     		beq	.L37	@,
+ 206:src/flash_program.c **** 		FLASH_Lock();
+ 623              		.loc 1 206 0
+ 624 005c FFF7FEFF 		bl	FLASH_Lock	@
+ 625              	.L37:
+ 207:src/flash_program.c **** 
+ 208:src/flash_program.c **** 	//verifico memoria
+ 209:src/flash_program.c **** 	for (i = 0; i < 255; i++)
+ 626              		.loc 1 209 0
+ 627 0060 1623     		movs	r3, #22	@ tmp146,
+ 628 0062 6B44     		add	r3, r3, sp	@ tmp146,
+ 629 0064 0022     		movs	r2, #0	@ tmp147,
+ 630 0066 1A80     		strh	r2, [r3]	@ tmp148, i
+ 631 0068 18E0     		b	.L38	@
+ 632              	.L41:
+ 210:src/flash_program.c **** 	{
+ 211:src/flash_program.c **** 		if (*(p_verif + i) != *(p + i))
+ 633              		.loc 1 211 0
+ 634 006a 1623     		movs	r3, #22	@ tmp149,
+ 635 006c 6B44     		add	r3, r3, sp	@ tmp149,
+ 636 006e 1B88     		ldrh	r3, [r3]	@ D.5086, i
+ 637 0070 9B00     		lsls	r3, r3, #2	@ D.5086, D.5086,
+ 638 0072 049A     		ldr	r2, [sp, #16]	@ tmp150, p_verif
+ 639 0074 D318     		adds	r3, r2, r3	@ D.5087, tmp150, D.5086
+ 640 0076 1A68     		ldr	r2, [r3]	@ D.5086, *_25
+ARM GAS  /tmp/ccNauqbt.s 			page 16
+
+
+ 641 0078 1623     		movs	r3, #22	@ tmp151,
+ 642 007a 6B44     		add	r3, r3, sp	@ tmp151,
+ 643 007c 1B88     		ldrh	r3, [r3]	@ D.5086, i
+ 644 007e 9B00     		lsls	r3, r3, #2	@ D.5086, D.5086,
+ 645 0080 0399     		ldr	r1, [sp, #12]	@ tmp152, p
+ 646 0082 CB18     		adds	r3, r1, r3	@ D.5087, tmp152, D.5086
+ 647 0084 1B68     		ldr	r3, [r3]	@ D.5086, *_29
+ 648 0086 9A42     		cmp	r2, r3	@ D.5086, D.5086
+ 649 0088 01D0     		beq	.L39	@,
+ 212:src/flash_program.c **** 			return FAILED;
+ 650              		.loc 1 212 0
+ 651 008a 0023     		movs	r3, #0	@ D.5085,
+ 652 008c 0CE0     		b	.L40	@
+ 653              	.L39:
+ 209:src/flash_program.c **** 	{
+ 654              		.loc 1 209 0 discriminator 2
+ 655 008e 1623     		movs	r3, #22	@ tmp153,
+ 656 0090 6B44     		add	r3, r3, sp	@ tmp153,
+ 657 0092 1A88     		ldrh	r2, [r3]	@ D.5088, i
+ 658 0094 1623     		movs	r3, #22	@ tmp154,
+ 659 0096 6B44     		add	r3, r3, sp	@ tmp154,
+ 660 0098 0132     		adds	r2, r2, #1	@ tmp155,
+ 661 009a 1A80     		strh	r2, [r3]	@ tmp156, i
+ 662              	.L38:
+ 209:src/flash_program.c **** 	{
+ 663              		.loc 1 209 0 is_stmt 0 discriminator 1
+ 664 009c 1623     		movs	r3, #22	@ tmp157,
+ 665 009e 6B44     		add	r3, r3, sp	@ tmp157,
+ 666 00a0 1B88     		ldrh	r3, [r3]	@ tmp158, i
+ 667 00a2 FE2B     		cmp	r3, #254	@ tmp158,
+ 668 00a4 E1D9     		bls	.L41	@,
+ 213:src/flash_program.c **** 	}
+ 214:src/flash_program.c **** 	return PASSED;
+ 669              		.loc 1 214 0 is_stmt 1
+ 670 00a6 0123     		movs	r3, #1	@ D.5085,
+ 671              	.L40:
+ 215:src/flash_program.c **** }
+ 672              		.loc 1 215 0
+ 673 00a8 1800     		movs	r0, r3	@, <retval>
+ 674 00aa 07B0     		add	sp, sp, #28	@,,
+ 675              		@ sp needed	@
+ 676 00ac 00BD     		pop	{pc}
+ 677              		.cfi_endproc
+ 678              	.LFE26:
+ 679              		.size	WritePage, .-WritePage
+ 680 00ae C046     		.section	.text.WriteConfigurations,"ax",%progbits
+ 681              		.align	2
+ 682              		.global	WriteConfigurations
+ 683              		.code	16
+ 684              		.thumb_func
+ 685              		.type	WriteConfigurations, %function
+ 686              	WriteConfigurations:
+ 687              	.LFB27:
+ 216:src/flash_program.c **** 
+ 217:src/flash_program.c **** 
+ 218:src/flash_program.c **** unsigned char WriteConfigurations (void)
+ 219:src/flash_program.c **** {
+ARM GAS  /tmp/ccNauqbt.s 			page 17
+
+
+ 688              		.loc 1 219 0
+ 689              		.cfi_startproc
+ 690 0000 00B5     		push	{lr}	@
+ 691              	.LCFI10:
+ 692              		.cfi_def_cfa_offset 4
+ 693              		.cfi_offset 14, -4
+ 694 0002 83B0     		sub	sp, sp, #12	@,,
+ 695              	.LCFI11:
+ 696              		.cfi_def_cfa_offset 16
+ 220:src/flash_program.c **** 	parameters_typedef * p_param;
+ 221:src/flash_program.c **** 
+ 222:src/flash_program.c **** 	ErasePage(PAGE31,0);
+ 697              		.loc 1 222 0
+ 698 0004 0A4B     		ldr	r3, .L45	@ tmp113,
+ 699 0006 0021     		movs	r1, #0	@,
+ 700 0008 1800     		movs	r0, r3	@, tmp113
+ 701 000a FFF7FEFF 		bl	ErasePage	@
+ 223:src/flash_program.c **** 
+ 224:src/flash_program.c **** 	//update en memoria
+ 225:src/flash_program.c **** 	p_param = &param_struct;
+ 702              		.loc 1 225 0
+ 703 000e 094B     		ldr	r3, .L45+4	@ tmp114,
+ 704 0010 0193     		str	r3, [sp, #4]	@ tmp114, p_param
+ 226:src/flash_program.c **** 
+ 227:src/flash_program.c **** 	if (WriteFlash((unsigned int *) p_param, PAGE31, 1, sizeof(parameters_typedef)) == FAILED)
+ 705              		.loc 1 227 0
+ 706 0012 0749     		ldr	r1, .L45	@ tmp115,
+ 707 0014 0198     		ldr	r0, [sp, #4]	@ tmp116, p_param
+ 708 0016 0C23     		movs	r3, #12	@,
+ 709 0018 0122     		movs	r2, #1	@,
+ 710 001a FFF7FEFF 		bl	WriteFlash	@
+ 711 001e 031E     		subs	r3, r0, #0	@ tmp117,,
+ 712 0020 01D1     		bne	.L43	@,
+ 228:src/flash_program.c **** 		return FAILED;
+ 713              		.loc 1 228 0
+ 714 0022 0023     		movs	r3, #0	@ D.5089,
+ 715 0024 00E0     		b	.L44	@
+ 716              	.L43:
+ 229:src/flash_program.c **** 
+ 230:src/flash_program.c **** 	return PASSED;
+ 717              		.loc 1 230 0
+ 718 0026 0123     		movs	r3, #1	@ D.5089,
+ 719              	.L44:
+ 231:src/flash_program.c **** }
+ 720              		.loc 1 231 0
+ 721 0028 1800     		movs	r0, r3	@, <retval>
+ 722 002a 03B0     		add	sp, sp, #12	@,,
+ 723              		@ sp needed	@
+ 724 002c 00BD     		pop	{pc}
+ 725              	.L46:
+ 726 002e C046     		.align	2
+ 727              	.L45:
+ 728 0030 007C0008 		.word	134249472
+ 729 0034 00000000 		.word	param_struct
+ 730              		.cfi_endproc
+ 731              	.LFE27:
+ 732              		.size	WriteConfigurations, .-WriteConfigurations
+ARM GAS  /tmp/ccNauqbt.s 			page 18
+
+
+ 733              		.section	.text.WriteFlash,"ax",%progbits
+ 734              		.align	2
+ 735              		.global	WriteFlash
+ 736              		.code	16
+ 737              		.thumb_func
+ 738              		.type	WriteFlash, %function
+ 739              	WriteFlash:
+ 740              	.LFB28:
+ 232:src/flash_program.c **** 
+ 233:src/flash_program.c **** unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char 
+ 234:src/flash_program.c **** {
+ 741              		.loc 1 234 0
+ 742              		.cfi_startproc
+ 743 0000 00B5     		push	{lr}	@
+ 744              	.LCFI12:
+ 745              		.cfi_def_cfa_offset 4
+ 746              		.cfi_offset 14, -4
+ 747 0002 87B0     		sub	sp, sp, #28	@,,
+ 748              	.LCFI13:
+ 749              		.cfi_def_cfa_offset 32
+ 750 0004 0390     		str	r0, [sp, #12]	@ p, p
+ 751 0006 0291     		str	r1, [sp, #8]	@ p_addr, p_addr
+ 752 0008 1900     		movs	r1, r3	@ tmp131, len_in_4
+ 753 000a 6B46     		mov	r3, sp	@ tmp171,
+ 754 000c 0733     		adds	r3, r3, #7	@ tmp129,
+ 755 000e 1A70     		strb	r2, [r3]	@ tmp130, with_lock
+ 756 0010 6B46     		mov	r3, sp	@ tmp172,
+ 757 0012 0633     		adds	r3, r3, #6	@ tmp132,
+ 758 0014 0A1C     		adds	r2, r1, #0	@ tmp133, tmp131
+ 759 0016 1A70     		strb	r2, [r3]	@ tmp133, len_in_4
+ 235:src/flash_program.c **** 	unsigned short i;
+ 236:src/flash_program.c **** 	unsigned int * p_verif;
+ 237:src/flash_program.c **** 
+ 238:src/flash_program.c **** 	p_verif = (unsigned int *) p_addr;
+ 760              		.loc 1 238 0
+ 761 0018 029B     		ldr	r3, [sp, #8]	@ tmp134, p_addr
+ 762 001a 0493     		str	r3, [sp, #16]	@ tmp134, p_verif
+ 239:src/flash_program.c **** 
+ 240:src/flash_program.c **** 	for (i = 0; i < len_in_4; i++)
+ 763              		.loc 1 240 0
+ 764 001c 1623     		movs	r3, #22	@ tmp135,
+ 765 001e 6B44     		add	r3, r3, sp	@ tmp135,
+ 766 0020 0022     		movs	r2, #0	@ tmp136,
+ 767 0022 1A80     		strh	r2, [r3]	@ tmp137, i
+ 768 0024 15E0     		b	.L48	@
+ 769              	.L49:
+ 241:src/flash_program.c **** 	{
+ 242:src/flash_program.c **** 		FLASH_ProgramWord(p_addr, *(p + i));
+ 770              		.loc 1 242 0 discriminator 3
+ 771 0026 1623     		movs	r3, #22	@ tmp138,
+ 772 0028 6B44     		add	r3, r3, sp	@ tmp138,
+ 773 002a 1B88     		ldrh	r3, [r3]	@ D.5092, i
+ 774 002c 9B00     		lsls	r3, r3, #2	@ D.5092, D.5092,
+ 775 002e 039A     		ldr	r2, [sp, #12]	@ tmp139, p
+ 776 0030 D318     		adds	r3, r2, r3	@ D.5093, tmp139, D.5092
+ 777 0032 1A68     		ldr	r2, [r3]	@ D.5092, *_16
+ 778 0034 029B     		ldr	r3, [sp, #8]	@ tmp140, p_addr
+ARM GAS  /tmp/ccNauqbt.s 			page 19
+
+
+ 779 0036 1100     		movs	r1, r2	@, D.5092
+ 780 0038 1800     		movs	r0, r3	@, tmp140
+ 781 003a FFF7FEFF 		bl	FLASH_ProgramWord	@
+ 243:src/flash_program.c **** 		p_addr += 4;
+ 782              		.loc 1 243 0 discriminator 3
+ 783 003e 029B     		ldr	r3, [sp, #8]	@ tmp142, p_addr
+ 784 0040 0433     		adds	r3, r3, #4	@ tmp141,
+ 785 0042 0293     		str	r3, [sp, #8]	@ tmp141, p_addr
+ 240:src/flash_program.c **** 	{
+ 786              		.loc 1 240 0 discriminator 3
+ 787 0044 1623     		movs	r3, #22	@ tmp143,
+ 788 0046 6B44     		add	r3, r3, sp	@ tmp143,
+ 789 0048 1A88     		ldrh	r2, [r3]	@ D.5091, i
+ 790 004a 1623     		movs	r3, #22	@ tmp144,
+ 791 004c 6B44     		add	r3, r3, sp	@ tmp144,
+ 792 004e 0132     		adds	r2, r2, #1	@ tmp145,
+ 793 0050 1A80     		strh	r2, [r3]	@ tmp146, i
+ 794              	.L48:
+ 240:src/flash_program.c **** 	{
+ 795              		.loc 1 240 0 is_stmt 0 discriminator 1
+ 796 0052 6B46     		mov	r3, sp	@ tmp177,
+ 797 0054 0633     		adds	r3, r3, #6	@ tmp147,
+ 798 0056 1B78     		ldrb	r3, [r3]	@ tmp149, len_in_4
+ 799 0058 9BB2     		uxth	r3, r3	@ D.5091, tmp148
+ 800 005a 1622     		movs	r2, #22	@ tmp150,
+ 801 005c 6A44     		add	r2, r2, sp	@ tmp150,
+ 802 005e 1288     		ldrh	r2, [r2]	@ tmp151, i
+ 803 0060 9A42     		cmp	r2, r3	@ tmp151, D.5091
+ 804 0062 E0D3     		bcc	.L49	@,
+ 244:src/flash_program.c **** 	}
+ 245:src/flash_program.c **** 
+ 246:src/flash_program.c **** 	if (with_lock)
+ 805              		.loc 1 246 0 is_stmt 1
+ 806 0064 6B46     		mov	r3, sp	@ tmp179,
+ 807 0066 0733     		adds	r3, r3, #7	@ tmp152,
+ 808 0068 1B78     		ldrb	r3, [r3]	@ tmp153, with_lock
+ 809 006a 002B     		cmp	r3, #0	@ tmp153,
+ 810 006c 01D0     		beq	.L50	@,
+ 247:src/flash_program.c **** 		FLASH_Lock();
+ 811              		.loc 1 247 0
+ 812 006e FFF7FEFF 		bl	FLASH_Lock	@
+ 813              	.L50:
+ 248:src/flash_program.c **** 
+ 249:src/flash_program.c **** 	//verifico memoria
+ 250:src/flash_program.c **** 	for (i = 0; i < len_in_4; i++)
+ 814              		.loc 1 250 0
+ 815 0072 1623     		movs	r3, #22	@ tmp154,
+ 816 0074 6B44     		add	r3, r3, sp	@ tmp154,
+ 817 0076 0022     		movs	r2, #0	@ tmp155,
+ 818 0078 1A80     		strh	r2, [r3]	@ tmp156, i
+ 819 007a 18E0     		b	.L51	@
+ 820              	.L54:
+ 251:src/flash_program.c **** 	{
+ 252:src/flash_program.c **** 		if (*(p_verif + i) != *(p + i))
+ 821              		.loc 1 252 0
+ 822 007c 1623     		movs	r3, #22	@ tmp157,
+ 823 007e 6B44     		add	r3, r3, sp	@ tmp157,
+ARM GAS  /tmp/ccNauqbt.s 			page 20
+
+
+ 824 0080 1B88     		ldrh	r3, [r3]	@ D.5092, i
+ 825 0082 9B00     		lsls	r3, r3, #2	@ D.5092, D.5092,
+ 826 0084 049A     		ldr	r2, [sp, #16]	@ tmp158, p_verif
+ 827 0086 D318     		adds	r3, r2, r3	@ D.5093, tmp158, D.5092
+ 828 0088 1A68     		ldr	r2, [r3]	@ D.5092, *_28
+ 829 008a 1623     		movs	r3, #22	@ tmp159,
+ 830 008c 6B44     		add	r3, r3, sp	@ tmp159,
+ 831 008e 1B88     		ldrh	r3, [r3]	@ D.5092, i
+ 832 0090 9B00     		lsls	r3, r3, #2	@ D.5092, D.5092,
+ 833 0092 0399     		ldr	r1, [sp, #12]	@ tmp160, p
+ 834 0094 CB18     		adds	r3, r1, r3	@ D.5093, tmp160, D.5092
+ 835 0096 1B68     		ldr	r3, [r3]	@ D.5092, *_32
+ 836 0098 9A42     		cmp	r2, r3	@ D.5092, D.5092
+ 837 009a 01D0     		beq	.L52	@,
+ 253:src/flash_program.c **** 			return FAILED;
+ 838              		.loc 1 253 0
+ 839 009c 0023     		movs	r3, #0	@ D.5090,
+ 840 009e 10E0     		b	.L53	@
+ 841              	.L52:
+ 250:src/flash_program.c **** 	{
+ 842              		.loc 1 250 0 discriminator 2
+ 843 00a0 1623     		movs	r3, #22	@ tmp161,
+ 844 00a2 6B44     		add	r3, r3, sp	@ tmp161,
+ 845 00a4 1A88     		ldrh	r2, [r3]	@ D.5091, i
+ 846 00a6 1623     		movs	r3, #22	@ tmp162,
+ 847 00a8 6B44     		add	r3, r3, sp	@ tmp162,
+ 848 00aa 0132     		adds	r2, r2, #1	@ tmp163,
+ 849 00ac 1A80     		strh	r2, [r3]	@ tmp164, i
+ 850              	.L51:
+ 250:src/flash_program.c **** 	{
+ 851              		.loc 1 250 0 is_stmt 0 discriminator 1
+ 852 00ae 6B46     		mov	r3, sp	@ tmp185,
+ 853 00b0 0633     		adds	r3, r3, #6	@ tmp165,
+ 854 00b2 1B78     		ldrb	r3, [r3]	@ tmp167, len_in_4
+ 855 00b4 9BB2     		uxth	r3, r3	@ D.5091, tmp166
+ 856 00b6 1622     		movs	r2, #22	@ tmp168,
+ 857 00b8 6A44     		add	r2, r2, sp	@ tmp168,
+ 858 00ba 1288     		ldrh	r2, [r2]	@ tmp169, i
+ 859 00bc 9A42     		cmp	r2, r3	@ tmp169, D.5091
+ 860 00be DDD3     		bcc	.L54	@,
+ 254:src/flash_program.c **** 	}
+ 255:src/flash_program.c **** 	return PASSED;
+ 861              		.loc 1 255 0 is_stmt 1
+ 862 00c0 0123     		movs	r3, #1	@ D.5090,
+ 863              	.L53:
+ 256:src/flash_program.c **** }
+ 864              		.loc 1 256 0
+ 865 00c2 1800     		movs	r0, r3	@, <retval>
+ 866 00c4 07B0     		add	sp, sp, #28	@,,
+ 867              		@ sp needed	@
+ 868 00c6 00BD     		pop	{pc}
+ 869              		.cfi_endproc
+ 870              	.LFE28:
+ 871              		.size	WriteFlash, .-WriteFlash
+ 872              		.text
+ 873              	.Letext0:
+ 874              		.file 2 "/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/arm-none-eabi/include/machine/_default_types
+ARM GAS  /tmp/ccNauqbt.s 			page 21
+
+
+ 875              		.file 3 "/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/arm-none-eabi/include/sys/_stdint.h"
+ 876              		.file 4 "src/flash_program.h"
+ 877              		.section	.debug_info,"",%progbits
+ 878              	.Ldebug_info0:
+ 879 0000 35040000 		.4byte	0x435
+ 880 0004 0200     		.2byte	0x2
+ 881 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 882 000a 04       		.byte	0x4
+ 883 000b 01       		.uleb128 0x1
+ 884 000c F2010000 		.4byte	.LASF51
+ 885 0010 0C       		.byte	0xc
+ 886 0011 A1010000 		.4byte	.LASF52
+ 887 0015 74000000 		.4byte	.LASF53
+ 888 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 889 001d 00000000 		.4byte	0
+ 890 0021 00000000 		.4byte	0
+ 891 0025 00000000 		.4byte	.Ldebug_line0
+ 892 0029 02       		.uleb128 0x2
+ 893 002a 01       		.byte	0x1
+ 894 002b 06       		.byte	0x6
+ 895 002c 41030000 		.4byte	.LASF0
+ 896 0030 02       		.uleb128 0x2
+ 897 0031 01       		.byte	0x1
+ 898 0032 08       		.byte	0x8
+ 899 0033 CE000000 		.4byte	.LASF1
+ 900 0037 02       		.uleb128 0x2
+ 901 0038 02       		.byte	0x2
+ 902 0039 05       		.byte	0x5
+ 903 003a F6020000 		.4byte	.LASF2
+ 904 003e 02       		.uleb128 0x2
+ 905 003f 02       		.byte	0x2
+ 906 0040 07       		.byte	0x7
+ 907 0041 5C000000 		.4byte	.LASF3
+ 908 0045 02       		.uleb128 0x2
+ 909 0046 04       		.byte	0x4
+ 910 0047 05       		.byte	0x5
+ 911 0048 2F030000 		.4byte	.LASF4
+ 912 004c 03       		.uleb128 0x3
+ 913 004d E6000000 		.4byte	.LASF9
+ 914 0051 02       		.byte	0x2
+ 915 0052 41       		.byte	0x41
+ 916 0053 57000000 		.4byte	0x57
+ 917 0057 02       		.uleb128 0x2
+ 918 0058 04       		.byte	0x4
+ 919 0059 07       		.byte	0x7
+ 920 005a 13010000 		.4byte	.LASF5
+ 921 005e 02       		.uleb128 0x2
+ 922 005f 08       		.byte	0x8
+ 923 0060 05       		.byte	0x5
+ 924 0061 A6020000 		.4byte	.LASF6
+ 925 0065 02       		.uleb128 0x2
+ 926 0066 08       		.byte	0x8
+ 927 0067 07       		.byte	0x7
+ 928 0068 CD010000 		.4byte	.LASF7
+ 929 006c 04       		.uleb128 0x4
+ 930 006d 04       		.byte	0x4
+ 931 006e 05       		.byte	0x5
+ARM GAS  /tmp/ccNauqbt.s 			page 22
+
+
+ 932 006f 696E7400 		.ascii	"int\000"
+ 933 0073 02       		.uleb128 0x2
+ 934 0074 04       		.byte	0x4
+ 935 0075 07       		.byte	0x7
+ 936 0076 B5010000 		.4byte	.LASF8
+ 937 007a 03       		.uleb128 0x3
+ 938 007b 26030000 		.4byte	.LASF10
+ 939 007f 03       		.byte	0x3
+ 940 0080 20       		.byte	0x20
+ 941 0081 4C000000 		.4byte	0x4c
+ 942 0085 05       		.uleb128 0x5
+ 943 0086 0A030000 		.4byte	.LASF54
+ 944 008a 0004     		.2byte	0x400
+ 945 008c 04       		.byte	0x4
+ 946 008d 2E       		.byte	0x2e
+ 947 008e B4000000 		.4byte	0xb4
+ 948 0092 06       		.uleb128 0x6
+ 949 0093 00000000 		.4byte	.LASF11
+ 950 0097 04       		.byte	0x4
+ 951 0098 2F       		.byte	0x2f
+ 952 0099 B4000000 		.4byte	0xb4
+ 953 009d 06       		.uleb128 0x6
+ 954 009e 38030000 		.4byte	.LASF12
+ 955 00a2 04       		.byte	0x4
+ 956 00a3 30       		.byte	0x30
+ 957 00a4 CB000000 		.4byte	0xcb
+ 958 00a8 06       		.uleb128 0x6
+ 959 00a9 EC020000 		.4byte	.LASF13
+ 960 00ad 04       		.byte	0x4
+ 961 00ae 31       		.byte	0x31
+ 962 00af DC000000 		.4byte	0xdc
+ 963 00b3 00       		.byte	0
+ 964 00b4 07       		.uleb128 0x7
+ 965 00b5 73000000 		.4byte	0x73
+ 966 00b9 C4000000 		.4byte	0xc4
+ 967 00bd 08       		.uleb128 0x8
+ 968 00be C4000000 		.4byte	0xc4
+ 969 00c2 FF       		.byte	0xff
+ 970 00c3 00       		.byte	0
+ 971 00c4 02       		.uleb128 0x2
+ 972 00c5 04       		.byte	0x4
+ 973 00c6 07       		.byte	0x7
+ 974 00c7 9D020000 		.4byte	.LASF14
+ 975 00cb 07       		.uleb128 0x7
+ 976 00cc 30000000 		.4byte	0x30
+ 977 00d0 DC000000 		.4byte	0xdc
+ 978 00d4 09       		.uleb128 0x9
+ 979 00d5 C4000000 		.4byte	0xc4
+ 980 00d9 FF03     		.2byte	0x3ff
+ 981 00db 00       		.byte	0
+ 982 00dc 07       		.uleb128 0x7
+ 983 00dd 3E000000 		.4byte	0x3e
+ 984 00e1 ED000000 		.4byte	0xed
+ 985 00e5 09       		.uleb128 0x9
+ 986 00e6 C4000000 		.4byte	0xc4
+ 987 00ea FF01     		.2byte	0x1ff
+ 988 00ec 00       		.byte	0
+ARM GAS  /tmp/ccNauqbt.s 			page 23
+
+
+ 989 00ed 03       		.uleb128 0x3
+ 990 00ee 40010000 		.4byte	.LASF15
+ 991 00f2 04       		.byte	0x4
+ 992 00f3 32       		.byte	0x32
+ 993 00f4 85000000 		.4byte	0x85
+ 994 00f8 0A       		.uleb128 0xa
+ 995 00f9 08010000 		.4byte	.LASF55
+ 996 00fd 0C       		.byte	0xc
+ 997 00fe 04       		.byte	0x4
+ 998 00ff 34       		.byte	0x34
+ 999 0100 9F010000 		.4byte	0x19f
+ 1000 0104 0B       		.uleb128 0xb
+ 1001 0105 F1000000 		.4byte	.LASF16
+ 1002 0109 04       		.byte	0x4
+ 1003 010a 36       		.byte	0x36
+ 1004 010b 30000000 		.4byte	0x30
+ 1005 010f 02       		.byte	0x2
+ 1006 0110 23       		.byte	0x23
+ 1007 0111 00       		.uleb128 0
+ 1008 0112 0B       		.uleb128 0xb
+ 1009 0113 37000000 		.4byte	.LASF17
+ 1010 0117 04       		.byte	0x4
+ 1011 0118 38       		.byte	0x38
+ 1012 0119 30000000 		.4byte	0x30
+ 1013 011d 02       		.byte	0x2
+ 1014 011e 23       		.byte	0x23
+ 1015 011f 01       		.uleb128 0x1
+ 1016 0120 0B       		.uleb128 0xb
+ 1017 0121 86010000 		.4byte	.LASF18
+ 1018 0125 04       		.byte	0x4
+ 1019 0126 39       		.byte	0x39
+ 1020 0127 30000000 		.4byte	0x30
+ 1021 012b 02       		.byte	0x2
+ 1022 012c 23       		.byte	0x23
+ 1023 012d 02       		.uleb128 0x2
+ 1024 012e 0B       		.uleb128 0xb
+ 1025 012f 3A010000 		.4byte	.LASF19
+ 1026 0133 04       		.byte	0x4
+ 1027 0134 3A       		.byte	0x3a
+ 1028 0135 30000000 		.4byte	0x30
+ 1029 0139 02       		.byte	0x2
+ 1030 013a 23       		.byte	0x23
+ 1031 013b 03       		.uleb128 0x3
+ 1032 013c 0B       		.uleb128 0xb
+ 1033 013d 19000000 		.4byte	.LASF20
+ 1034 0141 04       		.byte	0x4
+ 1035 0142 3C       		.byte	0x3c
+ 1036 0143 3E000000 		.4byte	0x3e
+ 1037 0147 02       		.byte	0x2
+ 1038 0148 23       		.byte	0x23
+ 1039 0149 04       		.uleb128 0x4
+ 1040 014a 0B       		.uleb128 0xb
+ 1041 014b 5E010000 		.4byte	.LASF21
+ 1042 014f 04       		.byte	0x4
+ 1043 0150 3D       		.byte	0x3d
+ 1044 0151 30000000 		.4byte	0x30
+ 1045 0155 02       		.byte	0x2
+ARM GAS  /tmp/ccNauqbt.s 			page 24
+
+
+ 1046 0156 23       		.byte	0x23
+ 1047 0157 06       		.uleb128 0x6
+ 1048 0158 0B       		.uleb128 0xb
+ 1049 0159 65010000 		.4byte	.LASF22
+ 1050 015d 04       		.byte	0x4
+ 1051 015e 3E       		.byte	0x3e
+ 1052 015f 30000000 		.4byte	0x30
+ 1053 0163 02       		.byte	0x2
+ 1054 0164 23       		.byte	0x23
+ 1055 0165 07       		.uleb128 0x7
+ 1056 0166 0B       		.uleb128 0xb
+ 1057 0167 B4020000 		.4byte	.LASF23
+ 1058 016b 04       		.byte	0x4
+ 1059 016c 41       		.byte	0x41
+ 1060 016d 30000000 		.4byte	0x30
+ 1061 0171 02       		.byte	0x2
+ 1062 0172 23       		.byte	0x23
+ 1063 0173 08       		.uleb128 0x8
+ 1064 0174 0B       		.uleb128 0xb
+ 1065 0175 C2020000 		.4byte	.LASF24
+ 1066 0179 04       		.byte	0x4
+ 1067 017a 42       		.byte	0x42
+ 1068 017b 30000000 		.4byte	0x30
+ 1069 017f 02       		.byte	0x2
+ 1070 0180 23       		.byte	0x23
+ 1071 0181 09       		.uleb128 0x9
+ 1072 0182 0B       		.uleb128 0xb
+ 1073 0183 D0020000 		.4byte	.LASF25
+ 1074 0187 04       		.byte	0x4
+ 1075 0188 43       		.byte	0x43
+ 1076 0189 30000000 		.4byte	0x30
+ 1077 018d 02       		.byte	0x2
+ 1078 018e 23       		.byte	0x23
+ 1079 018f 0A       		.uleb128 0xa
+ 1080 0190 0B       		.uleb128 0xb
+ 1081 0191 DE020000 		.4byte	.LASF26
+ 1082 0195 04       		.byte	0x4
+ 1083 0196 44       		.byte	0x44
+ 1084 0197 30000000 		.4byte	0x30
+ 1085 019b 02       		.byte	0x2
+ 1086 019c 23       		.byte	0x23
+ 1087 019d 0B       		.uleb128 0xb
+ 1088 019e 00       		.byte	0
+ 1089 019f 03       		.uleb128 0x3
+ 1090 01a0 06000000 		.4byte	.LASF27
+ 1091 01a4 04       		.byte	0x4
+ 1092 01a5 46       		.byte	0x46
+ 1093 01a6 F8000000 		.4byte	0xf8
+ 1094 01aa 0C       		.uleb128 0xc
+ 1095 01ab 01       		.byte	0x1
+ 1096 01ac 30000000 		.4byte	0x30
+ 1097 01b0 04       		.byte	0x4
+ 1098 01b1 6C       		.byte	0x6c
+ 1099 01b2 C3010000 		.4byte	0x1c3
+ 1100 01b6 0D       		.uleb128 0xd
+ 1101 01b7 4D030000 		.4byte	.LASF28
+ 1102 01bb 00       		.byte	0
+ARM GAS  /tmp/ccNauqbt.s 			page 25
+
+
+ 1103 01bc 0D       		.uleb128 0xd
+ 1104 01bd EB010000 		.4byte	.LASF29
+ 1105 01c1 01       		.byte	0x1
+ 1106 01c2 00       		.byte	0
+ 1107 01c3 0E       		.uleb128 0xe
+ 1108 01c4 01       		.byte	0x1
+ 1109 01c5 2F000000 		.4byte	.LASF56
+ 1110 01c9 01       		.byte	0x1
+ 1111 01ca 3E       		.byte	0x3e
+ 1112 01cb 01       		.byte	0x1
+ 1113 01cc 30000000 		.4byte	0x30
+ 1114 01d0 00000000 		.4byte	.LFB20
+ 1115 01d4 18000000 		.4byte	.LFE20
+ 1116 01d8 02       		.byte	0x2
+ 1117 01d9 7D       		.byte	0x7d
+ 1118 01da 00       		.sleb128 0
+ 1119 01db 01       		.byte	0x1
+ 1120 01dc 0F       		.uleb128 0xf
+ 1121 01dd 01       		.byte	0x1
+ 1122 01de 25010000 		.4byte	.LASF30
+ 1123 01e2 01       		.byte	0x1
+ 1124 01e3 46       		.byte	0x46
+ 1125 01e4 01       		.byte	0x1
+ 1126 01e5 30000000 		.4byte	0x30
+ 1127 01e9 00000000 		.4byte	.LFB21
+ 1128 01ed 48000000 		.4byte	.LFE21
+ 1129 01f1 00000000 		.4byte	.LLST0
+ 1130 01f5 01       		.byte	0x1
+ 1131 01f6 09020000 		.4byte	0x209
+ 1132 01fa 10       		.uleb128 0x10
+ 1133 01fb 4D000000 		.4byte	.LASF35
+ 1134 01ff 01       		.byte	0x1
+ 1135 0200 48       		.byte	0x48
+ 1136 0201 30000000 		.4byte	0x30
+ 1137 0205 02       		.byte	0x2
+ 1138 0206 91       		.byte	0x91
+ 1139 0207 77       		.sleb128 -9
+ 1140 0208 00       		.byte	0
+ 1141 0209 0F       		.uleb128 0xf
+ 1142 020a 01       		.byte	0x1
+ 1143 020b 75030000 		.4byte	.LASF31
+ 1144 020f 01       		.byte	0x1
+ 1145 0210 65       		.byte	0x65
+ 1146 0211 01       		.byte	0x1
+ 1147 0212 30000000 		.4byte	0x30
+ 1148 0216 00000000 		.4byte	.LFB22
+ 1149 021a 90010000 		.4byte	.LFE22
+ 1150 021e 2C000000 		.4byte	.LLST1
+ 1151 0222 01       		.byte	0x1
+ 1152 0223 44020000 		.4byte	0x244
+ 1153 0227 11       		.uleb128 0x11
+ 1154 0228 7D010000 		.4byte	.LASF32
+ 1155 022c 01       		.byte	0x1
+ 1156 022d 65       		.byte	0x65
+ 1157 022e 3E000000 		.4byte	0x3e
+ 1158 0232 02       		.byte	0x2
+ 1159 0233 91       		.byte	0x91
+ARM GAS  /tmp/ccNauqbt.s 			page 26
+
+
+ 1160 0234 76       		.sleb128 -10
+ 1161 0235 11       		.uleb128 0x11
+ 1162 0236 6C010000 		.4byte	.LASF33
+ 1163 023a 01       		.byte	0x1
+ 1164 023b 65       		.byte	0x65
+ 1165 023c 73000000 		.4byte	0x73
+ 1166 0240 02       		.byte	0x2
+ 1167 0241 91       		.byte	0x91
+ 1168 0242 70       		.sleb128 -16
+ 1169 0243 00       		.byte	0
+ 1170 0244 12       		.uleb128 0x12
+ 1171 0245 01       		.byte	0x1
+ 1172 0246 C2010000 		.4byte	.LASF36
+ 1173 024a 01       		.byte	0x1
+ 1174 024b A4       		.byte	0xa4
+ 1175 024c 01       		.byte	0x1
+ 1176 024d 00000000 		.4byte	.LFB23
+ 1177 0251 4A000000 		.4byte	.LFE23
+ 1178 0255 58000000 		.4byte	.LLST2
+ 1179 0259 01       		.byte	0x1
+ 1180 025a 85020000 		.4byte	0x285
+ 1181 025e 13       		.uleb128 0x13
+ 1182 025f 7000     		.ascii	"p\000"
+ 1183 0261 01       		.byte	0x1
+ 1184 0262 A4       		.byte	0xa4
+ 1185 0263 85020000 		.4byte	0x285
+ 1186 0267 02       		.byte	0x2
+ 1187 0268 91       		.byte	0x91
+ 1188 0269 74       		.sleb128 -12
+ 1189 026a 11       		.uleb128 0x11
+ 1190 026b 52000000 		.4byte	.LASF34
+ 1191 026f 01       		.byte	0x1
+ 1192 0270 A4       		.byte	0xa4
+ 1193 0271 85020000 		.4byte	0x285
+ 1194 0275 02       		.byte	0x2
+ 1195 0276 91       		.byte	0x91
+ 1196 0277 70       		.sleb128 -16
+ 1197 0278 14       		.uleb128 0x14
+ 1198 0279 6900     		.ascii	"i\000"
+ 1199 027b 01       		.byte	0x1
+ 1200 027c A6       		.byte	0xa6
+ 1201 027d 3E000000 		.4byte	0x3e
+ 1202 0281 02       		.byte	0x2
+ 1203 0282 91       		.byte	0x91
+ 1204 0283 7E       		.sleb128 -2
+ 1205 0284 00       		.byte	0
+ 1206 0285 15       		.uleb128 0x15
+ 1207 0286 04       		.byte	0x4
+ 1208 0287 73000000 		.4byte	0x73
+ 1209 028b 16       		.uleb128 0x16
+ 1210 028c 01       		.byte	0x1
+ 1211 028d DC000000 		.4byte	.LASF37
+ 1212 0291 01       		.byte	0x1
+ 1213 0292 AE       		.byte	0xae
+ 1214 0293 01       		.byte	0x1
+ 1215 0294 00000000 		.4byte	.LFB24
+ 1216 0298 2E000000 		.4byte	.LFE24
+ARM GAS  /tmp/ccNauqbt.s 			page 27
+
+
+ 1217 029c 78000000 		.4byte	.LLST3
+ 1218 02a0 01       		.byte	0x1
+ 1219 02a1 C2020000 		.4byte	0x2c2
+ 1220 02a5 11       		.uleb128 0x11
+ 1221 02a6 E4010000 		.4byte	.LASF38
+ 1222 02aa 01       		.byte	0x1
+ 1223 02ab AE       		.byte	0xae
+ 1224 02ac 7A000000 		.4byte	0x7a
+ 1225 02b0 02       		.byte	0x2
+ 1226 02b1 91       		.byte	0x91
+ 1227 02b2 74       		.sleb128 -12
+ 1228 02b3 11       		.uleb128 0x11
+ 1229 02b4 00030000 		.4byte	.LASF39
+ 1230 02b8 01       		.byte	0x1
+ 1231 02b9 AE       		.byte	0xae
+ 1232 02ba 30000000 		.4byte	0x30
+ 1233 02be 02       		.byte	0x2
+ 1234 02bf 91       		.byte	0x91
+ 1235 02c0 73       		.sleb128 -13
+ 1236 02c1 00       		.byte	0
+ 1237 02c2 17       		.uleb128 0x17
+ 1238 02c3 01       		.byte	0x1
+ 1239 02c4 50010000 		.4byte	.LASF40
+ 1240 02c8 01       		.byte	0x1
+ 1241 02c9 B6       		.byte	0xb6
+ 1242 02ca 01       		.byte	0x1
+ 1243 02cb 30000000 		.4byte	0x30
+ 1244 02cf 00000000 		.4byte	.LFB25
+ 1245 02d3 34000000 		.4byte	.LFE25
+ 1246 02d7 A4000000 		.4byte	.LLST4
+ 1247 02db 01       		.byte	0x1
+ 1248 02dc 09030000 		.4byte	0x309
+ 1249 02e0 13       		.uleb128 0x13
+ 1250 02e1 7000     		.ascii	"p\000"
+ 1251 02e3 01       		.byte	0x1
+ 1252 02e4 B6       		.byte	0xb6
+ 1253 02e5 85020000 		.4byte	0x285
+ 1254 02e9 02       		.byte	0x2
+ 1255 02ea 91       		.byte	0x91
+ 1256 02eb 7C       		.sleb128 -4
+ 1257 02ec 11       		.uleb128 0x11
+ 1258 02ed A9000000 		.4byte	.LASF41
+ 1259 02f1 01       		.byte	0x1
+ 1260 02f2 B6       		.byte	0xb6
+ 1261 02f3 3E000000 		.4byte	0x3e
+ 1262 02f7 02       		.byte	0x2
+ 1263 02f8 91       		.byte	0x91
+ 1264 02f9 7A       		.sleb128 -6
+ 1265 02fa 11       		.uleb128 0x11
+ 1266 02fb 6C010000 		.4byte	.LASF33
+ 1267 02ff 01       		.byte	0x1
+ 1268 0300 B6       		.byte	0xb6
+ 1269 0301 73000000 		.4byte	0x73
+ 1270 0305 02       		.byte	0x2
+ 1271 0306 91       		.byte	0x91
+ 1272 0307 74       		.sleb128 -12
+ 1273 0308 00       		.byte	0
+ARM GAS  /tmp/ccNauqbt.s 			page 28
+
+
+ 1274 0309 0F       		.uleb128 0xf
+ 1275 030a 01       		.byte	0x1
+ 1276 030b BC000000 		.4byte	.LASF42
+ 1277 030f 01       		.byte	0x1
+ 1278 0310 C0       		.byte	0xc0
+ 1279 0311 01       		.byte	0x1
+ 1280 0312 30000000 		.4byte	0x30
+ 1281 0316 00000000 		.4byte	.LFB26
+ 1282 031a AE000000 		.4byte	.LFE26
+ 1283 031e C4000000 		.4byte	.LLST5
+ 1284 0322 01       		.byte	0x1
+ 1285 0323 6A030000 		.4byte	0x36a
+ 1286 0327 13       		.uleb128 0x13
+ 1287 0328 7000     		.ascii	"p\000"
+ 1288 032a 01       		.byte	0x1
+ 1289 032b C0       		.byte	0xc0
+ 1290 032c 85020000 		.4byte	0x285
+ 1291 0330 02       		.byte	0x2
+ 1292 0331 91       		.byte	0x91
+ 1293 0332 6C       		.sleb128 -20
+ 1294 0333 11       		.uleb128 0x11
+ 1295 0334 E4010000 		.4byte	.LASF38
+ 1296 0338 01       		.byte	0x1
+ 1297 0339 C0       		.byte	0xc0
+ 1298 033a 7A000000 		.4byte	0x7a
+ 1299 033e 02       		.byte	0x2
+ 1300 033f 91       		.byte	0x91
+ 1301 0340 68       		.sleb128 -24
+ 1302 0341 11       		.uleb128 0x11
+ 1303 0342 00030000 		.4byte	.LASF39
+ 1304 0346 01       		.byte	0x1
+ 1305 0347 C0       		.byte	0xc0
+ 1306 0348 30000000 		.4byte	0x30
+ 1307 034c 02       		.byte	0x2
+ 1308 034d 91       		.byte	0x91
+ 1309 034e 67       		.sleb128 -25
+ 1310 034f 14       		.uleb128 0x14
+ 1311 0350 6900     		.ascii	"i\000"
+ 1312 0352 01       		.byte	0x1
+ 1313 0353 C2       		.byte	0xc2
+ 1314 0354 3E000000 		.4byte	0x3e
+ 1315 0358 02       		.byte	0x2
+ 1316 0359 91       		.byte	0x91
+ 1317 035a 76       		.sleb128 -10
+ 1318 035b 10       		.uleb128 0x10
+ 1319 035c C6000000 		.4byte	.LASF43
+ 1320 0360 01       		.byte	0x1
+ 1321 0361 C3       		.byte	0xc3
+ 1322 0362 85020000 		.4byte	0x285
+ 1323 0366 02       		.byte	0x2
+ 1324 0367 91       		.byte	0x91
+ 1325 0368 70       		.sleb128 -16
+ 1326 0369 00       		.byte	0
+ 1327 036a 0F       		.uleb128 0xf
+ 1328 036b 01       		.byte	0x1
+ 1329 036c 12030000 		.4byte	.LASF44
+ 1330 0370 01       		.byte	0x1
+ARM GAS  /tmp/ccNauqbt.s 			page 29
+
+
+ 1331 0371 DA       		.byte	0xda
+ 1332 0372 01       		.byte	0x1
+ 1333 0373 30000000 		.4byte	0x30
+ 1334 0377 00000000 		.4byte	.LFB27
+ 1335 037b 38000000 		.4byte	.LFE27
+ 1336 037f F0000000 		.4byte	.LLST6
+ 1337 0383 01       		.byte	0x1
+ 1338 0384 97030000 		.4byte	0x397
+ 1339 0388 10       		.uleb128 0x10
+ 1340 0389 75010000 		.4byte	.LASF45
+ 1341 038d 01       		.byte	0x1
+ 1342 038e DC       		.byte	0xdc
+ 1343 038f 97030000 		.4byte	0x397
+ 1344 0393 02       		.byte	0x2
+ 1345 0394 91       		.byte	0x91
+ 1346 0395 74       		.sleb128 -12
+ 1347 0396 00       		.byte	0
+ 1348 0397 15       		.uleb128 0x15
+ 1349 0398 04       		.byte	0x4
+ 1350 0399 9F010000 		.4byte	0x19f
+ 1351 039d 0F       		.uleb128 0xf
+ 1352 039e 01       		.byte	0x1
+ 1353 039f 5D030000 		.4byte	.LASF46
+ 1354 03a3 01       		.byte	0x1
+ 1355 03a4 E9       		.byte	0xe9
+ 1356 03a5 01       		.byte	0x1
+ 1357 03a6 30000000 		.4byte	0x30
+ 1358 03aa 00000000 		.4byte	.LFB28
+ 1359 03ae C8000000 		.4byte	.LFE28
+ 1360 03b2 1C010000 		.4byte	.LLST7
+ 1361 03b6 01       		.byte	0x1
+ 1362 03b7 0C040000 		.4byte	0x40c
+ 1363 03bb 13       		.uleb128 0x13
+ 1364 03bc 7000     		.ascii	"p\000"
+ 1365 03be 01       		.byte	0x1
+ 1366 03bf E9       		.byte	0xe9
+ 1367 03c0 85020000 		.4byte	0x285
+ 1368 03c4 02       		.byte	0x2
+ 1369 03c5 91       		.byte	0x91
+ 1370 03c6 6C       		.sleb128 -20
+ 1371 03c7 11       		.uleb128 0x11
+ 1372 03c8 E4010000 		.4byte	.LASF38
+ 1373 03cc 01       		.byte	0x1
+ 1374 03cd E9       		.byte	0xe9
+ 1375 03ce 7A000000 		.4byte	0x7a
+ 1376 03d2 02       		.byte	0x2
+ 1377 03d3 91       		.byte	0x91
+ 1378 03d4 68       		.sleb128 -24
+ 1379 03d5 11       		.uleb128 0x11
+ 1380 03d6 00030000 		.4byte	.LASF39
+ 1381 03da 01       		.byte	0x1
+ 1382 03db E9       		.byte	0xe9
+ 1383 03dc 30000000 		.4byte	0x30
+ 1384 03e0 02       		.byte	0x2
+ 1385 03e1 91       		.byte	0x91
+ 1386 03e2 67       		.sleb128 -25
+ 1387 03e3 11       		.uleb128 0x11
+ARM GAS  /tmp/ccNauqbt.s 			page 30
+
+
+ 1388 03e4 54030000 		.4byte	.LASF47
+ 1389 03e8 01       		.byte	0x1
+ 1390 03e9 E9       		.byte	0xe9
+ 1391 03ea 30000000 		.4byte	0x30
+ 1392 03ee 02       		.byte	0x2
+ 1393 03ef 91       		.byte	0x91
+ 1394 03f0 66       		.sleb128 -26
+ 1395 03f1 14       		.uleb128 0x14
+ 1396 03f2 6900     		.ascii	"i\000"
+ 1397 03f4 01       		.byte	0x1
+ 1398 03f5 EB       		.byte	0xeb
+ 1399 03f6 3E000000 		.4byte	0x3e
+ 1400 03fa 02       		.byte	0x2
+ 1401 03fb 91       		.byte	0x91
+ 1402 03fc 76       		.sleb128 -10
+ 1403 03fd 10       		.uleb128 0x10
+ 1404 03fe C6000000 		.4byte	.LASF43
+ 1405 0402 01       		.byte	0x1
+ 1406 0403 EC       		.byte	0xec
+ 1407 0404 85020000 		.4byte	0x285
+ 1408 0408 02       		.byte	0x2
+ 1409 0409 91       		.byte	0x91
+ 1410 040a 70       		.sleb128 -16
+ 1411 040b 00       		.byte	0
+ 1412 040c 18       		.uleb128 0x18
+ 1413 040d 68030000 		.4byte	.LASF48
+ 1414 0411 01       		.byte	0x1
+ 1415 0412 30       		.byte	0x30
+ 1416 0413 9F010000 		.4byte	0x19f
+ 1417 0417 01       		.byte	0x1
+ 1418 0418 01       		.byte	0x1
+ 1419 0419 18       		.uleb128 0x18
+ 1420 041a AE000000 		.4byte	.LASF49
+ 1421 041e 01       		.byte	0x1
+ 1422 041f 31       		.byte	0x31
+ 1423 0420 ED000000 		.4byte	0xed
+ 1424 0424 01       		.byte	0x1
+ 1425 0425 01       		.byte	0x1
+ 1426 0426 19       		.uleb128 0x19
+ 1427 0427 6F000000 		.4byte	.LASF50
+ 1428 042b 01       		.byte	0x1
+ 1429 042c 39       		.byte	0x39
+ 1430 042d 85020000 		.4byte	0x285
+ 1431 0431 01       		.byte	0x1
+ 1432 0432 05       		.byte	0x5
+ 1433 0433 03       		.byte	0x3
+ 1434 0434 00000000 		.4byte	pmem
+ 1435 0438 00       		.byte	0
+ 1436              		.section	.debug_abbrev,"",%progbits
+ 1437              	.Ldebug_abbrev0:
+ 1438 0000 01       		.uleb128 0x1
+ 1439 0001 11       		.uleb128 0x11
+ 1440 0002 01       		.byte	0x1
+ 1441 0003 25       		.uleb128 0x25
+ 1442 0004 0E       		.uleb128 0xe
+ 1443 0005 13       		.uleb128 0x13
+ 1444 0006 0B       		.uleb128 0xb
+ARM GAS  /tmp/ccNauqbt.s 			page 31
+
+
+ 1445 0007 03       		.uleb128 0x3
+ 1446 0008 0E       		.uleb128 0xe
+ 1447 0009 1B       		.uleb128 0x1b
+ 1448 000a 0E       		.uleb128 0xe
+ 1449 000b 55       		.uleb128 0x55
+ 1450 000c 06       		.uleb128 0x6
+ 1451 000d 11       		.uleb128 0x11
+ 1452 000e 01       		.uleb128 0x1
+ 1453 000f 52       		.uleb128 0x52
+ 1454 0010 01       		.uleb128 0x1
+ 1455 0011 10       		.uleb128 0x10
+ 1456 0012 06       		.uleb128 0x6
+ 1457 0013 00       		.byte	0
+ 1458 0014 00       		.byte	0
+ 1459 0015 02       		.uleb128 0x2
+ 1460 0016 24       		.uleb128 0x24
+ 1461 0017 00       		.byte	0
+ 1462 0018 0B       		.uleb128 0xb
+ 1463 0019 0B       		.uleb128 0xb
+ 1464 001a 3E       		.uleb128 0x3e
+ 1465 001b 0B       		.uleb128 0xb
+ 1466 001c 03       		.uleb128 0x3
+ 1467 001d 0E       		.uleb128 0xe
+ 1468 001e 00       		.byte	0
+ 1469 001f 00       		.byte	0
+ 1470 0020 03       		.uleb128 0x3
+ 1471 0021 16       		.uleb128 0x16
+ 1472 0022 00       		.byte	0
+ 1473 0023 03       		.uleb128 0x3
+ 1474 0024 0E       		.uleb128 0xe
+ 1475 0025 3A       		.uleb128 0x3a
+ 1476 0026 0B       		.uleb128 0xb
+ 1477 0027 3B       		.uleb128 0x3b
+ 1478 0028 0B       		.uleb128 0xb
+ 1479 0029 49       		.uleb128 0x49
+ 1480 002a 13       		.uleb128 0x13
+ 1481 002b 00       		.byte	0
+ 1482 002c 00       		.byte	0
+ 1483 002d 04       		.uleb128 0x4
+ 1484 002e 24       		.uleb128 0x24
+ 1485 002f 00       		.byte	0
+ 1486 0030 0B       		.uleb128 0xb
+ 1487 0031 0B       		.uleb128 0xb
+ 1488 0032 3E       		.uleb128 0x3e
+ 1489 0033 0B       		.uleb128 0xb
+ 1490 0034 03       		.uleb128 0x3
+ 1491 0035 08       		.uleb128 0x8
+ 1492 0036 00       		.byte	0
+ 1493 0037 00       		.byte	0
+ 1494 0038 05       		.uleb128 0x5
+ 1495 0039 17       		.uleb128 0x17
+ 1496 003a 01       		.byte	0x1
+ 1497 003b 03       		.uleb128 0x3
+ 1498 003c 0E       		.uleb128 0xe
+ 1499 003d 0B       		.uleb128 0xb
+ 1500 003e 05       		.uleb128 0x5
+ 1501 003f 3A       		.uleb128 0x3a
+ARM GAS  /tmp/ccNauqbt.s 			page 32
+
+
+ 1502 0040 0B       		.uleb128 0xb
+ 1503 0041 3B       		.uleb128 0x3b
+ 1504 0042 0B       		.uleb128 0xb
+ 1505 0043 01       		.uleb128 0x1
+ 1506 0044 13       		.uleb128 0x13
+ 1507 0045 00       		.byte	0
+ 1508 0046 00       		.byte	0
+ 1509 0047 06       		.uleb128 0x6
+ 1510 0048 0D       		.uleb128 0xd
+ 1511 0049 00       		.byte	0
+ 1512 004a 03       		.uleb128 0x3
+ 1513 004b 0E       		.uleb128 0xe
+ 1514 004c 3A       		.uleb128 0x3a
+ 1515 004d 0B       		.uleb128 0xb
+ 1516 004e 3B       		.uleb128 0x3b
+ 1517 004f 0B       		.uleb128 0xb
+ 1518 0050 49       		.uleb128 0x49
+ 1519 0051 13       		.uleb128 0x13
+ 1520 0052 00       		.byte	0
+ 1521 0053 00       		.byte	0
+ 1522 0054 07       		.uleb128 0x7
+ 1523 0055 01       		.uleb128 0x1
+ 1524 0056 01       		.byte	0x1
+ 1525 0057 49       		.uleb128 0x49
+ 1526 0058 13       		.uleb128 0x13
+ 1527 0059 01       		.uleb128 0x1
+ 1528 005a 13       		.uleb128 0x13
+ 1529 005b 00       		.byte	0
+ 1530 005c 00       		.byte	0
+ 1531 005d 08       		.uleb128 0x8
+ 1532 005e 21       		.uleb128 0x21
+ 1533 005f 00       		.byte	0
+ 1534 0060 49       		.uleb128 0x49
+ 1535 0061 13       		.uleb128 0x13
+ 1536 0062 2F       		.uleb128 0x2f
+ 1537 0063 0B       		.uleb128 0xb
+ 1538 0064 00       		.byte	0
+ 1539 0065 00       		.byte	0
+ 1540 0066 09       		.uleb128 0x9
+ 1541 0067 21       		.uleb128 0x21
+ 1542 0068 00       		.byte	0
+ 1543 0069 49       		.uleb128 0x49
+ 1544 006a 13       		.uleb128 0x13
+ 1545 006b 2F       		.uleb128 0x2f
+ 1546 006c 05       		.uleb128 0x5
+ 1547 006d 00       		.byte	0
+ 1548 006e 00       		.byte	0
+ 1549 006f 0A       		.uleb128 0xa
+ 1550 0070 13       		.uleb128 0x13
+ 1551 0071 01       		.byte	0x1
+ 1552 0072 03       		.uleb128 0x3
+ 1553 0073 0E       		.uleb128 0xe
+ 1554 0074 0B       		.uleb128 0xb
+ 1555 0075 0B       		.uleb128 0xb
+ 1556 0076 3A       		.uleb128 0x3a
+ 1557 0077 0B       		.uleb128 0xb
+ 1558 0078 3B       		.uleb128 0x3b
+ARM GAS  /tmp/ccNauqbt.s 			page 33
+
+
+ 1559 0079 0B       		.uleb128 0xb
+ 1560 007a 01       		.uleb128 0x1
+ 1561 007b 13       		.uleb128 0x13
+ 1562 007c 00       		.byte	0
+ 1563 007d 00       		.byte	0
+ 1564 007e 0B       		.uleb128 0xb
+ 1565 007f 0D       		.uleb128 0xd
+ 1566 0080 00       		.byte	0
+ 1567 0081 03       		.uleb128 0x3
+ 1568 0082 0E       		.uleb128 0xe
+ 1569 0083 3A       		.uleb128 0x3a
+ 1570 0084 0B       		.uleb128 0xb
+ 1571 0085 3B       		.uleb128 0x3b
+ 1572 0086 0B       		.uleb128 0xb
+ 1573 0087 49       		.uleb128 0x49
+ 1574 0088 13       		.uleb128 0x13
+ 1575 0089 38       		.uleb128 0x38
+ 1576 008a 0A       		.uleb128 0xa
+ 1577 008b 00       		.byte	0
+ 1578 008c 00       		.byte	0
+ 1579 008d 0C       		.uleb128 0xc
+ 1580 008e 04       		.uleb128 0x4
+ 1581 008f 01       		.byte	0x1
+ 1582 0090 0B       		.uleb128 0xb
+ 1583 0091 0B       		.uleb128 0xb
+ 1584 0092 49       		.uleb128 0x49
+ 1585 0093 13       		.uleb128 0x13
+ 1586 0094 3A       		.uleb128 0x3a
+ 1587 0095 0B       		.uleb128 0xb
+ 1588 0096 3B       		.uleb128 0x3b
+ 1589 0097 0B       		.uleb128 0xb
+ 1590 0098 01       		.uleb128 0x1
+ 1591 0099 13       		.uleb128 0x13
+ 1592 009a 00       		.byte	0
+ 1593 009b 00       		.byte	0
+ 1594 009c 0D       		.uleb128 0xd
+ 1595 009d 28       		.uleb128 0x28
+ 1596 009e 00       		.byte	0
+ 1597 009f 03       		.uleb128 0x3
+ 1598 00a0 0E       		.uleb128 0xe
+ 1599 00a1 1C       		.uleb128 0x1c
+ 1600 00a2 0B       		.uleb128 0xb
+ 1601 00a3 00       		.byte	0
+ 1602 00a4 00       		.byte	0
+ 1603 00a5 0E       		.uleb128 0xe
+ 1604 00a6 2E       		.uleb128 0x2e
+ 1605 00a7 00       		.byte	0
+ 1606 00a8 3F       		.uleb128 0x3f
+ 1607 00a9 0C       		.uleb128 0xc
+ 1608 00aa 03       		.uleb128 0x3
+ 1609 00ab 0E       		.uleb128 0xe
+ 1610 00ac 3A       		.uleb128 0x3a
+ 1611 00ad 0B       		.uleb128 0xb
+ 1612 00ae 3B       		.uleb128 0x3b
+ 1613 00af 0B       		.uleb128 0xb
+ 1614 00b0 27       		.uleb128 0x27
+ 1615 00b1 0C       		.uleb128 0xc
+ARM GAS  /tmp/ccNauqbt.s 			page 34
+
+
+ 1616 00b2 49       		.uleb128 0x49
+ 1617 00b3 13       		.uleb128 0x13
+ 1618 00b4 11       		.uleb128 0x11
+ 1619 00b5 01       		.uleb128 0x1
+ 1620 00b6 12       		.uleb128 0x12
+ 1621 00b7 01       		.uleb128 0x1
+ 1622 00b8 40       		.uleb128 0x40
+ 1623 00b9 0A       		.uleb128 0xa
+ 1624 00ba 9742     		.uleb128 0x2117
+ 1625 00bc 0C       		.uleb128 0xc
+ 1626 00bd 00       		.byte	0
+ 1627 00be 00       		.byte	0
+ 1628 00bf 0F       		.uleb128 0xf
+ 1629 00c0 2E       		.uleb128 0x2e
+ 1630 00c1 01       		.byte	0x1
+ 1631 00c2 3F       		.uleb128 0x3f
+ 1632 00c3 0C       		.uleb128 0xc
+ 1633 00c4 03       		.uleb128 0x3
+ 1634 00c5 0E       		.uleb128 0xe
+ 1635 00c6 3A       		.uleb128 0x3a
+ 1636 00c7 0B       		.uleb128 0xb
+ 1637 00c8 3B       		.uleb128 0x3b
+ 1638 00c9 0B       		.uleb128 0xb
+ 1639 00ca 27       		.uleb128 0x27
+ 1640 00cb 0C       		.uleb128 0xc
+ 1641 00cc 49       		.uleb128 0x49
+ 1642 00cd 13       		.uleb128 0x13
+ 1643 00ce 11       		.uleb128 0x11
+ 1644 00cf 01       		.uleb128 0x1
+ 1645 00d0 12       		.uleb128 0x12
+ 1646 00d1 01       		.uleb128 0x1
+ 1647 00d2 40       		.uleb128 0x40
+ 1648 00d3 06       		.uleb128 0x6
+ 1649 00d4 9642     		.uleb128 0x2116
+ 1650 00d6 0C       		.uleb128 0xc
+ 1651 00d7 01       		.uleb128 0x1
+ 1652 00d8 13       		.uleb128 0x13
+ 1653 00d9 00       		.byte	0
+ 1654 00da 00       		.byte	0
+ 1655 00db 10       		.uleb128 0x10
+ 1656 00dc 34       		.uleb128 0x34
+ 1657 00dd 00       		.byte	0
+ 1658 00de 03       		.uleb128 0x3
+ 1659 00df 0E       		.uleb128 0xe
+ 1660 00e0 3A       		.uleb128 0x3a
+ 1661 00e1 0B       		.uleb128 0xb
+ 1662 00e2 3B       		.uleb128 0x3b
+ 1663 00e3 0B       		.uleb128 0xb
+ 1664 00e4 49       		.uleb128 0x49
+ 1665 00e5 13       		.uleb128 0x13
+ 1666 00e6 02       		.uleb128 0x2
+ 1667 00e7 0A       		.uleb128 0xa
+ 1668 00e8 00       		.byte	0
+ 1669 00e9 00       		.byte	0
+ 1670 00ea 11       		.uleb128 0x11
+ 1671 00eb 05       		.uleb128 0x5
+ 1672 00ec 00       		.byte	0
+ARM GAS  /tmp/ccNauqbt.s 			page 35
+
+
+ 1673 00ed 03       		.uleb128 0x3
+ 1674 00ee 0E       		.uleb128 0xe
+ 1675 00ef 3A       		.uleb128 0x3a
+ 1676 00f0 0B       		.uleb128 0xb
+ 1677 00f1 3B       		.uleb128 0x3b
+ 1678 00f2 0B       		.uleb128 0xb
+ 1679 00f3 49       		.uleb128 0x49
+ 1680 00f4 13       		.uleb128 0x13
+ 1681 00f5 02       		.uleb128 0x2
+ 1682 00f6 0A       		.uleb128 0xa
+ 1683 00f7 00       		.byte	0
+ 1684 00f8 00       		.byte	0
+ 1685 00f9 12       		.uleb128 0x12
+ 1686 00fa 2E       		.uleb128 0x2e
+ 1687 00fb 01       		.byte	0x1
+ 1688 00fc 3F       		.uleb128 0x3f
+ 1689 00fd 0C       		.uleb128 0xc
+ 1690 00fe 03       		.uleb128 0x3
+ 1691 00ff 0E       		.uleb128 0xe
+ 1692 0100 3A       		.uleb128 0x3a
+ 1693 0101 0B       		.uleb128 0xb
+ 1694 0102 3B       		.uleb128 0x3b
+ 1695 0103 0B       		.uleb128 0xb
+ 1696 0104 27       		.uleb128 0x27
+ 1697 0105 0C       		.uleb128 0xc
+ 1698 0106 11       		.uleb128 0x11
+ 1699 0107 01       		.uleb128 0x1
+ 1700 0108 12       		.uleb128 0x12
+ 1701 0109 01       		.uleb128 0x1
+ 1702 010a 40       		.uleb128 0x40
+ 1703 010b 06       		.uleb128 0x6
+ 1704 010c 9742     		.uleb128 0x2117
+ 1705 010e 0C       		.uleb128 0xc
+ 1706 010f 01       		.uleb128 0x1
+ 1707 0110 13       		.uleb128 0x13
+ 1708 0111 00       		.byte	0
+ 1709 0112 00       		.byte	0
+ 1710 0113 13       		.uleb128 0x13
+ 1711 0114 05       		.uleb128 0x5
+ 1712 0115 00       		.byte	0
+ 1713 0116 03       		.uleb128 0x3
+ 1714 0117 08       		.uleb128 0x8
+ 1715 0118 3A       		.uleb128 0x3a
+ 1716 0119 0B       		.uleb128 0xb
+ 1717 011a 3B       		.uleb128 0x3b
+ 1718 011b 0B       		.uleb128 0xb
+ 1719 011c 49       		.uleb128 0x49
+ 1720 011d 13       		.uleb128 0x13
+ 1721 011e 02       		.uleb128 0x2
+ 1722 011f 0A       		.uleb128 0xa
+ 1723 0120 00       		.byte	0
+ 1724 0121 00       		.byte	0
+ 1725 0122 14       		.uleb128 0x14
+ 1726 0123 34       		.uleb128 0x34
+ 1727 0124 00       		.byte	0
+ 1728 0125 03       		.uleb128 0x3
+ 1729 0126 08       		.uleb128 0x8
+ARM GAS  /tmp/ccNauqbt.s 			page 36
+
+
+ 1730 0127 3A       		.uleb128 0x3a
+ 1731 0128 0B       		.uleb128 0xb
+ 1732 0129 3B       		.uleb128 0x3b
+ 1733 012a 0B       		.uleb128 0xb
+ 1734 012b 49       		.uleb128 0x49
+ 1735 012c 13       		.uleb128 0x13
+ 1736 012d 02       		.uleb128 0x2
+ 1737 012e 0A       		.uleb128 0xa
+ 1738 012f 00       		.byte	0
+ 1739 0130 00       		.byte	0
+ 1740 0131 15       		.uleb128 0x15
+ 1741 0132 0F       		.uleb128 0xf
+ 1742 0133 00       		.byte	0
+ 1743 0134 0B       		.uleb128 0xb
+ 1744 0135 0B       		.uleb128 0xb
+ 1745 0136 49       		.uleb128 0x49
+ 1746 0137 13       		.uleb128 0x13
+ 1747 0138 00       		.byte	0
+ 1748 0139 00       		.byte	0
+ 1749 013a 16       		.uleb128 0x16
+ 1750 013b 2E       		.uleb128 0x2e
+ 1751 013c 01       		.byte	0x1
+ 1752 013d 3F       		.uleb128 0x3f
+ 1753 013e 0C       		.uleb128 0xc
+ 1754 013f 03       		.uleb128 0x3
+ 1755 0140 0E       		.uleb128 0xe
+ 1756 0141 3A       		.uleb128 0x3a
+ 1757 0142 0B       		.uleb128 0xb
+ 1758 0143 3B       		.uleb128 0x3b
+ 1759 0144 0B       		.uleb128 0xb
+ 1760 0145 27       		.uleb128 0x27
+ 1761 0146 0C       		.uleb128 0xc
+ 1762 0147 11       		.uleb128 0x11
+ 1763 0148 01       		.uleb128 0x1
+ 1764 0149 12       		.uleb128 0x12
+ 1765 014a 01       		.uleb128 0x1
+ 1766 014b 40       		.uleb128 0x40
+ 1767 014c 06       		.uleb128 0x6
+ 1768 014d 9642     		.uleb128 0x2116
+ 1769 014f 0C       		.uleb128 0xc
+ 1770 0150 01       		.uleb128 0x1
+ 1771 0151 13       		.uleb128 0x13
+ 1772 0152 00       		.byte	0
+ 1773 0153 00       		.byte	0
+ 1774 0154 17       		.uleb128 0x17
+ 1775 0155 2E       		.uleb128 0x2e
+ 1776 0156 01       		.byte	0x1
+ 1777 0157 3F       		.uleb128 0x3f
+ 1778 0158 0C       		.uleb128 0xc
+ 1779 0159 03       		.uleb128 0x3
+ 1780 015a 0E       		.uleb128 0xe
+ 1781 015b 3A       		.uleb128 0x3a
+ 1782 015c 0B       		.uleb128 0xb
+ 1783 015d 3B       		.uleb128 0x3b
+ 1784 015e 0B       		.uleb128 0xb
+ 1785 015f 27       		.uleb128 0x27
+ 1786 0160 0C       		.uleb128 0xc
+ARM GAS  /tmp/ccNauqbt.s 			page 37
+
+
+ 1787 0161 49       		.uleb128 0x49
+ 1788 0162 13       		.uleb128 0x13
+ 1789 0163 11       		.uleb128 0x11
+ 1790 0164 01       		.uleb128 0x1
+ 1791 0165 12       		.uleb128 0x12
+ 1792 0166 01       		.uleb128 0x1
+ 1793 0167 40       		.uleb128 0x40
+ 1794 0168 06       		.uleb128 0x6
+ 1795 0169 9742     		.uleb128 0x2117
+ 1796 016b 0C       		.uleb128 0xc
+ 1797 016c 01       		.uleb128 0x1
+ 1798 016d 13       		.uleb128 0x13
+ 1799 016e 00       		.byte	0
+ 1800 016f 00       		.byte	0
+ 1801 0170 18       		.uleb128 0x18
+ 1802 0171 34       		.uleb128 0x34
+ 1803 0172 00       		.byte	0
+ 1804 0173 03       		.uleb128 0x3
+ 1805 0174 0E       		.uleb128 0xe
+ 1806 0175 3A       		.uleb128 0x3a
+ 1807 0176 0B       		.uleb128 0xb
+ 1808 0177 3B       		.uleb128 0x3b
+ 1809 0178 0B       		.uleb128 0xb
+ 1810 0179 49       		.uleb128 0x49
+ 1811 017a 13       		.uleb128 0x13
+ 1812 017b 3F       		.uleb128 0x3f
+ 1813 017c 0C       		.uleb128 0xc
+ 1814 017d 3C       		.uleb128 0x3c
+ 1815 017e 0C       		.uleb128 0xc
+ 1816 017f 00       		.byte	0
+ 1817 0180 00       		.byte	0
+ 1818 0181 19       		.uleb128 0x19
+ 1819 0182 34       		.uleb128 0x34
+ 1820 0183 00       		.byte	0
+ 1821 0184 03       		.uleb128 0x3
+ 1822 0185 0E       		.uleb128 0xe
+ 1823 0186 3A       		.uleb128 0x3a
+ 1824 0187 0B       		.uleb128 0xb
+ 1825 0188 3B       		.uleb128 0x3b
+ 1826 0189 0B       		.uleb128 0xb
+ 1827 018a 49       		.uleb128 0x49
+ 1828 018b 13       		.uleb128 0x13
+ 1829 018c 3F       		.uleb128 0x3f
+ 1830 018d 0C       		.uleb128 0xc
+ 1831 018e 02       		.uleb128 0x2
+ 1832 018f 0A       		.uleb128 0xa
+ 1833 0190 00       		.byte	0
+ 1834 0191 00       		.byte	0
+ 1835 0192 00       		.byte	0
+ 1836              		.section	.debug_loc,"",%progbits
+ 1837              	.Ldebug_loc0:
+ 1838              	.LLST0:
+ 1839 0000 00000000 		.4byte	.LFB21
+ 1840 0004 02000000 		.4byte	.LCFI0
+ 1841 0008 0200     		.2byte	0x2
+ 1842 000a 7D       		.byte	0x7d
+ 1843 000b 00       		.sleb128 0
+ARM GAS  /tmp/ccNauqbt.s 			page 38
+
+
+ 1844 000c 02000000 		.4byte	.LCFI0
+ 1845 0010 04000000 		.4byte	.LCFI1
+ 1846 0014 0200     		.2byte	0x2
+ 1847 0016 7D       		.byte	0x7d
+ 1848 0017 04       		.sleb128 4
+ 1849 0018 04000000 		.4byte	.LCFI1
+ 1850 001c 48000000 		.4byte	.LFE21
+ 1851 0020 0200     		.2byte	0x2
+ 1852 0022 7D       		.byte	0x7d
+ 1853 0023 10       		.sleb128 16
+ 1854 0024 00000000 		.4byte	0
+ 1855 0028 00000000 		.4byte	0
+ 1856              	.LLST1:
+ 1857 002c 00000000 		.4byte	.LFB22
+ 1858 0030 02000000 		.4byte	.LCFI2
+ 1859 0034 0200     		.2byte	0x2
+ 1860 0036 7D       		.byte	0x7d
+ 1861 0037 00       		.sleb128 0
+ 1862 0038 02000000 		.4byte	.LCFI2
+ 1863 003c 04000000 		.4byte	.LCFI3
+ 1864 0040 0200     		.2byte	0x2
+ 1865 0042 7D       		.byte	0x7d
+ 1866 0043 04       		.sleb128 4
+ 1867 0044 04000000 		.4byte	.LCFI3
+ 1868 0048 90010000 		.4byte	.LFE22
+ 1869 004c 0200     		.2byte	0x2
+ 1870 004e 7D       		.byte	0x7d
+ 1871 004f 10       		.sleb128 16
+ 1872 0050 00000000 		.4byte	0
+ 1873 0054 00000000 		.4byte	0
+ 1874              	.LLST2:
+ 1875 0058 00000000 		.4byte	.LFB23
+ 1876 005c 02000000 		.4byte	.LCFI4
+ 1877 0060 0200     		.2byte	0x2
+ 1878 0062 7D       		.byte	0x7d
+ 1879 0063 00       		.sleb128 0
+ 1880 0064 02000000 		.4byte	.LCFI4
+ 1881 0068 4A000000 		.4byte	.LFE23
+ 1882 006c 0200     		.2byte	0x2
+ 1883 006e 7D       		.byte	0x7d
+ 1884 006f 10       		.sleb128 16
+ 1885 0070 00000000 		.4byte	0
+ 1886 0074 00000000 		.4byte	0
+ 1887              	.LLST3:
+ 1888 0078 00000000 		.4byte	.LFB24
+ 1889 007c 02000000 		.4byte	.LCFI5
+ 1890 0080 0200     		.2byte	0x2
+ 1891 0082 7D       		.byte	0x7d
+ 1892 0083 00       		.sleb128 0
+ 1893 0084 02000000 		.4byte	.LCFI5
+ 1894 0088 04000000 		.4byte	.LCFI6
+ 1895 008c 0200     		.2byte	0x2
+ 1896 008e 7D       		.byte	0x7d
+ 1897 008f 04       		.sleb128 4
+ 1898 0090 04000000 		.4byte	.LCFI6
+ 1899 0094 2E000000 		.4byte	.LFE24
+ 1900 0098 0200     		.2byte	0x2
+ARM GAS  /tmp/ccNauqbt.s 			page 39
+
+
+ 1901 009a 7D       		.byte	0x7d
+ 1902 009b 10       		.sleb128 16
+ 1903 009c 00000000 		.4byte	0
+ 1904 00a0 00000000 		.4byte	0
+ 1905              	.LLST4:
+ 1906 00a4 00000000 		.4byte	.LFB25
+ 1907 00a8 02000000 		.4byte	.LCFI7
+ 1908 00ac 0200     		.2byte	0x2
+ 1909 00ae 7D       		.byte	0x7d
+ 1910 00af 00       		.sleb128 0
+ 1911 00b0 02000000 		.4byte	.LCFI7
+ 1912 00b4 34000000 		.4byte	.LFE25
+ 1913 00b8 0200     		.2byte	0x2
+ 1914 00ba 7D       		.byte	0x7d
+ 1915 00bb 10       		.sleb128 16
+ 1916 00bc 00000000 		.4byte	0
+ 1917 00c0 00000000 		.4byte	0
+ 1918              	.LLST5:
+ 1919 00c4 00000000 		.4byte	.LFB26
+ 1920 00c8 02000000 		.4byte	.LCFI8
+ 1921 00cc 0200     		.2byte	0x2
+ 1922 00ce 7D       		.byte	0x7d
+ 1923 00cf 00       		.sleb128 0
+ 1924 00d0 02000000 		.4byte	.LCFI8
+ 1925 00d4 04000000 		.4byte	.LCFI9
+ 1926 00d8 0200     		.2byte	0x2
+ 1927 00da 7D       		.byte	0x7d
+ 1928 00db 04       		.sleb128 4
+ 1929 00dc 04000000 		.4byte	.LCFI9
+ 1930 00e0 AE000000 		.4byte	.LFE26
+ 1931 00e4 0200     		.2byte	0x2
+ 1932 00e6 7D       		.byte	0x7d
+ 1933 00e7 20       		.sleb128 32
+ 1934 00e8 00000000 		.4byte	0
+ 1935 00ec 00000000 		.4byte	0
+ 1936              	.LLST6:
+ 1937 00f0 00000000 		.4byte	.LFB27
+ 1938 00f4 02000000 		.4byte	.LCFI10
+ 1939 00f8 0200     		.2byte	0x2
+ 1940 00fa 7D       		.byte	0x7d
+ 1941 00fb 00       		.sleb128 0
+ 1942 00fc 02000000 		.4byte	.LCFI10
+ 1943 0100 04000000 		.4byte	.LCFI11
+ 1944 0104 0200     		.2byte	0x2
+ 1945 0106 7D       		.byte	0x7d
+ 1946 0107 04       		.sleb128 4
+ 1947 0108 04000000 		.4byte	.LCFI11
+ 1948 010c 38000000 		.4byte	.LFE27
+ 1949 0110 0200     		.2byte	0x2
+ 1950 0112 7D       		.byte	0x7d
+ 1951 0113 10       		.sleb128 16
+ 1952 0114 00000000 		.4byte	0
+ 1953 0118 00000000 		.4byte	0
+ 1954              	.LLST7:
+ 1955 011c 00000000 		.4byte	.LFB28
+ 1956 0120 02000000 		.4byte	.LCFI12
+ 1957 0124 0200     		.2byte	0x2
+ARM GAS  /tmp/ccNauqbt.s 			page 40
+
+
+ 1958 0126 7D       		.byte	0x7d
+ 1959 0127 00       		.sleb128 0
+ 1960 0128 02000000 		.4byte	.LCFI12
+ 1961 012c 04000000 		.4byte	.LCFI13
+ 1962 0130 0200     		.2byte	0x2
+ 1963 0132 7D       		.byte	0x7d
+ 1964 0133 04       		.sleb128 4
+ 1965 0134 04000000 		.4byte	.LCFI13
+ 1966 0138 C8000000 		.4byte	.LFE28
+ 1967 013c 0200     		.2byte	0x2
+ 1968 013e 7D       		.byte	0x7d
+ 1969 013f 20       		.sleb128 32
+ 1970 0140 00000000 		.4byte	0
+ 1971 0144 00000000 		.4byte	0
+ 1972              		.section	.debug_aranges,"",%progbits
+ 1973 0000 5C000000 		.4byte	0x5c
+ 1974 0004 0200     		.2byte	0x2
+ 1975 0006 00000000 		.4byte	.Ldebug_info0
+ 1976 000a 04       		.byte	0x4
+ 1977 000b 00       		.byte	0
+ 1978 000c 0000     		.2byte	0
+ 1979 000e 0000     		.2byte	0
+ 1980 0010 00000000 		.4byte	.LFB20
+ 1981 0014 18000000 		.4byte	.LFE20-.LFB20
+ 1982 0018 00000000 		.4byte	.LFB21
+ 1983 001c 48000000 		.4byte	.LFE21-.LFB21
+ 1984 0020 00000000 		.4byte	.LFB22
+ 1985 0024 90010000 		.4byte	.LFE22-.LFB22
+ 1986 0028 00000000 		.4byte	.LFB23
+ 1987 002c 4A000000 		.4byte	.LFE23-.LFB23
+ 1988 0030 00000000 		.4byte	.LFB24
+ 1989 0034 2E000000 		.4byte	.LFE24-.LFB24
+ 1990 0038 00000000 		.4byte	.LFB25
+ 1991 003c 34000000 		.4byte	.LFE25-.LFB25
+ 1992 0040 00000000 		.4byte	.LFB26
+ 1993 0044 AE000000 		.4byte	.LFE26-.LFB26
+ 1994 0048 00000000 		.4byte	.LFB27
+ 1995 004c 38000000 		.4byte	.LFE27-.LFB27
+ 1996 0050 00000000 		.4byte	.LFB28
+ 1997 0054 C8000000 		.4byte	.LFE28-.LFB28
+ 1998 0058 00000000 		.4byte	0
+ 1999 005c 00000000 		.4byte	0
+ 2000              		.section	.debug_ranges,"",%progbits
+ 2001              	.Ldebug_ranges0:
+ 2002 0000 00000000 		.4byte	.LFB20
+ 2003 0004 18000000 		.4byte	.LFE20
+ 2004 0008 00000000 		.4byte	.LFB21
+ 2005 000c 48000000 		.4byte	.LFE21
+ 2006 0010 00000000 		.4byte	.LFB22
+ 2007 0014 90010000 		.4byte	.LFE22
+ 2008 0018 00000000 		.4byte	.LFB23
+ 2009 001c 4A000000 		.4byte	.LFE23
+ 2010 0020 00000000 		.4byte	.LFB24
+ 2011 0024 2E000000 		.4byte	.LFE24
+ 2012 0028 00000000 		.4byte	.LFB25
+ 2013 002c 34000000 		.4byte	.LFE25
+ 2014 0030 00000000 		.4byte	.LFB26
+ARM GAS  /tmp/ccNauqbt.s 			page 41
+
+
+ 2015 0034 AE000000 		.4byte	.LFE26
+ 2016 0038 00000000 		.4byte	.LFB27
+ 2017 003c 38000000 		.4byte	.LFE27
+ 2018 0040 00000000 		.4byte	.LFB28
+ 2019 0044 C8000000 		.4byte	.LFE28
+ 2020 0048 00000000 		.4byte	0
+ 2021 004c 00000000 		.4byte	0
+ 2022              		.section	.debug_line,"",%progbits
+ 2023              	.Ldebug_line0:
+ 2024 0000 29020000 		.section	.debug_str,"MS",%progbits,1
+ 2024      0200F000 
+ 2024      00000201 
+ 2024      FB0E0D00 
+ 2024      01010101 
+ 2025              	.LASF11:
+ 2026 0000 765F626B 		.ascii	"v_bkp\000"
+ 2026      7000
+ 2027              	.LASF27:
+ 2028 0006 70617261 		.ascii	"parameters_typedef\000"
+ 2028      6D657465 
+ 2028      72735F74 
+ 2028      79706564 
+ 2028      656600
+ 2029              	.LASF20:
+ 2030 0019 6C617374 		.ascii	"last_channel_in_flash\000"
+ 2030      5F636861 
+ 2030      6E6E656C 
+ 2030      5F696E5F 
+ 2030      666C6173 
+ 2031              	.LASF56:
+ 2032 002f 52656164 		.ascii	"ReadMem\000"
+ 2032      4D656D00 
+ 2033              	.LASF17:
+ 2034 0037 6C617374 		.ascii	"last_program_in_flash\000"
+ 2034      5F70726F 
+ 2034      6772616D 
+ 2034      5F696E5F 
+ 2034      666C6173 
+ 2035              	.LASF35:
+ 2036 004d 72657370 		.ascii	"resp\000"
+ 2036      00
+ 2037              	.LASF34:
+ 2038 0052 70616765 		.ascii	"page_addr\000"
+ 2038      5F616464 
+ 2038      7200
+ 2039              	.LASF3:
+ 2040 005c 73686F72 		.ascii	"short unsigned int\000"
+ 2040      7420756E 
+ 2040      7369676E 
+ 2040      65642069 
+ 2040      6E7400
+ 2041              	.LASF50:
+ 2042 006f 706D656D 		.ascii	"pmem\000"
+ 2042      00
+ 2043              	.LASF53:
+ 2044 0074 2F686F6D 		.ascii	"/home/med/Documents/stm32_proj/atom_planolux_redond"
+ 2044      652F6D65 
+ARM GAS  /tmp/ccNauqbt.s 			page 42
+
+
+ 2044      642F446F 
+ 2044      63756D65 
+ 2044      6E74732F 
+ 2045 00a7 6100     		.ascii	"a\000"
+ 2046              	.LASF41:
+ 2047 00a9 706F7369 		.ascii	"posi\000"
+ 2047      00
+ 2048              	.LASF49:
+ 2049 00ae 6D656D6F 		.ascii	"memory_backup\000"
+ 2049      72795F62 
+ 2049      61636B75 
+ 2049      7000
+ 2050              	.LASF42:
+ 2051 00bc 57726974 		.ascii	"WritePage\000"
+ 2051      65506167 
+ 2051      6500
+ 2052              	.LASF43:
+ 2053 00c6 705F7665 		.ascii	"p_verif\000"
+ 2053      72696600 
+ 2054              	.LASF1:
+ 2055 00ce 756E7369 		.ascii	"unsigned char\000"
+ 2055      676E6564 
+ 2055      20636861 
+ 2055      7200
+ 2056              	.LASF37:
+ 2057 00dc 45726173 		.ascii	"ErasePage\000"
+ 2057      65506167 
+ 2057      6500
+ 2058              	.LASF9:
+ 2059 00e6 5F5F7569 		.ascii	"__uint32_t\000"
+ 2059      6E743332 
+ 2059      5F7400
+ 2060              	.LASF16:
+ 2061 00f1 6C617374 		.ascii	"last_function_in_flash\000"
+ 2061      5F66756E 
+ 2061      6374696F 
+ 2061      6E5F696E 
+ 2061      5F666C61 
+ 2062              	.LASF55:
+ 2063 0108 70617261 		.ascii	"parameters\000"
+ 2063      6D657465 
+ 2063      727300
+ 2064              	.LASF5:
+ 2065 0113 6C6F6E67 		.ascii	"long unsigned int\000"
+ 2065      20756E73 
+ 2065      69676E65 
+ 2065      6420696E 
+ 2065      7400
+ 2066              	.LASF30:
+ 2067 0125 45726173 		.ascii	"EraseAllMemory_FLASH\000"
+ 2067      65416C6C 
+ 2067      4D656D6F 
+ 2067      72795F46 
+ 2067      4C415348 
+ 2068              	.LASF19:
+ 2069 013a 64756D6D 		.ascii	"dummy\000"
+ 2069      7900
+ARM GAS  /tmp/ccNauqbt.s 			page 43
+
+
+ 2070              	.LASF15:
+ 2071 0140 6D656D5F 		.ascii	"mem_bkp_typedef\000"
+ 2071      626B705F 
+ 2071      74797065 
+ 2071      64656600 
+ 2072              	.LASF40:
+ 2073 0150 55706461 		.ascii	"UpdateNewCode\000"
+ 2073      74654E65 
+ 2073      77436F64 
+ 2073      6500
+ 2074              	.LASF21:
+ 2075 015e 64756D6D 		.ascii	"dummy1\000"
+ 2075      793100
+ 2076              	.LASF22:
+ 2077 0165 64756D6D 		.ascii	"dummy2\000"
+ 2077      793200
+ 2078              	.LASF33:
+ 2079 016c 6E65775F 		.ascii	"new_code\000"
+ 2079      636F6465 
+ 2079      00
+ 2080              	.LASF45:
+ 2081 0175 705F7061 		.ascii	"p_param\000"
+ 2081      72616D00 
+ 2082              	.LASF32:
+ 2083 017d 706F7369 		.ascii	"position\000"
+ 2083      74696F6E 
+ 2083      00
+ 2084              	.LASF18:
+ 2085 0186 6C617374 		.ascii	"last_program_deep_in_flash\000"
+ 2085      5F70726F 
+ 2085      6772616D 
+ 2085      5F646565 
+ 2085      705F696E 
+ 2086              	.LASF52:
+ 2087 01a1 7372632F 		.ascii	"src/flash_program.c\000"
+ 2087      666C6173 
+ 2087      685F7072 
+ 2087      6F677261 
+ 2087      6D2E6300 
+ 2088              	.LASF8:
+ 2089 01b5 756E7369 		.ascii	"unsigned int\000"
+ 2089      676E6564 
+ 2089      20696E74 
+ 2089      00
+ 2090              	.LASF36:
+ 2091 01c2 4261636B 		.ascii	"BackupPage\000"
+ 2091      75705061 
+ 2091      676500
+ 2092              	.LASF7:
+ 2093 01cd 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 2093      206C6F6E 
+ 2093      6720756E 
+ 2093      7369676E 
+ 2093      65642069 
+ 2094              	.LASF38:
+ 2095 01e4 705F6164 		.ascii	"p_addr\000"
+ 2095      647200
+ARM GAS  /tmp/ccNauqbt.s 			page 44
+
+
+ 2096              	.LASF29:
+ 2097 01eb 50415353 		.ascii	"PASSED\000"
+ 2097      454400
+ 2098              	.LASF51:
+ 2099 01f2 474E5520 		.ascii	"GNU C11 5.2.1 20151202 (release) [ARM/embedded-5-br"
+ 2099      43313120 
+ 2099      352E322E 
+ 2099      31203230 
+ 2099      31353132 
+ 2100 0225 616E6368 		.ascii	"anch revision 231848] -mcpu=cortex-m0 -mthumb -g -g"
+ 2100      20726576 
+ 2100      6973696F 
+ 2100      6E203233 
+ 2100      31383438 
+ 2101 0258 64776172 		.ascii	"dwarf-2 -O0 -fomit-frame-pointer -fdata-sections -f"
+ 2101      662D3220 
+ 2101      2D4F3020 
+ 2101      2D666F6D 
+ 2101      69742D66 
+ 2102 028b 66756E63 		.ascii	"function-sections\000"
+ 2102      74696F6E 
+ 2102      2D736563 
+ 2102      74696F6E 
+ 2102      7300
+ 2103              	.LASF14:
+ 2104 029d 73697A65 		.ascii	"sizetype\000"
+ 2104      74797065 
+ 2104      00
+ 2105              	.LASF6:
+ 2106 02a6 6C6F6E67 		.ascii	"long long int\000"
+ 2106      206C6F6E 
+ 2106      6720696E 
+ 2106      7400
+ 2107              	.LASF23:
+ 2108 02b4 70776D5F 		.ascii	"pwm_channel_1\000"
+ 2108      6368616E 
+ 2108      6E656C5F 
+ 2108      3100
+ 2109              	.LASF24:
+ 2110 02c2 70776D5F 		.ascii	"pwm_channel_2\000"
+ 2110      6368616E 
+ 2110      6E656C5F 
+ 2110      3200
+ 2111              	.LASF25:
+ 2112 02d0 70776D5F 		.ascii	"pwm_channel_3\000"
+ 2112      6368616E 
+ 2112      6E656C5F 
+ 2112      3300
+ 2113              	.LASF26:
+ 2114 02de 70776D5F 		.ascii	"pwm_channel_4\000"
+ 2114      6368616E 
+ 2114      6E656C5F 
+ 2114      3400
+ 2115              	.LASF13:
+ 2116 02ec 765F626B 		.ascii	"v_bkp_16u\000"
+ 2116      705F3136 
+ 2116      7500
+ARM GAS  /tmp/ccNauqbt.s 			page 45
+
+
+ 2117              	.LASF2:
+ 2118 02f6 73686F72 		.ascii	"short int\000"
+ 2118      7420696E 
+ 2118      7400
+ 2119              	.LASF39:
+ 2120 0300 77697468 		.ascii	"with_lock\000"
+ 2120      5F6C6F63 
+ 2120      6B00
+ 2121              	.LASF54:
+ 2122 030a 6D656D5F 		.ascii	"mem_bkp\000"
+ 2122      626B7000 
+ 2123              	.LASF44:
+ 2124 0312 57726974 		.ascii	"WriteConfigurations\000"
+ 2124      65436F6E 
+ 2124      66696775 
+ 2124      72617469 
+ 2124      6F6E7300 
+ 2125              	.LASF10:
+ 2126 0326 75696E74 		.ascii	"uint32_t\000"
+ 2126      33325F74 
+ 2126      00
+ 2127              	.LASF4:
+ 2128 032f 6C6F6E67 		.ascii	"long int\000"
+ 2128      20696E74 
+ 2128      00
+ 2129              	.LASF12:
+ 2130 0338 765F626B 		.ascii	"v_bkp_8u\000"
+ 2130      705F3875 
+ 2130      00
+ 2131              	.LASF0:
+ 2132 0341 7369676E 		.ascii	"signed char\000"
+ 2132      65642063 
+ 2132      68617200 
+ 2133              	.LASF28:
+ 2134 034d 4641494C 		.ascii	"FAILED\000"
+ 2134      454400
+ 2135              	.LASF47:
+ 2136 0354 6C656E5F 		.ascii	"len_in_4\000"
+ 2136      696E5F34 
+ 2136      00
+ 2137              	.LASF46:
+ 2138 035d 57726974 		.ascii	"WriteFlash\000"
+ 2138      65466C61 
+ 2138      736800
+ 2139              	.LASF48:
+ 2140 0368 70617261 		.ascii	"param_struct\000"
+ 2140      6D5F7374 
+ 2140      72756374 
+ 2140      00
+ 2141              	.LASF31:
+ 2142 0375 57726974 		.ascii	"Write_Code_To_Memory_FLASH\000"
+ 2142      655F436F 
+ 2142      64655F54 
+ 2142      6F5F4D65 
+ 2142      6D6F7279 
+ 2143              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
+ARM GAS  /tmp/ccNauqbt.s 			page 46
+
+
+DEFINED SYMBOLS
+                            *ABS*:00000000 flash_program.c
+     /tmp/ccNauqbt.s:59     .data.pmem:00000000 pmem
+     /tmp/ccNauqbt.s:56     .data.pmem:00000000 $d
+     /tmp/ccNauqbt.s:62     .text.ReadMem:00000000 $t
+     /tmp/ccNauqbt.s:67     .text.ReadMem:00000000 ReadMem
+     /tmp/ccNauqbt.s:92     .text.ReadMem:00000014 $d
+     /tmp/ccNauqbt.s:97     .text.EraseAllMemory_FLASH:00000000 $t
+     /tmp/ccNauqbt.s:102    .text.EraseAllMemory_FLASH:00000000 EraseAllMemory_FLASH
+     /tmp/ccNauqbt.s:466    .text.ErasePage:00000000 ErasePage
+     /tmp/ccNauqbt.s:158    .text.EraseAllMemory_FLASH:00000044 $d
+     /tmp/ccNauqbt.s:163    .text.Write_Code_To_Memory_FLASH:00000000 $t
+     /tmp/ccNauqbt.s:168    .text.Write_Code_To_Memory_FLASH:00000000 Write_Code_To_Memory_FLASH
+     /tmp/ccNauqbt.s:406    .text.BackupPage:00000000 BackupPage
+     /tmp/ccNauqbt.s:511    .text.UpdateNewCode:00000000 UpdateNewCode
+     /tmp/ccNauqbt.s:560    .text.WritePage:00000000 WritePage
+     /tmp/ccNauqbt.s:387    .text.Write_Code_To_Memory_FLASH:00000168 $d
+     /tmp/ccNauqbt.s:401    .text.BackupPage:00000000 $t
+     /tmp/ccNauqbt.s:461    .text.ErasePage:00000000 $t
+     /tmp/ccNauqbt.s:506    .text.UpdateNewCode:00000000 $t
+     /tmp/ccNauqbt.s:555    .text.WritePage:00000000 $t
+     /tmp/ccNauqbt.s:681    .text.WriteConfigurations:00000000 $t
+     /tmp/ccNauqbt.s:686    .text.WriteConfigurations:00000000 WriteConfigurations
+     /tmp/ccNauqbt.s:739    .text.WriteFlash:00000000 WriteFlash
+     /tmp/ccNauqbt.s:728    .text.WriteConfigurations:00000030 $d
+     /tmp/ccNauqbt.s:734    .text.WriteFlash:00000000 $t
+                     .debug_frame:00000010 $d
+
+UNDEFINED SYMBOLS
+memory_backup
+FLASH_Unlock
+FLASH_ErasePage
+FLASH_Lock
+FLASH_ProgramWord
+param_struct
