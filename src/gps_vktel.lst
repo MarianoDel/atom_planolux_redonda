@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc6onYtx.s 			page 1
+ARM GAS  /tmp/ccOLcpfU.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   55              		.section	.bss.gps_state,"aw",%nobits
   56              		.type	gps_state, %object
   57              		.size	gps_state, 1
-ARM GAS  /tmp/cc6onYtx.s 			page 2
+ARM GAS  /tmp/ccOLcpfU.s 			page 2
 
 
   58              	gps_state:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  112 0010 62       		.byte	98
  113 0011 06       		.byte	6
  114 0012 01       		.byte	1
-ARM GAS  /tmp/cc6onYtx.s 			page 3
+ARM GAS  /tmp/ccOLcpfU.s 			page 3
 
 
  115 0013 03       		.byte	3
@@ -178,7 +178,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  169 0009 41       		.byte	65
  170 000a 2A       		.byte	42
  171 000b 32       		.byte	50
-ARM GAS  /tmp/cc6onYtx.s 			page 4
+ARM GAS  /tmp/ccOLcpfU.s 			page 4
 
 
  172 000c 37       		.byte	55
@@ -238,7 +238,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  226 0002 49       		.byte	73
  227 0003 47       		.byte	71
  228 0004 50       		.byte	80
-ARM GAS  /tmp/cc6onYtx.s 			page 5
+ARM GAS  /tmp/ccOLcpfU.s 			page 5
 
 
  229 0005 51       		.byte	81
@@ -298,7 +298,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  283              		.section	.data.str_conf8,"aw",%progbits
  284              		.align	2
  285              		.type	str_conf8, %object
-ARM GAS  /tmp/cc6onYtx.s 			page 6
+ARM GAS  /tmp/ccOLcpfU.s 			page 6
 
 
  286              		.size	str_conf8, 26
@@ -358,7 +358,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  340 0014 00       		.byte	0
  341 0015 F0       		.byte	-16
  342 0016 03       		.byte	3
-ARM GAS  /tmp/cc6onYtx.s 			page 7
+ARM GAS  /tmp/ccOLcpfU.s 			page 7
 
 
  343 0017 00       		.byte	0
@@ -418,7 +418,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  397 000d 0D       		.byte	13
  398 000e 0A       		.byte	10
  399 000f B5       		.byte	-75
-ARM GAS  /tmp/cc6onYtx.s 			page 8
+ARM GAS  /tmp/ccOLcpfU.s 			page 8
 
 
  400 0010 62       		.byte	98
@@ -478,7 +478,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  454 0006 FF       		.byte	-1
  455 0007 FF       		.byte	-1
  456 0008 00       		.byte	0
-ARM GAS  /tmp/cc6onYtx.s 			page 9
+ARM GAS  /tmp/ccOLcpfU.s 			page 9
 
 
  457 0009 00       		.byte	0
@@ -538,7 +538,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
    7:src/gps_vktel.c **** 
    8:src/gps_vktel.c **** #include "gps_vktel.h"
    9:src/gps_vktel.c **** #include "main_menu.h"
-ARM GAS  /tmp/cc6onYtx.s 			page 10
+ARM GAS  /tmp/ccOLcpfU.s 			page 10
 
 
   10:src/gps_vktel.c **** #include "uart.h"
@@ -598,7 +598,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   64:src/gps_vktel.c **** 
   65:src/gps_vktel.c **** unsigned char str_conf12 [] = Disable_GPZDA_String_Cmd;
   66:src/gps_vktel.c **** 
-ARM GAS  /tmp/cc6onYtx.s 			page 11
+ARM GAS  /tmp/ccOLcpfU.s 			page 11
 
 
   67:src/gps_vktel.c **** unsigned char str_factory [] = Set_Factory_String_Cmd;
@@ -628,17 +628,17 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   77:src/gps_vktel.c **** 	switch (gps_state)
  519              		.loc 1 77 0
  520 000c 2F4B     		ldr	r3, .L16	@ tmp128,
- 521 000e 1B78     		ldrb	r3, [r3]	@ D.4990, gps_state
- 522 0010 012B     		cmp	r3, #1	@ D.4991,
+ 521 000e 1B78     		ldrb	r3, [r3]	@ D.5016, gps_state
+ 522 0010 012B     		cmp	r3, #1	@ D.5017,
  523 0012 17D0     		beq	.L3	@,
  524 0014 02DC     		bgt	.L4	@,
- 525 0016 002B     		cmp	r3, #0	@ D.4991,
+ 525 0016 002B     		cmp	r3, #0	@ D.5017,
  526 0018 05D0     		beq	.L5	@,
  527 001a 47E0     		b	.L2	@
  528              	.L4:
- 529 001c 022B     		cmp	r3, #2	@ D.4991,
+ 529 001c 022B     		cmp	r3, #2	@ D.5017,
  530 001e 26D0     		beq	.L6	@,
- 531 0020 032B     		cmp	r3, #3	@ D.4991,
+ 531 0020 032B     		cmp	r3, #3	@ D.5017,
  532 0022 36D0     		beq	.L7	@,
  533 0024 42E0     		b	.L2	@
  534              	.L5:
@@ -647,7 +647,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   80:src/gps_vktel.c **** 			GPS_PIN_DISA;
  535              		.loc 1 80 0
  536 0026 9023     		movs	r3, #144	@ tmp172,
- 537 0028 DB05     		lsls	r3, r3, #23	@ D.4992, tmp172,
+ 537 0028 DB05     		lsls	r3, r3, #23	@ D.5018, tmp172,
  538 002a 8022     		movs	r2, #128	@ tmp173,
  539 002c 1206     		lsls	r2, r2, #24	@ tmp129, tmp173,
  540 002e 9A61     		str	r2, [r3, #24]	@ tmp129, _11->BSRR
@@ -658,13 +658,13 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  544 0034 1A80     		strh	r2, [r3]	@ tmp132, gps_timeout
   82:src/gps_vktel.c **** 			gps_state++;
  545              		.loc 1 82 0
-ARM GAS  /tmp/cc6onYtx.s 			page 12
+ARM GAS  /tmp/ccOLcpfU.s 			page 12
 
 
  546 0036 254B     		ldr	r3, .L16	@ tmp133,
- 547 0038 1B78     		ldrb	r3, [r3]	@ D.4990, gps_state
+ 547 0038 1B78     		ldrb	r3, [r3]	@ D.5016, gps_state
  548 003a 0133     		adds	r3, r3, #1	@ tmp134,
- 549 003c DAB2     		uxtb	r2, r3	@ D.4990, tmp134
+ 549 003c DAB2     		uxtb	r2, r3	@ D.5016, tmp134
  550 003e 234B     		ldr	r3, .L16	@ tmp135,
  551 0040 1A70     		strb	r2, [r3]	@ tmp136, gps_state
   83:src/gps_vktel.c **** 			break;
@@ -677,14 +677,14 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  555              		.loc 1 86 0
  556 0044 224B     		ldr	r3, .L16+4	@ tmp137,
  557 0046 1B88     		ldrh	r3, [r3]	@ tmp138, gps_timeout
- 558 0048 9BB2     		uxth	r3, r3	@ D.4993, tmp138
- 559 004a 002B     		cmp	r3, #0	@ D.4993,
+ 558 0048 9BB2     		uxth	r3, r3	@ D.5019, tmp138
+ 559 004a 002B     		cmp	r3, #0	@ D.5019,
  560 004c 32D1     		bne	.L13	@,
   87:src/gps_vktel.c **** 			{
   88:src/gps_vktel.c **** 				GPS_PIN_ENA;
  561              		.loc 1 88 0
  562 004e 9023     		movs	r3, #144	@ tmp169,
- 563 0050 DB05     		lsls	r3, r3, #23	@ D.4992, tmp169,
+ 563 0050 DB05     		lsls	r3, r3, #23	@ D.5018, tmp169,
  564 0052 8022     		movs	r2, #128	@ tmp170,
  565 0054 1202     		lsls	r2, r2, #8	@ tmp139, tmp170,
  566 0056 9A61     		str	r2, [r3, #24]	@ tmp139, _19->BSRR
@@ -697,9 +697,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   90:src/gps_vktel.c **** 				gps_state++;
  572              		.loc 1 90 0
  573 0060 1A4B     		ldr	r3, .L16	@ tmp143,
- 574 0062 1B78     		ldrb	r3, [r3]	@ D.4990, gps_state
+ 574 0062 1B78     		ldrb	r3, [r3]	@ D.5016, gps_state
  575 0064 0133     		adds	r3, r3, #1	@ tmp144,
- 576 0066 DAB2     		uxtb	r2, r3	@ D.4990, tmp144
+ 576 0066 DAB2     		uxtb	r2, r3	@ D.5016, tmp144
  577 0068 184B     		ldr	r3, .L16	@ tmp145,
  578 006a 1A70     		strb	r2, [r3]	@ tmp146, gps_state
   91:src/gps_vktel.c **** 			}
@@ -713,12 +713,12 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  582              		.loc 1 95 0
  583 006e 184B     		ldr	r3, .L16+4	@ tmp147,
  584 0070 1B88     		ldrh	r3, [r3]	@ tmp148, gps_timeout
- 585 0072 9BB2     		uxth	r3, r3	@ D.4993, tmp148
- 586 0074 002B     		cmp	r3, #0	@ D.4993,
+ 585 0072 9BB2     		uxth	r3, r3	@ D.5019, tmp148
+ 586 0074 002B     		cmp	r3, #0	@ D.5019,
  587 0076 1FD1     		bne	.L14	@,
   96:src/gps_vktel.c **** 			{
   97:src/gps_vktel.c **** 				Usart1SendSingle(0xFF);
-ARM GAS  /tmp/cc6onYtx.s 			page 13
+ARM GAS  /tmp/ccOLcpfU.s 			page 13
 
 
  588              		.loc 1 97 0
@@ -732,9 +732,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
   99:src/gps_vktel.c **** 				gps_state++;
  595              		.loc 1 99 0
  596 0084 114B     		ldr	r3, .L16	@ tmp152,
- 597 0086 1B78     		ldrb	r3, [r3]	@ D.4990, gps_state
+ 597 0086 1B78     		ldrb	r3, [r3]	@ D.5016, gps_state
  598 0088 0133     		adds	r3, r3, #1	@ tmp153,
- 599 008a DAB2     		uxtb	r2, r3	@ D.4990, tmp153
+ 599 008a DAB2     		uxtb	r2, r3	@ D.5016, tmp153
  600 008c 0F4B     		ldr	r3, .L16	@ tmp154,
  601 008e 1A70     		strb	r2, [r3]	@ tmp155, gps_state
  100:src/gps_vktel.c **** 			}
@@ -748,8 +748,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  605              		.loc 1 104 0
  606 0092 0F4B     		ldr	r3, .L16+4	@ tmp156,
  607 0094 1B88     		ldrh	r3, [r3]	@ tmp157, gps_timeout
- 608 0096 9BB2     		uxth	r3, r3	@ D.4993, tmp157
- 609 0098 002B     		cmp	r3, #0	@ D.4993,
+ 608 0096 9BB2     		uxth	r3, r3	@ D.5019, tmp157
+ 609 0098 002B     		cmp	r3, #0	@ D.5019,
  610 009a 0FD1     		bne	.L15	@,
  105:src/gps_vktel.c **** 			{
  106:src/gps_vktel.c **** 				resp = RESP_OK;
@@ -778,7 +778,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  113:src/gps_vktel.c **** 			break;
  627              		.loc 1 113 0
  628 00b2 04E0     		b	.L8	@
-ARM GAS  /tmp/cc6onYtx.s 			page 14
+ARM GAS  /tmp/ccOLcpfU.s 			page 14
 
 
  629              	.L13:
@@ -801,7 +801,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  641              		.loc 1 115 0
  642 00be 6B46     		mov	r3, sp	@ tmp176,
  643 00c0 0733     		adds	r3, r3, #7	@ tmp167,
- 644 00c2 1B78     		ldrb	r3, [r3]	@ D.4994, resp
+ 644 00c2 1B78     		ldrb	r3, [r3]	@ D.5020, resp
  116:src/gps_vktel.c **** }
  645              		.loc 1 116 0
  646 00c4 1800     		movs	r0, r3	@, <retval>
@@ -834,19 +834,19 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  668              		.loc 1 121 0
  669 0000 064B     		ldr	r3, .L21	@ tmp113,
  670 0002 1B88     		ldrh	r3, [r3]	@ tmp114, gps_timeout
- 671 0004 9BB2     		uxth	r3, r3	@ D.4996, tmp114
- 672 0006 002B     		cmp	r3, #0	@ D.4996,
+ 671 0004 9BB2     		uxth	r3, r3	@ D.5022, tmp114
+ 672 0006 002B     		cmp	r3, #0	@ D.5022,
  673 0008 06D0     		beq	.L20	@,
  122:src/gps_vktel.c **** 		gps_timeout--;
-ARM GAS  /tmp/cc6onYtx.s 			page 15
+ARM GAS  /tmp/ccOLcpfU.s 			page 15
 
 
  674              		.loc 1 122 0
  675 000a 044B     		ldr	r3, .L21	@ tmp115,
  676 000c 1B88     		ldrh	r3, [r3]	@ tmp116, gps_timeout
- 677 000e 9BB2     		uxth	r3, r3	@ D.4996, tmp116
+ 677 000e 9BB2     		uxth	r3, r3	@ D.5022, tmp116
  678 0010 013B     		subs	r3, r3, #1	@ tmp117,
- 679 0012 9AB2     		uxth	r2, r3	@ D.4996, tmp117
+ 679 0012 9AB2     		uxth	r2, r3	@ D.5022, tmp117
  680 0014 014B     		ldr	r3, .L21	@ tmp118,
  681 0016 1A80     		strh	r2, [r3]	@ tmp119, gps_timeout
  682              	.L20:
@@ -888,17 +888,17 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  709              		.loc 1 131 0
  710 0002 0D4B     		ldr	r3, .L26	@ tmp113,
  711 0004 1B78     		ldrb	r3, [r3]	@ tmp114, usart1_have_data
- 712 0006 DBB2     		uxtb	r3, r3	@ D.4997, tmp114
- 713 0008 002B     		cmp	r3, #0	@ D.4997,
+ 712 0006 DBB2     		uxtb	r3, r3	@ D.5023, tmp114
+ 713 0008 002B     		cmp	r3, #0	@ D.5023,
  714 000a 13D0     		beq	.L25	@,
  715              		.loc 1 131 0 is_stmt 0 discriminator 1
  716 000c 0B4B     		ldr	r3, .L26+4	@ tmp115,
  717 000e 1B78     		ldrb	r3, [r3]	@ tmp116, usart1_mini_timeout
- 718 0010 DBB2     		uxtb	r3, r3	@ D.4997, tmp116
- 719 0012 002B     		cmp	r3, #0	@ D.4997,
+ 718 0010 DBB2     		uxtb	r3, r3	@ D.5023, tmp116
+ 719 0012 002B     		cmp	r3, #0	@ D.5023,
  720 0014 0ED1     		bne	.L25	@,
  132:src/gps_vktel.c **** 	{
-ARM GAS  /tmp/cc6onYtx.s 			page 16
+ARM GAS  /tmp/ccOLcpfU.s 			page 16
 
 
  133:src/gps_vktel.c **** 		gps_have_data = 0;
@@ -918,7 +918,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  732 0026 1800     		movs	r0, r3	@, tmp123
  733 0028 FFF7FEFF 		bl	ReadUsart1Buffer	@
  734 002c 0300     		movs	r3, r0	@ tmp124,
- 735 002e 1A00     		movs	r2, r3	@ D.4997, tmp125
+ 735 002e 1A00     		movs	r2, r3	@ D.5023, tmp125
  736 0030 054B     		ldr	r3, .L26+16	@ tmp126,
  737 0032 1A70     		strb	r2, [r3]	@ tmp127, usart1_pckt_bytes
  738              	.L25:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  765 0000 024B     		ldr	r3, .L29	@ tmp110,
  766 0002 0022     		movs	r2, #0	@ tmp111,
  767 0004 1A70     		strb	r2, [r3]	@ tmp112, gps_state
-ARM GAS  /tmp/cc6onYtx.s 			page 17
+ARM GAS  /tmp/ccOLcpfU.s 			page 17
 
 
  143:src/gps_vktel.c **** }
@@ -1005,12 +1005,12 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  151:src/gps_vktel.c **** 	switch (gps_state)
  801              		.loc 1 151 0
  802 000c 964B     		ldr	r3, .L73	@ tmp151,
- 803 000e 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
- 804 0010 0C2B     		cmp	r3, #12	@ D.4999,
+ 803 000e 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
+ 804 0010 0C2B     		cmp	r3, #12	@ D.5025,
  805 0012 00D9     		bls	.LCB272	@
  806 0014 06E1     		b	.L32	@long jump	@
  807              	.LCB272:
- 808 0016 9A00     		lsls	r2, r3, #2	@ tmp152, D.4999,
+ 808 0016 9A00     		lsls	r2, r3, #2	@ tmp152, D.5025,
  809 0018 944B     		ldr	r3, .L73+4	@ tmp154,
  810 001a D318     		adds	r3, r2, r3	@ tmp153, tmp152, tmp154
  811 001c 1B68     		ldr	r3, [r3]	@ tmp155,
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  813              		.section	.rodata.GPSConfig,"a",%progbits
  814              		.align	2
  815              	.L34:
-ARM GAS  /tmp/cc6onYtx.s 			page 18
+ARM GAS  /tmp/ccOLcpfU.s 			page 18
 
 
  816 0000 20000000 		.word	.L33
@@ -1052,9 +1052,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  156:src/gps_vktel.c **** 			gps_state++;
  840              		.loc 1 156 0
  841 0030 8D4B     		ldr	r3, .L73	@ tmp160,
- 842 0032 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 842 0032 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  843 0034 0133     		adds	r3, r3, #1	@ tmp161,
- 844 0036 DAB2     		uxtb	r2, r3	@ D.4998, tmp161
+ 844 0036 DAB2     		uxtb	r2, r3	@ D.5024, tmp161
  845 0038 8B4B     		ldr	r3, .L73	@ tmp162,
  846 003a 1A70     		strb	r2, [r3]	@ tmp163, gps_state
  157:src/gps_vktel.c **** 			break;
@@ -1067,8 +1067,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  850              		.loc 1 160 0
  851 003e 8D4B     		ldr	r3, .L73+12	@ tmp164,
  852 0040 1B88     		ldrh	r3, [r3]	@ tmp165, gps_timeout
- 853 0042 9BB2     		uxth	r3, r3	@ D.5000, tmp165
- 854 0044 002B     		cmp	r3, #0	@ D.5000,
+ 853 0042 9BB2     		uxth	r3, r3	@ D.5026, tmp165
+ 854 0044 002B     		cmp	r3, #0	@ D.5026,
  855 0046 00D0     		beq	.LCB305	@
  856 0048 F0E0     		b	.L61	@long jump	@
  857              	.LCB305:
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  859 004a 8B4B     		ldr	r3, .L73+16	@ tmp166,
  860 004c 1A21     		movs	r1, #26	@,
  861 004e 1800     		movs	r0, r3	@, tmp166
-ARM GAS  /tmp/cc6onYtx.s 			page 19
+ARM GAS  /tmp/ccOLcpfU.s 			page 19
 
 
  862 0050 FFF7FEFF 		bl	Usart1SendUnsigned	@
@@ -1090,9 +1090,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  164:src/gps_vktel.c **** 				gps_state++;
  867              		.loc 1 164 0
  868 005a 834B     		ldr	r3, .L73	@ tmp170,
- 869 005c 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 869 005c 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  870 005e 0133     		adds	r3, r3, #1	@ tmp171,
- 871 0060 DAB2     		uxtb	r2, r3	@ D.4998, tmp171
+ 871 0060 DAB2     		uxtb	r2, r3	@ D.5024, tmp171
  872 0062 814B     		ldr	r3, .L73	@ tmp172,
  873 0064 1A70     		strb	r2, [r3]	@ tmp173, gps_state
  165:src/gps_vktel.c **** 			}
@@ -1106,8 +1106,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  877              		.loc 1 169 0
  878 0068 824B     		ldr	r3, .L73+12	@ tmp174,
  879 006a 1B88     		ldrh	r3, [r3]	@ tmp175, gps_timeout
- 880 006c 9BB2     		uxth	r3, r3	@ D.5000, tmp175
- 881 006e 002B     		cmp	r3, #0	@ D.5000,
+ 880 006c 9BB2     		uxth	r3, r3	@ D.5026, tmp175
+ 881 006e 002B     		cmp	r3, #0	@ D.5026,
  882 0070 00D0     		beq	.LCB327	@
  883 0072 DDE0     		b	.L62	@long jump	@
  884              	.LCB327:
@@ -1126,9 +1126,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  173:src/gps_vktel.c **** 				gps_state++;
  894              		.loc 1 173 0
  895 0084 784B     		ldr	r3, .L73	@ tmp180,
- 896 0086 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 896 0086 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  897 0088 0133     		adds	r3, r3, #1	@ tmp181,
- 898 008a DAB2     		uxtb	r2, r3	@ D.4998, tmp181
+ 898 008a DAB2     		uxtb	r2, r3	@ D.5024, tmp181
  899 008c 764B     		ldr	r3, .L73	@ tmp182,
  900 008e 1A70     		strb	r2, [r3]	@ tmp183, gps_state
  174:src/gps_vktel.c **** 			}
@@ -1138,15 +1138,15 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  903              	.L37:
  176:src/gps_vktel.c **** 
  177:src/gps_vktel.c **** 		case GPS_INIT4:
-ARM GAS  /tmp/cc6onYtx.s 			page 20
+ARM GAS  /tmp/ccOLcpfU.s 			page 20
 
 
  178:src/gps_vktel.c **** 			if (!gps_timeout)
  904              		.loc 1 178 0
  905 0092 784B     		ldr	r3, .L73+12	@ tmp184,
  906 0094 1B88     		ldrh	r3, [r3]	@ tmp185, gps_timeout
- 907 0096 9BB2     		uxth	r3, r3	@ D.5000, tmp185
- 908 0098 002B     		cmp	r3, #0	@ D.5000,
+ 907 0096 9BB2     		uxth	r3, r3	@ D.5026, tmp185
+ 908 0098 002B     		cmp	r3, #0	@ D.5026,
  909 009a 00D0     		beq	.LCB349	@
  910 009c CAE0     		b	.L63	@long jump	@
  911              	.LCB349:
@@ -1165,9 +1165,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  182:src/gps_vktel.c **** 				gps_state++;
  921              		.loc 1 182 0
  922 00ae 6E4B     		ldr	r3, .L73	@ tmp190,
- 923 00b0 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 923 00b0 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  924 00b2 0133     		adds	r3, r3, #1	@ tmp191,
- 925 00b4 DAB2     		uxtb	r2, r3	@ D.4998, tmp191
+ 925 00b4 DAB2     		uxtb	r2, r3	@ D.5024, tmp191
  926 00b6 6C4B     		ldr	r3, .L73	@ tmp192,
  927 00b8 1A70     		strb	r2, [r3]	@ tmp193, gps_state
  183:src/gps_vktel.c **** 			}
@@ -1181,8 +1181,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  931              		.loc 1 187 0
  932 00bc 6D4B     		ldr	r3, .L73+12	@ tmp194,
  933 00be 1B88     		ldrh	r3, [r3]	@ tmp195, gps_timeout
- 934 00c0 9BB2     		uxth	r3, r3	@ D.5000, tmp195
- 935 00c2 002B     		cmp	r3, #0	@ D.5000,
+ 934 00c0 9BB2     		uxth	r3, r3	@ D.5026, tmp195
+ 935 00c2 002B     		cmp	r3, #0	@ D.5026,
  936 00c4 00D0     		beq	.LCB371	@
  937 00c6 B7E0     		b	.L64	@long jump	@
  938              	.LCB371:
@@ -1198,15 +1198,15 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  945 00d2 684B     		ldr	r3, .L73+12	@ tmp197,
  946 00d4 6422     		movs	r2, #100	@ tmp198,
  947 00d6 1A80     		strh	r2, [r3]	@ tmp199, gps_timeout
-ARM GAS  /tmp/cc6onYtx.s 			page 21
+ARM GAS  /tmp/ccOLcpfU.s 			page 21
 
 
  191:src/gps_vktel.c **** 				gps_state++;
  948              		.loc 1 191 0
  949 00d8 634B     		ldr	r3, .L73	@ tmp200,
- 950 00da 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 950 00da 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  951 00dc 0133     		adds	r3, r3, #1	@ tmp201,
- 952 00de DAB2     		uxtb	r2, r3	@ D.4998, tmp201
+ 952 00de DAB2     		uxtb	r2, r3	@ D.5024, tmp201
  953 00e0 614B     		ldr	r3, .L73	@ tmp202,
  954 00e2 1A70     		strb	r2, [r3]	@ tmp203, gps_state
  192:src/gps_vktel.c **** 			}
@@ -1220,8 +1220,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  958              		.loc 1 196 0
  959 00e6 634B     		ldr	r3, .L73+12	@ tmp204,
  960 00e8 1B88     		ldrh	r3, [r3]	@ tmp205, gps_timeout
- 961 00ea 9BB2     		uxth	r3, r3	@ D.5000, tmp205
- 962 00ec 002B     		cmp	r3, #0	@ D.5000,
+ 961 00ea 9BB2     		uxth	r3, r3	@ D.5026, tmp205
+ 962 00ec 002B     		cmp	r3, #0	@ D.5026,
  963 00ee 00D0     		beq	.LCB393	@
  964 00f0 A4E0     		b	.L65	@long jump	@
  965              	.LCB393:
@@ -1240,9 +1240,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  200:src/gps_vktel.c **** 				gps_state++;
  975              		.loc 1 200 0
  976 0102 594B     		ldr	r3, .L73	@ tmp210,
- 977 0104 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 977 0104 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  978 0106 0133     		adds	r3, r3, #1	@ tmp211,
- 979 0108 DAB2     		uxtb	r2, r3	@ D.4998, tmp211
+ 979 0108 DAB2     		uxtb	r2, r3	@ D.5024, tmp211
  980 010a 574B     		ldr	r3, .L73	@ tmp212,
  981 010c 1A70     		strb	r2, [r3]	@ tmp213, gps_state
  201:src/gps_vktel.c **** 			}
@@ -1256,9 +1256,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  985              		.loc 1 205 0
  986 0110 584B     		ldr	r3, .L73+12	@ tmp214,
  987 0112 1B88     		ldrh	r3, [r3]	@ tmp215, gps_timeout
- 988 0114 9BB2     		uxth	r3, r3	@ D.5000, tmp215
- 989 0116 002B     		cmp	r3, #0	@ D.5000,
-ARM GAS  /tmp/cc6onYtx.s 			page 22
+ 988 0114 9BB2     		uxth	r3, r3	@ D.5026, tmp215
+ 989 0116 002B     		cmp	r3, #0	@ D.5026,
+ARM GAS  /tmp/ccOLcpfU.s 			page 22
 
 
  990 0118 00D0     		beq	.LCB415	@
@@ -1279,9 +1279,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  209:src/gps_vktel.c **** 				gps_state++;
  1002              		.loc 1 209 0
  1003 012c 4E4B     		ldr	r3, .L73	@ tmp220,
- 1004 012e 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 1004 012e 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  1005 0130 0133     		adds	r3, r3, #1	@ tmp221,
- 1006 0132 DAB2     		uxtb	r2, r3	@ D.4998, tmp221
+ 1006 0132 DAB2     		uxtb	r2, r3	@ D.5024, tmp221
  1007 0134 4C4B     		ldr	r3, .L73	@ tmp222,
  1008 0136 1A70     		strb	r2, [r3]	@ tmp223, gps_state
  210:src/gps_vktel.c **** 			}
@@ -1295,8 +1295,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1012              		.loc 1 214 0
  1013 013a 4E4B     		ldr	r3, .L73+12	@ tmp224,
  1014 013c 1B88     		ldrh	r3, [r3]	@ tmp225, gps_timeout
- 1015 013e 9BB2     		uxth	r3, r3	@ D.5000, tmp225
- 1016 0140 002B     		cmp	r3, #0	@ D.5000,
+ 1015 013e 9BB2     		uxth	r3, r3	@ D.5026, tmp225
+ 1016 0140 002B     		cmp	r3, #0	@ D.5026,
  1017 0142 00D0     		beq	.LCB437	@
  1018 0144 7EE0     		b	.L67	@long jump	@
  1019              	.LCB437:
@@ -1315,10 +1315,10 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  218:src/gps_vktel.c **** 				gps_state++;
  1029              		.loc 1 218 0
  1030 0156 444B     		ldr	r3, .L73	@ tmp230,
- 1031 0158 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 1031 0158 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  1032 015a 0133     		adds	r3, r3, #1	@ tmp231,
- 1033 015c DAB2     		uxtb	r2, r3	@ D.4998, tmp231
-ARM GAS  /tmp/cc6onYtx.s 			page 23
+ 1033 015c DAB2     		uxtb	r2, r3	@ D.5024, tmp231
+ARM GAS  /tmp/ccOLcpfU.s 			page 23
 
 
  1034 015e 424B     		ldr	r3, .L73	@ tmp232,
@@ -1334,8 +1334,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1039              		.loc 1 223 0
  1040 0164 434B     		ldr	r3, .L73+12	@ tmp234,
  1041 0166 1B88     		ldrh	r3, [r3]	@ tmp235, gps_timeout
- 1042 0168 9BB2     		uxth	r3, r3	@ D.5000, tmp235
- 1043 016a 002B     		cmp	r3, #0	@ D.5000,
+ 1042 0168 9BB2     		uxth	r3, r3	@ D.5026, tmp235
+ 1043 016a 002B     		cmp	r3, #0	@ D.5026,
  1044 016c 00D0     		beq	.LCB459	@
  1045 016e 6BE0     		b	.L68	@long jump	@
  1046              	.LCB459:
@@ -1354,9 +1354,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  227:src/gps_vktel.c **** 				gps_state++;
  1056              		.loc 1 227 0
  1057 0180 394B     		ldr	r3, .L73	@ tmp240,
- 1058 0182 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 1058 0182 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  1059 0184 0133     		adds	r3, r3, #1	@ tmp241,
- 1060 0186 DAB2     		uxtb	r2, r3	@ D.4998, tmp241
+ 1060 0186 DAB2     		uxtb	r2, r3	@ D.5024, tmp241
  1061 0188 374B     		ldr	r3, .L73	@ tmp242,
  1062 018a 1A70     		strb	r2, [r3]	@ tmp243, gps_state
  228:src/gps_vktel.c **** 			}
@@ -1370,15 +1370,15 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1066              		.loc 1 232 0
  1067 018e 394B     		ldr	r3, .L73+12	@ tmp244,
  1068 0190 1B88     		ldrh	r3, [r3]	@ tmp245, gps_timeout
- 1069 0192 9BB2     		uxth	r3, r3	@ D.5000, tmp245
- 1070 0194 002B     		cmp	r3, #0	@ D.5000,
+ 1069 0192 9BB2     		uxth	r3, r3	@ D.5026, tmp245
+ 1070 0194 002B     		cmp	r3, #0	@ D.5026,
  1071 0196 59D1     		bne	.L69	@,
  233:src/gps_vktel.c **** 			{
  234:src/gps_vktel.c **** 				Usart1SendUnsigned(str_conf10, sizeof(str_conf10));
  1072              		.loc 1 234 0
  1073 0198 3F4B     		ldr	r3, .L73+48	@ tmp246,
  1074 019a 1A21     		movs	r1, #26	@,
-ARM GAS  /tmp/cc6onYtx.s 			page 24
+ARM GAS  /tmp/ccOLcpfU.s 			page 24
 
 
  1075 019c 1800     		movs	r0, r3	@, tmp246
@@ -1391,9 +1391,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  236:src/gps_vktel.c **** 				gps_state++;
  1081              		.loc 1 236 0
  1082 01a8 2F4B     		ldr	r3, .L73	@ tmp250,
- 1083 01aa 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 1083 01aa 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  1084 01ac 0133     		adds	r3, r3, #1	@ tmp251,
- 1085 01ae DAB2     		uxtb	r2, r3	@ D.4998, tmp251
+ 1085 01ae DAB2     		uxtb	r2, r3	@ D.5024, tmp251
  1086 01b0 2D4B     		ldr	r3, .L73	@ tmp252,
  1087 01b2 1A70     		strb	r2, [r3]	@ tmp253, gps_state
  237:src/gps_vktel.c **** 			}
@@ -1407,8 +1407,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1091              		.loc 1 241 0
  1092 01b6 2F4B     		ldr	r3, .L73+12	@ tmp254,
  1093 01b8 1B88     		ldrh	r3, [r3]	@ tmp255, gps_timeout
- 1094 01ba 9BB2     		uxth	r3, r3	@ D.5000, tmp255
- 1095 01bc 002B     		cmp	r3, #0	@ D.5000,
+ 1094 01ba 9BB2     		uxth	r3, r3	@ D.5026, tmp255
+ 1095 01bc 002B     		cmp	r3, #0	@ D.5026,
  1096 01be 47D1     		bne	.L70	@,
  242:src/gps_vktel.c **** 			{
  243:src/gps_vktel.c **** 				Usart1SendUnsigned(str_conf11, sizeof(str_conf11));
@@ -1425,9 +1425,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  245:src/gps_vktel.c **** 				gps_state++;
  1106              		.loc 1 245 0
  1107 01d0 254B     		ldr	r3, .L73	@ tmp260,
- 1108 01d2 1B78     		ldrb	r3, [r3]	@ D.4998, gps_state
+ 1108 01d2 1B78     		ldrb	r3, [r3]	@ D.5024, gps_state
  1109 01d4 0133     		adds	r3, r3, #1	@ tmp261,
- 1110 01d6 DAB2     		uxtb	r2, r3	@ D.4998, tmp261
+ 1110 01d6 DAB2     		uxtb	r2, r3	@ D.5024, tmp261
  1111 01d8 234B     		ldr	r3, .L73	@ tmp262,
  1112 01da 1A70     		strb	r2, [r3]	@ tmp263, gps_state
  246:src/gps_vktel.c **** 			}
@@ -1438,14 +1438,14 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  248:src/gps_vktel.c **** 
  249:src/gps_vktel.c **** 		case GPS_INIT12:
  250:src/gps_vktel.c **** 			if (!gps_timeout)
-ARM GAS  /tmp/cc6onYtx.s 			page 25
+ARM GAS  /tmp/ccOLcpfU.s 			page 25
 
 
  1116              		.loc 1 250 0
  1117 01de 254B     		ldr	r3, .L73+12	@ tmp264,
  1118 01e0 1B88     		ldrh	r3, [r3]	@ tmp265, gps_timeout
- 1119 01e2 9BB2     		uxth	r3, r3	@ D.5000, tmp265
- 1120 01e4 002B     		cmp	r3, #0	@ D.5000,
+ 1119 01e2 9BB2     		uxth	r3, r3	@ D.5026, tmp265
+ 1120 01e4 002B     		cmp	r3, #0	@ D.5026,
  1121 01e6 35D1     		bne	.L71	@,
  251:src/gps_vktel.c **** 			{
  252:src/gps_vktel.c **** 				Usart1SendUnsigned(str_conf12, sizeof(str_conf12));
@@ -1475,8 +1475,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1138              		.loc 1 259 0
  1139 0200 1C4B     		ldr	r3, .L73+12	@ tmp273,
  1140 0202 1B88     		ldrh	r3, [r3]	@ tmp274, gps_timeout
- 1141 0204 9BB2     		uxth	r3, r3	@ D.5000, tmp274
- 1142 0206 002B     		cmp	r3, #0	@ D.5000,
+ 1141 0204 9BB2     		uxth	r3, r3	@ D.5026, tmp274
+ 1142 0206 002B     		cmp	r3, #0	@ D.5026,
  1143 0208 26D1     		bne	.L72	@,
  260:src/gps_vktel.c **** 			{
  261:src/gps_vktel.c **** 				Usart1SendUnsigned(str_save, sizeof(str_save));
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1155 021c 124B     		ldr	r3, .L73	@ tmp279,
  1156 021e 0022     		movs	r2, #0	@ tmp280,
  1157 0220 1A70     		strb	r2, [r3]	@ tmp281, gps_state
-ARM GAS  /tmp/cc6onYtx.s 			page 26
+ARM GAS  /tmp/ccOLcpfU.s 			page 26
 
 
  266:src/gps_vktel.c **** 			}
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1198 024a 06E0     		b	.L47	@
  1199              	.L69:
  238:src/gps_vktel.c **** 
-ARM GAS  /tmp/cc6onYtx.s 			page 27
+ARM GAS  /tmp/ccOLcpfU.s 			page 27
 
 
  1200              		.loc 1 238 0
@@ -1585,7 +1585,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1215              		.loc 1 274 0
  1216 025a 6B46     		mov	r3, sp	@ tmp289,
  1217 025c 0733     		adds	r3, r3, #7	@ tmp285,
- 1218 025e 1B78     		ldrb	r3, [r3]	@ D.5001, resp
+ 1218 025e 1B78     		ldrb	r3, [r3]	@ D.5027, resp
  275:src/gps_vktel.c **** }
  1219              		.loc 1 275 0
  1220 0260 1800     		movs	r0, r3	@, <retval>
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1247              		.align	2
  1248              		.global	GPSResetFactory
  1249              		.code	16
-ARM GAS  /tmp/cc6onYtx.s 			page 28
+ARM GAS  /tmp/ccOLcpfU.s 			page 28
 
 
  1250              		.thumb_func
@@ -1649,10 +1649,10 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  283:src/gps_vktel.c **** 	switch (gps_state)
  1268              		.loc 1 283 0
  1269 000c 174B     		ldr	r3, .L84	@ tmp118,
- 1270 000e 1B78     		ldrb	r3, [r3]	@ D.5003, gps_state
- 1271 0010 002B     		cmp	r3, #0	@ D.5004,
+ 1270 000e 1B78     		ldrb	r3, [r3]	@ D.5029, gps_state
+ 1271 0010 002B     		cmp	r3, #0	@ D.5030,
  1272 0012 02D0     		beq	.L77	@,
- 1273 0014 0C2B     		cmp	r3, #12	@ D.5004,
+ 1273 0014 0C2B     		cmp	r3, #12	@ D.5030,
  1274 0016 0CD0     		beq	.L78	@,
  1275 0018 1DE0     		b	.L82	@
  1276              	.L77:
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1290              		.loc 1 289 0
  1291 0030 16E0     		b	.L79	@
  1292              	.L78:
-ARM GAS  /tmp/cc6onYtx.s 			page 29
+ARM GAS  /tmp/ccOLcpfU.s 			page 29
 
 
  290:src/gps_vktel.c **** 
@@ -1687,8 +1687,8 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1293              		.loc 1 292 0
  1294 0032 104B     		ldr	r3, .L84+8	@ tmp126,
  1295 0034 1B88     		ldrh	r3, [r3]	@ tmp127, gps_timeout
- 1296 0036 9BB2     		uxth	r3, r3	@ D.5005, tmp127
- 1297 0038 002B     		cmp	r3, #0	@ D.5005,
+ 1296 0036 9BB2     		uxth	r3, r3	@ D.5031, tmp127
+ 1297 0038 002B     		cmp	r3, #0	@ D.5031,
  1298 003a 10D1     		bne	.L83	@,
  293:src/gps_vktel.c **** 			{
  294:src/gps_vktel.c **** 				Usart1SendUnsigned(str_save, sizeof(str_save));
@@ -1736,9 +1736,9 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1326              		.loc 1 307 0
  1327 0060 6B46     		mov	r3, sp	@ tmp142,
  1328 0062 0733     		adds	r3, r3, #7	@ tmp138,
- 1329 0064 1B78     		ldrb	r3, [r3]	@ D.5006, resp
+ 1329 0064 1B78     		ldrb	r3, [r3]	@ D.5032, resp
  308:src/gps_vktel.c **** }
-ARM GAS  /tmp/cc6onYtx.s 			page 30
+ARM GAS  /tmp/ccOLcpfU.s 			page 30
 
 
  1330              		.loc 1 308 0
@@ -1779,12 +1779,12 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1365 0025 00000000 		.4byte	.Ldebug_line0
  1366 0029 02       		.uleb128 0x2
  1367 002a 01       		.byte	0x1
- 1368 002b 06       		.byte	0x6
- 1369 002c B3000000 		.4byte	.LASF0
+ 1368 002b 08       		.byte	0x8
+ 1369 002c 23010000 		.4byte	.LASF0
  1370 0030 02       		.uleb128 0x2
  1371 0031 01       		.byte	0x1
- 1372 0032 08       		.byte	0x8
- 1373 0033 23010000 		.4byte	.LASF1
+ 1372 0032 06       		.byte	0x6
+ 1373 0033 B3000000 		.4byte	.LASF1
  1374 0037 02       		.uleb128 0x2
  1375 0038 02       		.byte	0x2
  1376 0039 05       		.byte	0x5
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1384 004a 02       		.byte	0x2
  1385 004b 07       		.byte	0x7
  1386 004c 11020000 		.4byte	.LASF3
-ARM GAS  /tmp/cc6onYtx.s 			page 31
+ARM GAS  /tmp/ccOLcpfU.s 			page 31
 
 
  1387 0050 02       		.uleb128 0x2
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1441 00bc 08       		.uleb128 0x8
  1442 00bd 2C       		.byte	0x2c
  1443 00be 04       		.byte	0x4
-ARM GAS  /tmp/cc6onYtx.s 			page 32
+ARM GAS  /tmp/ccOLcpfU.s 			page 32
 
 
  1444 00bf 6902     		.2byte	0x269
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1498 0127 85000000 		.4byte	0x85
  1499 012b 02       		.byte	0x2
  1500 012c 23       		.byte	0x23
-ARM GAS  /tmp/cc6onYtx.s 			page 33
+ARM GAS  /tmp/ccOLcpfU.s 			page 33
 
 
  1501 012d 12       		.uleb128 0x12
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1555 0194 02       		.byte	0x2
  1556 0195 23       		.byte	0x23
  1557 0196 2A       		.uleb128 0x2a
-ARM GAS  /tmp/cc6onYtx.s 			page 34
+ARM GAS  /tmp/ccOLcpfU.s 			page 34
 
 
  1558 0197 00       		.byte	0
@@ -1991,7 +1991,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1565 01a5 BC000000 		.4byte	0xbc
  1566 01a9 0C       		.uleb128 0xc
  1567 01aa 01       		.byte	0x1
- 1568 01ab 30000000 		.4byte	0x30
+ 1568 01ab 29000000 		.4byte	0x29
  1569 01af 05       		.byte	0x5
  1570 01b0 1C       		.byte	0x1c
  1571 01b1 04020000 		.4byte	0x204
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1612 0204 03       		.uleb128 0x3
  1613 0205 89000000 		.4byte	.LASF38
  1614 0209 05       		.byte	0x5
-ARM GAS  /tmp/cc6onYtx.s 			page 35
+ARM GAS  /tmp/ccOLcpfU.s 			page 35
 
 
  1615 020a 2C       		.byte	0x2c
@@ -2049,7 +2049,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1620 0215 01       		.byte	0x1
  1621 0216 49       		.byte	0x49
  1622 0217 01       		.byte	0x1
- 1623 0218 30000000 		.4byte	0x30
+ 1623 0218 29000000 		.4byte	0x29
  1624 021c 00000000 		.4byte	.LFB20
  1625 0220 D4000000 		.4byte	.LFE20
  1626 0224 00000000 		.4byte	.LLST0
@@ -2059,7 +2059,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1630 022e 74000000 		.4byte	.LASF44
  1631 0232 01       		.byte	0x1
  1632 0233 4B       		.byte	0x4b
- 1633 0234 30000000 		.4byte	0x30
+ 1633 0234 29000000 		.4byte	0x29
  1634 0238 02       		.byte	0x2
  1635 0239 91       		.byte	0x91
  1636 023a 77       		.sleb128 -9
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1669 0279 7D       		.byte	0x7d
  1670 027a 00       		.sleb128 0
  1671 027b 01       		.byte	0x1
-ARM GAS  /tmp/cc6onYtx.s 			page 36
+ARM GAS  /tmp/ccOLcpfU.s 			page 36
 
 
  1672 027c 0E       		.uleb128 0xe
@@ -2107,7 +2107,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1675 0282 01       		.byte	0x1
  1676 0283 93       		.byte	0x93
  1677 0284 01       		.byte	0x1
- 1678 0285 30000000 		.4byte	0x30
+ 1678 0285 29000000 		.4byte	0x29
  1679 0289 00000000 		.4byte	.LFB24
  1680 028d A8020000 		.4byte	.LFE24
  1681 0291 4C000000 		.4byte	.LLST2
@@ -2117,7 +2117,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1685 029b 74000000 		.4byte	.LASF44
  1686 029f 01       		.byte	0x1
  1687 02a0 95       		.byte	0x95
- 1688 02a1 30000000 		.4byte	0x30
+ 1688 02a1 29000000 		.4byte	0x29
  1689 02a5 02       		.byte	0x2
  1690 02a6 91       		.byte	0x91
  1691 02a7 77       		.sleb128 -9
@@ -2128,7 +2128,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1696 02af 01       		.byte	0x1
  1697 02b0 1701     		.2byte	0x117
  1698 02b2 01       		.byte	0x1
- 1699 02b3 30000000 		.4byte	0x30
+ 1699 02b3 29000000 		.4byte	0x29
  1700 02b7 00000000 		.4byte	.LFB25
  1701 02bb 7C000000 		.4byte	.LFE25
  1702 02bf 78000000 		.4byte	.LLST3
@@ -2138,7 +2138,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1706 02c9 74000000 		.4byte	.LASF44
  1707 02cd 01       		.byte	0x1
  1708 02ce 1901     		.2byte	0x119
- 1709 02d0 30000000 		.4byte	0x30
+ 1709 02d0 29000000 		.4byte	0x29
  1710 02d4 02       		.byte	0x2
  1711 02d5 91       		.byte	0x91
  1712 02d6 77       		.sleb128 -9
@@ -2151,14 +2151,14 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1719 02e3 01       		.byte	0x1
  1720 02e4 01       		.byte	0x1
  1721 02e5 05       		.uleb128 0x5
- 1722 02e6 30000000 		.4byte	0x30
+ 1722 02e6 29000000 		.4byte	0x29
  1723 02ea 14       		.uleb128 0x14
  1724 02eb 08010000 		.4byte	.LASF47
  1725 02ef 01       		.byte	0x1
  1726 02f0 14       		.byte	0x14
  1727 02f1 E5020000 		.4byte	0x2e5
  1728 02f5 01       		.byte	0x1
-ARM GAS  /tmp/cc6onYtx.s 			page 37
+ARM GAS  /tmp/ccOLcpfU.s 			page 37
 
 
  1729 02f6 01       		.byte	0x1
@@ -2173,11 +2173,11 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1738 0305 CA010000 		.4byte	.LASF49
  1739 0309 01       		.byte	0x1
  1740 030a 16       		.byte	0x16
- 1741 030b 30000000 		.4byte	0x30
+ 1741 030b 29000000 		.4byte	0x29
  1742 030f 01       		.byte	0x1
  1743 0310 01       		.byte	0x1
  1744 0311 06       		.uleb128 0x6
- 1745 0312 30000000 		.4byte	0x30
+ 1745 0312 29000000 		.4byte	0x29
  1746 0316 21030000 		.4byte	0x321
  1747 031a 07       		.uleb128 0x7
  1748 031b 9B000000 		.4byte	0x9b
@@ -2213,12 +2213,12 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1778 0357 05       		.uleb128 0x5
  1779 0358 49000000 		.4byte	0x49
  1780 035c 06       		.uleb128 0x6
- 1781 035d 30000000 		.4byte	0x30
+ 1781 035d 29000000 		.4byte	0x29
  1782 0361 6C030000 		.4byte	0x36c
  1783 0365 07       		.uleb128 0x7
  1784 0366 9B000000 		.4byte	0x9b
  1785 036a 15       		.byte	0x15
-ARM GAS  /tmp/cc6onYtx.s 			page 38
+ARM GAS  /tmp/ccOLcpfU.s 			page 38
 
 
  1786 036b 00       		.byte	0
@@ -2232,7 +2232,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1794 0379 03       		.byte	0x3
  1795 037a 00000000 		.4byte	str_conf1
  1796 037e 06       		.uleb128 0x6
- 1797 037f 30000000 		.4byte	0x30
+ 1797 037f 29000000 		.4byte	0x29
  1798 0383 8E030000 		.4byte	0x38e
  1799 0387 07       		.uleb128 0x7
  1800 0388 9B000000 		.4byte	0x9b
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1840 03d7 63010000 		.4byte	.LASF58
  1841 03db 01       		.byte	0x1
  1842 03dc 39       		.byte	0x39
-ARM GAS  /tmp/cc6onYtx.s 			page 39
+ARM GAS  /tmp/ccOLcpfU.s 			page 39
 
 
  1843 03dd 7E030000 		.4byte	0x37e
@@ -2338,13 +2338,13 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1897 0449 7E030000 		.4byte	0x37e
  1898 044d 01       		.byte	0x1
  1899 044e 05       		.byte	0x5
-ARM GAS  /tmp/cc6onYtx.s 			page 40
+ARM GAS  /tmp/ccOLcpfU.s 			page 40
 
 
  1900 044f 03       		.byte	0x3
  1901 0450 00000000 		.4byte	str_conf12
  1902 0454 06       		.uleb128 0x6
- 1903 0455 30000000 		.4byte	0x30
+ 1903 0455 29000000 		.4byte	0x29
  1904 0459 64040000 		.4byte	0x464
  1905 045d 07       		.uleb128 0x7
  1906 045e 9B000000 		.4byte	0x9b
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  1954 0018 0B       		.uleb128 0xb
  1955 0019 0B       		.uleb128 0xb
  1956 001a 3E       		.uleb128 0x3e
-ARM GAS  /tmp/cc6onYtx.s 			page 41
+ARM GAS  /tmp/ccOLcpfU.s 			page 41
 
 
  1957 001b 0B       		.uleb128 0xb
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2011 0051 08       		.uleb128 0x8
  2012 0052 13       		.uleb128 0x13
  2013 0053 01       		.byte	0x1
-ARM GAS  /tmp/cc6onYtx.s 			page 42
+ARM GAS  /tmp/ccOLcpfU.s 			page 42
 
 
  2014 0054 0B       		.uleb128 0xb
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2068 008a 04       		.uleb128 0x4
  2069 008b 01       		.byte	0x1
  2070 008c 0B       		.uleb128 0xb
-ARM GAS  /tmp/cc6onYtx.s 			page 43
+ARM GAS  /tmp/ccOLcpfU.s 			page 43
 
 
  2071 008d 0B       		.uleb128 0xb
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2125 00c4 3B       		.uleb128 0x3b
  2126 00c5 0B       		.uleb128 0xb
  2127 00c6 49       		.uleb128 0x49
-ARM GAS  /tmp/cc6onYtx.s 			page 44
+ARM GAS  /tmp/ccOLcpfU.s 			page 44
 
 
  2128 00c7 13       		.uleb128 0x13
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2182 00ff 3F       		.uleb128 0x3f
  2183 0100 0C       		.uleb128 0xc
  2184 0101 03       		.uleb128 0x3
-ARM GAS  /tmp/cc6onYtx.s 			page 45
+ARM GAS  /tmp/ccOLcpfU.s 			page 45
 
 
  2185 0102 0E       		.uleb128 0xe
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2239 0139 34       		.uleb128 0x34
  2240 013a 00       		.byte	0
  2241 013b 03       		.uleb128 0x3
-ARM GAS  /tmp/cc6onYtx.s 			page 46
+ARM GAS  /tmp/ccOLcpfU.s 			page 46
 
 
  2242 013c 0E       		.uleb128 0xe
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2296 005c 04000000 		.4byte	.LCFI4
  2297 0060 0200     		.2byte	0x2
  2298 0062 7D       		.byte	0x7d
-ARM GAS  /tmp/cc6onYtx.s 			page 47
+ARM GAS  /tmp/ccOLcpfU.s 			page 47
 
 
  2299 0063 04       		.sleb128 4
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2353 0010 00000000 		.4byte	.LFB22
  2354 0014 4C000000 		.4byte	.LFE22
  2355 0018 00000000 		.4byte	.LFB23
-ARM GAS  /tmp/cc6onYtx.s 			page 48
+ARM GAS  /tmp/ccOLcpfU.s 			page 48
 
 
  2356 001c 10000000 		.4byte	.LFE23
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2385 0069 5F5F7569 		.ascii	"__uint32_t\000"
  2385      6E743332 
  2385      5F7400
-ARM GAS  /tmp/cc6onYtx.s 			page 49
+ARM GAS  /tmp/ccOLcpfU.s 			page 49
 
 
  2386              	.LASF44:
@@ -2905,7 +2905,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2396              	.LASF15:
  2397 00ac 4F545950 		.ascii	"OTYPER\000"
  2397      455200
- 2398              	.LASF0:
+ 2398              	.LASF1:
  2399 00b3 7369676E 		.ascii	"signed char\000"
  2399      65642063 
  2399      68617200 
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2413 00fc 7374725F 		.ascii	"str_factory\000"
  2413      66616374 
  2413      6F727900 
-ARM GAS  /tmp/cc6onYtx.s 			page 50
+ARM GAS  /tmp/ccOLcpfU.s 			page 50
 
 
  2414              	.LASF47:
@@ -2951,7 +2951,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2417 011a 4750535F 		.ascii	"GPS_SAVE\000"
  2417      53415645 
  2417      00
- 2418              	.LASF1:
+ 2418              	.LASF0:
  2419 0123 756E7369 		.ascii	"unsigned char\000"
  2419      676E6564 
  2419      20636861 
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2439      313100
  2440              	.LASF9:
  2441 0196 6C6F6E67 		.ascii	"long long unsigned int\000"
-ARM GAS  /tmp/cc6onYtx.s 			page 51
+ARM GAS  /tmp/ccOLcpfU.s 			page 51
 
 
  2441      206C6F6E 
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2463      727300
  2464              	.LASF11:
  2465 0237 75696E74 		.ascii	"uint16_t\000"
-ARM GAS  /tmp/cc6onYtx.s 			page 52
+ARM GAS  /tmp/ccOLcpfU.s 			page 52
 
 
  2465      31365F74 
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2492 02e5 4750535F 		.ascii	"GPS_INIT10\000"
  2492      494E4954 
  2492      313000
-ARM GAS  /tmp/cc6onYtx.s 			page 53
+ARM GAS  /tmp/ccOLcpfU.s 			page 53
 
 
  2493              	.LASF50:
@@ -3168,67 +3168,67 @@ ARM GAS  /tmp/cc6onYtx.s 			page 1
  2509 03d5 4C434B52 		.ascii	"LCKR\000"
  2509      00
  2510              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/cc6onYtx.s 			page 54
+ARM GAS  /tmp/ccOLcpfU.s 			page 54
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 gps_vktel.c
-     /tmp/cc6onYtx.s:58     .bss.gps_state:00000000 gps_state
-     /tmp/cc6onYtx.s:59     .bss.gps_state:00000000 $d
+     /tmp/ccOLcpfU.s:58     .bss.gps_state:00000000 gps_state
+     /tmp/ccOLcpfU.s:59     .bss.gps_state:00000000 $d
                             *COM*:00000002 gps_timeout
                             *COM*:00000080 gps_buff
-     /tmp/cc6onYtx.s:67     .data.str_conf1:00000000 str_conf1
-     /tmp/cc6onYtx.s:64     .data.str_conf1:00000000 $d
-     /tmp/cc6onYtx.s:95     .data.str_conf2:00000000 str_conf2
-     /tmp/cc6onYtx.s:92     .data.str_conf2:00000000 $d
-     /tmp/cc6onYtx.s:127    .data.str_conf3:00000000 str_conf3
-     /tmp/cc6onYtx.s:124    .data.str_conf3:00000000 $d
-     /tmp/cc6onYtx.s:159    .data.str_conf4:00000000 str_conf4
-     /tmp/cc6onYtx.s:156    .data.str_conf4:00000000 $d
-     /tmp/cc6onYtx.s:191    .data.str_conf5:00000000 str_conf5
-     /tmp/cc6onYtx.s:188    .data.str_conf5:00000000 $d
-     /tmp/cc6onYtx.s:223    .data.str_conf6:00000000 str_conf6
-     /tmp/cc6onYtx.s:220    .data.str_conf6:00000000 $d
-     /tmp/cc6onYtx.s:255    .data.str_conf7:00000000 str_conf7
-     /tmp/cc6onYtx.s:252    .data.str_conf7:00000000 $d
-     /tmp/cc6onYtx.s:287    .data.str_conf8:00000000 str_conf8
-     /tmp/cc6onYtx.s:284    .data.str_conf8:00000000 $d
-     /tmp/cc6onYtx.s:319    .data.str_conf9:00000000 str_conf9
-     /tmp/cc6onYtx.s:316    .data.str_conf9:00000000 $d
-     /tmp/cc6onYtx.s:351    .data.str_conf10:00000000 str_conf10
-     /tmp/cc6onYtx.s:348    .data.str_conf10:00000000 $d
-     /tmp/cc6onYtx.s:383    .data.str_conf11:00000000 str_conf11
-     /tmp/cc6onYtx.s:380    .data.str_conf11:00000000 $d
-     /tmp/cc6onYtx.s:415    .data.str_conf12:00000000 str_conf12
-     /tmp/cc6onYtx.s:412    .data.str_conf12:00000000 $d
-     /tmp/cc6onYtx.s:447    .data.str_factory:00000000 str_factory
-     /tmp/cc6onYtx.s:444    .data.str_factory:00000000 $d
-     /tmp/cc6onYtx.s:474    .data.str_save:00000000 str_save
-     /tmp/cc6onYtx.s:471    .data.str_save:00000000 $d
-     /tmp/cc6onYtx.s:497    .text.GPSStart:00000000 $t
-     /tmp/cc6onYtx.s:502    .text.GPSStart:00000000 GPSStart
-     /tmp/cc6onYtx.s:653    .text.GPSStart:000000cc $d
-     /tmp/cc6onYtx.s:659    .text.GPSTimeoutCounters:00000000 $t
-     /tmp/cc6onYtx.s:664    .text.GPSTimeoutCounters:00000000 GPSTimeoutCounters
-     /tmp/cc6onYtx.s:690    .text.GPSTimeoutCounters:0000001c $d
-     /tmp/cc6onYtx.s:695    .text.GPSProcess:00000000 $t
-     /tmp/cc6onYtx.s:700    .text.GPSProcess:00000000 GPSProcess
-     /tmp/cc6onYtx.s:746    .text.GPSProcess:00000038 $d
-     /tmp/cc6onYtx.s:755    .text.GPSConfigResetSM:00000000 $t
-     /tmp/cc6onYtx.s:760    .text.GPSConfigResetSM:00000000 GPSConfigResetSM
-     /tmp/cc6onYtx.s:775    .text.GPSConfigResetSM:0000000c $d
-     /tmp/cc6onYtx.s:780    .text.GPSConfig:00000000 $t
-     /tmp/cc6onYtx.s:785    .text.GPSConfig:00000000 GPSConfig
-     /tmp/cc6onYtx.s:814    .rodata.GPSConfig:00000000 $d
-     /tmp/cc6onYtx.s:1227   .text.GPSConfig:00000268 $d
-     /tmp/cc6onYtx.s:1247   .text.GPSResetFactory:00000000 $t
-     /tmp/cc6onYtx.s:1252   .text.GPSResetFactory:00000000 GPSResetFactory
-     /tmp/cc6onYtx.s:1338   .text.GPSResetFactory:0000006c $d
+     /tmp/ccOLcpfU.s:67     .data.str_conf1:00000000 str_conf1
+     /tmp/ccOLcpfU.s:64     .data.str_conf1:00000000 $d
+     /tmp/ccOLcpfU.s:95     .data.str_conf2:00000000 str_conf2
+     /tmp/ccOLcpfU.s:92     .data.str_conf2:00000000 $d
+     /tmp/ccOLcpfU.s:127    .data.str_conf3:00000000 str_conf3
+     /tmp/ccOLcpfU.s:124    .data.str_conf3:00000000 $d
+     /tmp/ccOLcpfU.s:159    .data.str_conf4:00000000 str_conf4
+     /tmp/ccOLcpfU.s:156    .data.str_conf4:00000000 $d
+     /tmp/ccOLcpfU.s:191    .data.str_conf5:00000000 str_conf5
+     /tmp/ccOLcpfU.s:188    .data.str_conf5:00000000 $d
+     /tmp/ccOLcpfU.s:223    .data.str_conf6:00000000 str_conf6
+     /tmp/ccOLcpfU.s:220    .data.str_conf6:00000000 $d
+     /tmp/ccOLcpfU.s:255    .data.str_conf7:00000000 str_conf7
+     /tmp/ccOLcpfU.s:252    .data.str_conf7:00000000 $d
+     /tmp/ccOLcpfU.s:287    .data.str_conf8:00000000 str_conf8
+     /tmp/ccOLcpfU.s:284    .data.str_conf8:00000000 $d
+     /tmp/ccOLcpfU.s:319    .data.str_conf9:00000000 str_conf9
+     /tmp/ccOLcpfU.s:316    .data.str_conf9:00000000 $d
+     /tmp/ccOLcpfU.s:351    .data.str_conf10:00000000 str_conf10
+     /tmp/ccOLcpfU.s:348    .data.str_conf10:00000000 $d
+     /tmp/ccOLcpfU.s:383    .data.str_conf11:00000000 str_conf11
+     /tmp/ccOLcpfU.s:380    .data.str_conf11:00000000 $d
+     /tmp/ccOLcpfU.s:415    .data.str_conf12:00000000 str_conf12
+     /tmp/ccOLcpfU.s:412    .data.str_conf12:00000000 $d
+     /tmp/ccOLcpfU.s:447    .data.str_factory:00000000 str_factory
+     /tmp/ccOLcpfU.s:444    .data.str_factory:00000000 $d
+     /tmp/ccOLcpfU.s:474    .data.str_save:00000000 str_save
+     /tmp/ccOLcpfU.s:471    .data.str_save:00000000 $d
+     /tmp/ccOLcpfU.s:497    .text.GPSStart:00000000 $t
+     /tmp/ccOLcpfU.s:502    .text.GPSStart:00000000 GPSStart
+     /tmp/ccOLcpfU.s:653    .text.GPSStart:000000cc $d
+     /tmp/ccOLcpfU.s:659    .text.GPSTimeoutCounters:00000000 $t
+     /tmp/ccOLcpfU.s:664    .text.GPSTimeoutCounters:00000000 GPSTimeoutCounters
+     /tmp/ccOLcpfU.s:690    .text.GPSTimeoutCounters:0000001c $d
+     /tmp/ccOLcpfU.s:695    .text.GPSProcess:00000000 $t
+     /tmp/ccOLcpfU.s:700    .text.GPSProcess:00000000 GPSProcess
+     /tmp/ccOLcpfU.s:746    .text.GPSProcess:00000038 $d
+     /tmp/ccOLcpfU.s:755    .text.GPSConfigResetSM:00000000 $t
+     /tmp/ccOLcpfU.s:760    .text.GPSConfigResetSM:00000000 GPSConfigResetSM
+     /tmp/ccOLcpfU.s:775    .text.GPSConfigResetSM:0000000c $d
+     /tmp/ccOLcpfU.s:780    .text.GPSConfig:00000000 $t
+     /tmp/ccOLcpfU.s:785    .text.GPSConfig:00000000 GPSConfig
+     /tmp/ccOLcpfU.s:814    .rodata.GPSConfig:00000000 $d
+     /tmp/ccOLcpfU.s:1227   .text.GPSConfig:00000268 $d
+     /tmp/ccOLcpfU.s:1247   .text.GPSResetFactory:00000000 $t
+     /tmp/ccOLcpfU.s:1252   .text.GPSResetFactory:00000000 GPSResetFactory
+     /tmp/ccOLcpfU.s:1338   .text.GPSResetFactory:0000006c $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
 Usart1SendSingle
-ARM GAS  /tmp/cc6onYtx.s 			page 55
+ARM GAS  /tmp/ccOLcpfU.s 			page 55
 
 
 ReadUsart1Buffer

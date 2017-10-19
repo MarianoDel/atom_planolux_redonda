@@ -14,9 +14,8 @@
   */
 
 /* Includes ------------------------------------------------------------------*/
-#include "stm32f0x_tim.h"
-#include "stm32f0xx_tim.h"
-#include "stm32f0xx_misc.h"
+#include "tim.h"
+#include "stm32f0xx.h"
 #include "uart.h"
 #include "hard.h"
 
@@ -26,9 +25,6 @@ extern volatile unsigned char timer_1seg;
 extern volatile unsigned short timer_led_comm;
 extern volatile unsigned short wait_ms_var;
 
-// ------- para determinar igrid -------
-extern volatile unsigned char igrid_timer;
-extern volatile unsigned char vgrid_timer;
 
 //--- VARIABLES GLOBALES ---//
 
@@ -133,7 +129,7 @@ void TIM_3_Init (void)
 	//Configuracion Pines
 	//Alternate Fuction
 	GPIOA->AFR[0] = 0x01000000;	//PA6 -> AF1
-	//GPIOB->AFR[0] = 0x00000011;	//PB1 -> AF1; PB0 -> AF1
+	// GPIOB->AFR[0] = 0x00010000;	//PB4 -> AF1
 #endif
 
 }
@@ -207,16 +203,17 @@ void TIM_16_Init (void)
 		RCC_TIM16_CLK_ON;
 
 	//Configuracion del timer.
-	TIM16->ARR = 0;
+	TIM16->CR1 = 0x00;		//clk int / 1; upcounting; uev
+	TIM16->ARR = 0xFFFF;
 	TIM16->CNT = 0;
-	TIM16->PSC = 47;
+	//TIM16->PSC = 7999;	//tick 1ms
+	//TIM16->PSC = 799;	//tick 100us
+	TIM16->PSC = 47;			//tick 1us
+	TIM16->EGR = TIM_EGR_UG;
 
-	// Enable timer interrupt ver UDIS
-	TIM16->DIER |= TIM_DIER_UIE;
-	TIM16->CR1 |= TIM_CR1_URS | TIM_CR1_OPM;	//solo int cuando hay overflow y one shot
-
-	NVIC_EnableIRQ(TIM16_IRQn);
-	NVIC_SetPriority(TIM16_IRQn, 7);
+	// Enable timer ver UDIS
+	//	TIM16->DIER |= TIM_DIER_UIE;
+	//	TIM16->CR1 |= TIM_CR1_CEN;
 }
 
 void OneShootTIM16 (unsigned short a)
@@ -225,11 +222,19 @@ void OneShootTIM16 (unsigned short a)
 	TIM16->CR1 |= TIM_CR1_CEN;
 }
 
+void TIM16Enable (void)
+{
+	TIM16->CR1 |= TIM_CR1_CEN;
+}
+
+void TIM16Disable (void)
+{
+	TIM16->CR1 &= ~TIM_CR1_CEN;
+}
+
+
 void TIM17_IRQHandler (void)	//200uS
 {
-	igrid_timer = 1;
-	vgrid_timer = 1;
-
 	if (TIM17->SR & 0x01)
 		TIM17->SR = 0x00;		//bajar flag
 }
@@ -254,6 +259,3 @@ void TIM_17_Init (void)
 }
 
 //--- end of file ---//
-
-
-

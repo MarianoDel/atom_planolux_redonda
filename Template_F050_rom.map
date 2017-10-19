@@ -2,8 +2,6 @@ Archive member included to satisfy reference by file (symbol)
 
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
                               ./cmsis_boot/system_stm32f0xx.o (__aeabi_uidiv)
-/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
-                              ./src/adc.o (__aeabi_idiv)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o) (__aeabi_idiv0)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
@@ -14,6 +12,8 @@ Archive member included to satisfy reference by file (symbol)
                               ./src/main.o (memcpy)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
                               ./src/tcp_transceiver.o (memset)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+                              ./src/dsp.o (srand)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o)
                               ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTFormat.o (snprintf)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
@@ -33,27 +33,31 @@ Archive member included to satisfy reference by file (symbol)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-ctype_.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o) (__ctype_ptr__)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
-                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o) (_impure_ptr)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o) (_impure_ptr)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o) (malloc)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o) (_free_r)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o) (_malloc_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o) (_svfprintf_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (_printf_i)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (memchr)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (memmove)
-/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
-                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (_free_r)
-/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
-                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (_malloc_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o) (_realloc_r)
-/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
-                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o) (_sbrk_r)
-/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
-                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o) (_malloc_usable_size_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o) (errno)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o) (_malloc_usable_size_r)
+/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
+                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o) (__aeabi_lmul)
 
 Allocating common symbols
 Common symbol       size              file
@@ -64,15 +68,14 @@ GSMSendCommandTimeOut
                     0x2               ./src/sim900_800.o
 tcp_kalive_timer    0x2               ./src/main.o
 buffUARTGSMtx       0x100             ./src/sim900_800.o
+last_edge           0x1               ./src/hard.o
 vpote               0x22              ./src/main.o
 param_struct        0xc               ./src/main.o
 GSMbuffRtaCommand   0x100             ./src/sim900_800.o
 bufftcpsend         0x280             ./src/tcp_transceiver.o
-usart2_mini_timeout
-                    0x1               ./src/main.o
 vd1                 0x21              ./src/main.o
 errno               0x4               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
-usart2_pckt_ready   0x1               ./src/main.o
+VoltagePhoto        0x40              ./src/adc.o
 vd0                 0x21              ./src/main.o
 GSMIPadd            0x10              ./src/sim900_800.o
 pBuffUARTGSMrxW     0x4               ./src/sim900_800.o
@@ -80,8 +83,9 @@ standalone_timer    0x2               ./src/main.o
 buffUARTGSMrx2      0x100             ./src/sim900_800.o
 gps_buff            0x80              ./src/gps_vktel.o
 GSMStartTime        0x2               ./src/sim900_800.o
+tt_take_photo_sample
+                    0x2               ./src/main.o
 sac_aux             0x1               ./src/main.o
-usart2_pckt_bytes   0x1               ./src/main.o
 PacketReadyUARTGSM  0x1               ./src/sim900_800.o
 s1                  0x2               ./src/main.o
 usart1_pckt_bytes   0x1               ./src/main.o
@@ -93,7 +97,6 @@ GSMConfigTime       0x2               ./src/sim900_800.o
 usart1_mini_timeout
                     0x1               ./src/main.o
 ptx2_pckt_index     0x4               ./src/uart.o
-usart2_have_data    0x1               ./src/main.o
 gps_timeout         0x2               ./src/gps_vktel.o
 ptx2                0x4               ./src/uart.o
 usart1_have_data    0x1               ./src/main.o
@@ -109,7 +112,6 @@ GSMSendIPbuffAux    0x20              ./src/sim900_800.o
 buffUARTGSMrx       0x100             ./src/sim900_800.o
 tx2buff             0x100             ./src/main.o
 GSMSendSMSTimeOut   0x2               ./src/sim900_800.o
-board_temp          0x10              ./src/adc.o
 s2                  0x2               ./src/main.o
 vtemp               0x22              ./src/main.o
 standalone_enable_menu_timer
@@ -129,6 +131,7 @@ pBuffUARTGSMtxW     0x4               ./src/sim900_800.o
 prx1                0x4               ./src/uart.o
 pBuffUARTGSMrxR     0x4               ./src/sim900_800.o
 counterUARTGSM      0x1               ./src/sim900_800.o
+tt_relay_on_off     0x2               ./src/main.o
 vd3                 0x21              ./src/main.o
 GSMReadSMSrepIn     0x20              ./src/sim900_800.o
 GSMReadSMScommand   0x20              ./src/sim900_800.o
@@ -147,6 +150,10 @@ Discarded input sections
  .bss.scroll2_timer
                 0x00000000        0x2 ./src/main.o
  .bss.timer_wifi_bright
+                0x00000000        0x1 ./src/main.o
+ .bss.igrid_timer
+                0x00000000        0x1 ./src/main.o
+ .bss.vgrid_timer
                 0x00000000        0x1 ./src/main.o
  .bss.signal_state
                 0x00000000        0x1 ./src/main.o
@@ -168,7 +175,6 @@ Discarded input sections
  .text          0x00000000        0x0 ./cmsis_boot/syscalls/syscalls.o
  .data          0x00000000        0x0 ./cmsis_boot/syscalls/syscalls.o
  .bss           0x00000000        0x0 ./cmsis_boot/syscalls/syscalls.o
- .text._sbrk    0x00000000       0x34 ./cmsis_boot/syscalls/syscalls.o
  .text.link     0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text._close   0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text._fstat   0x00000000       0x18 ./cmsis_boot/syscalls/syscalls.o
@@ -177,94 +183,6 @@ Discarded input sections
  .text._read    0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text._write   0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text.abort    0x00000000        0x4 ./cmsis_boot/syscalls/syscalls.o
- .bss.heap.5298
-                0x00000000        0x4 ./cmsis_boot/syscalls/syscalls.o
- .debug_info    0x00000000      0x44a ./cmsis_boot/syscalls/syscalls.o
- .debug_abbrev  0x00000000       0xe7 ./cmsis_boot/syscalls/syscalls.o
- .debug_loc     0x00000000      0x100 ./cmsis_boot/syscalls/syscalls.o
- .debug_aranges
-                0x00000000       0x60 ./cmsis_boot/syscalls/syscalls.o
- .debug_ranges  0x00000000       0x50 ./cmsis_boot/syscalls/syscalls.o
- .debug_line    0x00000000      0x158 ./cmsis_boot/syscalls/syscalls.o
- .debug_str     0x00000000      0x2eb ./cmsis_boot/syscalls/syscalls.o
- .comment       0x00000000       0x6f ./cmsis_boot/syscalls/syscalls.o
- .debug_frame   0x00000000       0xc0 ./cmsis_boot/syscalls/syscalls.o
- .ARM.attributes
-                0x00000000       0x31 ./cmsis_boot/syscalls/syscalls.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_DeInit
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_Init
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_StructInit
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_Cmd  0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ClockModeConfig
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_JitterCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_AutoPowerOffCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_WaitModeCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_AnalogWatchdogCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_AnalogWatchdogThresholdsConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_AnalogWatchdogSingleChannelConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_AnalogWatchdogSingleChannelCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_TempSensorCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_VrefintCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_VbatCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ChannelConfig
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ContinuousModeCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_DiscModeCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_OverrunModeCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_GetCalibrationFactor
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_StopOfConversion
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_StartOfConversion
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_GetConversionValue
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_DMACmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_DMARequestModeConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ITConfig
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_GetFlagStatus
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ClearFlag
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_GetITStatus
-                0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .text.ADC_ClearITPendingBit
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_info    0x00000000      0x997 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_abbrev  0x00000000      0x18e ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_loc     0x00000000      0x3cc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_aranges
-                0x00000000      0x108 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_ranges  0x00000000       0xf8 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_line    0x00000000      0x43d ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_str     0x00000000      0x639 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .debug_frame   0x00000000      0x270 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
  .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
  .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
  .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
@@ -609,206 +527,6 @@ Discarded input sections
  .debug_frame   0x00000000      0x28c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
  .ARM.attributes
                 0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_DeInit
-                0x00000000      0x140 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_TimeBaseInit
-                0x00000000       0xec ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_TimeBaseStructInit
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_PrescalerConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_CounterModeConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetCounter
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetAutoreload
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetCounter
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetPrescaler
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_UpdateDisableConfig
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_UpdateRequestConfig
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ARRPreloadConfig
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectOnePulseMode
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetClockDivision
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_Cmd  0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_BDTRConfig
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_BDTRStructInit
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_CtrlPWMOutputs
-                0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC1Init
-                0x00000000      0x188 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC2Init
-                0x00000000      0x19c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC3Init
-                0x00000000      0x18c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC4Init
-                0x00000000      0x120 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OCStructInit
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectOCxM
-                0x00000000       0xd4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetCompare1
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetCompare2
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetCompare3
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetCompare4
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ForcedOC1Config
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ForcedOC2Config
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ForcedOC3Config
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ForcedOC4Config
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_CCPreloadControl
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC1PreloadConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC2PreloadConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC3PreloadConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC4PreloadConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC1FastConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC2FastConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC3FastConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC4FastConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearOC1Ref
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearOC2Ref
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearOC3Ref
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearOC4Ref
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC1PolarityConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC1NPolarityConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC2PolarityConfig
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC2NPolarityConfig
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC3PolarityConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC3NPolarityConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_OC4PolarityConfig
-                0x00000000       0x5c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectOCREFClear
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_CCxCmd
-                0x00000000       0x70 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_CCxNCmd
-                0x00000000       0x70 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectCOM
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ICInit
-                0x00000000       0xac ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ICStructInit
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_PWMIConfig
-                0x00000000       0xe0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetCapture1
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetCapture2
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetCapture3
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetCapture4
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetIC1Prescaler
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetIC2Prescaler
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetIC3Prescaler
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SetIC4Prescaler
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ITConfig
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GenerateEvent
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetFlagStatus
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearFlag
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_GetITStatus
-                0x00000000       0x78 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ClearITPendingBit
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_DMAConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_DMACmd
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectCCDMA
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_InternalClockConfig
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ITRxExternalClockConfig
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_TIxExternalClockConfig
-                0x00000000       0x7c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ETRClockMode1Config
-                0x00000000       0x9c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ETRClockMode2Config
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectInputTrigger
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectOutputTrigger
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectSlaveMode
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectMasterSlaveMode
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_ETRConfig
-                0x00000000       0x80 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_EncoderInterfaceConfig
-                0x00000000       0xe8 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_SelectHallSensor
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TIM_RemapConfig
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TI1_Config
-                0x00000000       0xbc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TI2_Config
-                0x00000000       0xe4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TI3_Config
-                0x00000000       0xdc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .text.TI4_Config
-                0x00000000       0xf0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_info    0x00000000     0x1ec2 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_abbrev  0x00000000      0x192 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_loc     0x00000000      0xc3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_aranges
-                0x00000000      0x300 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_ranges  0x00000000      0x2f0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_line    0x00000000      0xa70 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_str     0x00000000      0xe52 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .debug_frame   0x00000000      0x7bc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
  .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
  .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
  .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
@@ -925,86 +643,55 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/stm32f0xx_it.o
  .data          0x00000000        0x0 ./src/stm32f0xx_it.o
  .bss           0x00000000        0x0 ./src/stm32f0xx_it.o
- .text          0x00000000        0x0 ./src/stm32f0x_gpio.o
- .data          0x00000000        0x0 ./src/stm32f0x_gpio.o
- .bss           0x00000000        0x0 ./src/stm32f0x_gpio.o
- .text.EXTIOn   0x00000000       0x18 ./src/stm32f0x_gpio.o
- .text          0x00000000        0x0 ./src/stm32f0x_tim.o
- .data          0x00000000        0x0 ./src/stm32f0x_tim.o
- .bss           0x00000000        0x0 ./src/stm32f0x_tim.o
+ .text          0x00000000        0x0 ./src/gpio.o
+ .data          0x00000000        0x0 ./src/gpio.o
+ .bss           0x00000000        0x0 ./src/gpio.o
+ .text.EXTIOn   0x00000000       0x18 ./src/gpio.o
+ .text          0x00000000        0x0 ./src/tim.o
+ .data          0x00000000        0x0 ./src/tim.o
+ .bss           0x00000000        0x0 ./src/tim.o
  .text.NVIC_EnableIRQ
-                0x00000000       0x2c ./src/stm32f0x_tim.o
+                0x00000000       0x2c ./src/tim.o
  .text.NVIC_SetPriority
-                0x00000000       0xec ./src/stm32f0x_tim.o
+                0x00000000       0xec ./src/tim.o
  .bss.timer_1000
-                0x00000000        0x2 ./src/stm32f0x_tim.o
- .text.Update_TIM3_CH1
-                0x00000000       0x20 ./src/stm32f0x_tim.o
+                0x00000000        0x2 ./src/tim.o
  .text.Update_TIM3_CH2
-                0x00000000       0x20 ./src/stm32f0x_tim.o
+                0x00000000       0x20 ./src/tim.o
  .text.Update_TIM3_CH3
-                0x00000000       0x20 ./src/stm32f0x_tim.o
+                0x00000000       0x20 ./src/tim.o
  .text.Update_TIM3_CH4
-                0x00000000       0x20 ./src/stm32f0x_tim.o
+                0x00000000       0x20 ./src/tim.o
  .text.TIM_6_Init
-                0x00000000       0x38 ./src/stm32f0x_tim.o
+                0x00000000       0x38 ./src/tim.o
  .text.TIM_14_Init
-                0x00000000       0x4c ./src/stm32f0x_tim.o
- .text.TIM_16_Init
-                0x00000000       0x68 ./src/stm32f0x_tim.o
+                0x00000000       0x4c ./src/tim.o
  .text.OneShootTIM16
-                0x00000000       0x30 ./src/stm32f0x_tim.o
+                0x00000000       0x30 ./src/tim.o
+ .text.TIM16Disable
+                0x00000000       0x18 ./src/tim.o
  .text.TIM_17_Init
-                0x00000000       0x6c ./src/stm32f0x_tim.o
+                0x00000000       0x6c ./src/tim.o
  .text          0x00000000        0x0 ./src/adc.o
  .data          0x00000000        0x0 ./src/adc.o
  .bss           0x00000000        0x0 ./src/adc.o
- .bss.last_temp
-                0x00000000        0x2 ./src/adc.o
- .bss.board_temp_index
-                0x00000000        0x1 ./src/adc.o
- .bss.new_temp_sample
-                0x00000000        0x1 ./src/adc.o
- .text.AdcConfig
-                0x00000000       0xac ./src/adc.o
- .text.ADC_Conf
-                0x00000000       0xa0 ./src/adc.o
- .text.ReadADC1
-                0x00000000       0x54 ./src/adc.o
  .text.SetADC1_SampleTime
                 0x00000000       0x28 ./src/adc.o
- .text.ReadADC1_SameSampleTime
-                0x00000000       0x34 ./src/adc.o
  .text.ReadADC1Check
                 0x00000000       0x94 ./src/adc.o
- .text.GetLDR   0x00000000       0x10 ./src/adc.o
- .text.UpdateTemp
-                0x00000000       0x64 ./src/adc.o
- .text.GetTemp  0x00000000       0x6c ./src/adc.o
- .text.ConvertTemp
-                0x00000000       0xa4 ./src/adc.o
- .debug_info    0x00000000      0x594 ./src/adc.o
- .debug_abbrev  0x00000000      0x219 ./src/adc.o
- .debug_loc     0x00000000      0x170 ./src/adc.o
- .debug_aranges
-                0x00000000       0x68 ./src/adc.o
- .debug_ranges  0x00000000       0x58 ./src/adc.o
- .debug_line    0x00000000      0x28a ./src/adc.o
- .debug_str     0x00000000      0x3e5 ./src/adc.o
- .comment       0x00000000       0x6f ./src/adc.o
- .debug_frame   0x00000000      0x108 ./src/adc.o
- .ARM.attributes
-                0x00000000       0x31 ./src/adc.o
- COMMON         0x00000000       0x10 ./src/adc.o
  .text          0x00000000        0x0 ./src/uart.o
  .data          0x00000000        0x0 ./src/uart.o
  .bss           0x00000000        0x0 ./src/uart.o
  .bss.pckt_gps_ready
                 0x00000000        0x1 ./src/uart.o
+ .text.Usart1Mode
+                0x00000000      0x10c ./src/uart.o
+ .text.ReadUsart1Buffer
+                0x00000000       0x60 ./src/uart.o
  .text.Usart2SendSingle
                 0x00000000       0x20 ./src/uart.o
- .text.Usart1Send
-                0x00000000       0x2c ./src/uart.o
+ .text.ReadUsart2Buffer
+                0x00000000       0x60 ./src/uart.o
  .text.Usart1SendSingle
                 0x00000000       0x20 ./src/uart.o
  .text          0x00000000        0x0 ./src/flash_program.o
@@ -1040,6 +727,34 @@ Discarded input sections
  .debug_frame   0x00000000       0xf0 ./src/flash_program.o
  .ARM.attributes
                 0x00000000       0x31 ./src/flash_program.o
+ .text          0x00000000        0x0 ./src/dsp.o
+ .data          0x00000000        0x0 ./src/dsp.o
+ .bss           0x00000000        0x0 ./src/dsp.o
+ .text.RandomGen
+                0x00000000       0x20 ./src/dsp.o
+ .text.MAFilterFast
+                0x00000000       0x60 ./src/dsp.o
+ .text.MAFilter8
+                0x00000000       0xa8 ./src/dsp.o
+ .text.MAFilter32
+                0x00000000      0x2b0 ./src/dsp.o
+ .text.MAFilter32Circular
+                0x00000000       0x80 ./src/dsp.o
+ .debug_info    0x00000000      0x220 ./src/dsp.o
+ .debug_abbrev  0x00000000       0x8b ./src/dsp.o
+ .debug_loc     0x00000000       0xac ./src/dsp.o
+ .debug_aranges
+                0x00000000       0x40 ./src/dsp.o
+ .debug_ranges  0x00000000       0x30 ./src/dsp.o
+ .debug_line    0x00000000       0xc7 ./src/dsp.o
+ .debug_str     0x00000000      0x21f ./src/dsp.o
+ .comment       0x00000000       0x6f ./src/dsp.o
+ .debug_frame   0x00000000       0x7c ./src/dsp.o
+ .ARM.attributes
+                0x00000000       0x31 ./src/dsp.o
+ .text          0x00000000        0x0 ./src/hard.o
+ .data          0x00000000        0x0 ./src/hard.o
+ .bss           0x00000000        0x0 ./src/hard.o
  .text          0x00000000        0x0 ./src/synchro.o
  .data          0x00000000        0x0 ./src/synchro.o
  .bss           0x00000000        0x0 ./src/synchro.o
@@ -1485,6 +1200,8 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/sim900_800.o
  .data          0x00000000        0x0 ./src/sim900_800.o
  .bss           0x00000000        0x0 ./src/sim900_800.o
+ .bss.GSMStartState
+                0x00000000        0x1 ./src/sim900_800.o
  .bss.GSMSendCommandState
                 0x00000000        0x1 ./src/sim900_800.o
  .bss.GSMSendCommandFlag
@@ -1541,6 +1258,8 @@ Discarded input sections
                 0x00000000        0x9 ./src/sim900_800.o
  .bss.prestadorSimState
                 0x00000000        0x1 ./src/sim900_800.o
+ .data.prestadorSimTime
+                0x00000000        0x1 ./src/sim900_800.o
  .bss.GSMCantSMS
                 0x00000000        0x1 ./src/sim900_800.o
  .bss.GSMCantSMS2
@@ -1555,6 +1274,10 @@ Discarded input sections
                 0x00000000        0x1 ./src/sim900_800.o
  .bss.flagCloseIP
                 0x00000000        0x1 ./src/sim900_800.o
+ .text.GSMProcess
+                0x00000000       0x5c ./src/sim900_800.o
+ .text.GSM_Start
+                0x00000000       0xfc ./src/sim900_800.o
  .text.GSM_Stop
                 0x00000000       0x38 ./src/sim900_800.o
  .rodata        0x00000000      0x276 ./src/sim900_800.o
@@ -1580,32 +1303,34 @@ Discarded input sections
                 0x00000000       0x84 ./src/sim900_800.o
  .text.GSMSendIP
                 0x00000000      0x12c ./src/sim900_800.o
+ .text.GSMTimeoutCounters
+                0x00000000       0xdc ./src/sim900_800.o
  .text.GSMrxSMS
                 0x00000000      0x630 ./src/sim900_800.o
  .text.GSMConfigPDPGPRS
                 0x00000000      0x6e8 ./src/sim900_800.o
  .rodata.GSMConfigPDPGPRS
                 0x00000000       0x44 ./src/sim900_800.o
+ .debug_info    0x00000000      0xcf2 ./src/sim900_800.o
+ .debug_abbrev  0x00000000      0x190 ./src/sim900_800.o
+ .debug_loc     0x00000000      0x218 ./src/sim900_800.o
+ .debug_aranges
+                0x00000000       0x90 ./src/sim900_800.o
+ .debug_ranges  0x00000000       0x80 ./src/sim900_800.o
+ .debug_line    0x00000000      0x6c8 ./src/sim900_800.o
+ .debug_str     0x00000000      0x8f6 ./src/sim900_800.o
+ .comment       0x00000000       0x6f ./src/sim900_800.o
+ .debug_frame   0x00000000      0x19c ./src/sim900_800.o
+ .ARM.attributes
+                0x00000000       0x31 ./src/sim900_800.o
+ COMMON         0x00000000      0x518 ./src/sim900_800.o
  .text          0x00000000       0x14 ./cmsis_boot/startup/startup_stm32f0xx.o
  .data          0x00000000        0x0 ./cmsis_boot/startup/startup_stm32f0xx.o
  .bss           0x00000000        0x0 ./cmsis_boot/startup/startup_stm32f0xx.o
- .text          0x00000000      0x114 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
- .debug_frame   0x00000000       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
- .ARM.attributes
-                0x00000000       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
- .text          0x00000000      0x1d4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
- .debug_frame   0x00000000       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
- .ARM.attributes
-                0x00000000       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
- .text          0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
- .ARM.attributes
-                0x00000000       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
@@ -1631,6 +1356,14 @@ Discarded input sections
  .debug_frame   0x00000000       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
  .ARM.attributes
                 0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .text.srand    0x00000000       0x5c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .text.rand     0x00000000       0x78 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .debug_frame   0x00000000       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+ .ARM.attributes
+                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o)
@@ -1646,10 +1379,6 @@ Discarded input sections
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
  .text._sprintf_r
                 0x00000000       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
- .text.sprintf  0x00000000       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
- .debug_frame   0x00000000       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
@@ -1701,98 +1430,42 @@ Discarded input sections
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
- .data.impure_data
-                0x00000000       0x60 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
- .data._impure_ptr
-                0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
- .rodata.str1.1
-                0x00000000        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .rodata._global_impure_ptr
                 0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+ .text.malloc   0x00000000       0x14 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+ .text.free     0x00000000       0x14 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+ .debug_frame   0x00000000       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
  .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .text.__ssputs_r
-                0x00000000       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .text.__ssprint_r
-                0x00000000      0x100 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .text._svfprintf_r
-                0x00000000      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .rodata.str1.1
-                0x00000000       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x00000000       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .text._printf_common
-                0x00000000       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .text._printf_i
-                0x00000000      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .rodata.str1.1
-                0x00000000       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x00000000       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .text.memchr   0x00000000       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .debug_frame   0x00000000       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .text.memmove  0x00000000       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .debug_frame   0x00000000       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
- .text._free_r  0x00000000       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .text._malloc_r
-                0x00000000       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .bss.__malloc_sbrk_start
-                0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .bss.__malloc_free_list
-                0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .text._realloc_r
-                0x00000000       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x00000000       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .text.__ssprint_r
+                0x00000000      0x100 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .text._sbrk_r  0x00000000       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
- .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
- .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
- .text._malloc_usable_size_r
-                0x00000000       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
- .debug_frame   0x00000000       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
- .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
  .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
  .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
  .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
@@ -1800,10 +1473,15 @@ Discarded input sections
                 0x00000000       0x1a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
  .text._reclaim_reent
                 0x00000000       0xcc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
- .debug_frame   0x00000000       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .text          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .text          0x00000000       0x58 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
+ .data          0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
+ .bss           0x00000000        0x0 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
+ .debug_frame   0x00000000       0x34 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
  .ARM.attributes
-                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
- COMMON         0x00000000        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                0x00000000       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
 
 Memory Configuration
 
@@ -1817,21 +1495,21 @@ Linker script and memory map
 LOAD ./src/main.o
 LOAD ./cmsis_boot/system_stm32f0xx.o
 LOAD ./cmsis_boot/syscalls/syscalls.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
 LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 LOAD ./src/stm32f0xx_it.o
-LOAD ./src/stm32f0x_gpio.o
-LOAD ./src/stm32f0x_tim.o
+LOAD ./src/gpio.o
+LOAD ./src/tim.o
 LOAD ./src/adc.o
 LOAD ./src/uart.o
 LOAD ./src/flash_program.o
+LOAD ./src/dsp.o
+LOAD ./src/hard.o
 LOAD ./src/synchro.o
 LOAD ./src/tcp_transceiver.o
 LOAD ./cmsis_core/core_cm0.o
@@ -1867,176 +1545,260 @@ END GROUP
                 0x08000000                g_pfnVectors
                 0x080000c4                . = ALIGN (0x4)
 
-.text           0x080000c4     0x1208
+.text           0x080000c4     0x1cf8
                 0x080000c4                . = ALIGN (0x4)
  *(.text)
- .text          0x080000c4        0xe /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
-                0x080000c4                strlen
+ .text          0x080000c4      0x114 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+                0x080000c4                __udivsi3
+                0x080000c4                __aeabi_uidiv
+                0x080001d0                __aeabi_uidivmod
+ .text          0x080001d8        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
+                0x080001d8                __aeabi_ldiv0
+                0x080001d8                __aeabi_idiv0
+ .text          0x080001dc        0xe /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
+                0x080001dc                strlen
  *(.text*)
- *fill*         0x080000d2        0x2 
+ *fill*         0x080001ea        0x2 
  .text.NVIC_SetPriority
-                0x080000d4       0xec ./src/main.o
+                0x080001ec       0xec ./src/main.o
  .text.SysTick_Config
-                0x080001c0       0x48 ./src/main.o
- .text.main     0x08000208      0x24c ./src/main.o
-                0x08000208                main
+                0x080002d8       0x48 ./src/main.o
+ .text.main     0x08000320      0x2cc ./src/main.o
+                0x08000320                main
  .text.TimingDelay_Decrement
-                0x08000454      0x10c ./src/main.o
-                0x08000454                TimingDelay_Decrement
+                0x080005ec      0x128 ./src/main.o
+                0x080005ec                TimingDelay_Decrement
  .text.SystemInit
-                0x08000560       0x88 ./cmsis_boot/system_stm32f0xx.o
-                0x08000560                SystemInit
+                0x08000714       0x88 ./cmsis_boot/system_stm32f0xx.o
+                0x08000714                SystemInit
  .text.SetSysClockInternalRC
-                0x080005e8       0xac ./cmsis_boot/system_stm32f0xx.o
-                0x080005e8                SetSysClockInternalRC
+                0x0800079c       0xac ./cmsis_boot/system_stm32f0xx.o
+                0x0800079c                SetSysClockInternalRC
+ .text._sbrk    0x08000848       0x34 ./cmsis_boot/syscalls/syscalls.o
+                0x08000848                _sbrk
  .text.NMI_Handler
-                0x08000694        0x4 ./src/stm32f0xx_it.o
-                0x08000694                NMI_Handler
+                0x0800087c        0x4 ./src/stm32f0xx_it.o
+                0x0800087c                NMI_Handler
  .text.HardFault_Handler
-                0x08000698        0x4 ./src/stm32f0xx_it.o
-                0x08000698                HardFault_Handler
+                0x08000880        0x4 ./src/stm32f0xx_it.o
+                0x08000880                HardFault_Handler
  .text.SVC_Handler
-                0x0800069c        0x4 ./src/stm32f0xx_it.o
-                0x0800069c                SVC_Handler
+                0x08000884        0x4 ./src/stm32f0xx_it.o
+                0x08000884                SVC_Handler
  .text.PendSV_Handler
-                0x080006a0        0x4 ./src/stm32f0xx_it.o
-                0x080006a0                PendSV_Handler
+                0x08000888        0x4 ./src/stm32f0xx_it.o
+                0x08000888                PendSV_Handler
  .text.SysTick_Handler
-                0x080006a4        0xc ./src/stm32f0xx_it.o
-                0x080006a4                SysTick_Handler
+                0x0800088c        0xc ./src/stm32f0xx_it.o
+                0x0800088c                SysTick_Handler
  .text.GPIO_Config
-                0x080006b0      0x12c ./src/stm32f0x_gpio.o
-                0x080006b0                GPIO_Config
- .text.EXTIOff  0x080007dc       0x18 ./src/stm32f0x_gpio.o
-                0x080007dc                EXTIOff
- .text.Wait_ms  0x080007f4       0x2c ./src/stm32f0x_tim.o
-                0x080007f4                Wait_ms
+                0x08000898      0x11c ./src/gpio.o
+                0x08000898                GPIO_Config
+ .text.EXTIOff  0x080009b4       0x18 ./src/gpio.o
+                0x080009b4                EXTIOff
+ .text.Update_TIM3_CH1
+                0x080009cc       0x20 ./src/tim.o
+                0x080009cc                Update_TIM3_CH1
+ .text.Wait_ms  0x080009ec       0x2c ./src/tim.o
+                0x080009ec                Wait_ms
  .text.TIM3_IRQHandler
-                0x08000820       0x1c ./src/stm32f0x_tim.o
-                0x08000820                TIM3_IRQHandler
+                0x08000a18       0x1c ./src/tim.o
+                0x08000a18                TIM3_IRQHandler
  .text.TIM_3_Init
-                0x0800083c       0x78 ./src/stm32f0x_tim.o
-                0x0800083c                TIM_3_Init
+                0x08000a34       0x78 ./src/tim.o
+                0x08000a34                TIM_3_Init
  .text.TIM14_IRQHandler
-                0x080008b4       0x1c ./src/stm32f0x_tim.o
-                0x080008b4                TIM14_IRQHandler
+                0x08000aac       0x1c ./src/tim.o
+                0x08000aac                TIM14_IRQHandler
  .text.TIM16_IRQHandler
-                0x080008d0       0x1c ./src/stm32f0x_tim.o
-                0x080008d0                TIM16_IRQHandler
+                0x08000ac8       0x1c ./src/tim.o
+                0x08000ac8                TIM16_IRQHandler
+ .text.TIM_16_Init
+                0x08000ae4       0x48 ./src/tim.o
+                0x08000ae4                TIM_16_Init
+ .text.TIM16Enable
+                0x08000b2c       0x18 ./src/tim.o
+                0x08000b2c                TIM16Enable
  .text.TIM17_IRQHandler
-                0x080008ec       0x30 ./src/stm32f0x_tim.o
-                0x080008ec                TIM17_IRQHandler
+                0x08000b44       0x1c ./src/tim.o
+                0x08000b44                TIM17_IRQHandler
+ .text.AdcConfig
+                0x08000b60       0x84 ./src/adc.o
+                0x08000b60                AdcConfig
+ .text.ReadADC1_SameSampleTime
+                0x08000be4       0x34 ./src/adc.o
+                0x08000be4                ReadADC1_SameSampleTime
+ .text.ADCGetCalibrationFactor
+                0x08000c18       0x5c ./src/adc.o
+                0x08000c18                ADCGetCalibrationFactor
+ .text.UpdatePhotoTransistor
+                0x08000c74       0x60 ./src/adc.o
+                0x08000c74                UpdatePhotoTransistor
+ .text.FillPhotoBuffer
+                0x08000cd4       0x4c ./src/adc.o
+                0x08000cd4                FillPhotoBuffer
+ .text.GetPhoto
+                0x08000d20       0x6c ./src/adc.o
+                0x08000d20                GetPhoto
  .text.NVIC_EnableIRQ
-                0x0800091c       0x2c ./src/uart.o
+                0x08000d8c       0x2c ./src/uart.o
  .text.NVIC_SetPriority
-                0x08000948       0xec ./src/uart.o
- .text.Usart1Mode
-                0x08000a34      0x10c ./src/uart.o
-                0x08000a34                Usart1Mode
- .text.ReadUsart1Buffer
-                0x08000b40       0x60 ./src/uart.o
-                0x08000b40                ReadUsart1Buffer
+                0x08000db8       0xec ./src/uart.o
  .text.USART1_IRQHandler
-                0x08000ba0      0x118 ./src/uart.o
-                0x08000ba0                USART1_IRQHandler
+                0x08000ea4      0x118 ./src/uart.o
+                0x08000ea4                USART1_IRQHandler
  .text.USART2_IRQHandler
-                0x08000cb8      0x100 ./src/uart.o
-                0x08000cb8                USART2_IRQHandler
+                0x08000fbc       0xc4 ./src/uart.o
+                0x08000fbc                USART2_IRQHandler
  .text.Usart2Send
-                0x08000db8       0x2c ./src/uart.o
-                0x08000db8                Usart2Send
+                0x08001080       0x2c ./src/uart.o
+                0x08001080                Usart2Send
  .text.Usart2SendUnsigned
-                0x08000de4       0x60 ./src/uart.o
-                0x08000de4                Usart2SendUnsigned
- .text.ReadUsart2Buffer
-                0x08000e44       0x60 ./src/uart.o
-                0x08000e44                ReadUsart2Buffer
+                0x080010ac       0x60 ./src/uart.o
+                0x080010ac                Usart2SendUnsigned
+ .text.Usart1Send
+                0x0800110c       0x2c ./src/uart.o
+                0x0800110c                Usart1Send
  .text.Usart1SendUnsigned
-                0x08000ea4       0x60 ./src/uart.o
-                0x08000ea4                Usart1SendUnsigned
+                0x08001138       0x60 ./src/uart.o
+                0x08001138                Usart1SendUnsigned
  .text.USART2Config
-                0x08000f04       0x7c ./src/uart.o
-                0x08000f04                USART2Config
+                0x08001198       0x7c ./src/uart.o
+                0x08001198                USART2Config
  .text.USART1Config
-                0x08000f80       0x7c ./src/uart.o
-                0x08000f80                USART1Config
- .text.GSMProcess
-                0x08000ffc       0xa0 ./src/sim900_800.o
-                0x08000ffc                GSMProcess
- .text.GSM_Start
-                0x0800109c       0xfc ./src/sim900_800.o
-                0x0800109c                GSM_Start
- .text.GSMTimeoutCounters
-                0x08001198       0xdc ./src/sim900_800.o
-                0x08001198                GSMTimeoutCounters
+                0x08001214       0x7c ./src/uart.o
+                0x08001214                USART1Config
+ .text.RelayOn  0x08001290       0x24 ./src/hard.o
+                0x08001290                RelayOn
+ .text.RelayOff
+                0x080012b4       0x24 ./src/hard.o
+                0x080012b4                RelayOff
+ .text.RelayIsOn
+                0x080012d8       0x28 ./src/hard.o
+                0x080012d8                RelayIsOn
+ .text.RelayIsOff
+                0x08001300       0x28 ./src/hard.o
+                0x08001300                RelayIsOff
+ .text.UpdateRelay
+                0x08001328      0x160 ./src/hard.o
+                0x08001328                UpdateRelay
+ .text.GetHysteresis
+                0x08001488       0x50 ./src/hard.o
+                0x08001488                GetHysteresis
+ .text.GetNew1to10
+                0x080014d8       0x68 ./src/hard.o
+                0x080014d8                GetNew1to10
  .text.Reset_Handler
-                0x08001274       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x08001274                Reset_Handler
+                0x08001540       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x08001540                Reset_Handler
  .text.Default_Handler
-                0x080012b8        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x080012b8                TIM1_CC_IRQHandler
-                0x080012b8                ADC1_COMP_IRQHandler
-                0x080012b8                PVD_IRQHandler
-                0x080012b8                I2C1_IRQHandler
-                0x080012b8                SPI1_IRQHandler
-                0x080012b8                TIM6_DAC_IRQHandler
-                0x080012b8                EXTI2_3_IRQHandler
-                0x080012b8                I2C2_IRQHandler
-                0x080012b8                RTC_IRQHandler
-                0x080012b8                EXTI4_15_IRQHandler
-                0x080012b8                RCC_IRQHandler
-                0x080012b8                DMA1_Channel1_IRQHandler
-                0x080012b8                Default_Handler
-                0x080012b8                CEC_IRQHandler
-                0x080012b8                DMA1_Channel4_5_IRQHandler
-                0x080012b8                TIM15_IRQHandler
-                0x080012b8                EXTI0_1_IRQHandler
-                0x080012b8                SPI2_IRQHandler
-                0x080012b8                TS_IRQHandler
-                0x080012b8                WWDG_IRQHandler
-                0x080012b8                TIM2_IRQHandler
-                0x080012b8                DMA1_Channel2_3_IRQHandler
-                0x080012b8                FLASH_IRQHandler
-                0x080012b8                TIM1_BRK_UP_TRG_COM_IRQHandler
- .text.memcpy   0x080012ba       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
-                0x080012ba                memcpy
+                0x08001584        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x08001584                TIM1_CC_IRQHandler
+                0x08001584                ADC1_COMP_IRQHandler
+                0x08001584                PVD_IRQHandler
+                0x08001584                I2C1_IRQHandler
+                0x08001584                SPI1_IRQHandler
+                0x08001584                TIM6_DAC_IRQHandler
+                0x08001584                EXTI2_3_IRQHandler
+                0x08001584                I2C2_IRQHandler
+                0x08001584                RTC_IRQHandler
+                0x08001584                EXTI4_15_IRQHandler
+                0x08001584                RCC_IRQHandler
+                0x08001584                DMA1_Channel1_IRQHandler
+                0x08001584                Default_Handler
+                0x08001584                CEC_IRQHandler
+                0x08001584                DMA1_Channel4_5_IRQHandler
+                0x08001584                TIM15_IRQHandler
+                0x08001584                EXTI0_1_IRQHandler
+                0x08001584                SPI2_IRQHandler
+                0x08001584                TS_IRQHandler
+                0x08001584                WWDG_IRQHandler
+                0x08001584                TIM2_IRQHandler
+                0x08001584                DMA1_Channel2_3_IRQHandler
+                0x08001584                FLASH_IRQHandler
+                0x08001584                TIM1_BRK_UP_TRG_COM_IRQHandler
+ .text.memcpy   0x08001586       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x08001586                memcpy
+ .text.sprintf  0x08001598       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+                0x08001598                sprintf
+                0x08001598                siprintf
+ .text._free_r  0x080015dc       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+                0x080015dc                _free_r
+ .text._malloc_r
+                0x08001668       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x08001668                _malloc_r
+ .text.__ssputs_r
+                0x08001714       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08001714                __ssputs_r
+ .text._svfprintf_r
+                0x080017d8      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x080017d8                _svfprintf_r
+                0x080017d8                _svfiprintf_r
+ .text._printf_common
+                0x080019d4       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x080019d4                _printf_common
+ .text._printf_i
+                0x08001ab0      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08001ab0                _printf_i
+ .text._sbrk_r  0x08001cf4       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+                0x08001cf4                _sbrk_r
+ .text.memchr   0x08001d18       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+                0x08001d18                memchr
+ .text.memmove  0x08001d2e       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+                0x08001d2e                memmove
+ .text._realloc_r
+                0x08001d58       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+                0x08001d58                _realloc_r
+ .text._malloc_usable_size_r
+                0x08001da4       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+                0x08001da4                _malloc_usable_size_r
  *(.glue_7)
- .glue_7        0x080012cc        0x0 linker stubs
+ .glue_7        0x08001dba        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x080012cc        0x0 linker stubs
+ .glue_7t       0x08001dba        0x0 linker stubs
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x080012cc                . = ALIGN (0x4)
-                0x080012cc                _etext = .
+                0x08001dbc                . = ALIGN (0x4)
+ *fill*         0x08001dba        0x2 
+                0x08001dbc                _etext = .
 
-.vfp11_veneer   0x080012cc        0x0
- .vfp11_veneer  0x080012cc        0x0 linker stubs
+.vfp11_veneer   0x08001dbc        0x0
+ .vfp11_veneer  0x08001dbc        0x0 linker stubs
 
-.v4_bx          0x080012cc        0x0
- .v4_bx         0x080012cc        0x0 linker stubs
+.v4_bx          0x08001dbc        0x0
+ .v4_bx         0x08001dbc        0x0 linker stubs
 
-.iplt           0x080012cc        0x0
- .iplt          0x080012cc        0x0 ./src/main.o
+.iplt           0x08001dbc        0x0
+ .iplt          0x08001dbc        0x0 ./src/main.o
 
-.rodata         0x080012cc       0xd8
-                0x080012cc                . = ALIGN (0x4)
+.rodata         0x08001dbc      0x128
+                0x08001dbc                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x080012cc       0xd7 ./src/main.o
+ .rodata        0x08001dbc       0xd7 ./src/main.o
  *(.rodata*)
-                0x080013a4                . = ALIGN (0x4)
- *fill*         0x080013a3        0x1 
+ *fill*         0x08001e93        0x1 
+ .rodata.UpdateRelay
+                0x08001e94       0x18 ./src/hard.o
+ .rodata.str1.1
+                0x08001eac        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+ .rodata.str1.1
+                0x08001eae       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .rodata.str1.1
+                0x08001ebf       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08001ee4                . = ALIGN (0x4)
+ *fill*         0x08001ee1        0x3 
 
-.rel.dyn        0x080013a4        0x0
- .rel.iplt      0x080013a4        0x0 ./src/main.o
+.rel.dyn        0x08001ee4        0x0
+ .rel.iplt      0x08001ee4        0x0 ./src/main.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x080013a4        0x0
-                0x080013a4                __exidx_start = .
+.ARM            0x08001ee4        0x0
+                0x08001ee4                __exidx_start = .
  *(.ARM.exidx*)
-                0x080013a4                __exidx_end = .
+                0x08001ee4                __exidx_end = .
 
 .memParams      0x08007c00        0x0
                 0x08007c00                . = ALIGN (0x4)
@@ -2044,25 +1806,25 @@ END GROUP
  *(memParams1)
                 0x08007c00                . = ALIGN (0x4)
 
-.preinit_array  0x080013a4        0x0
+.preinit_array  0x08001ee4        0x0
                 [!provide]                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
                 [!provide]                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x080013a4        0x0
+.init_array     0x08001ee4        0x0
                 [!provide]                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
                 [!provide]                PROVIDE (__init_array_end, .)
 
-.fini_array     0x080013a4        0x0
+.fini_array     0x08001ee4        0x0
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x080013a4                _sidata = LOADADDR (.data)
+                0x08001ee4                _sidata = LOADADDR (.data)
 
-.data           0x20000000        0x4 load address 0x080013a4
+.data           0x20000000       0x68 load address 0x08001ee4
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -2070,126 +1832,124 @@ END GROUP
  .data.usart_mode
                 0x20000000        0x1 ./src/uart.o
                 0x20000000                usart_mode
- .data.prestadorSimTime
-                0x20000001        0x1 ./src/sim900_800.o
-                0x20000001                prestadorSimTime
-                0x20000004                . = ALIGN (0x4)
- *fill*         0x20000002        0x2 
-                0x20000004                _edata = .
+ *fill*         0x20000001        0x3 
+ .data.impure_data
+                0x20000004       0x60 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+ .data._impure_ptr
+                0x20000064        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+                0x20000064                _impure_ptr
+                0x20000068                . = ALIGN (0x4)
+                0x20000068                _edata = .
 
-.igot.plt       0x20000004        0x0 load address 0x080013a8
- .igot.plt      0x20000004        0x0 ./src/main.o
-                0x20000004                . = ALIGN (0x4)
+.igot.plt       0x20000068        0x0 load address 0x08001f4c
+ .igot.plt      0x20000068        0x0 ./src/main.o
+                0x20000068                . = ALIGN (0x4)
 
-.bss            0x20000004      0xa68 load address 0x080013a8
-                0x20000004                _sbss = .
-                0x20000004                __bss_start__ = _sbss
+.bss            0x20000068      0x5a8 load address 0x08001f4c
+                0x20000068                _sbss = .
+                0x20000068                __bss_start__ = _sbss
  *(.bss)
  *(.bss*)
  .bss.acswitch_timer
-                0x20000004        0x1 ./src/main.o
-                0x20000004                acswitch_timer
- *fill*         0x20000005        0x1 
+                0x20000068        0x1 ./src/main.o
+                0x20000068                acswitch_timer
+ *fill*         0x20000069        0x1 
  .bss.take_temp_sample
-                0x20000006        0x2 ./src/main.o
-                0x20000006                take_temp_sample
- .bss.minutes   0x20000008        0x2 ./src/main.o
-                0x20000008                minutes
- .bss.igrid_timer
-                0x2000000a        0x1 ./src/main.o
-                0x2000000a                igrid_timer
- .bss.vgrid_timer
-                0x2000000b        0x1 ./src/main.o
-                0x2000000b                vgrid_timer
+                0x2000006a        0x2 ./src/main.o
+                0x2000006a                take_temp_sample
+ .bss.timer_relay
+                0x2000006c        0x2 ./src/main.o
+                0x2000006c                timer_relay
  .bss.wait_ms_var
-                0x2000000c        0x2 ./src/main.o
-                0x2000000c                wait_ms_var
- .bss.secs      0x2000000e        0x2 ./src/main.o
-                0x2000000e                secs
- .bss.GSMStartState
-                0x20000010        0x1 ./src/sim900_800.o
-                0x20000010                GSMStartState
+                0x2000006e        0x2 ./src/main.o
+                0x2000006e                wait_ms_var
+ .bss.secs      0x20000070        0x2 ./src/main.o
+                0x20000070                secs
+ .bss.hours     0x20000072        0x1 ./src/main.o
+                0x20000072                hours
+ .bss.minutes   0x20000073        0x1 ./src/main.o
+                0x20000073                minutes
+ .bss.heap.5298
+                0x20000074        0x4 ./cmsis_boot/syscalls/syscalls.o
+ .bss.photo_index
+                0x20000078        0x1 ./src/adc.o
+                0x20000078                photo_index
+ *fill*         0x20000079        0x1 
+ .bss.last_photo
+                0x2000007a        0x2 ./src/adc.o
+                0x2000007a                last_photo
+ .bss.new_photo_sample
+                0x2000007c        0x1 ./src/adc.o
+                0x2000007c                new_photo_sample
+ .bss.relay_state
+                0x2000007d        0x1 ./src/hard.o
+                0x2000007d                relay_state
+ *fill*         0x2000007e        0x2 
+ .bss.__malloc_sbrk_start
+                0x20000080        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x20000080                __malloc_sbrk_start
+ .bss.__malloc_free_list
+                0x20000084        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x20000084                __malloc_free_list
  *(COMMON)
- *fill*         0x20000011        0x3 
- COMMON         0x20000014      0x525 ./src/main.o
-                0x20000014                saved_mode
-                0x20000016                tcp_kalive_timer
-                0x20000018                vpote
-                0x2000003c                param_struct
-                0x20000048                usart2_mini_timeout
-                0x2000004c                vd1
-                0x2000006d                usart2_pckt_ready
-                0x20000070                vd0
-                0x20000092                standalone_timer
-                0x20000094                sac_aux
-                0x20000095                usart2_pckt_bytes
-                0x20000096                s1
-                0x20000098                usart1_pckt_bytes
-                0x2000009c                vd4
-                0x200000c0                rx2buff
-                0x200001c0                usart1_mini_timeout
-                0x200001c1                usart2_have_data
-                0x200001c2                usart1_have_data
-                0x200001c3                usart1_pckt_ready
-                0x200001c4                tx1buff
-                0x200002c4                tx2buff
-                0x200003c4                s2
-                0x200003c8                vtemp
-                0x200003ea                standalone_enable_menu_timer
-                0x200003ec                filter_timer
-                0x200003ee                sac
-                0x200003f0                grouped_master_timeout_timer
-                0x200003f2                timer_standby
-                0x200003f4                vd2
-                0x20000418                rx1buff
-                0x20000518                vd3
- *fill*         0x20000539        0x3 
- COMMON         0x2000053c       0x18 ./src/uart.o
-                0x2000053c                ptx2_pckt_index
-                0x20000540                ptx2
-                0x20000544                ptx1
-                0x20000548                prx2
-                0x2000054c                ptx1_pckt_index
-                0x20000550                prx1
- COMMON         0x20000554      0x518 ./src/sim900_800.o
-                0x20000554                GSMSendIPTimeOut
-                0x20000556                GSMSendCommandTimeOut
-                0x20000558                buffUARTGSMtx
-                0x20000658                GSMbuffRtaCommand
-                0x20000758                GSMIPadd
-                0x20000768                pBuffUARTGSMrxW
-                0x2000076c                buffUARTGSMrx2
-                0x2000086c                GSMStartTime
-                0x2000086e                PacketReadyUARTGSM
-                0x20000870                GSMConfigGPRSTimeOut
-                0x20000872                GSMConfigTime
-                0x20000874                GSMSendSMSbuffAux
-                0x20000894                GSMbuffGPRSCommand
-                0x200008d4                DB300flagConnGPRS
-                0x200008d8                GSMSendIPbuffAux
-                0x200008f8                buffUARTGSMrx
-                0x200009f8                GSMSendSMSTimeOut
-                0x200009fa                GSMConfigTimeOut
-                0x200009fc                pBuffUARTGSMtxR
-                0x20000a00                GSMbuffStatus
-                0x20000a20                pBuffUARTGSMtxW
-                0x20000a24                pBuffUARTGSMrxR
-                0x20000a28                counterUARTGSM
-                0x20000a2c                GSMReadSMSrepIn
-                0x20000a4c                GSMReadSMScommand
-                0x20000a6c                . = ALIGN (0x4)
-                0x20000a6c                _ebss = .
-                0x20000a6c                __bss_end__ = _ebss
+ COMMON         0x20000088      0x525 ./src/main.o
+                0x20000088                saved_mode
+                0x2000008a                tcp_kalive_timer
+                0x2000008c                vpote
+                0x200000b0                param_struct
+                0x200000bc                vd1
+                0x200000e0                vd0
+                0x20000102                standalone_timer
+                0x20000104                tt_take_photo_sample
+                0x20000106                sac_aux
+                0x20000108                s1
+                0x2000010a                usart1_pckt_bytes
+                0x2000010c                vd4
+                0x20000130                rx2buff
+                0x20000230                usart1_mini_timeout
+                0x20000231                usart1_have_data
+                0x20000232                usart1_pckt_ready
+                0x20000234                tx1buff
+                0x20000334                tx2buff
+                0x20000434                s2
+                0x20000438                vtemp
+                0x2000045a                standalone_enable_menu_timer
+                0x2000045c                filter_timer
+                0x2000045e                sac
+                0x20000460                grouped_master_timeout_timer
+                0x20000462                timer_standby
+                0x20000464                vd2
+                0x20000488                rx1buff
+                0x20000588                tt_relay_on_off
+                0x2000058c                vd3
+ *fill*         0x200005ad        0x3 
+ COMMON         0x200005b0       0x40 ./src/adc.o
+                0x200005b0                VoltagePhoto
+ COMMON         0x200005f0       0x18 ./src/uart.o
+                0x200005f0                ptx2_pckt_index
+                0x200005f4                ptx2
+                0x200005f8                ptx1
+                0x200005fc                prx2
+                0x20000600                ptx1_pckt_index
+                0x20000604                prx1
+ COMMON         0x20000608        0x1 ./src/hard.o
+                0x20000608                last_edge
+ *fill*         0x20000609        0x3 
+ COMMON         0x2000060c        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                0x2000060c                errno
+                0x20000610                . = ALIGN (0x4)
+                0x20000610                _ebss = .
+                0x20000610                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x20000a6c      0x400 load address 0x080013a8
-                0x20000a6c                . = ALIGN (0x4)
+                0x20000610      0x400 load address 0x08001f4c
+                0x20000610                . = ALIGN (0x4)
                 [!provide]                PROVIDE (end, .)
-                0x20000a6c                PROVIDE (_end, .)
-                0x20000a6c                . = (. + _Min_Heap_Size)
-                0x20000e6c                . = (. + _Min_Stack_Size)
- *fill*         0x20000a6c      0x400 
-                0x20000e6c                . = ALIGN (0x4)
+                0x20000610                PROVIDE (_end, .)
+                0x20000610                . = (. + _Min_Heap_Size)
+                0x20000a10                . = (. + _Min_Stack_Size)
+ *fill*         0x20000610      0x400 
+                0x20000a10                . = ALIGN (0x4)
 
 /DISCARD/
  libc.a(*)
@@ -2204,176 +1964,203 @@ END GROUP
  .ARM.attributes
                 0x00000031       0x31 ./cmsis_boot/system_stm32f0xx.o
  .ARM.attributes
-                0x00000062       0x31 ./src/stm32f0xx_it.o
+                0x00000062       0x31 ./cmsis_boot/syscalls/syscalls.o
  .ARM.attributes
-                0x00000093       0x31 ./src/stm32f0x_gpio.o
+                0x00000093       0x31 ./src/stm32f0xx_it.o
  .ARM.attributes
-                0x000000c4       0x31 ./src/stm32f0x_tim.o
+                0x000000c4       0x31 ./src/gpio.o
  .ARM.attributes
-                0x000000f5       0x31 ./src/uart.o
+                0x000000f5       0x31 ./src/tim.o
  .ARM.attributes
-                0x00000126       0x31 ./src/sim900_800.o
+                0x00000126       0x31 ./src/adc.o
  .ARM.attributes
-                0x00000157       0x21 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x00000157       0x31 ./src/uart.o
  .ARM.attributes
-                0x00000178       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x00000188       0x31 ./src/hard.o
  .ARM.attributes
-                0x000001a4       0x1c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
+                0x000001b9       0x21 ./cmsis_boot/startup/startup_stm32f0xx.o
+ .ARM.attributes
+                0x000001da       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+ .ARM.attributes
+                0x000001f8       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
+ .ARM.attributes
+                0x00000216       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .ARM.attributes
+                0x00000242       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+ .ARM.attributes
+                0x0000026e       0x1c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
+ .ARM.attributes
+                0x0000028a       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+ .ARM.attributes
+                0x000002b6       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+ .ARM.attributes
+                0x000002e2       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .ARM.attributes
+                0x0000030e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .ARM.attributes
+                0x0000033a       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .ARM.attributes
+                0x00000366       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+ .ARM.attributes
+                0x00000392       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .ARM.attributes
+                0x000003be       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .ARM.attributes
+                0x000003ea       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .ARM.attributes
+                0x00000416       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000442       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 OUTPUT(Template_F050_rom.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x3553
- .debug_info    0x00000000      0xbd1 ./src/main.o
- .debug_info    0x00000bd1      0x34f ./cmsis_boot/system_stm32f0xx.o
- .debug_info    0x00000f20       0xe1 ./src/stm32f0xx_it.o
- .debug_info    0x00001001      0x353 ./src/stm32f0x_gpio.o
- .debug_info    0x00001354      0x9b4 ./src/stm32f0x_tim.o
- .debug_info    0x00001d08      0xa71 ./src/uart.o
- .debug_info    0x00002779      0xd59 ./src/sim900_800.o
- .debug_info    0x000034d2       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_info     0x00000000     0x3609
+ .debug_info    0x00000000      0xbf9 ./src/main.o
+ .debug_info    0x00000bf9      0x34f ./cmsis_boot/system_stm32f0xx.o
+ .debug_info    0x00000f48      0x44a ./cmsis_boot/syscalls/syscalls.o
+ .debug_info    0x00001392       0xe1 ./src/stm32f0xx_it.o
+ .debug_info    0x00001473      0x353 ./src/gpio.o
+ .debug_info    0x000017c6      0x9d4 ./src/tim.o
+ .debug_info    0x0000219a      0x468 ./src/adc.o
+ .debug_info    0x00002602      0xa57 ./src/uart.o
+ .debug_info    0x00003059      0x52f ./src/hard.o
+ .debug_info    0x00003588       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_abbrev   0x00000000      0xa2a
- .debug_abbrev  0x00000000      0x221 ./src/main.o
- .debug_abbrev  0x00000221      0x152 ./cmsis_boot/system_stm32f0xx.o
- .debug_abbrev  0x00000373       0x5c ./src/stm32f0xx_it.o
- .debug_abbrev  0x000003cf       0xcb ./src/stm32f0x_gpio.o
- .debug_abbrev  0x0000049a      0x19d ./src/stm32f0x_tim.o
- .debug_abbrev  0x00000637      0x21f ./src/uart.o
- .debug_abbrev  0x00000856      0x1c2 ./src/sim900_800.o
- .debug_abbrev  0x00000a18       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_abbrev   0x00000000      0xc39
+ .debug_abbrev  0x00000000      0x21a ./src/main.o
+ .debug_abbrev  0x0000021a      0x152 ./cmsis_boot/system_stm32f0xx.o
+ .debug_abbrev  0x0000036c       0xe7 ./cmsis_boot/syscalls/syscalls.o
+ .debug_abbrev  0x00000453       0x5c ./src/stm32f0xx_it.o
+ .debug_abbrev  0x000004af       0xcb ./src/gpio.o
+ .debug_abbrev  0x0000057a      0x19d ./src/tim.o
+ .debug_abbrev  0x00000717      0x1a5 ./src/adc.o
+ .debug_abbrev  0x000008bc      0x21f ./src/uart.o
+ .debug_abbrev  0x00000adb      0x14c ./src/hard.o
+ .debug_abbrev  0x00000c27       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_loc      0x00000000      0x72d
- .debug_loc     0x00000000       0xd1 ./src/main.o
- .debug_loc     0x000000d1       0x6c ./cmsis_boot/system_stm32f0xx.o
- .debug_loc     0x0000013d       0x20 ./src/stm32f0xx_it.o
- .debug_loc     0x0000015d       0x20 ./src/stm32f0x_gpio.o
- .debug_loc     0x0000017d      0x14c ./src/stm32f0x_tim.o
- .debug_loc     0x000002c9      0x24c ./src/uart.o
- .debug_loc     0x00000515      0x218 ./src/sim900_800.o
+.debug_loc      0x00000000      0x781
+ .debug_loc     0x00000000       0xb1 ./src/main.o
+ .debug_loc     0x000000b1       0x6c ./cmsis_boot/system_stm32f0xx.o
+ .debug_loc     0x0000011d      0x100 ./cmsis_boot/syscalls/syscalls.o
+ .debug_loc     0x0000021d       0x20 ./src/stm32f0xx_it.o
+ .debug_loc     0x0000023d       0x20 ./src/gpio.o
+ .debug_loc     0x0000025d      0x12c ./src/tim.o
+ .debug_loc     0x00000389      0x10c ./src/adc.o
+ .debug_loc     0x00000495      0x24c ./src/uart.o
+ .debug_loc     0x000006e1       0xa0 ./src/hard.o
 
-.debug_aranges  0x00000000      0x2d0
+.debug_aranges  0x00000000      0x358
  .debug_aranges
                 0x00000000       0x40 ./src/main.o
  .debug_aranges
                 0x00000040       0x38 ./cmsis_boot/system_stm32f0xx.o
  .debug_aranges
-                0x00000078       0x40 ./src/stm32f0xx_it.o
+                0x00000078       0x60 ./cmsis_boot/syscalls/syscalls.o
  .debug_aranges
-                0x000000b8       0x30 ./src/stm32f0x_gpio.o
+                0x000000d8       0x40 ./src/stm32f0xx_it.o
  .debug_aranges
-                0x000000e8       0xa0 ./src/stm32f0x_tim.o
+                0x00000118       0x30 ./src/gpio.o
  .debug_aranges
-                0x00000188       0x90 ./src/uart.o
+                0x00000148       0xb0 ./src/tim.o
  .debug_aranges
-                0x00000218       0x90 ./src/sim900_800.o
+                0x000001f8       0x58 ./src/adc.o
  .debug_aranges
-                0x000002a8       0x28 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x00000250       0x90 ./src/uart.o
+ .debug_aranges
+                0x000002e0       0x50 ./src/hard.o
+ .debug_aranges
+                0x00000330       0x28 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_ranges   0x00000000      0x258
+.debug_ranges   0x00000000      0x2c0
  .debug_ranges  0x00000000       0x30 ./src/main.o
  .debug_ranges  0x00000030       0x28 ./cmsis_boot/system_stm32f0xx.o
- .debug_ranges  0x00000058       0x30 ./src/stm32f0xx_it.o
- .debug_ranges  0x00000088       0x20 ./src/stm32f0x_gpio.o
- .debug_ranges  0x000000a8       0x90 ./src/stm32f0x_tim.o
- .debug_ranges  0x00000138       0x80 ./src/uart.o
- .debug_ranges  0x000001b8       0x80 ./src/sim900_800.o
- .debug_ranges  0x00000238       0x20 ./cmsis_boot/startup/startup_stm32f0xx.o
+ .debug_ranges  0x00000058       0x50 ./cmsis_boot/syscalls/syscalls.o
+ .debug_ranges  0x000000a8       0x30 ./src/stm32f0xx_it.o
+ .debug_ranges  0x000000d8       0x20 ./src/gpio.o
+ .debug_ranges  0x000000f8       0xa0 ./src/tim.o
+ .debug_ranges  0x00000198       0x48 ./src/adc.o
+ .debug_ranges  0x000001e0       0x80 ./src/uart.o
+ .debug_ranges  0x00000260       0x40 ./src/hard.o
+ .debug_ranges  0x000002a0       0x20 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_line     0x00000000     0x12d0
- .debug_line    0x00000000      0x233 ./src/main.o
- .debug_line    0x00000233      0x1df ./cmsis_boot/system_stm32f0xx.o
- .debug_line    0x00000412       0x8c ./src/stm32f0xx_it.o
- .debug_line    0x0000049e      0x159 ./src/stm32f0x_gpio.o
- .debug_line    0x000005f7      0x2ab ./src/stm32f0x_tim.o
- .debug_line    0x000008a2      0x2d8 ./src/uart.o
- .debug_line    0x00000b7a      0x6d1 ./src/sim900_800.o
- .debug_line    0x0000124b       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_line     0x00000000     0x117c
+ .debug_line    0x00000000      0x255 ./src/main.o
+ .debug_line    0x00000255      0x1df ./cmsis_boot/system_stm32f0xx.o
+ .debug_line    0x00000434      0x158 ./cmsis_boot/syscalls/syscalls.o
+ .debug_line    0x0000058c       0x8c ./src/stm32f0xx_it.o
+ .debug_line    0x00000618      0x150 ./src/gpio.o
+ .debug_line    0x00000768      0x2c6 ./src/tim.o
+ .debug_line    0x00000a2e      0x20a ./src/adc.o
+ .debug_line    0x00000c38      0x2d5 ./src/uart.o
+ .debug_line    0x00000f0d      0x1ea ./src/hard.o
+ .debug_line    0x000010f7       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_str      0x00000000     0x140c
- .debug_str     0x00000000      0x873 ./src/main.o
-                                0x8dd (size before relaxing)
- .debug_str     0x00000873      0x135 ./cmsis_boot/system_stm32f0xx.o
+.debug_str      0x00000000     0x10b6
+ .debug_str     0x00000000      0x88a ./src/main.o
+                                0x8f4 (size before relaxing)
+ .debug_str     0x0000088a      0x135 ./cmsis_boot/system_stm32f0xx.o
                                 0x2e1 (size before relaxing)
- .debug_str     0x000009a8       0x5c ./src/stm32f0xx_it.o
+ .debug_str     0x000009bf      0x140 ./cmsis_boot/syscalls/syscalls.o
+                                0x2eb (size before relaxing)
+ .debug_str     0x00000aff       0x5c ./src/stm32f0xx_it.o
                                 0x1c9 (size before relaxing)
- .debug_str     0x00000a04       0x4c ./src/stm32f0x_gpio.o
-                                0x293 (size before relaxing)
- .debug_str     0x00000a50      0x1b4 ./src/stm32f0x_tim.o
-                                0x647 (size before relaxing)
- .debug_str     0x00000c04      0x16f ./src/uart.o
-                                0x67d (size before relaxing)
- .debug_str     0x00000d73      0x699 ./src/sim900_800.o
-                                0x947 (size before relaxing)
+ .debug_str     0x00000b5b       0x43 ./src/gpio.o
+                                0x28a (size before relaxing)
+ .debug_str     0x00000b9e      0x1c4 ./src/tim.o
+                                0x651 (size before relaxing)
+ .debug_str     0x00000d62      0x11b ./src/adc.o
+                                0x34c (size before relaxing)
+ .debug_str     0x00000e7d      0x16a ./src/uart.o
+                                0x658 (size before relaxing)
+ .debug_str     0x00000fe7       0xcf ./src/hard.o
+                                0x38e (size before relaxing)
 
 .comment        0x00000000       0x6e
  .comment       0x00000000       0x6e ./src/main.o
                                  0x6f (size before relaxing)
  .comment       0x0000006e       0x6f ./cmsis_boot/system_stm32f0xx.o
+ .comment       0x0000006e       0x6f ./cmsis_boot/syscalls/syscalls.o
  .comment       0x0000006e       0x6f ./src/stm32f0xx_it.o
- .comment       0x0000006e       0x6f ./src/stm32f0x_gpio.o
- .comment       0x0000006e       0x6f ./src/stm32f0x_tim.o
+ .comment       0x0000006e       0x6f ./src/gpio.o
+ .comment       0x0000006e       0x6f ./src/tim.o
+ .comment       0x0000006e       0x6f ./src/adc.o
  .comment       0x0000006e       0x6f ./src/uart.o
- .comment       0x0000006e       0x6f ./src/sim900_800.o
+ .comment       0x0000006e       0x6f ./src/hard.o
 
-.debug_frame    0x00000000      0x67c
- .debug_frame   0x00000000       0xa0 ./src/main.o
- .debug_frame   0x000000a0       0x6c ./cmsis_boot/system_stm32f0xx.o
- .debug_frame   0x0000010c       0x6c ./src/stm32f0xx_it.o
- .debug_frame   0x00000178       0x44 ./src/stm32f0x_gpio.o
- .debug_frame   0x000001bc      0x164 ./src/stm32f0x_tim.o
- .debug_frame   0x00000320      0x198 ./src/uart.o
- .debug_frame   0x000004b8      0x19c ./src/sim900_800.o
- .debug_frame   0x00000654       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+.debug_frame    0x00000000      0x9b0
+ .debug_frame   0x00000000       0x94 ./src/main.o
+ .debug_frame   0x00000094       0x6c ./cmsis_boot/system_stm32f0xx.o
+ .debug_frame   0x00000100       0xc0 ./cmsis_boot/syscalls/syscalls.o
+ .debug_frame   0x000001c0       0x6c ./src/stm32f0xx_it.o
+ .debug_frame   0x0000022c       0x44 ./src/gpio.o
+ .debug_frame   0x00000270      0x178 ./src/tim.o
+ .debug_frame   0x000003e8       0xc8 ./src/adc.o
+ .debug_frame   0x000004b0      0x198 ./src/uart.o
+ .debug_frame   0x00000648       0xa4 ./src/hard.o
+ .debug_frame   0x000006ec       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x0000070c       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000734       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+ .debug_frame   0x00000784       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x000007b0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x000007dc       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x00000850       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x000008a4       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x000008d0       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .debug_frame   0x000008f0       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x00000918       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x00000948       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x00000990       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 
 Cross Reference Table
 
 Symbol                                            File
 ADC1_COMP_IRQHandler                              ./cmsis_boot/startup/startup_stm32f0xx.o
-ADC_AnalogWatchdogCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_AnalogWatchdogSingleChannelCmd                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_AnalogWatchdogSingleChannelConfig             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_AnalogWatchdogThresholdsConfig                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_AutoPowerOffCmd                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_ChannelConfig                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_ClearFlag                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_ClearITPendingBit                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_ClockModeConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_Cmd                                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_Conf                                          ./src/adc.o
-ADC_ContinuousModeCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_DMACmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_DMARequestModeConfig                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_DeInit                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_DiscModeCmd                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_GetCalibrationFactor                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_GetConversionValue                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_GetFlagStatus                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_GetITStatus                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_ITConfig                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_Init                                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_JitterCmd                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_OverrunModeCmd                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_StartOfConversion                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_StopOfConversion                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_StructInit                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-                                                  ./src/adc.o
-ADC_TempSensorCmd                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_VbatCmd                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_VrefintCmd                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
-ADC_WaitModeCmd                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
+ADCGetCalibrationFactor                           ./src/adc.o
 AHBPrescTable                                     ./cmsis_boot/system_stm32f0xx.o
 AdcConfig                                         ./src/adc.o
+                                                  ./src/main.o
 BackupPage                                        ./src/flash_program.o
 CEC_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
 CheckTCPMessage                                   ./src/tcp_transceiver.o
-ConvertTemp                                       ./src/adc.o
 DB300flagConnGPRS                                 ./src/sim900_800.o
 DMA1_Channel1_IRQHandler                          ./cmsis_boot/startup/startup_stm32f0xx.o
 DMA1_Channel2_3_IRQHandler                        ./cmsis_boot/startup/startup_stm32f0xx.o
@@ -2384,9 +2171,9 @@ ESP_SendDataResetSM                               ./src/tcp_transceiver.o
 EXTI0_1_IRQHandler                                ./cmsis_boot/startup/startup_stm32f0xx.o
 EXTI2_3_IRQHandler                                ./cmsis_boot/startup/startup_stm32f0xx.o
 EXTI4_15_IRQHandler                               ./cmsis_boot/startup/startup_stm32f0xx.o
-EXTIOff                                           ./src/stm32f0x_gpio.o
+EXTIOff                                           ./src/gpio.o
                                                   ./src/main.o
-EXTIOn                                            ./src/stm32f0x_gpio.o
+EXTIOn                                            ./src/gpio.o
 EXTI_ClearFlag                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
 EXTI_ClearITPendingBit                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
 EXTI_DeInit                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
@@ -2433,7 +2220,9 @@ FLASH_SetLatency                                  ../STM32F0xx_StdPeriph_Lib_V1.
 FLASH_Unlock                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
                                                   ./src/flash_program.o
 FLASH_WaitForLastOperation                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-GPIO_Config                                       ./src/stm32f0x_gpio.o
+FillPhotoBuffer                                   ./src/adc.o
+                                                  ./src/main.o
+GPIO_Config                                       ./src/gpio.o
                                                   ./src/main.o
 GPIO_DeInit                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
 GPIO_Init                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
@@ -2469,7 +2258,6 @@ GSMConfigTimeOut                                  ./src/sim900_800.o
 GSMIPadd                                          ./src/sim900_800.o
 GSMPrestador                                      ./src/sim900_800.o
 GSMProcess                                        ./src/sim900_800.o
-                                                  ./src/main.o
 GSMReadSMSState                                   ./src/sim900_800.o
 GSMReadSMScommand                                 ./src/sim900_800.o
 GSMReadSMSrepIn                                   ./src/sim900_800.o
@@ -2492,7 +2280,6 @@ GSMSendSMSbuffAux                                 ./src/sim900_800.o
 GSMStartState                                     ./src/sim900_800.o
 GSMStartTime                                      ./src/sim900_800.o
 GSMTimeoutCounters                                ./src/sim900_800.o
-                                                  ./src/main.o
 GSM_CMGF                                          ./src/sim900_800.o
 GSM_Config                                        ./src/sim900_800.o
 GSM_ERR                                           ./src/sim900_800.o
@@ -2512,7 +2299,6 @@ GSM_SIM1                                          ./src/sim900_800.o
 GSM_SIM2                                          ./src/sim900_800.o
 GSM_SetSIM                                        ./src/sim900_800.o
 GSM_Start                                         ./src/sim900_800.o
-                                                  ./src/main.o
 GSM_Stop                                          ./src/sim900_800.o
 GSMbuffGPRSCommand                                ./src/sim900_800.o
 GSMbuffRtaCommand                                 ./src/sim900_800.o
@@ -2520,9 +2306,13 @@ GSMbuffStatus                                     ./src/sim900_800.o
 GSMnumSMS                                         ./src/sim900_800.o
 GSMrxSMS                                          ./src/sim900_800.o
 GSMrxSMSState                                     ./src/sim900_800.o
+GetHysteresis                                     ./src/hard.o
+                                                  ./src/main.o
 GetIGrid                                          ./src/synchro.o
-GetLDR                                            ./src/adc.o
-GetTemp                                           ./src/adc.o
+GetNew1to10                                       ./src/hard.o
+                                                  ./src/main.o
+GetPhoto                                          ./src/adc.o
+                                                  ./src/main.o
 GetVGrid                                          ./src/synchro.o
 GetValue                                          ./src/tcp_transceiver.o
 HardFault_Handler                                 ./src/stm32f0xx_it.o
@@ -2532,6 +2322,10 @@ I2S_Cmd                                           ../STM32F0xx_StdPeriph_Lib_V1.
 I2S_Init                                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
 I2S_StructInit                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
 IpIsValid                                         ./src/tcp_transceiver.o
+MAFilter32                                        ./src/dsp.o
+MAFilter32Circular                                ./src/dsp.o
+MAFilter8                                         ./src/dsp.o
+MAFilterFast                                      ./src/dsp.o
 MQTTDeserialize_ack                               ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTDeserializePublish.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTUnsubscribeClient.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTFormat.o
@@ -2613,7 +2407,7 @@ NMI_Handler                                       ./src/stm32f0xx_it.o
 NVIC_Init                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
 NVIC_SystemLPConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
 OctetIsValid                                      ./src/tcp_transceiver.o
-OneShootTIM16                                     ./src/stm32f0x_tim.o
+OneShootTIM16                                     ./src/tim.o
 PVD_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
 PacketReadyUARTGSM                                ./src/sim900_800.o
 PendSV_Handler                                    ./src/stm32f0xx_it.o
@@ -2624,14 +2418,11 @@ RCC_AHBPeriphResetCmd                             ../STM32F0xx_StdPeriph_Lib_V1.
 RCC_APB1PeriphClockCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RCC_APB1PeriphResetCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
                                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
                                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
 RCC_APB2PeriphClockCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RCC_APB2PeriphResetCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
                                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
                                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_adc.o
 RCC_AdjustHSI14CalibrationValue                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RCC_AdjustHSICalibrationValue                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RCC_BackupResetCmd                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
@@ -2670,7 +2461,7 @@ RCC_USARTCLKConfig                                ../STM32F0xx_StdPeriph_Lib_V1.
 RCC_USBCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RCC_WaitForHSEStartUp                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RTC_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
-ReadADC1                                          ./src/adc.o
+RandomGen                                         ./src/dsp.o
 ReadADC1Check                                     ./src/adc.o
 ReadADC1_SameSampleTime                           ./src/adc.o
                                                   ./src/synchro.o
@@ -2681,7 +2472,12 @@ ReadUsart1Buffer                                  ./src/uart.o
                                                   ./src/sim900_800.o
                                                   ./src/gps_vktel.o
 ReadUsart2Buffer                                  ./src/uart.o
-                                                  ./src/sim900_800.o
+RelayIsOff                                        ./src/hard.o
+RelayIsOn                                         ./src/hard.o
+RelayOff                                          ./src/hard.o
+                                                  ./src/main.o
+RelayOn                                           ./src/hard.o
+                                                  ./src/main.o
 Reset_Handler                                     ./cmsis_boot/startup/startup_stm32f0xx.o
 SIM900APNSIM1                                     ./src/sim900_800.o
 SIM900APNSIM2                                     ./src/sim900_800.o
@@ -2735,110 +2531,25 @@ TCPProcess                                        ./src/tcp_transceiver.o
 TCPProcessInit                                    ./src/tcp_transceiver.o
 TCPSendData                                       ./src/tcp_transceiver.o
 TCPSendDataSocket                                 ./src/tcp_transceiver.o
-TIM14_IRQHandler                                  ./src/stm32f0x_tim.o
+TIM14_IRQHandler                                  ./src/tim.o
 TIM15_IRQHandler                                  ./cmsis_boot/startup/startup_stm32f0xx.o
-TIM16_IRQHandler                                  ./src/stm32f0x_tim.o
-TIM17_IRQHandler                                  ./src/stm32f0x_tim.o
+TIM16Disable                                      ./src/tim.o
+TIM16Enable                                       ./src/tim.o
+                                                  ./src/main.o
+TIM16_IRQHandler                                  ./src/tim.o
+TIM17_IRQHandler                                  ./src/tim.o
 TIM1_BRK_UP_TRG_COM_IRQHandler                    ./cmsis_boot/startup/startup_stm32f0xx.o
 TIM1_CC_IRQHandler                                ./cmsis_boot/startup/startup_stm32f0xx.o
 TIM2_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
-TIM3_IRQHandler                                   ./src/stm32f0x_tim.o
+TIM3_IRQHandler                                   ./src/tim.o
 TIM6_DAC_IRQHandler                               ./cmsis_boot/startup/startup_stm32f0xx.o
-TIM_14_Init                                       ./src/stm32f0x_tim.o
-TIM_16_Init                                       ./src/stm32f0x_tim.o
-TIM_17_Init                                       ./src/stm32f0x_tim.o
-TIM_3_Init                                        ./src/stm32f0x_tim.o
+TIM_14_Init                                       ./src/tim.o
+TIM_16_Init                                       ./src/tim.o
                                                   ./src/main.o
-TIM_6_Init                                        ./src/stm32f0x_tim.o
-TIM_ARRPreloadConfig                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_BDTRConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_BDTRStructInit                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_CCPreloadControl                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_CCxCmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_CCxNCmd                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearFlag                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearITPendingBit                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearOC1Ref                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearOC2Ref                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearOC3Ref                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ClearOC4Ref                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_Cmd                                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_CounterModeConfig                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_CtrlPWMOutputs                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_DMACmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_DMAConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_DeInit                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ETRClockMode1Config                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ETRClockMode2Config                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ETRConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_EncoderInterfaceConfig                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ForcedOC1Config                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ForcedOC2Config                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ForcedOC3Config                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ForcedOC4Config                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GenerateEvent                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetCapture1                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetCapture2                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetCapture3                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetCapture4                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetCounter                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetFlagStatus                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetITStatus                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_GetPrescaler                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ICInit                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ICStructInit                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ITConfig                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_ITRxExternalClockConfig                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_InternalClockConfig                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC1FastConfig                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC1Init                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC1NPolarityConfig                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC1PolarityConfig                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC1PreloadConfig                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC2FastConfig                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC2Init                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC2NPolarityConfig                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC2PolarityConfig                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC2PreloadConfig                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC3FastConfig                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC3Init                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC3NPolarityConfig                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC3PolarityConfig                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC3PreloadConfig                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC4FastConfig                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC4Init                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC4PolarityConfig                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OC4PreloadConfig                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_OCStructInit                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_PWMIConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_PrescalerConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_RemapConfig                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectCCDMA                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectCOM                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectHallSensor                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectInputTrigger                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectMasterSlaveMode                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectOCREFClear                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectOCxM                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectOnePulseMode                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectOutputTrigger                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SelectSlaveMode                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetAutoreload                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetClockDivision                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetCompare1                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetCompare2                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetCompare3                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetCompare4                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetCounter                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetIC1Prescaler                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetIC2Prescaler                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetIC3Prescaler                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_SetIC4Prescaler                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_TIxExternalClockConfig                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_TimeBaseInit                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_TimeBaseStructInit                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_UpdateDisableConfig                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
-TIM_UpdateRequestConfig                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_tim.o
+TIM_17_Init                                       ./src/tim.o
+TIM_3_Init                                        ./src/tim.o
+                                                  ./src/main.o
+TIM_6_Init                                        ./src/tim.o
 TS_IRQHandler                                     ./cmsis_boot/startup/startup_stm32f0xx.o
 TimingDelay_Decrement                             ./src/main.o
                                                   ./src/stm32f0xx_it.o
@@ -2899,28 +2610,31 @@ USART_StopModeWakeUpSourceConfig                  ../STM32F0xx_StdPeriph_Lib_V1.
 USART_StructInit                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 UpdateIGrid                                       ./src/synchro.o
 UpdateNewCode                                     ./src/flash_program.o
-UpdateTemp                                        ./src/adc.o
-UpdateVGrid                                       ./src/synchro.o
-Update_TIM3_CH1                                   ./src/stm32f0x_tim.o
-Update_TIM3_CH2                                   ./src/stm32f0x_tim.o
-Update_TIM3_CH3                                   ./src/stm32f0x_tim.o
-Update_TIM3_CH4                                   ./src/stm32f0x_tim.o
-Usart1Mode                                        ./src/uart.o
+UpdatePhotoTransistor                             ./src/adc.o
                                                   ./src/main.o
+UpdateRelay                                       ./src/hard.o
+                                                  ./src/main.o
+UpdateVGrid                                       ./src/synchro.o
+Update_TIM3_CH1                                   ./src/tim.o
+                                                  ./src/main.o
+Update_TIM3_CH2                                   ./src/tim.o
+Update_TIM3_CH3                                   ./src/tim.o
+Update_TIM3_CH4                                   ./src/tim.o
+Usart1Mode                                        ./src/uart.o
 Usart1Send                                        ./src/uart.o
                                                   ./src/sim900_800.o
+                                                  ./src/main.o
 Usart1SendSingle                                  ./src/uart.o
                                                   ./src/gps_vktel.o
 Usart1SendUnsigned                                ./src/uart.o
                                                   ./src/gps_vktel.o
-                                                  ./src/main.o
 Usart2Send                                        ./src/uart.o
                                                   ./src/main.o
 Usart2SendSingle                                  ./src/uart.o
 Usart2SendUnsigned                                ./src/uart.o
-                                                  ./src/main.o
+VoltagePhoto                                      ./src/adc.o
 WWDG_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
-Wait_ms                                           ./src/stm32f0x_tim.o
+Wait_ms                                           ./src/tim.o
                                                   ./src/sim900_800.o
                                                   ./src/main.o
 WriteConfigurations                               ./src/flash_program.o
@@ -2930,13 +2644,11 @@ Write_Code_To_Memory_FLASH                        ./src/flash_program.o
 __REV                                             ./cmsis_core/core_cm0.o
 __REV16                                           ./cmsis_core/core_cm0.o
 __REVSH                                           ./cmsis_core/core_cm0.o
-__aeabi_idiv                                      /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
-                                                  ./src/adc.o
 __aeabi_idiv0                                     /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
-                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
-__aeabi_idivmod                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
 __aeabi_ldiv0                                     /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
+__aeabi_lmul                                      /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
 __aeabi_uidiv                                     /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
@@ -2950,7 +2662,6 @@ __aeabi_uidivmod                                  /usr/local/sbin/gcc-arm-none-e
                                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 __ctype_ptr__                                     /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-ctype_.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
-__divsi3                                          /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_divsi3.o)
 __get_CONTROL                                     ./cmsis_core/core_cm0.o
 __get_MSP                                         ./cmsis_core/core_cm0.o
 __get_PRIMASK                                     ./cmsis_core/core_cm0.o
@@ -2958,6 +2669,7 @@ __get_PSP                                         ./cmsis_core/core_cm0.o
 __malloc_free_list                                /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
 __malloc_sbrk_start                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+__muldi3                                          /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_muldi3.o)
 __set_CONTROL                                     ./cmsis_core/core_cm0.o
 __set_MSP                                         ./cmsis_core/core_cm0.o
 __set_PRIMASK                                     ./cmsis_core/core_cm0.o
@@ -2979,18 +2691,22 @@ _free_r                                           /usr/local/sbin/gcc-arm-none-e
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
 _fstat                                            ./cmsis_boot/syscalls/syscalls.o
 _global_impure_ptr                                /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
 _impure_ptr                                       /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-snprintf.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
 _isatty                                           ./cmsis_boot/syscalls/syscalls.o
 _lseek                                            ./cmsis_boot/syscalls/syscalls.o
 _malloc_r                                         /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
 _malloc_usable_size_r                             /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
 _printf_common                                    /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
@@ -3023,12 +2739,9 @@ abort                                             ./cmsis_boot/syscalls/syscalls
 acswitch_timer                                    ./src/main.o
 atoi                                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
                                                   ./src/tcp_transceiver.o
-board_temp                                        ./src/adc.o
-board_temp_index                                  ./src/adc.o
 bufchar                                           ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
 buffUARTGSMrx                                     ./src/sim900_800.o
 buffUARTGSMrx2                                    ./src/sim900_800.o
-                                                  ./src/main.o
 buffUARTGSMtx                                     ./src/sim900_800.o
 bufftcpsend                                       ./src/tcp_transceiver.o
 cleanup_glue                                      /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
@@ -3038,20 +2751,24 @@ errno                                             /usr/local/sbin/gcc-arm-none-e
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
 filter_timer                                      ./src/main.o
 flagCloseIP                                       ./src/sim900_800.o
+free                                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
 g_pfnVectors                                      ./cmsis_boot/startup/startup_stm32f0xx.o
 getLenStringLen                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
 gps_buff                                          ./src/gps_vktel.o
 gps_state                                         ./src/gps_vktel.o
 gps_timeout                                       ./src/gps_vktel.o
 grouped_master_timeout_timer                      ./src/main.o
+hours                                             ./src/main.o
 igrid_timer                                       ./src/main.o
                                                   ./src/synchro.o
-                                                  ./src/stm32f0x_tim.o
 igrid_update_samples                              ./src/synchro.o
-last_temp                                         ./src/adc.o
+last_edge                                         ./src/hard.o
+last_photo                                        ./src/adc.o
 link                                              ./cmsis_boot/syscalls/syscalls.o
 main                                              ./src/main.o
                                                   ./cmsis_boot/startup/startup_stm32f0xx.o
+malloc                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-malloc.o)
+                                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
 max_igrid                                         ./src/synchro.o
 max_igrid_last                                    ./src/synchro.o
 max_vgrid                                         ./src/synchro.o
@@ -3077,7 +2794,7 @@ memset                                            /usr/local/sbin/gcc-arm-none-e
 min_igrid                                         ./src/synchro.o
 min_igrid_last                                    ./src/synchro.o
 minutes                                           ./src/main.o
-new_temp_sample                                   ./src/adc.o
+new_photo_sample                                  ./src/adc.o
 pBuffUARTGSMrxR                                   ./src/sim900_800.o
 pBuffUARTGSMrxW                                   ./src/sim900_800.o
 pBuffUARTGSMtxR                                   ./src/sim900_800.o
@@ -3085,6 +2802,7 @@ pBuffUARTGSMtxW                                   ./src/sim900_800.o
 param_struct                                      ./src/main.o
                                                   ./src/flash_program.o
 pckt_gps_ready                                    ./src/uart.o
+photo_index                                       ./src/adc.o
 pmem                                              ./src/flash_program.o
 prepare_json_pkt                                  ./src/main.o
 prestadorSimSelect                                ./src/sim900_800.o
@@ -3097,6 +2815,8 @@ ptx1                                              ./src/uart.o
 ptx1_pckt_index                                   ./src/uart.o
 ptx2                                              ./src/uart.o
 ptx2_pckt_index                                   ./src/uart.o
+rand                                              /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+                                                  ./src/dsp.o
 readChar                                          ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTUnsubscribeServer.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTSubscribeServer.o
@@ -3115,6 +2835,7 @@ readMQTTLenString                                 ./paho.mqtt.embedded-c/MQTTPac
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTSubscribeServer.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTDeserializePublish.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTConnectServer.o
+relay_state                                       ./src/hard.o
 rx1buff                                           ./src/main.o
                                                   ./src/uart.o
 rx2buff                                           ./src/main.o
@@ -3136,6 +2857,8 @@ snprintf                                          /usr/local/sbin/gcc-arm-none-e
 sprintf                                           /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
                                                   ./src/sim900_800.o
                                                   ./src/main.o
+srand                                             /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-rand.o)
+                                                  ./src/dsp.o
 standalone_enable_menu_timer                      ./src/main.o
 standalone_timer                                  ./src/main.o
 str_conf1                                         ./src/gps_vktel.o
@@ -3175,12 +2898,16 @@ strtol                                            /usr/local/sbin/gcc-arm-none-e
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
 switches_timer                                    ./src/main.o
 take_temp_sample                                  ./src/main.o
-                                                  ./src/adc.o
 tcp_kalive_timer                                  ./src/main.o
 tcp_tx_state                                      ./src/tcp_transceiver.o
-timer_1000                                        ./src/stm32f0x_tim.o
+timer_1000                                        ./src/tim.o
+timer_relay                                       ./src/main.o
+                                                  ./src/hard.o
 timer_standby                                     ./src/main.o
 timer_wifi_bright                                 ./src/main.o
+tt_relay_on_off                                   ./src/main.o
+tt_take_photo_sample                              ./src/main.o
+                                                  ./src/adc.o
 tx1buff                                           ./src/main.o
                                                   ./src/uart.o
 tx2buff                                           ./src/main.o
@@ -3199,16 +2926,6 @@ usart1_pckt_bytes                                 ./src/main.o
 usart1_pckt_ready                                 ./src/main.o
                                                   ./src/sim900_800.o
                                                   ./src/gps_vktel.o
-usart2_have_data                                  ./src/main.o
-                                                  ./src/sim900_800.o
-                                                  ./src/uart.o
-usart2_mini_timeout                               ./src/main.o
-                                                  ./src/sim900_800.o
-                                                  ./src/uart.o
-usart2_pckt_bytes                                 ./src/main.o
-                                                  ./src/sim900_800.o
-usart2_pckt_ready                                 ./src/main.o
-                                                  ./src/sim900_800.o
 usart_mode                                        ./src/uart.o
 vd0                                               ./src/main.o
 vd1                                               ./src/main.o
@@ -3217,12 +2934,11 @@ vd3                                               ./src/main.o
 vd4                                               ./src/main.o
 vgrid_timer                                       ./src/main.o
                                                   ./src/synchro.o
-                                                  ./src/stm32f0x_tim.o
 vgrid_update_samples                              ./src/synchro.o
 vpote                                             ./src/main.o
 vtemp                                             ./src/main.o
 wait_ms_var                                       ./src/main.o
-                                                  ./src/stm32f0x_tim.o
+                                                  ./src/tim.o
 writeCString                                      ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTConnectClient.o
 writeChar                                         ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o

@@ -1,6 +1,7 @@
 
 #include "sim900_800.h"
 #include "uart.h"
+#include "tim.h"
 
 #include <stdlib.h>
 #include <stdio.h>

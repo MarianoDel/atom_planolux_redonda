@@ -15,7 +15,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
-#include "stm32f0x_gpio.h"
+#include "gpio.h"
 #include "hard.h"
 
 
@@ -61,17 +61,24 @@ void GPIO_Config (void)
 	//10: Pull-down
 	//11: Reserved
 
-#ifdef VER_1_0
+#if (defined VER_1_0) || (defined VER_1_1)
 	//--- GPIO A ---//
 	if (!GPIOA_CLK)
 		GPIOA_CLK_ON;
 
+#ifdef USE_WITH_SYNC
+	temp = GPIOA->MODER;	//2 bits por pin
+	temp &= 0x3C030000;		//PA0 input SYNC; PA1 analog input; PA2 - PA3 alternate function; PA4 - PA5 input; PA6 alternate function; PA7 out open drain;
+	temp |= 0x416860AC;
+	GPIOA->MODER = temp;
+#else
 	temp = GPIOA->MODER;	//2 bits por pin
 	temp &= 0x3C030000;		//PA0 - PA1 analog input; PA2 - PA3 alternate function; PA4 - PA5 input; PA6 alternate function; PA7 out open drain;
-//	temp |= 0x416860AF;		//PA9 PA10 alternative; PA11 PA12 PA15 out open drain
-//	temp |= 0x4168606F;		//pruebo pin3
+	//	temp |= 0x416860AF;		//PA9 PA10 alternative; PA11 PA12 PA15 out open drain
+	//	temp |= 0x4168606F;		//pruebo pin3
 	temp |= 0x416860A3;		//PA1 input para pruebas
 	GPIOA->MODER = temp;
+#endif
 
 	temp = GPIOA->OTYPER;	//1 bit por pin
 	temp &= 0xFFFF7F7F;
@@ -85,16 +92,15 @@ void GPIO_Config (void)
 	GPIOA->OSPEEDR = temp;
 
 	temp = GPIOA->PUPDR;	//2 bits por pin
-	temp &= 0xFFFFFFF3;
-	temp |= 0x00000008;		//pull down pin1 para pruebas
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;		//pull down pin1 para pruebas
 	GPIOA->PUPDR = temp;
 
-
-
-	//Alternate Fuction
-	//GPIOA->AFR[0] = 0x11000000;	//PA7 -> AF1; PA6 -> AF1
+	//Alternate Fuction for GPIOA
+	// GPIOA->AFR[0] = 0x00001100;	//PA2 -> AF1; PA3 -> AF1;
 
 	//--- GPIO B ---//
+#ifdef GPIOB_ENABLE
 	if (!GPIOB_CLK)
 		GPIOB_CLK_ON;
 
@@ -118,8 +124,8 @@ void GPIO_Config (void)
 	temp |= 0x00000000;
 	GPIOB->PUPDR = temp;
 
-	//Alternate Fuction
-	//GPIOB->AFR[0] = 0x11000000;	//PA7 -> AF1; PA6 -> AF1
+	//Alternate Fuction for GPIOB
+	//GPIOB->AFR[0] = 0x00010000;	//PB4 -> AF1 enable pin on tim.c
 #endif
 
 #ifdef GPIOF_ENABLE
@@ -164,7 +170,7 @@ void GPIO_Config (void)
 //	NVIC_EnableIRQ(EXTI4_15_IRQn);
 //	NVIC_SetPriority(EXTI4_15_IRQn, 6);
 
-
+#endif
 }
 
 inline void EXTIOff (void)

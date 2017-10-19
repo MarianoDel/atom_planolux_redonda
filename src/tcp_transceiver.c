@@ -54,7 +54,7 @@ enum TcpMessages CheckTCPMessage(char * d, unsigned char * new_room_bright, unsi
 
 	if ((*d == 'r') && (*(d + 2) == ','))
 	{
-		if (ReadPcktR(d, 1, new_room_bright, bytes) == RESP_OK)
+		if (ReadPcktR((unsigned char *) d, 1, new_room_bright, bytes) == RESP_OK)
 		{
 			strcpy ((char *) d, (char *) (d + *bytes));
 			return ROOM_BRIGHT;
@@ -72,7 +72,8 @@ enum TcpMessages CheckTCPMessage(char * d, unsigned char * new_room_bright, unsi
 		return LAMP_BRIGHT;
 	}
 
-	if (strncmp((char *) (const char *) "o0,0;", (char *)d, sizeof((char *) (const char *) "o0,0;")) == 0)
+	if (strncmp((char *) (const char *) "o0,0;", (char *)d, sizeof("o0,0;")) == 0)
+	// if (strncmp((char *) (const char *) "o0,0;", (char *)d, sizeof((char *) (const char *) "o0,0;")) == 0)
 	{
 		strcpy ((char *) d, (char *) (d + 5));
 		*bytes = 5;
@@ -80,7 +81,8 @@ enum TcpMessages CheckTCPMessage(char * d, unsigned char * new_room_bright, unsi
 		return LIGHTS_OFF;
 	}
 
-	if (strncmp((char *) (const char *) "o0,1;", (char *)d, sizeof((char *) (const char *) "o0,1;")) == 0)
+	if (strncmp((char *) (const char *) "o0,1;", (char *)d, sizeof("o0,1;")) == 0)
+	// if (strncmp((char *) (const char *) "o0,1;", (char *)d, sizeof((char *) (const char *) "o0,1;")) == 0)
 	{
 		strcpy ((char *) d, (char *) (d + 5));
 		*bytes = 5;
@@ -134,7 +136,7 @@ void TCPProcess (void)
 
 		case TCP_TX_SENDING:
 			//me quedo esperando el signo de envio o timeout
-			resp = ESP_SendData(0, ptcp);
+			resp = ESP_SendData(0, (unsigned char *) ptcp);
 
 			if (resp == RESP_OK)
 			{
@@ -197,7 +199,8 @@ unsigned char TCPPreProcess(unsigned char * d, unsigned char * output, unsigned 
 
 	//llega:
 	//+IPD,0,6:geta;\n
-	if (strncmp((char *) (const char *) "+IPD,", (char *) d, sizeof((char *) (const char *) "+IPD,")) == 0)
+	// if (strncmp((char *) (const char *) "+IPD,", (char *) d, sizeof((char *) (const char *) "+IPD,")) == 0)
+	if (strncmp((char *) (const char *) "+IPD,", (char *) d, sizeof("+IPD,")) == 0)
 	{
 		if ((*(d+5) >= '0') && (*(d+5) <= '4'))
 		{

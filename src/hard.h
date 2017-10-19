@@ -26,14 +26,47 @@
 //#define USE_PROD_PROGRAM
 
 #ifdef USE_REDONDA_BASIC
+//-------- Voltage Conf ------------------------
+#define VOLTAGE_PHOTO_OFF	3322
+#define VOLTAGE_PHOTO_ON	3722
+
+//-------- Type of Program and Features ----------------
 #define WITH_1_TO_10_VOLTS
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
+#define USE_WITH_SYNC
+
+//-------- Others Configurations depending on the formers ------------
+//-------- Hysteresis Conf ------------------------
+#ifdef WITH_HYST
+#define HYST_MAX	400
+#define HYST_2		340
+#define HYST_4		240
+#define HYST_6		140
+#define HYST_MIN	40
+#endif
+
+//-------- PWM Conf ------------------------
+#ifdef WITH_1_TO_10_VOLTS
+#define PWM_MAX	255
+#define PWM_80		204
+#define PWM_60		153
+#define PWM_40		102
+#define PWM_20		52
+#define PWM_MIN	26
+#endif
+
 #endif
 
 //-------- End Of Defines For Configuration ------
 
-#ifdef VER_1_0
+#if (defined VER_1_0 || defined VER_1_1)
+#ifdef USE_WITH_SYNC
+//GPIOA pin0	lo uso como SYNC
+#define SYNC ((GPIOA->IDR & 0x0001) != 0)
+#else
+//GPIOA pin0	V_Sense
+#endif
 //GPIOA pin0	V_Sense
 //GPIOA pin1	Light_Sense
 #define LIGHT ((GPIOA->IDR & 0x0002) != 0)
@@ -81,9 +114,13 @@
 
 //GPIOA pin15
 #define EN_GPS 		((GPIOA->ODR & 0x8000) != 0)
-#define EN_GPS_ON	GPIOA->BSRR = 0x00008000
+#define EN_GPS_ON		GPIOA->BSRR = 0x00008000
 #define EN_GPS_OFF	GPIOA->BSRR = 0x80000000
-
+#ifdef USE_WITH_SYNC
+#define SYNCP			EN_GPS
+#define SYNCP_ON		EN_GPS_ON
+#define SYNCP_OFF		EN_GPS_OFF
+#endif
 
 //GPIOB pin3
 #define PPS ((GPIOB->IDR & 0x0008) == 0)
@@ -102,6 +139,7 @@
 
 
 //ESTADOS DEL PROGRAMA PRINCIPAL
+#if (defined USE_GSM_GATEWAY) || (defined USE_GSM) || (defined USE_GPS)
 #define MAIN_INIT				0
 #define MAIN_INIT_1				1
 #define MAIN_SENDING_CONF		2
@@ -118,6 +156,7 @@
 #define MAIN_NETWORKED			12
 #define MAIN_NETWORKED_1		13
 #define MAIN_IN_MAIN_MENU		14
+#endif
 
 //ESTADOS DEL PROGRAMA PRINCIPAL EN MODO MQTT
 #ifdef WIFI_TO_MQTT_BROKER
@@ -143,6 +182,18 @@ typedef enum {
 } wifi_state_t;
 #endif
 
+//ESTADOS DEL PROGRAMA PRINCIPAL USE_REDONDA_BASIC
+#ifdef USE_REDONDA_BASIC
+typedef enum
+{
+	MAIN_INIT = 0,
+  	LAMP_OFF,
+ //  	LAMP_TO_ON,
+	LAMP_ON,
+	// LAMP_TO_OFF
+
+} main_state_t;
+#endif
 //---- Temperaturas en el LM335
 //37	2,572
 //40	2,600
@@ -193,15 +244,34 @@ typedef enum {
 #define SIZEOF_BUFFTCP	SIZEOF_DATA
 
 
+//--- Temas con el sync de relay
+//#define TT_DELAYED_OFF		5600		//para relay metab
+//#define TT_DELAYED_ON		6560		//para relay metab
+#define TT_DELAYED_OFF		3600		//para relay placa redonda
+#define TT_DELAYED_ON		4560		//para relay placa redonda
+#define TT_RELAY			60		//timeout de espera antes de pegar o despegar el relay
+
+enum Relay_State {
+
+	ST_OFF = 0,
+	ST_WAIT_ON,
+	ST_DELAYED_ON,
+	ST_ON,
+	ST_WAIT_OFF,
+	ST_DELAYED_OFF
+
+};
 
 
 
-// ------- de los switches -------
-//void UpdateSwitches (void);
-//unsigned char CheckS1 (void);
-//unsigned char CheckS2 (void);
-//void UpdateACSwitch (void);
-//unsigned char CheckACSw (void);
+/* Module Functions ------------------------------------------------------------*/
+void RelayOn (void);
+void RelayOff (void);
+void UpdateRelay (void);
+unsigned char RelayIsOn (void);
+unsigned char RelayIsOff (void);
+unsigned short GetHysteresis (unsigned char);
+unsigned char GetNew1to10 (unsigned short);
 
 
 #endif /* HARD_H_ */

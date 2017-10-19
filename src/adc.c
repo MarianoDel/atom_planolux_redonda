@@ -7,32 +7,58 @@
 #include "adc.h"
 #include "stm32f0xx.h"
 #include "hard.h"
-
-#include "stm32f0xx_adc.h"
-//la incluyo por constates como ADC_SampleTime_239_5Cycles
+// #include "dsp.h"
 
 
 //--- VARIABLES EXTERNAS ---//
 extern volatile unsigned short adc_ch [];
-extern volatile unsigned short take_temp_sample;
+extern volatile unsigned short tt_take_photo_sample;
 
 #ifdef ADC_WITH_INT
 extern volatile unsigned char seq_ready;
 #endif
 
+#ifdef ADC_WITH_TEMP_SENSE
+extern volatile unsigned short tt_take_temp_sample;
+#endif
+
 //--- VARIABLES GLOBALES ---//
-#define SIZEOF_BOARD_TEMP	8
+#ifdef ADC_WITH_TEMP_SENSE
+// ------- del sensor de Temperatura -------
 unsigned short board_temp [SIZEOF_BOARD_TEMP];
 unsigned short last_temp = 0;
 unsigned char board_temp_index = 0;
-unsigned char new_temp_sample = 0;			//la uso para avisar que se puede usar el filtro
+unsigned char new_temp_sample = 0;
+#endif
+
+// ------- del PhotoTransistor -------
+#define SIZEOF_PHOTO_TRANS		32
+#define DIVISOR_PHOTO			5
+unsigned short VoltagePhoto [SIZEOF_PHOTO_TRANS];
+unsigned char photo_index = 0;
+unsigned short last_photo = 0;
+unsigned char new_photo_sample = 0;
+
+
+
+//Single conversion mode (CONT=0)
+//In Single conversion mode, the ADC performs a single sequence of conversions,
+//converting all the channels once.
+
+//Continuous conversion mode (CONT=1)
+//In continuous conversion mode, when a software or hardware trigger event occurs,
+//the ADC performs a sequence of conversions, converting all the channels once and then
+//automatically re-starts and continuously performs the same sequence of conversions
+
+//Discontinuous mode (DISCEN)
+//In this mode (DISCEN=1), a hardware or software trigger event is required to start
+//each conversion defined in the sequence. Only with (CONT=0)
 
 void AdcConfig (void)
 {
 #ifdef ADC_WITH_INT
 	NVIC_InitTypeDef    NVIC_InitStructure;
 #endif
-	unsigned short cal = 0;
 
 	if (!RCC_ADC_CLK)
 		RCC_ADC_CLK_ON;
@@ -49,35 +75,27 @@ void AdcConfig (void)
 	//set clock
 	ADC1->CFGR2 = ADC_ClockMode_SynClkDiv4;
 
-	//set resolution & trigger
+	//set resolution, trigger & Continuos or Discontinuous
 	//ADC1->CFGR1 |= ADC_Resolution_10b | ADC_ExternalTrigConvEdge_Rising | ADC_ExternalTrigConv_T3_TRGO;
 	//ADC1->CFGR1 |= ADC_Resolution_12b | ADC_ExternalTrigConvEdge_Rising | ADC_ExternalTrigConv_T1_TRGO;
-	//ADC1->CFGR1 |= ADC_DMAMode_Circular | 0x00000001;
+	//ADC1->CFGR1 |= ADC_Resolution_12b | ADC_CFGR1_DISCEN;
 	ADC1->CFGR1 |= ADC_Resolution_12b;
 
-	//ADC1->CFGR1 |= ADC_Resolution_10b | ADC_ExternalTrigConvEdge_Falling | ADC_ExternalTrigConv_T3_TRGO;
+	//DMA Config
+	//ADC1->CFGR1 |= ADC_CFGR1_DMAEN | ADC_CFGR1_DMACFG;
 
 	//set sampling time
-	ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
-	//ADC1->SMPR |= ADC_SampleTime_28_5Cycles;		//17.39 son SP 420
+	//ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
+	ADC1->SMPR |= ADC_SampleTime_28_5Cycles;		//17.39 son SP 420
 	//ADC1->SMPR |= ADC_SampleTime_7_5Cycles;		//17.36 de salida son SP 420 pero a veces pega
 													//las dos int (usar DMA?) y pierde el valor intermedio
 	//ADC1->SMPR |= ADC_SampleTime_1_5Cycles;			//20.7 de salida son SP 420 (regula mal)
 
-#ifdef VER_1_2
 	//set channel selection
-	ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_2 | ADC_Channel_3 | ADC_Channel_4;
+	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_2 | ADC_Channel_3 | ADC_Channel_4;
 	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_2;
 	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1;
 	//ADC1->CHSELR |= ADC_Channel_2;	//individuales andan todos
-#endif
-#ifdef VER_1_3
-	//set channel selection
-	ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_5;
-#endif
-
-	//habilito sensado de temperatura
-	ADC->CCR |= ADC_CCR_TSEN;
 
 #ifdef ADC_WITH_INT
 	//set interrupts
@@ -90,8 +108,12 @@ void AdcConfig (void)
 	NVIC_Init(&NVIC_InitStructure);
 #endif
 
+#ifdef ADC_WITH_TEMP_SENSE
+	ADC->CCR |= ADC_CCR_TSEN;
+#endif
+
 	//calibrar ADC
-	cal = ADC_GetCalibrationFactor(ADC1);
+	ADCGetCalibrationFactor();
 
 	// Enable ADC1
 	ADC1->CR |= ADC_CR_ADEN;
@@ -133,46 +155,9 @@ void ADC1_COMP_IRQHandler (void)
 }
 #endif
 
+/*
 
-unsigned short ADC_Conf (void)
-{
-	unsigned short cal = 0;
-	ADC_InitTypeDef ADC_InitStructure;
-
-	if (!RCC_ADC_CLK)
-		RCC_ADC_CLK_ON;
-
-	ADC_ClockModeConfig(ADC1, ADC_ClockMode_SynClkDiv4);
-
-	// preseteo de registros a default
-	  /* ADCs DeInit */
-	  ADC_DeInit(ADC1);
-
-	  /* Initialize ADC structure */
-	  ADC_StructInit(&ADC_InitStructure);
-
-	  /* Configure the ADC1 in continuous mode with a resolution equal to 12 bits  */
-	  ADC_InitStructure.ADC_Resolution = ADC_Resolution_12b;
-	  ADC_InitStructure.ADC_ContinuousConvMode = DISABLE;
-	  ADC_InitStructure.ADC_ExternalTrigConvEdge = ADC_ExternalTrigConvEdge_None;
-	  ADC_InitStructure.ADC_DataAlign = ADC_DataAlign_Right;
-	  ADC_InitStructure.ADC_ScanDirection = ADC_ScanDirection_Upward;
-	  ADC_Init(ADC1, &ADC_InitStructure);
-
-	//software by setting bit ADCAL=1.
-	//Calibration can only be initiated when the ADC is disabled (when ADEN=0).
-	//ADCAL bit stays at 1 during all the calibration sequence.
-	//It is then cleared by hardware as soon the calibration completes
-	cal = ADC_GetCalibrationFactor(ADC1);
-
-	// Enable ADC1
-	ADC_Cmd(ADC1, ENABLE);
-
-	SetADC1_SampleTime ();
-
-	return cal;
-}
-
+//USA STD LIB DE ST
 unsigned short ReadADC1 (unsigned int channel)
 {
 	uint32_t tmpreg = 0;
@@ -183,16 +168,16 @@ unsigned short ReadADC1 (unsigned int channel)
 	//ADC_ChannelConfig(ADC1, ADC_Channel_0, ADC_SampleTime_239_5Cycles);
 
 	//ADC_ChannelConfig INTERNALS
-	/* Configure the ADC Channel */
+	// Configure the ADC Channel
 	ADC1->CHSELR = channel;
 
-	/* Clear the Sampling time Selection bits */
+	// Clear the Sampling time Selection bits
 	tmpreg &= ~ADC_SMPR1_SMPR;
 
-	/* Set the ADC Sampling Time register */
+	// Set the ADC Sampling Time register
 	tmpreg |= (uint32_t)ADC_SampleTime_239_5Cycles;
 
-	/* Configure the ADC Sample time register */
+	// Configure the ADC Sample time register
 	ADC1->SMPR = tmpreg ;
 
 
@@ -204,6 +189,7 @@ unsigned short ReadADC1 (unsigned int channel)
 	//GPIOA_PIN4_OFF;	//tarda 20us en convertir
 	return ADC_GetConversionValue(ADC1);
 }
+*/
 
 //Setea el sample time en el ADC
 void SetADC1_SampleTime (void)
@@ -268,60 +254,144 @@ unsigned short ReadADC1Check (unsigned char channel)
 	return 1;
 }
 
-unsigned short GetLDR (void)
+unsigned int ADCGetCalibrationFactor (void)
 {
-	return ReadADC1_SameSampleTime(ADC_Channel_5);
+  uint32_t tmpreg = 0, calibrationcounter = 0, calibrationstatus = 0;
+
+  /* Set the ADC calibartion */
+  ADC1->CR |= (uint32_t)ADC_CR_ADCAL;
+
+  /* Wait until no ADC calibration is completed */
+  do
+  {
+    calibrationstatus = ADC1->CR & ADC_CR_ADCAL;
+    calibrationcounter++;
+  } while((calibrationcounter != CALIBRATION_TIMEOUT) && (calibrationstatus != 0x00));
+
+  if((uint32_t)(ADC1->CR & ADC_CR_ADCAL) == RESET)
+  {
+    /*Get the calibration factor from the ADC data register */
+    tmpreg = ADC1->DR;
+  }
+  else
+  {
+    /* Error factor */
+    tmpreg = 0x00000000;
+  }
+  return tmpreg;
 }
 
+#ifdef ADC_WITH_TEMP_SENSE
 void UpdateTemp(void)
 {
 	//hago update cada 1 seg
-	if (!take_temp_sample)
+	if (!tt_take_temp_sample)
 	{
-		take_temp_sample = 1000;
+		tt_take_temp_sample = 1000;
 
-		if (board_temp_index < SIZEOF_BOARD_TEMP)
+		board_temp [board_temp_index] = ReadADC1_SameSampleTime(ADC_CH16);
+		//board_temp [0] = ReadADC1_SameSampleTime(ADC_CH16);
+
+		if (board_temp_index < (SIZEOF_BOARD_TEMP - 1))
 			board_temp_index++;
 		else
 			board_temp_index = 0;
 
-		board_temp [board_temp_index] = ReadADC1_SameSampleTime(ADC_Channel_16);
 		new_temp_sample = 1;
 	}
 }
 
+//devuelve el valor promedio de la temperatura
+//si existen nuevas muestras hace la cuenta, sino contesta el ultimo valor calculado
 unsigned short GetTemp (void)
 {
-	unsigned char i;
-	unsigned int t = 0;
+    unsigned char i;
+    unsigned int t = 0;
 
-	if (new_temp_sample)
-	{
-		for (i = 0; i < SIZEOF_BOARD_TEMP; i++)
-		{
-			t += board_temp[i];
-		}
+    if (new_temp_sample)
+    {
+        for (i = 0; i < SIZEOF_BOARD_TEMP; i++)
+            t += board_temp[i];
 
-		last_temp = t >> 3;
-		new_temp_sample = 0;
-	}
+        last_temp = t >> 3;
+        new_temp_sample = 0;
+    }
 
-	return last_temp;
+    return ConvertTemp(last_temp);
 }
 
-short ConvertTemp (unsigned short t_sample)
+void FillTempBuffer (void)
 {
-	short dy = 110 - 30;
-	short dt = 0;
-	short temp = 0;
+	unsigned char i;
+	unsigned short dummy;
 
-	dt = *TEMP110_CAL_ADDR - *TEMP30_CAL_ADDR;
+	dummy = ReadADC1_SameSampleTime(ADC_CH16);
 
-	temp = t_sample - *TEMP30_CAL_ADDR;
-	temp = temp * dy;
-	temp = temp / dt;
-	//temp = temp + 30;
-	temp = temp + 20;	//resto 10 para compensar por temperatura exterior
+	for (i = 0; i < SIZEOF_BOARD_TEMP; i++)
+		 board_temp[i] = dummy;
 
-	return temp;
+}
+
+short ConvertTemp (unsigned short adc_temp)
+{
+	int32_t temperature; /* will contain the temperature in degree Celsius */
+	//temperature = (((int32_t) ADC1->DR * VDD_APPLI / VDD_CALIB) - (int32_t) *TEMP30_CAL_ADDR );
+	temperature = (int32_t) *TEMP30_CAL_ADDR - adc_temp;
+	temperature *= 1000;
+	temperature = temperature / 5336;	//4.3mV / °C
+	temperature = temperature + 30;
+
+	return (short) temperature;
+}
+#endif //ADC_WITH_TEMP_SENSE
+
+void UpdatePhotoTransistor(void)
+{
+	//hago update cada 1 seg
+	if (!tt_take_photo_sample)
+	{
+		tt_take_photo_sample = 1000;
+
+		VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
+
+		if (photo_index < (SIZEOF_PHOTO_TRANS - 1))
+			photo_index++;
+		else
+			photo_index = 0;
+
+		new_photo_sample = 1;
+	}
+}
+
+void FillPhotoBuffer (void)
+{
+	unsigned char i;
+	unsigned short dummy;
+
+	dummy = ReadADC1_SameSampleTime(ADC_CH1);
+
+	for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
+		 VoltagePhoto[i] = dummy;
+
+}
+
+//devuelve el valor promedio del PhotoTransistor
+//si existen nuevas muestras hace la cuenta, sino contesta el ultimo valor calculado
+unsigned short GetPhoto (void)
+{
+    unsigned char i;
+    unsigned int t = 0;
+
+    if (new_photo_sample)
+    {
+        for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
+        {
+            t += VoltagePhoto[i];
+        }
+
+        last_photo = t >> DIVISOR_PHOTO;
+        new_photo_sample = 0;
+    }
+
+    return last_photo;
 }

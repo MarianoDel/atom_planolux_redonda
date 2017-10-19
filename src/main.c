@@ -16,16 +16,13 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32f0xx.h"
-#include "stm32f0xx_adc.h"
 
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
 
-
-//--- My includes ---//
-#include "stm32f0x_gpio.h"
-#include "stm32f0x_tim.h"
+#include "gpio.h"
+#include "tim.h"
 #include "uart.h"
 #include "hard.h"
 
@@ -85,8 +82,14 @@ volatile unsigned short standalone_enable_menu_timer;
 //volatile unsigned short standalone_menu_timer;
 volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-volatile unsigned short minutes = 0;
 volatile unsigned char timer_wifi_bright = 0;
+
+#ifdef USE_REDONDA_BASIC
+volatile unsigned short timer_relay = 0;			//para relay default (si no hay synchro)
+
+volatile unsigned short tt_take_photo_sample;
+volatile unsigned short tt_relay_on_off;
+#endif
 
 
 unsigned char saved_mode;
@@ -154,6 +157,8 @@ volatile unsigned char filter_timer;
 //volatile unsigned char take_sample;
 //volatile unsigned char move_relay;
 volatile unsigned short secs = 0;
+volatile unsigned char hours = 0;
+volatile unsigned char minutes = 0;
 
 
 // ------- del DMX -------
@@ -212,7 +217,18 @@ int main(void)
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
 	unsigned short local_meas, local_meas_last;
+#ifdef USE_REDONDA_BASIC
+	main_state_t main_state = MAIN_INIT;
+#ifdef WITH_HYST
+	unsigned short hyst;
+#endif
+#ifdef WITH_1_TO_10_VOLTS
+	unsigned char one_to_ten;
+#endif
+
+#else
 	unsigned char main_state = 0;
+#endif
 	char s_lcd [20];
 	enum TcpMessages tcp_msg = NONE_MSG;
 	unsigned char new_room = 0;
@@ -260,7 +276,7 @@ int main(void)
 //	AdcConfig();
 
 	//TIM Configuration.
-	TIM_3_Init();
+	// TIM_3_Init();
 //	TIM_14_Init();
 //	TIM_16_Init();		//para OneShoot() cuando funciona en modo master
 //	TIM_17_Init();		//lo uso para el ADC de Igrid
@@ -309,7 +325,7 @@ int main(void)
 
 #ifdef USE_REDONDA_BASIC
 //---------- Inicio Programa de Produccion Redonda Basic --------//
-	USART1Config();
+	// USART1Config();
 	AdcConfig();		//recordar habilitar sensor en adc.h
 
 #ifdef WITH_1_TO_10_VOLTS
@@ -319,16 +335,16 @@ int main(void)
 	TIM_16_Init();
 	TIM16Enable();
 
-	Usart1Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
-	Usart1Send((char *) (const char *) "  Features:\r\n");
+	Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
+	Usart2Send((char *) (const char *) "  Features:\r\n");
 	#ifdef WITH_1_TO_10_VOLTS
-	Usart1Send((char *) (const char *) "  Dimmer 1 to 10V\r\n");
+	Usart2Send((char *) (const char *) "  Dimmer 1 to 10V\r\n");
 	#endif
 	#ifdef WITH_HYST
-	Usart1Send((char *) (const char *) "  Night Hysteresis\r\n");
+	Usart2Send((char *) (const char *) "  Night Hysteresis\r\n");
 	#endif
 	#ifdef WITH_TEMP_CONTROL
-	Usart1Send((char *) (const char *) "  Temp Control\r\n");
+	Usart2Send((char *) (const char *) "  Temp Control\r\n");
 	#endif
 
 	for (i = 0; i < 8; i++)
@@ -352,10 +368,12 @@ int main(void)
 				RelayOff();
 				LED_OFF;
 				FillPhotoBuffer();
+#ifdef WITH_TEMP_CONTROL
 				FillTempBuffer();
-	#ifdef WITH_1_TO_10_VOLTS
+#endif
+#ifdef WITH_1_TO_10_VOLTS
 				Update_TIM3_CH1 (0);
-	#endif
+#endif
 				main_state = LAMP_OFF;
 				break;
 
@@ -415,7 +433,11 @@ int main(void)
 
 		if (!timer_standby)
 		{
+#ifdef WITH_TEMP_CONTROL
 			sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), GetPhoto());
+#else
+			sprintf(s_lcd, "photo: %d\r\n", GetPhoto());
+#endif
 			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
 			Usart1Send(s_lcd);
 			timer_standby = 2000;
@@ -423,7 +445,9 @@ int main(void)
 
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();
+#ifdef WITH_TEMP_CONTROL
 		UpdateTemp();
+#endif
 		UpdatePhotoTransistor();
 	}	//end while 1
 //---------- Fin Programa de Procduccion Redonda Basic--------//
@@ -948,15 +972,22 @@ void TimingDelay_Decrement(void)
 	if (acswitch_timer)
 		acswitch_timer--;
 
-//	if (prog_timer)
-//		prog_timer--;
+	if (tt_take_photo_sample)
+		tt_take_photo_sample--;
+
+	if (tt_relay_on_off)
+		tt_relay_on_off--;
+
+#ifdef ADC_WITH_TEMP_SENSE
+	if (tt_take_temp_sample)
+		tt_take_temp_sample--;
+#endif
 
 	if (take_temp_sample)
 		take_temp_sample--;
 
 	if (filter_timer)
 		filter_timer--;
-
 
 	//cuenta de a 1 minuto
 	if (secs > 59999)	//pasaron 1 min
@@ -966,6 +997,13 @@ void TimingDelay_Decrement(void)
 	}
 	else
 		secs++;
+
+	if (minutes > 60)
+	{
+		hours++;
+		minutes = 0;
+	}
+
 
 #ifdef USE_MQTT_LIB
 	//timer del MQTT
