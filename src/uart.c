@@ -331,16 +331,21 @@ void Usart1SendSingle(unsigned char tosend)
 
 void USART2Config(void)
 {
+	unsigned int temp;
+
 	if (!USART2_CLK)
 		USART2_CLK_ON;
 
-	GPIOA->AFR[0] |= 0x0001100;	//PA2 -> AF1 PA3 -> AF1
+	temp = GPIOA->AFR[0];
+	temp &= 0xFFF00FF;
+	temp |= 0x0001100;	//PA2 -> AF1 PA3 -> AF1
+	GPIOA->AFR[0] = temp;
 
 	ptx2 = tx2buff;
 	ptx2_pckt_index = tx2buff;
 	prx2 = rx2buff;
 
-	USART2->BRR = USART_115200;
+	USART2->BRR = USART_9600;
 	USART2->CR1 = USART_CR1_RXNEIE | USART_CR1_RE | USART_CR1_TE | USART_CR1_UE;
 
 	NVIC_EnableIRQ(USART2_IRQn);
@@ -349,6 +354,8 @@ void USART2Config(void)
 
 void USART1Config(void)
 {
+	unsigned int temp;
+
 	if (!USART1_CLK)
 		USART1_CLK_ON;
 
@@ -358,6 +365,12 @@ void USART1Config(void)
 	GPIOB->AFR[0] &= 0x00FFFFFF;	//PB7 -> AF0 PB6 -> AF0
 	//para empezar con el GSM
 	//GPIOA->AFR[1] |= 0x00000110;	//PA10 -> AF1 PA9 -> AF1
+
+	// temp = GPIOA->AFR[0];
+	// temp &= 0xFFF00FF;
+	// temp |= 0x0001100;	//PA2 -> AF1 PA3 -> AF1
+	// GPIOA->AFR[0] = temp;
+
 #endif
 
 	ptx1 = tx1buff;

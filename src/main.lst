@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccbIQd7h.s 			page 1
+ARM GAS  /tmp/ccxUmJh6.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
   55              		.align	2
   56              		.code	16
   57              		.thumb_func
-ARM GAS  /tmp/ccbIQd7h.s 			page 2
+ARM GAS  /tmp/ccxUmJh6.s 			page 2
 
 
   58              		.type	NVIC_SetPriority, %function
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
   51:./cmsis_core/core_cm0.h **** #define __CM0_CMSIS_VERSION       ((__CM0_CMSIS_VERSION_MAIN << 16) | __CM0_CMSIS_VERSION_SUB) /*!<
   52:./cmsis_core/core_cm0.h **** 
   53:./cmsis_core/core_cm0.h **** #define __CORTEX_M                (0x00)                                                       /*!<
-ARM GAS  /tmp/ccbIQd7h.s 			page 3
+ARM GAS  /tmp/ccxUmJh6.s 			page 3
 
 
   54:./cmsis_core/core_cm0.h **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  108:./cmsis_core/core_cm0.h ****        uint32_t RESERVED4[64];
  109:./cmsis_core/core_cm0.h ****   __IO uint32_t IPR[8];                       //!< (Offset: 0x3EC) Interrupt Priority Register
  110:./cmsis_core/core_cm0.h **** }  NVIC_Type;
-ARM GAS  /tmp/ccbIQd7h.s 			page 4
+ARM GAS  /tmp/ccxUmJh6.s 			page 4
 
 
  111:./cmsis_core/core_cm0.h **** */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  165:./cmsis_core/core_cm0.h **** /* SCB Interrupt Control State Register Definitions */
  166:./cmsis_core/core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Pos            31                                             /*!< SCB 
  167:./cmsis_core/core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Msk            (1ul << SCB_ICSR_NMIPENDSET_Pos)               /*!< SCB 
-ARM GAS  /tmp/ccbIQd7h.s 			page 5
+ARM GAS  /tmp/ccxUmJh6.s 			page 5
 
 
  168:./cmsis_core/core_cm0.h **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  222:./cmsis_core/core_cm0.h **** 
  223:./cmsis_core/core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Pos             3                                             /*!< SCB 
  224:./cmsis_core/core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Msk            (1ul << SCB_CCR_UNALIGN_TRP_Pos)               /*!< SCB 
-ARM GAS  /tmp/ccbIQd7h.s 			page 6
+ARM GAS  /tmp/ccxUmJh6.s 			page 6
 
 
  225:./cmsis_core/core_cm0.h **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  279:./cmsis_core/core_cm0.h **** #define SysTick_VAL_CURRENT_Msk            (0xFFFFFFul << SysTick_VAL_CURRENT_Pos)        /*!< SysT
  280:./cmsis_core/core_cm0.h **** 
  281:./cmsis_core/core_cm0.h **** /* SysTick Calibration Register Definitions */
-ARM GAS  /tmp/ccbIQd7h.s 			page 7
+ARM GAS  /tmp/ccxUmJh6.s 			page 7
 
 
  282:./cmsis_core/core_cm0.h **** #define SysTick_CALIB_NOREF_Pos            31                                             /*!< SysT
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  336:./cmsis_core/core_cm0.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Pos       0                                             /*!< Core
  337:./cmsis_core/core_cm0.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Msk      (1ul << CoreDebug_DHCSR_C_DEBUGEN_Pos)         /*!< Core
  338:./cmsis_core/core_cm0.h **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 8
+ARM GAS  /tmp/ccxUmJh6.s 			page 8
 
 
  339:./cmsis_core/core_cm0.h **** /* Debug Core Register Selector Register */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  393:./cmsis_core/core_cm0.h **** #endif
  394:./cmsis_core/core_cm0.h **** 
  395:./cmsis_core/core_cm0.h **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 9
+ARM GAS  /tmp/ccxUmJh6.s 			page 9
 
 
  396:./cmsis_core/core_cm0.h **** /* ###################  Compiler specific Intrinsics  ########################### */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  450:./cmsis_core/core_cm0.h ****  * @param  topOfMainStack  Main Stack Pointer
  451:./cmsis_core/core_cm0.h ****  *
  452:./cmsis_core/core_cm0.h ****  * Assign the value mainStackPointer to the MSP 
-ARM GAS  /tmp/ccbIQd7h.s 			page 10
+ARM GAS  /tmp/ccxUmJh6.s 			page 10
 
 
  453:./cmsis_core/core_cm0.h ****  * (main stack pointer) Cortex processor register
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  507:./cmsis_core/core_cm0.h **** /**
  508:./cmsis_core/core_cm0.h ****  * @brief  Set the Control Register value
  509:./cmsis_core/core_cm0.h ****  *
-ARM GAS  /tmp/ccbIQd7h.s 			page 11
+ARM GAS  /tmp/ccxUmJh6.s 			page 11
 
 
  510:./cmsis_core/core_cm0.h ****  * @param  control  Control value
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  564:./cmsis_core/core_cm0.h ****  */
  565:./cmsis_core/core_cm0.h **** static __INLINE void __set_CONTROL(uint32_t control)
  566:./cmsis_core/core_cm0.h **** {
-ARM GAS  /tmp/ccbIQd7h.s 			page 12
+ARM GAS  /tmp/ccxUmJh6.s 			page 12
 
 
  567:./cmsis_core/core_cm0.h ****   register uint32_t __regControl         __ASM("control");
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  621:./cmsis_core/core_cm0.h ****  *
  622:./cmsis_core/core_cm0.h ****  * @return Main Stack Pointer
  623:./cmsis_core/core_cm0.h ****  *
-ARM GAS  /tmp/ccbIQd7h.s 			page 13
+ARM GAS  /tmp/ccxUmJh6.s 			page 13
 
 
  624:./cmsis_core/core_cm0.h ****  * Return the current value of the MSP (main stack pointer)
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  678:./cmsis_core/core_cm0.h ****  * @brief  Set the Process Stack Pointer
  679:./cmsis_core/core_cm0.h ****  *
  680:./cmsis_core/core_cm0.h ****  * @param  topOfProcStack  Process Stack Pointer
-ARM GAS  /tmp/ccbIQd7h.s 			page 14
+ARM GAS  /tmp/ccxUmJh6.s 			page 14
 
 
  681:./cmsis_core/core_cm0.h ****  *
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  735:./cmsis_core/core_cm0.h ****  * @brief  Set the Control Register value
  736:./cmsis_core/core_cm0.h ****  *
  737:./cmsis_core/core_cm0.h ****  * @param  control  Control value
-ARM GAS  /tmp/ccbIQd7h.s 			page 15
+ARM GAS  /tmp/ccxUmJh6.s 			page 15
 
 
  738:./cmsis_core/core_cm0.h ****  *
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  792:./cmsis_core/core_cm0.h **** /*@{*/
  793:./cmsis_core/core_cm0.h **** 
  794:./cmsis_core/core_cm0.h **** /* ##########################   NVIC functions  #################################### */
-ARM GAS  /tmp/ccbIQd7h.s 			page 16
+ARM GAS  /tmp/ccxUmJh6.s 			page 16
 
 
  795:./cmsis_core/core_cm0.h **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  849:./cmsis_core/core_cm0.h ****  * The interrupt number cannot be a negative value.
  850:./cmsis_core/core_cm0.h ****  */
  851:./cmsis_core/core_cm0.h **** static __INLINE void NVIC_SetPendingIRQ(IRQn_Type IRQn)
-ARM GAS  /tmp/ccbIQd7h.s 			page 17
+ARM GAS  /tmp/ccxUmJh6.s 			page 17
 
 
  852:./cmsis_core/core_cm0.h **** {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
   74 0006 0091     		str	r1, [sp]	@ priority, priority
   75 0008 6B46     		mov	r3, sp	@ tmp199,
   76 000a 0733     		adds	r3, r3, #7	@ tmp163,
-ARM GAS  /tmp/ccbIQd7h.s 			page 18
+ARM GAS  /tmp/ccxUmJh6.s 			page 18
 
 
   77 000c 1A70     		strb	r2, [r3]	@ tmp164, IRQn
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  128 006c 1D00     		movs	r5, r3	@ D.6877, D.6876
  129 006e 0323     		movs	r3, #3	@ tmp181,
  130 0070 2B40     		ands	r3, r5	@ D.6877, D.6877
-ARM GAS  /tmp/ccbIQd7h.s 			page 19
+ARM GAS  /tmp/ccxUmJh6.s 			page 19
 
 
  131 0072 DB00     		lsls	r3, r3, #3	@ D.6877, D.6877,
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  178 00c6 0732     		adds	r2, r2, #7	@ tmp195,
  179 00c8 1278     		ldrb	r2, [r2]	@ D.6876, IRQn
  180 00ca 1500     		movs	r5, r2	@ D.6877, D.6876
-ARM GAS  /tmp/ccbIQd7h.s 			page 20
+ARM GAS  /tmp/ccxUmJh6.s 			page 20
 
 
  181 00cc 0322     		movs	r2, #3	@ tmp196,
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  923:./cmsis_core/core_cm0.h ****     return((uint32_t)((NVIC->IPR[_IP_IDX(IRQn)] >> _BIT_SHIFT(IRQn) ) >> (8 - __NVIC_PRIO_BITS))); 
  924:./cmsis_core/core_cm0.h **** }
  925:./cmsis_core/core_cm0.h **** */
-ARM GAS  /tmp/ccbIQd7h.s 			page 21
+ARM GAS  /tmp/ccxUmJh6.s 			page 21
 
 
  926:./cmsis_core/core_cm0.h **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  235 0018 120A     		lsrs	r2, r2, #8	@ D.6882, tmp120,
  236 001a 013A     		subs	r2, r2, #1	@ D.6882,
  237 001c 5A60     		str	r2, [r3, #4]	@ D.6882, _6->LOAD
-ARM GAS  /tmp/ccbIQd7h.s 			page 22
+ARM GAS  /tmp/ccxUmJh6.s 			page 22
 
 
  957:./cmsis_core/core_cm0.h ****   NVIC_SetPriority (SysTick_IRQn, (1<<__NVIC_PRIO_BITS) - 1);  /* set Priority for Cortex-M0 System
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  285              		.global	acswitch_timer
  286              		.section	.bss.acswitch_timer,"aw",%nobits
  287              		.type	acswitch_timer, %object
-ARM GAS  /tmp/ccbIQd7h.s 			page 23
+ARM GAS  /tmp/ccxUmJh6.s 			page 23
 
 
  288              		.size	acswitch_timer, 1
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  342 0000 00       		.space	1
  343              		.comm	s1,2,2
  344              		.comm	s2,2,2
-ARM GAS  /tmp/ccbIQd7h.s 			page 24
+ARM GAS  /tmp/ccxUmJh6.s 			page 24
 
 
  345              		.comm	sac,2,2
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  399              		.comm	vpote,34,4
  400              		.section	.rodata
  401              		.align	2
-ARM GAS  /tmp/ccbIQd7h.s 			page 25
+ARM GAS  /tmp/ccxUmJh6.s 			page 25
 
 
  402              	.LC0:
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
   15:src/main.c    **** 
   16:src/main.c    **** 
   17:src/main.c    **** /* Includes ------------------------------------------------------------------*/
-ARM GAS  /tmp/ccbIQd7h.s 			page 26
+ARM GAS  /tmp/ccxUmJh6.s 			page 26
 
 
   18:src/main.c    **** #include "stm32f0xx.h"
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
   72:src/main.c    **** //volatile unsigned short mainmenu_timer = 0;
   73:src/main.c    **** volatile unsigned short show_select_timer = 0;
   74:src/main.c    **** volatile unsigned char switches_timer = 0;
-ARM GAS  /tmp/ccbIQd7h.s 			page 27
+ARM GAS  /tmp/ccxUmJh6.s 			page 27
 
 
   75:src/main.c    **** volatile unsigned char acswitch_timer = 0;
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  129:src/main.c    **** #define gsm_mini_timeout	usart1_mini_timeout
  130:src/main.c    **** #define gsm_pckt_ready		usart1_pckt_ready
  131:src/main.c    **** #define gsm_have_data		usart1_have_data
-ARM GAS  /tmp/ccbIQd7h.s 			page 28
+ARM GAS  /tmp/ccxUmJh6.s 			page 28
 
 
  132:src/main.c    **** #define gsm_pckt_bytes		usart1_pckt_bytes
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  186:src/main.c    **** //--- FUNCIONES DEL MODULO ---//
  187:src/main.c    **** void TimingDelay_Decrement(void);
  188:src/main.c    **** void Update_PWM (unsigned short);
-ARM GAS  /tmp/ccbIQd7h.s 			page 29
+ARM GAS  /tmp/ccxUmJh6.s 			page 29
 
 
  189:src/main.c    **** void UpdatePackets (void);
@@ -1718,7 +1718,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  432 0002 8CB0     		sub	sp, sp, #48	@,,
  433              	.LCFI5:
  434              		.cfi_def_cfa_offset 56
- 216:src/main.c    **** 	unsigned char i,ii;
+ 216:src/main.c    **** 	unsigned char i, ii;
  217:src/main.c    **** 	unsigned char bytes_remain, bytes_read, need_ack = 0;
  435              		.loc 2 217 0
  436 0004 2D23     		movs	r3, #45	@ tmp146,
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  446 0014 6B44     		add	r3, r3, sp	@ tmp152,
  447 0016 0022     		movs	r2, #0	@ tmp153,
  448 0018 1A70     		strb	r2, [r3]	@ tmp154, main_state
-ARM GAS  /tmp/ccbIQd7h.s 			page 30
+ARM GAS  /tmp/ccxUmJh6.s 			page 30
 
 
  222:src/main.c    **** #ifdef WITH_HYST
@@ -1748,7 +1748,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  226:src/main.c    **** 	unsigned char one_to_ten;
  227:src/main.c    **** #endif
  228:src/main.c    **** 
- 229:src/main.c    **** #else
+ 229:src/main.c    **** #else		//USE_REDONDA_BASIC
  230:src/main.c    **** 	unsigned char main_state = 0;
  231:src/main.c    **** #endif
  232:src/main.c    **** 	char s_lcd [20];
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  244:src/main.c    **** 	parameters_typedef * p_mem_init;
  245:src/main.c    **** 	//!< At this stage the microcontroller clock setting is already configured,
  246:src/main.c    ****     //   this is done through SystemInit() function which is called from startup
-ARM GAS  /tmp/ccbIQd7h.s 			page 31
+ARM GAS  /tmp/ccxUmJh6.s 			page 31
 
 
  247:src/main.c    ****     //   file (startup_stm32f0xx.s) before to branch to application main.
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  516 0084 2F23     		movs	r3, #47	@ tmp180,
  517 0086 6B44     		add	r3, r3, sp	@ tmp180,
  518 0088 0022     		movs	r2, #0	@ tmp181,
-ARM GAS  /tmp/ccbIQd7h.s 			page 32
+ARM GAS  /tmp/ccxUmJh6.s 			page 32
 
 
  519 008a 1A70     		strb	r2, [r3]	@ tmp182, i
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  287:src/main.c    **** //	{
  288:src/main.c    **** //		if (RELAY)
  289:src/main.c    **** //		{
-ARM GAS  /tmp/ccbIQd7h.s 			page 33
+ARM GAS  /tmp/ccxUmJh6.s 			page 33
 
 
  290:src/main.c    **** //			RELAY_OFF;
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  571 00d0 FFF7FEFF 		bl	USART2Config	@
  323:src/main.c    **** 
  324:src/main.c    **** 	EXTIOff();
-ARM GAS  /tmp/ccbIQd7h.s 			page 34
+ARM GAS  /tmp/ccxUmJh6.s 			page 34
 
 
  572              		.loc 2 324 0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  600 010a 6B44     		add	r3, r3, sp	@ tmp196,
  601 010c 0022     		movs	r2, #0	@ tmp197,
  602 010e 1A70     		strb	r2, [r3]	@ tmp198, i
-ARM GAS  /tmp/ccbIQd7h.s 			page 35
+ARM GAS  /tmp/ccxUmJh6.s 			page 35
 
 
  603 0110 1DE0     		b	.L19	@
@@ -2097,22 +2097,76 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  647 0156 DCD9     		bls	.L22	@,
  358:src/main.c    **** 	}
  359:src/main.c    **** 
- 360:src/main.c    **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 36
+ 360:src/main.c    **** 	timer_standby = 2000;
+ARM GAS  /tmp/ccxUmJh6.s 			page 36
 
 
- 361:src/main.c    **** 	timer_standby = 2000;
- 648              		.loc 2 361 0 is_stmt 1
+ 648              		.loc 2 360 0 is_stmt 1
  649 0158 564B     		ldr	r3, .L36+20	@ tmp210,
  650 015a FA22     		movs	r2, #250	@ tmp283,
  651 015c D200     		lsls	r2, r2, #3	@ tmp211, tmp283,
  652 015e 1A80     		strh	r2, [r3]	@ tmp212, timer_standby
  653              	.L32:
- 362:src/main.c    **** 
- 363:src/main.c    **** 	while (1)
- 364:src/main.c    **** 	{
- 365:src/main.c    **** 		switch (main_state)
- 654              		.loc 2 365 0
+ 361:src/main.c    **** 
+ 362:src/main.c    **** //--- Programa de pruebas 1 a 10V -----
+ 363:src/main.c    **** 	// while (1)
+ 364:src/main.c    **** 	// {
+ 365:src/main.c    **** 	// 	for (i = 0; i < 255; i++)
+ 366:src/main.c    **** 	// 	{
+ 367:src/main.c    **** 	// 		Update_TIM3_CH1(i);
+ 368:src/main.c    **** 	// 		Wait_ms(10);
+ 369:src/main.c    **** 	// 	}
+ 370:src/main.c    **** 	//
+ 371:src/main.c    **** 	// 	for (i = 255; i >= 0; i--)
+ 372:src/main.c    **** 	// 	{
+ 373:src/main.c    **** 	// 		Update_TIM3_CH1(i);
+ 374:src/main.c    **** 	// 		Wait_ms(10);
+ 375:src/main.c    **** 	// 	}
+ 376:src/main.c    **** 	// }
+ 377:src/main.c    **** //--- FIN Programa de pruebas 1 a 10V -----
+ 378:src/main.c    **** 
+ 379:src/main.c    **** //--- Programa de pruebas synchro de Relay -----
+ 380:src/main.c    **** 	// i = 0;
+ 381:src/main.c    **** 	// while (1)
+ 382:src/main.c    **** 	// {
+ 383:src/main.c    **** 	// 	switch (i)
+ 384:src/main.c    **** 	// 	{
+ 385:src/main.c    **** 	// 		case 0:
+ 386:src/main.c    **** 	// 			RelayOn();
+ 387:src/main.c    **** 	// 			timer_standby = 50;
+ 388:src/main.c    **** 	// 			LED_ON;
+ 389:src/main.c    **** 	// 			i++;
+ 390:src/main.c    **** 	// 			break;
+ 391:src/main.c    **** 	//
+ 392:src/main.c    **** 	// 		case 1:
+ 393:src/main.c    **** 	// 			if (!timer_standby)
+ 394:src/main.c    **** 	// 			{
+ 395:src/main.c    **** 	// 				RelayOff();
+ 396:src/main.c    **** 	// 				LED_OFF;
+ 397:src/main.c    **** 	// 				i++;
+ 398:src/main.c    **** 	// 				timer_standby = 10000;
+ 399:src/main.c    **** 	// 			}
+ 400:src/main.c    **** 	// 			break;
+ 401:src/main.c    **** 	//
+ 402:src/main.c    **** 	// 		case 2:
+ 403:src/main.c    **** 	// 			if (!timer_standby)
+ 404:src/main.c    **** 	// 			{
+ 405:src/main.c    **** 	// 				i = 0;
+ 406:src/main.c    **** 	// 			}
+ 407:src/main.c    **** 	// 			break;
+ 408:src/main.c    **** 	// 	}
+ 409:src/main.c    **** 	//
+ 410:src/main.c    **** 	// 	UpdateRelay ();
+ 411:src/main.c    **** 	// }
+ARM GAS  /tmp/ccxUmJh6.s 			page 37
+
+
+ 412:src/main.c    **** //--- FIN Programa de pruebas synchro de Relay -----
+ 413:src/main.c    **** 
+ 414:src/main.c    **** 	while (1)
+ 415:src/main.c    **** 	{
+ 416:src/main.c    **** 		switch (main_state)
+ 654              		.loc 2 416 0
  655 0160 2E23     		movs	r3, #46	@ tmp213,
  656 0162 6B44     		add	r3, r3, sp	@ tmp213,
  657 0164 1B78     		ldrb	r3, [r3]	@ D.6886, main_state
@@ -2124,119 +2178,119 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  663 0170 00D0     		beq	.LCB409	@
  664 0172 71E0     		b	.L33	@long jump	@
  665              	.LCB409:
- 366:src/main.c    **** 		{
- 367:src/main.c    **** 			case MAIN_INIT:
- 368:src/main.c    **** 				RelayOff();
- 666              		.loc 2 368 0
+ 417:src/main.c    **** 		{
+ 418:src/main.c    **** 			case MAIN_INIT:
+ 419:src/main.c    **** 				RelayOff();
+ 666              		.loc 2 419 0
  667 0174 FFF7FEFF 		bl	RelayOff	@
- 369:src/main.c    **** 				LED_OFF;
- 668              		.loc 2 369 0
+ 420:src/main.c    **** 				LED_OFF;
+ 668              		.loc 2 420 0
  669 0178 9023     		movs	r3, #144	@ tmp281,
  670 017a DB05     		lsls	r3, r3, #23	@ D.6884, tmp281,
  671 017c 8022     		movs	r2, #128	@ tmp282,
  672 017e 5205     		lsls	r2, r2, #21	@ tmp214, tmp282,
  673 0180 9A61     		str	r2, [r3, #24]	@ tmp214, _74->BSRR
- 370:src/main.c    **** 				FillPhotoBuffer();
- 674              		.loc 2 370 0
+ 421:src/main.c    **** 				FillPhotoBuffer();
+ 674              		.loc 2 421 0
  675 0182 FFF7FEFF 		bl	FillPhotoBuffer	@
- 371:src/main.c    **** #ifdef WITH_TEMP_CONTROL
- 372:src/main.c    **** 				FillTempBuffer();
- 373:src/main.c    **** #endif
- 374:src/main.c    **** #ifdef WITH_1_TO_10_VOLTS
- 375:src/main.c    **** 				Update_TIM3_CH1 (0);
- 676              		.loc 2 375 0
+ 422:src/main.c    **** #ifdef WITH_TEMP_CONTROL
+ 423:src/main.c    **** 				FillTempBuffer();
+ 424:src/main.c    **** #endif
+ 425:src/main.c    **** #ifdef WITH_1_TO_10_VOLTS
+ 426:src/main.c    **** 				Update_TIM3_CH1 (0);
+ 676              		.loc 2 426 0
  677 0186 0020     		movs	r0, #0	@,
  678 0188 FFF7FEFF 		bl	Update_TIM3_CH1	@
- 376:src/main.c    **** #endif
- 377:src/main.c    **** 				main_state = LAMP_OFF;
- 679              		.loc 2 377 0
+ 427:src/main.c    **** #endif
+ 428:src/main.c    **** 				main_state = LAMP_OFF;
+ 679              		.loc 2 428 0
  680 018c 2E23     		movs	r3, #46	@ tmp215,
  681 018e 6B44     		add	r3, r3, sp	@ tmp215,
  682 0190 0122     		movs	r2, #1	@ tmp216,
  683 0192 1A70     		strb	r2, [r3]	@ tmp217, main_state
- 378:src/main.c    **** 				break;
- 684              		.loc 2 378 0
+ 429:src/main.c    **** 				break;
+ 684              		.loc 2 429 0
  685 0194 68E0     		b	.L27	@
  686              	.L24:
-ARM GAS  /tmp/ccbIQd7h.s 			page 37
-
-
- 379:src/main.c    **** 
- 380:src/main.c    **** 			case LAMP_OFF:
- 381:src/main.c    **** 				if (!tt_relay_on_off)
- 687              		.loc 2 381 0
+ 430:src/main.c    **** 
+ 431:src/main.c    **** 			case LAMP_OFF:
+ 432:src/main.c    **** 				if (!tt_relay_on_off)
+ 687              		.loc 2 432 0
  688 0196 484B     		ldr	r3, .L36+24	@ tmp218,
  689 0198 1B88     		ldrh	r3, [r3]	@ tmp219, tt_relay_on_off
+ARM GAS  /tmp/ccxUmJh6.s 			page 38
+
+
  690 019a 9BB2     		uxth	r3, r3	@ D.6885, tmp219
  691 019c 002B     		cmp	r3, #0	@ D.6885,
  692 019e 60D1     		bne	.L34	@,
- 382:src/main.c    **** 				{
- 383:src/main.c    **** 					if (GetPhoto() > VOLTAGE_PHOTO_ON)
- 693              		.loc 2 383 0
+ 433:src/main.c    **** 				{
+ 434:src/main.c    **** 					if (GetPhoto() > VOLTAGE_PHOTO_ON)
+ 693              		.loc 2 434 0
  694 01a0 FFF7FEFF 		bl	GetPhoto	@
  695 01a4 0300     		movs	r3, r0	@ tmp220,
  696 01a6 1A1E     		subs	r2, r3, #0	@ D.6885, tmp221,
  697 01a8 444B     		ldr	r3, .L36+28	@ tmp222,
  698 01aa 9A42     		cmp	r2, r3	@ D.6885, tmp222
  699 01ac 59D9     		bls	.L34	@,
- 384:src/main.c    **** 					{
- 385:src/main.c    **** 						main_state = LAMP_ON;
- 700              		.loc 2 385 0
+ 435:src/main.c    **** 					{
+ 436:src/main.c    **** 						main_state = LAMP_ON;
+ 700              		.loc 2 436 0
  701 01ae 2E23     		movs	r3, #46	@ tmp223,
  702 01b0 6B44     		add	r3, r3, sp	@ tmp223,
  703 01b2 0222     		movs	r2, #2	@ tmp224,
  704 01b4 1A70     		strb	r2, [r3]	@ tmp225, main_state
- 386:src/main.c    **** 						tt_relay_on_off = 10000;
- 705              		.loc 2 386 0
+ 437:src/main.c    **** 						tt_relay_on_off = 10000;
+ 705              		.loc 2 437 0
  706 01b6 404B     		ldr	r3, .L36+24	@ tmp226,
  707 01b8 414A     		ldr	r2, .L36+32	@ tmp227,
  708 01ba 1A80     		strh	r2, [r3]	@ tmp228, tt_relay_on_off
- 387:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
- 388:src/main.c    **** 						Update_TIM3_CH1 (PWM_MIN);
- 709              		.loc 2 388 0
+ 438:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
+ 439:src/main.c    **** 						Update_TIM3_CH1 (PWM_MIN);
+ 709              		.loc 2 439 0
  710 01bc 1A20     		movs	r0, #26	@,
  711 01be FFF7FEFF 		bl	Update_TIM3_CH1	@
- 389:src/main.c    **** 	#endif
- 390:src/main.c    **** 
- 391:src/main.c    **** 						RelayOn();
- 712              		.loc 2 391 0
+ 440:src/main.c    **** 	#endif
+ 441:src/main.c    **** 
+ 442:src/main.c    **** 						RelayOn();
+ 712              		.loc 2 442 0
  713 01c2 FFF7FEFF 		bl	RelayOn	@
- 392:src/main.c    **** 						LED_ON;
- 714              		.loc 2 392 0
+ 443:src/main.c    **** 						LED_ON;
+ 714              		.loc 2 443 0
  715 01c6 9023     		movs	r3, #144	@ tmp279,
  716 01c8 DB05     		lsls	r3, r3, #23	@ D.6884, tmp279,
  717 01ca 8022     		movs	r2, #128	@ tmp280,
  718 01cc 5201     		lsls	r2, r2, #5	@ tmp229, tmp280,
  719 01ce 9A61     		str	r2, [r3, #24]	@ tmp229, _86->BSRR
- 393:src/main.c    **** 	#ifdef WITH_HYST
- 394:src/main.c    **** 						hours = 0;
- 720              		.loc 2 394 0
+ 444:src/main.c    **** 	#ifdef WITH_HYST
+ 445:src/main.c    **** 						hours = 0;
+ 720              		.loc 2 445 0
  721 01d0 3C4B     		ldr	r3, .L36+36	@ tmp230,
  722 01d2 0022     		movs	r2, #0	@ tmp231,
  723 01d4 1A70     		strb	r2, [r3]	@ tmp232, hours
- 395:src/main.c    **** 	#endif
- 396:src/main.c    **** 					}
- 397:src/main.c    **** 				}
- 398:src/main.c    **** 				break;
-ARM GAS  /tmp/ccbIQd7h.s 			page 38
-
-
- 724              		.loc 2 398 0
+ 446:src/main.c    **** 	#endif
+ 447:src/main.c    **** 					}
+ 448:src/main.c    **** 				}
+ 449:src/main.c    **** 				break;
+ 724              		.loc 2 449 0
  725 01d6 44E0     		b	.L34	@
  726              	.L25:
- 399:src/main.c    **** 
- 400:src/main.c    **** 			case LAMP_ON:
- 401:src/main.c    **** 				if (!tt_relay_on_off)
- 727              		.loc 2 401 0
+ 450:src/main.c    **** 
+ 451:src/main.c    **** 			case LAMP_ON:
+ 452:src/main.c    **** 				if (!tt_relay_on_off)
+ARM GAS  /tmp/ccxUmJh6.s 			page 39
+
+
+ 727              		.loc 2 452 0
  728 01d8 374B     		ldr	r3, .L36+24	@ tmp233,
  729 01da 1B88     		ldrh	r3, [r3]	@ tmp234, tt_relay_on_off
  730 01dc 9BB2     		uxth	r3, r3	@ D.6885, tmp234
  731 01de 002B     		cmp	r3, #0	@ D.6885,
  732 01e0 23D1     		bne	.L29	@,
- 402:src/main.c    **** 				{
- 403:src/main.c    **** 	#ifdef WITH_HYST		//con Hysteresis apaga casi en el mismo punto en el que prende
- 404:src/main.c    **** 					hyst = GetHysteresis (hours);
- 733              		.loc 2 404 0
+ 453:src/main.c    **** 				{
+ 454:src/main.c    **** 	#ifdef WITH_HYST		//con Hysteresis apaga casi en el mismo punto en el que prende
+ 455:src/main.c    **** 					hyst = GetHysteresis (hours);
+ 733              		.loc 2 455 0
  734 01e2 384B     		ldr	r3, .L36+36	@ tmp235,
  735 01e4 1B78     		ldrb	r3, [r3]	@ tmp236, hours
  736 01e6 DBB2     		uxtb	r3, r3	@ D.6887, tmp236
@@ -2245,8 +2299,8 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  739 01ec FFF7FEFF 		bl	GetHysteresis	@
  740 01f0 0300     		movs	r3, r0	@ tmp238,
  741 01f2 2380     		strh	r3, [r4]	@ tmp240, hyst
- 405:src/main.c    **** 					if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
- 742              		.loc 2 405 0
+ 456:src/main.c    **** 					if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+ 742              		.loc 2 456 0
  743 01f4 FFF7FEFF 		bl	GetPhoto	@
  744 01f8 0300     		movs	r3, r0	@ tmp241,
  745 01fa 1900     		movs	r1, r3	@ D.6886, D.6885
@@ -2256,55 +2310,55 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  749 0202 D31A     		subs	r3, r2, r3	@ D.6886, tmp244, D.6886
  750 0204 9942     		cmp	r1, r3	@ D.6886, D.6886
  751 0206 10DA     		bge	.L29	@,
- 406:src/main.c    **** 	#else
- 407:src/main.c    **** 					if (GetPhoto() < VOLTAGE_PHOTO_OFF)
- 408:src/main.c    **** 	#endif
- 409:src/main.c    **** 					{
- 410:src/main.c    **** 						main_state = LAMP_OFF;
- 752              		.loc 2 410 0
+ 457:src/main.c    **** 	#else
+ 458:src/main.c    **** 					if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+ 459:src/main.c    **** 	#endif
+ 460:src/main.c    **** 					{
+ 461:src/main.c    **** 						main_state = LAMP_OFF;
+ 752              		.loc 2 461 0
  753 0208 2E23     		movs	r3, #46	@ tmp245,
  754 020a 6B44     		add	r3, r3, sp	@ tmp245,
  755 020c 0122     		movs	r2, #1	@ tmp246,
  756 020e 1A70     		strb	r2, [r3]	@ tmp247, main_state
- 411:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
- 412:src/main.c    **** 						Update_TIM3_CH1 (0);
- 757              		.loc 2 412 0
+ 462:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
+ 463:src/main.c    **** 						Update_TIM3_CH1 (0);
+ 757              		.loc 2 463 0
  758 0210 0020     		movs	r0, #0	@,
  759 0212 FFF7FEFF 		bl	Update_TIM3_CH1	@
- 413:src/main.c    **** 	#endif
- 414:src/main.c    **** 						tt_relay_on_off = 10000;
- 760              		.loc 2 414 0
+ 464:src/main.c    **** 	#endif
+ 465:src/main.c    **** 						tt_relay_on_off = 10000;
+ 760              		.loc 2 465 0
  761 0216 284B     		ldr	r3, .L36+24	@ tmp248,
  762 0218 294A     		ldr	r2, .L36+32	@ tmp249,
  763 021a 1A80     		strh	r2, [r3]	@ tmp250, tt_relay_on_off
- 415:src/main.c    **** 						RelayOff();
-ARM GAS  /tmp/ccbIQd7h.s 			page 39
-
-
- 764              		.loc 2 415 0
+ 466:src/main.c    **** 						RelayOff();
+ 764              		.loc 2 466 0
  765 021c FFF7FEFF 		bl	RelayOff	@
- 416:src/main.c    **** 						LED_OFF;
- 766              		.loc 2 416 0
+ 467:src/main.c    **** 						LED_OFF;
+ 766              		.loc 2 467 0
  767 0220 9023     		movs	r3, #144	@ tmp277,
  768 0222 DB05     		lsls	r3, r3, #23	@ D.6884, tmp277,
+ARM GAS  /tmp/ccxUmJh6.s 			page 40
+
+
  769 0224 8022     		movs	r2, #128	@ tmp278,
  770 0226 5205     		lsls	r2, r2, #21	@ tmp251, tmp278,
  771 0228 9A61     		str	r2, [r3, #24]	@ tmp251, _102->BSRR
  772              	.L29:
- 417:src/main.c    **** 					}
- 418:src/main.c    **** 				}
- 419:src/main.c    **** 
- 420:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
- 421:src/main.c    **** 				if (main_state == LAMP_ON)
- 773              		.loc 2 421 0
+ 468:src/main.c    **** 					}
+ 469:src/main.c    **** 				}
+ 470:src/main.c    **** 
+ 471:src/main.c    **** 	#ifdef WITH_1_TO_10_VOLTS
+ 472:src/main.c    **** 				if (main_state == LAMP_ON)
+ 773              		.loc 2 472 0
  774 022a 2E23     		movs	r3, #46	@ tmp252,
  775 022c 6B44     		add	r3, r3, sp	@ tmp252,
  776 022e 1B78     		ldrb	r3, [r3]	@ tmp253, main_state
  777 0230 022B     		cmp	r3, #2	@ tmp253,
  778 0232 18D1     		bne	.L35	@,
- 422:src/main.c    **** 				{
- 423:src/main.c    **** 					one_to_ten = GetNew1to10 (GetPhoto());
- 779              		.loc 2 423 0
+ 473:src/main.c    **** 				{
+ 474:src/main.c    **** 					one_to_ten = GetNew1to10 (GetPhoto());
+ 779              		.loc 2 474 0
  780 0234 FFF7FEFF 		bl	GetPhoto	@
  781 0238 0300     		movs	r3, r0	@ tmp254,
  782 023a 1B24     		movs	r4, #27	@ tmp256,
@@ -2313,59 +2367,59 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  785 0240 FFF7FEFF 		bl	GetNew1to10	@
  786 0244 0300     		movs	r3, r0	@ tmp257,
  787 0246 2370     		strb	r3, [r4]	@ tmp259, one_to_ten
- 424:src/main.c    **** 					Update_TIM3_CH1 (one_to_ten);
- 788              		.loc 2 424 0
+ 475:src/main.c    **** 					Update_TIM3_CH1 (one_to_ten);
+ 788              		.loc 2 475 0
  789 0248 1B23     		movs	r3, #27	@ tmp260,
  790 024a 6B44     		add	r3, r3, sp	@ tmp260,
  791 024c 1B78     		ldrb	r3, [r3]	@ tmp262, one_to_ten
  792 024e 9BB2     		uxth	r3, r3	@ D.6885, tmp261
  793 0250 1800     		movs	r0, r3	@, D.6885
  794 0252 FFF7FEFF 		bl	Update_TIM3_CH1	@
- 425:src/main.c    **** 				}
- 426:src/main.c    **** 	#endif
- 427:src/main.c    **** 				break;
- 795              		.loc 2 427 0
+ 476:src/main.c    **** 				}
+ 477:src/main.c    **** 	#endif
+ 478:src/main.c    **** 				break;
+ 795              		.loc 2 478 0
  796 0256 06E0     		b	.L35	@
  797              	.L33:
- 428:src/main.c    **** 
- 429:src/main.c    **** 			default:
- 430:src/main.c    **** 				main_state = MAIN_INIT;
- 798              		.loc 2 430 0
+ 479:src/main.c    **** 
+ 480:src/main.c    **** 			default:
+ 481:src/main.c    **** 				main_state = MAIN_INIT;
+ 798              		.loc 2 481 0
  799 0258 2E23     		movs	r3, #46	@ tmp263,
  800 025a 6B44     		add	r3, r3, sp	@ tmp263,
  801 025c 0022     		movs	r2, #0	@ tmp264,
  802 025e 1A70     		strb	r2, [r3]	@ tmp265, main_state
- 431:src/main.c    **** 				break;
- 803              		.loc 2 431 0
+ 482:src/main.c    **** 				break;
+ 803              		.loc 2 482 0
  804 0260 02E0     		b	.L27	@
-ARM GAS  /tmp/ccbIQd7h.s 			page 40
-
-
  805              	.L34:
- 398:src/main.c    **** 
- 806              		.loc 2 398 0
+ 449:src/main.c    **** 
+ 806              		.loc 2 449 0
  807 0262 C046     		nop
  808 0264 00E0     		b	.L27	@
  809              	.L35:
- 427:src/main.c    **** 
- 810              		.loc 2 427 0
+ARM GAS  /tmp/ccxUmJh6.s 			page 41
+
+
+ 478:src/main.c    **** 
+ 810              		.loc 2 478 0
  811 0266 C046     		nop
  812              	.L27:
- 432:src/main.c    **** 		}
- 433:src/main.c    **** 
- 434:src/main.c    **** 		if (!timer_standby)
- 813              		.loc 2 434 0
+ 483:src/main.c    **** 		}
+ 484:src/main.c    **** 
+ 485:src/main.c    **** 		if (!timer_standby)
+ 813              		.loc 2 485 0
  814 0268 124B     		ldr	r3, .L36+20	@ tmp266,
  815 026a 1B88     		ldrh	r3, [r3]	@ tmp267, timer_standby
  816 026c 9BB2     		uxth	r3, r3	@ D.6885, tmp267
  817 026e 002B     		cmp	r3, #0	@ D.6885,
  818 0270 10D1     		bne	.L31	@,
- 435:src/main.c    **** 		{
- 436:src/main.c    **** #ifdef WITH_TEMP_CONTROL
- 437:src/main.c    **** 			sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), GetPhoto());
- 438:src/main.c    **** #else
- 439:src/main.c    **** 			sprintf(s_lcd, "photo: %d\r\n", GetPhoto());
- 819              		.loc 2 439 0
+ 486:src/main.c    **** 		{
+ 487:src/main.c    **** #ifdef WITH_TEMP_CONTROL
+ 488:src/main.c    **** 			sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), GetPhoto());
+ 489:src/main.c    **** #else
+ 490:src/main.c    **** 			sprintf(s_lcd, "photo: %d\r\n", GetPhoto());
+ 819              		.loc 2 490 0
  820 0272 FFF7FEFF 		bl	GetPhoto	@
  821 0276 0300     		movs	r3, r0	@ tmp268,
  822 0278 1A00     		movs	r2, r3	@ D.6886, D.6885
@@ -2373,40 +2427,40 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  824 027c 01AB     		add	r3, sp, #4	@ tmp271,,
  825 027e 1800     		movs	r0, r3	@, tmp271
  826 0280 FFF7FEFF 		bl	sprintf	@
- 440:src/main.c    **** #endif
- 441:src/main.c    **** 			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
- 442:src/main.c    **** 			Usart1Send(s_lcd);
- 827              		.loc 2 442 0
+ 491:src/main.c    **** #endif
+ 492:src/main.c    **** 			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
+ 493:src/main.c    **** 			Usart2Send(s_lcd);
+ 827              		.loc 2 493 0
  828 0284 01AB     		add	r3, sp, #4	@ tmp272,,
  829 0286 1800     		movs	r0, r3	@, tmp272
- 830 0288 FFF7FEFF 		bl	Usart1Send	@
- 443:src/main.c    **** 			timer_standby = 2000;
- 831              		.loc 2 443 0
+ 830 0288 FFF7FEFF 		bl	Usart2Send	@
+ 494:src/main.c    **** 			timer_standby = 2000;
+ 831              		.loc 2 494 0
  832 028c 094B     		ldr	r3, .L36+20	@ tmp273,
  833 028e FA22     		movs	r2, #250	@ tmp276,
  834 0290 D200     		lsls	r2, r2, #3	@ tmp274, tmp276,
  835 0292 1A80     		strh	r2, [r3]	@ tmp275, timer_standby
  836              	.L31:
- 444:src/main.c    **** 		}
- 445:src/main.c    **** 
- 446:src/main.c    **** 		//Cosas que no dependen del estado del programa
- 447:src/main.c    **** 		UpdateRelay ();
- 837              		.loc 2 447 0
+ 495:src/main.c    **** 		}
+ 496:src/main.c    **** 
+ 497:src/main.c    **** 		//Cosas que no dependen del estado del programa
+ 498:src/main.c    **** 		UpdateRelay ();
+ 837              		.loc 2 498 0
  838 0294 FFF7FEFF 		bl	UpdateRelay	@
- 448:src/main.c    **** #ifdef WITH_TEMP_CONTROL
- 449:src/main.c    **** 		UpdateTemp();
- 450:src/main.c    **** #endif
- 451:src/main.c    **** 		UpdatePhotoTransistor();
- 839              		.loc 2 451 0
-ARM GAS  /tmp/ccbIQd7h.s 			page 41
-
-
+ 499:src/main.c    **** #ifdef WITH_TEMP_CONTROL
+ 500:src/main.c    **** 		UpdateTemp();
+ 501:src/main.c    **** #endif
+ 502:src/main.c    **** 		UpdatePhotoTransistor();
+ 839              		.loc 2 502 0
  840 0298 FFF7FEFF 		bl	UpdatePhotoTransistor	@
- 452:src/main.c    **** 	}	//end while 1
- 841              		.loc 2 452 0
+ 503:src/main.c    **** 	}	//end while 1
+ 841              		.loc 2 503 0
  842 029c 60E7     		b	.L32	@
  843              	.L37:
  844 029e C046     		.align	2
+ARM GAS  /tmp/ccxUmJh6.s 			page 42
+
+
  845              	.L36:
  846 02a0 80BB0000 		.word	48000
  847 02a4 00000000 		.word	.LC0
@@ -2458,419 +2512,419 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  877              		.align	2
  878              		.global	prepare_json_pkt
  879              		.code	16
-ARM GAS  /tmp/ccbIQd7h.s 			page 42
-
-
  880              		.thumb_func
  881              		.type	prepare_json_pkt, %function
  882              	prepare_json_pkt:
  883              	.LFB21:
- 453:src/main.c    **** //---------- Fin Programa de Procduccion Redonda Basic--------//
- 454:src/main.c    **** #endif	//USE_REDONDA_BASIC
- 455:src/main.c    **** 
- 456:src/main.c    **** 
- 457:src/main.c    **** #ifdef USE_MQTT_LIB
- 458:src/main.c    **** 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
- 459:src/main.c    **** 	int rc = 0;
- 460:src/main.c    **** 	char buf[200];
- 461:src/main.c    **** 	MQTTString topicString = MQTTString_initializer;
- 462:src/main.c    **** 	char* payload = "mypayload";
- 463:src/main.c    **** 	int payloadlen = strlen(payload);int buflen = sizeof(buf);
- 464:src/main.c    **** 	int len = 0;
- 465:src/main.c    **** 
- 466:src/main.c    **** 	data.clientID.cstring = "me";
- 467:src/main.c    **** 	data.keepAliveInterval = 20;
- 468:src/main.c    **** 	data.cleansession = 1;
- 469:src/main.c    **** 	len = MQTTSerialize_connect(buf, buflen, &data); /* 1 */
- 470:src/main.c    **** 
- 471:src/main.c    **** 	topicString.cstring = "mytopic";
- 472:src/main.c    **** 	len += MQTTSerialize_publish(buf + len, buflen - len, 0, 0, 0, 0, topicString, payload, payloadlen
- 473:src/main.c    **** 
- 474:src/main.c    **** 	len += MQTTSerialize_disconnect(buf + len, buflen - len); /* 3 */
- 475:src/main.c    **** 	//falta abrir puerto
- 476:src/main.c    **** 	//falta enviar al socket
- 477:src/main.c    **** 	//falta cerrar socket
- 478:src/main.c    **** #endif
- 479:src/main.c    **** 
- 480:src/main.c    **** //	//---------- Prueba USART2 --------//
- 481:src/main.c    **** //
- 482:src/main.c    **** //    while( 1 )
- 483:src/main.c    **** //    {
- 484:src/main.c    **** //    	Usart2Send((char *) (const char *) "Kirno debug placa redonda\r\n");
- 485:src/main.c    **** //        Wait_ms(3000);
- 486:src/main.c    **** //    }
- 487:src/main.c    **** //
- 488:src/main.c    **** //    //---------- Fin Prueba USART2 --------//
- 489:src/main.c    **** 
- 490:src/main.c    **** 	//---------- Prueba con GPS --------//
- 491:src/main.c    **** #ifdef USE_GPS
- 492:src/main.c    **** 	Usart2SendSingle('M');
- 493:src/main.c    **** 	Usart2Send((char *) (const char *) "Kirno debug placa redonda\r\n");
- 494:src/main.c    **** 	Wait_ms(1000);
- 495:src/main.c    **** 
- 496:src/main.c    **** 	Usart1Mode (USART_GPS_MODE);
- 497:src/main.c    **** 
- 498:src/main.c    **** 	//mando reset al gps
- 499:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset de GPS\r\n");
- 500:src/main.c    **** 	GPSStartResetSM ();
- 501:src/main.c    **** 	while (GPSStart() != RESP_OK);
- 502:src/main.c    **** 
- 503:src/main.c    **** 	//mando conf al gps
- 504:src/main.c    **** 	Usart2Send((char *) (const char *) "Config al GPS\r\n");
- 505:src/main.c    **** 	GPSConfigResetSM ();
-ARM GAS  /tmp/ccbIQd7h.s 			page 43
+ 504:src/main.c    **** //---------- Fin Programa de Procduccion Redonda Basic--------//
+ 505:src/main.c    **** #endif	//USE_REDONDA_BASIC
+ARM GAS  /tmp/ccxUmJh6.s 			page 43
 
 
- 506:src/main.c    **** 	while (GPSConfig() != RESP_OK);
+ 506:src/main.c    **** 
  507:src/main.c    **** 
- 508:src/main.c    **** //	//mando reset factory al gps
- 509:src/main.c    **** //	Usart2Send((char *) (const char *) "GPS a Factory Default\r\n");
- 510:src/main.c    **** //	GPSResetFactoryResetSM ();
- 511:src/main.c    **** //	while (GPSResetFactory() != RESP_OK);
- 512:src/main.c    **** 
- 513:src/main.c    **** 	Usart2Send((char *) (const char *) "Espero datos de posicion\r\n");
- 514:src/main.c    **** //	timer_standby = 60000;
- 515:src/main.c    **** //	while( timer_standby )
- 516:src/main.c    **** 	while( 1 )
- 517:src/main.c    **** 	{
- 518:src/main.c    **** 		if (gps_pckt_ready)
- 519:src/main.c    **** 		{
- 520:src/main.c    **** 			gps_pckt_ready = 0;
- 521:src/main.c    **** 			//Usart2SendSingle('P');
- 522:src/main.c    **** 			Usart2Send("\r\nP:\r\n");
- 523:src/main.c    **** 			Usart2SendUnsigned(gps_buff, gps_pckt_bytes);
- 524:src/main.c    **** 		}
- 525:src/main.c    **** 
- 526:src/main.c    **** 		GPSProcess();
- 527:src/main.c    **** 	}
- 528:src/main.c    **** #endif
- 529:src/main.c    **** 	//---------- Fin Prueba con GPS --------//
+ 508:src/main.c    **** #ifdef USE_MQTT_LIB
+ 509:src/main.c    **** 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;
+ 510:src/main.c    **** 	int rc = 0;
+ 511:src/main.c    **** 	char buf[200];
+ 512:src/main.c    **** 	MQTTString topicString = MQTTString_initializer;
+ 513:src/main.c    **** 	char* payload = "mypayload";
+ 514:src/main.c    **** 	int payloadlen = strlen(payload);int buflen = sizeof(buf);
+ 515:src/main.c    **** 	int len = 0;
+ 516:src/main.c    **** 
+ 517:src/main.c    **** 	data.clientID.cstring = "me";
+ 518:src/main.c    **** 	data.keepAliveInterval = 20;
+ 519:src/main.c    **** 	data.cleansession = 1;
+ 520:src/main.c    **** 	len = MQTTSerialize_connect(buf, buflen, &data); /* 1 */
+ 521:src/main.c    **** 
+ 522:src/main.c    **** 	topicString.cstring = "mytopic";
+ 523:src/main.c    **** 	len += MQTTSerialize_publish(buf + len, buflen - len, 0, 0, 0, 0, topicString, payload, payloadlen
+ 524:src/main.c    **** 
+ 525:src/main.c    **** 	len += MQTTSerialize_disconnect(buf + len, buflen - len); /* 3 */
+ 526:src/main.c    **** 	//falta abrir puerto
+ 527:src/main.c    **** 	//falta enviar al socket
+ 528:src/main.c    **** 	//falta cerrar socket
+ 529:src/main.c    **** #endif
  530:src/main.c    **** 
- 531:src/main.c    **** 	//---------- Prueba con GSM --------//
- 532:src/main.c    **** #ifdef USE_GSM
- 533:src/main.c    **** 	Usart2Send((char *) (const char *) "Cambio a GSM\r\n");
- 534:src/main.c    **** 
- 535:src/main.c    **** 	Usart1Mode (USART_GSM_MODE);
- 536:src/main.c    **** 
- 537:src/main.c    **** 
- 538:src/main.c    **** 	//Pruebo USART1
- 539:src/main.c    **** //	while (1)
- 540:src/main.c    **** //	{
- 541:src/main.c    **** //			Usart1SendUnsigned((unsigned char *) (const char *) "Test OK\r\n", sizeof("Test OK\r\n"));
- 542:src/main.c    **** //			Wait_ms(50);
- 543:src/main.c    **** //	}
- 544:src/main.c    **** 
- 545:src/main.c    **** 
- 546:src/main.c    **** 	//mando start al gsm
- 547:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
- 548:src/main.c    **** 	//GPSStartResetSM ();
- 549:src/main.c    **** 	timer_standby = 60000;		//doy 1 minuto para prender modulo
- 550:src/main.c    **** 	while (timer_standby)
- 551:src/main.c    **** 	{
- 552:src/main.c    **** 		i = GSM_Start();
- 553:src/main.c    **** 		if (i == 2)
- 554:src/main.c    **** 		{
- 555:src/main.c    **** 			Usart2Send((char *) (const char *) "Start OK\r\n");
- 556:src/main.c    **** 			timer_standby = 0;
- 557:src/main.c    **** 		}
+ 531:src/main.c    **** //	//---------- Prueba USART2 --------//
+ 532:src/main.c    **** //
+ 533:src/main.c    **** //    while( 1 )
+ 534:src/main.c    **** //    {
+ 535:src/main.c    **** //    	Usart2Send((char *) (const char *) "Kirno debug placa redonda\r\n");
+ 536:src/main.c    **** //        Wait_ms(3000);
+ 537:src/main.c    **** //    }
+ 538:src/main.c    **** //
+ 539:src/main.c    **** //    //---------- Fin Prueba USART2 --------//
+ 540:src/main.c    **** 
+ 541:src/main.c    **** 	//---------- Prueba con GPS --------//
+ 542:src/main.c    **** #ifdef USE_GPS
+ 543:src/main.c    **** 	Usart2SendSingle('M');
+ 544:src/main.c    **** 	Usart2Send((char *) (const char *) "Kirno debug placa redonda\r\n");
+ 545:src/main.c    **** 	Wait_ms(1000);
+ 546:src/main.c    **** 
+ 547:src/main.c    **** 	Usart1Mode (USART_GPS_MODE);
+ 548:src/main.c    **** 
+ 549:src/main.c    **** 	//mando reset al gps
+ 550:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset de GPS\r\n");
+ 551:src/main.c    **** 	GPSStartResetSM ();
+ 552:src/main.c    **** 	while (GPSStart() != RESP_OK);
+ 553:src/main.c    **** 
+ 554:src/main.c    **** 	//mando conf al gps
+ 555:src/main.c    **** 	Usart2Send((char *) (const char *) "Config al GPS\r\n");
+ 556:src/main.c    **** 	GPSConfigResetSM ();
+ 557:src/main.c    **** 	while (GPSConfig() != RESP_OK);
  558:src/main.c    **** 
- 559:src/main.c    **** 		if (i == 4)
- 560:src/main.c    **** 			Usart2Send((char *) (const char *) "Start NOK\r\n");
- 561:src/main.c    **** 	}
- 562:src/main.c    **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 44
+ 559:src/main.c    **** //	//mando reset factory al gps
+ 560:src/main.c    **** //	Usart2Send((char *) (const char *) "GPS a Factory Default\r\n");
+ 561:src/main.c    **** //	GPSResetFactoryResetSM ();
+ 562:src/main.c    **** //	while (GPSResetFactory() != RESP_OK);
+ARM GAS  /tmp/ccxUmJh6.s 			page 44
 
 
- 563:src/main.c    **** 	//mando conf al gsm
- 564:src/main.c    **** 	Usart2Send((char *) (const char *) "Config al GSM\r\n");
- 565:src/main.c    **** 	//GPSConfigResetSM ();
- 566:src/main.c    **** 
- 567:src/main.c    **** 	i = 0;
- 568:src/main.c    **** 	while (i == 0)
- 569:src/main.c    **** 	{
- 570:src/main.c    **** 		ii = GSM_Config(1000);
- 571:src/main.c    **** 
- 572:src/main.c    **** 		if (ii == 2)
- 573:src/main.c    **** 			i = 0;
- 574:src/main.c    **** 		else if (ii > 2)
- 575:src/main.c    **** 		{
- 576:src/main.c    **** 			Usart2Send((const char*) "Error en configuracion\r\n");
- 577:src/main.c    **** 			while (1);
- 578:src/main.c    **** 		}
- 579:src/main.c    **** 
- 580:src/main.c    **** 		GSMProcess();
- 581:src/main.c    **** 		GSMReceive ();
- 582:src/main.c    **** 
- 583:src/main.c    **** 		if (gsm_pckt_ready)
- 584:src/main.c    **** 		{
- 585:src/main.c    **** 			gsm_pckt_ready = 0;
- 586:src/main.c    **** 			Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
- 587:src/main.c    **** 		}
+ 563:src/main.c    **** 
+ 564:src/main.c    **** 	Usart2Send((char *) (const char *) "Espero datos de posicion\r\n");
+ 565:src/main.c    **** //	timer_standby = 60000;
+ 566:src/main.c    **** //	while( timer_standby )
+ 567:src/main.c    **** 	while( 1 )
+ 568:src/main.c    **** 	{
+ 569:src/main.c    **** 		if (gps_pckt_ready)
+ 570:src/main.c    **** 		{
+ 571:src/main.c    **** 			gps_pckt_ready = 0;
+ 572:src/main.c    **** 			//Usart2SendSingle('P');
+ 573:src/main.c    **** 			Usart2Send("\r\nP:\r\n");
+ 574:src/main.c    **** 			Usart2SendUnsigned(gps_buff, gps_pckt_bytes);
+ 575:src/main.c    **** 		}
+ 576:src/main.c    **** 
+ 577:src/main.c    **** 		GPSProcess();
+ 578:src/main.c    **** 	}
+ 579:src/main.c    **** #endif
+ 580:src/main.c    **** 	//---------- Fin Prueba con GPS --------//
+ 581:src/main.c    **** 
+ 582:src/main.c    **** 	//---------- Prueba con GSM --------//
+ 583:src/main.c    **** #ifdef USE_GSM
+ 584:src/main.c    **** 	Usart2Send((char *) (const char *) "Cambio a GSM\r\n");
+ 585:src/main.c    **** 
+ 586:src/main.c    **** 	Usart1Mode (USART_GSM_MODE);
+ 587:src/main.c    **** 
  588:src/main.c    **** 
- 589:src/main.c    **** 		if (LIGHT)
- 590:src/main.c    **** 			LED_ON;
- 591:src/main.c    **** 		else
- 592:src/main.c    **** 			LED_OFF;
- 593:src/main.c    **** 	}
- 594:src/main.c    **** 
+ 589:src/main.c    **** 	//Pruebo USART1
+ 590:src/main.c    **** //	while (1)
+ 591:src/main.c    **** //	{
+ 592:src/main.c    **** //			Usart1SendUnsigned((unsigned char *) (const char *) "Test OK\r\n", sizeof("Test OK\r\n"));
+ 593:src/main.c    **** //			Wait_ms(50);
+ 594:src/main.c    **** //	}
  595:src/main.c    **** 
- 596:src/main.c    **** 	while( 1 )
- 597:src/main.c    **** 	{
- 598:src/main.c    **** 		if (gsm_pckt_ready)
- 599:src/main.c    **** 		{
- 600:src/main.c    **** 			gsm_pckt_ready = 0;
- 601:src/main.c    **** 			Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
- 602:src/main.c    **** 		}
- 603:src/main.c    **** 
- 604:src/main.c    **** 		GSMProcess();
- 605:src/main.c    **** 
- 606:src/main.c    **** 		if (LIGHT)
- 607:src/main.c    **** 			LED_ON;
- 608:src/main.c    **** 
- 609:src/main.c    **** 	}
- 610:src/main.c    **** #endif
- 611:src/main.c    **** 
- 612:src/main.c    **** 	//---------- Pruebas con GSM GATEWAY --------//
- 613:src/main.c    **** #ifdef USE_GSM_GATEWAY
- 614:src/main.c    **** 	LED_OFF;
- 615:src/main.c    **** 	for (i = 0; i < 6; i++)
- 616:src/main.c    **** 	{
- 617:src/main.c    **** 		if (LED)
- 618:src/main.c    **** 			LED_OFF;
- 619:src/main.c    **** 		else
-ARM GAS  /tmp/ccbIQd7h.s 			page 45
+ 596:src/main.c    **** 
+ 597:src/main.c    **** 	//mando start al gsm
+ 598:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
+ 599:src/main.c    **** 	//GPSStartResetSM ();
+ 600:src/main.c    **** 	timer_standby = 60000;		//doy 1 minuto para prender modulo
+ 601:src/main.c    **** 	while (timer_standby)
+ 602:src/main.c    **** 	{
+ 603:src/main.c    **** 		i = GSM_Start();
+ 604:src/main.c    **** 		if (i == 2)
+ 605:src/main.c    **** 		{
+ 606:src/main.c    **** 			Usart2Send((char *) (const char *) "Start OK\r\n");
+ 607:src/main.c    **** 			timer_standby = 0;
+ 608:src/main.c    **** 		}
+ 609:src/main.c    **** 
+ 610:src/main.c    **** 		if (i == 4)
+ 611:src/main.c    **** 			Usart2Send((char *) (const char *) "Start NOK\r\n");
+ 612:src/main.c    **** 	}
+ 613:src/main.c    **** 
+ 614:src/main.c    **** 	//mando conf al gsm
+ 615:src/main.c    **** 	Usart2Send((char *) (const char *) "Config al GSM\r\n");
+ 616:src/main.c    **** 	//GPSConfigResetSM ();
+ 617:src/main.c    **** 
+ 618:src/main.c    **** 	i = 0;
+ 619:src/main.c    **** 	while (i == 0)
+ARM GAS  /tmp/ccxUmJh6.s 			page 45
 
 
- 620:src/main.c    **** 			LED_ON;
- 621:src/main.c    **** 
- 622:src/main.c    **** 		Wait_ms (300);
- 623:src/main.c    **** 	}
- 624:src/main.c    **** 	Wait_ms (3000);
- 625:src/main.c    **** 
- 626:src/main.c    **** 	Usart2Send((char *) (const char *) "GSM GATEWAY.. Cambio a GSM\r\n");
- 627:src/main.c    **** 
- 628:src/main.c    **** 	Usart1Mode (USART_GSM_MODE);
- 629:src/main.c    **** 
+ 620:src/main.c    **** 	{
+ 621:src/main.c    **** 		ii = GSM_Config(1000);
+ 622:src/main.c    **** 
+ 623:src/main.c    **** 		if (ii == 2)
+ 624:src/main.c    **** 			i = 0;
+ 625:src/main.c    **** 		else if (ii > 2)
+ 626:src/main.c    **** 		{
+ 627:src/main.c    **** 			Usart2Send((const char*) "Error en configuracion\r\n");
+ 628:src/main.c    **** 			while (1);
+ 629:src/main.c    **** 		}
  630:src/main.c    **** 
- 631:src/main.c    **** 	//mando start al gsm
- 632:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
- 633:src/main.c    **** 	//GPSStartResetSM ();
- 634:src/main.c    **** 	timer_standby = 60000;		//doy 1 minuto para prender modulo
- 635:src/main.c    **** 	while (timer_standby)
- 636:src/main.c    **** 	{
- 637:src/main.c    **** 		i = GSM_Start();
- 638:src/main.c    **** 		if (i == 2)
- 639:src/main.c    **** 		{
- 640:src/main.c    **** 			Usart2Send((char *) (const char *) "Start OK\r\n");
- 641:src/main.c    **** 			timer_standby = 0;
- 642:src/main.c    **** 		}
- 643:src/main.c    **** 		else
- 644:src/main.c    **** 
- 645:src/main.c    **** 		if (i == 4)
- 646:src/main.c    **** 			Usart2Send((char *) (const char *) "Start NOK\r\n");
- 647:src/main.c    **** 	}
- 648:src/main.c    **** 
- 649:src/main.c    **** 	Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
- 650:src/main.c    **** 
- 651:src/main.c    **** 	while (1)
- 652:src/main.c    **** 	{
- 653:src/main.c    **** 		GSMProcess();
+ 631:src/main.c    **** 		GSMProcess();
+ 632:src/main.c    **** 		GSMReceive ();
+ 633:src/main.c    **** 
+ 634:src/main.c    **** 		if (gsm_pckt_ready)
+ 635:src/main.c    **** 		{
+ 636:src/main.c    **** 			gsm_pckt_ready = 0;
+ 637:src/main.c    **** 			Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
+ 638:src/main.c    **** 		}
+ 639:src/main.c    **** 
+ 640:src/main.c    **** 		if (LIGHT)
+ 641:src/main.c    **** 			LED_ON;
+ 642:src/main.c    **** 		else
+ 643:src/main.c    **** 			LED_OFF;
+ 644:src/main.c    **** 	}
+ 645:src/main.c    **** 
+ 646:src/main.c    **** 
+ 647:src/main.c    **** 	while( 1 )
+ 648:src/main.c    **** 	{
+ 649:src/main.c    **** 		if (gsm_pckt_ready)
+ 650:src/main.c    **** 		{
+ 651:src/main.c    **** 			gsm_pckt_ready = 0;
+ 652:src/main.c    **** 			Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
+ 653:src/main.c    **** 		}
  654:src/main.c    **** 
- 655:src/main.c    **** 		if (usart2_pckt_ready)	//deja paquete en buffUARTGSMrx2
- 656:src/main.c    **** 		{
- 657:src/main.c    **** 			usart2_pckt_ready = 0;
- 658:src/main.c    **** 			Usart1SendUnsigned((unsigned char *) buffUARTGSMrx2, usart2_pckt_bytes);
- 659:src/main.c    **** 		}
- 660:src/main.c    **** 
- 661:src/main.c    **** 		if (gsm_pckt_ready)		//deja paquete en buffUARTGSMrx2
- 662:src/main.c    **** 		{
- 663:src/main.c    **** 			gsm_pckt_ready = 0;
- 664:src/main.c    **** 			Usart2SendUnsigned((unsigned char *) buffUARTGSMrx2, gsm_pckt_bytes);
- 665:src/main.c    **** 		}
- 666:src/main.c    **** 
- 667:src/main.c    **** 		if (LIGHT)
- 668:src/main.c    **** 			LED_ON;
- 669:src/main.c    **** 		else
- 670:src/main.c    **** 			LED_OFF;
- 671:src/main.c    **** 	}
- 672:src/main.c    **** #endif
- 673:src/main.c    **** 
- 674:src/main.c    **** 	//---------- Fin Prueba con GSM GATEWAY --------//
- 675:src/main.c    **** 
+ 655:src/main.c    **** 		GSMProcess();
+ 656:src/main.c    **** 
+ 657:src/main.c    **** 		if (LIGHT)
+ 658:src/main.c    **** 			LED_ON;
+ 659:src/main.c    **** 
+ 660:src/main.c    **** 	}
+ 661:src/main.c    **** #endif
+ 662:src/main.c    **** 
+ 663:src/main.c    **** 	//---------- Pruebas con GSM GATEWAY --------//
+ 664:src/main.c    **** #ifdef USE_GSM_GATEWAY
+ 665:src/main.c    **** 	LED_OFF;
+ 666:src/main.c    **** 	for (i = 0; i < 6; i++)
+ 667:src/main.c    **** 	{
+ 668:src/main.c    **** 		if (LED)
+ 669:src/main.c    **** 			LED_OFF;
+ 670:src/main.c    **** 		else
+ 671:src/main.c    **** 			LED_ON;
+ 672:src/main.c    **** 
+ 673:src/main.c    **** 		Wait_ms (300);
+ 674:src/main.c    **** 	}
+ 675:src/main.c    **** 	Wait_ms (3000);
  676:src/main.c    **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 46
+ARM GAS  /tmp/ccxUmJh6.s 			page 46
 
 
- 677:src/main.c    **** 
- 678:src/main.c    **** 	//---------- Prueba temp --------//
- 679:src/main.c    **** 	/*
- 680:src/main.c    **** 	while (1)
- 681:src/main.c    **** 	{
- 682:src/main.c    **** 		local_meas = GetTemp();
- 683:src/main.c    **** 		if (local_meas != local_meas_last)
- 684:src/main.c    **** 		{
- 685:src/main.c    **** 			LED_ON;
- 686:src/main.c    **** 			local_meas_last = local_meas;
- 687:src/main.c    **** 			LCD_2DO_RENGLON;
- 688:src/main.c    **** 			LCDTransmitStr((const char *) "Brd Temp:       ");
- 689:src/main.c    **** 			local_meas = ConvertTemp(local_meas);
- 690:src/main.c    **** 			sprintf(s_lcd, "%d", local_meas);
- 691:src/main.c    **** 			Lcd_SetDDRAM(0x40 + 10);
- 692:src/main.c    **** 			LCDTransmitStr(s_lcd);
- 693:src/main.c    **** 			LED_OFF;
- 694:src/main.c    **** 		}
+ 677:src/main.c    **** 	Usart2Send((char *) (const char *) "GSM GATEWAY.. Cambio a GSM\r\n");
+ 678:src/main.c    **** 
+ 679:src/main.c    **** 	Usart1Mode (USART_GSM_MODE);
+ 680:src/main.c    **** 
+ 681:src/main.c    **** 
+ 682:src/main.c    **** 	//mando start al gsm
+ 683:src/main.c    **** 	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
+ 684:src/main.c    **** 	//GPSStartResetSM ();
+ 685:src/main.c    **** 	timer_standby = 60000;		//doy 1 minuto para prender modulo
+ 686:src/main.c    **** 	while (timer_standby)
+ 687:src/main.c    **** 	{
+ 688:src/main.c    **** 		i = GSM_Start();
+ 689:src/main.c    **** 		if (i == 2)
+ 690:src/main.c    **** 		{
+ 691:src/main.c    **** 			Usart2Send((char *) (const char *) "Start OK\r\n");
+ 692:src/main.c    **** 			timer_standby = 0;
+ 693:src/main.c    **** 		}
+ 694:src/main.c    **** 		else
  695:src/main.c    **** 
- 696:src/main.c    **** 		UpdateTemp();
- 697:src/main.c    **** 	}
- 698:src/main.c    **** 	*/
- 699:src/main.c    **** 	//---------- Fin prueba temp --------//
- 700:src/main.c    **** 
- 701:src/main.c    **** 	//---------- Prueba 1 to 10V --------//
- 702:src/main.c    **** 	/*
- 703:src/main.c    **** 	local_meas = 0;
- 704:src/main.c    **** 	while (1)
- 705:src/main.c    **** 	{
- 706:src/main.c    **** 		LCD_2DO_RENGLON;
- 707:src/main.c    **** 		LCDTransmitStr((const char *) "1 to 10V:       ");
- 708:src/main.c    **** 		fcalc = local_meas;
- 709:src/main.c    **** 		fcalc = fcalc * K_1TO10;
- 710:src/main.c    **** 		one_int = (short) fcalc;
- 711:src/main.c    **** 		fcalc = fcalc - one_int;
- 712:src/main.c    **** 		fcalc = fcalc * 10;
- 713:src/main.c    **** 		one_dec = (short) fcalc;
- 714:src/main.c    **** 
- 715:src/main.c    **** 		sprintf(s_lcd, "%02d.%01d V", one_int, one_dec);
- 716:src/main.c    **** 		Lcd_SetDDRAM(0x40 + 10);
- 717:src/main.c    **** 		LCDTransmitStr(s_lcd);
- 718:src/main.c    **** 
- 719:src/main.c    **** 		Wait_ms (1000);
- 720:src/main.c    **** 		if (local_meas <= 255)
- 721:src/main.c    **** 			local_meas = 0;
- 722:src/main.c    **** 		else
- 723:src/main.c    **** 			local_meas++;
- 724:src/main.c    **** 	}
- 725:src/main.c    **** 	*/
- 726:src/main.c    **** 	//---------- Fin prueba 1 to 10V --------//
+ 696:src/main.c    **** 		if (i == 4)
+ 697:src/main.c    **** 			Usart2Send((char *) (const char *) "Start NOK\r\n");
+ 698:src/main.c    **** 	}
+ 699:src/main.c    **** 
+ 700:src/main.c    **** 	Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
+ 701:src/main.c    **** 
+ 702:src/main.c    **** 	while (1)
+ 703:src/main.c    **** 	{
+ 704:src/main.c    **** 		GSMProcess();
+ 705:src/main.c    **** 
+ 706:src/main.c    **** 		if (usart2_pckt_ready)	//deja paquete en buffUARTGSMrx2
+ 707:src/main.c    **** 		{
+ 708:src/main.c    **** 			usart2_pckt_ready = 0;
+ 709:src/main.c    **** 			Usart1SendUnsigned((unsigned char *) buffUARTGSMrx2, usart2_pckt_bytes);
+ 710:src/main.c    **** 		}
+ 711:src/main.c    **** 
+ 712:src/main.c    **** 		if (gsm_pckt_ready)		//deja paquete en buffUARTGSMrx2
+ 713:src/main.c    **** 		{
+ 714:src/main.c    **** 			gsm_pckt_ready = 0;
+ 715:src/main.c    **** 			Usart2SendUnsigned((unsigned char *) buffUARTGSMrx2, gsm_pckt_bytes);
+ 716:src/main.c    **** 		}
+ 717:src/main.c    **** 
+ 718:src/main.c    **** 		if (LIGHT)
+ 719:src/main.c    **** 			LED_ON;
+ 720:src/main.c    **** 		else
+ 721:src/main.c    **** 			LED_OFF;
+ 722:src/main.c    **** 	}
+ 723:src/main.c    **** #endif
+ 724:src/main.c    **** 
+ 725:src/main.c    **** 	//---------- Fin Prueba con GSM GATEWAY --------//
+ 726:src/main.c    **** 
  727:src/main.c    **** 
- 728:src/main.c    ****     //---------- Programa de Certificacion S.E. --------//
- 729:src/main.c    **** #ifdef USE_CE_PROGRAM
- 730:src/main.c    **** 	while (1)
- 731:src/main.c    **** 	{
- 732:src/main.c    **** 		resp = FuncStandAloneCert();
- 733:src/main.c    **** 
-ARM GAS  /tmp/ccbIQd7h.s 			page 47
+ 728:src/main.c    **** 
+ 729:src/main.c    **** 	//---------- Prueba temp --------//
+ 730:src/main.c    **** 	/*
+ 731:src/main.c    **** 	while (1)
+ 732:src/main.c    **** 	{
+ 733:src/main.c    **** 		local_meas = GetTemp();
+ARM GAS  /tmp/ccxUmJh6.s 			page 47
 
 
- 734:src/main.c    **** 
- 735:src/main.c    **** 		UpdateSwitches();
- 736:src/main.c    **** 		UpdateACSwitch();
- 737:src/main.c    **** 		UpdatePackets();
- 738:src/main.c    **** 		UpdateTemp();
- 739:src/main.c    **** 		UpdateIGrid();
- 740:src/main.c    **** 		UpdateVGrid();
- 741:src/main.c    **** 
- 742:src/main.c    **** 	}	//termina while(1)
- 743:src/main.c    **** #endif
- 744:src/main.c    **** 	//---------- Fin Programa de Certificacion S.E. --------//
- 745:src/main.c    **** 
- 746:src/main.c    ****     //---------- Programa de Produccion --------//
- 747:src/main.c    **** #ifdef USE_PROD_PROGRAM
- 748:src/main.c    **** 	//--- PRUEBA FUNCION MAIN_MENU
- 749:src/main.c    **** 	//leo la memoria, si tengo configuracion de modo
- 750:src/main.c    **** 	//entro directo, sino a Main Menu
- 751:src/main.c    **** 	if (saved_mode == 0xFF)	//memoria borrada
- 752:src/main.c    **** 		main_state = MAIN_INIT;
- 753:src/main.c    **** 	else
- 754:src/main.c    **** 		jump_the_menu = RESP_YES;
- 755:src/main.c    **** 
- 756:src/main.c    **** #ifdef VER_1_2
- 757:src/main.c    **** 	Update_TIM3_CH2 (255);
- 758:src/main.c    **** #endif
- 759:src/main.c    **** 	//Wait_ms(2000);
- 760:src/main.c    **** 	while (1)
- 761:src/main.c    **** 	{
- 762:src/main.c    **** 		switch (main_state)
- 763:src/main.c    **** 		{
- 764:src/main.c    **** 			case MAIN_INIT:
- 765:src/main.c    **** 				resp = FuncMainMenu();
- 766:src/main.c    **** 
- 767:src/main.c    **** 				if (resp == MAINMENU_SHOW_STANDALONE_SELECTED)	//TODO deberia forzar init
- 768:src/main.c    **** 					main_state = MAIN_STAND_ALONE;
+ 734:src/main.c    **** 		if (local_meas != local_meas_last)
+ 735:src/main.c    **** 		{
+ 736:src/main.c    **** 			LED_ON;
+ 737:src/main.c    **** 			local_meas_last = local_meas;
+ 738:src/main.c    **** 			LCD_2DO_RENGLON;
+ 739:src/main.c    **** 			LCDTransmitStr((const char *) "Brd Temp:       ");
+ 740:src/main.c    **** 			local_meas = ConvertTemp(local_meas);
+ 741:src/main.c    **** 			sprintf(s_lcd, "%d", local_meas);
+ 742:src/main.c    **** 			Lcd_SetDDRAM(0x40 + 10);
+ 743:src/main.c    **** 			LCDTransmitStr(s_lcd);
+ 744:src/main.c    **** 			LED_OFF;
+ 745:src/main.c    **** 		}
+ 746:src/main.c    **** 
+ 747:src/main.c    **** 		UpdateTemp();
+ 748:src/main.c    **** 	}
+ 749:src/main.c    **** 	*/
+ 750:src/main.c    **** 	//---------- Fin prueba temp --------//
+ 751:src/main.c    **** 
+ 752:src/main.c    **** 	//---------- Prueba 1 to 10V --------//
+ 753:src/main.c    **** 	/*
+ 754:src/main.c    **** 	local_meas = 0;
+ 755:src/main.c    **** 	while (1)
+ 756:src/main.c    **** 	{
+ 757:src/main.c    **** 		LCD_2DO_RENGLON;
+ 758:src/main.c    **** 		LCDTransmitStr((const char *) "1 to 10V:       ");
+ 759:src/main.c    **** 		fcalc = local_meas;
+ 760:src/main.c    **** 		fcalc = fcalc * K_1TO10;
+ 761:src/main.c    **** 		one_int = (short) fcalc;
+ 762:src/main.c    **** 		fcalc = fcalc - one_int;
+ 763:src/main.c    **** 		fcalc = fcalc * 10;
+ 764:src/main.c    **** 		one_dec = (short) fcalc;
+ 765:src/main.c    **** 
+ 766:src/main.c    **** 		sprintf(s_lcd, "%02d.%01d V", one_int, one_dec);
+ 767:src/main.c    **** 		Lcd_SetDDRAM(0x40 + 10);
+ 768:src/main.c    **** 		LCDTransmitStr(s_lcd);
  769:src/main.c    **** 
- 770:src/main.c    **** 				if (resp == MAINMENU_SHOW_GROUPED_SELECTED)
- 771:src/main.c    **** 					main_state = MAIN_GROUPED;
- 772:src/main.c    **** 
- 773:src/main.c    **** 				if (resp == MAINMENU_SHOW_NETWORK_SELECTED)
- 774:src/main.c    **** 					main_state = MAIN_NETWORKED;
- 775:src/main.c    **** 
- 776:src/main.c    **** 				jump_the_menu = RESP_NO;
- 777:src/main.c    **** 				break;
+ 770:src/main.c    **** 		Wait_ms (1000);
+ 771:src/main.c    **** 		if (local_meas <= 255)
+ 772:src/main.c    **** 			local_meas = 0;
+ 773:src/main.c    **** 		else
+ 774:src/main.c    **** 			local_meas++;
+ 775:src/main.c    **** 	}
+ 776:src/main.c    **** 	*/
+ 777:src/main.c    **** 	//---------- Fin prueba 1 to 10V --------//
  778:src/main.c    **** 
- 779:src/main.c    **** 			case MAIN_STAND_ALONE:
- 780:src/main.c    **** 				resp = FuncStandAlone();
- 781:src/main.c    **** 
- 782:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
- 783:src/main.c    **** 				{
- 784:src/main.c    **** 					FuncStandAloneReset();
- 785:src/main.c    **** 					main_state = MAIN_INIT;
- 786:src/main.c    **** 				}
- 787:src/main.c    **** 
- 788:src/main.c    **** 				break;
- 789:src/main.c    **** 
- 790:src/main.c    **** 			case MAIN_GROUPED:
-ARM GAS  /tmp/ccbIQd7h.s 			page 48
+ 779:src/main.c    ****     //---------- Programa de Certificacion S.E. --------//
+ 780:src/main.c    **** #ifdef USE_CE_PROGRAM
+ 781:src/main.c    **** 	while (1)
+ 782:src/main.c    **** 	{
+ 783:src/main.c    **** 		resp = FuncStandAloneCert();
+ 784:src/main.c    **** 
+ 785:src/main.c    **** 
+ 786:src/main.c    **** 		UpdateSwitches();
+ 787:src/main.c    **** 		UpdateACSwitch();
+ 788:src/main.c    **** 		UpdatePackets();
+ 789:src/main.c    **** 		UpdateTemp();
+ 790:src/main.c    **** 		UpdateIGrid();
+ARM GAS  /tmp/ccxUmJh6.s 			page 48
 
 
- 791:src/main.c    **** 				resp = FuncGrouped();
+ 791:src/main.c    **** 		UpdateVGrid();
  792:src/main.c    **** 
- 793:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
- 794:src/main.c    **** 				{
- 795:src/main.c    **** 					FuncGroupedReset();
- 796:src/main.c    **** 					main_state = MAIN_INIT;
- 797:src/main.c    **** 				}
- 798:src/main.c    **** 
- 799:src/main.c    **** 				break;
- 800:src/main.c    **** 
- 801:src/main.c    **** 			case MAIN_NETWORKED:
- 802:src/main.c    **** 				resp = FuncNetworked(jump_the_menu);
- 803:src/main.c    **** 				jump_the_menu = RESP_NO_CHANGE;
- 804:src/main.c    **** 				main_state++;
- 805:src/main.c    **** 				break;
+ 793:src/main.c    **** 	}	//termina while(1)
+ 794:src/main.c    **** #endif
+ 795:src/main.c    **** 	//---------- Fin Programa de Certificacion S.E. --------//
+ 796:src/main.c    **** 
+ 797:src/main.c    ****     //---------- Programa de Produccion --------//
+ 798:src/main.c    **** #ifdef USE_PROD_PROGRAM
+ 799:src/main.c    **** 	//--- PRUEBA FUNCION MAIN_MENU
+ 800:src/main.c    **** 	//leo la memoria, si tengo configuracion de modo
+ 801:src/main.c    **** 	//entro directo, sino a Main Menu
+ 802:src/main.c    **** 	if (saved_mode == 0xFF)	//memoria borrada
+ 803:src/main.c    **** 		main_state = MAIN_INIT;
+ 804:src/main.c    **** 	else
+ 805:src/main.c    **** 		jump_the_menu = RESP_YES;
  806:src/main.c    **** 
- 807:src/main.c    **** 			case MAIN_NETWORKED_1:
- 808:src/main.c    **** 				resp = FuncNetworked(jump_the_menu);
- 809:src/main.c    **** 
- 810:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
- 811:src/main.c    **** 					main_state = MAIN_INIT;
- 812:src/main.c    **** 
- 813:src/main.c    **** 				break;
- 814:src/main.c    **** 
- 815:src/main.c    **** 			default:
- 816:src/main.c    **** 				main_state = MAIN_INIT;
- 817:src/main.c    **** 				break;
- 818:src/main.c    **** 
- 819:src/main.c    **** 		}
+ 807:src/main.c    **** #ifdef VER_1_2
+ 808:src/main.c    **** 	Update_TIM3_CH2 (255);
+ 809:src/main.c    **** #endif
+ 810:src/main.c    **** 	//Wait_ms(2000);
+ 811:src/main.c    **** 	while (1)
+ 812:src/main.c    **** 	{
+ 813:src/main.c    **** 		switch (main_state)
+ 814:src/main.c    **** 		{
+ 815:src/main.c    **** 			case MAIN_INIT:
+ 816:src/main.c    **** 				resp = FuncMainMenu();
+ 817:src/main.c    **** 
+ 818:src/main.c    **** 				if (resp == MAINMENU_SHOW_STANDALONE_SELECTED)	//TODO deberia forzar init
+ 819:src/main.c    **** 					main_state = MAIN_STAND_ALONE;
  820:src/main.c    **** 
- 821:src/main.c    **** 		UpdateSwitches();
- 822:src/main.c    **** 		UpdateACSwitch();
- 823:src/main.c    **** 		UpdatePackets();
- 824:src/main.c    **** 	}
- 825:src/main.c    **** 
- 826:src/main.c    **** 	//--- FIN PRUEBA FUNCION MAIN_MENU
- 827:src/main.c    **** #endif
- 828:src/main.c    **** 	//---------- Fin Programa de Procduccion --------//
+ 821:src/main.c    **** 				if (resp == MAINMENU_SHOW_GROUPED_SELECTED)
+ 822:src/main.c    **** 					main_state = MAIN_GROUPED;
+ 823:src/main.c    **** 
+ 824:src/main.c    **** 				if (resp == MAINMENU_SHOW_NETWORK_SELECTED)
+ 825:src/main.c    **** 					main_state = MAIN_NETWORKED;
+ 826:src/main.c    **** 
+ 827:src/main.c    **** 				jump_the_menu = RESP_NO;
+ 828:src/main.c    **** 				break;
  829:src/main.c    **** 
- 830:src/main.c    **** 	return 0;
- 831:src/main.c    **** }
+ 830:src/main.c    **** 			case MAIN_STAND_ALONE:
+ 831:src/main.c    **** 				resp = FuncStandAlone();
  832:src/main.c    **** 
- 833:src/main.c    **** //--- End of Main ---//
- 834:src/main.c    **** 
- 835:src/main.c    **** 
- 836:src/main.c    **** 
- 837:src/main.c    **** 
- 838:src/main.c    **** void prepare_json_pkt (uint8_t * buffer)
- 839:src/main.c    **** {
- 884              		.loc 2 839 0
+ 833:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
+ 834:src/main.c    **** 				{
+ 835:src/main.c    **** 					FuncStandAloneReset();
+ 836:src/main.c    **** 					main_state = MAIN_INIT;
+ 837:src/main.c    **** 				}
+ 838:src/main.c    **** 
+ 839:src/main.c    **** 				break;
+ 840:src/main.c    **** 
+ 841:src/main.c    **** 			case MAIN_GROUPED:
+ 842:src/main.c    **** 				resp = FuncGrouped();
+ 843:src/main.c    **** 
+ 844:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
+ 845:src/main.c    **** 				{
+ 846:src/main.c    **** 					FuncGroupedReset();
+ 847:src/main.c    **** 					main_state = MAIN_INIT;
+ARM GAS  /tmp/ccxUmJh6.s 			page 49
+
+
+ 848:src/main.c    **** 				}
+ 849:src/main.c    **** 
+ 850:src/main.c    **** 				break;
+ 851:src/main.c    **** 
+ 852:src/main.c    **** 			case MAIN_NETWORKED:
+ 853:src/main.c    **** 				resp = FuncNetworked(jump_the_menu);
+ 854:src/main.c    **** 				jump_the_menu = RESP_NO_CHANGE;
+ 855:src/main.c    **** 				main_state++;
+ 856:src/main.c    **** 				break;
+ 857:src/main.c    **** 
+ 858:src/main.c    **** 			case MAIN_NETWORKED_1:
+ 859:src/main.c    **** 				resp = FuncNetworked(jump_the_menu);
+ 860:src/main.c    **** 
+ 861:src/main.c    **** 				if (resp == RESP_CHANGE_ALL_UP)
+ 862:src/main.c    **** 					main_state = MAIN_INIT;
+ 863:src/main.c    **** 
+ 864:src/main.c    **** 				break;
+ 865:src/main.c    **** 
+ 866:src/main.c    **** 			default:
+ 867:src/main.c    **** 				main_state = MAIN_INIT;
+ 868:src/main.c    **** 				break;
+ 869:src/main.c    **** 
+ 870:src/main.c    **** 		}
+ 871:src/main.c    **** 
+ 872:src/main.c    **** 		UpdateSwitches();
+ 873:src/main.c    **** 		UpdateACSwitch();
+ 874:src/main.c    **** 		UpdatePackets();
+ 875:src/main.c    **** 	}
+ 876:src/main.c    **** 
+ 877:src/main.c    **** 	//--- FIN PRUEBA FUNCION MAIN_MENU
+ 878:src/main.c    **** #endif
+ 879:src/main.c    **** 	//---------- Fin Programa de Procduccion --------//
+ 880:src/main.c    **** 
+ 881:src/main.c    **** 	return 0;
+ 882:src/main.c    **** }
+ 883:src/main.c    **** 
+ 884:src/main.c    **** //--- End of Main ---//
+ 885:src/main.c    **** 
+ 886:src/main.c    **** 
+ 887:src/main.c    **** 
+ 888:src/main.c    **** 
+ 889:src/main.c    **** void prepare_json_pkt (uint8_t * buffer)
+ 890:src/main.c    **** {
+ 884              		.loc 2 890 0
  885              		.cfi_startproc
  886 0000 00B5     		push	{lr}	@
  887              	.LCFI6:
@@ -2878,15 +2932,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  889              		.cfi_offset 14, -4
  890 0002 97B0     		sub	sp, sp, #92	@,,
  891              	.LCFI7:
-ARM GAS  /tmp/ccbIQd7h.s 			page 49
-
-
  892              		.cfi_def_cfa_offset 96
  893 0004 0190     		str	r0, [sp, #4]	@ buffer, buffer
- 840:src/main.c    ****       int32_t d1 = 1, d2 = 2, d3 = 3, d4 = 4, d5 = 5, d6 = 6;
- 894              		.loc 2 840 0
+ 891:src/main.c    ****       int32_t d1 = 1, d2 = 2, d3 = 3, d4 = 4, d5 = 5, d6 = 6;
+ 894              		.loc 2 891 0
  895 0006 0123     		movs	r3, #1	@ tmp112,
  896 0008 1593     		str	r3, [sp, #84]	@ tmp112, d1
+ARM GAS  /tmp/ccxUmJh6.s 			page 50
+
+
  897 000a 0223     		movs	r3, #2	@ tmp113,
  898 000c 1493     		str	r3, [sp, #80]	@ tmp113, d2
  899 000e 0323     		movs	r3, #3	@ tmp114,
@@ -2897,15 +2951,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  904 0018 1193     		str	r3, [sp, #68]	@ tmp116, d5
  905 001a 0623     		movs	r3, #6	@ tmp117,
  906 001c 1093     		str	r3, [sp, #64]	@ tmp117, d6
- 841:src/main.c    ****       char tempbuff[40];
- 842:src/main.c    ****       volatile float HUMIDITY_Value;
- 843:src/main.c    ****       volatile float TEMPERATURE_Value;
- 844:src/main.c    ****       volatile float PRESSURE_Value;
- 845:src/main.c    **** 
- 846:src/main.c    **** 
- 847:src/main.c    **** 
- 848:src/main.c    ****       strcpy((char *)buffer,"{\"d\":{\"myName\":\"Nucleo\"");
- 907              		.loc 2 848 0
+ 892:src/main.c    ****       char tempbuff[40];
+ 893:src/main.c    ****       volatile float HUMIDITY_Value;
+ 894:src/main.c    ****       volatile float TEMPERATURE_Value;
+ 895:src/main.c    ****       volatile float PRESSURE_Value;
+ 896:src/main.c    **** 
+ 897:src/main.c    **** 
+ 898:src/main.c    **** 
+ 899:src/main.c    ****       strcpy((char *)buffer,"{\"d\":{\"myName\":\"Nucleo\"");
+ 907              		.loc 2 899 0
  908 001e 019A     		ldr	r2, [sp, #4]	@ tmp118, buffer
  909 0020 1E4B     		ldr	r3, .L40	@ tmp119,
  910 0022 1000     		movs	r0, r2	@ tmp120, tmp118
@@ -2913,63 +2967,63 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  912 0026 1823     		movs	r3, #24	@ tmp122,
  913 0028 1A00     		movs	r2, r3	@, tmp122
  914 002a FFF7FEFF 		bl	memcpy	@
- 849:src/main.c    **** //      BSP_HUM_TEMP_GetTemperature((float *)&TEMPERATURE_Value);
- 850:src/main.c    **** //      floatToInt(TEMPERATURE_Value, &d1, &d2, 2);
- 851:src/main.c    ****       sprintf(tempbuff, ",\"A_Temperature\":%lu.%lu",d1, d2);
- 915              		.loc 2 851 0
+ 900:src/main.c    **** //      BSP_HUM_TEMP_GetTemperature((float *)&TEMPERATURE_Value);
+ 901:src/main.c    **** //      floatToInt(TEMPERATURE_Value, &d1, &d2, 2);
+ 902:src/main.c    ****       sprintf(tempbuff, ",\"A_Temperature\":%lu.%lu",d1, d2);
+ 915              		.loc 2 902 0
  916 002e 149B     		ldr	r3, [sp, #80]	@ tmp125, d2
  917 0030 159A     		ldr	r2, [sp, #84]	@ tmp126, d1
  918 0032 1B49     		ldr	r1, .L40+4	@ tmp127,
  919 0034 06A8     		add	r0, sp, #24	@ tmp128,,
  920 0036 FFF7FEFF 		bl	sprintf	@
- 852:src/main.c    ****       strcat((char *)buffer,tempbuff);
- 921              		.loc 2 852 0
+ 903:src/main.c    ****       strcat((char *)buffer,tempbuff);
+ 921              		.loc 2 903 0
  922 003a 06AA     		add	r2, sp, #24	@ tmp129,,
  923 003c 019B     		ldr	r3, [sp, #4]	@ tmp130, buffer
  924 003e 1100     		movs	r1, r2	@, tmp129
  925 0040 1800     		movs	r0, r3	@, tmp130
  926 0042 FFF7FEFF 		bl	strcat	@
- 853:src/main.c    **** 
- 854:src/main.c    **** //      BSP_HUM_TEMP_GetHumidity((float *)&HUMIDITY_Value);
- 855:src/main.c    **** //      floatToInt(HUMIDITY_Value, &d3, &d4, 2);
- 856:src/main.c    ****       sprintf(tempbuff, ",\"A_Humidity\":%lu.%lu",d3,d4 );
- 927              		.loc 2 856 0
+ 904:src/main.c    **** 
+ 905:src/main.c    **** //      BSP_HUM_TEMP_GetHumidity((float *)&HUMIDITY_Value);
+ 906:src/main.c    **** //      floatToInt(HUMIDITY_Value, &d3, &d4, 2);
+ 907:src/main.c    ****       sprintf(tempbuff, ",\"A_Humidity\":%lu.%lu",d3,d4 );
+ 927              		.loc 2 907 0
  928 0046 129B     		ldr	r3, [sp, #72]	@ tmp131, d4
  929 0048 139A     		ldr	r2, [sp, #76]	@ tmp132, d3
  930 004a 1649     		ldr	r1, .L40+8	@ tmp133,
  931 004c 06A8     		add	r0, sp, #24	@ tmp134,,
-ARM GAS  /tmp/ccbIQd7h.s 			page 50
-
-
  932 004e FFF7FEFF 		bl	sprintf	@
- 857:src/main.c    ****       strcat(  (char *)buffer,tempbuff);
- 933              		.loc 2 857 0
+ 908:src/main.c    ****       strcat(  (char *)buffer,tempbuff);
+ 933              		.loc 2 908 0
  934 0052 06AA     		add	r2, sp, #24	@ tmp135,,
  935 0054 019B     		ldr	r3, [sp, #4]	@ tmp136, buffer
  936 0056 1100     		movs	r1, r2	@, tmp135
+ARM GAS  /tmp/ccxUmJh6.s 			page 51
+
+
  937 0058 1800     		movs	r0, r3	@, tmp136
  938 005a FFF7FEFF 		bl	strcat	@
- 858:src/main.c    **** 
- 859:src/main.c    **** //      BSP_PRESSURE_GetPressure((float *)&PRESSURE_Value);
- 860:src/main.c    **** //      floatToInt(PRESSURE_Value, &d5, &d6, 2);
- 861:src/main.c    ****       sprintf(tempbuff, ",\"A_Pressure\":%lu.%lu",d5,d6 );
- 939              		.loc 2 861 0
+ 909:src/main.c    **** 
+ 910:src/main.c    **** //      BSP_PRESSURE_GetPressure((float *)&PRESSURE_Value);
+ 911:src/main.c    **** //      floatToInt(PRESSURE_Value, &d5, &d6, 2);
+ 912:src/main.c    ****       sprintf(tempbuff, ",\"A_Pressure\":%lu.%lu",d5,d6 );
+ 939              		.loc 2 912 0
  940 005e 109B     		ldr	r3, [sp, #64]	@ tmp137, d6
  941 0060 119A     		ldr	r2, [sp, #68]	@ tmp138, d5
  942 0062 1149     		ldr	r1, .L40+12	@ tmp139,
  943 0064 06A8     		add	r0, sp, #24	@ tmp140,,
  944 0066 FFF7FEFF 		bl	sprintf	@
- 862:src/main.c    ****       strcat((char *)buffer,tempbuff);
- 945              		.loc 2 862 0
+ 913:src/main.c    ****       strcat((char *)buffer,tempbuff);
+ 945              		.loc 2 913 0
  946 006a 06AA     		add	r2, sp, #24	@ tmp141,,
  947 006c 019B     		ldr	r3, [sp, #4]	@ tmp142, buffer
  948 006e 1100     		movs	r1, r2	@, tmp141
  949 0070 1800     		movs	r0, r3	@, tmp142
  950 0072 FFF7FEFF 		bl	strcat	@
- 863:src/main.c    **** 
- 864:src/main.c    **** 
- 865:src/main.c    ****       strcat((char *)buffer,"}}");
- 951              		.loc 2 865 0
+ 914:src/main.c    **** 
+ 915:src/main.c    **** 
+ 916:src/main.c    ****       strcat((char *)buffer,"}}");
+ 951              		.loc 2 916 0
  952 0076 019B     		ldr	r3, [sp, #4]	@ tmp143, buffer
  953 0078 1800     		movs	r0, r3	@, tmp143
  954 007a FFF7FEFF 		bl	strlen	@
@@ -2983,12 +3037,12 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  962 008c 0323     		movs	r3, #3	@ tmp150,
  963 008e 1A00     		movs	r2, r3	@, tmp150
  964 0090 FFF7FEFF 		bl	memcpy	@
- 866:src/main.c    **** 
- 867:src/main.c    ****       return;
- 965              		.loc 2 867 0
+ 917:src/main.c    **** 
+ 918:src/main.c    ****       return;
+ 965              		.loc 2 918 0
  966 0094 C046     		nop
- 868:src/main.c    **** }
- 967              		.loc 2 868 0
+ 919:src/main.c    **** }
+ 967              		.loc 2 919 0
  968 0096 17B0     		add	sp, sp, #92	@,,
  969              		@ sp needed	@
  970 0098 00BD     		pop	{pc}
@@ -2998,15 +3052,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  974 009c 70000000 		.word	.LC13
  975 00a0 88000000 		.word	.LC15
  976 00a4 A4000000 		.word	.LC17
-ARM GAS  /tmp/ccbIQd7h.s 			page 51
-
-
  977 00a8 BC000000 		.word	.LC19
  978 00ac D4000000 		.word	.LC21
  979              		.cfi_endproc
  980              	.LFE21:
  981              		.size	prepare_json_pkt, .-prepare_json_pkt
  982              		.section	.text.TimingDelay_Decrement,"ax",%progbits
+ARM GAS  /tmp/ccxUmJh6.s 			page 52
+
+
  983              		.align	2
  984              		.global	TimingDelay_Decrement
  985              		.code	16
@@ -3014,138 +3068,138 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  987              		.type	TimingDelay_Decrement, %function
  988              	TimingDelay_Decrement:
  989              	.LFB22:
- 869:src/main.c    **** 
- 870:src/main.c    **** //void EXTI4_15_IRQHandler(void)
- 871:src/main.c    **** //{
- 872:src/main.c    **** //	unsigned short aux;
- 873:src/main.c    **** //
- 874:src/main.c    **** ////--- SOLO PRUEBA DE INTERRUPCIONES ---//
- 875:src/main.c    **** ////	if (DMX_INPUT)
- 876:src/main.c    **** ////		LED_ON;
- 877:src/main.c    **** ////	else
- 878:src/main.c    **** ////		LED_OFF;
- 879:src/main.c    **** ////
- 880:src/main.c    **** ////	EXTI->PR |= 0x0100;
- 881:src/main.c    **** //
- 882:src/main.c    **** //	if(EXTI->PR & 0x0100)	//Line8
- 883:src/main.c    **** //	{
- 884:src/main.c    **** //
- 885:src/main.c    **** //		//si no esta con el USART detecta el flanco	PONER TIMEOUT ACA?????
- 886:src/main.c    **** //		if ((dmx_receive_flag == 0) || (dmx_timeout_timer == 0))
- 887:src/main.c    **** //		//if (dmx_receive_flag == 0)
- 888:src/main.c    **** //		{
- 889:src/main.c    **** //			switch (signal_state)
- 890:src/main.c    **** //			{
- 891:src/main.c    **** //				case IDLE:
- 892:src/main.c    **** //					if (!(DMX_INPUT))
- 893:src/main.c    **** //					{
- 894:src/main.c    **** //						//Activo timer en Falling.
- 895:src/main.c    **** //						TIM14->CNT = 0;
- 896:src/main.c    **** //						TIM14->CR1 |= 0x0001;
- 897:src/main.c    **** //						signal_state++;
- 898:src/main.c    **** //					}
- 899:src/main.c    **** //					break;
- 900:src/main.c    **** //
- 901:src/main.c    **** //				case LOOK_FOR_BREAK:
- 902:src/main.c    **** //					if (DMX_INPUT)
- 903:src/main.c    **** //					{
- 904:src/main.c    **** //						//Desactivo timer en Rising.
- 905:src/main.c    **** //						aux = TIM14->CNT;
- 906:src/main.c    **** //
- 907:src/main.c    **** //						//reviso BREAK
- 908:src/main.c    **** //						//if (((tim_counter_65ms) || (aux > 88)) && (tim_counter_65ms <= 20))
- 909:src/main.c    **** //						if ((aux > 87) && (aux < 210))	//Consola STARLET 6
- 910:src/main.c    **** //						//if ((aux > 87) && (aux < 2000))		//Consola marca CODE tiene break 1.88ms
- 911:src/main.c    **** //						{
- 912:src/main.c    **** //							LED_ON;
-ARM GAS  /tmp/ccbIQd7h.s 			page 52
+ 920:src/main.c    **** 
+ 921:src/main.c    **** //void EXTI4_15_IRQHandler(void)
+ 922:src/main.c    **** //{
+ 923:src/main.c    **** //	unsigned short aux;
+ 924:src/main.c    **** //
+ 925:src/main.c    **** ////--- SOLO PRUEBA DE INTERRUPCIONES ---//
+ 926:src/main.c    **** ////	if (DMX_INPUT)
+ 927:src/main.c    **** ////		LED_ON;
+ 928:src/main.c    **** ////	else
+ 929:src/main.c    **** ////		LED_OFF;
+ 930:src/main.c    **** ////
+ 931:src/main.c    **** ////	EXTI->PR |= 0x0100;
+ 932:src/main.c    **** //
+ 933:src/main.c    **** //	if(EXTI->PR & 0x0100)	//Line8
+ 934:src/main.c    **** //	{
+ 935:src/main.c    **** //
+ 936:src/main.c    **** //		//si no esta con el USART detecta el flanco	PONER TIMEOUT ACA?????
+ 937:src/main.c    **** //		if ((dmx_receive_flag == 0) || (dmx_timeout_timer == 0))
+ 938:src/main.c    **** //		//if (dmx_receive_flag == 0)
+ 939:src/main.c    **** //		{
+ 940:src/main.c    **** //			switch (signal_state)
+ 941:src/main.c    **** //			{
+ 942:src/main.c    **** //				case IDLE:
+ 943:src/main.c    **** //					if (!(DMX_INPUT))
+ 944:src/main.c    **** //					{
+ 945:src/main.c    **** //						//Activo timer en Falling.
+ 946:src/main.c    **** //						TIM14->CNT = 0;
+ 947:src/main.c    **** //						TIM14->CR1 |= 0x0001;
+ 948:src/main.c    **** //						signal_state++;
+ 949:src/main.c    **** //					}
+ 950:src/main.c    **** //					break;
+ 951:src/main.c    **** //
+ 952:src/main.c    **** //				case LOOK_FOR_BREAK:
+ 953:src/main.c    **** //					if (DMX_INPUT)
+ 954:src/main.c    **** //					{
+ 955:src/main.c    **** //						//Desactivo timer en Rising.
+ 956:src/main.c    **** //						aux = TIM14->CNT;
+ 957:src/main.c    **** //
+ 958:src/main.c    **** //						//reviso BREAK
+ 959:src/main.c    **** //						//if (((tim_counter_65ms) || (aux > 88)) && (tim_counter_65ms <= 20))
+ 960:src/main.c    **** //						if ((aux > 87) && (aux < 210))	//Consola STARLET 6
+ 961:src/main.c    **** //						//if ((aux > 87) && (aux < 2000))		//Consola marca CODE tiene break 1.88ms
+ 962:src/main.c    **** //						{
+ 963:src/main.c    **** //							LED_ON;
+ 964:src/main.c    **** //							//Activo timer para ver MARK.
+ 965:src/main.c    **** //							//TIM2->CNT = 0;
+ 966:src/main.c    **** //							//TIM2->CR1 |= 0x0001;
+ 967:src/main.c    **** //
+ 968:src/main.c    **** //							signal_state++;
+ 969:src/main.c    **** //							//tengo el break, activo el puerto serie
+ARM GAS  /tmp/ccxUmJh6.s 			page 53
 
 
- 913:src/main.c    **** //							//Activo timer para ver MARK.
- 914:src/main.c    **** //							//TIM2->CNT = 0;
- 915:src/main.c    **** //							//TIM2->CR1 |= 0x0001;
- 916:src/main.c    **** //
- 917:src/main.c    **** //							signal_state++;
- 918:src/main.c    **** //							//tengo el break, activo el puerto serie
- 919:src/main.c    **** //							DMX_channel_received = 0;
- 920:src/main.c    **** //							//dmx_receive_flag = 1;
- 921:src/main.c    **** //
- 922:src/main.c    **** //							dmx_timeout_timer = DMX_TIMEOUT;		//activo el timer cuando prendo el puerto serie
- 923:src/main.c    **** //							//USARTx_RX_ENA;
- 924:src/main.c    **** //						}
- 925:src/main.c    **** //						else	//falso disparo
- 926:src/main.c    **** //							signal_state = IDLE;
- 927:src/main.c    **** //					}
- 928:src/main.c    **** //					else	//falso disparo
- 929:src/main.c    **** //						signal_state = IDLE;
- 930:src/main.c    **** //
- 931:src/main.c    **** //					TIM14->CR1 &= 0xFFFE;
- 932:src/main.c    **** //					break;
- 933:src/main.c    **** //
- 934:src/main.c    **** //				case LOOK_FOR_MARK:
- 935:src/main.c    **** //					if ((!(DMX_INPUT)) && (dmx_timeout_timer))	//termino Mark after break
- 936:src/main.c    **** //					{
- 937:src/main.c    **** //						//ya tenia el serie habilitado
- 938:src/main.c    **** //						//if ((aux > 7) && (aux < 12))
- 939:src/main.c    **** //						dmx_receive_flag = 1;
- 940:src/main.c    **** //					}
- 941:src/main.c    **** //					else	//falso disparo
- 942:src/main.c    **** //					{
- 943:src/main.c    **** //						//termine por timeout
- 944:src/main.c    **** //						dmx_receive_flag = 0;
- 945:src/main.c    **** //						//USARTx_RX_DISA;
- 946:src/main.c    **** //					}
- 947:src/main.c    **** //					signal_state = IDLE;
- 948:src/main.c    **** //					LED_OFF;
- 949:src/main.c    **** //					break;
- 950:src/main.c    **** //
- 951:src/main.c    **** //				default:
- 952:src/main.c    **** //					signal_state = IDLE;
- 953:src/main.c    **** //					break;
- 954:src/main.c    **** //			}
- 955:src/main.c    **** //		}
- 956:src/main.c    **** //
- 957:src/main.c    **** //		EXTI->PR |= 0x0100;
- 958:src/main.c    **** //	}
- 959:src/main.c    **** //}
- 960:src/main.c    **** 
- 961:src/main.c    **** void TimingDelay_Decrement(void)
- 962:src/main.c    **** {
- 990              		.loc 2 962 0
+ 970:src/main.c    **** //							DMX_channel_received = 0;
+ 971:src/main.c    **** //							//dmx_receive_flag = 1;
+ 972:src/main.c    **** //
+ 973:src/main.c    **** //							dmx_timeout_timer = DMX_TIMEOUT;		//activo el timer cuando prendo el puerto serie
+ 974:src/main.c    **** //							//USARTx_RX_ENA;
+ 975:src/main.c    **** //						}
+ 976:src/main.c    **** //						else	//falso disparo
+ 977:src/main.c    **** //							signal_state = IDLE;
+ 978:src/main.c    **** //					}
+ 979:src/main.c    **** //					else	//falso disparo
+ 980:src/main.c    **** //						signal_state = IDLE;
+ 981:src/main.c    **** //
+ 982:src/main.c    **** //					TIM14->CR1 &= 0xFFFE;
+ 983:src/main.c    **** //					break;
+ 984:src/main.c    **** //
+ 985:src/main.c    **** //				case LOOK_FOR_MARK:
+ 986:src/main.c    **** //					if ((!(DMX_INPUT)) && (dmx_timeout_timer))	//termino Mark after break
+ 987:src/main.c    **** //					{
+ 988:src/main.c    **** //						//ya tenia el serie habilitado
+ 989:src/main.c    **** //						//if ((aux > 7) && (aux < 12))
+ 990:src/main.c    **** //						dmx_receive_flag = 1;
+ 991:src/main.c    **** //					}
+ 992:src/main.c    **** //					else	//falso disparo
+ 993:src/main.c    **** //					{
+ 994:src/main.c    **** //						//termine por timeout
+ 995:src/main.c    **** //						dmx_receive_flag = 0;
+ 996:src/main.c    **** //						//USARTx_RX_DISA;
+ 997:src/main.c    **** //					}
+ 998:src/main.c    **** //					signal_state = IDLE;
+ 999:src/main.c    **** //					LED_OFF;
+1000:src/main.c    **** //					break;
+1001:src/main.c    **** //
+1002:src/main.c    **** //				default:
+1003:src/main.c    **** //					signal_state = IDLE;
+1004:src/main.c    **** //					break;
+1005:src/main.c    **** //			}
+1006:src/main.c    **** //		}
+1007:src/main.c    **** //
+1008:src/main.c    **** //		EXTI->PR |= 0x0100;
+1009:src/main.c    **** //	}
+1010:src/main.c    **** //}
+1011:src/main.c    **** 
+1012:src/main.c    **** void TimingDelay_Decrement(void)
+1013:src/main.c    **** {
+ 990              		.loc 2 1013 0
  991              		.cfi_startproc
- 963:src/main.c    **** 	if (wait_ms_var)
- 992              		.loc 2 963 0
+1014:src/main.c    **** 	if (wait_ms_var)
+ 992              		.loc 2 1014 0
  993 0000 3E4B     		ldr	r3, .L54	@ tmp139,
  994 0002 1B88     		ldrh	r3, [r3]	@ tmp140, wait_ms_var
  995 0004 9BB2     		uxth	r3, r3	@ D.6907, tmp140
-ARM GAS  /tmp/ccbIQd7h.s 			page 53
-
-
  996 0006 002B     		cmp	r3, #0	@ D.6907,
  997 0008 06D0     		beq	.L43	@,
- 964:src/main.c    **** 		wait_ms_var--;
- 998              		.loc 2 964 0
+1015:src/main.c    **** 		wait_ms_var--;
+ 998              		.loc 2 1015 0
  999 000a 3C4B     		ldr	r3, .L54	@ tmp141,
  1000 000c 1B88     		ldrh	r3, [r3]	@ tmp142, wait_ms_var
+ARM GAS  /tmp/ccxUmJh6.s 			page 54
+
+
  1001 000e 9BB2     		uxth	r3, r3	@ D.6907, tmp142
  1002 0010 013B     		subs	r3, r3, #1	@ tmp143,
  1003 0012 9AB2     		uxth	r2, r3	@ D.6907, tmp143
  1004 0014 394B     		ldr	r3, .L54	@ tmp144,
  1005 0016 1A80     		strh	r2, [r3]	@ tmp145, wait_ms_var
  1006              	.L43:
- 965:src/main.c    **** 
- 966:src/main.c    **** //	if (display_timer)
- 967:src/main.c    **** //		display_timer--;
- 968:src/main.c    **** 
- 969:src/main.c    **** 	if (timer_standby)
- 1007              		.loc 2 969 0
+1016:src/main.c    **** 
+1017:src/main.c    **** //	if (display_timer)
+1018:src/main.c    **** //		display_timer--;
+1019:src/main.c    **** 
+1020:src/main.c    **** 	if (timer_standby)
+ 1007              		.loc 2 1020 0
  1008 0018 394B     		ldr	r3, .L54+4	@ tmp146,
  1009 001a 1B88     		ldrh	r3, [r3]	@ tmp147, timer_standby
  1010 001c 9BB2     		uxth	r3, r3	@ D.6907, tmp147
  1011 001e 002B     		cmp	r3, #0	@ D.6907,
  1012 0020 06D0     		beq	.L44	@,
- 970:src/main.c    **** 		timer_standby--;
- 1013              		.loc 2 970 0
+1021:src/main.c    **** 		timer_standby--;
+ 1013              		.loc 2 1021 0
  1014 0022 374B     		ldr	r3, .L54+4	@ tmp148,
  1015 0024 1B88     		ldrh	r3, [r3]	@ tmp149, timer_standby
  1016 0026 9BB2     		uxth	r3, r3	@ D.6907, tmp149
@@ -3154,16 +3208,16 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1019 002c 344B     		ldr	r3, .L54+4	@ tmp151,
  1020 002e 1A80     		strh	r2, [r3]	@ tmp152, timer_standby
  1021              	.L44:
- 971:src/main.c    **** 
- 972:src/main.c    **** 	if (acswitch_timer)
- 1022              		.loc 2 972 0
+1022:src/main.c    **** 
+1023:src/main.c    **** 	if (acswitch_timer)
+ 1022              		.loc 2 1023 0
  1023 0030 344B     		ldr	r3, .L54+8	@ tmp153,
  1024 0032 1B78     		ldrb	r3, [r3]	@ tmp154, acswitch_timer
  1025 0034 DBB2     		uxtb	r3, r3	@ D.6908, tmp154
  1026 0036 002B     		cmp	r3, #0	@ D.6908,
  1027 0038 06D0     		beq	.L45	@,
- 973:src/main.c    **** 		acswitch_timer--;
- 1028              		.loc 2 973 0
+1024:src/main.c    **** 		acswitch_timer--;
+ 1028              		.loc 2 1024 0
  1029 003a 324B     		ldr	r3, .L54+8	@ tmp155,
  1030 003c 1B78     		ldrb	r3, [r3]	@ tmp156, acswitch_timer
  1031 003e DBB2     		uxtb	r3, r3	@ D.6908, tmp156
@@ -3172,37 +3226,37 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1034 0044 2F4B     		ldr	r3, .L54+8	@ tmp158,
  1035 0046 1A70     		strb	r2, [r3]	@ tmp159, acswitch_timer
  1036              	.L45:
- 974:src/main.c    **** 
- 975:src/main.c    **** 	if (tt_take_photo_sample)
- 1037              		.loc 2 975 0
+1025:src/main.c    **** 
+1026:src/main.c    **** 	if (tt_take_photo_sample)
+ 1037              		.loc 2 1026 0
  1038 0048 2F4B     		ldr	r3, .L54+12	@ tmp160,
  1039 004a 1B88     		ldrh	r3, [r3]	@ tmp161, tt_take_photo_sample
  1040 004c 9BB2     		uxth	r3, r3	@ D.6907, tmp161
-ARM GAS  /tmp/ccbIQd7h.s 			page 54
-
-
  1041 004e 002B     		cmp	r3, #0	@ D.6907,
  1042 0050 06D0     		beq	.L46	@,
- 976:src/main.c    **** 		tt_take_photo_sample--;
- 1043              		.loc 2 976 0
+1027:src/main.c    **** 		tt_take_photo_sample--;
+ 1043              		.loc 2 1027 0
  1044 0052 2D4B     		ldr	r3, .L54+12	@ tmp162,
  1045 0054 1B88     		ldrh	r3, [r3]	@ tmp163, tt_take_photo_sample
+ARM GAS  /tmp/ccxUmJh6.s 			page 55
+
+
  1046 0056 9BB2     		uxth	r3, r3	@ D.6907, tmp163
  1047 0058 013B     		subs	r3, r3, #1	@ tmp164,
  1048 005a 9AB2     		uxth	r2, r3	@ D.6907, tmp164
  1049 005c 2A4B     		ldr	r3, .L54+12	@ tmp165,
  1050 005e 1A80     		strh	r2, [r3]	@ tmp166, tt_take_photo_sample
  1051              	.L46:
- 977:src/main.c    **** 
- 978:src/main.c    **** 	if (tt_relay_on_off)
- 1052              		.loc 2 978 0
+1028:src/main.c    **** 
+1029:src/main.c    **** 	if (tt_relay_on_off)
+ 1052              		.loc 2 1029 0
  1053 0060 2A4B     		ldr	r3, .L54+16	@ tmp167,
  1054 0062 1B88     		ldrh	r3, [r3]	@ tmp168, tt_relay_on_off
  1055 0064 9BB2     		uxth	r3, r3	@ D.6907, tmp168
  1056 0066 002B     		cmp	r3, #0	@ D.6907,
  1057 0068 06D0     		beq	.L47	@,
- 979:src/main.c    **** 		tt_relay_on_off--;
- 1058              		.loc 2 979 0
+1030:src/main.c    **** 		tt_relay_on_off--;
+ 1058              		.loc 2 1030 0
  1059 006a 284B     		ldr	r3, .L54+16	@ tmp169,
  1060 006c 1B88     		ldrh	r3, [r3]	@ tmp170, tt_relay_on_off
  1061 006e 9BB2     		uxth	r3, r3	@ D.6907, tmp170
@@ -3211,21 +3265,21 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1064 0074 254B     		ldr	r3, .L54+16	@ tmp172,
  1065 0076 1A80     		strh	r2, [r3]	@ tmp173, tt_relay_on_off
  1066              	.L47:
- 980:src/main.c    **** 
- 981:src/main.c    **** #ifdef ADC_WITH_TEMP_SENSE
- 982:src/main.c    **** 	if (tt_take_temp_sample)
- 983:src/main.c    **** 		tt_take_temp_sample--;
- 984:src/main.c    **** #endif
- 985:src/main.c    **** 
- 986:src/main.c    **** 	if (take_temp_sample)
- 1067              		.loc 2 986 0
+1031:src/main.c    **** 
+1032:src/main.c    **** #ifdef ADC_WITH_TEMP_SENSE
+1033:src/main.c    **** 	if (tt_take_temp_sample)
+1034:src/main.c    **** 		tt_take_temp_sample--;
+1035:src/main.c    **** #endif
+1036:src/main.c    **** 
+1037:src/main.c    **** 	if (take_temp_sample)
+ 1067              		.loc 2 1037 0
  1068 0078 254B     		ldr	r3, .L54+20	@ tmp174,
  1069 007a 1B88     		ldrh	r3, [r3]	@ tmp175, take_temp_sample
  1070 007c 9BB2     		uxth	r3, r3	@ D.6907, tmp175
  1071 007e 002B     		cmp	r3, #0	@ D.6907,
  1072 0080 06D0     		beq	.L48	@,
- 987:src/main.c    **** 		take_temp_sample--;
- 1073              		.loc 2 987 0
+1038:src/main.c    **** 		take_temp_sample--;
+ 1073              		.loc 2 1038 0
  1074 0082 234B     		ldr	r3, .L54+20	@ tmp176,
  1075 0084 1B88     		ldrh	r3, [r3]	@ tmp177, take_temp_sample
  1076 0086 9BB2     		uxth	r3, r3	@ D.6907, tmp177
@@ -3234,19 +3288,19 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1079 008c 204B     		ldr	r3, .L54+20	@ tmp179,
  1080 008e 1A80     		strh	r2, [r3]	@ tmp180, take_temp_sample
  1081              	.L48:
- 988:src/main.c    **** 
- 989:src/main.c    **** 	if (filter_timer)
- 1082              		.loc 2 989 0
+1039:src/main.c    **** 
+1040:src/main.c    **** 	if (filter_timer)
+ 1082              		.loc 2 1040 0
  1083 0090 204B     		ldr	r3, .L54+24	@ tmp181,
-ARM GAS  /tmp/ccbIQd7h.s 			page 55
-
-
  1084 0092 1B78     		ldrb	r3, [r3]	@ tmp182, filter_timer
  1085 0094 DBB2     		uxtb	r3, r3	@ D.6908, tmp182
  1086 0096 002B     		cmp	r3, #0	@ D.6908,
  1087 0098 06D0     		beq	.L49	@,
- 990:src/main.c    **** 		filter_timer--;
- 1088              		.loc 2 990 0
+1041:src/main.c    **** 		filter_timer--;
+ 1088              		.loc 2 1041 0
+ARM GAS  /tmp/ccxUmJh6.s 			page 56
+
+
  1089 009a 1E4B     		ldr	r3, .L54+24	@ tmp183,
  1090 009c 1B78     		ldrb	r3, [r3]	@ tmp184, filter_timer
  1091 009e DBB2     		uxtb	r3, r3	@ D.6908, tmp184
@@ -3255,19 +3309,19 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1094 00a4 1B4B     		ldr	r3, .L54+24	@ tmp186,
  1095 00a6 1A70     		strb	r2, [r3]	@ tmp187, filter_timer
  1096              	.L49:
- 991:src/main.c    **** 
- 992:src/main.c    **** 	//cuenta de a 1 minuto
- 993:src/main.c    **** 	if (secs > 59999)	//pasaron 1 min
- 1097              		.loc 2 993 0
+1042:src/main.c    **** 
+1043:src/main.c    **** 	//cuenta de a 1 minuto
+1044:src/main.c    **** 	if (secs > 59999)	//pasaron 1 min
+ 1097              		.loc 2 1044 0
  1098 00a8 1B4B     		ldr	r3, .L54+28	@ tmp188,
  1099 00aa 1B88     		ldrh	r3, [r3]	@ tmp189, secs
  1100 00ac 9BB2     		uxth	r3, r3	@ D.6907, tmp189
  1101 00ae 1B4A     		ldr	r2, .L54+32	@ tmp190,
  1102 00b0 9342     		cmp	r3, r2	@ D.6907, tmp190
  1103 00b2 0AD9     		bls	.L50	@,
- 994:src/main.c    **** 	{
- 995:src/main.c    **** 		minutes++;
- 1104              		.loc 2 995 0
+1045:src/main.c    **** 	{
+1046:src/main.c    **** 		minutes++;
+ 1104              		.loc 2 1046 0
  1105 00b4 1A4B     		ldr	r3, .L54+36	@ tmp191,
  1106 00b6 1B78     		ldrb	r3, [r3]	@ tmp192, minutes
  1107 00b8 DBB2     		uxtb	r3, r3	@ D.6908, tmp192
@@ -3275,17 +3329,17 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1109 00bc DAB2     		uxtb	r2, r3	@ D.6908, tmp193
  1110 00be 184B     		ldr	r3, .L54+36	@ tmp194,
  1111 00c0 1A70     		strb	r2, [r3]	@ tmp195, minutes
- 996:src/main.c    **** 		secs = 0;
- 1112              		.loc 2 996 0
+1047:src/main.c    **** 		secs = 0;
+ 1112              		.loc 2 1047 0
  1113 00c2 154B     		ldr	r3, .L54+28	@ tmp196,
  1114 00c4 0022     		movs	r2, #0	@ tmp197,
  1115 00c6 1A80     		strh	r2, [r3]	@ tmp198, secs
  1116 00c8 06E0     		b	.L51	@
  1117              	.L50:
- 997:src/main.c    **** 	}
- 998:src/main.c    **** 	else
- 999:src/main.c    **** 		secs++;
- 1118              		.loc 2 999 0
+1048:src/main.c    **** 	}
+1049:src/main.c    **** 	else
+1050:src/main.c    **** 		secs++;
+ 1118              		.loc 2 1050 0
  1119 00ca 134B     		ldr	r3, .L54+28	@ tmp199,
  1120 00cc 1B88     		ldrh	r3, [r3]	@ tmp200, secs
  1121 00ce 9BB2     		uxth	r3, r3	@ D.6907, tmp200
@@ -3294,20 +3348,20 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1124 00d4 104B     		ldr	r3, .L54+28	@ tmp202,
  1125 00d6 1A80     		strh	r2, [r3]	@ tmp203, secs
  1126              	.L51:
-1000:src/main.c    **** 
-1001:src/main.c    **** 	if (minutes > 60)
- 1127              		.loc 2 1001 0
+1051:src/main.c    **** 
+1052:src/main.c    **** 	if (minutes > 60)
+ 1127              		.loc 2 1052 0
  1128 00d8 114B     		ldr	r3, .L54+36	@ tmp204,
-ARM GAS  /tmp/ccbIQd7h.s 			page 56
-
-
  1129 00da 1B78     		ldrb	r3, [r3]	@ tmp205, minutes
  1130 00dc DBB2     		uxtb	r3, r3	@ D.6908, tmp205
  1131 00de 3C2B     		cmp	r3, #60	@ D.6908,
  1132 00e0 09D9     		bls	.L53	@,
-1002:src/main.c    **** 	{
-1003:src/main.c    **** 		hours++;
- 1133              		.loc 2 1003 0
+1053:src/main.c    **** 	{
+1054:src/main.c    **** 		hours++;
+ARM GAS  /tmp/ccxUmJh6.s 			page 57
+
+
+ 1133              		.loc 2 1054 0
  1134 00e2 104B     		ldr	r3, .L54+40	@ tmp206,
  1135 00e4 1B78     		ldrb	r3, [r3]	@ tmp207, hours
  1136 00e6 DBB2     		uxtb	r3, r3	@ D.6908, tmp207
@@ -3315,35 +3369,35 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1138 00ea DAB2     		uxtb	r2, r3	@ D.6908, tmp208
  1139 00ec 0D4B     		ldr	r3, .L54+40	@ tmp209,
  1140 00ee 1A70     		strb	r2, [r3]	@ tmp210, hours
-1004:src/main.c    **** 		minutes = 0;
- 1141              		.loc 2 1004 0
+1055:src/main.c    **** 		minutes = 0;
+ 1141              		.loc 2 1055 0
  1142 00f0 0B4B     		ldr	r3, .L54+36	@ tmp211,
  1143 00f2 0022     		movs	r2, #0	@ tmp212,
  1144 00f4 1A70     		strb	r2, [r3]	@ tmp213, minutes
  1145              	.L53:
-1005:src/main.c    **** 	}
-1006:src/main.c    **** 
-1007:src/main.c    **** 
-1008:src/main.c    **** #ifdef USE_MQTT_LIB
-1009:src/main.c    **** 	//timer del MQTT
-1010:src/main.c    **** 	SysTickIntHandler();
-1011:src/main.c    **** #endif
-1012:src/main.c    **** 
-1013:src/main.c    **** #if (defined USE_GPS) || (defined USE_GSM) || (defined USE_GSM_GATEWAY)
-1014:src/main.c    **** 	if (usart1_mini_timeout)
-1015:src/main.c    **** 		usart1_mini_timeout--;
-1016:src/main.c    **** 	if (usart2_mini_timeout)
-1017:src/main.c    **** 		usart2_mini_timeout--;
-1018:src/main.c    **** #endif
-1019:src/main.c    **** #ifdef USE_GPS
-1020:src/main.c    **** 	GPSTimeoutCounters ();
-1021:src/main.c    **** #endif
-1022:src/main.c    **** 
-1023:src/main.c    **** #if (defined USE_GSM) || (defined USE_GSM_GATEWAY)
-1024:src/main.c    **** 	GSMTimeoutCounters ();
-1025:src/main.c    **** #endif
-1026:src/main.c    **** }
- 1146              		.loc 2 1026 0
+1056:src/main.c    **** 	}
+1057:src/main.c    **** 
+1058:src/main.c    **** 
+1059:src/main.c    **** #ifdef USE_MQTT_LIB
+1060:src/main.c    **** 	//timer del MQTT
+1061:src/main.c    **** 	SysTickIntHandler();
+1062:src/main.c    **** #endif
+1063:src/main.c    **** 
+1064:src/main.c    **** #if (defined USE_GPS) || (defined USE_GSM) || (defined USE_GSM_GATEWAY)
+1065:src/main.c    **** 	if (usart1_mini_timeout)
+1066:src/main.c    **** 		usart1_mini_timeout--;
+1067:src/main.c    **** 	if (usart2_mini_timeout)
+1068:src/main.c    **** 		usart2_mini_timeout--;
+1069:src/main.c    **** #endif
+1070:src/main.c    **** #ifdef USE_GPS
+1071:src/main.c    **** 	GPSTimeoutCounters ();
+1072:src/main.c    **** #endif
+1073:src/main.c    **** 
+1074:src/main.c    **** #if (defined USE_GSM) || (defined USE_GSM_GATEWAY)
+1075:src/main.c    **** 	GSMTimeoutCounters ();
+1076:src/main.c    **** #endif
+1077:src/main.c    **** }
+ 1146              		.loc 2 1077 0
  1147 00f6 C046     		nop
  1148              		@ sp needed	@
  1149 00f8 7047     		bx	lr
@@ -3358,15 +3412,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1158 0110 00000000 		.word	take_temp_sample
  1159 0114 00000000 		.word	filter_timer
  1160 0118 00000000 		.word	secs
-ARM GAS  /tmp/ccbIQd7h.s 			page 57
-
-
  1161 011c 5FEA0000 		.word	59999
  1162 0120 00000000 		.word	minutes
  1163 0124 00000000 		.word	hours
  1164              		.cfi_endproc
  1165              	.LFE22:
  1166              		.size	TimingDelay_Decrement, .-TimingDelay_Decrement
+ARM GAS  /tmp/ccxUmJh6.s 			page 58
+
+
  1167              		.text
  1168              	.Letext0:
  1169              		.file 3 "./cmsis_boot/stm32f0xx.h"
@@ -3418,15 +3472,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1215 005d 04       		.uleb128 0x4
  1216 005e 40040000 		.4byte	.LASF6
  1217 0062 01       		.byte	0x1
-ARM GAS  /tmp/ccbIQd7h.s 			page 58
-
-
  1218 0063 04       		.uleb128 0x4
  1219 0064 D1040000 		.4byte	.LASF7
  1220 0068 02       		.byte	0x2
  1221 0069 04       		.uleb128 0x4
  1222 006a 29010000 		.4byte	.LASF8
  1223 006e 03       		.byte	0x3
+ARM GAS  /tmp/ccxUmJh6.s 			page 59
+
+
  1224 006f 04       		.uleb128 0x4
  1225 0070 9C010000 		.4byte	.LASF9
  1226 0074 04       		.byte	0x4
@@ -3478,15 +3532,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1272 00cf 04       		.uleb128 0x4
  1273 00d0 FB000000 		.4byte	.LASF25
  1274 00d4 15       		.byte	0x15
-ARM GAS  /tmp/ccbIQd7h.s 			page 59
-
-
  1275 00d5 04       		.uleb128 0x4
  1276 00d6 71050000 		.4byte	.LASF26
  1277 00da 16       		.byte	0x16
  1278 00db 04       		.uleb128 0x4
  1279 00dc 86010000 		.4byte	.LASF27
  1280 00e0 17       		.byte	0x17
+ARM GAS  /tmp/ccxUmJh6.s 			page 60
+
+
  1281 00e1 04       		.uleb128 0x4
  1282 00e2 F1050000 		.4byte	.LASF28
  1283 00e6 18       		.byte	0x18
@@ -3538,15 +3592,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1329 013f 07       		.byte	0x7
  1330 0140 C8070000 		.4byte	.LASF40
  1331 0144 07       		.uleb128 0x7
-ARM GAS  /tmp/ccbIQd7h.s 			page 60
-
-
  1332 0145 17010000 		.4byte	.LASF41
  1333 0149 04       		.byte	0x4
  1334 014a 3F       		.byte	0x3f
  1335 014b 4F010000 		.4byte	0x14f
  1336 014f 05       		.uleb128 0x5
  1337 0150 04       		.byte	0x4
+ARM GAS  /tmp/ccxUmJh6.s 			page 61
+
+
  1338 0151 05       		.byte	0x5
  1339 0152 16050000 		.4byte	.LASF42
  1340 0156 07       		.uleb128 0x7
@@ -3598,15 +3652,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1386 01b1 2003     		.2byte	0x320
  1387 01b3 01       		.byte	0x1
  1388 01b4 71       		.byte	0x71
-ARM GAS  /tmp/ccbIQd7h.s 			page 61
-
-
  1389 01b5 4D020000 		.4byte	0x24d
  1390 01b9 0A       		.uleb128 0xa
  1391 01ba B7010000 		.4byte	.LASF52
  1392 01be 01       		.byte	0x1
  1393 01bf 73       		.byte	0x73
  1394 01c0 64020000 		.4byte	0x264
+ARM GAS  /tmp/ccxUmJh6.s 			page 62
+
+
  1395 01c4 02       		.byte	0x2
  1396 01c5 23       		.byte	0x23
  1397 01c6 00       		.uleb128 0
@@ -3658,15 +3712,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1443 021c 03       		.byte	0x3
  1444 021d 23       		.byte	0x23
  1445 021e 8003     		.uleb128 0x180
-ARM GAS  /tmp/ccbIQd7h.s 			page 62
-
-
  1446 0220 0A       		.uleb128 0xa
  1447 0221 F8040000 		.4byte	.LASF59
  1448 0225 01       		.byte	0x1
  1449 0226 7A       		.byte	0x7a
  1450 0227 69020000 		.4byte	0x269
  1451 022b 03       		.byte	0x3
+ARM GAS  /tmp/ccxUmJh6.s 			page 63
+
+
  1452 022c 23       		.byte	0x23
  1453 022d 8403     		.uleb128 0x184
  1454 022f 0A       		.uleb128 0xa
@@ -3718,15 +3772,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1500 0291 0D       		.uleb128 0xd
  1501 0292 5D020000 		.4byte	0x25d
  1502 0296 3F       		.byte	0x3f
-ARM GAS  /tmp/ccbIQd7h.s 			page 63
-
-
  1503 0297 00       		.byte	0
  1504 0298 0C       		.uleb128 0xc
  1505 0299 A5010000 		.4byte	0x1a5
  1506 029d A8020000 		.4byte	0x2a8
  1507 02a1 0D       		.uleb128 0xd
  1508 02a2 5D020000 		.4byte	0x25d
+ARM GAS  /tmp/ccxUmJh6.s 			page 64
+
+
  1509 02a6 07       		.byte	0x7
  1510 02a7 00       		.byte	0
  1511 02a8 0E       		.uleb128 0xe
@@ -3778,15 +3832,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1557 02fd 01       		.byte	0x1
  1558 02fe 8C       		.byte	0x8c
  1559 02ff 5B030000 		.4byte	0x35b
-ARM GAS  /tmp/ccbIQd7h.s 			page 64
-
-
  1560 0303 02       		.byte	0x2
  1561 0304 23       		.byte	0x23
  1562 0305 10       		.uleb128 0x10
  1563 0306 0B       		.uleb128 0xb
  1564 0307 43435200 		.ascii	"CCR\000"
  1565 030b 01       		.byte	0x1
+ARM GAS  /tmp/ccxUmJh6.s 			page 65
+
+
  1566 030c 8D       		.byte	0x8d
  1567 030d 5B030000 		.4byte	0x35b
  1568 0311 02       		.byte	0x2
@@ -3838,15 +3892,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1614 0360 10       		.uleb128 0x10
  1615 0361 5B030000 		.4byte	0x35b
  1616 0365 0C       		.uleb128 0xc
-ARM GAS  /tmp/ccbIQd7h.s 			page 65
-
-
  1617 0366 A5010000 		.4byte	0x1a5
  1618 036a 75030000 		.4byte	0x375
  1619 036e 0D       		.uleb128 0xd
  1620 036f 5D020000 		.4byte	0x25d
  1621 0373 01       		.byte	0x1
  1622 0374 00       		.byte	0
+ARM GAS  /tmp/ccxUmJh6.s 			page 66
+
+
  1623 0375 0E       		.uleb128 0xe
  1624 0376 65030000 		.4byte	0x365
  1625 037a 07       		.uleb128 0x7
@@ -3898,15 +3952,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1671 03ce 0201     		.2byte	0x102
  1672 03d0 85030000 		.4byte	0x385
  1673 03d4 0E       		.uleb128 0xe
-ARM GAS  /tmp/ccbIQd7h.s 			page 66
-
-
  1674 03d5 8F010000 		.4byte	0x18f
  1675 03d9 13       		.uleb128 0x13
  1676 03da 2C       		.byte	0x2c
  1677 03db 03       		.byte	0x3
  1678 03dc 6902     		.2byte	0x269
  1679 03de B5040000 		.4byte	0x4b5
+ARM GAS  /tmp/ccxUmJh6.s 			page 67
+
+
  1680 03e2 12       		.uleb128 0x12
  1681 03e3 28020000 		.4byte	.LASF74
  1682 03e7 03       		.byte	0x3
@@ -3958,15 +4012,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1728 043c 12       		.uleb128 0x12
  1729 043d E4040000 		.4byte	.LASF66
  1730 0441 03       		.byte	0x3
-ARM GAS  /tmp/ccbIQd7h.s 			page 67
-
-
  1731 0442 7102     		.2byte	0x271
  1732 0444 8F010000 		.4byte	0x18f
  1733 0448 02       		.byte	0x2
  1734 0449 23       		.byte	0x23
  1735 044a 12       		.uleb128 0x12
  1736 044b 11       		.uleb128 0x11
+ARM GAS  /tmp/ccxUmJh6.s 			page 68
+
+
  1737 044c 4F445200 		.ascii	"ODR\000"
  1738 0450 03       		.byte	0x3
  1739 0451 7202     		.2byte	0x272
@@ -4018,15 +4072,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1785 04a6 F8040000 		.4byte	.LASF59
  1786 04aa 03       		.byte	0x3
  1787 04ab 7802     		.2byte	0x278
-ARM GAS  /tmp/ccbIQd7h.s 			page 68
-
-
  1788 04ad 8F010000 		.4byte	0x18f
  1789 04b1 02       		.byte	0x2
  1790 04b2 23       		.byte	0x23
  1791 04b3 2A       		.uleb128 0x2a
  1792 04b4 00       		.byte	0
  1793 04b5 0E       		.uleb128 0xe
+ARM GAS  /tmp/ccxUmJh6.s 			page 69
+
+
  1794 04b6 65030000 		.4byte	0x365
  1795 04ba 06       		.uleb128 0x6
  1796 04bb C0050000 		.4byte	.LASF80
@@ -4078,15 +4132,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1842 0517 00       		.uleb128 0
  1843 0518 0A       		.uleb128 0xa
  1844 0519 0E070000 		.4byte	.LASF88
-ARM GAS  /tmp/ccbIQd7h.s 			page 69
-
-
  1845 051d 07       		.byte	0x7
  1846 051e 38       		.byte	0x38
  1847 051f 24010000 		.4byte	0x124
  1848 0523 02       		.byte	0x2
  1849 0524 23       		.byte	0x23
  1850 0525 01       		.uleb128 0x1
+ARM GAS  /tmp/ccxUmJh6.s 			page 70
+
+
  1851 0526 0A       		.uleb128 0xa
  1852 0527 5A000000 		.4byte	.LASF89
  1853 052b 07       		.byte	0x7
@@ -4138,15 +4192,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1899 057a 0A       		.uleb128 0xa
  1900 057b 14000000 		.4byte	.LASF95
  1901 057f 07       		.byte	0x7
-ARM GAS  /tmp/ccbIQd7h.s 			page 70
-
-
  1902 0580 42       		.byte	0x42
  1903 0581 24010000 		.4byte	0x124
  1904 0585 02       		.byte	0x2
  1905 0586 23       		.byte	0x23
  1906 0587 09       		.uleb128 0x9
  1907 0588 0A       		.uleb128 0xa
+ARM GAS  /tmp/ccxUmJh6.s 			page 71
+
+
  1908 0589 22000000 		.4byte	.LASF96
  1909 058d 07       		.byte	0x7
  1910 058e 43       		.byte	0x43
@@ -4198,15 +4252,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  1956 05e9 06       		.byte	0x6
  1957 05ea 00       		.byte	0
  1958 05eb 16       		.uleb128 0x16
-ARM GAS  /tmp/ccbIQd7h.s 			page 71
-
-
  1959 05ec D8000000 		.4byte	.LASF175
  1960 05f0 01       		.byte	0x1
  1961 05f1 7C03     		.2byte	0x37c
  1962 05f3 01       		.byte	0x1
  1963 05f4 00000000 		.4byte	.LFB16
  1964 05f8 EC000000 		.4byte	.LFE16
+ARM GAS  /tmp/ccxUmJh6.s 			page 72
+
+
  1965 05fc 00000000 		.4byte	.LLST0
  1966 0600 01       		.byte	0x1
  1967 0601 24060000 		.4byte	0x624
@@ -4258,15 +4312,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2013 0663 CC020000 		.4byte	.LFE20
  2014 0667 58000000 		.4byte	.LLST2
  2015 066b 01       		.byte	0x1
-ARM GAS  /tmp/ccbIQd7h.s 			page 72
-
-
  2016 066c 74070000 		.4byte	0x774
  2017 0670 1A       		.uleb128 0x1a
  2018 0671 6900     		.ascii	"i\000"
  2019 0673 02       		.byte	0x2
  2020 0674 D8       		.byte	0xd8
  2021 0675 24010000 		.4byte	0x124
+ARM GAS  /tmp/ccxUmJh6.s 			page 73
+
+
  2022 0679 02       		.byte	0x2
  2023 067a 91       		.byte	0x91
  2024 067b 77       		.sleb128 -9
@@ -4318,15 +4372,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2070 06d5 F3040000 		.4byte	0x4f3
  2071 06d9 02       		.byte	0x2
  2072 06da 91       		.byte	0x91
-ARM GAS  /tmp/ccbIQd7h.s 			page 73
-
-
  2073 06db 76       		.sleb128 -10
  2074 06dc 1D       		.uleb128 0x1d
  2075 06dd C2010000 		.4byte	.LASF117
  2076 06e1 02       		.byte	0x2
  2077 06e2 DF       		.byte	0xdf
  2078 06e3 3D010000 		.4byte	0x13d
+ARM GAS  /tmp/ccxUmJh6.s 			page 74
+
+
  2079 06e7 02       		.byte	0x2
  2080 06e8 91       		.byte	0x91
  2081 06e9 64       		.sleb128 -28
@@ -4378,15 +4432,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2127 073b 02       		.byte	0x2
  2128 073c 91       		.byte	0x91
  2129 073d 70       		.sleb128 -16
-ARM GAS  /tmp/ccbIQd7h.s 			page 74
-
-
  2130 073e 1D       		.uleb128 0x1d
  2131 073f A5010000 		.4byte	.LASF124
  2132 0743 02       		.byte	0x2
  2133 0744 ED       		.byte	0xed
  2134 0745 24010000 		.4byte	0x124
  2135 0749 02       		.byte	0x2
+ARM GAS  /tmp/ccxUmJh6.s 			page 75
+
+
  2136 074a 91       		.byte	0x91
  2137 074b 6F       		.sleb128 -17
  2138 074c 1D       		.uleb128 0x1d
@@ -4425,7 +4479,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2171 078b 01       		.byte	0x1
  2172 078c 77070000 		.4byte	.LASF178
  2173 0790 02       		.byte	0x2
- 2174 0791 4603     		.2byte	0x346
+ 2174 0791 7903     		.2byte	0x379
  2175 0793 01       		.byte	0x1
  2176 0794 00000000 		.4byte	.LFB21
  2177 0798 B0000000 		.4byte	.LFE21
@@ -4435,18 +4489,18 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2181 07a5 17       		.uleb128 0x17
  2182 07a6 CB000000 		.4byte	.LASF128
  2183 07aa 02       		.byte	0x2
- 2184 07ab 4603     		.2byte	0x346
+ 2184 07ab 7903     		.2byte	0x379
  2185 07ad 4A080000 		.4byte	0x84a
  2186 07b1 03       		.byte	0x3
-ARM GAS  /tmp/ccbIQd7h.s 			page 75
-
-
  2187 07b2 91       		.byte	0x91
  2188 07b3 A47F     		.sleb128 -92
  2189 07b5 20       		.uleb128 0x20
  2190 07b6 643100   		.ascii	"d1\000"
  2191 07b9 02       		.byte	0x2
- 2192 07ba 4803     		.2byte	0x348
+ 2192 07ba 7B03     		.2byte	0x37b
+ARM GAS  /tmp/ccxUmJh6.s 			page 76
+
+
  2193 07bc 9A010000 		.4byte	0x19a
  2194 07c0 02       		.byte	0x2
  2195 07c1 91       		.byte	0x91
@@ -4454,7 +4508,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2197 07c3 20       		.uleb128 0x20
  2198 07c4 643200   		.ascii	"d2\000"
  2199 07c7 02       		.byte	0x2
- 2200 07c8 4803     		.2byte	0x348
+ 2200 07c8 7B03     		.2byte	0x37b
  2201 07ca 9A010000 		.4byte	0x19a
  2202 07ce 02       		.byte	0x2
  2203 07cf 91       		.byte	0x91
@@ -4462,7 +4516,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2205 07d1 20       		.uleb128 0x20
  2206 07d2 643300   		.ascii	"d3\000"
  2207 07d5 02       		.byte	0x2
- 2208 07d6 4803     		.2byte	0x348
+ 2208 07d6 7B03     		.2byte	0x37b
  2209 07d8 9A010000 		.4byte	0x19a
  2210 07dc 02       		.byte	0x2
  2211 07dd 91       		.byte	0x91
@@ -4470,7 +4524,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2213 07df 20       		.uleb128 0x20
  2214 07e0 643400   		.ascii	"d4\000"
  2215 07e3 02       		.byte	0x2
- 2216 07e4 4803     		.2byte	0x348
+ 2216 07e4 7B03     		.2byte	0x37b
  2217 07e6 9A010000 		.4byte	0x19a
  2218 07ea 02       		.byte	0x2
  2219 07eb 91       		.byte	0x91
@@ -4478,7 +4532,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2221 07ed 20       		.uleb128 0x20
  2222 07ee 643500   		.ascii	"d5\000"
  2223 07f1 02       		.byte	0x2
- 2224 07f2 4803     		.2byte	0x348
+ 2224 07f2 7B03     		.2byte	0x37b
  2225 07f4 9A010000 		.4byte	0x19a
  2226 07f8 02       		.byte	0x2
  2227 07f9 91       		.byte	0x91
@@ -4486,7 +4540,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2229 07fb 20       		.uleb128 0x20
  2230 07fc 643600   		.ascii	"d6\000"
  2231 07ff 02       		.byte	0x2
- 2232 0800 4803     		.2byte	0x348
+ 2232 0800 7B03     		.2byte	0x37b
  2233 0802 9A010000 		.4byte	0x19a
  2234 0806 02       		.byte	0x2
  2235 0807 91       		.byte	0x91
@@ -4494,26 +4548,26 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2237 0809 21       		.uleb128 0x21
  2238 080a 37040000 		.4byte	.LASF129
  2239 080e 02       		.byte	0x2
- 2240 080f 4903     		.2byte	0x349
+ 2240 080f 7C03     		.2byte	0x37c
  2241 0811 50080000 		.4byte	0x850
  2242 0815 03       		.byte	0x3
  2243 0816 91       		.byte	0x91
-ARM GAS  /tmp/ccbIQd7h.s 			page 76
-
-
  2244 0817 B87F     		.sleb128 -72
  2245 0819 21       		.uleb128 0x21
  2246 081a 5B060000 		.4byte	.LASF130
  2247 081e 02       		.byte	0x2
- 2248 081f 4A03     		.2byte	0x34a
+ 2248 081f 7D03     		.2byte	0x37d
  2249 0821 67080000 		.4byte	0x867
+ARM GAS  /tmp/ccxUmJh6.s 			page 77
+
+
  2250 0825 03       		.byte	0x3
  2251 0826 91       		.byte	0x91
  2252 0827 B47F     		.sleb128 -76
  2253 0829 21       		.uleb128 0x21
  2254 082a EE020000 		.4byte	.LASF131
  2255 082e 02       		.byte	0x2
- 2256 082f 4B03     		.2byte	0x34b
+ 2256 082f 7E03     		.2byte	0x37e
  2257 0831 67080000 		.4byte	0x867
  2258 0835 03       		.byte	0x3
  2259 0836 91       		.byte	0x91
@@ -4521,7 +4575,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2261 0839 21       		.uleb128 0x21
  2262 083a 17060000 		.4byte	.LASF132
  2263 083e 02       		.byte	0x2
- 2264 083f 4C03     		.2byte	0x34c
+ 2264 083f 7F03     		.2byte	0x37f
  2265 0841 67080000 		.4byte	0x867
  2266 0845 03       		.byte	0x3
  2267 0846 91       		.byte	0x91
@@ -4547,7 +4601,7 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2287 086d 01       		.byte	0x1
  2288 086e 35070000 		.4byte	.LASF179
  2289 0872 02       		.byte	0x2
- 2290 0873 C103     		.2byte	0x3c1
+ 2290 0873 F403     		.2byte	0x3f4
  2291 0875 01       		.byte	0x1
  2292 0876 00000000 		.4byte	.LFB22
  2293 087a 28010000 		.4byte	.LFE22
@@ -4558,15 +4612,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2298 0882 0C       		.uleb128 0xc
  2299 0883 24010000 		.4byte	0x124
  2300 0887 92080000 		.4byte	0x892
-ARM GAS  /tmp/ccbIQd7h.s 			page 77
-
-
  2301 088b 0D       		.uleb128 0xd
  2302 088c 5D020000 		.4byte	0x25d
  2303 0890 FF       		.byte	0xff
  2304 0891 00       		.byte	0
  2305 0892 23       		.uleb128 0x23
  2306 0893 48010000 		.4byte	.LASF134
+ARM GAS  /tmp/ccxUmJh6.s 			page 78
+
+
  2307 0897 02       		.byte	0x2
  2308 0898 3B       		.byte	0x3b
  2309 0899 A4080000 		.4byte	0x8a4
@@ -4618,15 +4672,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2355 08fa 05       		.byte	0x5
  2356 08fb 03       		.byte	0x3
  2357 08fc 00000000 		.4byte	show_select_timer
-ARM GAS  /tmp/ccbIQd7h.s 			page 78
-
-
  2358 0900 0E       		.uleb128 0xe
  2359 0901 3D010000 		.4byte	0x13d
  2360 0905 23       		.uleb128 0x23
  2361 0906 67040000 		.4byte	.LASF139
  2362 090a 02       		.byte	0x2
  2363 090b 4A       		.byte	0x4a
+ARM GAS  /tmp/ccxUmJh6.s 			page 79
+
+
  2364 090c 17090000 		.4byte	0x917
  2365 0910 01       		.byte	0x1
  2366 0911 05       		.byte	0x5
@@ -4678,15 +4732,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2412 096f 01       		.byte	0x1
  2413 0970 05       		.byte	0x5
  2414 0971 03       		.byte	0x3
-ARM GAS  /tmp/ccbIQd7h.s 			page 79
-
-
  2415 0972 00000000 		.4byte	standalone_enable_menu_timer
  2416 0976 23       		.uleb128 0x23
  2417 0977 5D010000 		.4byte	.LASF145
  2418 097b 02       		.byte	0x2
  2419 097c 53       		.byte	0x53
  2420 097d 17090000 		.4byte	0x917
+ARM GAS  /tmp/ccxUmJh6.s 			page 80
+
+
  2421 0981 01       		.byte	0x1
  2422 0982 05       		.byte	0x5
  2423 0983 03       		.byte	0x3
@@ -4738,15 +4792,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2469 09de 00000000 		.4byte	tt_relay_on_off
  2470 09e2 23       		.uleb128 0x23
  2471 09e3 C6030000 		.4byte	.LASF151
-ARM GAS  /tmp/ccbIQd7h.s 			page 80
-
-
  2472 09e7 02       		.byte	0x2
  2473 09e8 5F       		.byte	0x5f
  2474 09e9 24010000 		.4byte	0x124
  2475 09ed 01       		.byte	0x1
  2476 09ee 05       		.byte	0x5
  2477 09ef 03       		.byte	0x3
+ARM GAS  /tmp/ccxUmJh6.s 			page 81
+
+
  2478 09f0 00000000 		.4byte	saved_mode
  2479 09f4 23       		.uleb128 0x23
  2480 09f5 7D020000 		.4byte	.LASF152
@@ -4798,15 +4852,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2526 0a51 02       		.byte	0x2
  2527 0a52 69       		.byte	0x69
  2528 0a53 24010000 		.4byte	0x124
-ARM GAS  /tmp/ccbIQd7h.s 			page 81
-
-
  2529 0a57 01       		.byte	0x1
  2530 0a58 05       		.byte	0x5
  2531 0a59 03       		.byte	0x3
  2532 0a5a 00000000 		.4byte	sac_aux
  2533 0a5e 23       		.uleb128 0x23
  2534 0a5f B2030000 		.4byte	.LASF155
+ARM GAS  /tmp/ccxUmJh6.s 			page 82
+
+
  2535 0a63 02       		.byte	0x2
  2536 0a64 6C       		.byte	0x6c
  2537 0a65 17090000 		.4byte	0x917
@@ -4858,15 +4912,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2583 0ac3 01       		.byte	0x1
  2584 0ac4 05       		.byte	0x5
  2585 0ac5 03       		.byte	0x3
-ARM GAS  /tmp/ccbIQd7h.s 			page 82
-
-
  2586 0ac6 00000000 		.4byte	wait_ms_var
  2587 0aca 23       		.uleb128 0x23
  2588 0acb C9080000 		.4byte	.LASF161
  2589 0acf 02       		.byte	0x2
  2590 0ad0 97       		.byte	0x97
  2591 0ad1 00090000 		.4byte	0x900
+ARM GAS  /tmp/ccxUmJh6.s 			page 83
+
+
  2592 0ad5 01       		.byte	0x1
  2593 0ad6 05       		.byte	0x5
  2594 0ad7 03       		.byte	0x3
@@ -4918,15 +4972,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2640 0b32 00000000 		.4byte	minutes
  2641 0b36 23       		.uleb128 0x23
  2642 0b37 08020000 		.4byte	.LASF167
-ARM GAS  /tmp/ccbIQd7h.s 			page 83
-
-
  2643 0b3b 02       		.byte	0x2
  2644 0b3c A5       		.byte	0xa5
  2645 0b3d 17090000 		.4byte	0x917
  2646 0b41 01       		.byte	0x1
  2647 0b42 05       		.byte	0x5
  2648 0b43 03       		.byte	0x3
+ARM GAS  /tmp/ccxUmJh6.s 			page 84
+
+
  2649 0b44 00000000 		.4byte	signal_state
  2650 0b48 23       		.uleb128 0x23
  2651 0b49 B7060000 		.4byte	.LASF168
@@ -4978,15 +5032,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2697 0ba7 5A0B0000 		.4byte	0xb5a
  2698 0bab 01       		.byte	0x1
  2699 0bac 05       		.byte	0x5
-ARM GAS  /tmp/ccbIQd7h.s 			page 84
-
-
  2700 0bad 03       		.byte	0x3
  2701 0bae 00000000 		.4byte	vd3
  2702 0bb2 24       		.uleb128 0x24
  2703 0bb3 76643400 		.ascii	"vd4\000"
  2704 0bb7 02       		.byte	0x2
  2705 0bb8 B0       		.byte	0xb0
+ARM GAS  /tmp/ccxUmJh6.s 			page 85
+
+
  2706 0bb9 5A0B0000 		.4byte	0xb5a
  2707 0bbd 01       		.byte	0x1
  2708 0bbe 05       		.byte	0x5
@@ -5038,15 +5092,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2754 000f 52       		.uleb128 0x52
  2755 0010 01       		.uleb128 0x1
  2756 0011 10       		.uleb128 0x10
-ARM GAS  /tmp/ccbIQd7h.s 			page 85
-
-
  2757 0012 06       		.uleb128 0x6
  2758 0013 00       		.byte	0
  2759 0014 00       		.byte	0
  2760 0015 02       		.uleb128 0x2
  2761 0016 04       		.uleb128 0x4
  2762 0017 01       		.byte	0x1
+ARM GAS  /tmp/ccxUmJh6.s 			page 86
+
+
  2763 0018 03       		.uleb128 0x3
  2764 0019 0E       		.uleb128 0xe
  2765 001a 0B       		.uleb128 0xb
@@ -5098,15 +5152,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2811 0048 3A       		.uleb128 0x3a
  2812 0049 0B       		.uleb128 0xb
  2813 004a 3B       		.uleb128 0x3b
-ARM GAS  /tmp/ccbIQd7h.s 			page 86
-
-
  2814 004b 05       		.uleb128 0x5
  2815 004c 49       		.uleb128 0x49
  2816 004d 13       		.uleb128 0x13
  2817 004e 00       		.byte	0
  2818 004f 00       		.byte	0
  2819 0050 07       		.uleb128 0x7
+ARM GAS  /tmp/ccxUmJh6.s 			page 87
+
+
  2820 0051 16       		.uleb128 0x16
  2821 0052 00       		.byte	0
  2822 0053 03       		.uleb128 0x3
@@ -5158,15 +5212,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2868 0081 0A       		.uleb128 0xa
  2869 0082 00       		.byte	0
  2870 0083 00       		.byte	0
-ARM GAS  /tmp/ccbIQd7h.s 			page 87
-
-
  2871 0084 0B       		.uleb128 0xb
  2872 0085 0D       		.uleb128 0xd
  2873 0086 00       		.byte	0
  2874 0087 03       		.uleb128 0x3
  2875 0088 08       		.uleb128 0x8
  2876 0089 3A       		.uleb128 0x3a
+ARM GAS  /tmp/ccxUmJh6.s 			page 88
+
+
  2877 008a 0B       		.uleb128 0xb
  2878 008b 3B       		.uleb128 0x3b
  2879 008c 0B       		.uleb128 0xb
@@ -5218,15 +5272,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2925 00ba 26       		.uleb128 0x26
  2926 00bb 00       		.byte	0
  2927 00bc 49       		.uleb128 0x49
-ARM GAS  /tmp/ccbIQd7h.s 			page 88
-
-
  2928 00bd 13       		.uleb128 0x13
  2929 00be 00       		.byte	0
  2930 00bf 00       		.byte	0
  2931 00c0 11       		.uleb128 0x11
  2932 00c1 0D       		.uleb128 0xd
  2933 00c2 00       		.byte	0
+ARM GAS  /tmp/ccxUmJh6.s 			page 89
+
+
  2934 00c3 03       		.uleb128 0x3
  2935 00c4 08       		.uleb128 0x8
  2936 00c5 3A       		.uleb128 0x3a
@@ -5278,15 +5332,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  2982 00f3 0B       		.uleb128 0xb
  2983 00f4 3B       		.uleb128 0x3b
  2984 00f5 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccbIQd7h.s 			page 89
-
-
  2985 00f6 01       		.uleb128 0x1
  2986 00f7 13       		.uleb128 0x13
  2987 00f8 00       		.byte	0
  2988 00f9 00       		.byte	0
  2989 00fa 15       		.uleb128 0x15
  2990 00fb 13       		.uleb128 0x13
+ARM GAS  /tmp/ccxUmJh6.s 			page 90
+
+
  2991 00fc 01       		.byte	0x1
  2992 00fd 03       		.uleb128 0x3
  2993 00fe 0E       		.uleb128 0xe
@@ -5338,15 +5392,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3039 012d 0A       		.uleb128 0xa
  3040 012e 00       		.byte	0
  3041 012f 00       		.byte	0
-ARM GAS  /tmp/ccbIQd7h.s 			page 90
-
-
  3042 0130 18       		.uleb128 0x18
  3043 0131 2E       		.uleb128 0x2e
  3044 0132 01       		.byte	0x1
  3045 0133 03       		.uleb128 0x3
  3046 0134 0E       		.uleb128 0xe
  3047 0135 3A       		.uleb128 0x3a
+ARM GAS  /tmp/ccxUmJh6.s 			page 91
+
+
  3048 0136 0B       		.uleb128 0xb
  3049 0137 3B       		.uleb128 0x3b
  3050 0138 05       		.uleb128 0x5
@@ -5398,15 +5452,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3096 0168 00       		.byte	0
  3097 0169 03       		.uleb128 0x3
  3098 016a 08       		.uleb128 0x8
-ARM GAS  /tmp/ccbIQd7h.s 			page 91
-
-
  3099 016b 3A       		.uleb128 0x3a
  3100 016c 0B       		.uleb128 0xb
  3101 016d 3B       		.uleb128 0x3b
  3102 016e 0B       		.uleb128 0xb
  3103 016f 49       		.uleb128 0x49
  3104 0170 13       		.uleb128 0x13
+ARM GAS  /tmp/ccxUmJh6.s 			page 92
+
+
  3105 0171 02       		.uleb128 0x2
  3106 0172 0A       		.uleb128 0xa
  3107 0173 00       		.byte	0
@@ -5458,15 +5512,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3153 01a1 0B       		.uleb128 0xb
  3154 01a2 0B       		.uleb128 0xb
  3155 01a3 49       		.uleb128 0x49
-ARM GAS  /tmp/ccbIQd7h.s 			page 92
-
-
  3156 01a4 13       		.uleb128 0x13
  3157 01a5 00       		.byte	0
  3158 01a6 00       		.byte	0
  3159 01a7 1F       		.uleb128 0x1f
  3160 01a8 2E       		.uleb128 0x2e
  3161 01a9 01       		.byte	0x1
+ARM GAS  /tmp/ccxUmJh6.s 			page 93
+
+
  3162 01aa 3F       		.uleb128 0x3f
  3163 01ab 0C       		.uleb128 0xc
  3164 01ac 03       		.uleb128 0x3
@@ -5518,15 +5572,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3210 01db 02       		.uleb128 0x2
  3211 01dc 0A       		.uleb128 0xa
  3212 01dd 00       		.byte	0
-ARM GAS  /tmp/ccbIQd7h.s 			page 93
-
-
  3213 01de 00       		.byte	0
  3214 01df 22       		.uleb128 0x22
  3215 01e0 2E       		.uleb128 0x2e
  3216 01e1 00       		.byte	0
  3217 01e2 3F       		.uleb128 0x3f
  3218 01e3 0C       		.uleb128 0xc
+ARM GAS  /tmp/ccxUmJh6.s 			page 94
+
+
  3219 01e4 03       		.uleb128 0x3
  3220 01e5 0E       		.uleb128 0xe
  3221 01e6 3A       		.uleb128 0x3a
@@ -5578,15 +5632,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3267 0215 02       		.uleb128 0x2
  3268 0216 0A       		.uleb128 0xa
  3269 0217 00       		.byte	0
-ARM GAS  /tmp/ccbIQd7h.s 			page 94
-
-
  3270 0218 00       		.byte	0
  3271 0219 00       		.byte	0
  3272              		.section	.debug_loc,"",%progbits
  3273              	.Ldebug_loc0:
  3274              	.LLST0:
  3275 0000 00000000 		.4byte	.LFB16
+ARM GAS  /tmp/ccxUmJh6.s 			page 95
+
+
  3276 0004 02000000 		.4byte	.LCFI0
  3277 0008 0200     		.2byte	0x2
  3278 000a 7D       		.byte	0x7d
@@ -5638,15 +5692,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3324 007a 7D       		.byte	0x7d
  3325 007b 38       		.sleb128 56
  3326 007c 00000000 		.4byte	0
-ARM GAS  /tmp/ccbIQd7h.s 			page 95
-
-
  3327 0080 00000000 		.4byte	0
  3328              	.LLST3:
  3329 0084 00000000 		.4byte	.LFB21
  3330 0088 02000000 		.4byte	.LCFI6
  3331 008c 0200     		.2byte	0x2
  3332 008e 7D       		.byte	0x7d
+ARM GAS  /tmp/ccxUmJh6.s 			page 96
+
+
  3333 008f 00       		.sleb128 0
  3334 0090 02000000 		.4byte	.LCFI6
  3335 0094 04000000 		.4byte	.LCFI7
@@ -5696,17 +5750,17 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3379 002c 00000000 		.4byte	0
  3380              		.section	.debug_line,"",%progbits
  3381              	.Ldebug_line0:
- 3382 0000 51020000 		.section	.debug_str,"MS",%progbits,1
+ 3382 0000 53020000 		.section	.debug_str,"MS",%progbits,1
  3382      02003D01 
-ARM GAS  /tmp/ccbIQd7h.s 			page 96
-
-
  3382      00000201 
  3382      FB0E0D00 
  3382      01010101 
  3383              	.LASF119:
  3384 0000 735F6C63 		.ascii	"s_lcd\000"
  3384      6400
+ARM GAS  /tmp/ccxUmJh6.s 			page 97
+
+
  3385              	.LASF94:
  3386 0006 70776D5F 		.ascii	"pwm_channel_1\000"
  3386      6368616E 
@@ -5758,15 +5812,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3404      6E5F696E 
  3404      5F666C61 
  3405              	.LASF11:
-ARM GAS  /tmp/ccbIQd7h.s 			page 97
-
-
  3406 009f 45585449 		.ascii	"EXTI2_3_IRQn\000"
  3406      325F335F 
  3406      4952516E 
  3406      00
  3407              	.LASF116:
  3408 00ac 6D61696E 		.ascii	"main_state\000"
+ARM GAS  /tmp/ccxUmJh6.s 			page 98
+
+
  3408      5F737461 
  3408      746500
  3409              	.LASF127:
@@ -5818,15 +5872,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3432 0129 464C4153 		.ascii	"FLASH_IRQn\000"
  3432      485F4952 
  3432      516E00
-ARM GAS  /tmp/ccbIQd7h.s 			page 98
-
-
  3433              	.LASF137:
  3434 0134 72783162 		.ascii	"rx1buff\000"
  3434      75666600 
  3435              	.LASF90:
  3436 013c 64756D6D 		.ascii	"dummy\000"
  3436      7900
+ARM GAS  /tmp/ccxUmJh6.s 			page 99
+
+
  3437              	.LASF72:
  3438 0142 43414C49 		.ascii	"CALIB\000"
  3438      4200
@@ -5878,15 +5932,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3462 01c2 68797374 		.ascii	"hyst\000"
  3462      00
  3463              	.LASF55:
-ARM GAS  /tmp/ccbIQd7h.s 			page 99
-
-
  3464 01c7 52534552 		.ascii	"RSERVED1\000"
  3464      56454431 
  3464      00
  3465              	.LASF29:
  3466 01d0 53504931 		.ascii	"SPI1_IRQn\000"
  3466      5F495251 
+ARM GAS  /tmp/ccxUmJh6.s 			page 100
+
+
  3466      6E00
  3467              	.LASF46:
  3468 01da 6C6F6E67 		.ascii	"long long unsigned int\000"
@@ -5938,15 +5992,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3488      52516E00 
  3489              	.LASF63:
  3490 0262 43505549 		.ascii	"CPUID\000"
-ARM GAS  /tmp/ccbIQd7h.s 			page 100
-
-
  3490      4400
  3491              	.LASF149:
  3492 0268 74745F74 		.ascii	"tt_take_photo_sample\000"
  3492      616B655F 
  3492      70686F74 
  3492      6F5F7361 
+ARM GAS  /tmp/ccxUmJh6.s 			page 101
+
+
  3492      6D706C65 
  3493              	.LASF152:
  3494 027d 69677269 		.ascii	"igrid_timer\000"
@@ -5998,15 +6052,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3516      5552455F 
  3516      56616C75 
  3516      6500
-ARM GAS  /tmp/ccbIQd7h.s 			page 101
-
-
  3517              	.LASF65:
  3518 0300 41495243 		.ascii	"AIRCR\000"
  3518      5200
  3519              	.LASF146:
  3520 0306 74616B65 		.ascii	"take_temp_sample\000"
  3520      5F74656D 
+ARM GAS  /tmp/ccxUmJh6.s 			page 102
+
+
  3520      705F7361 
  3520      6D706C65 
  3520      00
@@ -6058,15 +6112,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3543              	.LASF45:
  3544 0394 6C6F6E67 		.ascii	"long long int\000"
  3544      206C6F6E 
-ARM GAS  /tmp/ccbIQd7h.s 			page 102
-
-
  3544      6720696E 
  3544      7400
  3545              	.LASF5:
  3546 03a2 57574447 		.ascii	"WWDG_IRQn\000"
  3546      5F495251 
  3546      6E00
+ARM GAS  /tmp/ccxUmJh6.s 			page 103
+
+
  3547              	.LASF67:
  3548 03ac 53484353 		.ascii	"SHCSR\000"
  3548      5200
@@ -6118,15 +6172,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3570 0437 74656D70 		.ascii	"tempbuff\000"
  3570      62756666 
  3570      00
-ARM GAS  /tmp/ccbIQd7h.s 			page 103
-
-
  3571              	.LASF6:
  3572 0440 5056445F 		.ascii	"PVD_IRQn\000"
  3572      4952516E 
  3572      00
  3573              	.LASF107:
  3574 0449 4C494748 		.ascii	"LIGHTS_ON\000"
+ARM GAS  /tmp/ccxUmJh6.s 			page 104
+
+
  3574      54535F4F 
  3574      4E00
  3575              	.LASF58:
@@ -6178,15 +6232,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3597              	.LASF7:
  3598 04d1 5254435F 		.ascii	"RTC_IRQn\000"
  3598      4952516E 
-ARM GAS  /tmp/ccbIQd7h.s 			page 104
-
-
  3598      00
  3599              	.LASF53:
  3600 04da 52455345 		.ascii	"RESERVED0\000"
  3600      52564544 
  3600      3000
  3601              	.LASF66:
+ARM GAS  /tmp/ccxUmJh6.s 			page 105
+
+
  3602 04e4 52455345 		.ascii	"RESERVED1\000"
  3602      52564544 
  3602      3100
@@ -6238,15 +6292,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3624      00
  3625              	.LASF160:
  3626 0565 77616974 		.ascii	"wait_ms_var\000"
-ARM GAS  /tmp/ccbIQd7h.s 			page 105
-
-
  3626      5F6D735F 
  3626      76617200 
  3627              	.LASF26:
  3628 0571 54494D31 		.ascii	"TIM17_IRQn\000"
  3628      375F4952 
  3628      516E00
+ARM GAS  /tmp/ccxUmJh6.s 			page 106
+
+
  3629              	.LASF16:
  3630 057c 444D4131 		.ascii	"DMA1_Channel4_5_IRQn\000"
  3630      5F436861 
@@ -6298,15 +6352,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3652      5F495251 
  3652      6E00
  3653              	.LASF44:
-ARM GAS  /tmp/ccbIQd7h.s 			page 106
-
-
  3654 05fb 6C6F6E67 		.ascii	"long unsigned int\000"
  3654      20756E73 
  3654      69676E65 
  3654      6420696E 
  3654      7400
  3655              	.LASF20:
+ARM GAS  /tmp/ccxUmJh6.s 			page 107
+
+
  3656 060d 54494D32 		.ascii	"TIM2_IRQn\000"
  3656      5F495251 
  3656      6E00
@@ -6358,15 +6412,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3676              	.LASF22:
  3677 06c9 54494D36 		.ascii	"TIM6_DAC_IRQn\000"
  3677      5F444143 
-ARM GAS  /tmp/ccbIQd7h.s 			page 107
-
-
  3677      5F495251 
  3677      6E00
  3678              	.LASF37:
  3679 06d7 756E7369 		.ascii	"unsigned char\000"
  3679      676E6564 
  3679      20636861 
+ARM GAS  /tmp/ccxUmJh6.s 			page 108
+
+
  3679      7200
  3680              	.LASF84:
  3681 06e5 4C414D50 		.ascii	"LAMP_OFF\000"
@@ -6418,15 +6472,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3701      656E00
  3702              	.LASF30:
  3703 076d 53504932 		.ascii	"SPI2_IRQn\000"
-ARM GAS  /tmp/ccbIQd7h.s 			page 108
-
-
  3703      5F495251 
  3703      6E00
  3704              	.LASF178:
  3705 0777 70726570 		.ascii	"prepare_json_pkt\000"
  3705      6172655F 
  3705      6A736F6E 
+ARM GAS  /tmp/ccxUmJh6.s 			page 109
+
+
  3705      5F706B74 
  3705      00
  3706              	.LASF102:
@@ -6478,15 +6532,15 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3722      2D736563 
  3722      74696F6E 
  3722      7300
-ARM GAS  /tmp/ccbIQd7h.s 			page 109
-
-
  3723              	.LASF143:
  3724 0886 7374616E 		.ascii	"standalone_timer\000"
  3724      64616C6F 
  3724      6E655F74 
  3724      696D6572 
  3724      00
+ARM GAS  /tmp/ccxUmJh6.s 			page 110
+
+
  3725              	.LASF177:
  3726 0897 6D61696E 		.ascii	"main\000"
  3726      00
@@ -6529,47 +6583,47 @@ ARM GAS  /tmp/ccbIQd7h.s 			page 1
  3746 08ee 4745545F 		.ascii	"GET_A\000"
  3746      4100
  3747              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/ccbIQd7h.s 			page 110
+ARM GAS  /tmp/ccxUmJh6.s 			page 111
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 main.c
-     /tmp/ccbIQd7h.s:55     .text.NVIC_SetPriority:00000000 $t
-     /tmp/ccbIQd7h.s:59     .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-     /tmp/ccbIQd7h.s:200    .text.NVIC_SetPriority:000000e4 $d
-     /tmp/ccbIQd7h.s:206    .text.SysTick_Config:00000000 $t
-     /tmp/ccbIQd7h.s:210    .text.SysTick_Config:00000000 SysTick_Config
-     /tmp/ccbIQd7h.s:263    .text.SysTick_Config:00000040 $d
+     /tmp/ccxUmJh6.s:55     .text.NVIC_SetPriority:00000000 $t
+     /tmp/ccxUmJh6.s:59     .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+     /tmp/ccxUmJh6.s:200    .text.NVIC_SetPriority:000000e4 $d
+     /tmp/ccxUmJh6.s:206    .text.SysTick_Config:00000000 $t
+     /tmp/ccxUmJh6.s:210    .text.SysTick_Config:00000000 SysTick_Config
+     /tmp/ccxUmJh6.s:263    .text.SysTick_Config:00000040 $d
                             *COM*:00000100 tx2buff
                             *COM*:00000100 rx2buff
                             *COM*:00000100 tx1buff
                             *COM*:00000100 rx1buff
-     /tmp/ccbIQd7h.s:277    .bss.show_select_timer:00000000 show_select_timer
-     /tmp/ccbIQd7h.s:274    .bss.show_select_timer:00000000 $d
-     /tmp/ccbIQd7h.s:283    .bss.switches_timer:00000000 switches_timer
-     /tmp/ccbIQd7h.s:284    .bss.switches_timer:00000000 $d
-     /tmp/ccbIQd7h.s:289    .bss.acswitch_timer:00000000 acswitch_timer
-     /tmp/ccbIQd7h.s:290    .bss.acswitch_timer:00000000 $d
-     /tmp/ccbIQd7h.s:296    .bss.scroll1_timer:00000000 scroll1_timer
-     /tmp/ccbIQd7h.s:293    .bss.scroll1_timer:00000000 $d
-     /tmp/ccbIQd7h.s:303    .bss.scroll2_timer:00000000 scroll2_timer
-     /tmp/ccbIQd7h.s:300    .bss.scroll2_timer:00000000 $d
+     /tmp/ccxUmJh6.s:277    .bss.show_select_timer:00000000 show_select_timer
+     /tmp/ccxUmJh6.s:274    .bss.show_select_timer:00000000 $d
+     /tmp/ccxUmJh6.s:283    .bss.switches_timer:00000000 switches_timer
+     /tmp/ccxUmJh6.s:284    .bss.switches_timer:00000000 $d
+     /tmp/ccxUmJh6.s:289    .bss.acswitch_timer:00000000 acswitch_timer
+     /tmp/ccxUmJh6.s:290    .bss.acswitch_timer:00000000 $d
+     /tmp/ccxUmJh6.s:296    .bss.scroll1_timer:00000000 scroll1_timer
+     /tmp/ccxUmJh6.s:293    .bss.scroll1_timer:00000000 $d
+     /tmp/ccxUmJh6.s:303    .bss.scroll2_timer:00000000 scroll2_timer
+     /tmp/ccxUmJh6.s:300    .bss.scroll2_timer:00000000 $d
                             *COM*:00000002 standalone_timer
                             *COM*:00000002 standalone_enable_menu_timer
                             *COM*:00000001 grouped_master_timeout_timer
-     /tmp/ccbIQd7h.s:313    .bss.take_temp_sample:00000000 take_temp_sample
-     /tmp/ccbIQd7h.s:310    .bss.take_temp_sample:00000000 $d
-     /tmp/ccbIQd7h.s:319    .bss.timer_wifi_bright:00000000 timer_wifi_bright
-     /tmp/ccbIQd7h.s:320    .bss.timer_wifi_bright:00000000 $d
-     /tmp/ccbIQd7h.s:326    .bss.timer_relay:00000000 timer_relay
-     /tmp/ccbIQd7h.s:323    .bss.timer_relay:00000000 $d
+     /tmp/ccxUmJh6.s:313    .bss.take_temp_sample:00000000 take_temp_sample
+     /tmp/ccxUmJh6.s:310    .bss.take_temp_sample:00000000 $d
+     /tmp/ccxUmJh6.s:319    .bss.timer_wifi_bright:00000000 timer_wifi_bright
+     /tmp/ccxUmJh6.s:320    .bss.timer_wifi_bright:00000000 $d
+     /tmp/ccxUmJh6.s:326    .bss.timer_relay:00000000 timer_relay
+     /tmp/ccxUmJh6.s:323    .bss.timer_relay:00000000 $d
                             *COM*:00000002 tt_take_photo_sample
                             *COM*:00000002 tt_relay_on_off
                             *COM*:00000001 saved_mode
-     /tmp/ccbIQd7h.s:335    .bss.igrid_timer:00000000 igrid_timer
-     /tmp/ccbIQd7h.s:336    .bss.igrid_timer:00000000 $d
-     /tmp/ccbIQd7h.s:341    .bss.vgrid_timer:00000000 vgrid_timer
-     /tmp/ccbIQd7h.s:342    .bss.vgrid_timer:00000000 $d
+     /tmp/ccxUmJh6.s:335    .bss.igrid_timer:00000000 igrid_timer
+     /tmp/ccxUmJh6.s:336    .bss.igrid_timer:00000000 $d
+     /tmp/ccxUmJh6.s:341    .bss.vgrid_timer:00000000 vgrid_timer
+     /tmp/ccxUmJh6.s:342    .bss.vgrid_timer:00000000 $d
                             *COM*:00000002 s1
                             *COM*:00000002 s2
                             *COM*:00000002 sac
@@ -6579,24 +6633,24 @@ DEFINED SYMBOLS
                             *COM*:00000001 usart1_have_data
                             *COM*:00000001 usart1_pckt_bytes
                             *COM*:0000000c param_struct
-     /tmp/ccbIQd7h.s:357    .bss.wait_ms_var:00000000 wait_ms_var
-     /tmp/ccbIQd7h.s:354    .bss.wait_ms_var:00000000 $d
+     /tmp/ccxUmJh6.s:357    .bss.wait_ms_var:00000000 wait_ms_var
+     /tmp/ccxUmJh6.s:354    .bss.wait_ms_var:00000000 $d
                             *COM*:00000002 timer_standby
                             *COM*:00000002 tcp_kalive_timer
                             *COM*:00000001 filter_timer
-     /tmp/ccbIQd7h.s:367    .bss.secs:00000000 secs
-     /tmp/ccbIQd7h.s:364    .bss.secs:00000000 $d
-     /tmp/ccbIQd7h.s:373    .bss.hours:00000000 hours
-     /tmp/ccbIQd7h.s:374    .bss.hours:00000000 $d
-     /tmp/ccbIQd7h.s:379    .bss.minutes:00000000 minutes
-ARM GAS  /tmp/ccbIQd7h.s 			page 111
+     /tmp/ccxUmJh6.s:367    .bss.secs:00000000 secs
+     /tmp/ccxUmJh6.s:364    .bss.secs:00000000 $d
+     /tmp/ccxUmJh6.s:373    .bss.hours:00000000 hours
+     /tmp/ccxUmJh6.s:374    .bss.hours:00000000 $d
+     /tmp/ccxUmJh6.s:379    .bss.minutes:00000000 minutes
+ARM GAS  /tmp/ccxUmJh6.s 			page 112
 
 
-     /tmp/ccbIQd7h.s:380    .bss.minutes:00000000 $d
-     /tmp/ccbIQd7h.s:385    .bss.signal_state:00000000 signal_state
-     /tmp/ccbIQd7h.s:386    .bss.signal_state:00000000 $d
-     /tmp/ccbIQd7h.s:391    .bss.dmx_timeout_timer:00000000 dmx_timeout_timer
-     /tmp/ccbIQd7h.s:392    .bss.dmx_timeout_timer:00000000 $d
+     /tmp/ccxUmJh6.s:380    .bss.minutes:00000000 $d
+     /tmp/ccxUmJh6.s:385    .bss.signal_state:00000000 signal_state
+     /tmp/ccxUmJh6.s:386    .bss.signal_state:00000000 $d
+     /tmp/ccxUmJh6.s:391    .bss.dmx_timeout_timer:00000000 dmx_timeout_timer
+     /tmp/ccxUmJh6.s:392    .bss.dmx_timeout_timer:00000000 $d
                             *COM*:00000021 vd0
                             *COM*:00000021 vd1
                             *COM*:00000021 vd2
@@ -6604,16 +6658,16 @@ DEFINED SYMBOLS
                             *COM*:00000021 vd4
                             *COM*:00000022 vtemp
                             *COM*:00000022 vpote
-     /tmp/ccbIQd7h.s:401    .rodata:00000000 $d
-     /tmp/ccbIQd7h.s:417    .text.main:00000000 $t
-     /tmp/ccbIQd7h.s:422    .text.main:00000000 main
-     /tmp/ccbIQd7h.s:846    .text.main:000002a0 $d
-     /tmp/ccbIQd7h.s:877    .text.prepare_json_pkt:00000000 $t
-     /tmp/ccbIQd7h.s:882    .text.prepare_json_pkt:00000000 prepare_json_pkt
-     /tmp/ccbIQd7h.s:974    .text.prepare_json_pkt:0000009c $d
-     /tmp/ccbIQd7h.s:983    .text.TimingDelay_Decrement:00000000 $t
-     /tmp/ccbIQd7h.s:988    .text.TimingDelay_Decrement:00000000 TimingDelay_Decrement
-     /tmp/ccbIQd7h.s:1153   .text.TimingDelay_Decrement:000000fc $d
+     /tmp/ccxUmJh6.s:401    .rodata:00000000 $d
+     /tmp/ccxUmJh6.s:417    .text.main:00000000 $t
+     /tmp/ccxUmJh6.s:422    .text.main:00000000 main
+     /tmp/ccxUmJh6.s:846    .text.main:000002a0 $d
+     /tmp/ccxUmJh6.s:877    .text.prepare_json_pkt:00000000 $t
+     /tmp/ccxUmJh6.s:882    .text.prepare_json_pkt:00000000 prepare_json_pkt
+     /tmp/ccxUmJh6.s:974    .text.prepare_json_pkt:0000009c $d
+     /tmp/ccxUmJh6.s:983    .text.TimingDelay_Decrement:00000000 $t
+     /tmp/ccxUmJh6.s:988    .text.TimingDelay_Decrement:00000000 TimingDelay_Decrement
+     /tmp/ccxUmJh6.s:1153   .text.TimingDelay_Decrement:000000fc $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
@@ -6635,7 +6689,6 @@ RelayOn
 GetHysteresis
 GetNew1to10
 sprintf
-Usart1Send
 UpdateRelay
 UpdatePhotoTransistor
 memcpy

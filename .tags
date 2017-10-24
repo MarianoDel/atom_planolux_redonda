@@ -4991,7 +4991,6 @@ VAL	cmsis_core/core_cm0.h	/^  __IO uint32_t VAL;                          \/*!< 
 VDD_APPLI	src/adc.h	33;"	d
 VDD_CALIB	src/adc.h	32;"	d
 VERSION	paho.mqtt.embedded-c/Makefile	/^VERSION = ${MAJOR_VERSION}.${MINOR_VERSION}$/;"	m
-VER_1_0	src/hard.h	14;"	d
 VER_1_1	src/hard.h	15;"	d
 VGRID_MAX	src/synchro.h	18;"	d
 VGRID_MIN	src/synchro.h	24;"	d

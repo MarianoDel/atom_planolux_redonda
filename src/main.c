@@ -213,7 +213,7 @@ unsigned short vpote [LARGO_FILTRO + 1];
 //------------------------------------------//
 int main(void)
 {
-	unsigned char i,ii;
+	unsigned char i, ii;
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
 	unsigned short local_meas, local_meas_last;
@@ -226,7 +226,7 @@ int main(void)
 	unsigned char one_to_ten;
 #endif
 
-#else
+#else		//USE_REDONDA_BASIC
 	unsigned char main_state = 0;
 #endif
 	char s_lcd [20];
@@ -357,8 +357,59 @@ int main(void)
 		Wait_ms (250);
 	}
 
-
 	timer_standby = 2000;
+
+//--- Programa de pruebas 1 a 10V -----
+	// while (1)
+	// {
+	// 	for (i = 0; i < 255; i++)
+	// 	{
+	// 		Update_TIM3_CH1(i);
+	// 		Wait_ms(10);
+	// 	}
+	//
+	// 	for (i = 255; i >= 0; i--)
+	// 	{
+	// 		Update_TIM3_CH1(i);
+	// 		Wait_ms(10);
+	// 	}
+	// }
+//--- FIN Programa de pruebas 1 a 10V -----
+
+//--- Programa de pruebas synchro de Relay -----
+	// i = 0;
+	// while (1)
+	// {
+	// 	switch (i)
+	// 	{
+	// 		case 0:
+	// 			RelayOn();
+	// 			timer_standby = 50;
+	// 			LED_ON;
+	// 			i++;
+	// 			break;
+	//
+	// 		case 1:
+	// 			if (!timer_standby)
+	// 			{
+	// 				RelayOff();
+	// 				LED_OFF;
+	// 				i++;
+	// 				timer_standby = 10000;
+	// 			}
+	// 			break;
+	//
+	// 		case 2:
+	// 			if (!timer_standby)
+	// 			{
+	// 				i = 0;
+	// 			}
+	// 			break;
+	// 	}
+	//
+	// 	UpdateRelay ();
+	// }
+//--- FIN Programa de pruebas synchro de Relay -----
 
 	while (1)
 	{
@@ -439,7 +490,7 @@ int main(void)
 			sprintf(s_lcd, "photo: %d\r\n", GetPhoto());
 #endif
 			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
-			Usart1Send(s_lcd);
+			Usart2Send(s_lcd);
 			timer_standby = 2000;
 		}
 

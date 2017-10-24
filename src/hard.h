@@ -11,7 +11,7 @@
 
 //----------- Defines For Configuration -------------
 //----------- Hardware Board Version -------------
-#define VER_1_0
+// #define VER_1_0
 #define VER_1_1		//mismo pinout que VER_1_0
 
 //-------- Type of Program ----------------
@@ -247,8 +247,8 @@ typedef enum
 //--- Temas con el sync de relay
 //#define TT_DELAYED_OFF		5600		//para relay metab
 //#define TT_DELAYED_ON		6560		//para relay metab
-#define TT_DELAYED_OFF		3600		//para relay placa redonda
-#define TT_DELAYED_ON		4560		//para relay placa redonda
+#define TT_DELAYED_OFF		5260		//para relay placa redonda
+#define TT_DELAYED_ON		5400		//para relay placa redonda
 #define TT_RELAY			60		//timeout de espera antes de pegar o despegar el relay
 
 enum Relay_State {

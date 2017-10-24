@@ -95,8 +95,7 @@ void TIM3_IRQHandler (void)	//1 ms
 
 void TIM_3_Init (void)
 {
-
-	//NVIC_InitTypeDef NVIC_InitStructure;
+	unsigned int temp;
 
 	if (!RCC_TIM3_CLK)
 		RCC_TIM3_CLK_ON;
@@ -104,7 +103,7 @@ void TIM_3_Init (void)
 	//Configuracion del timer.
 	TIM3->CR1 = 0x00;		//clk int / 1; upcounting
 	TIM3->CR2 = 0x00;		//igual al reset
-#ifdef VER_1_0
+#if (defined VER_1_0) || (defined VER_1_1)
 //	TIM3->CCMR2 = 0x7070;			//CH4 y CH3 output PWM mode 2
 	TIM3->CCMR1 = 0x0060;			//CH1 PWM mode 2
 	TIM3->CCMR2 = 0x0000;			//
@@ -128,7 +127,10 @@ void TIM_3_Init (void)
 
 	//Configuracion Pines
 	//Alternate Fuction
-	GPIOA->AFR[0] = 0x01000000;	//PA6 -> AF1
+	temp = GPIOA->AFR[0];
+	temp &= 0xF0FFFFFF;
+	temp |= 0x01000000;	//PA6 -> AF1
+	GPIOA->AFR[0] = temp;
 	// GPIOB->AFR[0] = 0x00010000;	//PB4 -> AF1
 #endif
 
