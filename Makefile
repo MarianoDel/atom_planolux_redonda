@@ -251,6 +251,9 @@ $(assobjects): %.o: %.s
 flash:
 	sudo openocd -f stm32f0_flash.cfg
 
+flash_lock:
+	sudo openocd -f stm32f0_flash_lock.cfg
+
 gdb:
 	sudo openocd -f stm32f0_gdb.cfg
 
