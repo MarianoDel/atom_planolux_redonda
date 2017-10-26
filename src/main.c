@@ -283,25 +283,26 @@ int main(void)
 
 //	EXTIOff ();
 
-//	while (1)
-//	{
-//		if (RELAY)
-//		{
-//			RELAY_OFF;
-//			LED_OFF;
-//		}
-//		else
-//		{
-//			RELAY_ON;
-//			LED_ON;
-//		}
-//
-//		for (i = 0; i < 255; i++)
-//		{
-//			Update_TIM3_CH1 (i);
-//			Wait_ms (10);
-//		}
-//	}
+	// while (1)
+	// {
+	// 	// if (SYNCP)
+	// 	// {
+	// 	// 	SYNCP_OFF;
+	// 	// 	LED_OFF;
+	// 	// }
+	// 	// else
+	// 	// {
+	// 	// 	SYNCP_ON;
+	// 	// 	LED_ON;
+	// 	// }
+	// 	// Wait_ms(10);
+	//
+	// 	// for (i = 0; i < 255; i++)
+	// 	// {
+	// 	// 	Update_TIM3_CH1 (i);
+	// 	// 	Wait_ms (10);
+	// 	// }
+	// }
 
 //		while (1)
 //		{
@@ -346,6 +347,12 @@ int main(void)
 	#ifdef WITH_TEMP_CONTROL
 	Usart2Send((char *) (const char *) "  Temp Control\r\n");
 	#endif
+	#ifdef USE_WITH_SYNC
+	Usart2Send((char *) (const char *) "  Sync by Edges\r\n");
+	#else
+	Usart2Send((char *) (const char *) "  Sync by ADC\r\n");
+	#endif
+
 
 	for (i = 0; i < 8; i++)
 	{
@@ -411,6 +418,11 @@ int main(void)
 	// }
 //--- FIN Programa de pruebas synchro de Relay -----
 
+//--- Programa de pruebas I meas -----
+	RELAY_ON;
+	while (1);
+//--- FIN Programa de pruebas I meas -----
+
 	while (1)
 	{
 		switch (main_state)
@@ -425,8 +437,13 @@ int main(void)
 #ifdef WITH_1_TO_10_VOLTS
 				Update_TIM3_CH1 (0);
 #endif
+				main_state = SET_ZERO_CURRENT;
+				break;
+
+			case SET_ZERO_CURRENT:
 				main_state = LAMP_OFF;
 				break;
+
 
 			case LAMP_OFF:
 				if (!tt_relay_on_off)

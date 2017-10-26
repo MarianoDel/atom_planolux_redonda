@@ -69,8 +69,8 @@ void GPIO_Config (void)
 #ifdef USE_WITH_SYNC
 	temp = GPIOA->MODER;	//2 bits por pin
 	temp &= 0x3C030000;		//PA0 input SYNC; PA1 analog input; PA2 - PA3 alternate function; PA4 - PA5 input; PA6 alternate function; PA7 out open drain;
-	// temp |= 0x4168609C;
-	temp |= 0x416860AC;	
+									//PA15 output
+	temp |= 0x416860AC;
 	GPIOA->MODER = temp;
 #else
 	temp = GPIOA->MODER;	//2 bits por pin
@@ -83,8 +83,11 @@ void GPIO_Config (void)
 
 	temp = GPIOA->OTYPER;	//1 bit por pin
 	temp &= 0xFFFF7F7F;
-//	temp |= 0x00000080;		//PA7 open drain
+#ifndef USE_GPS
+	temp |= 0x00000080;		//PA7 open drain
+#else
 	temp |= 0x00008080;		//PA15 y PA7 open drain
+#endif
 	GPIOA->OTYPER = temp;
 
 	temp = GPIOA->OSPEEDR;	//2 bits por pin

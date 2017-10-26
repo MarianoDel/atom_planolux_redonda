@@ -8,6 +8,7 @@
 #include "hard.h"
 #include "tim.h"
 #include "stm32f0xx.h"
+#include "adc.h"
 
 /* Externals variables ---------------------------------------------------------*/
 extern unsigned short timer_relay;
@@ -66,7 +67,11 @@ unsigned char RelayIsOff (void)
 void UpdateRelay (void)
 {
 	unsigned char edge = 0;
+#ifndef USE_WITH_SYNC
+	unsigned short sample = 0;
+#endif
 
+#ifdef USE_WITH_SYNC
 	if ((!last_edge) && (SYNC))		//flanco ascendente detector
 	{									//senoidal arriba
 //		edge = 1;
@@ -80,6 +85,28 @@ void UpdateRelay (void)
 		last_edge = 0;
 		SYNCP_OFF;
 	}
+#else
+	sample = ReadADC1_SameSampleTime(ADC_CH0);
+
+	if (!last_edge)	//flanco ascendente detector, senoidal arriba
+	{
+		if (sample > (ADC_THRESHOLD + ADC_NOISE))
+		{
+			last_edge = 1;
+			SYNCP_ON;
+		}
+	}
+
+	if (last_edge)		//flanco descendente detector, senidal abajo
+	{
+		if (sample < (ADC_THRESHOLD - ADC_NOISE))
+		{
+			edge = 1;
+			last_edge = 0;
+			SYNCP_OFF;
+		}
+	}
+#endif
 
 	switch (relay_state)
 	{

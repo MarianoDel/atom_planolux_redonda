@@ -34,7 +34,7 @@
 #define WITH_1_TO_10_VOLTS
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
-#define USE_WITH_SYNC
+// #define USE_WITH_SYNC				//usa circuito sync por flanco (modificacion en Hardware)
 
 //-------- Others Configurations depending on the formers ------------
 //-------- Hysteresis Conf ------------------------
@@ -116,7 +116,7 @@
 #define EN_GPS 		((GPIOA->ODR & 0x8000) != 0)
 #define EN_GPS_ON		GPIOA->BSRR = 0x00008000
 #define EN_GPS_OFF	GPIOA->BSRR = 0x80000000
-#ifdef USE_WITH_SYNC
+#ifndef USE_GPS
 #define SYNCP			EN_GPS
 #define SYNCP_ON		EN_GPS_ON
 #define SYNCP_OFF		EN_GPS_OFF
@@ -187,6 +187,7 @@ typedef enum {
 typedef enum
 {
 	MAIN_INIT = 0,
+	SET_ZERO_CURRENT,
   	LAMP_OFF,
  //  	LAMP_TO_ON,
 	LAMP_ON,
@@ -247,9 +248,17 @@ typedef enum
 //--- Temas con el sync de relay
 //#define TT_DELAYED_OFF		5600		//para relay metab
 //#define TT_DELAYED_ON		6560		//para relay metab
+#ifdef USE_WITH_SYNC
 #define TT_DELAYED_OFF		5260		//para relay placa redonda
 #define TT_DELAYED_ON		5400		//para relay placa redonda
-#define TT_RELAY			60		//timeout de espera antes de pegar o despegar el relay
+#else
+#define TT_DELAYED_OFF		6660		//para relay placa redonda
+#define TT_DELAYED_ON		7000		//para relay placa redonda
+
+#define ADC_THRESHOLD		1024		//threshold para deteccion de flanco
+#define ADC_NOISE				50		//threshold para ruido de ADC
+#endif
+#define TT_RELAY			60		//timeout de espera antes de pegar o despegar el relay por default
 
 enum Relay_State {
 

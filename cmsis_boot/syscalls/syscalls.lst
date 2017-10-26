@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccaLxiTd.s 			page 1
+ARM GAS  /tmp/ccNMwA9h.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
   55              		.section	.text._sbrk,"ax",%progbits
   56              		.align	2
   57              		.global	_sbrk
-ARM GAS  /tmp/ccaLxiTd.s 			page 2
+ARM GAS  /tmp/ccNMwA9h.s 			page 2
 
 
   58              		.code	16
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
   86 001a 1A68     		ldr	r2, [r3]	@ D.5367, heap
   87 001c 019B     		ldr	r3, [sp, #4]	@ D.5368, incr
   88 001e D218     		adds	r2, r2, r3	@ D.5367, D.5367, D.5368
-ARM GAS  /tmp/ccaLxiTd.s 			page 3
+ARM GAS  /tmp/ccNMwA9h.s 			page 3
 
 
   89 0020 024B     		ldr	r3, .L4	@ tmp122,
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  135              		.code	16
  136              		.thumb_func
  137              		.type	_close, %function
-ARM GAS  /tmp/ccaLxiTd.s 			page 4
+ARM GAS  /tmp/ccNMwA9h.s 			page 4
 
 
  138              	_close:
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  179              		.loc 1 47 0
  180 0010 1800     		movs	r0, r3	@, <retval>
  181 0012 02B0     		add	sp, sp, #8	@,,
-ARM GAS  /tmp/ccaLxiTd.s 			page 5
+ARM GAS  /tmp/ccNMwA9h.s 			page 5
 
 
  182              		@ sp needed	@
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  226 0006 0192     		str	r2, [sp, #4]	@ dir, dir
   58:cmsis_boot/syscalls/syscalls.c ****   return 0;
  227              		.loc 1 58 0
-ARM GAS  /tmp/ccaLxiTd.s 			page 6
+ARM GAS  /tmp/ccNMwA9h.s 			page 6
 
 
  228 0008 0023     		movs	r3, #0	@ D.5374,
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  273 0000 84B0     		sub	sp, sp, #16	@,,
  274              	.LCFI7:
  275              		.cfi_def_cfa_offset 16
-ARM GAS  /tmp/ccaLxiTd.s 			page 7
+ARM GAS  /tmp/ccNMwA9h.s 			page 7
 
 
  276 0002 0390     		str	r0, [sp, #12]	@ file, file
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  322 000a 04       		.byte	0x4
  323 000b 01       		.uleb128 0x1
  324 000c 2B020000 		.4byte	.LASF54
-ARM GAS  /tmp/ccaLxiTd.s 			page 8
+ARM GAS  /tmp/ccNMwA9h.s 			page 8
 
 
  325 0010 0C       		.byte	0xc
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  379 007c 10       		.byte	0x10
  380 007d 45000000 		.4byte	0x45
  381 0081 04       		.uleb128 0x4
-ARM GAS  /tmp/ccaLxiTd.s 			page 9
+ARM GAS  /tmp/ccNMwA9h.s 			page 9
 
 
  382 0082 A8000000 		.4byte	.LASF11
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  436 00f4 05010000 		.4byte	.LASF21
  437 00f8 04       		.byte	0x4
  438 00f9 AF       		.byte	0xaf
-ARM GAS  /tmp/ccaLxiTd.s 			page 10
+ARM GAS  /tmp/ccNMwA9h.s 			page 10
 
 
  439 00fa 8C000000 		.4byte	0x8c
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  493 0163 07       		.uleb128 0x7
  494 0164 B0000000 		.4byte	.LASF29
  495 0168 05       		.byte	0x5
-ARM GAS  /tmp/ccaLxiTd.s 			page 11
+ARM GAS  /tmp/ccNMwA9h.s 			page 11
 
 
  496 0169 21       		.byte	0x21
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  550 01c6 C1000000 		.4byte	.LASF36
  551 01ca 05       		.byte	0x5
  552 01cb 35       		.byte	0x35
-ARM GAS  /tmp/ccaLxiTd.s 			page 12
+ARM GAS  /tmp/ccNMwA9h.s 			page 12
 
 
  553 01cc 45000000 		.4byte	0x45
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  607 022c DF020000 		.4byte	.LASF44
  608 0230 01       		.byte	0x1
  609 0231 10       		.byte	0x10
-ARM GAS  /tmp/ccaLxiTd.s 			page 13
+ARM GAS  /tmp/ccNMwA9h.s 			page 13
 
 
  610 0232 01       		.byte	0x1
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  664 02a7 01       		.byte	0x1
  665 02a8 20       		.byte	0x20
  666 02a9 AF000000 		.4byte	0xaf
-ARM GAS  /tmp/ccaLxiTd.s 			page 14
+ARM GAS  /tmp/ccNMwA9h.s 			page 14
 
 
  667 02ad 02       		.byte	0x2
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  721 0318 05       		.uleb128 0x5
  722 0319 04       		.byte	0x4
  723 031a 1F010000 		.4byte	0x11f
-ARM GAS  /tmp/ccaLxiTd.s 			page 15
+ARM GAS  /tmp/ccNMwA9h.s 			page 15
 
 
  724 031e 0A       		.uleb128 0xa
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  778 0390 02       		.byte	0x2
  779 0391 91       		.byte	0x91
  780 0392 74       		.sleb128 -12
-ARM GAS  /tmp/ccaLxiTd.s 			page 16
+ARM GAS  /tmp/ccNMwA9h.s 			page 16
 
 
  781 0393 00       		.byte	0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  835 0402 61000000 		.4byte	0x61
  836 0406 02       		.byte	0x2
  837 0407 91       		.byte	0x91
-ARM GAS  /tmp/ccaLxiTd.s 			page 17
+ARM GAS  /tmp/ccNMwA9h.s 			page 17
 
 
  838 0408 7C       		.sleb128 -4
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  892 000d 11       		.uleb128 0x11
  893 000e 01       		.uleb128 0x1
  894 000f 52       		.uleb128 0x52
-ARM GAS  /tmp/ccaLxiTd.s 			page 18
+ARM GAS  /tmp/ccNMwA9h.s 			page 18
 
 
  895 0010 01       		.uleb128 0x1
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  949 0046 0B       		.uleb128 0xb
  950 0047 0B       		.uleb128 0xb
  951 0048 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccaLxiTd.s 			page 19
+ARM GAS  /tmp/ccNMwA9h.s 			page 19
 
 
  952 0049 0B       		.uleb128 0xb
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1006 007f 13       		.uleb128 0x13
  1007 0080 11       		.uleb128 0x11
  1008 0081 01       		.uleb128 0x1
-ARM GAS  /tmp/ccaLxiTd.s 			page 20
+ARM GAS  /tmp/ccNMwA9h.s 			page 20
 
 
  1009 0082 12       		.uleb128 0x12
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1063 00b9 00       		.byte	0
  1064 00ba 0E       		.uleb128 0xe
  1065 00bb 2E       		.uleb128 0x2e
-ARM GAS  /tmp/ccaLxiTd.s 			page 21
+ARM GAS  /tmp/ccNMwA9h.s 			page 21
 
 
  1066 00bc 00       		.byte	0
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1120 0018 00000000 		.4byte	0
  1121 001c 00000000 		.4byte	0
  1122              	.LLST1:
-ARM GAS  /tmp/ccaLxiTd.s 			page 22
+ARM GAS  /tmp/ccNMwA9h.s 			page 22
 
 
  1123 0020 00000000 		.4byte	.LFB1
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1177 00a8 0200     		.2byte	0x2
  1178 00aa 7D       		.byte	0x7d
  1179 00ab 00       		.sleb128 0
-ARM GAS  /tmp/ccaLxiTd.s 			page 23
+ARM GAS  /tmp/ccNMwA9h.s 			page 23
 
 
  1180 00ac 02000000 		.4byte	.LCFI5
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1234 0044 10000000 		.4byte	.LFE6-.LFB6
  1235 0048 00000000 		.4byte	.LFB7
  1236 004c 10000000 		.4byte	.LFE7-.LFB7
-ARM GAS  /tmp/ccaLxiTd.s 			page 24
+ARM GAS  /tmp/ccNMwA9h.s 			page 24
 
 
  1237 0050 00000000 		.4byte	.LFB8
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1275      00
  1276              	.LASF6:
  1277 004d 6C6F6E67 		.ascii	"long long int\000"
-ARM GAS  /tmp/ccaLxiTd.s 			page 25
+ARM GAS  /tmp/ccNMwA9h.s 			page 25
 
 
  1277      206C6F6E 
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1309      70617265 
  1309      3300
  1310              	.LASF41:
-ARM GAS  /tmp/ccaLxiTd.s 			page 26
+ARM GAS  /tmp/ccNMwA9h.s 			page 26
 
 
  1311 00d5 73745F73 		.ascii	"st_spare4\000"
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1339 0160 5F6F6666 		.ascii	"_off_t\000"
  1339      5F7400
  1340              	.LASF56:
-ARM GAS  /tmp/ccaLxiTd.s 			page 27
+ARM GAS  /tmp/ccNMwA9h.s 			page 27
 
 
  1341 0167 2F686F6D 		.ascii	"/home/med/Documents/stm32_proj/atom_planolux_redond"
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1370      7400
  1371              	.LASF12:
  1372 020e 5F5F7569 		.ascii	"__uid_t\000"
-ARM GAS  /tmp/ccaLxiTd.s 			page 28
+ARM GAS  /tmp/ccNMwA9h.s 			page 28
 
 
  1372      645F7400 
@@ -1663,32 +1663,32 @@ ARM GAS  /tmp/ccaLxiTd.s 			page 1
  1389 02e5 696E6F5F 		.ascii	"ino_t\000"
  1389      7400
  1390              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/ccaLxiTd.s 			page 29
+ARM GAS  /tmp/ccNMwA9h.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 syscalls.c
-     /tmp/ccaLxiTd.s:56     .text._sbrk:00000000 $t
-     /tmp/ccaLxiTd.s:61     .text._sbrk:00000000 _sbrk
-     /tmp/ccaLxiTd.s:101    .text._sbrk:0000002c $d
-     /tmp/ccaLxiTd.s:309    .bss.heap.5298:00000000 heap.5298
-     /tmp/ccaLxiTd.s:107    .text.link:00000000 $t
-     /tmp/ccaLxiTd.s:112    .text.link:00000000 link
-     /tmp/ccaLxiTd.s:133    .text._close:00000000 $t
-     /tmp/ccaLxiTd.s:138    .text._close:00000000 _close
-     /tmp/ccaLxiTd.s:158    .text._fstat:00000000 $t
-     /tmp/ccaLxiTd.s:163    .text._fstat:00000000 _fstat
-     /tmp/ccaLxiTd.s:188    .text._isatty:00000000 $t
-     /tmp/ccaLxiTd.s:193    .text._isatty:00000000 _isatty
-     /tmp/ccaLxiTd.s:212    .text._lseek:00000000 $t
-     /tmp/ccaLxiTd.s:217    .text._lseek:00000000 _lseek
-     /tmp/ccaLxiTd.s:238    .text._read:00000000 $t
-     /tmp/ccaLxiTd.s:243    .text._read:00000000 _read
-     /tmp/ccaLxiTd.s:264    .text._write:00000000 $t
-     /tmp/ccaLxiTd.s:269    .text._write:00000000 _write
-     /tmp/ccaLxiTd.s:290    .text.abort:00000000 $t
-     /tmp/ccaLxiTd.s:295    .text.abort:00000000 abort
-     /tmp/ccaLxiTd.s:306    .bss.heap.5298:00000000 $d
+     /tmp/ccNMwA9h.s:56     .text._sbrk:00000000 $t
+     /tmp/ccNMwA9h.s:61     .text._sbrk:00000000 _sbrk
+     /tmp/ccNMwA9h.s:101    .text._sbrk:0000002c $d
+     /tmp/ccNMwA9h.s:309    .bss.heap.5298:00000000 heap.5298
+     /tmp/ccNMwA9h.s:107    .text.link:00000000 $t
+     /tmp/ccNMwA9h.s:112    .text.link:00000000 link
+     /tmp/ccNMwA9h.s:133    .text._close:00000000 $t
+     /tmp/ccNMwA9h.s:138    .text._close:00000000 _close
+     /tmp/ccNMwA9h.s:158    .text._fstat:00000000 $t
+     /tmp/ccNMwA9h.s:163    .text._fstat:00000000 _fstat
+     /tmp/ccNMwA9h.s:188    .text._isatty:00000000 $t
+     /tmp/ccNMwA9h.s:193    .text._isatty:00000000 _isatty
+     /tmp/ccNMwA9h.s:212    .text._lseek:00000000 $t
+     /tmp/ccNMwA9h.s:217    .text._lseek:00000000 _lseek
+     /tmp/ccNMwA9h.s:238    .text._read:00000000 $t
+     /tmp/ccNMwA9h.s:243    .text._read:00000000 _read
+     /tmp/ccNMwA9h.s:264    .text._write:00000000 $t
+     /tmp/ccNMwA9h.s:269    .text._write:00000000 _write
+     /tmp/ccNMwA9h.s:290    .text.abort:00000000 $t
+     /tmp/ccNMwA9h.s:295    .text.abort:00000000 abort
+     /tmp/ccNMwA9h.s:306    .bss.heap.5298:00000000 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

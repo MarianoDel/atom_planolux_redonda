@@ -5,11 +5,11 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ACR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ACR;          \/*!<FLASH access control register,                 Address offset: 0x00 *\/$/;"	m	struct:__anon45
-AC_SWITCH_THRESHOLD_FULL	src/hard.h	222;"	d
-AC_SWITCH_THRESHOLD_HALF	src/hard.h	223;"	d
-AC_SWITCH_THRESHOLD_MIN	src/hard.h	224;"	d
-AC_SWITCH_THRESHOLD_ROOF	src/hard.h	221;"	d
-AC_SWITCH_TIMER_RELOAD	src/hard.h	215;"	d
+AC_SWITCH_THRESHOLD_FULL	src/hard.h	223;"	d
+AC_SWITCH_THRESHOLD_HALF	src/hard.h	224;"	d
+AC_SWITCH_THRESHOLD_MIN	src/hard.h	225;"	d
+AC_SWITCH_THRESHOLD_ROOF	src/hard.h	222;"	d
+AC_SWITCH_TIMER_RELOAD	src/hard.h	216;"	d
 ADC	cmsis_boot/stm32f0xx.h	978;"	d
 ADC1	cmsis_boot/stm32f0xx.h	977;"	d
 ADC1_BASE	cmsis_boot/stm32f0xx.h	914;"	d
@@ -163,6 +163,7 @@ ADC_IT_EOSEQ	src/adc.h	39;"	d
 ADC_IT_EOSMP	src/adc.h	37;"	d
 ADC_IT_OVR	src/adc.h	40;"	d
 ADC_LTR_LT	cmsis_boot/stm32f0xx.h	1116;"	d
+ADC_NOISE	src/hard.h	259;"	d
 ADC_Resolution_10b	src/adc.h	83;"	d
 ADC_Resolution_12b	src/adc.h	82;"	d
 ADC_Resolution_6b	src/adc.h	85;"	d
@@ -185,6 +186,7 @@ ADC_SampleTime_71_5Cycles	src/adc.h	79;"	d
 ADC_SampleTime_7_5Cycles	src/adc.h	74;"	d
 ADC_ScanDirection_Backward	src/adc.h	112;"	d
 ADC_ScanDirection_Upward	src/adc.h	111;"	d
+ADC_THRESHOLD	src/hard.h	258;"	d
 ADC_TR_HT	cmsis_boot/stm32f0xx.h	1111;"	d
 ADC_TR_LT	cmsis_boot/stm32f0xx.h	1112;"	d
 ADC_TypeDef	cmsis_boot/stm32f0xx.h	/^} ADC_TypeDef;$/;"	t	typeref:struct:__anon30
@@ -1929,7 +1931,7 @@ DMA_ISR_TEIF5	cmsis_boot/stm32f0xx.h	2716;"	d
 DMA_ISR_TEIF6	cmsis_boot/stm32f0xx.h	2720;"	d
 DMA_ISR_TEIF7	cmsis_boot/stm32f0xx.h	2724;"	d
 DMA_TypeDef	cmsis_boot/stm32f0xx.h	/^} DMA_TypeDef;$/;"	t	typeref:struct:__anon43
-DMX_DISPLAY_SHOW_TIMEOUT	src/hard.h	229;"	d
+DMX_DISPLAY_SHOW_TIMEOUT	src/hard.h	230;"	d
 DMX_TIMEOUT	src/main.c	196;"	d	file:
 DOR1	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR1;     \/*!< DAC channel1 data output register,                       Address offset: 0x2C *\/$/;"	m	struct:__anon40
 DOR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR2;     \/*!< DAC channel2 data output register,                       Address offset: 0x30 *\/$/;"	m	struct:__anon40
@@ -2250,9 +2252,9 @@ FR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t FR2; \/*!< CAN Filter bank register
 FS1R	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              FS1R;                \/*!< CAN filter scale register,           Address offset: 0x20C         *\/$/;"	m	struct:__anon35
 FTSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t FTSR;         \/*!<EXTI Falling trigger selection register,                  Address offset: 0x0C *\/$/;"	m	struct:__anon44
 FULL_PRJ	Makefile	/^FULL_PRJ = $(PROJECT)_rom$/;"	m
-FUNCTION_CAT	src/hard.h	238;"	d
-FUNCTION_DMX	src/hard.h	236;"	d
-FUNCTION_MAN	src/hard.h	237;"	d
+FUNCTION_CAT	src/hard.h	239;"	d
+FUNCTION_DMX	src/hard.h	237;"	d
+FUNCTION_MAN	src/hard.h	238;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	25;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	41;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	53;"	d
@@ -4118,11 +4120,12 @@ SEND_DATA_INIT	src/ESP8266.h	/^	SEND_DATA_INIT = 0,$/;"	e	enum:EspSendDataState
 SEND_DATA_RST	src/ESP8266.h	/^	SEND_DATA_RST,$/;"	e	enum:EspSendDataState
 SEND_DATA_WAIT_SEND_OK	src/ESP8266.h	/^	SEND_DATA_WAIT_SEND_OK$/;"	e	enum:EspSendDataState
 SET	cmsis_boot/stm32f0xx.h	/^typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;$/;"	e	enum:__anon27
+SET_ZERO_CURRENT	src/hard.h	/^	SET_ZERO_CURRENT,$/;"	e	enum:__anon7
 SHCSR	cmsis_core/core_cm0.h	/^  __IO uint32_t SHCSR;                        \/*!< Offset: 0x24  System Handler Control and State Register             *\/$/;"	m	struct:__anon2
 SHELL	paho.mqtt.embedded-c/Makefile	/^SHELL = \/bin\/sh$/;"	m
 SHIFTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SHIFTR;     \/*!< RTC shift control register,                               Address offset: 0x2C *\/$/;"	m	struct:__anon53
-SHOW_CHANNELS	src/hard.h	211;"	d
-SHOW_NUMBERS	src/hard.h	212;"	d
+SHOW_CHANNELS	src/hard.h	212;"	d
+SHOW_NUMBERS	src/hard.h	213;"	d
 SHOW_SELECT_1	src/main_menu.h	60;"	d
 SHOW_SELECT_2	src/main_menu.h	61;"	d
 SHOW_SELECT_3	src/main_menu.h	62;"	d
@@ -4133,12 +4136,12 @@ SHOW_SELECT_SELECTED	src/main_menu.h	63;"	d
 SHOW_SELECT_SELECTED_1	src/main_menu.h	64;"	d
 SHP	cmsis_core/core_cm0.h	/^  __IO uint32_t SHP[2];                       \/*!< Offset: 0x1C  System Handlers Priority Registers. [0] is RESERVED   *\/$/;"	m	struct:__anon2
 SIZEOF_BOARD_TEMP	src/adc.h	21;"	d
-SIZEOF_BUFFTCP	src/hard.h	244;"	d
+SIZEOF_BUFFTCP	src/hard.h	245;"	d
 SIZEOF_BUFFTCP_SEND	src/tcp_transceiver.h	25;"	d
-SIZEOF_DATA	src/hard.h	241;"	d
-SIZEOF_DATA1	src/hard.h	240;"	d
-SIZEOF_DATA256	src/hard.h	243;"	d
-SIZEOF_DATA512	src/hard.h	242;"	d
+SIZEOF_DATA	src/hard.h	242;"	d
+SIZEOF_DATA1	src/hard.h	241;"	d
+SIZEOF_DATA256	src/hard.h	244;"	d
+SIZEOF_DATA512	src/hard.h	243;"	d
 SIZEOF_GPSBUFF	src/gps_vktel.h	50;"	d
 SIZEOF_PHOTO_TRANS	src/adc.c	35;"	d	file:
 SMCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t SMCR;            \/*!< TIM slave Mode Control register,             Address offset: 0x08 *\/$/;"	m	struct:__anon55
@@ -4260,10 +4263,10 @@ SUCCESS	paho.mqtt.embedded-c/MQTTClient/src/MQTTClient.h	/^enum returnCode { BUF
 SVC_Handler	src/stm32f0xx_it.c	/^void SVC_Handler(void)$/;"	f
 SVC_IRQn	cmsis_boot/stm32f0xx.h	/^  SVC_IRQn                    = -5,     \/*!< 11 Cortex-M0 SV Call Interrupt                          *\/$/;"	e	enum:IRQn
 SWIER	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWIER;        \/*!<EXTI Software interrupt event register,                   Address offset: 0x10 *\/$/;"	m	struct:__anon44
-SWITCHES_THRESHOLD_FULL	src/hard.h	217;"	d
-SWITCHES_THRESHOLD_HALF	src/hard.h	218;"	d
-SWITCHES_THRESHOLD_MIN	src/hard.h	219;"	d
-SWITCHES_TIMER_RELOAD	src/hard.h	214;"	d
+SWITCHES_THRESHOLD_FULL	src/hard.h	218;"	d
+SWITCHES_THRESHOLD_HALF	src/hard.h	219;"	d
+SWITCHES_THRESHOLD_MIN	src/hard.h	220;"	d
+SWITCHES_TIMER_RELOAD	src/hard.h	215;"	d
 SWTRIGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon40
 SYNC	src/hard.h	66;"	d
 SYNCHRO_H_	src/synchro.h	9;"	d
@@ -4415,10 +4418,10 @@ SYSCFG_EXTICR4_EXTI15_PC	cmsis_boot/stm32f0xx.h	4579;"	d
 SYSCFG_EXTICR4_EXTI15_PD	cmsis_boot/stm32f0xx.h	4580;"	d
 SYSCFG_EXTICR4_EXTI15_PE	cmsis_boot/stm32f0xx.h	4581;"	d
 SYSCFG_TypeDef	cmsis_boot/stm32f0xx.h	/^} SYSCFG_TypeDef;$/;"	t	typeref:struct:__anon48
-S_FULL	src/hard.h	231;"	d
-S_HALF	src/hard.h	232;"	d
-S_MIN	src/hard.h	233;"	d
-S_NO	src/hard.h	234;"	d
+S_FULL	src/hard.h	232;"	d
+S_HALF	src/hard.h	233;"	d
+S_MIN	src/hard.h	234;"	d
+S_NO	src/hard.h	235;"	d
 S_UPPER_SRCS	paho.mqtt.embedded-c/Debug/sources.mk	/^S_UPPER_SRCS := $/;"	m
 Save_Changes_String_Cmd	src/gps_vktel.h	83;"	d
 SendCommandWaitAnswer	src/ESP8266.c	/^unsigned char SendCommandWaitAnswer (const char * comm)	\/\/blanquea esp_answer$/;"	f
@@ -4477,11 +4480,11 @@ TDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TDR;    \/*!< USART Transmit Data r
 TDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDTR; \/*!< CAN mailbox data length control and time stamp register *\/$/;"	m	struct:__anon32
 TEMP110_CAL_ADDR	src/adc.h	30;"	d
 TEMP30_CAL_ADDR	src/adc.h	31;"	d
-TEMP_DISCONECT	src/hard.h	208;"	d
-TEMP_IN_30	src/hard.h	204;"	d
-TEMP_IN_35	src/hard.h	205;"	d
-TEMP_IN_50	src/hard.h	206;"	d
-TEMP_IN_65	src/hard.h	207;"	d
+TEMP_DISCONECT	src/hard.h	209;"	d
+TEMP_IN_30	src/hard.h	205;"	d
+TEMP_IN_35	src/hard.h	206;"	d
+TEMP_IN_50	src/hard.h	207;"	d
+TEMP_IN_65	src/hard.h	208;"	d
 TEST_FILES_C	paho.mqtt.embedded-c/Makefile	/^TEST_FILES_C = test1$/;"	m
 TIM1	cmsis_boot/stm32f0xx.h	979;"	d
 TIM14	cmsis_boot/stm32f0xx.h	958;"	d
@@ -4520,8 +4523,8 @@ TIM6_DAC_IRQn	cmsis_boot/stm32f0xx.h	/^  TIM6_DAC_IRQn               = 17,     \
 TIM7	cmsis_boot/stm32f0xx.h	957;"	d
 TIM7_BASE	cmsis_boot/stm32f0xx.h	894;"	d
 TIMEOUTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMEOUTR; \/*!< I2C Timeout register,              Address offset: 0x14 *\/$/;"	m	struct:__anon49
-TIMER_STANDBY_TIMEOUT	src/hard.h	228;"	d
-TIMER_STANDBY_TIMEOUT_REDUCED	src/hard.h	227;"	d
+TIMER_STANDBY_TIMEOUT	src/hard.h	229;"	d
+TIMER_STANDBY_TIMEOUT_REDUCED	src/hard.h	228;"	d
 TIMINGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMINGR;  \/*!< I2C Timing register,               Address offset: 0x10 *\/$/;"	m	struct:__anon49
 TIM_14_Init	src/tim.c	/^void TIM_14_Init (void)$/;"	f
 TIM_16_Init	src/tim.c	/^void TIM_16_Init (void)$/;"	f
@@ -4758,18 +4761,20 @@ TSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              TSR;                 \
 TSSSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TSSSR;      \/*!< RTC time-stamp sub second register,                       Address offset: 0x38 *\/$/;"	m	struct:__anon53
 TSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TSTR;       \/*!< RTC time stamp time register,                             Address offset: 0x30 *\/$/;"	m	struct:__anon53
 TS_IRQn	cmsis_boot/stm32f0xx.h	/^  TS_IRQn                     = 8,      \/*!< Touch sense controller Interrupt                        *\/$/;"	e	enum:IRQn
-TTIMER_FOR_CAT_DISPLAY	src/hard.h	226;"	d
+TTIMER_FOR_CAT_DISPLAY	src/hard.h	227;"	d
 TT_AT_1SEG	src/ESP8266.h	23;"	d
 TT_AT_3SEG	src/ESP8266.h	24;"	d
-TT_DELAYED_OFF	src/hard.h	250;"	d
-TT_DELAYED_ON	src/hard.h	251;"	d
+TT_DELAYED_OFF	src/hard.h	252;"	d
+TT_DELAYED_OFF	src/hard.h	255;"	d
+TT_DELAYED_ON	src/hard.h	253;"	d
+TT_DELAYED_ON	src/hard.h	256;"	d
 TT_ESP_AT_MINI	src/ESP8266.h	21;"	d
 TT_ESP_AT_MODE	src/ESP8266.h	19;"	d
 TT_ESP_RESET	src/ESP8266.h	20;"	d
 TT_GPS_MINI	src/gps_vktel.h	47;"	d
 TT_GSM_MINI	src/gps_vktel.h	48;"	d
 TT_KALIVE	src/tcp_transceiver.h	24;"	d
-TT_RELAY	src/hard.h	252;"	d
+TT_RELAY	src/hard.h	261;"	d
 TT_TCP_SEND	src/tcp_transceiver.h	26;"	d
 TXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TXCRCR;   \/*!< SPI Tx CRC register (not used in I2S mode),          Address offset: 0x18 *\/$/;"	m	struct:__anon54
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;         \/*!< CEC Tx data register ,                                      Address offset:0x08 *\/$/;"	m	struct:__anon36
@@ -4969,7 +4974,6 @@ USB_READ_BUFFER_SIZE	src/constants.h	48;"	d
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon46
 USER_OBJS	paho.mqtt.embedded-c/Debug/objects.mk	/^USER_OBJS :=$/;"	m
 USE_REDONDA_BASIC	src/hard.h	22;"	d
-USE_WITH_SYNC	src/hard.h	37;"	d
 UpdateIGrid	src/synchro.c	/^void UpdateIGrid (void)$/;"	f
 UpdateNewCode	src/flash_program.c	/^unsigned char UpdateNewCode(unsigned int * p, unsigned short posi, unsigned int new_code)$/;"	f
 UpdatePhotoTransistor	src/adc.c	/^void UpdatePhotoTransistor(void)$/;"	f

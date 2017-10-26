@@ -210,6 +210,8 @@ extern unsigned char usart2_pckt_bytes;
 //	}
 //}
 
+//Procesa respuestas del modulo GSM esperando el final de linea por timeout
+//carga el buffer buffUARTGSMrx2 y avisa con el flag PacketReadyUARTGSM
 void GSMProcess (void)
 {
 	if ((gsm_have_data) && (!gsm_mini_timeout))
@@ -599,6 +601,9 @@ char GSMCloseIP(void)
 	return 0;
 }
 
+//Procesa respuestas del modulo GSM ubicadas en el buffer buffUARTGSMrx2 con flag PacketReadyUARTGSM
+//revisa los flag de estados GSMConfigGPRSflag GSMSendCommandFlag y revisa respuestas no esperadas
+//para respuestas no esperadas revisa SMS y avisa la cantidad con GSMCantSMS
 //void GSMReceive (unsigned char * pAlertasReportar, char * puserCode, unsigned char * pclaveAct, unsigned char * pActDact)
 void GSMReceive (void)
 {
