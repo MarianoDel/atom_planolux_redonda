@@ -12,7 +12,7 @@
 
 //----------- Defines For Configuration --------------//
 //----------- Some ADC Configurations ----------------//
-//#define ADC_WITH_INT
+#define ADC_WITH_INT
 #ifdef WITH_TEMP_CONTROL
 #define ADC_WITH_TEMP_SENSE
 #endif
@@ -21,6 +21,13 @@
 #define SIZEOF_BOARD_TEMP		8
 #endif
 //----------- End of ADC Configurations --------------//
+
+#ifdef ADC_WITH_INT
+#define V_Sense		adc_ch[0]
+#define Light_Sense	adc_ch[1]
+#define I_Sense		adc_ch[2]
+#endif
+
 
 #define RCC_ADC_CLK 		(RCC->APB2ENR & 0x00000200)
 #define RCC_ADC_CLK_ON 		RCC->APB2ENR |= 0x00000200
@@ -135,6 +142,7 @@
 #define ADC_AnalogWatchdog_Channel_18                ((uint32_t)0x48000000)
 
 #define CALIBRATION_TIMEOUT       ((uint32_t)0x0000F000)
+
 
 void AdcConfig (void);
 unsigned short ReadADC1 (unsigned int);

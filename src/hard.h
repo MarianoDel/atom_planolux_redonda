@@ -134,10 +134,6 @@
 #endif	//
 
 
-//#define DOOR_ROOF	200
-//#define DOOR_THRESH	180
-
-
 //ESTADOS DEL PROGRAMA PRINCIPAL
 #if (defined USE_GSM_GATEWAY) || (defined USE_GSM) || (defined USE_GPS)
 #define MAIN_INIT				0
@@ -187,6 +183,7 @@ typedef enum {
 typedef enum
 {
 	MAIN_INIT = 0,
+	SYNCHRO_ADC,
 	SET_ZERO_CURRENT,
   	LAMP_OFF,
  //  	LAMP_TO_ON,
@@ -281,6 +278,12 @@ unsigned char RelayIsOn (void);
 unsigned char RelayIsOff (void);
 unsigned short GetHysteresis (unsigned char);
 unsigned char GetNew1to10 (unsigned short);
+void UpdateVGrid (void);
+void UpdateIGrid (void);
+unsigned short GetVGrid (void);
+unsigned short GetIGrid (void);
+unsigned short PowerCalc (unsigned short, unsigned short);
+unsigned short PowerCalcMean8 (unsigned short * p);
 
 
 #endif /* HARD_H_ */

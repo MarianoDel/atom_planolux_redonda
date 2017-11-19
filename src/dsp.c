@@ -31,7 +31,7 @@ unsigned short RandomGen (unsigned int seed)
 }
 unsigned short MAFilterFast (unsigned short new_sample, unsigned short * vsample)
 {
-	unsigned short total_ma;
+	unsigned int total_ma;
 
 	//Kernel mejorado ver 2
 	//si el vector es de 0 a 7 (+1) sumo todas las posiciones entre 1 y 8, acomodo el nuevo vector entre 0 y 7
@@ -47,7 +47,7 @@ unsigned short MAFilterFast (unsigned short new_sample, unsigned short * vsample
 //unsigned short MAFilter8 (unsigned short new_sample, unsigned short * vsample)
 unsigned short MAFilter8 (unsigned short * vsample)
 {
-	unsigned short total_ma;
+	unsigned int total_ma;
 
 	//Kernel mejorado ver 2
 	//si el vector es de 0 a 7 (+1) sumo todas las posiciones entre 1 y 8, acomodo el nuevo vector entre 0 y 7
@@ -61,7 +61,7 @@ unsigned short MAFilter8 (unsigned short * vsample)
 	*(vsample + 2) = *(vsample + 1);
 	*(vsample + 1) = *(vsample);
 
-	return total_ma >> 3;
+	return (unsigned short) (total_ma >> 3);
 }
 
 unsigned short MAFilter32 (unsigned short new_sample, unsigned short * vsample)

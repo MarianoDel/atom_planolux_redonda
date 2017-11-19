@@ -102,7 +102,7 @@ void TIM_3_Init (void)
 
 	//Configuracion del timer.
 	TIM3->CR1 = 0x00;		//clk int / 1; upcounting
-	TIM3->CR2 = 0x00;		//igual al reset
+	TIM3->CR2 |= TIM_CR2_MMS_1;		//UEV -> TRG0
 #if (defined VER_1_0) || (defined VER_1_1)
 //	TIM3->CCMR2 = 0x7070;			//CH4 y CH3 output PWM mode 2
 	TIM3->CCMR1 = 0x0060;			//CH1 PWM mode 2

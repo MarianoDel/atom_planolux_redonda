@@ -94,15 +94,19 @@ volatile unsigned short tt_relay_on_off;
 
 unsigned char saved_mode;
 
-// ------- para determinar igrid -------
-volatile unsigned char igrid_timer = 0;
-volatile unsigned char vgrid_timer = 0;
 
 // ------- Externals de los switches -------
 unsigned short s1;
 unsigned short s2;
 unsigned short sac;
 unsigned char sac_aux;
+
+// ------- Externals de los switches -------
+#ifdef ADC_WITH_INT
+volatile unsigned short adc_ch[3];
+volatile unsigned char seq_ready = 0;
+unsigned short zero_current;
+#endif
 
 // ------- Externals del GPS & GSM -------
 volatile unsigned char usart1_mini_timeout;
@@ -160,36 +164,12 @@ volatile unsigned short secs = 0;
 volatile unsigned char hours = 0;
 volatile unsigned char minutes = 0;
 
+#define SIZEOF_POWER_VECT		10
 
-// ------- del DMX -------
-volatile unsigned char signal_state = 0;
-volatile unsigned char dmx_timeout_timer = 0;
-//unsigned short tim_counter_65ms = 0;
-
-// ------- de los filtros DMX -------
-#define LARGO_F		32
-#define DIVISOR_F	5
-unsigned char vd0 [LARGO_F + 1];
-unsigned char vd1 [LARGO_F + 1];
-unsigned char vd2 [LARGO_F + 1];
-unsigned char vd3 [LARGO_F + 1];
-unsigned char vd4 [LARGO_F + 1];
-
-
-#define IDLE	0
-#define LOOK_FOR_BREAK	1
-#define LOOK_FOR_MARK	2
-#define LOOK_FOR_START	3
-
-
+unsigned short power_vect [SIZEOF_POWER_VECT];
 
 //--- FUNCIONES DEL MODULO ---//
 void TimingDelay_Decrement(void);
-void Update_PWM (unsigned short);
-void UpdatePackets (void);
-
-// ------- del display -------
-
 
 // ------- del DMX -------
 extern void EXTI4_15_IRQHandler(void);
@@ -205,6 +185,11 @@ unsigned short vpote [LARGO_FILTRO + 1];
 
 //--- FIN DEFINICIONES DE FILTRO ---//
 
+// #define KW			0.009721
+// #define KW			0.00945
+// #define KW			0.00959
+#define KW			0.01013
+
 
 //-------------------------------------------//
 // @brief  Main program.
@@ -216,7 +201,11 @@ int main(void)
 	unsigned char i, ii;
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
-	unsigned short local_meas, local_meas_last;
+	unsigned short power_int, power_dec;
+	unsigned short power;
+	float fcalc = 1.0;
+	unsigned int zero_current_loc = 0;
+
 #ifdef USE_REDONDA_BASIC
 	main_state_t main_state = MAIN_INIT;
 #ifdef WITH_HYST
@@ -330,10 +319,10 @@ int main(void)
 	AdcConfig();		//recordar habilitar sensor en adc.h
 
 #ifdef WITH_1_TO_10_VOLTS
-	TIM_3_Init ();
+	TIM_3_Init ();					//lo tuilizo para 1 a 10V y para synchro ADC
 #endif
 
-	TIM_16_Init();
+	TIM_16_Init();					//o tuilizo para synchro de relay
 	TIM16Enable();
 
 	Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
@@ -418,9 +407,140 @@ int main(void)
 	// }
 //--- FIN Programa de pruebas synchro de Relay -----
 
+
 //--- Programa de pruebas I meas -----
-	RELAY_ON;
-	while (1);
+	while (1)
+	{
+		switch (main_state)
+		{
+			case MAIN_INIT:
+				Update_TIM3_CH1 (10);		//lo uso para ver diff entre synchro adc con led
+				main_state = SYNCHRO_ADC;
+				ADC1->CR |= ADC_CR_ADSTART;
+				seq_ready = 0;
+				break;
+
+			case SYNCHRO_ADC:
+				if (seq_ready)
+				{
+					main_state = SET_ZERO_CURRENT;
+					Usart2Send((char *) (const char *) "Getted\r\n");
+					Usart2Send((char *) (const char *) "Waiting GSM Startup and zero current\r\n");
+					timer_standby = 60000;
+					zero_current_loc = 0;
+					i = 0;
+				}
+				break;
+
+			case SET_ZERO_CURRENT:
+				if (!timer_standby)
+				{
+					if (i < 32)
+					// if (i < 4)
+					{
+						if (seq_ready)
+						{
+							seq_ready = 0;
+							zero_current_loc += I_Sense;
+							i++;
+							timer_standby = 2;	//cargo valor zero_current en 64ms
+						}
+					}
+					else
+					{
+						zero_current_loc >>= 5;
+						// zero_current_loc >>= 2;
+						zero_current = zero_current_loc;
+						main_state = LAMP_ON;
+						RELAY_ON;
+						i = 0;
+					}
+				}
+				break;
+
+			case LAMP_OFF:
+				break;
+
+			case LAMP_ON:
+				if (!timer_standby)
+				{
+					if (i < SIZEOF_POWER_VECT)
+					{
+						power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
+						i++;
+					}
+					else
+					{
+						//termine de cargar el vector, muestro info
+						power = PowerCalcMean8(power_vect);
+						power_2secs_acum += power;
+						power_2secs_index++;
+						fcalc = power;
+						fcalc = power * KW;
+						power_int = (unsigned short) fcalc;
+						fcalc = fcalc - power_int;
+						fcalc = fcalc * 100;
+						power_dec = (unsigned short) fcalc;
+						sprintf(s_lcd, "p: %3d.%02d d: %d\r\n", power_int, power_dec, power);
+
+						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, V_Sense, I_Sense);
+						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
+						//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
+						Usart2Send(s_lcd);
+						i = 0;
+
+						if (power_2secs_index >= 30)	//1 a 30 es el contador
+						{
+							power_2secs_index = 0;
+							power_minutes += power;		//TODO: supongo todo el minuto el mismo consumo ver power_2secs_acum
+							power_minutes_index++;
+						}
+
+						if (power_minutes_index >= 60)	//1 a 60 es el contador
+						{
+							power_minutes_index = 0;
+							power_hours += power_minutes;		//TODO: OJO se supuso todo el minuto el mismo consumo
+							power_minutes = 0;
+						}
+
+						
+					}
+					timer_standby = 200;		//10 veces 200ms
+
+					// fcalc = voltage;
+					// fcalc = fcalc * KV;
+					// volt_int = (short) fcalc;
+					// fcalc = fcalc - volt_int;
+					// fcalc = fcalc * 100;
+					// volt_dec = (short) fcalc;
+					//
+					// sprintf(str, "%2d.%02d", volt_int, volt_dec);
+					//
+					// //sprintf(str, "%4d        ", voltage);
+					// LCDTransmitStr(str);
+
+				}
+
+				break;
+
+			default:
+				main_state = MAIN_INIT;
+				break;
+		}
+
+		//Cosas que dependen de las muestras
+		if (seq_ready)
+		{
+			seq_ready = 0;
+			UpdateVGrid ();
+			UpdateIGrid ();
+		}
+
+		//Cosas que no dependen del estado del programa
+		UpdateRelay ();
+		// UpdatePhotoTransistor();
+	}	//end while 1
+
 //--- FIN Programa de pruebas I meas -----
 
 	while (1)
@@ -437,13 +557,24 @@ int main(void)
 #ifdef WITH_1_TO_10_VOLTS
 				Update_TIM3_CH1 (0);
 #endif
-				main_state = SET_ZERO_CURRENT;
+				main_state = SYNCHRO_ADC;
+#ifdef ADC_WITH_INT
+				seq_ready = 0;
+#endif
+				break;
+
+			case SYNCHRO_ADC:
+#ifdef ADC_WITH_INT
+				if (seq_ready)
+#endif
+				{
+					main_state = SET_ZERO_CURRENT;
+				}
 				break;
 
 			case SET_ZERO_CURRENT:
 				main_state = LAMP_OFF;
 				break;
-
 
 			case LAMP_OFF:
 				if (!tt_relay_on_off)
@@ -793,106 +924,7 @@ int main(void)
 	*/
 	//---------- Fin prueba 1 to 10V --------//
 
-    //---------- Programa de Certificacion S.E. --------//
-#ifdef USE_CE_PROGRAM
-	while (1)
-	{
-		resp = FuncStandAloneCert();
 
-
-		UpdateSwitches();
-		UpdateACSwitch();
-		UpdatePackets();
-		UpdateTemp();
-		UpdateIGrid();
-		UpdateVGrid();
-
-	}	//termina while(1)
-#endif
-	//---------- Fin Programa de Certificacion S.E. --------//
-
-    //---------- Programa de Produccion --------//
-#ifdef USE_PROD_PROGRAM
-	//--- PRUEBA FUNCION MAIN_MENU
-	//leo la memoria, si tengo configuracion de modo
-	//entro directo, sino a Main Menu
-	if (saved_mode == 0xFF)	//memoria borrada
-		main_state = MAIN_INIT;
-	else
-		jump_the_menu = RESP_YES;
-
-#ifdef VER_1_2
-	Update_TIM3_CH2 (255);
-#endif
-	//Wait_ms(2000);
-	while (1)
-	{
-		switch (main_state)
-		{
-			case MAIN_INIT:
-				resp = FuncMainMenu();
-
-				if (resp == MAINMENU_SHOW_STANDALONE_SELECTED)	//TODO deberia forzar init
-					main_state = MAIN_STAND_ALONE;
-
-				if (resp == MAINMENU_SHOW_GROUPED_SELECTED)
-					main_state = MAIN_GROUPED;
-
-				if (resp == MAINMENU_SHOW_NETWORK_SELECTED)
-					main_state = MAIN_NETWORKED;
-
-				jump_the_menu = RESP_NO;
-				break;
-
-			case MAIN_STAND_ALONE:
-				resp = FuncStandAlone();
-
-				if (resp == RESP_CHANGE_ALL_UP)
-				{
-					FuncStandAloneReset();
-					main_state = MAIN_INIT;
-				}
-
-				break;
-
-			case MAIN_GROUPED:
-				resp = FuncGrouped();
-
-				if (resp == RESP_CHANGE_ALL_UP)
-				{
-					FuncGroupedReset();
-					main_state = MAIN_INIT;
-				}
-
-				break;
-
-			case MAIN_NETWORKED:
-				resp = FuncNetworked(jump_the_menu);
-				jump_the_menu = RESP_NO_CHANGE;
-				main_state++;
-				break;
-
-			case MAIN_NETWORKED_1:
-				resp = FuncNetworked(jump_the_menu);
-
-				if (resp == RESP_CHANGE_ALL_UP)
-					main_state = MAIN_INIT;
-
-				break;
-
-			default:
-				main_state = MAIN_INIT;
-				break;
-
-		}
-
-		UpdateSwitches();
-		UpdateACSwitch();
-		UpdatePackets();
-	}
-
-	//--- FIN PRUEBA FUNCION MAIN_MENU
-#endif
 	//---------- Fin Programa de Procduccion --------//
 
 	return 0;

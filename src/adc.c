@@ -23,6 +23,10 @@ extern volatile unsigned short tt_take_temp_sample;
 #endif
 
 //--- VARIABLES GLOBALES ---//
+#ifdef ADC_WITH_INT
+volatile unsigned short * p_channel;
+#endif
+
 #ifdef ADC_WITH_TEMP_SENSE
 // ------- del sensor de Temperatura -------
 unsigned short board_temp [SIZEOF_BOARD_TEMP];
@@ -56,10 +60,6 @@ unsigned char new_photo_sample = 0;
 
 void AdcConfig (void)
 {
-#ifdef ADC_WITH_INT
-	NVIC_InitTypeDef    NVIC_InitStructure;
-#endif
-
 	if (!RCC_ADC_CLK)
 		RCC_ADC_CLK_ON;
 
@@ -76,36 +76,33 @@ void AdcConfig (void)
 	ADC1->CFGR2 = ADC_ClockMode_SynClkDiv4;
 
 	//set resolution, trigger & Continuos or Discontinuous
-	//ADC1->CFGR1 |= ADC_Resolution_10b | ADC_ExternalTrigConvEdge_Rising | ADC_ExternalTrigConv_T3_TRGO;
+	ADC1->CFGR1 |= ADC_Resolution_12b | ADC_ExternalTrigConvEdge_Rising | ADC_ExternalTrigConv_T3_TRGO;	//recordar ADC1->CR |= ADC_CR_ADSTART
 	//ADC1->CFGR1 |= ADC_Resolution_12b | ADC_ExternalTrigConvEdge_Rising | ADC_ExternalTrigConv_T1_TRGO;
 	//ADC1->CFGR1 |= ADC_Resolution_12b | ADC_CFGR1_DISCEN;
-	ADC1->CFGR1 |= ADC_Resolution_12b;
+	// ADC1->CFGR1 |= ADC_Resolution_12b;
 
 	//DMA Config
 	//ADC1->CFGR1 |= ADC_CFGR1_DMAEN | ADC_CFGR1_DMACFG;
 
 	//set sampling time
-	//ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
-	ADC1->SMPR |= ADC_SampleTime_28_5Cycles;		//17.39 son SP 420
+	ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
+	// ADC1->SMPR |= ADC_SampleTime_28_5Cycles;		//17.39 son SP 420
 	//ADC1->SMPR |= ADC_SampleTime_7_5Cycles;		//17.36 de salida son SP 420 pero a veces pega
 													//las dos int (usar DMA?) y pierde el valor intermedio
 	//ADC1->SMPR |= ADC_SampleTime_1_5Cycles;			//20.7 de salida son SP 420 (regula mal)
 
-	//set channel selection
-	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_2 | ADC_Channel_3 | ADC_Channel_4;
-	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_2;
-	//ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1;
-	//ADC1->CHSELR |= ADC_Channel_2;	//individuales andan todos
-
 #ifdef ADC_WITH_INT
+	//set channel selection
+	ADC1->CHSELR |= ADC_Channel_0 | ADC_Channel_1 | ADC_Channel_8;
+
 	//set interrupts
 	ADC1->IER |= ADC_IT_EOC;
 
-	/* Configure and enable ADC1 interrupt */
-	NVIC_InitStructure.NVIC_IRQChannel = ADC1_IRQn;
-	NVIC_InitStructure.NVIC_IRQChannelPriority = 0;
-	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-	NVIC_Init(&NVIC_InitStructure);
+	//set pointer
+	p_channel = &adc_ch[0];
+
+	NVIC_EnableIRQ(ADC1_COMP_IRQn);
+	NVIC_SetPriority(ADC1_COMP_IRQn, 3);
 #endif
 
 #ifdef ADC_WITH_TEMP_SENSE
@@ -122,74 +119,28 @@ void AdcConfig (void)
 #ifdef ADC_WITH_INT
 void ADC1_COMP_IRQHandler (void)
 {
-	/*
 	if (ADC1->ISR & ADC_IT_EOC)
 	{
-		LED_ON;
-		//clear pending
-		ADC1->ISR |= ADC_IT_EOC | ADC_IT_EOSEQ;
-		LED_OFF;
-	}
-	*/
-
-
-	if (ADC1->ISR & ADC_IT_EOC)
-	{
-		//LED_ON;
-		if (ADC1->ISR & ADC_IT_EOSEQ)	//seguro que es channel2
+		if (ADC1->ISR & ADC_IT_EOSEQ)	//seguro que es channel8 en posicion 3
 		{
-			adc_ch2 = ADC1->DR;
+			p_channel = &adc_ch[2];
+			*p_channel = ADC1->DR;
+			p_channel = &adc_ch[0];
 			seq_ready = 1;
 		}
 		else
 		{
-//			LED_ON;
-			adc_ch1 = ADC1->DR;
+			*p_channel = ADC1->DR;		//
+			if (p_channel < &adc_ch[2])
+				p_channel++;
 		}
 
 		//clear pending
 		ADC1->ISR |= ADC_IT_EOC | ADC_IT_EOSEQ;
-
-		//LED_OFF;
 	}
 }
 #endif
 
-/*
-
-//USA STD LIB DE ST
-unsigned short ReadADC1 (unsigned int channel)
-{
-	uint32_t tmpreg = 0;
-	//GPIOA_PIN4_ON;
-	// Set channel and sample time
-	//ADC_ChannelConfig(ADC1, channel, ADC_SampleTime_7_5Cycles);	//pifia la medicion 2800 o 3400 en ves de 4095
-	//ADC_ChannelConfig(ADC1, channel, ADC_SampleTime_239_5Cycles);
-	//ADC_ChannelConfig(ADC1, ADC_Channel_0, ADC_SampleTime_239_5Cycles);
-
-	//ADC_ChannelConfig INTERNALS
-	// Configure the ADC Channel
-	ADC1->CHSELR = channel;
-
-	// Clear the Sampling time Selection bits
-	tmpreg &= ~ADC_SMPR1_SMPR;
-
-	// Set the ADC Sampling Time register
-	tmpreg |= (uint32_t)ADC_SampleTime_239_5Cycles;
-
-	// Configure the ADC Sample time register
-	ADC1->SMPR = tmpreg ;
-
-
-	// Start the conversion
-	ADC_StartOfConversion(ADC1);
-	// Wait until conversion completion
-	while(ADC_GetFlagStatus(ADC1, ADC_FLAG_EOC) == RESET);
-	// Get the conversion value
-	//GPIOA_PIN4_OFF;	//tarda 20us en convertir
-	return ADC_GetConversionValue(ADC1);
-}
-*/
 
 //Setea el sample time en el ADC
 void SetADC1_SampleTime (void)

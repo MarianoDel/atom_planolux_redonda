@@ -111,7 +111,7 @@ SRC += ./src/uart.c
 SRC += ./src/flash_program.c
 SRC += ./src/dsp.c
 SRC += ./src/hard.c
-SRC += ./src/synchro.c
+# SRC += ./src/synchro.c
 SRC += ./src/tcp_transceiver.c
 # SRC += ./src/programs_functions.c
 ## System Support
