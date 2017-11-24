@@ -49,10 +49,10 @@
 //Para Hardware de GSM
 #if (defined USE_GSM) || (defined USE_GSM_GATEWAY)
 #include "sim900_800.h"
+#include "funcs_gsm.h"
 #endif
 
 //--- VARIABLES EXTERNAS ---//
-
 
 
 // ------- Externals del Puerto serie  -------
@@ -150,6 +150,22 @@ extern volatile char buffUARTGSMrx2[];
 //--- VARIABLES GLOBALES ---//
 parameters_typedef param_struct;
 
+//para las mediciones
+unsigned int power_2secs_acum = 0;
+unsigned char power_2secs_index = 0;
+unsigned short power_minutes = 0;
+unsigned char power_minutes_index = 0;
+unsigned short power_hours = 0;
+
+//para los msjs GSM
+char gsmNUM [20];
+char gsmMSG [180];
+
+
+
+
+
+
 // ------- de los timers -------
 volatile unsigned short wait_ms_var = 0;
 volatile unsigned short timer_standby;
@@ -208,6 +224,7 @@ int main(void)
 
 #ifdef USE_REDONDA_BASIC
 	main_state_t main_state = MAIN_INIT;
+	unsigned char sended = 0;
 #ifdef WITH_HYST
 	unsigned short hyst;
 #endif
@@ -313,6 +330,7 @@ int main(void)
 
 	EXTIOff();
 
+
 #ifdef USE_REDONDA_BASIC
 //---------- Inicio Programa de Produccion Redonda Basic --------//
 	// USART1Config();
@@ -341,6 +359,10 @@ int main(void)
 	#else
 	Usart2Send((char *) (const char *) "  Sync by ADC\r\n");
 	#endif
+	#ifdef USE_GSM
+	Usart2Send((char *) (const char *) "  Uses GSM for SMS data\r\n");
+	#endif
+
 
 
 	for (i = 0; i < 8; i++)
@@ -354,6 +376,8 @@ int main(void)
 	}
 
 	timer_standby = 2000;
+	FuncsGSMReset();
+	Usart1Mode(USART_GSM_MODE);
 
 //--- Programa de pruebas 1 a 10V -----
 	// while (1)
@@ -421,14 +445,21 @@ int main(void)
 				break;
 
 			case SYNCHRO_ADC:
-				if (seq_ready)
+				if (seq_ready)					//TODO ojo aca seq_ready se usa fuera del main switch
 				{
-					main_state = SET_ZERO_CURRENT;
 					Usart2Send((char *) (const char *) "Getted\r\n");
 					Usart2Send((char *) (const char *) "Waiting GSM Startup and zero current\r\n");
+#ifdef USE_GSM
+					main_state = SET_ZERO_CURRENT;
+					timer_standby = 0;
+					zero_current_loc = 0;
+					i = 0;
+#else
+					main_state = SET_ZERO_CURRENT;
 					timer_standby = 60000;
 					zero_current_loc = 0;
 					i = 0;
+#endif
 				}
 				break;
 
@@ -438,7 +469,7 @@ int main(void)
 					if (i < 32)
 					// if (i < 4)
 					{
-						if (seq_ready)
+						if (seq_ready)		//TODO ojo aca seq_ready se usa fuera del main switch
 						{
 							seq_ready = 0;
 							zero_current_loc += I_Sense;
@@ -486,7 +517,8 @@ int main(void)
 						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, V_Sense, I_Sense);
 						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
 						//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
-						Usart2Send(s_lcd);
+						//TODO: para debug no envio datos
+						// Usart2Send(s_lcd);
 						i = 0;
 
 						if (power_2secs_index >= 30)	//1 a 30 es el contador
@@ -503,9 +535,16 @@ int main(void)
 							power_minutes = 0;
 						}
 
-						
+
 					}
 					timer_standby = 200;		//10 veces 200ms
+
+					if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
+					{
+						Usart2Send((char *) (const char *) "GSM Listo!\r\n");
+						FuncsGSMSendSMS("Hola", "1145376762");
+						sended = 1;
+					}
 
 					// fcalc = voltage;
 					// fcalc = fcalc * KV;
@@ -539,6 +578,9 @@ int main(void)
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();
 		// UpdatePhotoTransistor();
+#ifdef USE_GSM
+		FuncsGSM();
+#endif
 	}	//end while 1
 
 //--- FIN Programa de pruebas I meas -----
@@ -1072,11 +1114,13 @@ void TimingDelay_Decrement(void)
 	if (acswitch_timer)
 		acswitch_timer--;
 
+#ifdef USE_REDONDA_BASIC
 	if (tt_take_photo_sample)
 		tt_take_photo_sample--;
 
 	if (tt_relay_on_off)
 		tt_relay_on_off--;
+#endif
 
 #ifdef ADC_WITH_TEMP_SENSE
 	if (tt_take_temp_sample)

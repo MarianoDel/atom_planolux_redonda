@@ -149,6 +149,7 @@ SRC += ./src/gps_vktel.c
 #SRC += ./src/ESP8266.c
 #SRC += ./src/HLK_RM04.c
 SRC += ./src/sim900_800.c
+SRC += ./src/funcs_gsm.c
 
 # List ASM source files here
 ASRC = ./cmsis_boot/startup/startup_stm32f0xx.s

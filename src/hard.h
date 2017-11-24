@@ -17,7 +17,7 @@
 //-------- Type of Program ----------------
 //#define USE_MQTT_LIB
 //#define USE_GPS
-//#define USE_GSM
+#define USE_GSM
 // #define USE_GSM_GATEWAY
 #define USE_REDONDA_BASIC
 
@@ -135,7 +135,8 @@
 
 
 //ESTADOS DEL PROGRAMA PRINCIPAL
-#if (defined USE_GSM_GATEWAY) || (defined USE_GSM) || (defined USE_GPS)
+// #if (defined USE_GSM_GATEWAY) || (defined USE_GSM) || (defined USE_GPS)
+#if (defined USE_GSM_GATEWAY) || (defined USE_GPS)
 #define MAIN_INIT				0
 #define MAIN_INIT_1				1
 #define MAIN_SENDING_CONF		2
@@ -186,6 +187,9 @@ typedef enum
 	SYNCHRO_ADC,
 	SET_ZERO_CURRENT,
   	LAMP_OFF,
+	START_GSM,
+	CONFIG_GSM,
+	WELCOME_GSM,
  //  	LAMP_TO_ON,
 	LAMP_ON,
 	// LAMP_TO_OFF

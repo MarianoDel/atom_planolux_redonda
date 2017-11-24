@@ -521,7 +521,6 @@ unsigned char ESP_GetIP (char * s_ip)
 			}
 			break;
 
-
 		case GET_IP_CHECK:
 			ESPPreParser((unsigned char *)rx2buff);
 			//copio desde la primer comilla a la segunda con 15 posiciones como maximo
@@ -863,4 +862,3 @@ void CheckVersion (char * answer)
 	else
 		esp_answer = RESP_NOK;
 }
-

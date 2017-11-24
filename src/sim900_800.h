@@ -34,12 +34,15 @@
 
 //--- Module Function Declaration ---//
 unsigned char GSM_Start(void);
-void GSM_Stop(void);
+unsigned char GSM_Stop(void);
+void GSM_Start_Stop_ResetSM (void);
+unsigned char GSM_Delay (unsigned short);
+
 void GSMReceive (void);
 //void GSMReceive (unsigned char * pAlertasReportar, char * puserCode, unsigned char * pclaveAct, unsigned char * pActDact);
 char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta,char *ptrRta);
 char GSM_Config(unsigned short timeOut);
-char GSMSendSMS (char *ptrMSG, char *ptrNUM, unsigned short timeOut, char sim);
+char GSMSendSMS (char *ptrMSG, char *ptrNUM, unsigned short timeOut);
 char GSMConfigGPRS (char sim, char *ptrAPN, char *ptrUSER, char *ptrKEY , char *ptrIPAdd, char *ptrIPremote, char *ptrPORTremote,unsigned short timeOut);
 char GSM_SetSIM (unsigned char sim);
 char GSMSendIP (char *ptrMSG, unsigned short timeOut);

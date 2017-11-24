@@ -170,7 +170,7 @@ void USART1_IRQHandler(void)
 				prx1++;
 				usart1_have_data = 1;
 			}
-			usart1_mini_timeout = TT_GPS_MINI;
+			usart1_mini_timeout = TT_GSM_MINI;
 		}
 
 //		//RX GSM
