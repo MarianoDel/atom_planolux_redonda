@@ -2,6 +2,8 @@
 #include "sim900_800.h"
 #include "uart.h"
 #include "tim.h"
+#include "ESP8266.h"
+#include "funcs_gsm.h"		//para string flags
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -10,15 +12,9 @@
 
 //UART GSM.
 //RX.
-volatile char buffUARTGSMrx[buffUARTGSMrx_dimension];
 volatile char buffUARTGSMrx2[buffUARTGSMrx_dimension];
-volatile char *pBuffUARTGSMrxW;
-volatile char *pBuffUARTGSMrxR;
 volatile char PacketReadyUARTGSM;
 //TX.
-volatile char buffUARTGSMtx[buffUARTGSMrx_dimension];
-volatile char *pBuffUARTGSMtxR;
-volatile char *pBuffUARTGSMtxW;
 
 //GSM Start.
 unsigned char GSMStartState = 0;
@@ -59,8 +55,6 @@ char GSMSendIPbuffAux[32];
 
 char GSMbuffRtaCommand[buffUARTGSMrx_dimension];
 
-//Conexion cerrada.
-char DB300flagConnGPRS;
 
 const char GSM_OK[] 	= "OK";
 const char GSM_ERR[] 	= "ERROR";
@@ -127,88 +121,6 @@ extern volatile unsigned char usart2_pckt_ready;
 extern volatile unsigned char usart2_have_data;
 extern unsigned char usart2_pckt_bytes;
 #endif
-//TODO: reimplementar esto
-//void UARTGSM_Config(void)
-//{
-//
-//	unsigned long temp;
-//	NVIC_InitTypeDef NVIC_InitStructure;
-//
-//	//---- Clk USART2 ----//
-//	if (!(RCC->APB1ENR & 0x00020000))
-//		RCC->APB1ENR |= 0x00020000;
-//
-//	if (!(RCC->APB2ENR & 0x00000004))
-//		RCC->APB2ENR |= 0x00000004;
-//
-//	//----GPIOA----//
-//	//----TX:PA2 RX:PA3----//
-//	temp = GPIOA->CRL;
-//	temp &= 0xFFFF00FF;
-//	temp |= 0x00004B00;
-//	GPIOA->CRL = temp;
-//
-//	//---- NVIC ----//
-//	NVIC_InitStructure.NVIC_IRQChannel = USART2_IRQn;
-//	NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 2;
-//	NVIC_InitStructure.NVIC_IRQChannelSubPriority = 0;
-//	NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-//	NVIC_Init(&NVIC_InitStructure);
-//
-//	//NVIC_SetPriority(USART2_IRQn, 0);
-//
-//	//buffer GSM.
-//	//RX.
-//	pBuffUARTGSMrxW = &buffUARTGSMrx[0];
-//	pBuffUARTGSMrxR = &buffUARTGSMrx[0];
-//	counterUARTGSM = 0;
-//	PacketReadyUARTGSM = 0;
-//
-//	//TX.
-//	pBuffUARTGSMtxR = &buffUARTGSMtx[0];
-//	pBuffUARTGSMtxW = &buffUARTGSMtx[0];
-//
-//	while (pBuffUARTGSMrxW != &buffUARTGSMrx[buffUARTGSMrx_dimension - 2])
-//	{
-//		*pBuffUARTGSMrxW = 0;
-//		pBuffUARTGSMrxW++;
-//	}
-//
-//	pBuffUARTGSMrxW = &buffUARTGSMrx[0];
-//
-//	while (pBuffUARTGSMtxW != &buffUARTGSMtx[buffUARTGSMrx_dimension - 2])
-//	{
-//		*pBuffUARTGSMtxW = 0;
-//		pBuffUARTGSMtxW++;
-//	}
-//
-//	pBuffUARTGSMtxW = &buffUARTGSMtx[0];
-//
-//	USART2->BRR |= 0x0EA6;
-//	USART2->CR1 |= 0x202C;
-//
-//}
-//
-//
-//void UARTGSMSend(char * ptrSend)
-//{
-//
-//	char datos = strlen ((const char *) &ptrSend[0]);
-//
-//	if (datos < (buffUARTGSMrx_dimension - 2))
-//	{
-//		if ((pBuffUARTGSMtxW + datos) < &buffUARTGSMtx[buffUARTGSMrx_dimension - 2])
-//		{
-//			strncpy((char *)pBuffUARTGSMtxW, (const char *)&ptrSend[0], datos);
-//			pBuffUARTGSMtxW += datos;
-//			*pBuffUARTGSMtxW = 0;
-//		}
-//		else
-//			pBuffUARTGSMtxW  = buffUARTGSMtx;
-//
-//		USART_ITConfig(USART2, USART_IT_TXE, ENABLE);
-//	}
-//}
 
 //Procesa respuestas del modulo GSM esperando el final de linea por timeout
 //carga el buffer buffUARTGSMrx2 y avisa con el flag PacketReadyUARTGSM
@@ -673,58 +585,36 @@ char GSMCloseIP(void)
 //void GSMReceive (unsigned char * pAlertasReportar, char * puserCode, unsigned char * pclaveAct, unsigned char * pActDact)
 void GSMReceive (void)
 {
-
 	//---- Comunicacion con modulo GSM ----//
 	if (PacketReadyUARTGSM)
 	{
 		//TODO: para debug envio lo que llega
+		ESPPreParser2(buffUARTGSMrx2, buffUARTGSMrx2);
 		Usart2Send(buffUARTGSMrx2);
+		Usart2Send("\r\n");
 
 		if (GSMSendCommandFlag)
 		{
-			// if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"CLOSED", strlen((const char *)"CLOSED")))
-			// 	DB300flagConnGPRS = 1;
-
 			if (GSMSendCommandFlag == 3)
 			{
 				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)&GSM_SENDOK[0], strlen((const char *)&GSM_SENDOK[0])))
 					GSMSendCommandFlag = 4;
-//				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)&GSM_OK[0], strlen((const char *)&GSM_OK[0])))
-//					GSMSendCommandFlag = 4;
-				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"SHUT OK", strlen((const char *)"SHUT OK")))
+				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"> ", (sizeof("> ") - 1)))
 					GSMSendCommandFlag = 4;
-				// if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"AT\r\n", sizeof "AT\r\n"))
-				// 	GSMSendCommandFlag = 4;
-				// if (GSMSendSMSState == 1)
-				// {
-					if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"\r\n> ", (sizeof("\r\n> ") - 1)))
-					// if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"\r\n> ", sizeof("\r\n> ")))
-					// if(buffUARTGSMrx2[0] == '>')
-						GSMSendCommandFlag = 4;
-				// }
-				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"AT\r\r\nOK\r\n", sizeof "AT\r\r\nOK\r\n"))
+				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"ATOK", (sizeof("ATOK") - 1)))
 					GSMSendCommandFlag = 4;
-				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"\r\nOK\r\n", sizeof "\r\nOK\r\n"))
+				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"OK", (sizeof("OK") - 1)))
 					GSMSendCommandFlag = 4;
 			}
 
-			// if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: NAK", sizeof("000: NAK") - 1))
-			// 	GSMSendCommandFlag = 5;
-
-
-
-//			if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)&GSM_ERR[0], strlen((const char *)&GSM_ERR[0])))
-			if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *) "\r\nERROR\r\n", sizeof("\r\nERROR\r\n")))
-			{
+			if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *) "ERROR", (sizeof("ERROR") - 1)))
 				GSMSendCommandFlag = 5;
-			}
 
 			if (GSMSendCommandFlag == 1)
 			{
 				if(buffUARTGSMrx2[0] == GSM_RTA)
 					GSMSendCommandFlag = 2;
 			}
-
 		}
 
 		if(GSMConfigGPRSflag == 1)
@@ -756,7 +646,12 @@ void GSMReceive (void)
 		}
 
 		//respuestas no esperadas
-		//respuestas no esperadas
+		//primero reviso flags
+		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"Call Ready", (sizeof("Call Ready") - 1)))
+			FuncsGSMMessageFlags (GSM_SET_CALL);
+
+		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"SMS Ready", (sizeof("SMS Ready") - 1)))
+			FuncsGSMMessageFlags (GSM_SET_SMS);
 
 		if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"000:", sizeof ("000:") -1))
 		{
@@ -1667,84 +1562,6 @@ char GSMSendIP (char *ptrMSG, unsigned short timeOut)
 	return 1;
 }
 
-
-/*
-void USART2_IRQHandler(void)
-{
-	//--- Recepcion ---//
-	if(USART_GetITStatus(USART2, USART_IT_RXNE) != RESET)
-	{
-
-		//Lectura del dato recibido.
-		*pBuffUARTGSMrxW = USART_ReceiveData(USART2);
-
-		if (*(pBuffUARTGSMrxW) != 0)
-		{
-			if ((*(pBuffUARTGSMrxW) == '\n') || (*(pBuffUARTGSMrxW) == '>'))
-			{
-				*(pBuffUARTGSMrxW+1) = 0;
-
-				//strncpy((char *)&buffUARTGSMrx2[0], (const char *)&buffUARTGSMrx[0], (counterUARTGSM+1));
-				strcpy((char *)&buffUARTGSMrx2[0], (const char *)&buffUARTGSMrx[0]);
-
-				//PacketReadyUARTGSM = counterUARTGSM;
-				PacketReadyUARTGSM = 1;
-				pBuffUARTGSMrxW = &buffUARTGSMrx[0];
-				*pBuffUARTGSMrxW = 0;
-				counterUARTGSM = 0;
-			}
-			else
-			{
-				//counterUARTGSM++;
-
-				//-- Mueve el puntero ---//
-				if (pBuffUARTGSMrxW < &buffUARTGSMrx[buffUARTGSMrx_dimension - 2])
-					pBuffUARTGSMrxW++;
-				else
-					pBuffUARTGSMrxW = &buffUARTGSMrx[0];
-
-				//RN171UART_TimeOut = 10;
-			}
-		}
-		USART2->SR &= ~USART_FLAG_RXNE;
-	}
-	//--- Transmision ---//
-	if(USART_GetITStatus(USART2, USART_IT_TXE) != RESET)
-	{
-
-		//if (*pBuffUARTGSMtxR == '\n')
-		if (pBuffUARTGSMtxR == pBuffUARTGSMtxW)
-		{
-
-			pBuffUARTGSMtxR =  buffUARTGSMtx;
-			pBuffUARTGSMtxW =  buffUARTGSMtx;
-
-			USART_ITConfig(USART2, USART_IT_TXE, DISABLE);
-		}
-		else
-		{
-			if (*pBuffUARTGSMtxR)
-				USART2->DR = (*pBuffUARTGSMtxR & 0xFF);
-			else
-			{
-				pBuffUARTGSMtxR = buffUARTGSMtx;
-				pBuffUARTGSMtxW = buffUARTGSMtx;
-			}
-
-			if(pBuffUARTGSMtxR != &buffUARTGSMtx[buffUARTGSMrx_dimension - 1])
-			{
-				pBuffUARTGSMtxR++;
-			}
-			else
-			{
-				pBuffUARTGSMtxR = buffUARTGSMtx;
-			}
-		}
-
-		USART2->SR &= ~USART_IT_TXE;
-	}
-}
-*/
 
 void GSMTimeoutCounters (void)
 {

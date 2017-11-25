@@ -15,6 +15,9 @@ unsigned char gsm_sms_error_counter = 0;
 char * p_MSG;
 char * p_NUM;
 
+//flags
+unsigned short GSMFlags = 0;
+
 
 //--- Exported functions ---//
 
@@ -148,6 +151,23 @@ unsigned char FuncsGSMReady (void)
 		return resp_gsm_ok;
 	else
 		return resp_gsm_error;
+}
+
+void FuncsGSMMessageFlags (unsigned short flag)
+{
+	unsigned short temp;
+
+	//veo si es un reset flag
+	if (flag & GSM_RESET_FLAG)
+		GSMFlags &= flag;
+	else			//set flags
+		GSMFlags |= flag;
+
+}
+
+unsigned short FuncsGSMMessageFlagsAsk (void)
+{
+	return GSMFlags;
 }
 
 //--- Private function prototypes ---//

@@ -1735,7 +1735,6 @@ DAC_TypeDef	cmsis_boot/stm32f0xx.h	/^} DAC_TypeDef;$/;"	t	typeref:struct:__anon4
 DADEFS	Makefile	/^DADEFS =$/;"	m
 DATA0	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t DATA0;        \/*!< User data byte 0 (stored in FLASH_OBR[23:16]), Address offset: 0x04 *\/$/;"	m	struct:__anon48
 DATA1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t DATA1;        \/*!< User data byte 1 (stored in FLASH_OBR[31:24]), Address offset: 0x06 *\/$/;"	m	struct:__anon48
-DB300flagConnGPRS	src/sim900_800.c	/^char DB300flagConnGPRS;$/;"	v
 DBGMCU	cmsis_boot/stm32f0xx.h	985;"	d
 DBGMCU_APB1_FZ_DBG_CAN_STOP	cmsis_boot/stm32f0xx.h	2682;"	d
 DBGMCU_APB1_FZ_DBG_I2C1_SMBUS_TIMEOUT	cmsis_boot/stm32f0xx.h	2681;"	d
@@ -2305,6 +2304,8 @@ FuncChangeSecs	src/main_menu.h	108;"	d
 FuncChangeSecsMove	src/main_menu.h	109;"	d
 FuncChangeSecsReset	src/main_menu.h	112;"	d
 FuncsGSM	src/funcs_gsm.c	/^void FuncsGSM (void)$/;"	f
+FuncsGSMMessageFlags	src/funcs_gsm.c	/^void FuncsGSMMessageFlags (unsigned short flag)$/;"	f
+FuncsGSMMessageFlagsAsk	src/funcs_gsm.c	/^unsigned short FuncsGSMMessageFlagsAsk (void)$/;"	f
 FuncsGSMReady	src/funcs_gsm.c	/^unsigned char FuncsGSMReady (void)$/;"	f
 FuncsGSMReset	src/funcs_gsm.c	/^void FuncsGSMReset (void)$/;"	f
 FuncsGSMSendSMS	src/funcs_gsm.c	/^unsigned char FuncsGSMSendSMS (char *ptrMSG, char *ptrNUM)$/;"	f
@@ -2728,6 +2729,7 @@ GSMConfigPDPGPRS	src/sim900_800.c	/^char GSMConfigPDPGPRS (char sim, char *ptrAP
 GSMConfigState	src/sim900_800.c	/^char GSMConfigState = 0;$/;"	v
 GSMConfigTime	src/sim900_800.c	/^volatile unsigned short GSMConfigTime;$/;"	v
 GSMConfigTimeOut	src/sim900_800.c	/^volatile unsigned short GSMConfigTimeOut;$/;"	v
+GSMFlags	src/funcs_gsm.c	/^unsigned short GSMFlags = 0;$/;"	v
 GSMGeneralTimeOut	src/sim900_800.c	/^volatile unsigned short GSMGeneralTimeOut;$/;"	v
 GSMIPadd	src/sim900_800.c	/^char GSMIPadd[16];$/;"	v
 GSMPrestador	src/sim900_800.c	/^void GSMPrestador(unsigned char * pGSMHWstatus, unsigned char * prestadorSim1, unsigned char * prestadorSim2, char * pCONFIGURACIONgprsAPN1, char * pCONFIGURACIONgprsUsuario1, char * pCONFIGURACIONgprsClave1, char * pCONFIGURACIONgprsProveedor1, char * pCONFIGURACIONgprsAPN2, char * pCONFIGURACIONgprsUsuario2, char * pCONFIGURACIONgprsClave2, char * pCONFIGURACIONgprsProveedor2, char * pCONFIGURACIONIPREMOTE, char * pCONFIGURACIONPORTREMOTE)$/;"	f
@@ -2775,8 +2777,11 @@ GSM_OK	src/sim900_800.c	/^const char GSM_OK[] 	= "OK";$/;"	v
 GSM_PWRKEY	src/sim900_800.h	19;"	d
 GSM_PWRKEY_OFF	src/sim900_800.h	21;"	d
 GSM_PWRKEY_ON	src/sim900_800.h	20;"	d
+GSM_RESET_FLAG	src/funcs_gsm.h	37;"	d
 GSM_RTA	src/sim900_800.c	/^const char GSM_RTA		= '+';$/;"	v
 GSM_SENDOK	src/sim900_800.c	/^const char GSM_SENDOK[] = "SEND OK";$/;"	v
+GSM_SET_CALL	src/funcs_gsm.h	38;"	d
+GSM_SET_SMS	src/funcs_gsm.h	39;"	d
 GSM_SIM1	src/sim900_800.c	/^const char GSM_SIM1[] = "SIM1";$/;"	v
 GSM_SIM2	src/sim900_800.c	/^const char GSM_SIM2[] = "SIM2";$/;"	v
 GSM_STATUS	src/sim900_800.h	24;"	d
@@ -5210,10 +5215,8 @@ board_temp_index	src/adc.c	/^unsigned char board_temp_index = 0;$/;"	v
 buf	paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.h	/^    unsigned char *buf,$/;"	m	struct:MQTTClient
 buf_size	paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.h	/^    size_t buf_size,$/;"	m	struct:MQTTClient
 bufchar	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.c	/^int bufchar(unsigned char* c, int count)$/;"	f
-buffUARTGSMrx	src/sim900_800.c	/^volatile char buffUARTGSMrx[buffUARTGSMrx_dimension];$/;"	v
 buffUARTGSMrx2	src/sim900_800.c	/^volatile char buffUARTGSMrx2[buffUARTGSMrx_dimension];$/;"	v
 buffUARTGSMrx_dimension	src/sim900_800.h	8;"	d
-buffUARTGSMtx	src/sim900_800.c	/^volatile char buffUARTGSMtx[buffUARTGSMrx_dimension];$/;"	v
 bufftcpsend	src/tcp_transceiver.c	/^char bufftcpsend [5] [SIZEOF_BUFFTCP_SEND];$/;"	v
 bufptr	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.c	/^static unsigned char* bufptr;$/;"	v	file:
 byte	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	unsigned char byte;	                \/**< the whole byte *\/$/;"	m	union:__anon22
@@ -5338,13 +5341,13 @@ grouped_master_timeout_timer	src/main.c	/^volatile unsigned char grouped_master_
 gsmMSG	src/main.c	/^char gsmMSG [180];$/;"	v
 gsmNUM	src/main.c	/^char gsmNUM [20];$/;"	v
 gsm_have_data	src/main.c	135;"	d	file:
-gsm_have_data	src/sim900_800.c	121;"	d	file:
+gsm_have_data	src/sim900_800.c	115;"	d	file:
 gsm_mini_timeout	src/main.c	133;"	d	file:
-gsm_mini_timeout	src/sim900_800.c	119;"	d	file:
+gsm_mini_timeout	src/sim900_800.c	113;"	d	file:
 gsm_pckt_bytes	src/main.c	136;"	d	file:
-gsm_pckt_bytes	src/sim900_800.c	122;"	d	file:
+gsm_pckt_bytes	src/sim900_800.c	116;"	d	file:
 gsm_pckt_ready	src/main.c	134;"	d	file:
-gsm_pckt_ready	src/sim900_800.c	120;"	d	file:
+gsm_pckt_ready	src/sim900_800.c	114;"	d	file:
 gsm_sms_error_counter	src/funcs_gsm.c	/^unsigned char gsm_sms_error_counter = 0;$/;"	v
 gsm_state	src/funcs_gsm.c	/^t_GsmState gsm_state = gsm_state_reset;$/;"	v
 gsm_state_connected	src/funcs_gsm.h	/^	gsm_state_connected,$/;"	e	enum:__anon8
@@ -5506,10 +5509,6 @@ opts	paho.mqtt.embedded-c/MQTTClient/samples/linux/stdoutsub.cpp	/^} opts =$/;"	
 opts_struct	paho.mqtt.embedded-c/MQTTClient-C/samples/linux/stdoutsub.c	/^struct opts_struct$/;"	s	file:
 opts_struct	paho.mqtt.embedded-c/MQTTClient/samples/linux/stdoutsub.cpp	/^struct opts_struct$/;"	s	file:
 output	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	/^char output[3000];$/;"	v
-pBuffUARTGSMrxR	src/sim900_800.c	/^volatile char *pBuffUARTGSMrxR;$/;"	v
-pBuffUARTGSMrxW	src/sim900_800.c	/^volatile char *pBuffUARTGSMrxW;$/;"	v
-pBuffUARTGSMtxR	src/sim900_800.c	/^volatile char *pBuffUARTGSMtxR;$/;"	v
-pBuffUARTGSMtxW	src/sim900_800.c	/^volatile char *pBuffUARTGSMtxW;$/;"	v
 pCallBack	src/ESP8266.c	/^void (* pCallBack) (char *);$/;"	v
 p_MSG	src/funcs_gsm.c	/^char * p_MSG;$/;"	v
 p_NUM	src/funcs_gsm.c	/^char * p_NUM;$/;"	v

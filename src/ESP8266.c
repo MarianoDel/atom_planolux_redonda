@@ -812,7 +812,7 @@ void ESPPreParser(unsigned char * d)
 	}
 }
 
-//achica el buffer recibido a solo numeros letras y espacios
+//achica el buffer recibido a todos los codigos numeros letras y espacios
 void ESPPreParser2 (unsigned char * orig, unsigned char * dest)
 {
 	unsigned char i;

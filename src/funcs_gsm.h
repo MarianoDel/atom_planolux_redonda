@@ -33,6 +33,11 @@ typedef enum {
 } t_RespGsm;
 
 //--- Exported macro ---//
+//FLAGS de string del gsm
+#define GSM_RESET_FLAG		0x8000
+#define GSM_SET_CALL			0x0001
+#define GSM_SET_SMS			0x0002
+
 
 
 //--- Exported functions ---//
@@ -41,6 +46,8 @@ void FuncsGSMReset (void);
 unsigned char FuncsGSMReady (void);
 void FuncsGSMShutdown (void);
 unsigned char FuncsGSMSendSMS (char *, char *);
+void FuncsGSMMessageFlags (unsigned short);
+unsigned short FuncsGSMMessageFlagsAsk (void);
 
 
 

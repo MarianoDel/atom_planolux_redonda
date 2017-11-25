@@ -539,11 +539,19 @@ int main(void)
 					}
 					timer_standby = 200;		//10 veces 200ms
 
-					if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
+					// if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
+					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_CALL) && (!sended))
 					{
-						Usart2Send((char *) (const char *) "GSM Listo!\r\n");
-						FuncsGSMSendSMS("Hola", "1145376762");
-						sended = 1;
+						Usart2Send((char *) (const char *) "Llamadas Listas!\r\n");
+						// FuncsGSMSendSMS("Hola", "1145376762");
+						sended++;
+					}
+
+					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended < 2))
+					{
+						Usart2Send((char *) (const char *) "SMS Listo!\r\n");
+						// FuncsGSMSendSMS("Hola", "1145376762");
+						sended++;
 					}
 
 					// fcalc = voltage;
