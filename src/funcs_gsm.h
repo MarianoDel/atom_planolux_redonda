@@ -37,6 +37,7 @@ typedef enum {
 #define GSM_RESET_FLAG		0x8000
 #define GSM_SET_CALL			0x0001
 #define GSM_SET_SMS			0x0002
+#define GSM_SET_POWER_DOWN	0x4000
 
 
 

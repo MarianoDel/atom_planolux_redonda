@@ -2781,6 +2781,7 @@ GSM_RESET_FLAG	src/funcs_gsm.h	37;"	d
 GSM_RTA	src/sim900_800.c	/^const char GSM_RTA		= '+';$/;"	v
 GSM_SENDOK	src/sim900_800.c	/^const char GSM_SENDOK[] = "SEND OK";$/;"	v
 GSM_SET_CALL	src/funcs_gsm.h	38;"	d
+GSM_SET_POWER_DOWN	src/funcs_gsm.h	40;"	d
 GSM_SET_SMS	src/funcs_gsm.h	39;"	d
 GSM_SIM1	src/sim900_800.c	/^const char GSM_SIM1[] = "SIM1";$/;"	v
 GSM_SIM2	src/sim900_800.c	/^const char GSM_SIM2[] = "SIM2";$/;"	v

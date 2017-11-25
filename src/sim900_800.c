@@ -648,10 +648,19 @@ void GSMReceive (void)
 		//respuestas no esperadas
 		//primero reviso flags
 		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"Call Ready", (sizeof("Call Ready") - 1)))
+		{
+			FuncsGSMMessageFlags (GSM_RESET_FLAG);
 			FuncsGSMMessageFlags (GSM_SET_CALL);
+		}			
 
 		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"SMS Ready", (sizeof("SMS Ready") - 1)))
 			FuncsGSMMessageFlags (GSM_SET_SMS);
+
+		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"NORMAL POWER DOWN", (sizeof("NORMAL POWER DOWN") - 1)))
+		{
+			FuncsGSMMessageFlags (GSM_RESET_FLAG);
+			FuncsGSMMessageFlags (GSM_SET_POWER_DOWN);
+		}
 
 		if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"000:", sizeof ("000:") -1))
 		{

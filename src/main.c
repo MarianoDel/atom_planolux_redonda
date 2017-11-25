@@ -547,11 +547,26 @@ int main(void)
 						sended++;
 					}
 
-					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended < 2))
+					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended == 1))
 					{
 						Usart2Send((char *) (const char *) "SMS Listo!\r\n");
 						// FuncsGSMSendSMS("Hola", "1145376762");
 						sended++;
+					}
+
+					if (sended == 2)
+					{
+						Wait_ms(10000);
+						//apago modulo
+						FuncsGSMShutdown ();
+						sended++;
+					}
+
+					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_POWER_DOWN) && (sended == 3))
+					{
+						Usart2Send((char *) (const char *) "Pwr down!\r\n");
+						Wait_ms(60000);
+						sended = 0;
 					}
 
 					// fcalc = voltage;
