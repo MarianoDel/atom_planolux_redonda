@@ -518,7 +518,7 @@ int main(void)
 						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
 						//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
 						//TODO: para debug no envio datos
-						// Usart2Send(s_lcd);
+						Usart2Send(s_lcd);
 						i = 0;
 
 						if (power_2secs_index >= 30)	//1 a 30 es el contador
@@ -543,31 +543,35 @@ int main(void)
 					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_CALL) && (!sended))
 					{
 						Usart2Send((char *) (const char *) "Llamadas Listas!\r\n");
-						// FuncsGSMSendSMS("Hola", "1145376762");
 						sended++;
 					}
 
 					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended == 1))
 					{
 						Usart2Send((char *) (const char *) "SMS Listo!\r\n");
-						// FuncsGSMSendSMS("Hola", "1145376762");
 						sended++;
 					}
 
-					if (sended == 2)
+					if ((FuncsGSMReady() == resp_gsm_ok) && (sended == 2))
 					{
-						Wait_ms(10000);
-						//apago modulo
-						FuncsGSMShutdown ();
+						FuncsGSMSendSMS("Hola", "1145376762");
 						sended++;
 					}
 
-					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_POWER_DOWN) && (sended == 3))
-					{
-						Usart2Send((char *) (const char *) "Pwr down!\r\n");
-						Wait_ms(60000);
-						sended = 0;
-					}
+					// if (sended == 2)
+					// {
+					// 	Wait_ms(10000);
+					// 	//apago modulo
+					// 	FuncsGSMShutdown ();
+					// 	sended++;
+					// }
+					//
+					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_POWER_DOWN) && (sended == 3))
+					// {
+					// 	Usart2Send((char *) (const char *) "Pwr down!\r\n");
+					// 	Wait_ms(60000);
+					// 	sended = 0;
+					// }
 
 					// fcalc = voltage;
 					// fcalc = fcalc * KV;
