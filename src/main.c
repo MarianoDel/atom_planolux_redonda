@@ -140,15 +140,13 @@ volatile unsigned char usart2_pckt_ready;
 volatile unsigned char usart2_have_data;
 unsigned char usart2_pckt_bytes;
 
-//unsigned char AlertasReportar[5] = {0,0,0,0,0};
-//unsigned char ActDact = 0;
-//unsigned char claveAct[5] = {0,0,0,0,0};
-//volatile char USERCODE[8] = "123456";
 extern volatile char buffUARTGSMrx2[];
 #endif
 
-//--- VARIABLES GLOBALES ---//
 parameters_typedef param_struct;
+
+//--- VARIABLES GLOBALES ---//
+
 
 //para las mediciones
 unsigned int power_2secs_acum = 0;
@@ -206,6 +204,9 @@ unsigned short vpote [LARGO_FILTRO + 1];
 // #define KW			0.00959
 #define KW			0.01013
 
+//--- Private Definitions ---//
+#define num_tel_rep		param_struct.num_reportar
+
 
 //-------------------------------------------//
 // @brief  Main program.
@@ -218,12 +219,18 @@ int main(void)
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
 	unsigned short power_int, power_dec;
+	unsigned short wh_int, wh_dec;
 	unsigned short power;
 	float fcalc = 1.0;
 	unsigned int zero_current_loc = 0;
 
+	unsigned char acum_secs_index, acum_mins_index;
+	unsigned int acum_secs, acum_mins, acum_hours;
+	unsigned char show_power = 0;
+
 #ifdef USE_REDONDA_BASIC
 	main_state_t main_state = MAIN_INIT;
+	unsigned char reportar_SMS = 0;
 	unsigned char sended = 0;
 #ifdef WITH_HYST
 	unsigned short hyst;
@@ -235,19 +242,15 @@ int main(void)
 #else		//USE_REDONDA_BASIC
 	unsigned char main_state = 0;
 #endif
-	char s_lcd [20];
-	enum TcpMessages tcp_msg = NONE_MSG;
-	unsigned char new_room = 0;
-	unsigned char new_lamp = 0;
-	unsigned char last_bright = 0;
-	unsigned char show_ldr = 0;
-	int dummy_resp = 0;
-	unsigned char pps_one = 0;
+	char s_lcd [40];
+	// enum TcpMessages tcp_msg = NONE_MSG;
+	// unsigned char new_room = 0;
+	// unsigned char new_lamp = 0;
+	// unsigned char last_bright = 0;
+	// unsigned char show_ldr = 0;
+	// int dummy_resp = 0;
+	// unsigned char pps_one = 0;
 
-#ifdef USE_PROD_PROGRAM
-	unsigned char jump_the_menu = 0;
-#endif
-	parameters_typedef * p_mem_init;
 	//!< At this stage the microcontroller clock setting is already configured,
     //   this is done through SystemInit() function which is called from startup
     //   file (startup_stm32f0xx.s) before to branch to application main.
@@ -317,6 +320,29 @@ int main(void)
 //			PIN3_ON;
 //			Wait_ms (10);
 //		}
+
+	//--- Leo los parametros de memoria ---//
+	param_struct.acumm_historico = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_historico;
+	if (param_struct.acumm_historico != 0xFFFFFFFF)
+	{
+		//memoria no vacia
+		strncpy( param_struct.num_reportar,
+					((parameters_typedef *) (char *) PAGE63)->num_reportar,
+					sizeof(param_struct.num_reportar));
+
+
+		param_struct.timer_reportar = ((parameters_typedef *) (unsigned int *) PAGE63)->timer_reportar;
+		reportar_SMS = 1;
+	}
+	else
+	{
+		//memoria vacia
+		param_struct.acumm_historico = 0;
+		param_struct.timer_reportar = 0;
+		reportar_SMS = 0;
+	}
+
+
 
 	//--- Welcome code ---//
 	LED_OFF;
@@ -448,8 +474,9 @@ int main(void)
 				if (seq_ready)					//TODO ojo aca seq_ready se usa fuera del main switch
 				{
 					Usart2Send((char *) (const char *) "Getted\r\n");
-					Usart2Send((char *) (const char *) "Waiting GSM Startup and zero current\r\n");
+
 #ifdef USE_GSM
+					Usart2Send((char *) (const char *) "Waiting GSM Startup and zero current\r\n");
 					main_state = SET_ZERO_CURRENT;
 					timer_standby = 0;
 					zero_current_loc = 0;
@@ -482,11 +509,36 @@ int main(void)
 						zero_current_loc >>= 5;
 						// zero_current_loc >>= 2;
 						zero_current = zero_current_loc;
-						main_state = LAMP_ON;
+						main_state = SET_COUNTERS_AND_PHONE;
 						RELAY_ON;
 						i = 0;
 					}
 				}
+				break;
+
+			case SET_COUNTERS_AND_PHONE:
+				acum_secs = 0;
+				acum_secs_index = 0;
+				acum_mins = 0;
+				acum_mins_index = 0;
+				acum_hours = 0;
+
+				if (reportar_SMS)
+				{
+					if (FuncsGSMStateAsk() == gsm_state_ready)
+					{
+						Usart2Send((char *) (const char *) "Reports by SMS\r\n");
+						main_state = LAMP_ON;
+						RELAY_ON;
+
+
+
+					}
+				}
+				else
+					main_state = LAMP_ON;
+
+
 				break;
 
 			case LAMP_OFF:
@@ -502,61 +554,92 @@ int main(void)
 					}
 					else
 					{
-						//termine de cargar el vector, muestro info
-						power = PowerCalcMean8(power_vect);
-						power_2secs_acum += power;
-						power_2secs_index++;
-						fcalc = power;
-						fcalc = power * KW;
-						power_int = (unsigned short) fcalc;
-						fcalc = fcalc - power_int;
-						fcalc = fcalc * 100;
-						power_dec = (unsigned short) fcalc;
-						sprintf(s_lcd, "p: %3d.%02d d: %d\r\n", power_int, power_dec, power);
-
-						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, V_Sense, I_Sense);
-						// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
-						//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
-						//TODO: para debug no envio datos
-						Usart2Send(s_lcd);
 						i = 0;
+						//termine de cargar el vector, guardo muestro info
+						power = PowerCalcMean8(power_vect);
+						acum_secs += power;
+						acum_secs_index++;
 
-						if (power_2secs_index >= 30)	//1 a 30 es el contador
+						if (acum_secs_index == 30)
 						{
-							power_2secs_index = 0;
-							power_minutes += power;		//TODO: supongo todo el minuto el mismo consumo ver power_2secs_acum
-							power_minutes_index++;
+							acum_mins += acum_secs;
+							acum_mins_index++;
+							acum_secs = 0;
+							acum_secs_index = 0;
+							show_power = 1;
 						}
 
-						if (power_minutes_index >= 60)	//1 a 60 es el contador
+						if (acum_mins_index == 60)
 						{
-							power_minutes_index = 0;
-							power_hours += power_minutes;		//TODO: OJO se supuso todo el minuto el mismo consumo
-							power_minutes = 0;
+							acum_mins = acum_mins / 1800;		//lo convierto a Wh
+							acum_hours += acum_mins;
+							acum_mins = 0;
+							acum_mins_index = 0;
 						}
 
+						if (show_power)
+						{
+							// fcalc = power;
+							fcalc = power * KW;
+							power_int = (unsigned short) fcalc;
+							fcalc = fcalc - power_int;
+							fcalc = fcalc * 100;
+							power_dec = (unsigned short) fcalc;
 
+							fcalc = acum_hours * KW;
+							wh_int = (unsigned short) fcalc;
+							fcalc = fcalc - wh_int;
+							fcalc = fcalc * 100;
+							wh_dec = (unsigned short) fcalc;
+
+							sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%02d\r\n", power_int, power_dec, wh_int, wh_dec);
+
+							// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, V_Sense, I_Sense);
+							// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
+							//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
+							//TODO: para debug no envio datos
+							Usart2Send(s_lcd);
+
+							show_power = 0;
+						}
 					}
 					timer_standby = 200;		//10 veces 200ms
 
-					// if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
-					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_CALL) && (!sended))
-					{
-						Usart2Send((char *) (const char *) "Llamadas Listas!\r\n");
-						sended++;
-					}
-
-					if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended == 1))
-					{
-						Usart2Send((char *) (const char *) "SMS Listo!\r\n");
-						sended++;
-					}
-
-					if ((FuncsGSMReady() == resp_gsm_ok) && (sended == 2))
-					{
-						FuncsGSMSendSMS("Hola", "1145376762");
-						sended++;
-					}
+					// // if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
+					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_CALL) && (!sended))
+					// {
+					// 	Usart2Send((char *) (const char *) "Llamadas Listas!\r\n");
+					// 	sended++;
+					// }
+					//
+					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended == 1))
+					// {
+					// 	Usart2Send((char *) (const char *) "SMS Listo!\r\n");
+					// 	sended++;
+					// }
+					//
+					// if ((FuncsGSMReady() == resp_gsm_ok) && (sended == 2))
+					// {
+					// 	// FuncsGSMSendSMS("Hola", "1145376762");
+					// 	sended++;
+					// }
+					//
+					// if (sended == 3)
+					// {
+					// 	if (FuncsGSMCommandAnswer("AT+GSN\r\n", &param_struct.imei[0]) == resp_gsm_ok)
+					// 		sended++;
+					// }
+					//
+					// if (sended == 4)
+					// {
+					// 	if (FuncsGSMStateAsk() == gsm_state_ready)
+					// 	{
+					// 		Usart2Send((char *) (const char *) "IMEI\r\n");
+					// 		strcpy(s_lcd, &param_struct.imei[0]);
+					// 		Usart2Send(s_lcd);
+					// 		sended++;
+					// 	}
+					// }
 
 					// if (sended == 2)
 					// {

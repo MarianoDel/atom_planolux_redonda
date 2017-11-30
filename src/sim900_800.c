@@ -4,10 +4,18 @@
 #include "tim.h"
 #include "ESP8266.h"
 #include "funcs_gsm.h"		//para string flags
+#include "flash_program.h"
 
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+
+
+//PARAMETROS
+extern parameters_typedef param_struct;
+#define num_tel_rep		param_struct.num_reportar
+#define timer_rep			param_struct.timer_reportar
+#define send_energy		param_struct.send_energy_flag
 
 
 //UART GSM.
@@ -59,8 +67,6 @@ char GSMbuffRtaCommand[buffUARTGSMrx_dimension];
 const char GSM_OK[] 	= "OK";
 const char GSM_ERR[] 	= "ERROR";
 
-const char GSM_RTA		= '+';
-
 const char GSM_CMGF[] = "+CMGF:";
 const char GSM_IPSTATE[] = "STATE:";
 
@@ -89,7 +95,7 @@ unsigned char GSMnumSMS = 1;
 char GSMReadSMSState = 0;
 char GSMReadSMScommand[32];
 char GSMReadSMSrepIn[32];
-unsigned char GSMrxSMSState = 0;
+// unsigned char GSMrxSMSState = 0;
 unsigned char prestadorSimSelect = 0;
 unsigned char flagCloseIP = 0;
 
@@ -612,7 +618,8 @@ void GSMReceive (void)
 
 			if (GSMSendCommandFlag == 1)
 			{
-				if(buffUARTGSMrx2[0] == GSM_RTA)
+				//autorizo la copia siempre
+				// if(buffUARTGSMrx2[0] == '+')		//lo que sigue es la respuesta al comando
 					GSMSendCommandFlag = 2;
 			}
 		}
@@ -651,7 +658,7 @@ void GSMReceive (void)
 		{
 			FuncsGSMMessageFlags (GSM_RESET_FLAG);
 			FuncsGSMMessageFlags (GSM_SET_CALL);
-		}			
+		}
 
 		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"SMS Ready", (sizeof("SMS Ready") - 1)))
 			FuncsGSMMessageFlags (GSM_SET_SMS);
@@ -662,68 +669,21 @@ void GSMReceive (void)
 			FuncsGSMMessageFlags (GSM_SET_POWER_DOWN);
 		}
 
-		if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"000:", sizeof ("000:") -1))
+		// if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"+CMTIDS: \"SM\",", sizeof ("+CMTIDS: \"SM\",") -1))
+		// {
+		// 	GSMCantSMS2 = buffUARTGSMrx2[14] - 48;
+		// }
+		if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"+CMTI: \"SM\",", sizeof ("+CMTI: \"SM\",") -1))
 		{
-			strcpy(&GSMReadSMSrepIn[0], (const char *)&buffUARTGSMrx2[0]);
-		}
-		if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"+CMTIDS: \"SM\",", sizeof ("+CMTIDS: \"SM\",") -1))
-		{
-			GSMCantSMS2 = buffUARTGSMrx2[14] - 48;
-		}
-		else if (!strncmp((char *)&buffUARTGSMrx2[0], (const char *)"+CMTI: \"SM\",", sizeof ("+CMTI: \"SM\",") -1))
-		{
+			//TODO: modificar a dos bytes
 			GSMCantSMS = buffUARTGSMrx2[12] - 48;
 		}
-
-//		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: EST,", strlen((const char *)"000: EST,")))
-//			*pAlertasReportar |= 0x80;
-//
-//		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: ARM,", strlen((const char *)"000: ARM,")))
-//		{
-//			if (!strncmp((const char *)&buffUARTGSMrx2[9], (const char *)puserCode, strlen((const char *)puserCode)))
-//			{
-//				strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-//
-//				*pActDact |= 0x40; //Armar
-//			}
-//		}
 
 		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"CLOSED", strlen((const char *)"CLOSED")))
 		{
 			flagCloseIP = 1;
 		}
 
-//		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: DRM,", strlen((const char *)"000: DRM,")))
-//		{
-//			if (!strncmp((const char *)&buffUARTGSMrx2[9], (const char *)puserCode, strlen((const char *)puserCode)))
-//			{
-//				strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-//
-//				*pActDact |= 0x80; //Desarmar
-//			}
-//		}
-/*		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: ARM", sizeof("000: ARM") - 1))
-		{
-			if (!strncmp((const char *)&buffUARTGSMrx2[9], (const char *)puserCode, strlen((const char *)puserCode)))
-			{
-				strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-				*pActDact |= 0x40; //Armar
-				*pActDact |= 0x01; //SendOK.
-			}
-		}
-
-		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"000: DRM", sizeof("000: DRM") - 1))
-		{
-			if (!strncmp((const char *)&buffUARTGSMrx2[9], (const char *)puserCode, strlen((const char *)puserCode)))
-			{
-				strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-				*pActDact |= 0x80; //Desrmar
-				*pActDact |= 0x01; //SendOK.
-			}
-		}
-*/
 		PacketReadyUARTGSM = 0;
 	}
 }
@@ -781,10 +741,14 @@ char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta
 			//Espera rta.
 			if (GSMSendCommandFlag == 2)
 			{
-				GSMSendCommandFlag = 3;
-				GSMSendCommandState++;
+				// GSMSendCommandFlag = 3;
+				// GSMSendCommandState++;
 				//Rta obtenida.
 				strcpy((char *)ptrRta, (const char *)&buffUARTGSMrx2[0]);
+				//OK pegado
+				GSMSendCommandFlag = 0;
+				GSMSendCommandState = 0;
+				return 2;
 			}
 			break;
 
@@ -1604,272 +1568,373 @@ void GSMTimeoutCounters (void)
 }
 
 
-//---------------------------------------------------------//
-//void GSMrxSMS(char * ptrMSG, char *ptrNumTel, char flagSMSin)
-//---------------------------------------------------------//
-void GSMrxSMS(unsigned char * pAlertasReportar, char * puserCode, unsigned char * pclaveAct, unsigned char * pActDact, char * pGSMReadSMStel)
+void GSMReceivSMS (void)
 {
-	unsigned char i;
-	unsigned char flag;
+	unsigned char i, j, colon_index;
+	char * pToAnswer;
 
-	if (GSMCantSMS)
+	if (GSMCantSMS)	//me avisan que hay un SMS para leer, este es el index
 	{
-		switch(GSMrxSMSState)
+		switch(GSMReadSMSState)
 		{
-
 			case 0:
-				GSMrxSMSState++;
+				sprintf(&GSMReadSMScommand[0], (const char *)"AT+CMGR=%d\r\n", GSMCantSMS);
+				GSMReadSMSState++;
 				break;
+
 			case 1:
-				i = GSM_SetSIM (1);
-
-				if (i == 2)
-					GSMrxSMSState++;
-				if (i > 2)
-					GSMrxSMSState=0;
-				break;
-
-			case 2:
-					//Verifico que no hayan sido leidos los SMS.
-					if (GSMnumSMS <= GSMCantSMS)
-					{
-						switch(GSMReadSMSState)
-						{
-							case 0:
-								GSMReadSMSrepIn[0] = 0;
-								sprintf(&GSMReadSMScommand[0], (const char *)"AT+CMGR=%d\r\n", GSMnumSMS);
-								GSMReadSMSState++;
-								break;
-
-							case 1:
-
-								i = GSMSendCommand (&GSMReadSMScommand[0], 15, 1, &GSMbuffRtaCommand[0]);
-
-								if (i == 2)
-								{
-									if (!strncmp((char *)&GSMbuffRtaCommand[0], (const char *)"+CMGR:", sizeof("+CMGR:") - 1))
-									{
-
-										if (!strncmp((char *)&GSMReadSMSrepIn[0], (const char *)"000:", sizeof ("000:") -1))
-										{
-											i = 0;
-											flag = 0;
-											while (GSMbuffRtaCommand[i] != 0)
-											{
-												if ((GSMbuffRtaCommand[i] == ',') && (GSMbuffRtaCommand[i+1] == '"') && (flag == 0))
-												{
-													i += 2;
-													flag = i;
-													while (GSMbuffRtaCommand[i] != '"')
-													{
-														i++;
-													}
-													strncpy(pGSMReadSMStel, &GSMbuffRtaCommand[flag], (i - flag));
-													//strcat(pGSMReadSMStel, (const char *)"\r\n");
-													//UARTDBGSend(pGSMReadSMStel);
-													//GSMReadSMStel[0]  = 0;
-												}
-												i++;
-											}
-
-											GSMReadSMSrepIn[19] = 0;
-											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: ARM", sizeof("000: ARM") - 1))
-											{
-												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
-												{
-													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-													*pActDact |= 0x40; //Armar
-													*pActDact |= 0x01; //SendOK.
-												}
-											}
-
-											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: DRM", sizeof("000: DRM") - 1))
-											{
-												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
-												{
-													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-													*pActDact |= 0x80; //Desrmar
-													*pActDact |= 0x01; //SendOK.
-												}
-											}
-											//strcat(&GSMReadSMSrepIn[0], (const char *)"\r\n");
-											//UARTDBGSend(&GSMReadSMSrepIn[0]);
-											//Led4Toggle();
-										}
-
-										GSMReadSMSState = 0;
-										GSMnumSMS++;
-									}
-								}
-
-								if (i > 2)
-								{
-									GSMReadSMSState = 0;
-								}
-							break;
-
-						default:
-							GSMReadSMSState = 0;
-							break;
-						}
-			}
-			else
-			{
-
-				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 15, 0, &GSMbuffRtaCommand[0]);
+				i = GSMSendCommand (&GSMReadSMScommand[0], 6000, 1, &GSMbuffRtaCommand[0]);
 
 				if (i == 2)
 				{
-					GSMnumSMS = 1;
-					GSMrxSMSState = 0;
+					if (!strncmp((char *)&GSMbuffRtaCommand[0], (const char *)"+CMGR:", sizeof("+CMGR:") - 1))
+					{
+						//mensajes al modulo
+						colon_index = 0;
+						for (j = 0; j < 222; j++)		//222 	160bytes para SMS + 62 bytes header
+						{
+							if (GSMbuffRtaCommand[j] == '"')
+							{
+								colon_index++;
+								if (colon_index == 8)
+								{
+									pToAnswer = (char *) &GSMbuffRtaCommand [j+1];
+									j = 222;
+								}
+							}
+						}
+
+						//fin del for, en pToAnswer debo tener la respuesta (payload del SMS)
+						if (colon_index == 8)
+						{
+							//Son todos payloads correctos REVISO RESPUESTAS
+							if (!strncmp(pToAnswer, (const char *)"REPORTAR:", sizeof ("REPORTAR:") -1))
+							{
+								strcpy(num_tel_rep, (pToAnswer + 9));
+								//quito el OK pegado
+								colon_index	= strlen(num_tel_rep);
+								if (colon_index > 2)
+									num_tel_rep[colon_index - 2] = '\0';
+
+							}
+
+							if (!strncmp(pToAnswer, (const char *)"TIMER:", sizeof ("TIMER:") -1))
+							{
+								colon_index = 0;
+								colon_index += (*(pToAnswer + 6) - 48) * 10;
+								colon_index += *(pToAnswer + 7) - 48;
+
+								if ((colon_index > 1) && (colon_index <= 60))
+									timer_rep = colon_index;
+							}
+
+							if (!strncmp(pToAnswer, (const char *)"ENERGIA:", sizeof ("ENERGIA:") -1))
+								send_energy = 1;
+
+						}
+
+						//me fijo si tengo mas SMS
+						if (GSMCantSMS > 1)
+						{
+							GSMReadSMSState = 0;
+							GSMCantSMS--;
+						}
+						else
+							GSMReadSMSState++;
+					}
+				}
+
+				if (i > 2)
+					GSMReadSMSState = 0;
+
+				break;
+
+			case 2:
+				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 25000, 0, &GSMbuffRtaCommand[0]);
+
+				if (i == 2)
+				{
 					GSMReadSMSState = 0;
 					GSMCantSMS = 0;
 				}
 
 				if (i > 2)
-				{
 					GSMReadSMSState = 0;
-				}
-			}
-			break;
 
-		default:
-			GSMrxSMSState = 0;
-			break;
-		}
-	}
-	else if (GSMCantSMS2)
-	{
-		switch(GSMrxSMSState)
-		{
-
-			case 0:
-				GSMrxSMSState++;
-				break;
-			case 1:
-				i = GSM_SetSIM (2);
-
-				if (i == 2)
-					GSMrxSMSState++;
-				if (i > 2)
-					GSMrxSMSState=0;
 				break;
 
-			case 2:
-					//Verifico que no hayan sido leidos los SMS.
-					if (GSMnumSMS <= GSMCantSMS2)
-					{
-						switch(GSMReadSMSState)
-						{
-							case 0:
-								GSMReadSMSrepIn[0] = 0;
-								sprintf(&GSMReadSMScommand[0], (const char *)"AT+CMGR=%d\r\n", GSMnumSMS);
-								GSMReadSMSState++;
-								break;
-
-							case 1:
-
-								i = GSMSendCommand (&GSMReadSMScommand[0], 15, 1, &GSMbuffRtaCommand[0]);
-
-								if (i == 2)
-								{
-									if (!strncmp((char *)&GSMbuffRtaCommand[0], (const char *)"+CMGR:", sizeof("+CMGR:") - 1))
-									{
-
-										if (!strncmp((char *)&GSMReadSMSrepIn[0], (const char *)"000:", sizeof ("000:") -1))
-										{
-											i = 0;
-											flag = 0;
-											while (*(GSMbuffRtaCommand+i) != 0)
-											{
-												if ((*(GSMbuffRtaCommand+i) == ',') && (*(GSMbuffRtaCommand+i+1) == '"') && (flag == 0))
-												{
-													i += 2;
-													flag = i;
-													while (*(GSMbuffRtaCommand+i) != '"')
-													{
-														i++;
-													}
-													strncpy((char *)pGSMReadSMStel, (const char *)&GSMbuffRtaCommand[flag], (i - flag));
-													//strcat(pGSMReadSMStel, (const char *)"\r\n");
-													//UARTDBGSend(pGSMReadSMStel);
-													//*pGSMReadSMStel  = 0;
-												}
-												i++;
-											}
-
-											GSMReadSMSrepIn[19] = 0;
-											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: ARM", sizeof("000: ARM") - 1))
-											{
-												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
-												{
-													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-													*pActDact |= 0x40; //Armar
-													*pActDact |= 0x02; //SendOK.
-												}
-											}
-
-											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: DRM", sizeof("000: DRM") - 1))
-											{
-												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
-												{
-													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
-
-													*pActDact |= 0x80; //Desrmar
-													*pActDact |= 0x02; //SendOK.
-												}
-											}
-											//strcat(&GSMReadSMSrepIn[0], (const char *)"\r\n");
-											//UARTDBGSend(&GSMReadSMSrepIn[0]);
-											//Led4Toggle();
-										}
-
-										GSMReadSMSState = 0;
-										GSMnumSMS++;
-									}
-								}
-
-								if (i > 2)
-								{
-									GSMReadSMSState = 0;
-									//GSMrxSMSState = 0;
-								}
-							break;
-
-						default:
-							GSMReadSMSState = 0;
-							break;
-						}
-			}
-			else
-			{
-
-				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 15, 0, &GSMbuffRtaCommand[0]);
-
-				if (i == 2)
-				{
-					GSMnumSMS = 1;
-					GSMReadSMSState = 0;
-					GSMrxSMSState = 0;
-					GSMCantSMS2 = 0;
-				}
-
-				if (i > 2)
-				{
-					GSMrxSMSState = 0;
-					GSMReadSMSState = 0;
-				}
-			}
-			break;
-		default:
-			GSMrxSMSState = 0;
-			break;
+			default:
+				GSMReadSMSState = 0;
+				break;
 		}
 	}
 }
+//---------------------------------------------------------//
+//void GSMrxSMS(char * ptrMSG, char *ptrNumTel, char flagSMSin)
+//---------------------------------------------------------//
+// void GSMrxSMS(unsigned char * pAlertasReportar, char * puserCode, unsigned char * pclaveAct, unsigned char * pActDact, char * pGSMReadSMStel)
+// {
+// 	unsigned char i;
+// 	unsigned char flag;
+//
+// 	if (GSMCantSMS)
+// 	{
+// 		switch(GSMrxSMSState)
+// 		{
+//
+// 			case 0:
+// 				GSMrxSMSState++;
+// 				break;
+// 			case 1:
+// 				i = GSM_SetSIM (1);
+//
+// 				if (i == 2)
+// 					GSMrxSMSState++;
+// 				if (i > 2)
+// 					GSMrxSMSState=0;
+// 				break;
+//
+// 			case 2:
+// 					//Verifico que no hayan sido leidos los SMS.
+// 					if (GSMnumSMS <= GSMCantSMS)
+// 					{
+// 						switch(GSMReadSMSState)
+// 						{
+// 							case 0:
+// 								GSMReadSMSrepIn[0] = 0;
+// 								sprintf(&GSMReadSMScommand[0], (const char *)"AT+CMGR=%d\r\n", GSMnumSMS);
+// 								GSMReadSMSState++;
+// 								break;
+//
+// 							case 1:
+//
+// 								i = GSMSendCommand (&GSMReadSMScommand[0], 15, 1, &GSMbuffRtaCommand[0]);
+//
+// 								if (i == 2)
+// 								{
+// 									if (!strncmp((char *)&GSMbuffRtaCommand[0], (const char *)"+CMGR:", sizeof("+CMGR:") - 1))
+// 									{
+//
+// 										if (!strncmp((char *)&GSMReadSMSrepIn[0], (const char *)"000:", sizeof ("000:") -1))
+// 										{
+// 											i = 0;
+// 											flag = 0;
+// 											while (GSMbuffRtaCommand[i] != 0)
+// 											{
+// 												if ((GSMbuffRtaCommand[i] == ',') && (GSMbuffRtaCommand[i+1] == '"') && (flag == 0))
+// 												{
+// 													i += 2;
+// 													flag = i;
+// 													while (GSMbuffRtaCommand[i] != '"')
+// 													{
+// 														i++;
+// 													}
+// 													strncpy(pGSMReadSMStel, &GSMbuffRtaCommand[flag], (i - flag));
+// 													//strcat(pGSMReadSMStel, (const char *)"\r\n");
+// 													//UARTDBGSend(pGSMReadSMStel);
+// 													//GSMReadSMStel[0]  = 0;
+// 												}
+// 												i++;
+// 											}
+//
+// 											GSMReadSMSrepIn[19] = 0;
+// 											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: ARM", sizeof("000: ARM") - 1))
+// 											{
+// 												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
+// 												{
+// 													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
+//
+// 													*pActDact |= 0x40; //Armar
+// 													*pActDact |= 0x01; //SendOK.
+// 												}
+// 											}
+//
+// 											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: DRM", sizeof("000: DRM") - 1))
+// 											{
+// 												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
+// 												{
+// 													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
+//
+// 													*pActDact |= 0x80; //Desrmar
+// 													*pActDact |= 0x01; //SendOK.
+// 												}
+// 											}
+// 											//strcat(&GSMReadSMSrepIn[0], (const char *)"\r\n");
+// 											//UARTDBGSend(&GSMReadSMSrepIn[0]);
+// 											//Led4Toggle();
+// 										}
+//
+// 										GSMReadSMSState = 0;
+// 										GSMnumSMS++;
+// 									}
+// 								}
+//
+// 								if (i > 2)
+// 								{
+// 									GSMReadSMSState = 0;
+// 								}
+// 							break;
+//
+// 						default:
+// 							GSMReadSMSState = 0;
+// 							break;
+// 						}
+// 			}
+// 			else
+// 			{
+//
+// 				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 15, 0, &GSMbuffRtaCommand[0]);
+//
+// 				if (i == 2)
+// 				{
+// 					GSMnumSMS = 1;
+// 					GSMrxSMSState = 0;
+// 					GSMReadSMSState = 0;
+// 					GSMCantSMS = 0;
+// 				}
+//
+// 				if (i > 2)
+// 				{
+// 					GSMReadSMSState = 0;
+// 				}
+// 			}
+// 			break;
+//
+// 		default:
+// 			GSMrxSMSState = 0;
+// 			break;
+// 		}
+// 	}
+// 	else if (GSMCantSMS2)
+// 	{
+// 		switch(GSMrxSMSState)
+// 		{
+//
+// 			case 0:
+// 				GSMrxSMSState++;
+// 				break;
+// 			case 1:
+// 				i = GSM_SetSIM (2);
+//
+// 				if (i == 2)
+// 					GSMrxSMSState++;
+// 				if (i > 2)
+// 					GSMrxSMSState=0;
+// 				break;
+//
+// 			case 2:
+// 					//Verifico que no hayan sido leidos los SMS.
+// 					if (GSMnumSMS <= GSMCantSMS2)
+// 					{
+// 						switch(GSMReadSMSState)
+// 						{
+// 							case 0:
+// 								GSMReadSMSrepIn[0] = 0;
+// 								sprintf(&GSMReadSMScommand[0], (const char *)"AT+CMGR=%d\r\n", GSMnumSMS);
+// 								GSMReadSMSState++;
+// 								break;
+//
+// 							case 1:
+//
+// 								i = GSMSendCommand (&GSMReadSMScommand[0], 15, 1, &GSMbuffRtaCommand[0]);
+//
+// 								if (i == 2)
+// 								{
+// 									if (!strncmp((char *)&GSMbuffRtaCommand[0], (const char *)"+CMGR:", sizeof("+CMGR:") - 1))
+// 									{
+//
+// 										if (!strncmp((char *)&GSMReadSMSrepIn[0], (const char *)"000:", sizeof ("000:") -1))
+// 										{
+// 											i = 0;
+// 											flag = 0;
+// 											while (*(GSMbuffRtaCommand+i) != 0)
+// 											{
+// 												if ((*(GSMbuffRtaCommand+i) == ',') && (*(GSMbuffRtaCommand+i+1) == '"') && (flag == 0))
+// 												{
+// 													i += 2;
+// 													flag = i;
+// 													while (*(GSMbuffRtaCommand+i) != '"')
+// 													{
+// 														i++;
+// 													}
+// 													strncpy((char *)pGSMReadSMStel, (const char *)&GSMbuffRtaCommand[flag], (i - flag));
+// 													//strcat(pGSMReadSMStel, (const char *)"\r\n");
+// 													//UARTDBGSend(pGSMReadSMStel);
+// 													//*pGSMReadSMStel  = 0;
+// 												}
+// 												i++;
+// 											}
+//
+// 											GSMReadSMSrepIn[19] = 0;
+// 											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: ARM", sizeof("000: ARM") - 1))
+// 											{
+// 												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
+// 												{
+// 													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
+//
+// 													*pActDact |= 0x40; //Armar
+// 													*pActDact |= 0x02; //SendOK.
+// 												}
+// 											}
+//
+// 											if(!strncmp((const char *)&GSMReadSMSrepIn[0], (const char *)"000: DRM", sizeof("000: DRM") - 1))
+// 											{
+// 												if (!strncmp((const char *)&GSMReadSMSrepIn[9], (const char *)puserCode, strlen((const char *)puserCode)))
+// 												{
+// 													strncpy((char *) pclaveAct, (const char *)&buffUARTGSMrx2[16], 4);
+//
+// 													*pActDact |= 0x80; //Desrmar
+// 													*pActDact |= 0x02; //SendOK.
+// 												}
+// 											}
+// 											//strcat(&GSMReadSMSrepIn[0], (const char *)"\r\n");
+// 											//UARTDBGSend(&GSMReadSMSrepIn[0]);
+// 											//Led4Toggle();
+// 										}
+//
+// 										GSMReadSMSState = 0;
+// 										GSMnumSMS++;
+// 									}
+// 								}
+//
+// 								if (i > 2)
+// 								{
+// 									GSMReadSMSState = 0;
+// 									//GSMrxSMSState = 0;
+// 								}
+// 							break;
+//
+// 						default:
+// 							GSMReadSMSState = 0;
+// 							break;
+// 						}
+// 			}
+// 			else
+// 			{
+//
+// 				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 15, 0, &GSMbuffRtaCommand[0]);
+//
+// 				if (i == 2)
+// 				{
+// 					GSMnumSMS = 1;
+// 					GSMReadSMSState = 0;
+// 					GSMrxSMSState = 0;
+// 					GSMCantSMS2 = 0;
+// 				}
+//
+// 				if (i > 2)
+// 				{
+// 					GSMrxSMSState = 0;
+// 					GSMReadSMSState = 0;
+// 				}
+// 			}
+// 			break;
+// 		default:
+// 			GSMrxSMSState = 0;
+// 			break;
+// 		}
+// 	}
+// }
 
 char GSMConfigPDPGPRS (char sim, char *ptrAPN, char *ptrUSER, char *ptrKEY , char *ptrIPAdd, char *ptrIPremote, char *ptrPORTremote,unsigned short timeOut)
 {

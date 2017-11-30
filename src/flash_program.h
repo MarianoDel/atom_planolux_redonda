@@ -43,6 +43,8 @@
 #define PAGE30			((uint32_t)0x08007800)
 #define PAGE31			((uint32_t)0x08007C00)
 
+#define PAGE63			((uint32_t)0x0800FC00)
+
 typedef union mem_bkp {
 		unsigned int v_bkp [FLASH_PAGE_SIZE_DIV4];
 		unsigned char v_bkp_8u [FLASH_PAGE_SIZE];
@@ -51,21 +53,20 @@ typedef union mem_bkp {
 
 typedef struct parameters {
 
-	unsigned char last_function_in_flash;
+	char num_reportar [24];
+	char imei [24];
+	char num_propio [24];
 
-	unsigned char last_program_in_flash;
-	unsigned char last_program_deep_in_flash;
-	unsigned char dummy;	//corrige desplazamiento de memoria
+	unsigned int acumm_historico;
+	unsigned int acumm_diario;
+	unsigned short pot_instantanea;
 
-	unsigned short last_channel_in_flash;
-	unsigned char dummy1;	//corrige desplazamiento de memoria
-	unsigned char dummy2;	//corrige desplazamiento de memoria
+	unsigned char timer_reportar;
+	unsigned char send_energy_flag;
 
-	//agregados para RGB_FOR_CAT
-	unsigned char pwm_channel_1;
-	unsigned char pwm_channel_2;
-	unsigned char pwm_channel_3;
-	unsigned char pwm_channel_4;
+	//dummys para completar
+	// unsigned char dummy1;
+	// unsigned char dummy2;
 
 } parameters_typedef;
 

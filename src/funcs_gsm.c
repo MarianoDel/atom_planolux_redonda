@@ -14,6 +14,8 @@ t_GsmState gsm_state = gsm_state_reset;
 unsigned char gsm_sms_error_counter = 0;
 char * p_MSG;
 char * p_NUM;
+char * p_CMD;
+char * p_RESP;
 
 //flags
 unsigned short GSMFlags = 0;
@@ -90,6 +92,15 @@ void FuncsGSM (void)
 			}
 			break;
 
+		case gsm_state_command_answer:
+			resp = GSMSendCommand (p_CMD, 4000, 1, p_RESP);
+
+			if (resp != 1)
+			{
+				gsm_state = gsm_state_ready;
+			}
+			break;
+
 		case gsm_state_shutdown:
 			resp = GSM_Stop();
 
@@ -118,6 +129,8 @@ void FuncsGSM (void)
 
 	GSMProcess ();		//lee bytes del puerto serie y avisa con flag la terminacion del msj
 	GSMReceive ();		//usa el flag para analizar las respuestas
+
+	GSMReceivSMS ();	//si existen SMS los leo aca!
 
 }
 
@@ -153,6 +166,11 @@ unsigned char FuncsGSMReady (void)
 		return resp_gsm_error;
 }
 
+unsigned char FuncsGSMStateAsk (void)
+{
+	return gsm_state;
+}
+
 void FuncsGSMMessageFlags (unsigned short flag)
 {
 	unsigned short temp;
@@ -170,6 +188,17 @@ unsigned short FuncsGSMMessageFlagsAsk (void)
 	return GSMFlags;
 }
 
+unsigned char FuncsGSMCommandAnswer (char * pCMD, char * pIMEI)
+{
+	if (gsm_state != gsm_state_ready)
+		return resp_gsm_error;
+
+	gsm_state = gsm_state_command_answer;
+	p_RESP = pIMEI;
+	p_CMD = pCMD;
+
+	return resp_gsm_ok;
+}
 //--- Private function prototypes ---//
 //--- Private functions ---//
 

@@ -14,7 +14,7 @@ typedef enum {
 	gsm_state_ready,
 	gsm_state_sending_conf,
 	gsm_state_sending_sms,
-	gsm_state_wait_ip1,
+	gsm_state_command_answer,
 	gsm_state_idle,
 	gsm_state_connecting,
 	gsm_state_connected,
@@ -45,10 +45,12 @@ typedef enum {
 void FuncsGSM (void);
 void FuncsGSMReset (void);
 unsigned char FuncsGSMReady (void);
+unsigned char FuncsGSMStateAsk (void);
 void FuncsGSMShutdown (void);
 unsigned char FuncsGSMSendSMS (char *, char *);
 void FuncsGSMMessageFlags (unsigned short);
 unsigned short FuncsGSMMessageFlagsAsk (void);
+unsigned char FuncsGSMCommandAnswer (char * , char * );
 
 
 
