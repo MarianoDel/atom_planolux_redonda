@@ -196,6 +196,20 @@ typedef enum
 	// LAMP_TO_OFF
 
 } main_state_t;
+
+//Estados cuando la lampara esta prendida
+typedef enum
+{
+	init_airplane0 = 0,
+	init_airplane1,
+	meas_init,
+	meas_meas,
+	meas_reporting0,
+	meas_reporting1,
+  	meas_go_airplane
+
+} lamp_on_state_t;
+
 #endif
 //---- Temperaturas en el LM335
 //37	2,572

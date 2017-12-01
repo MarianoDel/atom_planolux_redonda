@@ -68,21 +68,19 @@ volatile unsigned char rx1buff[SIZEOF_DATA];
 //volatile unsigned char data[SIZEOF_DATA];
 
 // ------- Externals de los timers -------
-//volatile unsigned short prog_timer = 0;
-//volatile unsigned short mainmenu_timer = 0;
-volatile unsigned short show_select_timer = 0;
-volatile unsigned char switches_timer = 0;
-volatile unsigned char acswitch_timer = 0;
-
-volatile unsigned short scroll1_timer = 0;
-volatile unsigned short scroll2_timer = 0;
-
-volatile unsigned short standalone_timer;
-volatile unsigned short standalone_enable_menu_timer;
-//volatile unsigned short standalone_menu_timer;
-volatile unsigned char grouped_master_timeout_timer;
+// volatile unsigned char switches_timer = 0;
+//
+//
+// volatile unsigned short scroll1_timer = 0;
+// volatile unsigned short scroll2_timer = 0;
+//
+// volatile unsigned short standalone_timer;
+// volatile unsigned short standalone_enable_menu_timer;
+// //volatile unsigned short standalone_menu_timer;
+// volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-volatile unsigned char timer_wifi_bright = 0;
+volatile unsigned short timer_rep = 0;
+// volatile unsigned char timer_wifi_bright = 0;
 
 #ifdef USE_REDONDA_BASIC
 volatile unsigned short timer_relay = 0;			//para relay default (si no hay synchro)
@@ -149,11 +147,11 @@ parameters_typedef param_struct;
 
 
 //para las mediciones
-unsigned int power_2secs_acum = 0;
-unsigned char power_2secs_index = 0;
-unsigned short power_minutes = 0;
-unsigned char power_minutes_index = 0;
-unsigned short power_hours = 0;
+// unsigned int power_2secs_acum = 0;
+// unsigned char power_2secs_index = 0;
+// unsigned short power_minutes = 0;
+// unsigned char power_minutes_index = 0;
+// unsigned short power_hours = 0;
 
 //para los msjs GSM
 char gsmNUM [20];
@@ -174,9 +172,11 @@ volatile unsigned char filter_timer;
 //volatile unsigned char door_filter;
 //volatile unsigned char take_sample;
 //volatile unsigned char move_relay;
+#ifdef WITH_HYST
 volatile unsigned short secs = 0;
 volatile unsigned char hours = 0;
 volatile unsigned char minutes = 0;
+#endif
 
 #define SIZEOF_POWER_VECT		10
 
@@ -220,18 +220,23 @@ int main(void)
 	unsigned char resp = RESP_CONTINUE;
 	unsigned short power_int, power_dec;
 	unsigned short wh_int, wh_dec;
-	unsigned short power;
+	unsigned short power, last_power;
 	float fcalc = 1.0;
 	unsigned int zero_current_loc = 0;
 
-	unsigned char acum_secs_index, acum_mins_index;
-	unsigned int acum_secs, acum_mins, acum_hours;
+	unsigned short acum_secs_index;
+	unsigned int acum_secs, acum_hours;
+	unsigned char show_power_index = 0;
 	unsigned char show_power = 0;
 
 #ifdef USE_REDONDA_BASIC
 	main_state_t main_state = MAIN_INIT;
 	unsigned char reportar_SMS = 0;
 	unsigned char sended = 0;
+	lamp_on_state_t lamp_on_state = init_airplane0;
+	unsigned char counters_mode = 0;
+	unsigned char meas_end = 0;
+
 #ifdef WITH_HYST
 	unsigned short hyst;
 #endif
@@ -519,9 +524,9 @@ int main(void)
 			case SET_COUNTERS_AND_PHONE:
 				acum_secs = 0;
 				acum_secs_index = 0;
-				acum_mins = 0;
-				acum_mins_index = 0;
 				acum_hours = 0;
+
+				counters_mode = 0;
 
 				if (reportar_SMS)
 				{
@@ -545,131 +550,158 @@ int main(void)
 				break;
 
 			case LAMP_ON:
-				if (!timer_standby)
+				switch (lamp_on_state)
 				{
-					if (i < SIZEOF_POWER_VECT)
-					{
-						power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
-						i++;
-					}
-					else
-					{
-						i = 0;
-						//termine de cargar el vector, guardo muestro info
-						power = PowerCalcMean8(power_vect);
-						acum_secs += power;
-						acum_secs_index++;
-
-						if (acum_secs_index == 30)
+					case init_airplane0:
+						if (FuncsGSMStateAsk() == gsm_state_ready)
 						{
-							acum_mins += acum_secs;
-							acum_mins_index++;
-							acum_secs = 0;
-							acum_secs_index = 0;
-							show_power = 1;
+							//lo paso a modo avion
+							s_lcd[0] = '\0';
+							FuncsGSMCommandAnswer ("AT+CFUN=4\r\n" , s_lcd);
+							lamp_on_state = init_airplane1;
 						}
+						break;
 
-						if (acum_mins_index == 60)
+					case init_airplane1:
+						if (strncmp(s_lcd, "OK", sizeof("OK") - 1))
 						{
-							acum_mins = acum_mins / 1800;		//lo convierto a Wh
-							acum_hours += acum_mins;
-							acum_mins = 0;
-							acum_mins_index = 0;
+							//en modo avion, prendo y mido
+							RelayOn();
+							lamp_on_state = meas_init;
 						}
+						break;
 
-						if (show_power)
+					case meas_init:
+						if (RelayIsOn())
 						{
-							// fcalc = power;
-							fcalc = power * KW;
-							power_int = (unsigned short) fcalc;
-							fcalc = fcalc - power_int;
-							fcalc = fcalc * 100;
-							power_dec = (unsigned short) fcalc;
-
-							fcalc = acum_hours * KW;
-							wh_int = (unsigned short) fcalc;
-							fcalc = fcalc - wh_int;
-							fcalc = fcalc * 100;
-							wh_dec = (unsigned short) fcalc;
-
-							sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%02d\r\n", power_int, power_dec, wh_int, wh_dec);
-
-							// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, V_Sense, I_Sense);
-							// sprintf(s_lcd, "z: %d, v: %d, i: %d\r\n", zero_current, GetVGrid(), GetIGrid());
-							//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
-							//TODO: para debug no envio datos
-							Usart2Send(s_lcd);
-
-							show_power = 0;
+							lamp_on_state = meas_meas;
+							counters_mode = 1;
 						}
-					}
-					timer_standby = 200;		//10 veces 200ms
+						break;
 
-					// // if ((FuncsGSMReady() == resp_gsm_ok) && (!sended))
-					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_CALL) && (!sended))
-					// {
-					// 	Usart2Send((char *) (const char *) "Llamadas Listas!\r\n");
-					// 	sended++;
-					// }
-					//
-					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_SMS) && (sended == 1))
-					// {
-					// 	Usart2Send((char *) (const char *) "SMS Listo!\r\n");
-					// 	sended++;
-					// }
-					//
-					// if ((FuncsGSMReady() == resp_gsm_ok) && (sended == 2))
-					// {
-					// 	// FuncsGSMSendSMS("Hola", "1145376762");
-					// 	sended++;
-					// }
-					//
-					// if (sended == 3)
-					// {
-					// 	if (FuncsGSMCommandAnswer("AT+GSN\r\n", &param_struct.imei[0]) == resp_gsm_ok)
-					// 		sended++;
-					// }
-					//
-					// if (sended == 4)
-					// {
-					// 	if (FuncsGSMStateAsk() == gsm_state_ready)
-					// 	{
-					// 		Usart2Send((char *) (const char *) "IMEI\r\n");
-					// 		strcpy(s_lcd, &param_struct.imei[0]);
-					// 		Usart2Send(s_lcd);
-					// 		sended++;
-					// 	}
-					// }
+					case meas_meas:
+						if (meas_end)
+						{
+							meas_end = 0;
 
-					// if (sended == 2)
-					// {
-					// 	Wait_ms(10000);
-					// 	//apago modulo
-					// 	FuncsGSMShutdown ();
-					// 	sended++;
-					// }
-					//
-					// if ((FuncsGSMMessageFlagsAsk () & GSM_SET_POWER_DOWN) && (sended == 3))
-					// {
-					// 	Usart2Send((char *) (const char *) "Pwr down!\r\n");
-					// 	Wait_ms(60000);
-					// 	sended = 0;
-					// }
+							if (!timer_rep)
+							{
+								timer_rep = param_struct.timer_reportar;
+								counters_mode = 2;
+								lamp_on_state = meas_reporting0;
+							}
+						}
+						break;
 
-					// fcalc = voltage;
-					// fcalc = fcalc * KV;
-					// volt_int = (short) fcalc;
-					// fcalc = fcalc - volt_int;
-					// fcalc = fcalc * 100;
-					// volt_dec = (short) fcalc;
-					//
-					// sprintf(str, "%2d.%02d", volt_int, volt_dec);
-					//
-					// //sprintf(str, "%4d        ", voltage);
-					// LCDTransmitStr(str);
+					case meas_reporting0:
+						//lo saco de modo avion
+						s_lcd[0] = '\0';
+						FuncsGSMCommandAnswer ("AT+CFUN=1\r\n" , s_lcd);
+						lamp_on_state = meas_reporting1;
+						break;
 
+					case meas_reporting1:
+						if (strncmp(s_lcd, "OK", sizeof("OK") - 1))
+						{
+							if (FuncsGSMStateAsk() == gsm_state_ready)
+							{
+								// fcalc = power;
+								fcalc = power * KW;
+								power_int = (unsigned short) fcalc;
+								fcalc = fcalc - power_int;
+								fcalc = fcalc * 100;
+								power_dec = (unsigned short) fcalc;
+
+								fcalc = (acum_hours + acum_secs / 1800) * KW;
+								wh_int = (unsigned short) fcalc;
+								fcalc = fcalc - wh_int;
+								fcalc = fcalc * 10;
+								wh_dec = (unsigned short) fcalc;
+
+								sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
+
+								//TODO: para debug no envio datos
+								Usart2Send(s_lcd);
+								FuncsGSMSendSMS ("1145376762", s_lcd);
+							}
+							lamp_on_state = init_airplane0;
+						}
+						break;
+
+					default:
+						lamp_on_state = init_airplane0;
+						break;
 				}
 
+				if (counters_mode)	//si esta activo el modo de contadores mido
+				{
+					if (!timer_standby)	//update cada 200ms
+					{
+						if (i < SIZEOF_POWER_VECT)
+						{
+							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
+							i++;
+						}
+						else
+						{		//termine de cargar el vector, guardo muestro info
+							i = 0;
+
+							if (counters_mode == 1)	//mido normalmente
+							{
+								power = PowerCalcMean8(power_vect);
+								last_power = power;
+							}
+
+							if (counters_mode == 2)	//no mido solo update de lo viejo
+								power = last_power;
+
+							acum_secs += power;
+							acum_secs_index++;
+							show_power_index++;
+
+							if (acum_secs_index >= 1800)
+							{
+								acum_hours += (acum_secs / 1800);	//lo convierto a Wh, para no perder bits en cada cuenta
+								acum_secs = 0;
+								acum_secs_index = 0;
+							}
+
+							//cuando termino una medicion completa aviso con meas_end
+							meas_end = 1;
+
+
+							// if (show_power_index >= 30)
+							// {
+							// 	show_power = 1;
+							// 	show_power_index = 0;
+							// }
+							//
+							// if (show_power)
+							// {
+							// 	// fcalc = power;
+							// 	fcalc = power * KW;
+							// 	power_int = (unsigned short) fcalc;
+							// 	fcalc = fcalc - power_int;
+							// 	fcalc = fcalc * 100;
+							// 	power_dec = (unsigned short) fcalc;
+							//
+							// 	fcalc = (acum_hours + acum_secs / 1800) * KW;
+							// 	wh_int = (unsigned short) fcalc;
+							// 	fcalc = fcalc - wh_int;
+							// 	fcalc = fcalc * 10;
+							// 	wh_dec = (unsigned short) fcalc;
+							//
+							// 	sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
+							//
+							// 	//TODO: para debug no envio datos
+							// 	Usart2Send(s_lcd);
+							//
+							// 	show_power = 0;
+							// }
+						}
+						timer_standby = 200;		//10 veces 200ms
+					}
+				}
 				break;
 
 			default:
@@ -1215,14 +1247,12 @@ void TimingDelay_Decrement(void)
 	if (wait_ms_var)
 		wait_ms_var--;
 
-//	if (display_timer)
-//		display_timer--;
+	if (timer_rep)
+		timer_rep--;
 
 	if (timer_standby)
 		timer_standby--;
 
-	if (acswitch_timer)
-		acswitch_timer--;
 
 #ifdef USE_REDONDA_BASIC
 	if (tt_take_photo_sample)
@@ -1243,6 +1273,7 @@ void TimingDelay_Decrement(void)
 	if (filter_timer)
 		filter_timer--;
 
+#ifdef WITH_HYST
 	//cuenta de a 1 minuto
 	if (secs > 59999)	//pasaron 1 min
 	{
@@ -1257,6 +1288,7 @@ void TimingDelay_Decrement(void)
 		hours++;
 		minutes = 0;
 	}
+#endif
 
 
 #ifdef USE_MQTT_LIB
