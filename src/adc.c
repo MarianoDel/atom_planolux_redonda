@@ -303,7 +303,8 @@ void UpdatePhotoTransistor(void)
 	{
 		tt_take_photo_sample = 1000;
 
-		VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
+		// VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
+		VoltagePhoto [photo_index] = Light_Sense;
 
 		if (photo_index < (SIZEOF_PHOTO_TRANS - 1))
 			photo_index++;
@@ -319,7 +320,8 @@ void FillPhotoBuffer (void)
 	unsigned char i;
 	unsigned short dummy;
 
-	dummy = ReadADC1_SameSampleTime(ADC_CH1);
+	// dummy = ReadADC1_SameSampleTime(ADC_CH1);
+	dummy = Light_Sense;
 
 	for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
 		 VoltagePhoto[i] = dummy;

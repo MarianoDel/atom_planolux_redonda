@@ -297,26 +297,6 @@ int main(void)
 
 //	EXTIOff ();
 
-	// while (1)
-	// {
-	// 	// if (SYNCP)
-	// 	// {
-	// 	// 	SYNCP_OFF;
-	// 	// 	LED_OFF;
-	// 	// }
-	// 	// else
-	// 	// {
-	// 	// 	SYNCP_ON;
-	// 	// 	LED_ON;
-	// 	// }
-	// 	// Wait_ms(10);
-	//
-	// 	// for (i = 0; i < 255; i++)
-	// 	// {
-	// 	// 	Update_TIM3_CH1 (i);
-	// 	// 	Wait_ms (10);
-	// 	// }
-	// }
 
 //		while (1)
 //		{
@@ -439,7 +419,7 @@ int main(void)
 	TIM_3_Init ();					//lo tuilizo para 1 a 10V y para synchro ADC
 #endif
 
-	TIM_16_Init();					//o tuilizo para synchro de relay
+	TIM_16_Init();					//o utilizo para synchro de relay
 	TIM16Enable();
 
 	Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
@@ -474,9 +454,32 @@ int main(void)
 		Wait_ms (250);
 	}
 
+
 	timer_standby = 2000;
 	FuncsGSMReset();
 	Usart1Mode(USART_GSM_MODE);
+
+	// while (1)
+	// {
+	// 	if (SYNCP)
+	// 	{
+	// 		SYNCP_OFF;
+	// 		LED_OFF;
+	// 	}
+	// 	else
+	// 	{
+	// 		SYNCP_ON;
+	// 		LED_ON;
+	// 	}
+	// 	Wait_ms(10);
+	//
+	// 	// for (i = 0; i < 255; i++)
+	// 	// {
+	// 	// 	Update_TIM3_CH1 (i);
+	// 	// 	Wait_ms (10);
+	// 	// }
+	// }
+
 
 //--- Programa de pruebas 1 a 10V -----
 	// while (1)
@@ -502,13 +505,25 @@ int main(void)
 	// 	switch (i)
 	// 	{
 	// 		case 0:
+	// 			//habilitar y esperar el final de la secuencia
+	// 			ADC1->CR |= ADC_CR_ADSTART;
+	// 			seq_ready = 0;
+	// 			i++;
+	// 			break;
+	//
+	// 		case 1:
+	// 			if (seq_ready)		//esoty sincronizado
+	// 				i++;
+	// 			break;
+	//
+	// 		case 2:
 	// 			RelayOn();
 	// 			timer_standby = 50;
 	// 			LED_ON;
 	// 			i++;
 	// 			break;
 	//
-	// 		case 1:
+	// 		case 3:
 	// 			if (!timer_standby)
 	// 			{
 	// 				RelayOff();
@@ -518,10 +533,10 @@ int main(void)
 	// 			}
 	// 			break;
 	//
-	// 		case 2:
+	// 		case 4:
 	// 			if (!timer_standby)
 	// 			{
-	// 				i = 0;
+	// 				i = 2;
 	// 			}
 	// 			break;
 	// 	}
@@ -581,7 +596,6 @@ int main(void)
 						zero_current_loc >>= 5;
 						zero_current = zero_current_loc;
 						main_state = SET_COUNTERS_AND_PHONE0;
-						RELAY_ON;
 						i = 0;
 					}
 				}
@@ -593,6 +607,7 @@ int main(void)
 				acum_hours = 0;
 
 				counters_mode = 0;
+				LED_OFF;
 
 				//espero que el telefono este libre
 				//TODO: timeout aca
@@ -643,7 +658,6 @@ int main(void)
 						tt_relay_on_off = 10000;
 						Usart2Send("PRENDIDO\r\n");
 						FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
-
 						LED_ON;
 #ifdef WITH_HYST
 						hours = 0;
