@@ -3,6 +3,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "funcs_gsm.h"
 #include "sim900_800.h"
+#include <string.h>
 
 
 
@@ -12,6 +13,7 @@
 //--- Global variables ---//
 t_GsmState gsm_state = gsm_state_reset;
 unsigned char gsm_sms_error_counter = 0;
+unsigned char gsm_error_counter = 0;
 char * p_MSG;
 char * p_NUM;
 char * p_CMD;
@@ -28,7 +30,7 @@ unsigned short GSMFlags = 0;
 void FuncsGSM (void)
 {
 	t_RespGsm resp = resp_gsm_continue;
-	char dummy [2];
+	char dummy [32];
 
 	switch (gsm_state)
 	{
@@ -36,7 +38,10 @@ void FuncsGSM (void)
 			resp = GSM_Start();
 
 			if (resp == resp_gsm_ok)
+			{
+				gsm_error_counter = 0;
 				gsm_state = gsm_state_verify_at;
+			}
 
 			if ((resp == resp_gsm_error) || (resp == resp_gsm_timeout))
 			{
@@ -49,9 +54,22 @@ void FuncsGSM (void)
 			resp = GSMSendCommand ("AT\r\n", 1000, 0, &dummy[0]);
 
 			if (resp == 2)
+				gsm_state = gsm_state_verify_fully_func;
+
+			if (resp > 2)
 			{
 				GSM_Start_Stop_ResetSM ();
-				gsm_state = gsm_state_ready_wait;
+				gsm_state = gsm_state_shutdown;
+			}
+			break;
+
+		case gsm_state_verify_fully_func:
+			resp = GSMSendCommand ("AT+CFUN=1\r\n", 10000, 0, &dummy[0]);
+
+			if (resp == 2)
+			{
+				GSM_Start_Stop_ResetSM ();
+				gsm_state = gsm_state_wait_reg;
 			}
 
 			if (resp > 2)
@@ -61,12 +79,33 @@ void FuncsGSM (void)
 			}
 			break;
 
-		case gsm_state_ready_wait:
+		case gsm_state_wait_reg:
 			resp = GSM_Delay (8000);	//8 segundos de espera
 
 			if (resp == resp_gsm_ok)
-				gsm_state = gsm_state_ready;
+				gsm_state = gsm_state_verify_reg;
 
+			break;
+
+		case gsm_state_verify_reg:
+			resp = GSMSendCommand ("AT+CREG?\r\n", 1000, 1, &dummy[0]);
+
+			if (resp == 2)
+			{
+				if (!strncmp(dummy, "+CREG: 0,1", sizeof("+CREG: 0,1") - 1))
+					gsm_state = gsm_state_ready;		//equipo registrado
+				if (!strncmp(dummy, "+CREG: 0,2", sizeof("+CREG: 0,2") - 1))
+					gsm_state = gsm_state_ready;		//equipo buscando nueva empresa
+				if (!strncmp(dummy, "+CREG: 0,5", sizeof("+CREG: 0,5") - 1))
+					gsm_state = gsm_state_ready;		//equipo registrado con roaming
+			}
+
+			if (resp > 2)
+			{
+				GSM_Start_Stop_ResetSM ();
+				gsm_state = gsm_state_wait_reg;
+				gsm_error_counter++;
+			}
 			break;
 
 		case gsm_state_ready:
@@ -75,7 +114,7 @@ void FuncsGSM (void)
 			break;
 
 		case gsm_state_sending_sms:
-			resp = GSMSendSMS (p_MSG, p_NUM, 4000);
+			resp = GSMSendSMS (p_MSG, p_NUM, 60000);
 
 			if (resp == resp_gsm_ok)
 			{
@@ -93,7 +132,7 @@ void FuncsGSM (void)
 			break;
 
 		case gsm_state_command_answer:
-			resp = GSMSendCommand (p_CMD, 4000, 1, p_RESP);
+			resp = GSMSendCommand (p_CMD, 10000, 1, p_RESP);	//la mayoria de los comandos no tarda mas de 10 secs
 
 			if (resp != 1)
 			{
@@ -130,8 +169,14 @@ void FuncsGSM (void)
 	GSMProcess ();		//lee bytes del puerto serie y avisa con flag la terminacion del msj
 	GSMReceive ();		//usa el flag para analizar las respuestas
 
-	GSMReceivSMS ();	//si existen SMS los leo aca!
+	GSMReceivSMS ();	//si existen SMS los leo aca! TODO: por ahora
 
+	if (gsm_error_counter > 4)
+	{
+		Usart2Send("Error counter overflow -> SHUTTING DOWN");
+		GSM_Start_Stop_ResetSM ();
+		gsm_state = gsm_state_shutdown;
+	}
 }
 
 void FuncsGSMReset (void)
@@ -199,6 +244,7 @@ unsigned char FuncsGSMCommandAnswer (char * pCMD, char * pIMEI)
 
 	return resp_gsm_ok;
 }
+
 //--- Private function prototypes ---//
 //--- Private functions ---//
 

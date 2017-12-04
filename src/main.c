@@ -247,7 +247,7 @@ int main(void)
 #else		//USE_REDONDA_BASIC
 	unsigned char main_state = 0;
 #endif
-	char s_lcd [40];
+	char s_lcd [100];		//lo agrando porque lo uso tambien para enviar SMS
 	// enum TcpMessages tcp_msg = NONE_MSG;
 	// unsigned char new_room = 0;
 	// unsigned char new_lamp = 0;
@@ -327,6 +327,7 @@ int main(void)
 //		}
 
 	//--- Leo los parametros de memoria ---//
+#ifdef USE_REDONDA_BASIC
 	param_struct.acumm_historico = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_historico;
 	if (param_struct.acumm_historico != 0xFFFFFFFF)
 	{
@@ -343,10 +344,11 @@ int main(void)
 	{
 		//memoria vacia
 		param_struct.acumm_historico = 0;
-		param_struct.timer_reportar = 0;
+		param_struct.timer_reportar = 2;
 		reportar_SMS = 0;
+		strcpy( param_struct.num_reportar, "1149867843");	//segund asim de claro
 	}
-
+#endif
 
 
 	//--- Welcome code ---//
@@ -360,6 +362,72 @@ int main(void)
 	USART2Config();
 
 	EXTIOff();
+
+
+
+//---------- Pruebas con GSM GATEWAY --------//
+#ifdef USE_GSM_GATEWAY
+	LED_OFF;
+	for (i = 0; i < 6; i++)
+	{
+		if (LED)
+			LED_OFF;
+		else
+			LED_ON;
+
+		Wait_ms (300);
+	}
+
+	Wait_ms (3000);
+	Usart2Send((char *) (const char *) "GSM GATEWAY.. Cambio a GSM\r\n");
+	Usart1Mode (USART_GSM_MODE);
+
+	//mando start al gsm
+	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
+	//GPSStartResetSM ();
+	timer_standby = 60000;		//doy 1 minuto para prender modulo
+	while (timer_standby)
+	{
+		i = GSM_Start();
+		if (i == 1)
+		{
+			Usart2Send((char *) (const char *) "Start OK\r\n");
+			timer_standby = 0;
+		}
+		else
+
+		if (i > 1)
+			Usart2Send((char *) (const char *) "Start NOK\r\n");
+	}
+
+	Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
+
+	while (1)
+	{
+		GSMProcess();
+
+		if (usart2_pckt_ready)	//deja paquete en buffUARTGSMrx2
+		{
+			usart2_pckt_ready = 0;
+			Usart1SendUnsigned((unsigned char *) buffUARTGSMrx2, usart2_pckt_bytes);
+		}
+
+		if (gsm_pckt_ready)		//deja paquete en buffUARTGSMrx2
+		{
+			gsm_pckt_ready = 0;
+			Usart2SendUnsigned((unsigned char *) buffUARTGSMrx2, gsm_pckt_bytes);
+		}
+
+		if (LIGHT)
+			LED_ON;
+		else
+			LED_OFF;
+	}
+#endif
+//---------- Fin Prueba con GSM GATEWAY --------//
+
+
+
 
 
 #ifdef USE_REDONDA_BASIC
@@ -499,7 +567,6 @@ int main(void)
 				if (!timer_standby)
 				{
 					if (i < 32)
-					// if (i < 4)
 					{
 						if (seq_ready)		//TODO ojo aca seq_ready se usa fuera del main switch
 						{
@@ -512,44 +579,81 @@ int main(void)
 					else
 					{
 						zero_current_loc >>= 5;
-						// zero_current_loc >>= 2;
 						zero_current = zero_current_loc;
-						main_state = SET_COUNTERS_AND_PHONE;
+						main_state = SET_COUNTERS_AND_PHONE0;
 						RELAY_ON;
 						i = 0;
 					}
 				}
 				break;
 
-			case SET_COUNTERS_AND_PHONE:
+			case SET_COUNTERS_AND_PHONE0:
 				acum_secs = 0;
 				acum_secs_index = 0;
 				acum_hours = 0;
 
 				counters_mode = 0;
 
-				if (reportar_SMS)
+				//espero que el telefono este libre
+				//TODO: timeout aca
+				if (FuncsGSMStateAsk() == gsm_state_ready)
 				{
-					if (FuncsGSMStateAsk() == gsm_state_ready)
-					{
-						Usart2Send((char *) (const char *) "Reports by SMS\r\n");
-						main_state = LAMP_ON;
-						RELAY_ON;
+					Usart2Send((char *) (const char *) "Reports by SMS\r\n");
+					main_state = SET_COUNTERS_AND_PHONE1;
 
-
-
-					}
+					//pido imei
+					s_lcd[0] = '\0';
+					FuncsGSMCommandAnswer ("AT+GSN\r\n" , s_lcd);
 				}
-				else
-					main_state = LAMP_ON;
+				break;
 
+			case SET_COUNTERS_AND_PHONE1:
+				//espero que el telefono este libre
+				if (FuncsGSMStateAsk() == gsm_state_ready)
+				{
+					i = strlen(s_lcd);
+					strncpy(param_struct.imei, s_lcd, (i - 2));
+					Usart2Send("IMEI: ");
+					Usart2Send(param_struct.imei);
+					Usart2Send("\r\n");
 
+					//mando SMS con mi info
+					strcpy(s_lcd, "IMEI: ");
+					strcat(s_lcd, param_struct.imei);
+					strcat(s_lcd, ", ACTIVO");
+
+					FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+					// FuncsGSMSendSMS("forro", param_struct.num_reportar);
+					main_state = LAMP_OFF;
+				}
 				break;
 
 			case LAMP_OFF:
+				if (!tt_relay_on_off)
+				{
+					if (GetPhoto() > VOLTAGE_PHOTO_ON)
+					{
+#ifdef WITH_1_TO_10_VOLTS
+						Update_TIM3_CH1 (PWM_MIN);
+#else
+						Update_TIM3_CH1 (PWM_MAX);
+#endif
+						// RelayOn();
+						main_state = LAMP_ON;
+						tt_relay_on_off = 10000;
+						Usart2Send("PRENDIDO\r\n");
+						FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
+
+						LED_ON;
+#ifdef WITH_HYST
+						hours = 0;
+#endif
+					}
+				}
 				break;
 
 			case LAMP_ON:
+#if defined REPORTS_AIRPLANE_MODE
 				switch (lamp_on_state)
 				{
 					case init_airplane0:
@@ -563,7 +667,7 @@ int main(void)
 						break;
 
 					case init_airplane1:
-						if (strncmp(s_lcd, "OK", sizeof("OK") - 1))
+						if (!strncmp(s_lcd, "OK", sizeof("OK") - 1))
 						{
 							//en modo avion, prendo y mido
 							RelayOn();
@@ -584,6 +688,36 @@ int main(void)
 						{
 							meas_end = 0;
 
+							if (!tt_relay_on_off)
+							{
+#ifdef WITH_HYST			//con Hysteresis apaga casi en el mismo punto en el que prende
+								hyst = GetHysteresis (hours);
+								if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+#else
+								if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+#endif
+								{
+									main_state = LAMP_OFF;
+#ifdef WITH_1_TO_10_VOLTS
+									Update_TIM3_CH1 (0);
+#endif
+									lamp_on_state = init_airplane0;
+									counters_mode = 0;
+									Usart2Send("APAGADO\r\n");
+									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+									tt_relay_on_off = 10000;
+									RelayOff();
+									LED_OFF;
+								}
+#ifdef WITH_1_TO_10_VOLTS
+								else
+								{
+									one_to_ten = GetNew1to10 (GetPhoto());
+									Update_TIM3_CH1 (one_to_ten);
+								}
+#endif
+							}
+
 							if (!timer_rep)
 							{
 								timer_rep = param_struct.timer_reportar;
@@ -601,7 +735,7 @@ int main(void)
 						break;
 
 					case meas_reporting1:
-						if (strncmp(s_lcd, "OK", sizeof("OK") - 1))
+						if (!strncmp(s_lcd, "OK", sizeof("OK") - 1))
 						{
 							if (FuncsGSMStateAsk() == gsm_state_ready)
 							{
@@ -622,7 +756,7 @@ int main(void)
 
 								//TODO: para debug no envio datos
 								Usart2Send(s_lcd);
-								FuncsGSMSendSMS ("1145376762", s_lcd);
+								FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
 							}
 							lamp_on_state = init_airplane0;
 						}
@@ -632,6 +766,102 @@ int main(void)
 						lamp_on_state = init_airplane0;
 						break;
 				}
+
+#elif defined REPORTS_NORMAL_MODE
+				switch (lamp_on_state)
+				{
+					case init_airplane0:
+						lamp_on_state++;
+						break;
+
+					case init_airplane1:
+						lamp_on_state++;
+						break;
+
+					case meas_init:
+						RelayOn();
+						lamp_on_state = meas_meas;
+						counters_mode = 1;
+						break;
+
+					case meas_meas:
+						if (meas_end)		//termino una vuelta de mediciones, generalmente 2 segundos
+						{
+							meas_end = 0;
+
+							if (!tt_relay_on_off)
+							{
+#ifdef WITH_HYST			//con Hysteresis apaga casi en el mismo punto en el que prende
+								hyst = GetHysteresis (hours);
+								if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+#else
+								if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+#endif
+								{
+									main_state = LAMP_OFF;
+#ifdef WITH_1_TO_10_VOLTS
+									Update_TIM3_CH1 (0);
+#endif
+									lamp_on_state = init_airplane0;
+									counters_mode = 0;
+									Usart2Send("APAGADO");
+									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+									tt_relay_on_off = 10000;
+									RelayOff();
+									LED_OFF;
+								}
+#ifdef WITH_1_TO_10_VOLTS
+								else
+								{
+									one_to_ten = GetNew1to10 (GetPhoto());
+									Update_TIM3_CH1 (one_to_ten);
+								}
+#endif
+							}
+
+							if (!timer_rep)
+							{
+								timer_rep = param_struct.timer_reportar;
+								// counters_mode = 2;		//sigo midiendo normalmente
+								lamp_on_state = meas_reporting0;
+							}
+						}
+						break;
+
+					case meas_reporting0:
+
+						// fcalc = power;
+						fcalc = power * KW;
+						power_int = (unsigned short) fcalc;
+						fcalc = fcalc - power_int;
+						fcalc = fcalc * 100;
+						power_dec = (unsigned short) fcalc;
+
+						fcalc = (acum_hours + acum_secs / 1800) * KW;
+						wh_int = (unsigned short) fcalc;
+						fcalc = fcalc - wh_int;
+						fcalc = fcalc * 10;
+						wh_dec = (unsigned short) fcalc;
+
+						sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
+
+						//TODO: para debug no envio datos
+						Usart2Send(s_lcd);
+						FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+						lamp_on_state = meas_meas;
+						break;
+
+					case meas_reporting1:
+						break;
+
+					default:
+						lamp_on_state = init_airplane0;
+						break;
+				}
+
+#else
+#error "Debe elegir la forma de reportar Normal / Airplane"
+#endif
 
 				if (counters_mode)	//si esta activo el modo de contadores mido
 				{
@@ -719,7 +949,7 @@ int main(void)
 
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();
-		// UpdatePhotoTransistor();
+		UpdatePhotoTransistor();
 #ifdef USE_GSM
 		FuncsGSM();
 #endif
@@ -992,69 +1222,6 @@ int main(void)
 	}
 #endif
 
-	//---------- Pruebas con GSM GATEWAY --------//
-#ifdef USE_GSM_GATEWAY
-	LED_OFF;
-	for (i = 0; i < 6; i++)
-	{
-		if (LED)
-			LED_OFF;
-		else
-			LED_ON;
-
-		Wait_ms (300);
-	}
-	Wait_ms (3000);
-
-	Usart2Send((char *) (const char *) "GSM GATEWAY.. Cambio a GSM\r\n");
-
-	Usart1Mode (USART_GSM_MODE);
-
-
-	//mando start al gsm
-	Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
-	//GPSStartResetSM ();
-	timer_standby = 60000;		//doy 1 minuto para prender modulo
-	while (timer_standby)
-	{
-		i = GSM_Start();
-		if (i == 2)
-		{
-			Usart2Send((char *) (const char *) "Start OK\r\n");
-			timer_standby = 0;
-		}
-		else
-
-		if (i == 4)
-			Usart2Send((char *) (const char *) "Start NOK\r\n");
-	}
-
-	Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
-
-	while (1)
-	{
-		GSMProcess();
-
-		if (usart2_pckt_ready)	//deja paquete en buffUARTGSMrx2
-		{
-			usart2_pckt_ready = 0;
-			Usart1SendUnsigned((unsigned char *) buffUARTGSMrx2, usart2_pckt_bytes);
-		}
-
-		if (gsm_pckt_ready)		//deja paquete en buffUARTGSMrx2
-		{
-			gsm_pckt_ready = 0;
-			Usart2SendUnsigned((unsigned char *) buffUARTGSMrx2, gsm_pckt_bytes);
-		}
-
-		if (LIGHT)
-			LED_ON;
-		else
-			LED_OFF;
-	}
-#endif
-
-	//---------- Fin Prueba con GSM GATEWAY --------//
 
 
 
@@ -1151,108 +1318,13 @@ void prepare_json_pkt (uint8_t * buffer)
       return;
 }
 
-//void EXTI4_15_IRQHandler(void)
-//{
-//	unsigned short aux;
-//
-////--- SOLO PRUEBA DE INTERRUPCIONES ---//
-////	if (DMX_INPUT)
-////		LED_ON;
-////	else
-////		LED_OFF;
-////
-////	EXTI->PR |= 0x0100;
-//
-//	if(EXTI->PR & 0x0100)	//Line8
-//	{
-//
-//		//si no esta con el USART detecta el flanco	PONER TIMEOUT ACA?????
-//		if ((dmx_receive_flag == 0) || (dmx_timeout_timer == 0))
-//		//if (dmx_receive_flag == 0)
-//		{
-//			switch (signal_state)
-//			{
-//				case IDLE:
-//					if (!(DMX_INPUT))
-//					{
-//						//Activo timer en Falling.
-//						TIM14->CNT = 0;
-//						TIM14->CR1 |= 0x0001;
-//						signal_state++;
-//					}
-//					break;
-//
-//				case LOOK_FOR_BREAK:
-//					if (DMX_INPUT)
-//					{
-//						//Desactivo timer en Rising.
-//						aux = TIM14->CNT;
-//
-//						//reviso BREAK
-//						//if (((tim_counter_65ms) || (aux > 88)) && (tim_counter_65ms <= 20))
-//						if ((aux > 87) && (aux < 210))	//Consola STARLET 6
-//						//if ((aux > 87) && (aux < 2000))		//Consola marca CODE tiene break 1.88ms
-//						{
-//							LED_ON;
-//							//Activo timer para ver MARK.
-//							//TIM2->CNT = 0;
-//							//TIM2->CR1 |= 0x0001;
-//
-//							signal_state++;
-//							//tengo el break, activo el puerto serie
-//							DMX_channel_received = 0;
-//							//dmx_receive_flag = 1;
-//
-//							dmx_timeout_timer = DMX_TIMEOUT;		//activo el timer cuando prendo el puerto serie
-//							//USARTx_RX_ENA;
-//						}
-//						else	//falso disparo
-//							signal_state = IDLE;
-//					}
-//					else	//falso disparo
-//						signal_state = IDLE;
-//
-//					TIM14->CR1 &= 0xFFFE;
-//					break;
-//
-//				case LOOK_FOR_MARK:
-//					if ((!(DMX_INPUT)) && (dmx_timeout_timer))	//termino Mark after break
-//					{
-//						//ya tenia el serie habilitado
-//						//if ((aux > 7) && (aux < 12))
-//						dmx_receive_flag = 1;
-//					}
-//					else	//falso disparo
-//					{
-//						//termine por timeout
-//						dmx_receive_flag = 0;
-//						//USARTx_RX_DISA;
-//					}
-//					signal_state = IDLE;
-//					LED_OFF;
-//					break;
-//
-//				default:
-//					signal_state = IDLE;
-//					break;
-//			}
-//		}
-//
-//		EXTI->PR |= 0x0100;
-//	}
-//}
-
 void TimingDelay_Decrement(void)
 {
 	if (wait_ms_var)
 		wait_ms_var--;
 
-	if (timer_rep)
-		timer_rep--;
-
 	if (timer_standby)
 		timer_standby--;
-
 
 #ifdef USE_REDONDA_BASIC
 	if (tt_take_photo_sample)
@@ -1273,12 +1345,14 @@ void TimingDelay_Decrement(void)
 	if (filter_timer)
 		filter_timer--;
 
-#ifdef WITH_HYST
 	//cuenta de a 1 minuto
 	if (secs > 59999)	//pasaron 1 min
 	{
 		minutes++;
 		secs = 0;
+
+		if (timer_rep)
+			timer_rep--;	//timer de reportes de a 1 minuto
 	}
 	else
 		secs++;
@@ -1288,8 +1362,6 @@ void TimingDelay_Decrement(void)
 		hours++;
 		minutes = 0;
 	}
-#endif
-
 
 #ifdef USE_MQTT_LIB
 	//timer del MQTT

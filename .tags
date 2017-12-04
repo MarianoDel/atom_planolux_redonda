@@ -5,11 +5,11 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 ACR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ACR;          \/*!<FLASH access control register,                 Address offset: 0x00 *\/$/;"	m	struct:__anon48
-AC_SWITCH_THRESHOLD_FULL	src/hard.h	239;"	d
-AC_SWITCH_THRESHOLD_HALF	src/hard.h	240;"	d
-AC_SWITCH_THRESHOLD_MIN	src/hard.h	241;"	d
-AC_SWITCH_THRESHOLD_ROOF	src/hard.h	238;"	d
-AC_SWITCH_TIMER_RELOAD	src/hard.h	232;"	d
+AC_SWITCH_THRESHOLD_FULL	src/hard.h	245;"	d
+AC_SWITCH_THRESHOLD_HALF	src/hard.h	246;"	d
+AC_SWITCH_THRESHOLD_MIN	src/hard.h	247;"	d
+AC_SWITCH_THRESHOLD_ROOF	src/hard.h	244;"	d
+AC_SWITCH_TIMER_RELOAD	src/hard.h	238;"	d
 ADC	cmsis_boot/stm32f0xx.h	978;"	d
 ADC1	cmsis_boot/stm32f0xx.h	977;"	d
 ADC1_BASE	cmsis_boot/stm32f0xx.h	914;"	d
@@ -163,7 +163,7 @@ ADC_IT_EOSEQ	src/adc.h	46;"	d
 ADC_IT_EOSMP	src/adc.h	44;"	d
 ADC_IT_OVR	src/adc.h	47;"	d
 ADC_LTR_LT	cmsis_boot/stm32f0xx.h	1116;"	d
-ADC_NOISE	src/hard.h	275;"	d
+ADC_NOISE	src/hard.h	281;"	d
 ADC_Resolution_10b	src/adc.h	90;"	d
 ADC_Resolution_12b	src/adc.h	89;"	d
 ADC_Resolution_6b	src/adc.h	92;"	d
@@ -186,7 +186,7 @@ ADC_SampleTime_71_5Cycles	src/adc.h	86;"	d
 ADC_SampleTime_7_5Cycles	src/adc.h	81;"	d
 ADC_ScanDirection_Backward	src/adc.h	119;"	d
 ADC_ScanDirection_Upward	src/adc.h	118;"	d
-ADC_THRESHOLD	src/hard.h	274;"	d
+ADC_THRESHOLD	src/hard.h	280;"	d
 ADC_TR_HT	cmsis_boot/stm32f0xx.h	1111;"	d
 ADC_TR_LT	cmsis_boot/stm32f0xx.h	1112;"	d
 ADC_TypeDef	cmsis_boot/stm32f0xx.h	/^} ADC_TypeDef;$/;"	t	typeref:struct:__anon33
@@ -1931,7 +1931,7 @@ DMA_ISR_TEIF5	cmsis_boot/stm32f0xx.h	2716;"	d
 DMA_ISR_TEIF6	cmsis_boot/stm32f0xx.h	2720;"	d
 DMA_ISR_TEIF7	cmsis_boot/stm32f0xx.h	2724;"	d
 DMA_TypeDef	cmsis_boot/stm32f0xx.h	/^} DMA_TypeDef;$/;"	t	typeref:struct:__anon46
-DMX_DISPLAY_SHOW_TIMEOUT	src/hard.h	246;"	d
+DMX_DISPLAY_SHOW_TIMEOUT	src/hard.h	252;"	d
 DMX_TIMEOUT	src/main.c	190;"	d	file:
 DOR1	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR1;     \/*!< DAC channel1 data output register,                       Address offset: 0x2C *\/$/;"	m	struct:__anon43
 DOR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t DOR2;     \/*!< DAC channel2 data output register,                       Address offset: 0x30 *\/$/;"	m	struct:__anon43
@@ -1971,9 +1971,9 @@ ENA_INIT	src/ESP8266.h	/^	ENA_INIT = 0,$/;"	e	enum:EspEnaState
 END_OF_MESSAGE_ID	src/constants.h	261;"	d
 ENOTCONN	paho.mqtt.embedded-c/MQTTPacket/samples/transport.c	36;"	d	file:
 ENOTCONN	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	36;"	d	file:
-EN_GPS	src/hard.h	116;"	d
-EN_GPS_OFF	src/hard.h	118;"	d
-EN_GPS_ON	src/hard.h	117;"	d
+EN_GPS	src/hard.h	121;"	d
+EN_GPS_OFF	src/hard.h	123;"	d
+EN_GPS_ON	src/hard.h	122;"	d
 ERROR	cmsis_boot/stm32f0xx.h	/^typedef enum {ERROR = 0, SUCCESS = !ERROR} ErrorStatus;$/;"	e	enum:__anon32
 ERROR	paho.mqtt.embedded-c/MQTTClient/src/MQTTLogging.h	46;"	d
 ESP8266_H_	src/ESP8266.h	9;"	d
@@ -2252,9 +2252,9 @@ FR2	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t FR2; \/*!< CAN Filter bank register
 FS1R	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              FS1R;                \/*!< CAN filter scale register,           Address offset: 0x20C         *\/$/;"	m	struct:__anon38
 FTSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t FTSR;         \/*!<EXTI Falling trigger selection register,                  Address offset: 0x0C *\/$/;"	m	struct:__anon47
 FULL_PRJ	Makefile	/^FULL_PRJ = $(PROJECT)_rom$/;"	m
-FUNCTION_CAT	src/hard.h	255;"	d
-FUNCTION_DMX	src/hard.h	253;"	d
-FUNCTION_MAN	src/hard.h	254;"	d
+FUNCTION_CAT	src/hard.h	261;"	d
+FUNCTION_DMX	src/hard.h	259;"	d
+FUNCTION_MAN	src/hard.h	260;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	25;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	41;"	d
 FUNC_ENTRY	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	53;"	d
@@ -2743,7 +2743,6 @@ GSMReceivSMS	src/sim900_800.c	/^void GSMReceivSMS (void)$/;"	f
 GSMReceive	src/sim900_800.c	/^void GSMReceive (void)$/;"	f
 GSMSendCommand	src/sim900_800.c	/^char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta, char *ptrRta)$/;"	f
 GSMSendCommandFlag	src/sim900_800.c	/^char GSMSendCommandFlag = 0;$/;"	v
-GSMSendCommandIntento	src/sim900_800.c	/^char GSMSendCommandIntento = 0;$/;"	v
 GSMSendCommandState	src/sim900_800.c	/^char GSMSendCommandState = 0;$/;"	v
 GSMSendCommandTimeOut	src/sim900_800.c	/^volatile unsigned short GSMSendCommandTimeOut;$/;"	v
 GSMSendIP	src/sim900_800.c	/^char GSMSendIP (char *ptrMSG, unsigned short timeOut)$/;"	f
@@ -2780,11 +2779,11 @@ GSM_OK	src/sim900_800.c	/^const char GSM_OK[] 	= "OK";$/;"	v
 GSM_PWRKEY	src/sim900_800.h	19;"	d
 GSM_PWRKEY_OFF	src/sim900_800.h	21;"	d
 GSM_PWRKEY_ON	src/sim900_800.h	20;"	d
-GSM_RESET_FLAG	src/funcs_gsm.h	37;"	d
+GSM_RESET_FLAG	src/funcs_gsm.h	39;"	d
 GSM_SENDOK	src/sim900_800.c	/^const char GSM_SENDOK[] = "SEND OK";$/;"	v
-GSM_SET_CALL	src/funcs_gsm.h	38;"	d
-GSM_SET_POWER_DOWN	src/funcs_gsm.h	40;"	d
-GSM_SET_SMS	src/funcs_gsm.h	39;"	d
+GSM_SET_CALL	src/funcs_gsm.h	40;"	d
+GSM_SET_POWER_DOWN	src/funcs_gsm.h	42;"	d
+GSM_SET_SMS	src/funcs_gsm.h	41;"	d
 GSM_SIM1	src/sim900_800.c	/^const char GSM_SIM1[] = "SIM1";$/;"	v
 GSM_SIM2	src/sim900_800.c	/^const char GSM_SIM2[] = "SIM2";$/;"	v
 GSM_STATUS	src/sim900_800.h	24;"	d
@@ -2815,11 +2814,11 @@ HSI14_VALUE	cmsis_boot/stm32f0xx.h	148;"	d
 HSI48_VALUE	cmsis_boot/stm32f0xx.h	154;"	d
 HSI_STARTUP_TIMEOUT	cmsis_boot/stm32f0xx.h	138;"	d
 HSI_VALUE	cmsis_boot/stm32f0xx.h	142;"	d
-HYST_2	src/hard.h	43;"	d
-HYST_4	src/hard.h	44;"	d
-HYST_6	src/hard.h	45;"	d
-HYST_MAX	src/hard.h	42;"	d
-HYST_MIN	src/hard.h	46;"	d
+HYST_2	src/hard.h	48;"	d
+HYST_4	src/hard.h	49;"	d
+HYST_6	src/hard.h	50;"	d
+HYST_MAX	src/hard.h	47;"	d
+HYST_MIN	src/hard.h	51;"	d
 HardFault_Handler	src/stm32f0xx_it.c	/^void HardFault_Handler(void)$/;"	f
 HardFault_IRQn	cmsis_boot/stm32f0xx.h	/^  HardFault_IRQn              = -13,    \/*!< 3 Cortex-M0 Hard Fault Interrupt                        *\/$/;"	e	enum:IRQn
 I2C1	cmsis_boot/stm32f0xx.h	966;"	d
@@ -2991,18 +2990,18 @@ LDFLAGS	Makefile	/^LDFLAGS = $(MCFLAGS) -mthumb --specs=nano.specs -Wl,--gc-sect
 LDFLAGS_C	paho.mqtt.embedded-c/Makefile	/^LDFLAGS_C = -shared -Wl,-install_name,lib$(MQTT_EMBED_LIB_C).so.${MAJOR_VERSION}$/;"	m
 LDFLAGS_C	paho.mqtt.embedded-c/Makefile	/^LDFLAGS_C = -shared -Wl,-soname,lib$(MQTT_EMBED_LIB_C).so.${MAJOR_VERSION}$/;"	m
 LDSCRIPT	Makefile	/^LDSCRIPT = $(LINKER)\/stm32_flash.ld$/;"	m
-LED	src/hard.h	108;"	d
+LED	src/hard.h	113;"	d
 LED_NETLIGHT_OFF	src/sim900_800.h	31;"	d
 LED_NETLIGHT_ON	src/sim900_800.h	30;"	d
-LED_OFF	src/hard.h	110;"	d
-LED_ON	src/hard.h	109;"	d
+LED_OFF	src/hard.h	115;"	d
+LED_ON	src/hard.h	114;"	d
 LEGAL_FILES	paho.mqtt.embedded-c/Makefile	/^LEGAL_FILES = edl-v10 epl-v10 notice.html about.html CONTRIBUTING.md README.md$/;"	m
 LIBDIR	Makefile	/^LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))$/;"	m
 LIBRARIES	paho.mqtt.embedded-c/Debug/sources.mk	/^LIBRARIES := $/;"	m
 LIBS	Makefile	/^LIBS    = $(DLIBS) $(ULIBS)$/;"	m
 LIBS	paho.mqtt.embedded-c/Debug/objects.mk	/^LIBS :=$/;"	m
 LIBSDIR	Makefile	/^LIBSDIR    = ..\/STM32F0xx_StdPeriph_Lib_V1.3.1\/Libraries\/STM32F0xx_StdPeriph_Driver$/;"	m
-LIGHT	src/hard.h	72;"	d
+LIGHT	src/hard.h	77;"	d
 LIGHTS_OFF	src/tcp_transceiver.h	/^	LIGHTS_OFF,$/;"	e	enum:TcpMessages
 LIGHTS_ON	src/tcp_transceiver.h	/^	LIGHTS_ON$/;"	e	enum:TcpMessages
 LINKER	Makefile	/^LINKER = .\/cmsis_boot\/startup$/;"	m
@@ -3045,23 +3044,23 @@ MAINMENU_SHOW_STANDALONE_2	src/main_menu.h	18;"	d
 MAINMENU_SHOW_STANDALONE_3	src/main_menu.h	19;"	d
 MAINMENU_SHOW_STANDALONE_SELECTED	src/main_menu.h	29;"	d
 MAINMENU_SHOW_STANDALONE_SELECTED_1	src/main_menu.h	30;"	d
-MAIN_AT_CONFIG_2B	src/hard.h	148;"	d
-MAIN_ERROR	src/hard.h	149;"	d
-MAIN_GROUPED	src/hard.h	152;"	d
+MAIN_AT_CONFIG_2B	src/hard.h	153;"	d
+MAIN_ERROR	src/hard.h	154;"	d
+MAIN_GROUPED	src/hard.h	157;"	d
 MAIN_INIT	src/hard.h	/^	MAIN_INIT = 0,$/;"	e	enum:__anon7
-MAIN_INIT	src/hard.h	140;"	d
-MAIN_INIT_1	src/hard.h	141;"	d
-MAIN_IN_MAIN_MENU	src/hard.h	155;"	d
+MAIN_INIT	src/hard.h	145;"	d
+MAIN_INIT_1	src/hard.h	146;"	d
+MAIN_IN_MAIN_MENU	src/hard.h	160;"	d
 MAIN_MENU_H_	src/main_menu.h	9;"	d
-MAIN_NETWORKED	src/hard.h	153;"	d
-MAIN_NETWORKED_1	src/hard.h	154;"	d
-MAIN_READING_TCP	src/hard.h	146;"	d
-MAIN_SENDING_CONF	src/hard.h	142;"	d
-MAIN_STAND_ALONE	src/hard.h	151;"	d
-MAIN_TRANSPARENT	src/hard.h	147;"	d
-MAIN_WAIT_CONNECT_0	src/hard.h	143;"	d
-MAIN_WAIT_CONNECT_1	src/hard.h	144;"	d
-MAIN_WAIT_CONNECT_2	src/hard.h	145;"	d
+MAIN_NETWORKED	src/hard.h	158;"	d
+MAIN_NETWORKED_1	src/hard.h	159;"	d
+MAIN_READING_TCP	src/hard.h	151;"	d
+MAIN_SENDING_CONF	src/hard.h	147;"	d
+MAIN_STAND_ALONE	src/hard.h	156;"	d
+MAIN_TRANSPARENT	src/hard.h	152;"	d
+MAIN_WAIT_CONNECT_0	src/hard.h	148;"	d
+MAIN_WAIT_CONNECT_1	src/hard.h	149;"	d
+MAIN_WAIT_CONNECT_2	src/hard.h	150;"	d
 MAJOR_VERSION	paho.mqtt.embedded-c/Makefile	/^MAJOR_VERSION = 1$/;"	m
 MAXHOSTNAMELEN	paho.mqtt.embedded-c/MQTTPacket/samples/transport.c	30;"	d	file:
 MAXHOSTNAMELEN	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	31;"	d	file:
@@ -3186,7 +3185,7 @@ MutexInit	paho.mqtt.embedded-c/MQTTClient-C/src/FreeRTOS/MQTTFreeRTOS.c	/^void M
 MutexLock	paho.mqtt.embedded-c/MQTTClient-C/src/FreeRTOS/MQTTFreeRTOS.c	/^int MutexLock(Mutex* mutex)$/;"	f
 MutexUnlock	paho.mqtt.embedded-c/MQTTClient-C/src/FreeRTOS/MQTTFreeRTOS.c	/^int MutexUnlock(Mutex* mutex)$/;"	f
 MyLog	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	/^void MyLog(int LOGA_level, char* format, ...)$/;"	f
-NETLIGHT	src/hard.h	81;"	d
+NETLIGHT	src/hard.h	86;"	d
 NMI_Handler	src/stm32f0xx_it.c	/^void NMI_Handler(void)$/;"	f
 NONE_MSG	src/tcp_transceiver.h	/^	NONE_MSG = 0,$/;"	e	enum:TcpMessages
 NOSTACKTRACE	paho.mqtt.embedded-c/MQTTPacket/src/StackTrace.h	22;"	d
@@ -3280,12 +3279,12 @@ PASSED	src/flash_program.h	/^typedef enum {FAILED = 0, PASSED = !FAILED} TestSta
 PAYLOAD_SIZE	src/constants.h	266;"	d
 PECR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PECR;     \/*!< I2C PEC register,                  Address offset: 0x20 *\/$/;"	m	struct:__anon52
 PERIPH_BASE	cmsis_boot/stm32f0xx.h	884;"	d
-PIN3_OFF	src/hard.h	77;"	d
-PIN3_ON	src/hard.h	76;"	d
+PIN3_OFF	src/hard.h	82;"	d
+PIN3_ON	src/hard.h	81;"	d
 PINGREQ	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	PINGREQ, PINGRESP, DISCONNECT$/;"	e	enum:msgTypes
 PINGRESP	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	PINGREQ, PINGRESP, DISCONNECT$/;"	e	enum:msgTypes
 POL	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t POL;         \/*!< CRC polynomial register,                     Address offset: 0x14 *\/$/;"	m	struct:__anon41
-PPS	src/hard.h	126;"	d
+PPS	src/hard.h	131;"	d
 PR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PR;           \/*!<EXTI Pending register,                                    Address offset: 0x14 *\/$/;"	m	struct:__anon47
 PR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PR;   \/*!< IWDG Prescaler register, Address offset: 0x04 *\/$/;"	m	struct:__anon53
 PRER	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PRER;       \/*!< RTC prescaler register,                                   Address offset: 0x10 *\/$/;"	m	struct:__anon56
@@ -3299,16 +3298,16 @@ PUBREC	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	CONNECT = 1, CONNACK,
 PUBREL	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	CONNECT = 1, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL,$/;"	e	enum:msgTypes
 PUPDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PUPDR;        \/*!< GPIO port pull-up\/pull-down register,                     Address offset: 0x0C *\/$/;"	m	struct:__anon50
 PVD_IRQn	cmsis_boot/stm32f0xx.h	/^  PVD_IRQn                    = 1,      \/*!< PVD through EXTI Line detect Interrupt                  *\/$/;"	e	enum:IRQn
-PWM_20	src/hard.h	55;"	d
-PWM_40	src/hard.h	54;"	d
-PWM_60	src/hard.h	53;"	d
-PWM_80	src/hard.h	52;"	d
-PWM_MAX	src/hard.h	51;"	d
-PWM_MIN	src/hard.h	56;"	d
+PWM_20	src/hard.h	60;"	d
+PWM_40	src/hard.h	59;"	d
+PWM_60	src/hard.h	58;"	d
+PWM_80	src/hard.h	57;"	d
+PWM_MAX	src/hard.h	56;"	d
+PWM_MIN	src/hard.h	61;"	d
 PWR	cmsis_boot/stm32f0xx.h	970;"	d
-PWRKEY	src/hard.h	89;"	d
-PWRKEY_OFF	src/hard.h	91;"	d
-PWRKEY_ON	src/hard.h	90;"	d
+PWRKEY	src/hard.h	94;"	d
+PWRKEY_OFF	src/hard.h	96;"	d
+PWRKEY_ON	src/hard.h	95;"	d
 PWR_BASE	cmsis_boot/stm32f0xx.h	907;"	d
 PWR_CR_CSBF	cmsis_boot/stm32f0xx.h	3570;"	d
 PWR_CR_CWUF	cmsis_boot/stm32f0xx.h	3569;"	d
@@ -3700,9 +3699,10 @@ RDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RDR;    \/*!< USART Receive Data re
 RDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RDTR; \/*!< CAN receive FIFO mailbox data length control and time stamp register *\/$/;"	m	struct:__anon36
 REALLY_GOOD	src/synchro.h	/^	REALLY_GOOD	\/\/3$/;"	e	enum:Answers
 REGULAR	src/synchro.h	/^	REGULAR,		\/\/1$/;"	e	enum:Answers
-RELAY	src/hard.h	103;"	d
-RELAY_OFF	src/hard.h	105;"	d
-RELAY_ON	src/hard.h	104;"	d
+RELAY	src/hard.h	108;"	d
+RELAY_OFF	src/hard.h	110;"	d
+RELAY_ON	src/hard.h	109;"	d
+REPORTS_NORMAL_MODE	src/hard.h	41;"	d
 RESERVED	cmsis_boot/stm32f0xx.h	/^       uint32_t RESERVED;    \/*!< Reserved,                                                                  0x04 *\/$/;"	m	struct:__anon51
 RESERVED	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RESERVED;     \/*!< Reserved,                                                     0x18 *\/$/;"	m	struct:__anon48
 RESERVED0	cmsis_boot/stm32f0xx.h	/^  uint16_t      RESERVED0;       \/*!< Reserved,                                                    0x02 *\/$/;"	m	struct:__anon58
@@ -4138,13 +4138,14 @@ SEND_DATA_INIT	src/ESP8266.h	/^	SEND_DATA_INIT = 0,$/;"	e	enum:EspSendDataState
 SEND_DATA_RST	src/ESP8266.h	/^	SEND_DATA_RST,$/;"	e	enum:EspSendDataState
 SEND_DATA_WAIT_SEND_OK	src/ESP8266.h	/^	SEND_DATA_WAIT_SEND_OK$/;"	e	enum:EspSendDataState
 SET	cmsis_boot/stm32f0xx.h	/^typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;$/;"	e	enum:__anon30
-SET_COUNTERS_AND_PHONE	src/hard.h	/^	SET_COUNTERS_AND_PHONE,$/;"	e	enum:__anon7
+SET_COUNTERS_AND_PHONE0	src/hard.h	/^	SET_COUNTERS_AND_PHONE0,$/;"	e	enum:__anon7
+SET_COUNTERS_AND_PHONE1	src/hard.h	/^	SET_COUNTERS_AND_PHONE1,$/;"	e	enum:__anon7
 SET_ZERO_CURRENT	src/hard.h	/^	SET_ZERO_CURRENT,$/;"	e	enum:__anon7
 SHCSR	cmsis_core/core_cm0.h	/^  __IO uint32_t SHCSR;                        \/*!< Offset: 0x24  System Handler Control and State Register             *\/$/;"	m	struct:__anon2
 SHELL	paho.mqtt.embedded-c/Makefile	/^SHELL = \/bin\/sh$/;"	m
 SHIFTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SHIFTR;     \/*!< RTC shift control register,                               Address offset: 0x2C *\/$/;"	m	struct:__anon56
-SHOW_CHANNELS	src/hard.h	228;"	d
-SHOW_NUMBERS	src/hard.h	229;"	d
+SHOW_CHANNELS	src/hard.h	234;"	d
+SHOW_NUMBERS	src/hard.h	235;"	d
 SHOW_SELECT_1	src/main_menu.h	60;"	d
 SHOW_SELECT_2	src/main_menu.h	61;"	d
 SHOW_SELECT_3	src/main_menu.h	62;"	d
@@ -4155,12 +4156,12 @@ SHOW_SELECT_SELECTED	src/main_menu.h	63;"	d
 SHOW_SELECT_SELECTED_1	src/main_menu.h	64;"	d
 SHP	cmsis_core/core_cm0.h	/^  __IO uint32_t SHP[2];                       \/*!< Offset: 0x1C  System Handlers Priority Registers. [0] is RESERVED   *\/$/;"	m	struct:__anon2
 SIZEOF_BOARD_TEMP	src/adc.h	21;"	d
-SIZEOF_BUFFTCP	src/hard.h	261;"	d
+SIZEOF_BUFFTCP	src/hard.h	267;"	d
 SIZEOF_BUFFTCP_SEND	src/tcp_transceiver.h	25;"	d
-SIZEOF_DATA	src/hard.h	258;"	d
-SIZEOF_DATA1	src/hard.h	257;"	d
-SIZEOF_DATA256	src/hard.h	260;"	d
-SIZEOF_DATA512	src/hard.h	259;"	d
+SIZEOF_DATA	src/hard.h	264;"	d
+SIZEOF_DATA1	src/hard.h	263;"	d
+SIZEOF_DATA256	src/hard.h	266;"	d
+SIZEOF_DATA512	src/hard.h	265;"	d
 SIZEOF_GPSBUFF	src/gps_vktel.h	50;"	d
 SIZEOF_PHOTO_TRANS	src/adc.c	39;"	d	file:
 SIZEOF_POWER_VECT	src/main.c	181;"	d	file:
@@ -4259,7 +4260,7 @@ START_OF_MESSAGE_ID	src/constants.h	256;"	d
 START_TIME_TYPE	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	147;"	d	file:
 START_TIME_TYPE	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	155;"	d	file:
 START_TIME_TYPE	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	164;"	d	file:
-STATUS	src/hard.h	84;"	d
+STATUS	src/hard.h	89;"	d
 STM32F030	cmsis_boot/stm32f0xx.h	97;"	d
 STM32F031	cmsis_boot/stm32f0xx.h	87;"	d
 STM32F051	cmsis_boot/stm32f0xx.h	71;"	d
@@ -4284,17 +4285,17 @@ SUCCESS	paho.mqtt.embedded-c/MQTTClient/src/MQTTClient.h	/^enum returnCode { BUF
 SVC_Handler	src/stm32f0xx_it.c	/^void SVC_Handler(void)$/;"	f
 SVC_IRQn	cmsis_boot/stm32f0xx.h	/^  SVC_IRQn                    = -5,     \/*!< 11 Cortex-M0 SV Call Interrupt                          *\/$/;"	e	enum:IRQn
 SWIER	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWIER;        \/*!<EXTI Software interrupt event register,                   Address offset: 0x10 *\/$/;"	m	struct:__anon47
-SWITCHES_THRESHOLD_FULL	src/hard.h	234;"	d
-SWITCHES_THRESHOLD_HALF	src/hard.h	235;"	d
-SWITCHES_THRESHOLD_MIN	src/hard.h	236;"	d
-SWITCHES_TIMER_RELOAD	src/hard.h	231;"	d
+SWITCHES_THRESHOLD_FULL	src/hard.h	240;"	d
+SWITCHES_THRESHOLD_HALF	src/hard.h	241;"	d
+SWITCHES_THRESHOLD_MIN	src/hard.h	242;"	d
+SWITCHES_TIMER_RELOAD	src/hard.h	237;"	d
 SWTRIGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon43
-SYNC	src/hard.h	66;"	d
+SYNC	src/hard.h	71;"	d
 SYNCHRO_ADC	src/hard.h	/^	SYNCHRO_ADC,$/;"	e	enum:__anon7
 SYNCHRO_H_	src/synchro.h	9;"	d
-SYNCP	src/hard.h	120;"	d
-SYNCP_OFF	src/hard.h	122;"	d
-SYNCP_ON	src/hard.h	121;"	d
+SYNCP	src/hard.h	125;"	d
+SYNCP_OFF	src/hard.h	127;"	d
+SYNCP_ON	src/hard.h	126;"	d
 SYNC_SAMPLES	paho.mqtt.embedded-c/Makefile	/^SYNC_SAMPLES = ${addprefix ${blddir}\/samples\/,${SAMPLE_FILES_C}}$/;"	m
 SYNC_TESTS	paho.mqtt.embedded-c/Makefile	/^SYNC_TESTS = ${addprefix ${blddir}\/test\/,${TEST_FILES_C}}$/;"	m
 SYSCFG	cmsis_boot/stm32f0xx.h	974;"	d
@@ -4440,10 +4441,10 @@ SYSCFG_EXTICR4_EXTI15_PC	cmsis_boot/stm32f0xx.h	4579;"	d
 SYSCFG_EXTICR4_EXTI15_PD	cmsis_boot/stm32f0xx.h	4580;"	d
 SYSCFG_EXTICR4_EXTI15_PE	cmsis_boot/stm32f0xx.h	4581;"	d
 SYSCFG_TypeDef	cmsis_boot/stm32f0xx.h	/^} SYSCFG_TypeDef;$/;"	t	typeref:struct:__anon51
-S_FULL	src/hard.h	248;"	d
-S_HALF	src/hard.h	249;"	d
-S_MIN	src/hard.h	250;"	d
-S_NO	src/hard.h	251;"	d
+S_FULL	src/hard.h	254;"	d
+S_HALF	src/hard.h	255;"	d
+S_MIN	src/hard.h	256;"	d
+S_NO	src/hard.h	257;"	d
 S_UPPER_SRCS	paho.mqtt.embedded-c/Debug/sources.mk	/^S_UPPER_SRCS := $/;"	m
 Save_Changes_String_Cmd	src/gps_vktel.h	83;"	d
 SendCommandWaitAnswer	src/ESP8266.c	/^unsigned char SendCommandWaitAnswer (const char * comm)	\/\/blanquea esp_answer$/;"	f
@@ -4502,11 +4503,11 @@ TDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TDR;    \/*!< USART Transmit Data r
 TDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TDTR; \/*!< CAN mailbox data length control and time stamp register *\/$/;"	m	struct:__anon35
 TEMP110_CAL_ADDR	src/adc.h	37;"	d
 TEMP30_CAL_ADDR	src/adc.h	38;"	d
-TEMP_DISCONECT	src/hard.h	225;"	d
-TEMP_IN_30	src/hard.h	221;"	d
-TEMP_IN_35	src/hard.h	222;"	d
-TEMP_IN_50	src/hard.h	223;"	d
-TEMP_IN_65	src/hard.h	224;"	d
+TEMP_DISCONECT	src/hard.h	231;"	d
+TEMP_IN_30	src/hard.h	227;"	d
+TEMP_IN_35	src/hard.h	228;"	d
+TEMP_IN_50	src/hard.h	229;"	d
+TEMP_IN_65	src/hard.h	230;"	d
 TEST_FILES_C	paho.mqtt.embedded-c/Makefile	/^TEST_FILES_C = test1$/;"	m
 TIM1	cmsis_boot/stm32f0xx.h	979;"	d
 TIM14	cmsis_boot/stm32f0xx.h	958;"	d
@@ -4545,8 +4546,8 @@ TIM6_DAC_IRQn	cmsis_boot/stm32f0xx.h	/^  TIM6_DAC_IRQn               = 17,     \
 TIM7	cmsis_boot/stm32f0xx.h	957;"	d
 TIM7_BASE	cmsis_boot/stm32f0xx.h	894;"	d
 TIMEOUTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMEOUTR; \/*!< I2C Timeout register,              Address offset: 0x14 *\/$/;"	m	struct:__anon52
-TIMER_STANDBY_TIMEOUT	src/hard.h	245;"	d
-TIMER_STANDBY_TIMEOUT_REDUCED	src/hard.h	244;"	d
+TIMER_STANDBY_TIMEOUT	src/hard.h	251;"	d
+TIMER_STANDBY_TIMEOUT_REDUCED	src/hard.h	250;"	d
 TIMINGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMINGR;  \/*!< I2C Timing register,               Address offset: 0x10 *\/$/;"	m	struct:__anon52
 TIM_14_Init	src/tim.c	/^void TIM_14_Init (void)$/;"	f
 TIM_16_Init	src/tim.c	/^void TIM_16_Init (void)$/;"	f
@@ -4783,20 +4784,20 @@ TSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              TSR;                 \
 TSSSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TSSSR;      \/*!< RTC time-stamp sub second register,                       Address offset: 0x38 *\/$/;"	m	struct:__anon56
 TSTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TSTR;       \/*!< RTC time stamp time register,                             Address offset: 0x30 *\/$/;"	m	struct:__anon56
 TS_IRQn	cmsis_boot/stm32f0xx.h	/^  TS_IRQn                     = 8,      \/*!< Touch sense controller Interrupt                        *\/$/;"	e	enum:IRQn
-TTIMER_FOR_CAT_DISPLAY	src/hard.h	243;"	d
+TTIMER_FOR_CAT_DISPLAY	src/hard.h	249;"	d
 TT_AT_1SEG	src/ESP8266.h	23;"	d
 TT_AT_3SEG	src/ESP8266.h	24;"	d
-TT_DELAYED_OFF	src/hard.h	268;"	d
-TT_DELAYED_OFF	src/hard.h	271;"	d
-TT_DELAYED_ON	src/hard.h	269;"	d
-TT_DELAYED_ON	src/hard.h	272;"	d
+TT_DELAYED_OFF	src/hard.h	274;"	d
+TT_DELAYED_OFF	src/hard.h	277;"	d
+TT_DELAYED_ON	src/hard.h	275;"	d
+TT_DELAYED_ON	src/hard.h	278;"	d
 TT_ESP_AT_MINI	src/ESP8266.h	21;"	d
 TT_ESP_AT_MODE	src/ESP8266.h	19;"	d
 TT_ESP_RESET	src/ESP8266.h	20;"	d
 TT_GPS_MINI	src/gps_vktel.h	47;"	d
 TT_GSM_MINI	src/gps_vktel.h	48;"	d
 TT_KALIVE	src/tcp_transceiver.h	24;"	d
-TT_RELAY	src/hard.h	277;"	d
+TT_RELAY	src/hard.h	283;"	d
 TT_TCP_SEND	src/tcp_transceiver.h	26;"	d
 TXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TXCRCR;   \/*!< SPI Tx CRC register (not used in I2S mode),          Address offset: 0x18 *\/$/;"	m	struct:__anon57
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;         \/*!< CEC Tx data register ,                                      Address offset:0x08 *\/$/;"	m	struct:__anon39
@@ -4995,8 +4996,8 @@ USB_POLLING_INTERVAL	src/constants.h	55;"	d
 USB_READ_BUFFER_SIZE	src/constants.h	48;"	d
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon49
 USER_OBJS	paho.mqtt.embedded-c/Debug/objects.mk	/^USER_OBJS :=$/;"	m
-USE_GSM	src/hard.h	20;"	d
-USE_REDONDA_BASIC	src/hard.h	22;"	d
+USE_GSM	src/hard.h	22;"	d
+USE_REDONDA_BASIC	src/hard.h	23;"	d
 UpdateIGrid	src/hard.c	/^void UpdateIGrid (void)$/;"	f
 UpdateIGrid	src/synchro.c	/^void UpdateIGrid (void)$/;"	f
 UpdateNewCode	src/flash_program.c	/^unsigned char UpdateNewCode(unsigned int * p, unsigned short posi, unsigned int new_code)$/;"	f
@@ -5026,15 +5027,15 @@ VGRID_MIN	src/synchro.h	24;"	d
 VGRID_SAMPLES_RESET	src/synchro.h	25;"	d
 VIN_MAX	src/synchro.h	34;"	d
 VIN_MIN	src/synchro.h	35;"	d
-VOLTAGE_PHOTO_OFF	src/hard.h	30;"	d
-VOLTAGE_PHOTO_ON	src/hard.h	31;"	d
+VOLTAGE_PHOTO_OFF	src/hard.h	31;"	d
+VOLTAGE_PHOTO_ON	src/hard.h	32;"	d
 V_Sense	src/adc.h	26;"	d
 VoltagePhoto	src/adc.c	/^unsigned short VoltagePhoto [SIZEOF_PHOTO_TRANS];$/;"	v
 WARN	paho.mqtt.embedded-c/MQTTClient/src/MQTTLogging.h	38;"	d
 WELCOME_GSM	src/hard.h	/^	WELCOME_GSM,$/;"	e	enum:__anon7
 WINR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WINR; \/*!< IWDG Window register,    Address offset: 0x10 *\/$/;"	m	struct:__anon53
-WITH_1_TO_10_VOLTS	src/hard.h	34;"	d
-WITH_HYST	src/hard.h	35;"	d
+WITH_1_TO_10_VOLTS	src/hard.h	35;"	d
+WITH_HYST	src/hard.h	36;"	d
 WPR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WPR;        \/*!< RTC write protection register,                            Address offset: 0x24 *\/$/;"	m	struct:__anon56
 WRP0	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP0;         \/*!< FLASH option byte write protection 0,          Address offset: 0x08 *\/$/;"	m	struct:__anon49
 WRP1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP1;         \/*!< FLASH option byte write protection 1,          Address offset: 0x0A *\/$/;"	m	struct:__anon49
@@ -5340,6 +5341,7 @@ gps_state	src/gps_vktel.c	/^GPSState gps_state = GPS_INIT;$/;"	v
 gps_timeout	src/gps_vktel.c	/^volatile unsigned short gps_timeout;$/;"	v
 gsmMSG	src/main.c	/^char gsmMSG [180];$/;"	v
 gsmNUM	src/main.c	/^char gsmNUM [20];$/;"	v
+gsm_error_counter	src/funcs_gsm.c	/^unsigned char gsm_error_counter = 0;$/;"	v
 gsm_have_data	src/main.c	133;"	d	file:
 gsm_have_data	src/sim900_800.c	121;"	d	file:
 gsm_mini_timeout	src/main.c	131;"	d	file:
@@ -5356,13 +5358,15 @@ gsm_state_connecting	src/funcs_gsm.h	/^	gsm_state_connecting,$/;"	e	enum:__anon9
 gsm_state_disconnected	src/funcs_gsm.h	/^	gsm_state_disconnected,$/;"	e	enum:__anon9
 gsm_state_idle	src/funcs_gsm.h	/^	gsm_state_idle,$/;"	e	enum:__anon9
 gsm_state_ready	src/funcs_gsm.h	/^	gsm_state_ready,$/;"	e	enum:__anon9
-gsm_state_ready_wait	src/funcs_gsm.h	/^	gsm_state_ready_wait,$/;"	e	enum:__anon9
 gsm_state_reset	src/funcs_gsm.h	/^	gsm_state_reset = 0,$/;"	e	enum:__anon9
 gsm_state_sending_conf	src/funcs_gsm.h	/^	gsm_state_sending_conf,$/;"	e	enum:__anon9
 gsm_state_sending_sms	src/funcs_gsm.h	/^	gsm_state_sending_sms,$/;"	e	enum:__anon9
 gsm_state_shutdown	src/funcs_gsm.h	/^	gsm_state_shutdown,$/;"	e	enum:__anon9
 gsm_state_stop_wait	src/funcs_gsm.h	/^	gsm_state_stop_wait$/;"	e	enum:__anon9
 gsm_state_verify_at	src/funcs_gsm.h	/^	gsm_state_verify_at,$/;"	e	enum:__anon9
+gsm_state_verify_fully_func	src/funcs_gsm.h	/^	gsm_state_verify_fully_func,$/;"	e	enum:__anon9
+gsm_state_verify_reg	src/funcs_gsm.h	/^	gsm_state_verify_reg,$/;"	e	enum:__anon9
+gsm_state_wait_reg	src/funcs_gsm.h	/^	gsm_state_wait_reg,$/;"	e	enum:__anon9
 haconnections	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	/^	char** haconnections;$/;"	m	struct:Options	file:
 hacount	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	/^	int hacount;$/;"	m	struct:Options	file:
 host	paho.mqtt.embedded-c/MQTTClient-C/samples/linux/stdoutsub.c	/^	char* host;$/;"	m	struct:opts_struct	file:

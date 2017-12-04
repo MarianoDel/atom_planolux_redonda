@@ -10,7 +10,9 @@
 typedef enum {
 	gsm_state_reset = 0,
 	gsm_state_verify_at,
-	gsm_state_ready_wait,
+	gsm_state_verify_fully_func,
+	gsm_state_wait_reg,
+	gsm_state_verify_reg,
 	gsm_state_ready,
 	gsm_state_sending_conf,
 	gsm_state_sending_sms,

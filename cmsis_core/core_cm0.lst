@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccUxQEBM.s 			page 1
+ARM GAS  /tmp/ccp04r9T.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
   55              		.align	2
   56              		.global	__get_PSP
   57              		.code	16
-ARM GAS  /tmp/ccUxQEBM.s 			page 2
+ARM GAS  /tmp/ccp04r9T.s 			page 2
 
 
   58              		.thumb_func
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
   50:cmsis_core/core_cm0.c **** 
   51:cmsis_core/core_cm0.c **** /**
   52:cmsis_core/core_cm0.c ****  * @brief  Return the Process Stack Pointer
-ARM GAS  /tmp/ccUxQEBM.s 			page 3
+ARM GAS  /tmp/ccp04r9T.s 			page 3
 
 
   53:cmsis_core/core_cm0.c ****  *
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  107:cmsis_core/core_cm0.c ****  * @brief  Reverse byte order in unsigned short value
  108:cmsis_core/core_cm0.c ****  *
  109:cmsis_core/core_cm0.c ****  * @param   value  value to reverse
-ARM GAS  /tmp/ccUxQEBM.s 			page 4
+ARM GAS  /tmp/ccp04r9T.s 			page 4
 
 
  110:cmsis_core/core_cm0.c ****  * @return         reversed value
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  164:cmsis_core/core_cm0.c **** /**
  165:cmsis_core/core_cm0.c ****  * @brief  Return the Control Register value
  166:cmsis_core/core_cm0.c ****  * 
-ARM GAS  /tmp/ccUxQEBM.s 			page 5
+ARM GAS  /tmp/ccp04r9T.s 			page 5
 
 
  167:cmsis_core/core_cm0.c ****  * @return Control value
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  221:cmsis_core/core_cm0.c ****   __ASM("msr psp, r0");
  222:cmsis_core/core_cm0.c ****   __ASM("bx lr");
  223:cmsis_core/core_cm0.c **** }
-ARM GAS  /tmp/ccUxQEBM.s 			page 6
+ARM GAS  /tmp/ccp04r9T.s 			page 6
 
 
  224:cmsis_core/core_cm0.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  278:cmsis_core/core_cm0.c ****  *
  279:cmsis_core/core_cm0.c ****  * Return the actual process stack pointer
  280:cmsis_core/core_cm0.c ****  */
-ARM GAS  /tmp/ccUxQEBM.s 			page 7
+ARM GAS  /tmp/ccp04r9T.s 			page 7
 
 
  281:cmsis_core/core_cm0.c **** uint32_t __get_PSP(void) __attribute__( ( naked ) );
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
   94              		.loc 1 303 0
   95              		.syntax divided
   96              	@ 303 "cmsis_core/core_cm0.c" 1
-ARM GAS  /tmp/ccUxQEBM.s 			page 8
+ARM GAS  /tmp/ccp04r9T.s 			page 8
 
 
   97 0002 83F30988 		MSR psp, r3	@ topOfProcStack
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  324:cmsis_core/core_cm0.c **** }
  131              		.loc 1 324 0
  132 000c 1800     		movs	r0, r3	@, <retval>
-ARM GAS  /tmp/ccUxQEBM.s 			page 9
+ARM GAS  /tmp/ccp04r9T.s 			page 9
 
 
  133              		.cfi_endproc
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  343:cmsis_core/core_cm0.c ****  * @brief  Return the Priority Mask value
  344:cmsis_core/core_cm0.c ****  *
  345:cmsis_core/core_cm0.c ****  * @return PriMask
-ARM GAS  /tmp/ccUxQEBM.s 			page 10
+ARM GAS  /tmp/ccp04r9T.s 			page 10
 
 
  346:cmsis_core/core_cm0.c ****  *
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  203              		.loc 1 365 0
  204              		.cfi_startproc
  205 0000 82B0     		sub	sp, sp, #8	@,,
-ARM GAS  /tmp/ccUxQEBM.s 			page 11
+ARM GAS  /tmp/ccp04r9T.s 			page 11
 
 
  206              	.LCFI1:
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  245              	@ 0 "" 2
  246              		.thumb
  247              		.syntax unified
-ARM GAS  /tmp/ccUxQEBM.s 			page 12
+ARM GAS  /tmp/ccp04r9T.s 			page 12
 
 
  248 000a 0193     		str	r3, [sp, #4]	@ result, result
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  288              		.size	__set_CONTROL, .-__set_CONTROL
  289              		.section	.text.__REV,"ax",%progbits
  290              		.align	2
-ARM GAS  /tmp/ccUxQEBM.s 			page 13
+ARM GAS  /tmp/ccp04r9T.s 			page 13
 
 
  291              		.global	__REV
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  328              		.code	16
  329              		.thumb_func
  330              		.type	__REV16, %function
-ARM GAS  /tmp/ccUxQEBM.s 			page 14
+ARM GAS  /tmp/ccp04r9T.s 			page 14
 
 
  331              	__REV16:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  369              		.code	16
  370              		.thumb_func
  371              		.type	__REVSH, %function
-ARM GAS  /tmp/ccUxQEBM.s 			page 15
+ARM GAS  /tmp/ccp04r9T.s 			page 15
 
 
  372              	__REVSH:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  410              		.file 3 "/usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/arm-none-eabi/include/sys/_stdint.h"
  411              		.section	.debug_info,"",%progbits
  412              	.Ldebug_info0:
-ARM GAS  /tmp/ccUxQEBM.s 			page 16
+ARM GAS  /tmp/ccp04r9T.s 			page 16
 
 
  413 0000 DA020000 		.4byte	0x2da
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  467 0079 04       		.byte	0x4
  468 007a 07       		.byte	0x7
  469 007b A1000000 		.4byte	.LASF9
-ARM GAS  /tmp/ccUxQEBM.s 			page 17
+ARM GAS  /tmp/ccp04r9T.s 			page 17
 
 
  470 007f 02       		.uleb128 0x2
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  524 00ed BC000000 		.4byte	0xbc
  525 00f1 01       		.byte	0x1
  526 00f2 54       		.byte	0x54
-ARM GAS  /tmp/ccUxQEBM.s 			page 18
+ARM GAS  /tmp/ccp04r9T.s 			page 18
 
 
  527 00f3 00       		.byte	0
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  581 015e 00       		.sleb128 0
  582 015f 01       		.byte	0x1
  583 0160 73010000 		.4byte	0x173
-ARM GAS  /tmp/ccUxQEBM.s 			page 19
+ARM GAS  /tmp/ccp04r9T.s 			page 19
 
 
  584 0164 08       		.uleb128 0x8
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  638 01d6 01       		.byte	0x1
  639 01d7 BC000000 		.4byte	0xbc
  640 01db 00000000 		.4byte	.LFB6
-ARM GAS  /tmp/ccUxQEBM.s 			page 20
+ARM GAS  /tmp/ccp04r9T.s 			page 20
 
 
  641 01df 14000000 		.4byte	.LFE6
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  695 0256 3D010000 		.4byte	.LASF19
  696 025a 01       		.byte	0x1
  697 025b 9701     		.2byte	0x197
-ARM GAS  /tmp/ccUxQEBM.s 			page 21
+ARM GAS  /tmp/ccp04r9T.s 			page 21
 
 
  698 025d BC000000 		.4byte	0xbc
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  752 02ce 3D010000 		.4byte	.LASF19
  753 02d2 01       		.byte	0x1
  754 02d3 B701     		.2byte	0x1b7
-ARM GAS  /tmp/ccUxQEBM.s 			page 22
+ARM GAS  /tmp/ccp04r9T.s 			page 22
 
 
  755 02d5 BC000000 		.4byte	0xbc
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  809 002e 24       		.uleb128 0x24
  810 002f 00       		.byte	0
  811 0030 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccUxQEBM.s 			page 23
+ARM GAS  /tmp/ccp04r9T.s 			page 23
 
 
  812 0031 0B       		.uleb128 0xb
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  866 0068 03       		.uleb128 0x3
  867 0069 0E       		.uleb128 0xe
  868 006a 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccUxQEBM.s 			page 24
+ARM GAS  /tmp/ccp04r9T.s 			page 24
 
 
  869 006b 0B       		.uleb128 0xb
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  923 00a3 0C       		.uleb128 0xc
  924 00a4 01       		.uleb128 0x1
  925 00a5 13       		.uleb128 0x13
-ARM GAS  /tmp/ccUxQEBM.s 			page 25
+ARM GAS  /tmp/ccp04r9T.s 			page 25
 
 
  926 00a6 00       		.byte	0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  980              	.Ldebug_loc0:
  981              	.LLST0:
  982 0000 00000000 		.4byte	.LFB4
-ARM GAS  /tmp/ccUxQEBM.s 			page 26
+ARM GAS  /tmp/ccp04r9T.s 			page 26
 
 
  983 0004 02000000 		.4byte	.LCFI0
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1037 008a 7D       		.byte	0x7d
  1038 008b 00       		.sleb128 0
  1039 008c 02000000 		.4byte	.LCFI4
-ARM GAS  /tmp/ccUxQEBM.s 			page 27
+ARM GAS  /tmp/ccp04r9T.s 			page 27
 
 
  1040 0090 16000000 		.4byte	.LFE8
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1094 0048 00000000 		.4byte	.LFB7
  1095 004c 10000000 		.4byte	.LFE7-.LFB7
  1096 0050 00000000 		.4byte	.LFB8
-ARM GAS  /tmp/ccUxQEBM.s 			page 28
+ARM GAS  /tmp/ccp04r9T.s 			page 28
 
 
  1097 0054 16000000 		.4byte	.LFE8-.LFB8
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1138      7400
  1139              	.LASF31:
  1140 002e 76616C75 		.ascii	"value\000"
-ARM GAS  /tmp/ccUxQEBM.s 			page 29
+ARM GAS  /tmp/ccp04r9T.s 			page 29
 
 
  1140      6500
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1165              	.LASF29:
  1166 00c6 636F6E74 		.ascii	"control\000"
  1166      726F6C00 
-ARM GAS  /tmp/ccUxQEBM.s 			page 30
+ARM GAS  /tmp/ccp04r9T.s 			page 30
 
 
  1167              	.LASF4:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1193 0187 5F5F5245 		.ascii	"__REV\000"
  1193      5600
  1194              	.LASF27:
-ARM GAS  /tmp/ccUxQEBM.s 			page 31
+ARM GAS  /tmp/ccp04r9T.s 			page 31
 
 
  1195 018d 5F5F6765 		.ascii	"__get_CONTROL\000"
@@ -1847,33 +1847,33 @@ ARM GAS  /tmp/ccUxQEBM.s 			page 1
  1210      65642063 
  1210      68617200 
  1211              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/ccUxQEBM.s 			page 32
+ARM GAS  /tmp/ccp04r9T.s 			page 32
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 core_cm0.c
-     /tmp/ccUxQEBM.s:55     .text.__get_PSP:00000000 $t
-     /tmp/ccUxQEBM.s:60     .text.__get_PSP:00000000 __get_PSP
-     /tmp/ccUxQEBM.s:84     .text.__set_PSP:00000000 $t
-     /tmp/ccUxQEBM.s:89     .text.__set_PSP:00000000 __set_PSP
-     /tmp/ccUxQEBM.s:109    .text.__get_MSP:00000000 $t
-     /tmp/ccUxQEBM.s:114    .text.__get_MSP:00000000 __get_MSP
-     /tmp/ccUxQEBM.s:137    .text.__set_MSP:00000000 $t
-     /tmp/ccUxQEBM.s:142    .text.__set_MSP:00000000 __set_MSP
-     /tmp/ccUxQEBM.s:162    .text.__get_PRIMASK:00000000 $t
-     /tmp/ccUxQEBM.s:167    .text.__get_PRIMASK:00000000 __get_PRIMASK
-     /tmp/ccUxQEBM.s:196    .text.__set_PRIMASK:00000000 $t
-     /tmp/ccUxQEBM.s:201    .text.__set_PRIMASK:00000000 __set_PRIMASK
-     /tmp/ccUxQEBM.s:226    .text.__get_CONTROL:00000000 $t
-     /tmp/ccUxQEBM.s:231    .text.__get_CONTROL:00000000 __get_CONTROL
-     /tmp/ccUxQEBM.s:260    .text.__set_CONTROL:00000000 $t
-     /tmp/ccUxQEBM.s:265    .text.__set_CONTROL:00000000 __set_CONTROL
-     /tmp/ccUxQEBM.s:290    .text.__REV:00000000 $t
-     /tmp/ccUxQEBM.s:295    .text.__REV:00000000 __REV
-     /tmp/ccUxQEBM.s:326    .text.__REV16:00000000 $t
-     /tmp/ccUxQEBM.s:331    .text.__REV16:00000000 __REV16
-     /tmp/ccUxQEBM.s:367    .text.__REVSH:00000000 $t
-     /tmp/ccUxQEBM.s:372    .text.__REVSH:00000000 __REVSH
+     /tmp/ccp04r9T.s:55     .text.__get_PSP:00000000 $t
+     /tmp/ccp04r9T.s:60     .text.__get_PSP:00000000 __get_PSP
+     /tmp/ccp04r9T.s:84     .text.__set_PSP:00000000 $t
+     /tmp/ccp04r9T.s:89     .text.__set_PSP:00000000 __set_PSP
+     /tmp/ccp04r9T.s:109    .text.__get_MSP:00000000 $t
+     /tmp/ccp04r9T.s:114    .text.__get_MSP:00000000 __get_MSP
+     /tmp/ccp04r9T.s:137    .text.__set_MSP:00000000 $t
+     /tmp/ccp04r9T.s:142    .text.__set_MSP:00000000 __set_MSP
+     /tmp/ccp04r9T.s:162    .text.__get_PRIMASK:00000000 $t
+     /tmp/ccp04r9T.s:167    .text.__get_PRIMASK:00000000 __get_PRIMASK
+     /tmp/ccp04r9T.s:196    .text.__set_PRIMASK:00000000 $t
+     /tmp/ccp04r9T.s:201    .text.__set_PRIMASK:00000000 __set_PRIMASK
+     /tmp/ccp04r9T.s:226    .text.__get_CONTROL:00000000 $t
+     /tmp/ccp04r9T.s:231    .text.__get_CONTROL:00000000 __get_CONTROL
+     /tmp/ccp04r9T.s:260    .text.__set_CONTROL:00000000 $t
+     /tmp/ccp04r9T.s:265    .text.__set_CONTROL:00000000 __set_CONTROL
+     /tmp/ccp04r9T.s:290    .text.__REV:00000000 $t
+     /tmp/ccp04r9T.s:295    .text.__REV:00000000 __REV
+     /tmp/ccp04r9T.s:326    .text.__REV16:00000000 $t
+     /tmp/ccp04r9T.s:331    .text.__REV16:00000000 __REV16
+     /tmp/ccp04r9T.s:367    .text.__REVSH:00000000 $t
+     /tmp/ccp04r9T.s:372    .text.__REVSH:00000000 __REVSH
                      .debug_frame:00000010 $d
 
 NO UNDEFINED SYMBOLS

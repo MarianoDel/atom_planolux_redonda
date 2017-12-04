@@ -33,7 +33,7 @@ volatile unsigned short GSMGeneralTimeOut;
 char GSMSendCommandState = 0;
 char GSMSendCommandFlag = 0;
 volatile unsigned short GSMSendCommandTimeOut;
-char GSMSendCommandIntento = 0;
+
 
 //GSM SendSMS
 char GSMSendSMSState = 0;
@@ -601,7 +601,7 @@ void GSMReceive (void)
 
 		if (GSMSendCommandFlag)
 		{
-			if (GSMSendCommandFlag == 3)
+			if (GSMSendCommandFlag == 3)	//no espera respuesta
 			{
 				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)&GSM_SENDOK[0], strlen((const char *)&GSM_SENDOK[0])))
 					GSMSendCommandFlag = 4;
@@ -616,7 +616,7 @@ void GSMReceive (void)
 			if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *) "ERROR", (sizeof("ERROR") - 1)))
 				GSMSendCommandFlag = 5;
 
-			if (GSMSendCommandFlag == 1)
+			if (GSMSendCommandFlag == 1)	//espera respuestas
 			{
 				//autorizo la copia siempre
 				// if(buffUARTGSMrx2[0] == '+')		//lo que sigue es la respuesta al comando
@@ -711,10 +711,11 @@ char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta
 			GSMSendCommandFlag = 0;
 			GSMSendCommandTimeOut = timeOut;
 			GSMSendCommandState++;
-			GSMSendCommandIntento = 0;
 			break;
 
 		case 1:
+			UARTGSMSend(&ptrCommand[0]);
+
 			if (rta)
 			{
 				GSMSendCommandState = 2;
@@ -725,24 +726,12 @@ char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta
 				GSMSendCommandState = 3;
 				GSMSendCommandFlag = 3;
 			}
-
-			if (GSMSendCommandIntento == 1)
-			{
-				GSMSendCommandState = 0;
-				return 4;
-			}
-			else
-			{
-				UARTGSMSend(&ptrCommand[0]);
-			}
 			break;
 
 		case 2:
 			//Espera rta.
 			if (GSMSendCommandFlag == 2)
 			{
-				// GSMSendCommandFlag = 3;
-				// GSMSendCommandState++;
 				//Rta obtenida.
 				strcpy((char *)ptrRta, (const char *)&buffUARTGSMrx2[0]);
 				//OK pegado
@@ -768,18 +757,16 @@ char GSMSendCommand (char *ptrCommand, unsigned short timeOut, unsigned char rta
 			break;
 	}
 
-	if (GSMSendCommandFlag == 5)
+	if (GSMSendCommandFlag == 5)	//"ERROR"
 	{
-		GSMSendCommandIntento++;
-		GSMSendCommandTimeOut = timeOut;
-		GSMSendCommandState = 1;
+		GSMSendCommandState = 0;
+		return 3;
 	}
 
 	if (!GSMSendCommandTimeOut)
 	{
-		GSMSendCommandIntento++;
-		GSMSendCommandTimeOut = timeOut;
-		GSMSendCommandState = 1;
+		GSMSendCommandState = 0;
+		return 4;
 	}
 
 	return 1;
@@ -991,7 +978,7 @@ char GSMSendSMS (char *ptrMSG, char *ptrNUM, unsigned short timeOut)
 			break;
 
 		case 1:
-			i = GSMSendCommand(&GSMSendSMSbuffAux[0], 1000, 0, &GSMbuffRtaCommand[0]);
+			i = GSMSendCommand(&GSMSendSMSbuffAux[0], timeOut, 0, &GSMbuffRtaCommand[0]);
 
 			if (i == 2)
 			{
@@ -1009,13 +996,16 @@ char GSMSendSMS (char *ptrMSG, char *ptrNUM, unsigned short timeOut)
 			break;
 
 		case 2:
-			// i = GSMSendCommand(&GSMSendSMSbuffAux[0], 1000, 1, &GSMbuffRtaCommand[0]);
-			i = GSMSendCommand(&GSMSendSMSbuffAux[0], 1000, 0, &GSMbuffRtaCommand[0]);
+			i = GSMSendCommand(&GSMSendSMSbuffAux[0], timeOut, 1, &GSMbuffRtaCommand[0]);
 
 			if (i == 2)
 			{
 				GSMSendSMSState = 0;
-				return 1;
+
+				if (!strncmp(GSMbuffRtaCommand, "+CMGS: ", sizeof("+CMGS: ") - 1))
+					return 1;
+				else
+					return 2;
 			}
 
 			if (i > 2)

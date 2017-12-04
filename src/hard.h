@@ -17,8 +17,9 @@
 //-------- Type of Program ----------------
 //#define USE_MQTT_LIB
 //#define USE_GPS
-#define USE_GSM
 // #define USE_GSM_GATEWAY
+//estos dos van juntos
+#define USE_GSM
 #define USE_REDONDA_BASIC
 
 //#define WIFI_TO_MQTT_BROKER
@@ -35,6 +36,10 @@
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
 // #define USE_WITH_SYNC				//usa circuito sync por flanco (modificacion en Hardware)
+
+//-------- Kind of Reports Sended ----------------
+#define REPORTS_NORMAL_MODE
+// #define REPORTS_AIRPLANE_MODE
 
 //-------- Others Configurations depending on the formers ------------
 //-------- Hysteresis Conf ------------------------
@@ -186,7 +191,8 @@ typedef enum
 	MAIN_INIT = 0,
 	SYNCHRO_ADC,
 	SET_ZERO_CURRENT,
-	SET_COUNTERS_AND_PHONE,
+	SET_COUNTERS_AND_PHONE0,
+	SET_COUNTERS_AND_PHONE1,
   	LAMP_OFF,
 	START_GSM,
 	CONFIG_GSM,
