@@ -594,10 +594,11 @@ void GSMReceive (void)
 	//---- Comunicacion con modulo GSM ----//
 	if (PacketReadyUARTGSM)
 	{
-		//TODO: para debug envio lo que llega
 		ESPPreParser2(buffUARTGSMrx2, buffUARTGSMrx2);
+#ifdef DEBUG_ON
 		Usart2Send(buffUARTGSMrx2);
 		Usart2Send("\r\n");
+#endif
 
 		if (GSMSendCommandFlag)
 		{

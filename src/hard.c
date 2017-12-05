@@ -11,6 +11,8 @@
 #include "adc.h"
 #include "dsp.h"
 
+#include <stdio.h>
+
 /* Externals variables ---------------------------------------------------------*/
 extern unsigned short timer_relay;
 extern volatile unsigned short adc_ch[];
@@ -354,4 +356,26 @@ unsigned short PowerCalcMean8 (unsigned short * p)
 
 	power = MAFilter8 (p);
 	return power;
+}
+
+void ShowPower (char * pstr, unsigned short pi, unsigned int e_acum_hours, unsigned int e_acum_secs)
+{
+	unsigned short power_int, power_dec;
+	unsigned short wh_int, wh_dec;
+	float fcalc = 1.0;
+
+	fcalc = pi * KW;
+	power_int = (unsigned short) fcalc;
+	fcalc = fcalc - power_int;
+	fcalc = fcalc * 100;
+	power_dec = (unsigned short) fcalc;
+
+	fcalc = (e_acum_hours + e_acum_secs / 1800) * KW;
+	wh_int = (unsigned short) fcalc;
+	fcalc = fcalc - wh_int;
+	fcalc = fcalc * 10;
+	wh_dec = (unsigned short) fcalc;
+
+	sprintf(pstr, "pi: %3d.%02d wh: %d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
+
 }

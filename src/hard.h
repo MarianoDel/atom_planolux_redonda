@@ -25,6 +25,7 @@
 //#define WIFI_TO_MQTT_BROKER
 //#define USE_CERT_PROGRAM
 //#define USE_PROD_PROGRAM
+// #define DEBUG_ON
 
 #ifdef USE_REDONDA_BASIC
 //-------- Voltage Conf ------------------------
@@ -293,6 +294,11 @@ enum Relay_State {
 
 };
 
+// #define KW			0.009721
+// #define KW			0.00945
+// #define KW			0.00959
+#define KW			0.01013
+
 
 
 /* Module Functions ------------------------------------------------------------*/
@@ -309,6 +315,6 @@ unsigned short GetVGrid (void);
 unsigned short GetIGrid (void);
 unsigned short PowerCalc (unsigned short, unsigned short);
 unsigned short PowerCalcMean8 (unsigned short * p);
-
+void ShowPower (char *, unsigned short, unsigned int, unsigned int);
 
 #endif /* HARD_H_ */

@@ -3,6 +3,7 @@
 /* Includes ------------------------------------------------------------------*/
 #include "funcs_gsm.h"
 #include "sim900_800.h"
+#include "uart.h"
 #include <string.h>
 
 

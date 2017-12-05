@@ -79,7 +79,7 @@ volatile unsigned char rx1buff[SIZEOF_DATA];
 // //volatile unsigned short standalone_menu_timer;
 // volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-volatile unsigned short timer_rep = 0;
+unsigned short timer_rep = 0;
 // volatile unsigned char timer_wifi_bright = 0;
 
 #ifdef USE_REDONDA_BASIC
@@ -144,7 +144,7 @@ extern volatile char buffUARTGSMrx2[];
 parameters_typedef param_struct;
 
 //--- VARIABLES GLOBALES ---//
-
+unsigned short show_power_index = 0;	//lo uso como timer sincronizado con la mediciontick 2 secs.
 
 //para las mediciones
 // unsigned int power_2secs_acum = 0;
@@ -167,7 +167,7 @@ volatile unsigned short wait_ms_var = 0;
 volatile unsigned short timer_standby;
 volatile unsigned short tcp_kalive_timer;
 //volatile unsigned char display_timer;
-volatile unsigned char filter_timer;
+volatile unsigned char timer_meas;
 
 //volatile unsigned char door_filter;
 //volatile unsigned char take_sample;
@@ -199,10 +199,6 @@ unsigned short vpote [LARGO_FILTRO + 1];
 
 //--- FIN DEFINICIONES DE FILTRO ---//
 
-// #define KW			0.009721
-// #define KW			0.00945
-// #define KW			0.00959
-#define KW			0.01013
 
 //--- Private Definitions ---//
 #define num_tel_rep		param_struct.num_reportar
@@ -218,15 +214,14 @@ int main(void)
 	unsigned char i, ii;
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
-	unsigned short power_int, power_dec;
-	unsigned short wh_int, wh_dec;
+	// unsigned short power_int, power_dec;
+	// unsigned short wh_int, wh_dec;
+	// float fcalc = 1.0;
 	unsigned short power, last_power;
-	float fcalc = 1.0;
 	unsigned int zero_current_loc = 0;
 
 	unsigned short acum_secs_index;
 	unsigned int acum_secs, acum_hours;
-	unsigned char show_power_index = 0;
 	unsigned char show_power = 0;
 
 #ifdef USE_REDONDA_BASIC
@@ -325,6 +320,8 @@ int main(void)
 		//memoria vacia
 		param_struct.acumm_historico = 0;
 		param_struct.timer_reportar = 2;
+		//el timer a reportar esta n minutos, yo tengo tick cada 2 segundos
+
 		reportar_SMS = 0;
 		strcpy( param_struct.num_reportar, "1149867843");	//segund asim de claro
 	}
@@ -723,20 +720,20 @@ int main(void)
 									RelayOff();
 									LED_OFF;
 								}
-#ifdef WITH_1_TO_10_VOLTS
 								else
 								{
+									//No apago, tengo que reportar?
+									if (show_power_index >= timer_rep)
+									{
+										show_power_index = 0;
+										counters_mode = 2;		//paso al modo memoria de medicion
+										lamp_on_state = meas_reporting0;
+									}
+#ifdef WITH_1_TO_10_VOLTS
 									one_to_ten = GetNew1to10 (GetPhoto());
 									Update_TIM3_CH1 (one_to_ten);
-								}
 #endif
-							}
-
-							if (!timer_rep)
-							{
-								timer_rep = param_struct.timer_reportar;
-								counters_mode = 2;
-								lamp_on_state = meas_reporting0;
+								}
 							}
 						}
 						break;
@@ -753,22 +750,7 @@ int main(void)
 						{
 							if (FuncsGSMStateAsk() == gsm_state_ready)
 							{
-								// fcalc = power;
-								fcalc = power * KW;
-								power_int = (unsigned short) fcalc;
-								fcalc = fcalc - power_int;
-								fcalc = fcalc * 100;
-								power_dec = (unsigned short) fcalc;
-
-								fcalc = (acum_hours + acum_secs / 1800) * KW;
-								wh_int = (unsigned short) fcalc;
-								fcalc = fcalc - wh_int;
-								fcalc = fcalc * 10;
-								wh_dec = (unsigned short) fcalc;
-
-								sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
-
-								//TODO: para debug no envio datos
+								ShowPower(s_lcd, power, acum_hours, acum_secs);
 								Usart2Send(s_lcd);
 								FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
 							}
@@ -796,6 +778,9 @@ int main(void)
 						RelayOn();
 						lamp_on_state = meas_meas;
 						counters_mode = 1;
+						timer_meas = 200;		//le doy 200ms de buffer a la medicion
+						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
+						timer_rep = param_struct.timer_reportar * 30;
 						break;
 
 					case meas_meas:
@@ -824,48 +809,42 @@ int main(void)
 									RelayOff();
 									LED_OFF;
 								}
-#ifdef WITH_1_TO_10_VOLTS
 								else
 								{
+									//No apago, tengo que reportar?
+									if (show_power_index >= timer_rep)
+									{
+										show_power_index = 0;
+										counters_mode = 2;		//paso al modo memoria de medicion
+										lamp_on_state = meas_reporting0;
+									}
+#ifdef WITH_1_TO_10_VOLTS
 									one_to_ten = GetNew1to10 (GetPhoto());
 									Update_TIM3_CH1 (one_to_ten);
-								}
 #endif
-							}
-
-							if (!timer_rep)
-							{
-								timer_rep = param_struct.timer_reportar;
-								// counters_mode = 2;		//sigo midiendo normalmente
-								lamp_on_state = meas_reporting0;
+								}
 							}
 						}
 						break;
 
 					case meas_reporting0:
-
-						// fcalc = power;
-						fcalc = power * KW;
-						power_int = (unsigned short) fcalc;
-						fcalc = fcalc - power_int;
-						fcalc = fcalc * 100;
-						power_dec = (unsigned short) fcalc;
-
-						fcalc = (acum_hours + acum_secs / 1800) * KW;
-						wh_int = (unsigned short) fcalc;
-						fcalc = fcalc - wh_int;
-						fcalc = fcalc * 10;
-						wh_dec = (unsigned short) fcalc;
-
-						sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
-
-						//TODO: para debug no envio datos
+						ShowPower(s_lcd, power, acum_hours, acum_secs);
 						Usart2Send(s_lcd);
 						FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
-						lamp_on_state = meas_meas;
+						lamp_on_state = meas_reporting1;
 						break;
 
 					case meas_reporting1:
+						if (meas_end)		//me sincronizo nuevamente con la medicion
+						{
+							meas_end = 0;
+
+							if (FuncsGSMStateAsk() == gsm_state_ready)
+							{
+								counters_mode = 1;
+								lamp_on_state = meas_meas;
+							}
+						}
 						break;
 
 					default:
@@ -879,7 +858,7 @@ int main(void)
 
 				if (counters_mode)	//si esta activo el modo de contadores mido
 				{
-					if (!timer_standby)	//update cada 200ms
+					if (!timer_meas)	//update cada 200ms
 					{
 						if (i < SIZEOF_POWER_VECT)
 						{
@@ -892,7 +871,8 @@ int main(void)
 
 							if (counters_mode == 1)	//mido normalmente
 							{
-								power = PowerCalcMean8(power_vect);
+								// power = PowerCalcMean8(power_vect);
+								power = 9871;
 								last_power = power;
 							}
 
@@ -909,41 +889,10 @@ int main(void)
 								acum_secs = 0;
 								acum_secs_index = 0;
 							}
-
 							//cuando termino una medicion completa aviso con meas_end
 							meas_end = 1;
-
-
-							// if (show_power_index >= 30)
-							// {
-							// 	show_power = 1;
-							// 	show_power_index = 0;
-							// }
-							//
-							// if (show_power)
-							// {
-							// 	// fcalc = power;
-							// 	fcalc = power * KW;
-							// 	power_int = (unsigned short) fcalc;
-							// 	fcalc = fcalc - power_int;
-							// 	fcalc = fcalc * 100;
-							// 	power_dec = (unsigned short) fcalc;
-							//
-							// 	fcalc = (acum_hours + acum_secs / 1800) * KW;
-							// 	wh_int = (unsigned short) fcalc;
-							// 	fcalc = fcalc - wh_int;
-							// 	fcalc = fcalc * 10;
-							// 	wh_dec = (unsigned short) fcalc;
-							//
-							// 	sprintf(s_lcd, "pi: %3d.%02d wh: %3d.%01d\r\n", power_int, power_dec, wh_int, wh_dec);
-							//
-							// 	//TODO: para debug no envio datos
-							// 	Usart2Send(s_lcd);
-							//
-							// 	show_power = 0;
-							// }
 						}
-						timer_standby = 200;		//10 veces 200ms
+						timer_meas = 200;		//10 veces 200ms
 					}
 				}
 				break;
@@ -1356,26 +1305,23 @@ void TimingDelay_Decrement(void)
 	if (take_temp_sample)
 		take_temp_sample--;
 
-	if (filter_timer)
-		filter_timer--;
+	if (timer_meas)
+		timer_meas--;
 
-	//cuenta de a 1 minuto
-	if (secs > 59999)	//pasaron 1 min
-	{
-		minutes++;
-		secs = 0;
-
-		if (timer_rep)
-			timer_rep--;	//timer de reportes de a 1 minuto
-	}
-	else
-		secs++;
-
-	if (minutes > 60)
-	{
-		hours++;
-		minutes = 0;
-	}
+	// //cuenta de a 1 minuto
+	// if (secs > 59999)	//pasaron 1 min
+	// {
+	// 	minutes++;
+	// 	secs = 0;
+	// }
+	// else
+	// 	secs++;
+	//
+	// if (minutes > 60)
+	// {
+	// 	hours++;
+	// 	minutes = 0;
+	// }
 
 #ifdef USE_MQTT_LIB
 	//timer del MQTT
