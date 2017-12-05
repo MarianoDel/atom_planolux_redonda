@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccOa56bm.s 			page 1
+ARM GAS  /tmp/ccgjcFn2.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
   55              		.align	2
   56              		.code	16
   57              		.thumb_func
-ARM GAS  /tmp/ccOa56bm.s 			page 2
+ARM GAS  /tmp/ccgjcFn2.s 			page 2
 
 
   58              		.type	NVIC_EnableIRQ, %function
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
   51:./cmsis_core/core_cm0.h **** #define __CM0_CMSIS_VERSION       ((__CM0_CMSIS_VERSION_MAIN << 16) | __CM0_CMSIS_VERSION_SUB) /*!<
   52:./cmsis_core/core_cm0.h **** 
   53:./cmsis_core/core_cm0.h **** #define __CORTEX_M                (0x00)                                                       /*!<
-ARM GAS  /tmp/ccOa56bm.s 			page 3
+ARM GAS  /tmp/ccgjcFn2.s 			page 3
 
 
   54:./cmsis_core/core_cm0.h **** 
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  108:./cmsis_core/core_cm0.h ****        uint32_t RESERVED4[64];
  109:./cmsis_core/core_cm0.h ****   __IO uint32_t IPR[8];                       //!< (Offset: 0x3EC) Interrupt Priority Register
  110:./cmsis_core/core_cm0.h **** }  NVIC_Type;
-ARM GAS  /tmp/ccOa56bm.s 			page 4
+ARM GAS  /tmp/ccgjcFn2.s 			page 4
 
 
  111:./cmsis_core/core_cm0.h **** */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  165:./cmsis_core/core_cm0.h **** /* SCB Interrupt Control State Register Definitions */
  166:./cmsis_core/core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Pos            31                                             /*!< SCB 
  167:./cmsis_core/core_cm0.h **** #define SCB_ICSR_NMIPENDSET_Msk            (1ul << SCB_ICSR_NMIPENDSET_Pos)               /*!< SCB 
-ARM GAS  /tmp/ccOa56bm.s 			page 5
+ARM GAS  /tmp/ccgjcFn2.s 			page 5
 
 
  168:./cmsis_core/core_cm0.h **** 
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  222:./cmsis_core/core_cm0.h **** 
  223:./cmsis_core/core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Pos             3                                             /*!< SCB 
  224:./cmsis_core/core_cm0.h **** #define SCB_CCR_UNALIGN_TRP_Msk            (1ul << SCB_CCR_UNALIGN_TRP_Pos)               /*!< SCB 
-ARM GAS  /tmp/ccOa56bm.s 			page 6
+ARM GAS  /tmp/ccgjcFn2.s 			page 6
 
 
  225:./cmsis_core/core_cm0.h **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  279:./cmsis_core/core_cm0.h **** #define SysTick_VAL_CURRENT_Msk            (0xFFFFFFul << SysTick_VAL_CURRENT_Pos)        /*!< SysT
  280:./cmsis_core/core_cm0.h **** 
  281:./cmsis_core/core_cm0.h **** /* SysTick Calibration Register Definitions */
-ARM GAS  /tmp/ccOa56bm.s 			page 7
+ARM GAS  /tmp/ccgjcFn2.s 			page 7
 
 
  282:./cmsis_core/core_cm0.h **** #define SysTick_CALIB_NOREF_Pos            31                                             /*!< SysT
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  336:./cmsis_core/core_cm0.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Pos       0                                             /*!< Core
  337:./cmsis_core/core_cm0.h **** #define CoreDebug_DHCSR_C_DEBUGEN_Msk      (1ul << CoreDebug_DHCSR_C_DEBUGEN_Pos)         /*!< Core
  338:./cmsis_core/core_cm0.h **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 8
+ARM GAS  /tmp/ccgjcFn2.s 			page 8
 
 
  339:./cmsis_core/core_cm0.h **** /* Debug Core Register Selector Register */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  393:./cmsis_core/core_cm0.h **** #endif
  394:./cmsis_core/core_cm0.h **** 
  395:./cmsis_core/core_cm0.h **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 9
+ARM GAS  /tmp/ccgjcFn2.s 			page 9
 
 
  396:./cmsis_core/core_cm0.h **** /* ###################  Compiler specific Intrinsics  ########################### */
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  450:./cmsis_core/core_cm0.h ****  * @param  topOfMainStack  Main Stack Pointer
  451:./cmsis_core/core_cm0.h ****  *
  452:./cmsis_core/core_cm0.h ****  * Assign the value mainStackPointer to the MSP 
-ARM GAS  /tmp/ccOa56bm.s 			page 10
+ARM GAS  /tmp/ccgjcFn2.s 			page 10
 
 
  453:./cmsis_core/core_cm0.h ****  * (main stack pointer) Cortex processor register
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  507:./cmsis_core/core_cm0.h **** /**
  508:./cmsis_core/core_cm0.h ****  * @brief  Set the Control Register value
  509:./cmsis_core/core_cm0.h ****  *
-ARM GAS  /tmp/ccOa56bm.s 			page 11
+ARM GAS  /tmp/ccgjcFn2.s 			page 11
 
 
  510:./cmsis_core/core_cm0.h ****  * @param  control  Control value
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  564:./cmsis_core/core_cm0.h ****  */
  565:./cmsis_core/core_cm0.h **** static __INLINE void __set_CONTROL(uint32_t control)
  566:./cmsis_core/core_cm0.h **** {
-ARM GAS  /tmp/ccOa56bm.s 			page 12
+ARM GAS  /tmp/ccgjcFn2.s 			page 12
 
 
  567:./cmsis_core/core_cm0.h ****   register uint32_t __regControl         __ASM("control");
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  621:./cmsis_core/core_cm0.h ****  *
  622:./cmsis_core/core_cm0.h ****  * @return Main Stack Pointer
  623:./cmsis_core/core_cm0.h ****  *
-ARM GAS  /tmp/ccOa56bm.s 			page 13
+ARM GAS  /tmp/ccgjcFn2.s 			page 13
 
 
  624:./cmsis_core/core_cm0.h ****  * Return the current value of the MSP (main stack pointer)
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  678:./cmsis_core/core_cm0.h ****  * @brief  Set the Process Stack Pointer
  679:./cmsis_core/core_cm0.h ****  *
  680:./cmsis_core/core_cm0.h ****  * @param  topOfProcStack  Process Stack Pointer
-ARM GAS  /tmp/ccOa56bm.s 			page 14
+ARM GAS  /tmp/ccgjcFn2.s 			page 14
 
 
  681:./cmsis_core/core_cm0.h ****  *
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  735:./cmsis_core/core_cm0.h ****  * @brief  Set the Control Register value
  736:./cmsis_core/core_cm0.h ****  *
  737:./cmsis_core/core_cm0.h ****  * @param  control  Control value
-ARM GAS  /tmp/ccOa56bm.s 			page 15
+ARM GAS  /tmp/ccgjcFn2.s 			page 15
 
 
  738:./cmsis_core/core_cm0.h ****  *
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  792:./cmsis_core/core_cm0.h **** /*@{*/
  793:./cmsis_core/core_cm0.h **** 
  794:./cmsis_core/core_cm0.h **** /* ##########################   NVIC functions  #################################### */
-ARM GAS  /tmp/ccOa56bm.s 			page 16
+ARM GAS  /tmp/ccgjcFn2.s 			page 16
 
 
  795:./cmsis_core/core_cm0.h **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
   96              		.align	2
   97              		.code	16
   98              		.thumb_func
-ARM GAS  /tmp/ccOa56bm.s 			page 17
+ARM GAS  /tmp/ccgjcFn2.s 			page 17
 
 
   99              		.type	NVIC_SetPriority, %function
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  866:./cmsis_core/core_cm0.h ****   NVIC->ICPR[0] = (1 << ((uint32_t)(IRQn) & 0x1F)); /* Clear pending interrupt */
  867:./cmsis_core/core_cm0.h **** }
  868:./cmsis_core/core_cm0.h **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 18
+ARM GAS  /tmp/ccgjcFn2.s 			page 18
 
 
  869:./cmsis_core/core_cm0.h **** /**
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  129 0020 1A00     		movs	r2, r3	@ D.5093, D.5092
  130 0022 0F23     		movs	r3, #15	@ tmp168,
  131 0024 1340     		ands	r3, r2	@ D.5093, D.5093
-ARM GAS  /tmp/ccOa56bm.s 			page 19
+ARM GAS  /tmp/ccgjcFn2.s 			page 19
 
 
  132 0026 083B     		subs	r3, r3, #8	@ D.5093,
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  900:./cmsis_core/core_cm0.h **** }
  181              		.loc 1 900 0
  182 0084 2BE0     		b	.L7	@
-ARM GAS  /tmp/ccOa56bm.s 			page 20
+ARM GAS  /tmp/ccgjcFn2.s 			page 20
 
 
  183              	.L5:
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  234 00e0 03B0     		add	sp, sp, #12	@,,
  235              		@ sp needed	@
  236 00e2 30BD     		pop	{r4, r5, pc}
-ARM GAS  /tmp/ccOa56bm.s 			page 21
+ARM GAS  /tmp/ccgjcFn2.s 			page 21
 
 
  237              	.L9:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
   17:src/adc.c     **** #ifdef ADC_WITH_INT
   18:src/adc.c     **** extern volatile unsigned char seq_ready;
   19:src/adc.c     **** #endif
-ARM GAS  /tmp/ccOa56bm.s 			page 22
+ARM GAS  /tmp/ccgjcFn2.s 			page 22
 
 
   20:src/adc.c     **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  285 0006 8023     		movs	r3, #128	@ tmp166,
  286 0008 9B00     		lsls	r3, r3, #2	@ tmp145, tmp166,
  287 000a 1340     		ands	r3, r2	@ D.5097, D.5097
-ARM GAS  /tmp/ccOa56bm.s 			page 23
+ARM GAS  /tmp/ccgjcFn2.s 			page 23
 
 
  288 000c 06D1     		bne	.L11	@,
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  329 004a 1206     		lsls	r2, r2, #24	@ tmp154, tmp162,
  330 004c 1A61     		str	r2, [r3, #16]	@ tmp154, _25->CFGR2
   77:src/adc.c     **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 24
+ARM GAS  /tmp/ccgjcFn2.s 			page 24
 
 
   78:src/adc.c     **** 	//set resolution, trigger & Continuos or Discontinuous
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  102:src/adc.c     **** 	p_channel = &adc_ch[0];
  361              		.loc 2 102 0
  362 0082 0D4B     		ldr	r3, .L12+12	@ tmp159,
-ARM GAS  /tmp/ccOa56bm.s 			page 25
+ARM GAS  /tmp/ccgjcFn2.s 			page 25
 
 
  363 0084 0D4A     		ldr	r2, .L12+16	@ tmp160,
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  402              	ADC1_COMP_IRQHandler:
  403              	.LFB21:
  118:src/adc.c     **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 26
+ARM GAS  /tmp/ccgjcFn2.s 			page 26
 
 
  119:src/adc.c     **** #ifdef ADC_WITH_INT
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  443 003a 1B6C     		ldr	r3, [r3, #64]	@ D.5100, _19->DR
  444 003c 9BB2     		uxth	r3, r3	@ D.5102, D.5100
  445 003e 1380     		strh	r3, [r2]	@ tmp143, *_18
-ARM GAS  /tmp/ccOa56bm.s 			page 27
+ARM GAS  /tmp/ccgjcFn2.s 			page 27
 
 
  134:src/adc.c     **** 			if (p_channel < &adc_ch[2])
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  144:src/adc.c     **** 
  145:src/adc.c     **** //Setea el sample time en el ADC
  146:src/adc.c     **** void SetADC1_SampleTime (void)
-ARM GAS  /tmp/ccOa56bm.s 			page 28
+ARM GAS  /tmp/ccgjcFn2.s 			page 28
 
 
  147:src/adc.c     **** {
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  159:src/adc.c     **** 
  160:src/adc.c     **** 
  161:src/adc.c     **** //lee el ADC sin cambiar el sample time anterior
-ARM GAS  /tmp/ccOa56bm.s 			page 29
+ARM GAS  /tmp/ccgjcFn2.s 			page 29
 
 
  162:src/adc.c     **** unsigned short ReadADC1_SameSampleTime (unsigned int channel)
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  572              	.LFE23:
  573              		.size	ReadADC1_SameSampleTime, .-ReadADC1_SameSampleTime
  574              		.section	.text.ReadADC1Check,"ax",%progbits
-ARM GAS  /tmp/ccOa56bm.s 			page 30
+ARM GAS  /tmp/ccgjcFn2.s 			page 30
 
 
  575              		.align	2
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  618 0030 174B     		ldr	r3, .L41+4	@ D.5107,
  619 0032 27E0     		b	.L31	@
  620              	.L33:
-ARM GAS  /tmp/ccOa56bm.s 			page 31
+ARM GAS  /tmp/ccgjcFn2.s 			page 31
 
 
  187:src/adc.c     **** 
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  199:src/adc.c     **** 
  200:src/adc.c     **** 	//espero que no se este convirtiendo ADCSTART = 0
  201:src/adc.c     **** 	while ((ADC1->CR & 0x02) != 0);	//espero ADCSTART = 0
-ARM GAS  /tmp/ccOa56bm.s 			page 32
+ARM GAS  /tmp/ccgjcFn2.s 			page 32
 
 
  663              		.loc 2 201 0
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  708 0006 0023     		movs	r3, #0	@ tmp123,
  709 0008 0293     		str	r3, [sp, #8]	@ tmp123, calibrationcounter
  710 000a 0023     		movs	r3, #0	@ tmp124,
-ARM GAS  /tmp/ccOa56bm.s 			page 33
+ARM GAS  /tmp/ccgjcFn2.s 			page 33
 
 
  711 000c 0193     		str	r3, [sp, #4]	@ tmp124, calibrationstatus
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  750 0048 0393     		str	r3, [sp, #12]	@ tmp133, tmpreg
  751 004a 01E0     		b	.L47	@
  752              	.L46:
-ARM GAS  /tmp/ccOa56bm.s 			page 34
+ARM GAS  /tmp/ccgjcFn2.s 			page 34
 
 
  226:src/adc.c     ****   }
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  254:src/adc.c     **** 
  255:src/adc.c     **** //devuelve el valor promedio de la temperatura
  256:src/adc.c     **** //si existen nuevas muestras hace la cuenta, sino contesta el ultimo valor calculado
-ARM GAS  /tmp/ccOa56bm.s 			page 35
+ARM GAS  /tmp/ccgjcFn2.s 			page 35
 
 
  257:src/adc.c     **** unsigned short GetTemp (void)
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  303:src/adc.c     **** 	{
  304:src/adc.c     **** 		tt_take_photo_sample = 1000;
  787              		.loc 2 304 0
-ARM GAS  /tmp/ccOa56bm.s 			page 36
+ARM GAS  /tmp/ccgjcFn2.s 			page 36
 
 
  788 000a 104B     		ldr	r3, .L56	@ tmp119,
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  830              	.L57:
  831 004a C046     		.align	2
  832              	.L56:
-ARM GAS  /tmp/ccOa56bm.s 			page 37
+ARM GAS  /tmp/ccgjcFn2.s 			page 37
 
 
  833 004c 00000000 		.word	tt_take_photo_sample
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  875              		.loc 2 326 0 discriminator 3
  876 0024 6B46     		mov	r3, sp	@ tmp131,
  877 0026 0733     		adds	r3, r3, #7	@ tmp123,
-ARM GAS  /tmp/ccOa56bm.s 			page 38
+ARM GAS  /tmp/ccgjcFn2.s 			page 38
 
 
  878 0028 1A78     		ldrb	r2, [r3]	@ D.5118, i
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  920 0006 164B     		ldr	r3, .L68	@ tmp120,
  921 0008 1B78     		ldrb	r3, [r3]	@ D.5119, new_photo_sample
  922 000a 002B     		cmp	r3, #0	@ D.5119,
-ARM GAS  /tmp/ccOa56bm.s 			page 39
+ARM GAS  /tmp/ccgjcFn2.s 			page 39
 
 
  923 000c 22D0     		beq	.L64	@,
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  967              	.L64:
  347:src/adc.c     ****     }
  348:src/adc.c     **** 
-ARM GAS  /tmp/ccOa56bm.s 			page 40
+ARM GAS  /tmp/ccgjcFn2.s 			page 40
 
 
  349:src/adc.c     ****     return last_photo;
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1020 0047 CB000000 		.4byte	.LASF1
  1021 004b 73       		.sleb128 -13
  1022 004c 04       		.uleb128 0x4
-ARM GAS  /tmp/ccOa56bm.s 			page 41
+ARM GAS  /tmp/ccgjcFn2.s 			page 41
 
 
  1023 004d 97050000 		.4byte	.LASF2
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1077 00b9 8C040000 		.4byte	.LASF20
  1078 00bd 0F       		.byte	0xf
  1079 00be 05       		.uleb128 0x5
-ARM GAS  /tmp/ccOa56bm.s 			page 42
+ARM GAS  /tmp/ccgjcFn2.s 			page 42
 
 
  1080 00bf 86050000 		.4byte	.LASF21
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1134 012c 04       		.byte	0x4
  1135 012d 2B       		.byte	0x2b
  1136 012e 32010000 		.4byte	0x132
-ARM GAS  /tmp/ccOa56bm.s 			page 43
+ARM GAS  /tmp/ccgjcFn2.s 			page 43
 
 
  1137 0132 02       		.uleb128 0x2
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1191 0199 23       		.byte	0x23
  1192 019a 00       		.uleb128 0
  1193 019b 0A       		.uleb128 0xa
-ARM GAS  /tmp/ccOa56bm.s 			page 44
+ARM GAS  /tmp/ccgjcFn2.s 			page 44
 
 
  1194 019c B6020000 		.4byte	.LASF49
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1248 0201 8403     		.uleb128 0x184
  1249 0203 0A       		.uleb128 0xa
  1250 0204 DE020000 		.4byte	.LASF56
-ARM GAS  /tmp/ccOa56bm.s 			page 45
+ARM GAS  /tmp/ccgjcFn2.s 			page 45
 
 
  1251 0208 01       		.byte	0x1
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1305 027b 00       		.byte	0
  1306 027c 0E       		.uleb128 0xe
  1307 027d 6C020000 		.4byte	0x26c
-ARM GAS  /tmp/ccOa56bm.s 			page 46
+ARM GAS  /tmp/ccgjcFn2.s 			page 46
 
 
  1308 0281 07       		.uleb128 0x7
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1362 02e1 2F030000 		.4byte	0x32f
  1363 02e5 02       		.byte	0x2
  1364 02e6 23       		.byte	0x23
-ARM GAS  /tmp/ccOa56bm.s 			page 47
+ARM GAS  /tmp/ccgjcFn2.s 			page 47
 
 
  1365 02e7 14       		.uleb128 0x14
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1419 034a 39030000 		.4byte	0x339
  1420 034e 07       		.uleb128 0x7
  1421 034f 16010000 		.4byte	.LASF65
-ARM GAS  /tmp/ccOa56bm.s 			page 48
+ARM GAS  /tmp/ccgjcFn2.s 			page 48
 
 
  1422 0353 01       		.byte	0x1
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1476 03b8 AD040000 		.4byte	.LASF68
  1477 03bc 03       		.byte	0x3
  1478 03bd 8201     		.2byte	0x182
-ARM GAS  /tmp/ccOa56bm.s 			page 49
+ARM GAS  /tmp/ccgjcFn2.s 			page 49
 
 
  1479 03bf 2F030000 		.4byte	0x32f
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1533 0424 03       		.byte	0x3
  1534 0425 8901     		.2byte	0x189
  1535 0427 3D040000 		.4byte	0x43d
-ARM GAS  /tmp/ccOa56bm.s 			page 50
+ARM GAS  /tmp/ccgjcFn2.s 			page 50
 
 
  1536 042b 02       		.byte	0x2
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1590 048f 97000000 		.4byte	.LASF73
  1591 0493 03       		.byte	0x3
  1592 0494 BA02     		.2byte	0x2ba
-ARM GAS  /tmp/ccOa56bm.s 			page 51
+ARM GAS  /tmp/ccgjcFn2.s 			page 51
 
 
  1593 0496 2F030000 		.4byte	0x32f
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1647 04fc 03       		.byte	0x3
  1648 04fd C102     		.2byte	0x2c1
  1649 04ff 2F030000 		.4byte	0x32f
-ARM GAS  /tmp/ccOa56bm.s 			page 52
+ARM GAS  /tmp/ccgjcFn2.s 			page 52
 
 
  1650 0503 02       		.byte	0x2
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1704 056f 01       		.byte	0x1
  1705 0570 7C03     		.2byte	0x37c
  1706 0572 01       		.byte	0x1
-ARM GAS  /tmp/ccOa56bm.s 			page 53
+ARM GAS  /tmp/ccgjcFn2.s 			page 53
 
 
  1707 0573 00000000 		.4byte	.LFB16
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1761 05e4 F7050000 		.4byte	0x5f7
  1762 05e8 1B       		.uleb128 0x1b
  1763 05e9 87000000 		.4byte	.LASF92
-ARM GAS  /tmp/ccOa56bm.s 			page 54
+ARM GAS  /tmp/ccgjcFn2.s 			page 54
 
 
  1764 05ed 02       		.byte	0x2
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1818 0659 01       		.byte	0x1
  1819 065a 67010000 		.4byte	0x167
  1820 065e 00000000 		.4byte	.LFB25
-ARM GAS  /tmp/ccOa56bm.s 			page 55
+ARM GAS  /tmp/ccgjcFn2.s 			page 55
 
 
  1821 0662 5C000000 		.4byte	.LFE25
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1875 06ce 02       		.byte	0x2
  1876 06cf 4001     		.2byte	0x140
  1877 06d1 29000000 		.4byte	0x29
-ARM GAS  /tmp/ccOa56bm.s 			page 56
+ARM GAS  /tmp/ccgjcFn2.s 			page 56
 
 
  1878 06d5 02       		.byte	0x2
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1932 073b 22070000 		.4byte	0x722
  1933 073f 24       		.uleb128 0x24
  1934 0740 6A030000 		.4byte	.LASF101
-ARM GAS  /tmp/ccOa56bm.s 			page 57
+ARM GAS  /tmp/ccgjcFn2.s 			page 57
 
 
  1935 0744 02       		.byte	0x2
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  1989 07b0 C2040000 		.4byte	.LASF106
  1990 07b4 02       		.byte	0x2
  1991 07b5 2B       		.byte	0x2b
-ARM GAS  /tmp/ccOa56bm.s 			page 58
+ARM GAS  /tmp/ccgjcFn2.s 			page 58
 
 
  1992 07b6 32010000 		.4byte	0x132
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2046 0025 0B       		.uleb128 0xb
  2047 0026 0B       		.uleb128 0xb
  2048 0027 49       		.uleb128 0x49
-ARM GAS  /tmp/ccOa56bm.s 			page 59
+ARM GAS  /tmp/ccgjcFn2.s 			page 59
 
 
  2049 0028 13       		.uleb128 0x13
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2103 005e 24       		.uleb128 0x24
  2104 005f 00       		.byte	0
  2105 0060 0B       		.uleb128 0xb
-ARM GAS  /tmp/ccOa56bm.s 			page 60
+ARM GAS  /tmp/ccgjcFn2.s 			page 60
 
 
  2106 0061 0B       		.uleb128 0xb
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2160 0097 13       		.uleb128 0x13
  2161 0098 01       		.uleb128 0x1
  2162 0099 13       		.uleb128 0x13
-ARM GAS  /tmp/ccOa56bm.s 			page 61
+ARM GAS  /tmp/ccgjcFn2.s 			page 61
 
 
  2163 009a 00       		.byte	0
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2217 00d0 28       		.uleb128 0x28
  2218 00d1 00       		.byte	0
  2219 00d2 03       		.uleb128 0x3
-ARM GAS  /tmp/ccOa56bm.s 			page 62
+ARM GAS  /tmp/ccgjcFn2.s 			page 62
 
 
  2220 00d3 08       		.uleb128 0x8
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2274 0109 0B       		.uleb128 0xb
  2275 010a 3B       		.uleb128 0x3b
  2276 010b 05       		.uleb128 0x5
-ARM GAS  /tmp/ccOa56bm.s 			page 63
+ARM GAS  /tmp/ccgjcFn2.s 			page 63
 
 
  2277 010c 27       		.uleb128 0x27
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2331 0144 00       		.byte	0
  2332 0145 3F       		.uleb128 0x3f
  2333 0146 0C       		.uleb128 0xc
-ARM GAS  /tmp/ccOa56bm.s 			page 64
+ARM GAS  /tmp/ccgjcFn2.s 			page 64
 
 
  2334 0147 03       		.uleb128 0x3
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2388 017f 02       		.uleb128 0x2
  2389 0180 0A       		.uleb128 0xa
  2390 0181 00       		.byte	0
-ARM GAS  /tmp/ccOa56bm.s 			page 65
+ARM GAS  /tmp/ccgjcFn2.s 			page 65
 
 
  2391 0182 00       		.byte	0
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2445 01b9 27       		.uleb128 0x27
  2446 01ba 0C       		.uleb128 0xc
  2447 01bb 11       		.uleb128 0x11
-ARM GAS  /tmp/ccOa56bm.s 			page 66
+ARM GAS  /tmp/ccgjcFn2.s 			page 66
 
 
  2448 01bc 01       		.uleb128 0x1
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2502 01f4 3A       		.uleb128 0x3a
  2503 01f5 0B       		.uleb128 0xb
  2504 01f6 3B       		.uleb128 0x3b
-ARM GAS  /tmp/ccOa56bm.s 			page 67
+ARM GAS  /tmp/ccgjcFn2.s 			page 67
 
 
  2505 01f7 05       		.uleb128 0x5
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2559 022e 00       		.byte	0
  2560 022f 00       		.byte	0
  2561 0230 25       		.uleb128 0x25
-ARM GAS  /tmp/ccOa56bm.s 			page 68
+ARM GAS  /tmp/ccgjcFn2.s 			page 68
 
 
  2562 0231 34       		.uleb128 0x34
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2616 0040 0200     		.2byte	0x2
  2617 0042 7D       		.byte	0x7d
  2618 0043 18       		.sleb128 24
-ARM GAS  /tmp/ccOa56bm.s 			page 69
+ARM GAS  /tmp/ccgjcFn2.s 			page 69
 
 
  2619 0044 00000000 		.4byte	0
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2673              	.LLST6:
  2674 00cc 00000000 		.4byte	.LFB25
  2675 00d0 02000000 		.4byte	.LCFI7
-ARM GAS  /tmp/ccOa56bm.s 			page 70
+ARM GAS  /tmp/ccgjcFn2.s 			page 70
 
 
  2676 00d4 0200     		.2byte	0x2
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2730 0038 00000000 		.4byte	.LFB23
  2731 003c 34000000 		.4byte	.LFE23-.LFB23
  2732 0040 00000000 		.4byte	.LFB24
-ARM GAS  /tmp/ccOa56bm.s 			page 71
+ARM GAS  /tmp/ccgjcFn2.s 			page 71
 
 
  2733 0044 94000000 		.4byte	.LFE24-.LFB24
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2779              	.LASF6:
  2780 0016 5056445F 		.ascii	"PVD_IRQn\000"
  2780      4952516E 
-ARM GAS  /tmp/ccOa56bm.s 			page 72
+ARM GAS  /tmp/ccgjcFn2.s 			page 72
 
 
  2780      00
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2808      31365F74 
  2808      00
  2809              	.LASF71:
-ARM GAS  /tmp/ccOa56bm.s 			page 73
+ARM GAS  /tmp/ccgjcFn2.s 			page 73
 
 
  2810 00a9 4144435F 		.ascii	"ADC_TypeDef\000"
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2833              	.LASF17:
  2834 0148 41444331 		.ascii	"ADC1_COMP_IRQn\000"
  2834      5F434F4D 
-ARM GAS  /tmp/ccOa56bm.s 			page 74
+ARM GAS  /tmp/ccgjcFn2.s 			page 74
 
 
  2834      505F4952 
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2860      6E00
  2861              	.LASF85:
  2862 01df 7072696F 		.ascii	"priority\000"
-ARM GAS  /tmp/ccOa56bm.s 			page 75
+ARM GAS  /tmp/ccgjcFn2.s 			page 75
 
 
  2862      72697479 
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2886      642F446F 
  2886      63756D65 
  2886      6E74732F 
-ARM GAS  /tmp/ccOa56bm.s 			page 76
+ARM GAS  /tmp/ccgjcFn2.s 			page 76
 
 
  2887 02a1 6100     		.ascii	"a\000"
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2913      00
  2914              	.LASF58:
  2915 0335 4E564943 		.ascii	"NVIC_Type\000"
-ARM GAS  /tmp/ccOa56bm.s 			page 77
+ARM GAS  /tmp/ccgjcFn2.s 			page 77
 
 
  2915      5F547970 
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2940              	.LASF97:
  2941 03d0 46696C6C 		.ascii	"FillPhotoBuffer\000"
  2941      50686F74 
-ARM GAS  /tmp/ccOa56bm.s 			page 78
+ARM GAS  /tmp/ccgjcFn2.s 			page 78
 
 
  2941      6F427566 
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2963      505F4952 
  2963      5148616E 
  2963      646C6572 
-ARM GAS  /tmp/ccOa56bm.s 			page 79
+ARM GAS  /tmp/ccgjcFn2.s 			page 79
 
 
  2964              	.LASF20:
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2988      4952516E 
  2988      00
  2989              	.LASF21:
-ARM GAS  /tmp/ccOa56bm.s 			page 80
+ARM GAS  /tmp/ccgjcFn2.s 			page 80
 
 
  2990 0586 54494D33 		.ascii	"TIM3_IRQn\000"
@@ -4761,52 +4761,52 @@ ARM GAS  /tmp/ccOa56bm.s 			page 1
  2998      72697479 
  2998      00
  2999              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/ccOa56bm.s 			page 81
+ARM GAS  /tmp/ccgjcFn2.s 			page 81
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 adc.c
-     /tmp/ccOa56bm.s:55     .text.NVIC_EnableIRQ:00000000 $t
-     /tmp/ccOa56bm.s:59     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
-     /tmp/ccOa56bm.s:91     .text.NVIC_EnableIRQ:00000028 $d
-     /tmp/ccOa56bm.s:96     .text.NVIC_SetPriority:00000000 $t
-     /tmp/ccOa56bm.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
-     /tmp/ccOa56bm.s:240    .text.NVIC_SetPriority:000000e4 $d
+     /tmp/ccgjcFn2.s:55     .text.NVIC_EnableIRQ:00000000 $t
+     /tmp/ccgjcFn2.s:59     .text.NVIC_EnableIRQ:00000000 NVIC_EnableIRQ
+     /tmp/ccgjcFn2.s:91     .text.NVIC_EnableIRQ:00000028 $d
+     /tmp/ccgjcFn2.s:96     .text.NVIC_SetPriority:00000000 $t
+     /tmp/ccgjcFn2.s:100    .text.NVIC_SetPriority:00000000 NVIC_SetPriority
+     /tmp/ccgjcFn2.s:240    .text.NVIC_SetPriority:000000e4 $d
                             *COM*:00000004 p_channel
                             *COM*:00000040 VoltagePhoto
-     /tmp/ccOa56bm.s:251    .bss.photo_index:00000000 photo_index
-     /tmp/ccOa56bm.s:252    .bss.photo_index:00000000 $d
-     /tmp/ccOa56bm.s:258    .bss.last_photo:00000000 last_photo
-     /tmp/ccOa56bm.s:255    .bss.last_photo:00000000 $d
-     /tmp/ccOa56bm.s:264    .bss.new_photo_sample:00000000 new_photo_sample
-     /tmp/ccOa56bm.s:265    .bss.new_photo_sample:00000000 $d
-     /tmp/ccOa56bm.s:267    .text.AdcConfig:00000000 $t
-     /tmp/ccOa56bm.s:272    .text.AdcConfig:00000000 AdcConfig
-     /tmp/ccOa56bm.s:698    .text.ADCGetCalibrationFactor:00000000 ADCGetCalibrationFactor
-     /tmp/ccOa56bm.s:388    .text.AdcConfig:000000ac $d
-     /tmp/ccOa56bm.s:397    .text.ADC1_COMP_IRQHandler:00000000 $t
-     /tmp/ccOa56bm.s:402    .text.ADC1_COMP_IRQHandler:00000000 ADC1_COMP_IRQHandler
-     /tmp/ccOa56bm.s:474    .text.ADC1_COMP_IRQHandler:00000064 $d
-     /tmp/ccOa56bm.s:483    .text.SetADC1_SampleTime:00000000 $t
-     /tmp/ccOa56bm.s:488    .text.SetADC1_SampleTime:00000000 SetADC1_SampleTime
-     /tmp/ccOa56bm.s:520    .text.SetADC1_SampleTime:00000024 $d
-     /tmp/ccOa56bm.s:525    .text.ReadADC1_SameSampleTime:00000000 $t
-     /tmp/ccOa56bm.s:530    .text.ReadADC1_SameSampleTime:00000000 ReadADC1_SameSampleTime
-     /tmp/ccOa56bm.s:570    .text.ReadADC1_SameSampleTime:00000030 $d
-     /tmp/ccOa56bm.s:575    .text.ReadADC1Check:00000000 $t
-     /tmp/ccOa56bm.s:580    .text.ReadADC1Check:00000000 ReadADC1Check
-     /tmp/ccOa56bm.s:687    .text.ReadADC1Check:0000008c $d
-     /tmp/ccOa56bm.s:693    .text.ADCGetCalibrationFactor:00000000 $t
-     /tmp/ccOa56bm.s:767    .text.ADCGetCalibrationFactor:00000058 $d
-     /tmp/ccOa56bm.s:772    .text.UpdatePhotoTransistor:00000000 $t
-     /tmp/ccOa56bm.s:777    .text.UpdatePhotoTransistor:00000000 UpdatePhotoTransistor
-     /tmp/ccOa56bm.s:833    .text.UpdatePhotoTransistor:0000004c $d
-     /tmp/ccOa56bm.s:842    .text.FillPhotoBuffer:00000000 $t
-     /tmp/ccOa56bm.s:847    .text.FillPhotoBuffer:00000000 FillPhotoBuffer
-     /tmp/ccOa56bm.s:898    .text.FillPhotoBuffer:00000044 $d
-     /tmp/ccOa56bm.s:904    .text.GetPhoto:00000000 $t
-     /tmp/ccOa56bm.s:909    .text.GetPhoto:00000000 GetPhoto
-     /tmp/ccOa56bm.s:979    .text.GetPhoto:00000060 $d
+     /tmp/ccgjcFn2.s:251    .bss.photo_index:00000000 photo_index
+     /tmp/ccgjcFn2.s:252    .bss.photo_index:00000000 $d
+     /tmp/ccgjcFn2.s:258    .bss.last_photo:00000000 last_photo
+     /tmp/ccgjcFn2.s:255    .bss.last_photo:00000000 $d
+     /tmp/ccgjcFn2.s:264    .bss.new_photo_sample:00000000 new_photo_sample
+     /tmp/ccgjcFn2.s:265    .bss.new_photo_sample:00000000 $d
+     /tmp/ccgjcFn2.s:267    .text.AdcConfig:00000000 $t
+     /tmp/ccgjcFn2.s:272    .text.AdcConfig:00000000 AdcConfig
+     /tmp/ccgjcFn2.s:698    .text.ADCGetCalibrationFactor:00000000 ADCGetCalibrationFactor
+     /tmp/ccgjcFn2.s:388    .text.AdcConfig:000000ac $d
+     /tmp/ccgjcFn2.s:397    .text.ADC1_COMP_IRQHandler:00000000 $t
+     /tmp/ccgjcFn2.s:402    .text.ADC1_COMP_IRQHandler:00000000 ADC1_COMP_IRQHandler
+     /tmp/ccgjcFn2.s:474    .text.ADC1_COMP_IRQHandler:00000064 $d
+     /tmp/ccgjcFn2.s:483    .text.SetADC1_SampleTime:00000000 $t
+     /tmp/ccgjcFn2.s:488    .text.SetADC1_SampleTime:00000000 SetADC1_SampleTime
+     /tmp/ccgjcFn2.s:520    .text.SetADC1_SampleTime:00000024 $d
+     /tmp/ccgjcFn2.s:525    .text.ReadADC1_SameSampleTime:00000000 $t
+     /tmp/ccgjcFn2.s:530    .text.ReadADC1_SameSampleTime:00000000 ReadADC1_SameSampleTime
+     /tmp/ccgjcFn2.s:570    .text.ReadADC1_SameSampleTime:00000030 $d
+     /tmp/ccgjcFn2.s:575    .text.ReadADC1Check:00000000 $t
+     /tmp/ccgjcFn2.s:580    .text.ReadADC1Check:00000000 ReadADC1Check
+     /tmp/ccgjcFn2.s:687    .text.ReadADC1Check:0000008c $d
+     /tmp/ccgjcFn2.s:693    .text.ADCGetCalibrationFactor:00000000 $t
+     /tmp/ccgjcFn2.s:767    .text.ADCGetCalibrationFactor:00000058 $d
+     /tmp/ccgjcFn2.s:772    .text.UpdatePhotoTransistor:00000000 $t
+     /tmp/ccgjcFn2.s:777    .text.UpdatePhotoTransistor:00000000 UpdatePhotoTransistor
+     /tmp/ccgjcFn2.s:833    .text.UpdatePhotoTransistor:0000004c $d
+     /tmp/ccgjcFn2.s:842    .text.FillPhotoBuffer:00000000 $t
+     /tmp/ccgjcFn2.s:847    .text.FillPhotoBuffer:00000000 FillPhotoBuffer
+     /tmp/ccgjcFn2.s:898    .text.FillPhotoBuffer:00000044 $d
+     /tmp/ccgjcFn2.s:904    .text.GetPhoto:00000000 $t
+     /tmp/ccgjcFn2.s:909    .text.GetPhoto:00000000 GetPhoto
+     /tmp/ccgjcFn2.s:979    .text.GetPhoto:00000060 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS

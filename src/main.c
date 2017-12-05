@@ -93,13 +93,8 @@ volatile unsigned short tt_relay_on_off;
 unsigned char saved_mode;
 
 
-// ------- Externals de los switches -------
-unsigned short s1;
-unsigned short s2;
-unsigned short sac;
-unsigned char sac_aux;
-
-// ------- Externals de los switches -------
+unsigned char send_energy = 0;
+// ------- Externals del o para el ADC -------
 #ifdef ADC_WITH_INT
 volatile unsigned short adc_ch[3];
 volatile unsigned char seq_ready = 0;
@@ -303,27 +298,28 @@ int main(void)
 
 	//--- Leo los parametros de memoria ---//
 #ifdef USE_REDONDA_BASIC
-	param_struct.acumm_historico = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_historico;
-	if (param_struct.acumm_historico != 0xFFFFFFFF)
+	param_struct.acumm_wh = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_wh;
+	if (param_struct.acumm_wh != 0xFFFFFFFF)
 	{
 		//memoria no vacia
 		strncpy( param_struct.num_reportar,
 					((parameters_typedef *) (char *) PAGE63)->num_reportar,
 					sizeof(param_struct.num_reportar));
 
-
-		param_struct.timer_reportar = ((parameters_typedef *) (unsigned int *) PAGE63)->timer_reportar;
-		reportar_SMS = 1;
+		param_struct.acumm_w2s = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_w2s;
+		param_struct.acumm_w2s_index = ((parameters_typedef *) (unsigned short *) PAGE63)->acumm_w2s_index;
+		param_struct.timer_reportar = ((parameters_typedef *) (unsigned char *) PAGE63)->timer_reportar;
 	}
 	else
 	{
 		//memoria vacia
-		param_struct.acumm_historico = 0;
+		param_struct.acumm_wh = 0;
+		param_struct.acumm_w2s = 0;
+		param_struct.acumm_w2s_index = 0;
 		param_struct.timer_reportar = 2;
 		//el timer a reportar esta n minutos, yo tengo tick cada 2 segundos
 
-		reportar_SMS = 0;
-		strcpy( param_struct.num_reportar, "1149867843");	//segund asim de claro
+		strcpy( param_struct.num_reportar, "1149867843");	//segunda sim de claro
 	}
 #endif
 
@@ -871,8 +867,12 @@ int main(void)
 
 							if (counters_mode == 1)	//mido normalmente
 							{
-								// power = PowerCalcMean8(power_vect);
-								power = 9871;
+								power = PowerCalcMean8(power_vect);
+								// power = 9871;	//100w forzados para evaluar contadores
+														//9871 * KW = 100
+								if (power < MIN_SENSE_POWER)	//minimo de medicion
+									power = 0;
+
 								last_power = power;
 							}
 

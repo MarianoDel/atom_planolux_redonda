@@ -218,48 +218,6 @@ typedef enum
 } lamp_on_state_t;
 
 #endif
-//---- Temperaturas en el LM335
-//37	2,572
-//40	2,600
-//45	2,650
-//50	2,681
-//55	2,725
-//60	2,765
-#define TEMP_IN_30		3226
-#define TEMP_IN_35		3279
-#define TEMP_IN_50		3434
-#define TEMP_IN_65		3591
-#define TEMP_DISCONECT		4000
-
-//ESTADOS DEL DISPLAY EN RGB_FOR_CAT
-#define SHOW_CHANNELS	0
-#define SHOW_NUMBERS	1
-
-#define SWITCHES_TIMER_RELOAD	10
-#define AC_SWITCH_TIMER_RELOAD	22
-
-#define SWITCHES_THRESHOLD_FULL	300		//3 segundos
-#define SWITCHES_THRESHOLD_HALF	100		//1 segundo
-#define SWITCHES_THRESHOLD_MIN	5		//50 ms
-
-#define AC_SWITCH_THRESHOLD_ROOF	255		//techo del integrador
-#define AC_SWITCH_THRESHOLD_FULL	136		//3 segundos
-#define AC_SWITCH_THRESHOLD_HALF	45		//1 segundo
-#define AC_SWITCH_THRESHOLD_MIN		2		//50 ms
-
-#define TTIMER_FOR_CAT_DISPLAY			2000	//tiempo entre que dice canal y el numero
-#define TIMER_STANDBY_TIMEOUT_REDUCED	2000	//reduced 2 segs
-#define TIMER_STANDBY_TIMEOUT			6000	//6 segundos
-#define DMX_DISPLAY_SHOW_TIMEOUT		30000	//30 segundos
-
-#define S_FULL		10
-#define S_HALF		3
-#define S_MIN		1
-#define S_NO		0
-
-#define FUNCTION_DMX	1
-#define FUNCTION_MAN	2
-#define FUNCTION_CAT	FUNCTION_MAN
 
 #define SIZEOF_DATA1	512
 #define SIZEOF_DATA		256
@@ -294,10 +252,11 @@ enum Relay_State {
 
 };
 
-// #define KW			0.009721
-// #define KW			0.00945
-// #define KW			0.00959
-#define KW			0.01013
+
+// #define KW			0.01013		//R originales en OPAMP
+#define KW			0.01992		//con los cambos en las R y ajustado en 300W
+// #define MIN_SENSE_POWER		753		//15W con KW
+#define MIN_SENSE_POWER		1506		//30W con KW
 
 
 

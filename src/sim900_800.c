@@ -15,7 +15,8 @@
 extern parameters_typedef param_struct;
 #define num_tel_rep		param_struct.num_reportar
 #define timer_rep			param_struct.timer_reportar
-#define send_energy		param_struct.send_energy_flag
+// #define send_energy		param_struct.send_energy_flag
+extern unsigned char send_energy;
 
 
 //UART GSM.

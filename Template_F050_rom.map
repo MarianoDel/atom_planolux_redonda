@@ -122,14 +122,12 @@ gsmNUM              0x14              ./src/main.o
 tt_take_photo_sample
                     0x2               ./src/main.o
 min_vgrid_last      0x2               ./src/hard.o
-sac_aux             0x1               ./src/main.o
 usart2_pckt_bytes   0x1               ./src/main.o
 power_vect          0x14              ./src/main.o
 vgrid_update_samples
                     0x2               ./src/hard.o
 PacketReadyUARTGSM  0x1               ./src/sim900_800.o
 p_CMD               0x4               ./src/funcs_gsm.o
-s1                  0x2               ./src/main.o
 usart1_pckt_bytes   0x1               ./src/main.o
 GSMGeneralTimeOut   0x2               ./src/sim900_800.o
 GSMConfigGPRSTimeOut
@@ -160,13 +158,11 @@ ptx1_pckt_index     0x4               ./src/uart.o
 GSMSendIPbuffAux    0x20              ./src/sim900_800.o
 tx2buff             0x100             ./src/main.o
 GSMSendSMSTimeOut   0x2               ./src/sim900_800.o
-s2                  0x2               ./src/main.o
 vtemp               0x22              ./src/main.o
 gsmMSG              0xb4              ./src/main.o
 GSMConfigTimeOut    0x2               ./src/sim900_800.o
 max_vgrid_last      0x2               ./src/hard.o
 zero_current        0x2               ./src/main.o
-sac                 0x2               ./src/main.o
 timer_standby       0x2               ./src/main.o
 ptcp                0x4               ./src/tcp_transceiver.o
 rx1buff             0x100             ./src/main.o
@@ -207,463 +203,6 @@ Discarded input sections
  .text._read    0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text._write   0x00000000       0x10 ./cmsis_boot/syscalls/syscalls.o
  .text.abort    0x00000000        0x4 ./cmsis_boot/syscalls/syscalls.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_DeInit
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_Init
-                0x00000000       0xdc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_StructInit
-                0x00000000       0x24 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_GenerateSWInterrupt
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_GetFlagStatus
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_ClearFlag
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_GetITStatus
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text.EXTI_ClearITPendingBit
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_info    0x00000000      0x360 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_abbrev  0x00000000      0x19a ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_loc     0x00000000       0xe0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_aranges
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_ranges  0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_line    0x00000000      0x261 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_str     0x00000000      0x3a3 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .debug_frame   0x00000000       0xac ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_SetLatency
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_PrefetchBufferCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_GetPrefetchBufferStatus
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_Unlock
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_Lock
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_ErasePage
-                0x00000000       0x78 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_EraseAllPages
-                0x00000000       0x70 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_ProgramWord
-                0x00000000       0xb0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_ProgramHalfWord
-                0x00000000       0x78 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_Unlock
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_Lock
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_Launch
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_Erase
-                0x00000000       0xec ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_EnableWRP
-                0x00000000      0x174 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_RDPConfig
-                0x00000000       0xdc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_UserConfig
-                0x00000000       0xb8 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_BOOTConfig
-                0x00000000       0x8c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_BOOT0Config
-                0x00000000       0x8c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_BOOT0SWConfig
-                0x00000000       0x8c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_VDDAConfig
-                0x00000000       0x8c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_SRAMParityConfig
-                0x00000000       0x8c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_WriteUser
-                0x00000000       0x84 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_ProgramData
-                0x00000000       0x84 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_GetUser
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_GetWRP
-                0x00000000        0xc ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_OB_GetRDP
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_ITConfig
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_GetFlagStatus
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_ClearFlag
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_GetStatus
-                0x00000000       0x60 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text.FLASH_WaitForLastOperation
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_info    0x00000000      0x8fe ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_abbrev  0x00000000      0x1df ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_loc     0x00000000      0x3c0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_aranges
-                0x00000000      0x110 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_ranges  0x00000000      0x100 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_line    0x00000000      0x4bf ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_str     0x00000000      0x642 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .debug_frame   0x00000000      0x2e0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_DeInit
-                0x00000000       0xec ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_Init
-                0x00000000      0x12c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_StructInit
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_PinLockConfig
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_ReadInputDataBit
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_ReadInputData
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_ReadOutputDataBit
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_ReadOutputData
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_SetBits
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_ResetBits
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_WriteBit
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_Write
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text.GPIO_PinAFConfig
-                0x00000000       0xb0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_info    0x00000000      0x656 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_abbrev  0x00000000      0x1a3 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_loc     0x00000000      0x1ac ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_aranges
-                0x00000000       0x80 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_ranges  0x00000000       0x70 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_line    0x00000000      0x300 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_str     0x00000000      0x500 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .debug_frame   0x00000000      0x11c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .text.NVIC_Init
-                0x00000000       0xa4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .text.NVIC_SystemLPConfig
-                0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .text.SysTick_CLKSourceConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_info    0x00000000      0x3bd ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_abbrev  0x00000000      0x12d ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_loc     0x00000000       0x60 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_aranges
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_ranges  0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_line    0x00000000      0x209 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_str     0x00000000      0x36f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .debug_frame   0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .data.APBAHBPrescTable
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_DeInit
-                0x00000000       0x84 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HSEConfig
-                0x00000000       0x24 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_WaitForHSEStartUp
-                0x00000000       0x68 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_AdjustHSICalibrationValue
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HSICmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_AdjustHSI14CalibrationValue
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HSI14Cmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HSI14ADCRequestCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_LSEConfig
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_LSEDriveConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_LSICmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_PLLConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_PLLCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HSI48Cmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_PREDIV1Config
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_ClockSecuritySystemCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_MCOConfig
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_SYSCLKConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_GetSYSCLKSource
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_HCLKConfig
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_PCLKConfig
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_ADCCLKConfig
-                0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_CECCLKConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_I2CCLKConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_USARTCLKConfig
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_USBCLKConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_GetClocksFreq
-                0x00000000      0x264 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_RTCCLKConfig
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_RTCCLKCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_BackupResetCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_AHBPeriphClockCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_APB2PeriphClockCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_APB1PeriphClockCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_AHBPeriphResetCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_APB2PeriphResetCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_APB1PeriphResetCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_ITConfig
-                0x00000000       0x54 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_GetFlagStatus
-                0x00000000       0x94 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_ClearFlag
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_GetITStatus
-                0x00000000       0x44 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text.RCC_ClearITPendingBit
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_info    0x00000000      0xb28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_abbrev  0x00000000      0x1f2 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_loc     0x00000000      0x4d8 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_aranges
-                0x00000000      0x160 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_ranges  0x00000000      0x150 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_line    0x00000000      0x552 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_str     0x00000000      0x7ee ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .debug_frame   0x00000000      0x348 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_DeInit
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_StructInit
-                0x00000000       0x44 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_Init
-                0x00000000      0x100 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.I2S_StructInit
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.I2S_Init
-                0x00000000      0x1ac ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_Cmd  0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_TIModeCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.I2S_Cmd  0x00000000       0x44 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_DataSizeConfig
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_RxFIFOThresholdConfig
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_BiDirectionalLineConfig
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_NSSInternalSoftwareConfig
-                0x00000000       0x4c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_SSOutputCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_NSSPulseModeCmd
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_SendData8
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_SendData16
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_ReceiveData8
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_ReceiveData16
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_CRCLengthConfig
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_CalculateCRC
-                0x00000000       0x44 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_TransmitCRC
-                0x00000000       0x1c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_GetCRC
-                0x00000000       0x40 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_GetCRCPolynomial
-                0x00000000       0x10 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_DMACmd
-                0x00000000       0x58 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_LastDMATransferCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_ITConfig
-                0x00000000       0x80 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_GetTransmissionFIFOStatus
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_GetReceptionFIFOStatus
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_GetFlagStatus
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_ClearFlag
-                0x00000000       0x20 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text.SPI_I2S_GetITStatus
-                0x00000000       0xa4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_info    0x00000000      0xba6 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_abbrev  0x00000000      0x1a7 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_loc     0x00000000      0x3f9 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_aranges
-                0x00000000      0x110 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_ranges  0x00000000      0x100 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_line    0x00000000      0x489 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_str     0x00000000      0x797 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .debug_frame   0x00000000      0x28c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
- .text          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .data          0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .bss           0x00000000        0x0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DeInit
-                0x00000000       0xa4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_Init
-                0x00000000      0x168 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_StructInit
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ClockInit
-                0x00000000       0x44 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ClockStructInit
-                0x00000000       0x24 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_Cmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DirectionModeCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_OverSampling8Cmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_OneBitMethodCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_MSBFirstCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DataInvCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_InvPinCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SWAPPinCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ReceiverTimeOutCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetReceiverTimeOut
-                0x00000000       0x24 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetPrescaler
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_STOPModeCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_StopModeWakeUpSourceConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_AutoBaudRateCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_AutoBaudRateConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SendData
-                0x00000000       0x24 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ReceiveData
-                0x00000000       0x18 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetAddress
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_MuteModeCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_MuteModeWakeUpConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_AddressDetectionConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_LINBreakDetectLengthConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_LINCmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_HalfDuplexCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetGuardTime
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SmartCardCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SmartCardNACKCmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetAutoRetryCount
-                0x00000000       0x34 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetBlockLength
-                0x00000000       0x30 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_IrDAConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_IrDACmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DECmd
-                0x00000000       0x3c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DEPolarityConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetDEAssertionTime
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_SetDEDeassertionTime
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DMACmd
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_DMAReceptionErrorConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ITConfig
-                0x00000000       0x84 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_RequestCmd
-                0x00000000       0x48 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_OverrunDetectionConfig
-                0x00000000       0x28 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_GetFlagStatus
-                0x00000000       0x38 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ClearFlag
-                0x00000000       0x14 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_GetITStatus
-                0x00000000       0xac ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .text.USART_ClearITPendingBit
-                0x00000000       0x2c ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_info    0x00000000      0xf91 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_abbrev  0x00000000      0x162 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_loc     0x00000000      0x639 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_aranges
-                0x00000000      0x1a0 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_ranges  0x00000000      0x190 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_line    0x00000000      0x5f5 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_str     0x00000000      0x9ec ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .comment       0x00000000       0x6f ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .debug_frame   0x00000000      0x3f4 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
- .ARM.attributes
-                0x00000000       0x31 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
  .text          0x00000000        0x0 ./src/stm32f0xx_it.o
  .data          0x00000000        0x0 ./src/stm32f0xx_it.o
  .bss           0x00000000        0x0 ./src/stm32f0xx_it.o
@@ -721,34 +260,40 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/flash_program.o
  .data          0x00000000        0x0 ./src/flash_program.o
  .bss           0x00000000        0x0 ./src/flash_program.o
- .data.pmem     0x00000000        0x4 ./src/flash_program.o
- .text.ReadMem  0x00000000       0x18 ./src/flash_program.o
  .text.EraseAllMemory_FLASH
                 0x00000000       0x48 ./src/flash_program.o
- .text.Write_Code_To_Memory_FLASH
-                0x00000000      0x190 ./src/flash_program.o
  .text.BackupPage
                 0x00000000       0x4c ./src/flash_program.o
  .text.ErasePage
                 0x00000000       0x30 ./src/flash_program.o
- .text.UpdateNewCode
-                0x00000000       0x34 ./src/flash_program.o
+ .text.FLASH_Unlock
+                0x00000000       0x28 ./src/flash_program.o
+ .text.FLASH_ErasePage
+                0x00000000       0x78 ./src/flash_program.o
+ .text.FLASH_Lock
+                0x00000000       0x14 ./src/flash_program.o
+ .text.FLASH_ProgramWord
+                0x00000000       0xb0 ./src/flash_program.o
+ .text.FLASH_WaitForLastOperation
+                0x00000000       0x58 ./src/flash_program.o
+ .text.FLASH_GetStatus
+                0x00000000       0x60 ./src/flash_program.o
  .text.WritePage
                 0x00000000       0xb0 ./src/flash_program.o
  .text.WriteConfigurations
                 0x00000000       0x38 ./src/flash_program.o
  .text.WriteFlash
                 0x00000000       0xc8 ./src/flash_program.o
- .debug_info    0x00000000      0x426 ./src/flash_program.o
- .debug_abbrev  0x00000000      0x193 ./src/flash_program.o
- .debug_loc     0x00000000      0x148 ./src/flash_program.o
+ .debug_info    0x00000000      0x538 ./src/flash_program.o
+ .debug_abbrev  0x00000000      0x20a ./src/flash_program.o
+ .debug_loc     0x00000000      0x1a0 ./src/flash_program.o
  .debug_aranges
-                0x00000000       0x60 ./src/flash_program.o
- .debug_ranges  0x00000000       0x50 ./src/flash_program.o
- .debug_line    0x00000000      0x22d ./src/flash_program.o
- .debug_str     0x00000000      0x355 ./src/flash_program.o
+                0x00000000       0x78 ./src/flash_program.o
+ .debug_ranges  0x00000000       0x68 ./src/flash_program.o
+ .debug_line    0x00000000      0x28b ./src/flash_program.o
+ .debug_str     0x00000000      0x3eb ./src/flash_program.o
  .comment       0x00000000       0x6f ./src/flash_program.o
- .debug_frame   0x00000000       0xf0 ./src/flash_program.o
+ .debug_frame   0x00000000      0x138 ./src/flash_program.o
  .ARM.attributes
                 0x00000000       0x31 ./src/flash_program.o
  .text          0x00000000        0x0 ./src/dsp.o
@@ -758,29 +303,13 @@ Discarded input sections
                 0x00000000       0x20 ./src/dsp.o
  .text.MAFilterFast
                 0x00000000       0x54 ./src/dsp.o
- .text.MAFilter8
-                0x00000000       0x98 ./src/dsp.o
  .text.MAFilter32
                 0x00000000      0x2b0 ./src/dsp.o
  .text.MAFilter32Circular
                 0x00000000       0x80 ./src/dsp.o
- .debug_info    0x00000000      0x220 ./src/dsp.o
- .debug_abbrev  0x00000000       0x8b ./src/dsp.o
- .debug_loc     0x00000000       0xac ./src/dsp.o
- .debug_aranges
-                0x00000000       0x40 ./src/dsp.o
- .debug_ranges  0x00000000       0x30 ./src/dsp.o
- .debug_line    0x00000000       0xc5 ./src/dsp.o
- .debug_str     0x00000000      0x21f ./src/dsp.o
- .comment       0x00000000       0x6f ./src/dsp.o
- .debug_frame   0x00000000       0x7c ./src/dsp.o
- .ARM.attributes
-                0x00000000       0x31 ./src/dsp.o
  .text          0x00000000        0x0 ./src/hard.o
  .data          0x00000000        0x0 ./src/hard.o
  .bss           0x00000000        0x0 ./src/hard.o
- .text.PowerCalcMean8
-                0x00000000      0x170 ./src/hard.o
  .text          0x00000000        0x0 ./src/tcp_transceiver.o
  .data          0x00000000        0x0 ./src/tcp_transceiver.o
  .bss           0x00000000        0x0 ./src/tcp_transceiver.o
@@ -1506,13 +1035,6 @@ Linker script and memory map
 LOAD ./src/main.o
 LOAD ./cmsis_boot/system_stm32f0xx.o
 LOAD ./cmsis_boot/syscalls/syscalls.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-LOAD ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 LOAD ./src/stm32f0xx_it.o
 LOAD ./src/gpio.o
 LOAD ./src/tim.o
@@ -1557,7 +1079,7 @@ END GROUP
                 0x08000000                g_pfnVectors
                 0x080000c4                . = ALIGN (0x4)
 
-.text           0x080000c4     0x4630
+.text           0x080000c4     0x4868
                 0x080000c4                . = ALIGN (0x4)
  *(.text)
  .text          0x080000c4      0x114 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
@@ -1614,342 +1136,348 @@ END GROUP
                 0x08001134       0xec ./src/main.o
  .text.SysTick_Config
                 0x08001220       0x48 ./src/main.o
- .text.main     0x08001268      0x760 ./src/main.o
+ .text.main     0x08001268      0x790 ./src/main.o
                 0x08001268                main
  .text.TimingDelay_Decrement
-                0x080019c8       0xec ./src/main.o
-                0x080019c8                TimingDelay_Decrement
+                0x080019f8       0xec ./src/main.o
+                0x080019f8                TimingDelay_Decrement
  .text.SystemInit
-                0x08001ab4       0x88 ./cmsis_boot/system_stm32f0xx.o
-                0x08001ab4                SystemInit
+                0x08001ae4       0x88 ./cmsis_boot/system_stm32f0xx.o
+                0x08001ae4                SystemInit
  .text.SetSysClockInternalRC
-                0x08001b3c       0xac ./cmsis_boot/system_stm32f0xx.o
-                0x08001b3c                SetSysClockInternalRC
- .text._sbrk    0x08001be8       0x34 ./cmsis_boot/syscalls/syscalls.o
-                0x08001be8                _sbrk
+                0x08001b6c       0xac ./cmsis_boot/system_stm32f0xx.o
+                0x08001b6c                SetSysClockInternalRC
+ .text._sbrk    0x08001c18       0x34 ./cmsis_boot/syscalls/syscalls.o
+                0x08001c18                _sbrk
  .text.NMI_Handler
-                0x08001c1c        0x4 ./src/stm32f0xx_it.o
-                0x08001c1c                NMI_Handler
+                0x08001c4c        0x4 ./src/stm32f0xx_it.o
+                0x08001c4c                NMI_Handler
  .text.HardFault_Handler
-                0x08001c20        0x4 ./src/stm32f0xx_it.o
-                0x08001c20                HardFault_Handler
+                0x08001c50        0x4 ./src/stm32f0xx_it.o
+                0x08001c50                HardFault_Handler
  .text.SVC_Handler
-                0x08001c24        0x4 ./src/stm32f0xx_it.o
-                0x08001c24                SVC_Handler
+                0x08001c54        0x4 ./src/stm32f0xx_it.o
+                0x08001c54                SVC_Handler
  .text.PendSV_Handler
-                0x08001c28        0x4 ./src/stm32f0xx_it.o
-                0x08001c28                PendSV_Handler
+                0x08001c58        0x4 ./src/stm32f0xx_it.o
+                0x08001c58                PendSV_Handler
  .text.SysTick_Handler
-                0x08001c2c        0xc ./src/stm32f0xx_it.o
-                0x08001c2c                SysTick_Handler
+                0x08001c5c        0xc ./src/stm32f0xx_it.o
+                0x08001c5c                SysTick_Handler
  .text.GPIO_Config
-                0x08001c38      0x118 ./src/gpio.o
-                0x08001c38                GPIO_Config
- .text.EXTIOff  0x08001d50       0x18 ./src/gpio.o
-                0x08001d50                EXTIOff
+                0x08001c68      0x118 ./src/gpio.o
+                0x08001c68                GPIO_Config
+ .text.EXTIOff  0x08001d80       0x18 ./src/gpio.o
+                0x08001d80                EXTIOff
  .text.Update_TIM3_CH1
-                0x08001d68       0x20 ./src/tim.o
-                0x08001d68                Update_TIM3_CH1
- .text.Wait_ms  0x08001d88       0x2c ./src/tim.o
-                0x08001d88                Wait_ms
+                0x08001d98       0x20 ./src/tim.o
+                0x08001d98                Update_TIM3_CH1
+ .text.Wait_ms  0x08001db8       0x2c ./src/tim.o
+                0x08001db8                Wait_ms
  .text.TIM3_IRQHandler
-                0x08001db4       0x1c ./src/tim.o
-                0x08001db4                TIM3_IRQHandler
+                0x08001de4       0x1c ./src/tim.o
+                0x08001de4                TIM3_IRQHandler
  .text.TIM_3_Init
-                0x08001dd0       0xa0 ./src/tim.o
-                0x08001dd0                TIM_3_Init
+                0x08001e00       0xa0 ./src/tim.o
+                0x08001e00                TIM_3_Init
  .text.TIM14_IRQHandler
-                0x08001e70       0x1c ./src/tim.o
-                0x08001e70                TIM14_IRQHandler
+                0x08001ea0       0x1c ./src/tim.o
+                0x08001ea0                TIM14_IRQHandler
  .text.TIM16_IRQHandler
-                0x08001e8c       0x1c ./src/tim.o
-                0x08001e8c                TIM16_IRQHandler
+                0x08001ebc       0x1c ./src/tim.o
+                0x08001ebc                TIM16_IRQHandler
  .text.TIM_16_Init
-                0x08001ea8       0x48 ./src/tim.o
-                0x08001ea8                TIM_16_Init
+                0x08001ed8       0x48 ./src/tim.o
+                0x08001ed8                TIM_16_Init
  .text.TIM16Enable
-                0x08001ef0       0x18 ./src/tim.o
-                0x08001ef0                TIM16Enable
+                0x08001f20       0x18 ./src/tim.o
+                0x08001f20                TIM16Enable
  .text.TIM17_IRQHandler
-                0x08001f08       0x1c ./src/tim.o
-                0x08001f08                TIM17_IRQHandler
+                0x08001f38       0x1c ./src/tim.o
+                0x08001f38                TIM17_IRQHandler
  .text.NVIC_EnableIRQ
-                0x08001f24       0x2c ./src/adc.o
+                0x08001f54       0x2c ./src/adc.o
  .text.NVIC_SetPriority
-                0x08001f50       0xec ./src/adc.o
+                0x08001f80       0xec ./src/adc.o
  .text.AdcConfig
-                0x0800203c       0xc0 ./src/adc.o
-                0x0800203c                AdcConfig
+                0x0800206c       0xc0 ./src/adc.o
+                0x0800206c                AdcConfig
  .text.ADC1_COMP_IRQHandler
-                0x080020fc       0x78 ./src/adc.o
-                0x080020fc                ADC1_COMP_IRQHandler
+                0x0800212c       0x78 ./src/adc.o
+                0x0800212c                ADC1_COMP_IRQHandler
  .text.ADCGetCalibrationFactor
-                0x08002174       0x5c ./src/adc.o
-                0x08002174                ADCGetCalibrationFactor
+                0x080021a4       0x5c ./src/adc.o
+                0x080021a4                ADCGetCalibrationFactor
  .text.UpdatePhotoTransistor
-                0x080021d0       0x60 ./src/adc.o
-                0x080021d0                UpdatePhotoTransistor
+                0x08002200       0x60 ./src/adc.o
+                0x08002200                UpdatePhotoTransistor
  .text.GetPhoto
-                0x08002230       0x6c ./src/adc.o
-                0x08002230                GetPhoto
+                0x08002260       0x6c ./src/adc.o
+                0x08002260                GetPhoto
  .text.NVIC_EnableIRQ
-                0x0800229c       0x2c ./src/uart.o
+                0x080022cc       0x2c ./src/uart.o
  .text.NVIC_SetPriority
-                0x080022c8       0xec ./src/uart.o
+                0x080022f8       0xec ./src/uart.o
  .text.Usart1Mode
-                0x080023b4      0x10c ./src/uart.o
-                0x080023b4                Usart1Mode
+                0x080023e4      0x10c ./src/uart.o
+                0x080023e4                Usart1Mode
  .text.ReadUsart1Buffer
-                0x080024c0       0x78 ./src/uart.o
-                0x080024c0                ReadUsart1Buffer
+                0x080024f0       0x78 ./src/uart.o
+                0x080024f0                ReadUsart1Buffer
  .text.USART1_IRQHandler
-                0x08002538      0x118 ./src/uart.o
-                0x08002538                USART1_IRQHandler
+                0x08002568      0x118 ./src/uart.o
+                0x08002568                USART1_IRQHandler
  .text.USART2_IRQHandler
-                0x08002650       0xc4 ./src/uart.o
-                0x08002650                USART2_IRQHandler
+                0x08002680       0xc4 ./src/uart.o
+                0x08002680                USART2_IRQHandler
  .text.Usart2Send
-                0x08002714       0x2c ./src/uart.o
-                0x08002714                Usart2Send
+                0x08002744       0x2c ./src/uart.o
+                0x08002744                Usart2Send
  .text.Usart2SendUnsigned
-                0x08002740       0x60 ./src/uart.o
-                0x08002740                Usart2SendUnsigned
+                0x08002770       0x60 ./src/uart.o
+                0x08002770                Usart2SendUnsigned
  .text.Usart1Send
-                0x080027a0       0x2c ./src/uart.o
-                0x080027a0                Usart1Send
+                0x080027d0       0x2c ./src/uart.o
+                0x080027d0                Usart1Send
  .text.Usart1SendUnsigned
-                0x080027cc       0x60 ./src/uart.o
-                0x080027cc                Usart1SendUnsigned
+                0x080027fc       0x60 ./src/uart.o
+                0x080027fc                Usart1SendUnsigned
  .text.USART2Config
-                0x0800282c       0x98 ./src/uart.o
-                0x0800282c                USART2Config
+                0x0800285c       0x98 ./src/uart.o
+                0x0800285c                USART2Config
  .text.USART1Config
-                0x080028c4       0x6c ./src/uart.o
-                0x080028c4                USART1Config
- .text.RelayOn  0x08002930       0x24 ./src/hard.o
-                0x08002930                RelayOn
+                0x080028f4       0x6c ./src/uart.o
+                0x080028f4                USART1Config
+ .text.MAFilter8
+                0x08002960       0x98 ./src/dsp.o
+                0x08002960                MAFilter8
+ .text.RelayOn  0x080029f8       0x24 ./src/hard.o
+                0x080029f8                RelayOn
  .text.RelayOff
-                0x08002954       0x24 ./src/hard.o
-                0x08002954                RelayOff
+                0x08002a1c       0x24 ./src/hard.o
+                0x08002a1c                RelayOff
  .text.RelayIsOn
-                0x08002978       0x28 ./src/hard.o
-                0x08002978                RelayIsOn
+                0x08002a40       0x28 ./src/hard.o
+                0x08002a40                RelayIsOn
  .text.RelayIsOff
-                0x080029a0       0x28 ./src/hard.o
-                0x080029a0                RelayIsOff
+                0x08002a68       0x28 ./src/hard.o
+                0x08002a68                RelayIsOff
  .text.UpdateRelay
-                0x080029c8      0x170 ./src/hard.o
-                0x080029c8                UpdateRelay
+                0x08002a90      0x170 ./src/hard.o
+                0x08002a90                UpdateRelay
  .text.GetHysteresis
-                0x08002b38       0x50 ./src/hard.o
-                0x08002b38                GetHysteresis
+                0x08002c00       0x50 ./src/hard.o
+                0x08002c00                GetHysteresis
  .text.GetNew1to10
-                0x08002b88       0x68 ./src/hard.o
-                0x08002b88                GetNew1to10
+                0x08002c50       0x68 ./src/hard.o
+                0x08002c50                GetNew1to10
  .text.UpdateVGrid
-                0x08002bf0       0x70 ./src/hard.o
-                0x08002bf0                UpdateVGrid
+                0x08002cb8       0x70 ./src/hard.o
+                0x08002cb8                UpdateVGrid
  .text.UpdateIGrid
-                0x08002c60       0x90 ./src/hard.o
-                0x08002c60                UpdateIGrid
+                0x08002d28       0x90 ./src/hard.o
+                0x08002d28                UpdateIGrid
  .text.GetVGrid
-                0x08002cf0       0x28 ./src/hard.o
-                0x08002cf0                GetVGrid
+                0x08002db8       0x28 ./src/hard.o
+                0x08002db8                GetVGrid
  .text.GetIGrid
-                0x08002d18       0x28 ./src/hard.o
-                0x08002d18                GetIGrid
+                0x08002de0       0x28 ./src/hard.o
+                0x08002de0                GetIGrid
  .text.PowerCalc
-                0x08002d40       0x30 ./src/hard.o
-                0x08002d40                PowerCalc
+                0x08002e08       0x30 ./src/hard.o
+                0x08002e08                PowerCalc
+ .text.PowerCalcMean8
+                0x08002e38      0x170 ./src/hard.o
+                0x08002e38                PowerCalcMean8
  .text.ShowPower
-                0x08002d70      0x12c ./src/hard.o
-                0x08002d70                ShowPower
+                0x08002fa8      0x12c ./src/hard.o
+                0x08002fa8                ShowPower
  .text.ESPPreParser2
-                0x08002e9c       0x5c ./src/ESP8266.o
-                0x08002e9c                ESPPreParser2
+                0x080030d4       0x5c ./src/ESP8266.o
+                0x080030d4                ESPPreParser2
  .text.GSMProcess
-                0x08002ef8       0x5c ./src/sim900_800.o
-                0x08002ef8                GSMProcess
+                0x08003130       0x5c ./src/sim900_800.o
+                0x08003130                GSMProcess
  .text.GSM_Start
-                0x08002f54       0xfc ./src/sim900_800.o
-                0x08002f54                GSM_Start
+                0x0800318c       0xfc ./src/sim900_800.o
+                0x0800318c                GSM_Start
  .text.GSM_Start_Stop_ResetSM
-                0x08003050       0x10 ./src/sim900_800.o
-                0x08003050                GSM_Start_Stop_ResetSM
+                0x08003288       0x10 ./src/sim900_800.o
+                0x08003288                GSM_Start_Stop_ResetSM
  .text.GSM_Stop
-                0x08003060       0xbc ./src/sim900_800.o
-                0x08003060                GSM_Stop
+                0x08003298       0xbc ./src/sim900_800.o
+                0x08003298                GSM_Stop
  .text.GSM_Delay
-                0x0800311c       0x70 ./src/sim900_800.o
-                0x0800311c                GSM_Delay
+                0x08003354       0x70 ./src/sim900_800.o
+                0x08003354                GSM_Delay
  .text.GSMReceive
-                0x0800318c      0x290 ./src/sim900_800.o
-                0x0800318c                GSMReceive
+                0x080033c4      0x290 ./src/sim900_800.o
+                0x080033c4                GSMReceive
  .text.GSMSendCommand
-                0x0800341c      0x10c ./src/sim900_800.o
-                0x0800341c                GSMSendCommand
+                0x08003654      0x10c ./src/sim900_800.o
+                0x08003654                GSMSendCommand
  .text.GSMSendSMS
-                0x08003528      0x18c ./src/sim900_800.o
-                0x08003528                GSMSendSMS
+                0x08003760      0x18c ./src/sim900_800.o
+                0x08003760                GSMSendSMS
  .text.GSMTimeoutCounters
-                0x080036b4       0xf8 ./src/sim900_800.o
-                0x080036b4                GSMTimeoutCounters
+                0x080038ec       0xf8 ./src/sim900_800.o
+                0x080038ec                GSMTimeoutCounters
  .text.GSMReceivSMS
-                0x080037ac      0x274 ./src/sim900_800.o
-                0x080037ac                GSMReceivSMS
+                0x080039e4      0x274 ./src/sim900_800.o
+                0x080039e4                GSMReceivSMS
  .text.FuncsGSM
-                0x08003a20      0x30c ./src/funcs_gsm.o
-                0x08003a20                FuncsGSM
+                0x08003c58      0x30c ./src/funcs_gsm.o
+                0x08003c58                FuncsGSM
  .text.FuncsGSMReset
-                0x08003d2c       0x14 ./src/funcs_gsm.o
-                0x08003d2c                FuncsGSMReset
+                0x08003f64       0x14 ./src/funcs_gsm.o
+                0x08003f64                FuncsGSMReset
  .text.FuncsGSMSendSMS
-                0x08003d40       0x38 ./src/funcs_gsm.o
-                0x08003d40                FuncsGSMSendSMS
+                0x08003f78       0x38 ./src/funcs_gsm.o
+                0x08003f78                FuncsGSMSendSMS
  .text.FuncsGSMStateAsk
-                0x08003d78        0xc ./src/funcs_gsm.o
-                0x08003d78                FuncsGSMStateAsk
+                0x08003fb0        0xc ./src/funcs_gsm.o
+                0x08003fb0                FuncsGSMStateAsk
  .text.FuncsGSMMessageFlags
-                0x08003d84       0x48 ./src/funcs_gsm.o
-                0x08003d84                FuncsGSMMessageFlags
+                0x08003fbc       0x48 ./src/funcs_gsm.o
+                0x08003fbc                FuncsGSMMessageFlags
  .text.FuncsGSMCommandAnswer
-                0x08003dcc       0x38 ./src/funcs_gsm.o
-                0x08003dcc                FuncsGSMCommandAnswer
+                0x08004004       0x38 ./src/funcs_gsm.o
+                0x08004004                FuncsGSMCommandAnswer
  .text.Reset_Handler
-                0x08003e04       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x08003e04                Reset_Handler
+                0x0800403c       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x0800403c                Reset_Handler
  .text.Default_Handler
-                0x08003e48        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x08003e48                TIM1_CC_IRQHandler
-                0x08003e48                PVD_IRQHandler
-                0x08003e48                I2C1_IRQHandler
-                0x08003e48                SPI1_IRQHandler
-                0x08003e48                TIM6_DAC_IRQHandler
-                0x08003e48                EXTI2_3_IRQHandler
-                0x08003e48                I2C2_IRQHandler
-                0x08003e48                RTC_IRQHandler
-                0x08003e48                EXTI4_15_IRQHandler
-                0x08003e48                RCC_IRQHandler
-                0x08003e48                DMA1_Channel1_IRQHandler
-                0x08003e48                Default_Handler
-                0x08003e48                CEC_IRQHandler
-                0x08003e48                DMA1_Channel4_5_IRQHandler
-                0x08003e48                TIM15_IRQHandler
-                0x08003e48                EXTI0_1_IRQHandler
-                0x08003e48                SPI2_IRQHandler
-                0x08003e48                TS_IRQHandler
-                0x08003e48                WWDG_IRQHandler
-                0x08003e48                TIM2_IRQHandler
-                0x08003e48                DMA1_Channel2_3_IRQHandler
-                0x08003e48                FLASH_IRQHandler
-                0x08003e48                TIM1_BRK_UP_TRG_COM_IRQHandler
- .text.memcpy   0x08003e4a       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
-                0x08003e4a                memcpy
- .text.sprintf  0x08003e5c       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
-                0x08003e5c                sprintf
-                0x08003e5c                siprintf
- .text.strcat   0x08003ea0       0x1a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
-                0x08003ea0                strcat
- .text.strcpy   0x08003eba       0x10 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
-                0x08003eba                strcpy
- .text.strncmp  0x08003eca       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
-                0x08003eca                strncmp
- .text.strncpy  0x08003eee       0x26 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
-                0x08003eee                strncpy
- .text._free_r  0x08003f14       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
-                0x08003f14                _free_r
+                0x08004080        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x08004080                TIM1_CC_IRQHandler
+                0x08004080                PVD_IRQHandler
+                0x08004080                I2C1_IRQHandler
+                0x08004080                SPI1_IRQHandler
+                0x08004080                TIM6_DAC_IRQHandler
+                0x08004080                EXTI2_3_IRQHandler
+                0x08004080                I2C2_IRQHandler
+                0x08004080                RTC_IRQHandler
+                0x08004080                EXTI4_15_IRQHandler
+                0x08004080                RCC_IRQHandler
+                0x08004080                DMA1_Channel1_IRQHandler
+                0x08004080                Default_Handler
+                0x08004080                CEC_IRQHandler
+                0x08004080                DMA1_Channel4_5_IRQHandler
+                0x08004080                TIM15_IRQHandler
+                0x08004080                EXTI0_1_IRQHandler
+                0x08004080                SPI2_IRQHandler
+                0x08004080                TS_IRQHandler
+                0x08004080                WWDG_IRQHandler
+                0x08004080                TIM2_IRQHandler
+                0x08004080                DMA1_Channel2_3_IRQHandler
+                0x08004080                FLASH_IRQHandler
+                0x08004080                TIM1_BRK_UP_TRG_COM_IRQHandler
+ .text.memcpy   0x08004082       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x08004082                memcpy
+ .text.sprintf  0x08004094       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+                0x08004094                sprintf
+                0x08004094                siprintf
+ .text.strcat   0x080040d8       0x1a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+                0x080040d8                strcat
+ .text.strcpy   0x080040f2       0x10 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
+                0x080040f2                strcpy
+ .text.strncmp  0x08004102       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
+                0x08004102                strncmp
+ .text.strncpy  0x08004126       0x26 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+                0x08004126                strncpy
+ .text._free_r  0x0800414c       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+                0x0800414c                _free_r
  .text._malloc_r
-                0x08003fa0       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
-                0x08003fa0                _malloc_r
+                0x080041d8       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x080041d8                _malloc_r
  .text.__ssputs_r
-                0x0800404c       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
-                0x0800404c                __ssputs_r
+                0x08004284       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08004284                __ssputs_r
  .text._svfprintf_r
-                0x08004110      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
-                0x08004110                _svfprintf_r
-                0x08004110                _svfiprintf_r
+                0x08004348      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08004348                _svfprintf_r
+                0x08004348                _svfiprintf_r
  .text._printf_common
-                0x0800430c       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x0800430c                _printf_common
+                0x08004544       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08004544                _printf_common
  .text._printf_i
-                0x080043e8      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x080043e8                _printf_i
- .text._sbrk_r  0x0800462c       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
-                0x0800462c                _sbrk_r
- .text.memchr   0x08004650       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
-                0x08004650                memchr
- .text.memmove  0x08004666       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
-                0x08004666                memmove
+                0x08004620      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08004620                _printf_i
+ .text._sbrk_r  0x08004864       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+                0x08004864                _sbrk_r
+ .text.memchr   0x08004888       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+                0x08004888                memchr
+ .text.memmove  0x0800489e       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+                0x0800489e                memmove
  .text._realloc_r
-                0x08004690       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
-                0x08004690                _realloc_r
+                0x080048c8       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+                0x080048c8                _realloc_r
  .text._malloc_usable_size_r
-                0x080046dc       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
-                0x080046dc                _malloc_usable_size_r
+                0x08004914       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+                0x08004914                _malloc_usable_size_r
  *(.glue_7)
- .glue_7        0x080046f2        0x0 linker stubs
+ .glue_7        0x0800492a        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x080046f2        0x0 linker stubs
+ .glue_7t       0x0800492a        0x0 linker stubs
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x080046f4                . = ALIGN (0x4)
- *fill*         0x080046f2        0x2 
-                0x080046f4                _etext = .
+                0x0800492c                . = ALIGN (0x4)
+ *fill*         0x0800492a        0x2 
+                0x0800492c                _etext = .
 
-.vfp11_veneer   0x080046f4        0x0
- .vfp11_veneer  0x080046f4        0x0 linker stubs
+.vfp11_veneer   0x0800492c        0x0
+ .vfp11_veneer  0x0800492c        0x0 linker stubs
 
-.v4_bx          0x080046f4        0x0
- .v4_bx         0x080046f4        0x0 linker stubs
+.v4_bx          0x0800492c        0x0
+ .v4_bx         0x0800492c        0x0 linker stubs
 
-.iplt           0x080046f4        0x0
- .iplt          0x080046f4        0x0 ./src/main.o
+.iplt           0x0800492c        0x0
+ .iplt          0x0800492c        0x0 ./src/main.o
 
-.rodata         0x080046f4      0x5e8
-                0x080046f4                . = ALIGN (0x4)
+.rodata         0x0800492c      0x5e8
+                0x0800492c                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x080046f4      0x18f ./src/main.o
- *fill*         0x08004883        0x1 
- .rodata        0x08004884       0x1b ./src/hard.o
- *fill*         0x0800489f        0x1 
- .rodata        0x080048a0      0x272 ./src/sim900_800.o
- *fill*         0x08004b12        0x2 
- .rodata        0x08004b14       0x6c ./src/funcs_gsm.o
- .rodata        0x08004b80       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
- .rodata        0x08004bc0       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
+ .rodata        0x0800492c      0x18f ./src/main.o
+ *fill*         0x08004abb        0x1 
+ .rodata        0x08004abc       0x1b ./src/hard.o
+ *fill*         0x08004ad7        0x1 
+ .rodata        0x08004ad8      0x272 ./src/sim900_800.o
+ *fill*         0x08004d4a        0x2 
+ .rodata        0x08004d4c       0x6c ./src/funcs_gsm.o
+ .rodata        0x08004db8       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
+ .rodata        0x08004df8       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
  *(.rodata*)
- .rodata.main   0x08004c00       0x40 ./src/main.o
+ .rodata.main   0x08004e38       0x40 ./src/main.o
  .rodata.UpdateRelay
-                0x08004c40       0x18 ./src/hard.o
+                0x08004e78       0x18 ./src/hard.o
  .rodata.GSM_IPSTATE
-                0x08004c58        0x7 ./src/sim900_800.o
-                0x08004c58                GSM_IPSTATE
- *fill*         0x08004c5f        0x1 
+                0x08004e90        0x7 ./src/sim900_800.o
+                0x08004e90                GSM_IPSTATE
+ *fill*         0x08004e97        0x1 
  .rodata.GSM_SENDOK
-                0x08004c60        0x8 ./src/sim900_800.o
-                0x08004c60                GSM_SENDOK
+                0x08004e98        0x8 ./src/sim900_800.o
+                0x08004e98                GSM_SENDOK
  .rodata.FuncsGSM
-                0x08004c68       0x3c ./src/funcs_gsm.o
+                0x08004ea0       0x3c ./src/funcs_gsm.o
  .rodata.str1.1
-                0x08004ca4        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+                0x08004edc        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .rodata.str1.1
-                0x08004ca6       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08004ede       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
  .rodata.str1.1
-                0x08004cb7       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x08004cdc                . = ALIGN (0x4)
- *fill*         0x08004cd9        0x3 
+                0x08004eef       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08004f14                . = ALIGN (0x4)
+ *fill*         0x08004f11        0x3 
 
-.rel.dyn        0x08004cdc        0x0
- .rel.iplt      0x08004cdc        0x0 ./src/main.o
+.rel.dyn        0x08004f14        0x0
+ .rel.iplt      0x08004f14        0x0 ./src/main.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08004cdc        0x0
-                0x08004cdc                __exidx_start = .
+.ARM            0x08004f14        0x0
+                0x08004f14                __exidx_start = .
  *(.ARM.exidx*)
-                0x08004cdc                __exidx_end = .
+                0x08004f14                __exidx_end = .
 
 .memParams      0x08007c00        0x0
                 0x08007c00                . = ALIGN (0x4)
@@ -1957,25 +1485,25 @@ END GROUP
  *(memParams1)
                 0x08007c00                . = ALIGN (0x4)
 
-.preinit_array  0x08004cdc        0x0
+.preinit_array  0x08004f14        0x0
                 [!provide]                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
                 [!provide]                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08004cdc        0x0
+.init_array     0x08004f14        0x0
                 [!provide]                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
                 [!provide]                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08004cdc        0x0
+.fini_array     0x08004f14        0x0
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08004cdc                _sidata = LOADADDR (.data)
+                0x08004f14                _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x68 load address 0x08004cdc
+.data           0x20000000       0x68 load address 0x08004f14
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -1995,11 +1523,11 @@ END GROUP
                 0x20000068                . = ALIGN (0x4)
                 0x20000068                _edata = .
 
-.igot.plt       0x20000068        0x0 load address 0x08004d44
+.igot.plt       0x20000068        0x0 load address 0x08004f7c
  .igot.plt      0x20000068        0x0 ./src/main.o
                 0x20000068                . = ALIGN (0x4)
 
-.bss            0x20000068      0x960 load address 0x08004d44
+.bss            0x20000068      0x958 load address 0x08004f7c
                 0x20000068                _sbss = .
                 0x20000068                __bss_start__ = _sbss
  *(.bss)
@@ -2013,10 +1541,12 @@ END GROUP
  .bss.timer_relay
                 0x2000006c        0x2 ./src/main.o
                 0x2000006c                timer_relay
- .bss.seq_ready
+ .bss.send_energy
                 0x2000006e        0x1 ./src/main.o
-                0x2000006e                seq_ready
- *fill*         0x2000006f        0x1 
+                0x2000006e                send_energy
+ .bss.seq_ready
+                0x2000006f        0x1 ./src/main.o
+                0x2000006f                seq_ready
  .bss.show_power_index
                 0x20000070        0x2 ./src/main.o
                 0x20000070                show_power_index
@@ -2086,7 +1616,7 @@ END GROUP
                 0x20000094        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
                 0x20000094                __malloc_free_list
  *(COMMON)
- COMMON         0x20000098      0x5a2 ./src/main.o
+ COMMON         0x20000098      0x59a ./src/main.o
                 0x20000098                saved_mode
                 0x2000009a                tcp_kalive_timer
                 0x2000009c                vpote
@@ -2096,11 +1626,9 @@ END GROUP
                 0x20000116                timer_meas
                 0x20000118                gsmNUM
                 0x2000012c                tt_take_photo_sample
-                0x2000012e                sac_aux
-                0x2000012f                usart2_pckt_bytes
+                0x2000012e                usart2_pckt_bytes
                 0x20000130                power_vect
-                0x20000144                s1
-                0x20000146                usart1_pckt_bytes
+                0x20000144                usart1_pckt_bytes
                 0x20000148                adc_ch
                 0x20000150                rx2buff
                 0x20000250                usart1_mini_timeout
@@ -2109,77 +1637,75 @@ END GROUP
                 0x20000253                usart1_pckt_ready
                 0x20000254                tx1buff
                 0x20000354                tx2buff
-                0x20000454                s2
-                0x20000458                vtemp
-                0x2000047c                gsmMSG
-                0x20000530                zero_current
-                0x20000532                sac
-                0x20000534                timer_standby
-                0x20000538                rx1buff
-                0x20000638                tt_relay_on_off
- *fill*         0x2000063a        0x2 
- COMMON         0x2000063c       0x44 ./src/adc.o
-                0x2000063c                p_channel
-                0x20000640                VoltagePhoto
- COMMON         0x20000680       0x18 ./src/uart.o
-                0x20000680                ptx2_pckt_index
-                0x20000684                ptx2
-                0x20000688                ptx1
-                0x2000068c                prx2
-                0x20000690                ptx1_pckt_index
-                0x20000694                prx1
- COMMON         0x20000698       0x16 ./src/hard.o
-                0x20000698                last_edge
-                0x2000069a                max_igrid
-                0x2000069c                min_igrid
-                0x2000069e                min_igrid_last
-                0x200006a0                min_vgrid
-                0x200006a2                min_vgrid_last
-                0x200006a4                vgrid_update_samples
-                0x200006a6                max_vgrid
-                0x200006a8                igrid_update_samples
-                0x200006aa                max_igrid_last
-                0x200006ac                max_vgrid_last
- *fill*         0x200006ae        0x2 
- COMMON         0x200006b0      0x304 ./src/sim900_800.o
-                0x200006b0                GSMSendIPTimeOut
-                0x200006b2                GSMSendCommandTimeOut
-                0x200006b4                GSMbuffRtaCommand
-                0x200007b4                GSMIPadd
-                0x200007c4                buffUARTGSMrx2
-                0x200008c4                GSMStartTime
-                0x200008c6                PacketReadyUARTGSM
-                0x200008c8                GSMGeneralTimeOut
-                0x200008ca                GSMConfigGPRSTimeOut
-                0x200008cc                GSMConfigTime
-                0x200008d0                GSMSendSMSbuffAux
-                0x200008f0                GSMbuffGPRSCommand
-                0x20000930                GSMSendIPbuffAux
-                0x20000950                GSMSendSMSTimeOut
-                0x20000952                GSMConfigTimeOut
-                0x20000954                GSMbuffStatus
-                0x20000974                GSMReadSMSrepIn
-                0x20000994                GSMReadSMScommand
- COMMON         0x200009b4       0x10 ./src/funcs_gsm.o
-                0x200009b4                p_MSG
-                0x200009b8                p_NUM
-                0x200009bc                p_CMD
-                0x200009c0                p_RESP
- COMMON         0x200009c4        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
-                0x200009c4                errno
-                0x200009c8                . = ALIGN (0x4)
-                0x200009c8                _ebss = .
-                0x200009c8                __bss_end__ = _ebss
+                0x20000454                vtemp
+                0x20000478                gsmMSG
+                0x2000052c                zero_current
+                0x2000052e                timer_standby
+                0x20000530                rx1buff
+                0x20000630                tt_relay_on_off
+ *fill*         0x20000632        0x2 
+ COMMON         0x20000634       0x44 ./src/adc.o
+                0x20000634                p_channel
+                0x20000638                VoltagePhoto
+ COMMON         0x20000678       0x18 ./src/uart.o
+                0x20000678                ptx2_pckt_index
+                0x2000067c                ptx2
+                0x20000680                ptx1
+                0x20000684                prx2
+                0x20000688                ptx1_pckt_index
+                0x2000068c                prx1
+ COMMON         0x20000690       0x16 ./src/hard.o
+                0x20000690                last_edge
+                0x20000692                max_igrid
+                0x20000694                min_igrid
+                0x20000696                min_igrid_last
+                0x20000698                min_vgrid
+                0x2000069a                min_vgrid_last
+                0x2000069c                vgrid_update_samples
+                0x2000069e                max_vgrid
+                0x200006a0                igrid_update_samples
+                0x200006a2                max_igrid_last
+                0x200006a4                max_vgrid_last
+ *fill*         0x200006a6        0x2 
+ COMMON         0x200006a8      0x304 ./src/sim900_800.o
+                0x200006a8                GSMSendIPTimeOut
+                0x200006aa                GSMSendCommandTimeOut
+                0x200006ac                GSMbuffRtaCommand
+                0x200007ac                GSMIPadd
+                0x200007bc                buffUARTGSMrx2
+                0x200008bc                GSMStartTime
+                0x200008be                PacketReadyUARTGSM
+                0x200008c0                GSMGeneralTimeOut
+                0x200008c2                GSMConfigGPRSTimeOut
+                0x200008c4                GSMConfigTime
+                0x200008c8                GSMSendSMSbuffAux
+                0x200008e8                GSMbuffGPRSCommand
+                0x20000928                GSMSendIPbuffAux
+                0x20000948                GSMSendSMSTimeOut
+                0x2000094a                GSMConfigTimeOut
+                0x2000094c                GSMbuffStatus
+                0x2000096c                GSMReadSMSrepIn
+                0x2000098c                GSMReadSMScommand
+ COMMON         0x200009ac       0x10 ./src/funcs_gsm.o
+                0x200009ac                p_MSG
+                0x200009b0                p_NUM
+                0x200009b4                p_CMD
+                0x200009b8                p_RESP
+ COMMON         0x200009bc        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                0x200009bc                errno
+                0x200009c0                . = ALIGN (0x4)
+                0x200009c0                _ebss = .
+                0x200009c0                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200009c8      0x400 load address 0x08004d44
-                0x200009c8                . = ALIGN (0x4)
+                0x200009c0      0x400 load address 0x08004f7c
+                0x200009c0                . = ALIGN (0x4)
                 [!provide]                PROVIDE (end, .)
-                0x200009c8                PROVIDE (_end, .)
-                0x200009c8                . = (. + _Min_Heap_Size)
-                0x20000dc8                . = (. + _Min_Stack_Size)
- *fill*         0x200009c8      0x400 
-                0x20000dc8                . = ALIGN (0x4)
+                0x200009c0                PROVIDE (_end, .)
+                0x200009c0                . = (. + _Min_Heap_Size)
+                0x20000dc0                . = (. + _Min_Stack_Size)
+ *fill*         0x200009c0      0x400 
+                0x20000dc0                . = ALIGN (0x4)
 
 /DISCARD/
  libc.a(*)
@@ -2206,116 +1732,120 @@ END GROUP
  .ARM.attributes
                 0x00000157       0x31 ./src/uart.o
  .ARM.attributes
-                0x00000188       0x31 ./src/hard.o
+                0x00000188       0x31 ./src/dsp.o
  .ARM.attributes
-                0x000001b9       0x31 ./src/ESP8266.o
+                0x000001b9       0x31 ./src/hard.o
  .ARM.attributes
-                0x000001ea       0x31 ./src/sim900_800.o
+                0x000001ea       0x31 ./src/ESP8266.o
  .ARM.attributes
-                0x0000021b       0x31 ./src/funcs_gsm.o
+                0x0000021b       0x31 ./src/sim900_800.o
  .ARM.attributes
-                0x0000024c       0x21 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x0000024c       0x31 ./src/funcs_gsm.o
  .ARM.attributes
-                0x0000026d       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+                0x0000027d       0x21 ./cmsis_boot/startup/startup_stm32f0xx.o
  .ARM.attributes
-                0x0000028b       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
+                0x0000029e       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
  .ARM.attributes
-                0x000002a9       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
+                0x000002bc       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_dvmd_tls.o)
  .ARM.attributes
-                0x000002d5       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
+                0x000002da       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
  .ARM.attributes
-                0x00000301       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
+                0x00000306       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
  .ARM.attributes
-                0x0000032d       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
+                0x00000332       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
  .ARM.attributes
-                0x00000359       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
+                0x0000035e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
  .ARM.attributes
-                0x00000385       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
+                0x0000038a       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
  .ARM.attributes
-                0x000003b1       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
+                0x000003b6       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
  .ARM.attributes
-                0x000003dd       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
+                0x000003e2       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
  .ARM.attributes
-                0x00000409       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
+                0x0000040e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
  .ARM.attributes
-                0x00000435       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_arm_cmpsf2.o)
+                0x0000043a       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
  .ARM.attributes
-                0x00000453       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_clzsi2.o)
+                0x00000466       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_arm_cmpsf2.o)
  .ARM.attributes
-                0x00000471       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
+                0x00000484       0x1e /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_clzsi2.o)
  .ARM.attributes
-                0x0000049d       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
+                0x000004a2       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
  .ARM.attributes
-                0x000004c9       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
+                0x000004ce       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
  .ARM.attributes
-                0x000004f5       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x000004fa       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
  .ARM.attributes
-                0x00000521       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+                0x00000526       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
  .ARM.attributes
-                0x0000054d       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+                0x00000552       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
  .ARM.attributes
-                0x00000579       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
+                0x0000057e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
  .ARM.attributes
-                0x000005a5       0x1c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
+                0x000005aa       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
  .ARM.attributes
-                0x000005c1       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
+                0x000005d6       0x1c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
  .ARM.attributes
-                0x000005ed       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+                0x000005f2       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
  .ARM.attributes
-                0x00000619       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+                0x0000061e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
  .ARM.attributes
-                0x00000645       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+                0x0000064a       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .ARM.attributes
-                0x00000671       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x00000676       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
  .ARM.attributes
-                0x0000069d       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x000006a2       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
  .ARM.attributes
-                0x000006c9       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x000006ce       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
  .ARM.attributes
-                0x000006f5       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+                0x000006fa       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
  .ARM.attributes
-                0x00000721       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+                0x00000726       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
  .ARM.attributes
-                0x0000074d       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+                0x00000752       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
  .ARM.attributes
-                0x00000779       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+                0x0000077e       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
  .ARM.attributes
-                0x000007a5       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                0x000007aa       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
  .ARM.attributes
-                0x000007d1       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+                0x000007d6       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .ARM.attributes
+                0x00000802       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 OUTPUT(Template_F050_rom.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x555f
- .debug_info    0x00000000      0xd64 ./src/main.o
- .debug_info    0x00000d64      0x34f ./cmsis_boot/system_stm32f0xx.o
- .debug_info    0x000010b3      0x44a ./cmsis_boot/syscalls/syscalls.o
- .debug_info    0x000014fd       0xe1 ./src/stm32f0xx_it.o
- .debug_info    0x000015de      0x353 ./src/gpio.o
- .debug_info    0x00001931      0x9e8 ./src/tim.o
- .debug_info    0x00002319      0x7d4 ./src/adc.o
- .debug_info    0x00002aed      0xa7c ./src/uart.o
- .debug_info    0x00003569      0x809 ./src/hard.o
- .debug_info    0x00003d72      0x73c ./src/ESP8266.o
- .debug_info    0x000044ae      0xd0b ./src/sim900_800.o
- .debug_info    0x000051b9      0x325 ./src/funcs_gsm.o
- .debug_info    0x000054de       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_info     0x00000000     0x5757
+ .debug_info    0x00000000      0xd30 ./src/main.o
+ .debug_info    0x00000d30      0x34f ./cmsis_boot/system_stm32f0xx.o
+ .debug_info    0x0000107f      0x44a ./cmsis_boot/syscalls/syscalls.o
+ .debug_info    0x000014c9       0xe1 ./src/stm32f0xx_it.o
+ .debug_info    0x000015aa      0x353 ./src/gpio.o
+ .debug_info    0x000018fd      0x9e8 ./src/tim.o
+ .debug_info    0x000022e5      0x7d4 ./src/adc.o
+ .debug_info    0x00002ab9      0xa7c ./src/uart.o
+ .debug_info    0x00003535      0x220 ./src/dsp.o
+ .debug_info    0x00003755      0x808 ./src/hard.o
+ .debug_info    0x00003f5d      0x73c ./src/ESP8266.o
+ .debug_info    0x00004699      0xd18 ./src/sim900_800.o
+ .debug_info    0x000053b1      0x325 ./src/funcs_gsm.o
+ .debug_info    0x000056d6       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_abbrev   0x00000000     0x12b2
- .debug_abbrev  0x00000000      0x230 ./src/main.o
- .debug_abbrev  0x00000230      0x152 ./cmsis_boot/system_stm32f0xx.o
- .debug_abbrev  0x00000382       0xe7 ./cmsis_boot/syscalls/syscalls.o
- .debug_abbrev  0x00000469       0x5c ./src/stm32f0xx_it.o
- .debug_abbrev  0x000004c5       0xcb ./src/gpio.o
- .debug_abbrev  0x00000590      0x1ac ./src/tim.o
- .debug_abbrev  0x0000073c      0x24b ./src/adc.o
- .debug_abbrev  0x00000987      0x223 ./src/uart.o
- .debug_abbrev  0x00000baa      0x232 ./src/hard.o
- .debug_abbrev  0x00000ddc      0x1d0 ./src/ESP8266.o
- .debug_abbrev  0x00000fac      0x1ca ./src/sim900_800.o
- .debug_abbrev  0x00001176      0x12a ./src/funcs_gsm.o
- .debug_abbrev  0x000012a0       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_abbrev   0x00000000     0x132c
+ .debug_abbrev  0x00000000      0x21f ./src/main.o
+ .debug_abbrev  0x0000021f      0x152 ./cmsis_boot/system_stm32f0xx.o
+ .debug_abbrev  0x00000371       0xe7 ./cmsis_boot/syscalls/syscalls.o
+ .debug_abbrev  0x00000458       0x5c ./src/stm32f0xx_it.o
+ .debug_abbrev  0x000004b4       0xcb ./src/gpio.o
+ .debug_abbrev  0x0000057f      0x1ac ./src/tim.o
+ .debug_abbrev  0x0000072b      0x24b ./src/adc.o
+ .debug_abbrev  0x00000976      0x223 ./src/uart.o
+ .debug_abbrev  0x00000b99       0x8b ./src/dsp.o
+ .debug_abbrev  0x00000c24      0x232 ./src/hard.o
+ .debug_abbrev  0x00000e56      0x1d0 ./src/ESP8266.o
+ .debug_abbrev  0x00001026      0x1ca ./src/sim900_800.o
+ .debug_abbrev  0x000011f0      0x12a ./src/funcs_gsm.o
+ .debug_abbrev  0x0000131a       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_loc      0x00000000      0xdcf
+.debug_loc      0x00000000      0xe7b
  .debug_loc     0x00000000       0xd2 ./src/main.o
  .debug_loc     0x000000d2       0x6c ./cmsis_boot/system_stm32f0xx.o
  .debug_loc     0x0000013e      0x100 ./cmsis_boot/syscalls/syscalls.o
@@ -2324,12 +1854,13 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_loc     0x0000027e      0x14c ./src/tim.o
  .debug_loc     0x000003ca      0x12c ./src/adc.o
  .debug_loc     0x000004f6      0x258 ./src/uart.o
- .debug_loc     0x0000074e      0x118 ./src/hard.o
- .debug_loc     0x00000866      0x265 ./src/ESP8266.o
- .debug_loc     0x00000acb      0x238 ./src/sim900_800.o
- .debug_loc     0x00000d03       0xcc ./src/funcs_gsm.o
+ .debug_loc     0x0000074e       0xac ./src/dsp.o
+ .debug_loc     0x000007fa      0x118 ./src/hard.o
+ .debug_loc     0x00000912      0x265 ./src/ESP8266.o
+ .debug_loc     0x00000b77      0x238 ./src/sim900_800.o
+ .debug_loc     0x00000daf       0xcc ./src/funcs_gsm.o
 
-.debug_aranges  0x00000000      0x568
+.debug_aranges  0x00000000      0x5a8
  .debug_aranges
                 0x00000000       0x40 ./src/main.o
  .debug_aranges
@@ -2347,17 +1878,19 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_aranges
                 0x00000268       0x90 ./src/uart.o
  .debug_aranges
-                0x000002f8       0x88 ./src/hard.o
+                0x000002f8       0x40 ./src/dsp.o
  .debug_aranges
-                0x00000380       0xc0 ./src/ESP8266.o
+                0x00000338       0x88 ./src/hard.o
  .debug_aranges
-                0x00000440       0xa0 ./src/sim900_800.o
+                0x000003c0       0xc0 ./src/ESP8266.o
  .debug_aranges
-                0x000004e0       0x60 ./src/funcs_gsm.o
+                0x00000480       0xa0 ./src/sim900_800.o
  .debug_aranges
-                0x00000540       0x28 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x00000520       0x60 ./src/funcs_gsm.o
+ .debug_aranges
+                0x00000580       0x28 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_ranges   0x00000000      0x4a0
+.debug_ranges   0x00000000      0x4d0
  .debug_ranges  0x00000000       0x30 ./src/main.o
  .debug_ranges  0x00000030       0x28 ./cmsis_boot/system_stm32f0xx.o
  .debug_ranges  0x00000058       0x50 ./cmsis_boot/syscalls/syscalls.o
@@ -2366,51 +1899,55 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_ranges  0x000000f8       0xa0 ./src/tim.o
  .debug_ranges  0x00000198       0x60 ./src/adc.o
  .debug_ranges  0x000001f8       0x80 ./src/uart.o
- .debug_ranges  0x00000278       0x78 ./src/hard.o
- .debug_ranges  0x000002f0       0xb0 ./src/ESP8266.o
- .debug_ranges  0x000003a0       0x90 ./src/sim900_800.o
- .debug_ranges  0x00000430       0x50 ./src/funcs_gsm.o
- .debug_ranges  0x00000480       0x20 ./cmsis_boot/startup/startup_stm32f0xx.o
+ .debug_ranges  0x00000278       0x30 ./src/dsp.o
+ .debug_ranges  0x000002a8       0x78 ./src/hard.o
+ .debug_ranges  0x00000320       0xb0 ./src/ESP8266.o
+ .debug_ranges  0x000003d0       0x90 ./src/sim900_800.o
+ .debug_ranges  0x00000460       0x50 ./src/funcs_gsm.o
+ .debug_ranges  0x000004b0       0x20 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_line     0x00000000     0x1f6e
- .debug_line    0x00000000      0x2e4 ./src/main.o
- .debug_line    0x000002e4      0x1df ./cmsis_boot/system_stm32f0xx.o
- .debug_line    0x000004c3      0x158 ./cmsis_boot/syscalls/syscalls.o
- .debug_line    0x0000061b       0x8c ./src/stm32f0xx_it.o
- .debug_line    0x000006a7      0x150 ./src/gpio.o
- .debug_line    0x000007f7      0x2c9 ./src/tim.o
- .debug_line    0x00000ac0      0x285 ./src/adc.o
- .debug_line    0x00000d45      0x2dc ./src/uart.o
- .debug_line    0x00001021      0x2d5 ./src/hard.o
- .debug_line    0x000012f6      0x40a ./src/ESP8266.o
- .debug_line    0x00001700      0x684 ./src/sim900_800.o
- .debug_line    0x00001d84      0x165 ./src/funcs_gsm.o
- .debug_line    0x00001ee9       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_line     0x00000000     0x2037
+ .debug_line    0x00000000      0x2e8 ./src/main.o
+ .debug_line    0x000002e8      0x1df ./cmsis_boot/system_stm32f0xx.o
+ .debug_line    0x000004c7      0x158 ./cmsis_boot/syscalls/syscalls.o
+ .debug_line    0x0000061f       0x8c ./src/stm32f0xx_it.o
+ .debug_line    0x000006ab      0x150 ./src/gpio.o
+ .debug_line    0x000007fb      0x2c9 ./src/tim.o
+ .debug_line    0x00000ac4      0x285 ./src/adc.o
+ .debug_line    0x00000d49      0x2dc ./src/uart.o
+ .debug_line    0x00001025       0xc5 ./src/dsp.o
+ .debug_line    0x000010ea      0x2d5 ./src/hard.o
+ .debug_line    0x000013bf      0x40a ./src/ESP8266.o
+ .debug_line    0x000017c9      0x684 ./src/sim900_800.o
+ .debug_line    0x00001e4d      0x165 ./src/funcs_gsm.o
+ .debug_line    0x00001fb2       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_str      0x00000000     0x1f65
- .debug_str     0x00000000      0x9fa ./src/main.o
-                                0xa85 (size before relaxing)
- .debug_str     0x000009fa      0x12f ./cmsis_boot/system_stm32f0xx.o
+.debug_str      0x00000000     0x1fe3
+ .debug_str     0x00000000      0x9ea ./src/main.o
+                                0xa75 (size before relaxing)
+ .debug_str     0x000009ea      0x12f ./cmsis_boot/system_stm32f0xx.o
                                 0x2e1 (size before relaxing)
- .debug_str     0x00000b29      0x13b ./cmsis_boot/syscalls/syscalls.o
+ .debug_str     0x00000b19      0x13b ./cmsis_boot/syscalls/syscalls.o
                                 0x2eb (size before relaxing)
- .debug_str     0x00000c64       0x5c ./src/stm32f0xx_it.o
+ .debug_str     0x00000c54       0x5c ./src/stm32f0xx_it.o
                                 0x1c9 (size before relaxing)
- .debug_str     0x00000cc0       0x43 ./src/gpio.o
+ .debug_str     0x00000cb0       0x43 ./src/gpio.o
                                 0x28a (size before relaxing)
- .debug_str     0x00000d03      0x1bf ./src/tim.o
+ .debug_str     0x00000cf3      0x1bf ./src/tim.o
                                 0x656 (size before relaxing)
- .debug_str     0x00000ec2      0x11a ./src/adc.o
+ .debug_str     0x00000eb2      0x11a ./src/adc.o
                                 0x5b8 (size before relaxing)
- .debug_str     0x00000fdc      0x16a ./src/uart.o
+ .debug_str     0x00000fcc      0x16a ./src/uart.o
                                 0x65d (size before relaxing)
- .debug_str     0x00001146      0x204 ./src/hard.o
+ .debug_str     0x00001136       0x8e ./src/dsp.o
+                                0x21f (size before relaxing)
+ .debug_str     0x000011c4      0x204 ./src/hard.o
                                 0x500 (size before relaxing)
- .debug_str     0x0000134a      0x4ca ./src/ESP8266.o
+ .debug_str     0x000013c8      0x4ca ./src/ESP8266.o
                                 0x661 (size before relaxing)
- .debug_str     0x00001814      0x5f5 ./src/sim900_800.o
-                                0x8f2 (size before relaxing)
- .debug_str     0x00001e09      0x15c ./src/funcs_gsm.o
+ .debug_str     0x00001892      0x5f5 ./src/sim900_800.o
+                                0x8ea (size before relaxing)
+ .debug_str     0x00001e87      0x15c ./src/funcs_gsm.o
                                 0x431 (size before relaxing)
 
 .comment        0x00000000       0x6e
@@ -2423,12 +1960,13 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .comment       0x0000006e       0x6f ./src/tim.o
  .comment       0x0000006e       0x6f ./src/adc.o
  .comment       0x0000006e       0x6f ./src/uart.o
+ .comment       0x0000006e       0x6f ./src/dsp.o
  .comment       0x0000006e       0x6f ./src/hard.o
  .comment       0x0000006e       0x6f ./src/ESP8266.o
  .comment       0x0000006e       0x6f ./src/sim900_800.o
  .comment       0x0000006e       0x6f ./src/funcs_gsm.o
 
-.debug_frame    0x00000000     0x11c8
+.debug_frame    0x00000000     0x1244
  .debug_frame   0x00000000       0xa4 ./src/main.o
  .debug_frame   0x000000a4       0x6c ./cmsis_boot/system_stm32f0xx.o
  .debug_frame   0x00000110       0xc0 ./cmsis_boot/syscalls/syscalls.o
@@ -2437,39 +1975,40 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_frame   0x00000280      0x17c ./src/tim.o
  .debug_frame   0x000003fc       0xf8 ./src/adc.o
  .debug_frame   0x000004f4      0x198 ./src/uart.o
- .debug_frame   0x0000068c      0x134 ./src/hard.o
- .debug_frame   0x000007c0      0x1f4 ./src/ESP8266.o
- .debug_frame   0x000009b4      0x1b8 ./src/sim900_800.o
- .debug_frame   0x00000b6c       0xd0 ./src/funcs_gsm.o
- .debug_frame   0x00000c3c       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
- .debug_frame   0x00000c5c       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
- .debug_frame   0x00000c84       0x38 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
- .debug_frame   0x00000cbc       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
- .debug_frame   0x00000cec       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
- .debug_frame   0x00000d0c       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
- .debug_frame   0x00000d38       0x3c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
- .debug_frame   0x00000d74       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
- .debug_frame   0x00000da0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
- .debug_frame   0x00000dcc       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
- .debug_frame   0x00000df8       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
- .debug_frame   0x00000e24       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
- .debug_frame   0x00000e54       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
- .debug_frame   0x00000e84       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x00000eac       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
- .debug_frame   0x00000efc       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
- .debug_frame   0x00000f24       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
- .debug_frame   0x00000f44       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
- .debug_frame   0x00000f70       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
- .debug_frame   0x00000f9c       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x00000fc8       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x00000ff4       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x00001068       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x000010bc       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x000010e8       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .debug_frame   0x00001108       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .debug_frame   0x00001130       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x00001160       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
- .debug_frame   0x000011a8       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x0000068c       0x7c ./src/dsp.o
+ .debug_frame   0x00000708      0x134 ./src/hard.o
+ .debug_frame   0x0000083c      0x1f4 ./src/ESP8266.o
+ .debug_frame   0x00000a30      0x1b8 ./src/sim900_800.o
+ .debug_frame   0x00000be8       0xd0 ./src/funcs_gsm.o
+ .debug_frame   0x00000cb8       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000cd8       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
+ .debug_frame   0x00000d00       0x38 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
+ .debug_frame   0x00000d38       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
+ .debug_frame   0x00000d68       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
+ .debug_frame   0x00000d88       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
+ .debug_frame   0x00000db4       0x3c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
+ .debug_frame   0x00000df0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
+ .debug_frame   0x00000e1c       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
+ .debug_frame   0x00000e48       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
+ .debug_frame   0x00000e74       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
+ .debug_frame   0x00000ea0       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
+ .debug_frame   0x00000ed0       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
+ .debug_frame   0x00000f00       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x00000f28       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+ .debug_frame   0x00000f78       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+ .debug_frame   0x00000fa0       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
+ .debug_frame   0x00000fc0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
+ .debug_frame   0x00000fec       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+ .debug_frame   0x00001018       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x00001044       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x00001070       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x000010e4       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x00001138       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x00001164       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .debug_frame   0x00001184       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x000011ac       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x000011dc       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x00001224       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 
 Cross Reference Table
 
@@ -2513,52 +2052,15 @@ EXTI4_15_IRQHandler                               ./cmsis_boot/startup/startup_s
 EXTIOff                                           ./src/gpio.o
                                                   ./src/main.o
 EXTIOn                                            ./src/gpio.o
-EXTI_ClearFlag                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_ClearITPendingBit                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_DeInit                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_GenerateSWInterrupt                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_GetFlagStatus                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_GetITStatus                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_Init                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
-EXTI_StructInit                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_exti.o
 EraseAllMemory_FLASH                              ./src/flash_program.o
 ErasePage                                         ./src/flash_program.o
-FLASH_ClearFlag                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_EraseAllPages                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_ErasePage                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-                                                  ./src/flash_program.o
-FLASH_GetFlagStatus                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_GetPrefetchBufferStatus                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_GetStatus                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
+FLASH_ErasePage                                   ./src/flash_program.o
+FLASH_GetStatus                                   ./src/flash_program.o
 FLASH_IRQHandler                                  ./cmsis_boot/startup/startup_stm32f0xx.o
-FLASH_ITConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_Lock                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-                                                  ./src/flash_program.o
-FLASH_OB_BOOT0Config                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_BOOT0SWConfig                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_BOOTConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_EnableWRP                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_Erase                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_GetRDP                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_GetUser                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_GetWRP                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_Launch                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_Lock                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_ProgramData                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_RDPConfig                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_SRAMParityConfig                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_Unlock                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_UserConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_VDDAConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_OB_WriteUser                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_PrefetchBufferCmd                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_ProgramHalfWord                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_ProgramWord                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-                                                  ./src/flash_program.o
-FLASH_SetLatency                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-FLASH_Unlock                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
-                                                  ./src/flash_program.o
-FLASH_WaitForLastOperation                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_flash.o
+FLASH_Lock                                        ./src/flash_program.o
+FLASH_ProgramWord                                 ./src/flash_program.o
+FLASH_Unlock                                      ./src/flash_program.o
+FLASH_WaitForLastOperation                        ./src/flash_program.o
 FillPhotoBuffer                                   ./src/adc.o
 FuncsGSM                                          ./src/funcs_gsm.o
                                                   ./src/main.o
@@ -2577,19 +2079,6 @@ FuncsGSMStateAsk                                  ./src/funcs_gsm.o
                                                   ./src/main.o
 GPIO_Config                                       ./src/gpio.o
                                                   ./src/main.o
-GPIO_DeInit                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_Init                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_PinAFConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_PinLockConfig                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_ReadInputData                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_ReadInputDataBit                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_ReadOutputData                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_ReadOutputDataBit                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_ResetBits                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_SetBits                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_StructInit                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_Write                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-GPIO_WriteBit                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
 GPRSrssi                                          ./src/sim900_800.o
 GPSConfig                                         ./src/gps_vktel.o
 GPSConfigResetSM                                  ./src/gps_vktel.o
@@ -2684,9 +2173,6 @@ GetValue                                          ./src/tcp_transceiver.o
 HardFault_Handler                                 ./src/stm32f0xx_it.o
 I2C1_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
 I2C2_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
-I2S_Cmd                                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-I2S_Init                                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-I2S_StructInit                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
 IpIsValid                                         ./src/tcp_transceiver.o
 MAFilter32                                        ./src/dsp.o
 MAFilter32Circular                                ./src/dsp.o
@@ -2771,8 +2257,6 @@ MQTTstrlen                                        ./paho.mqtt.embedded-c/MQTTPac
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTSerializePublish.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTConnectClient.o
 NMI_Handler                                       ./src/stm32f0xx_it.o
-NVIC_Init                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
-NVIC_SystemLPConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
 OctetIsValid                                      ./src/tcp_transceiver.o
 OneShootTIM16                                     ./src/tim.o
 PVD_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
@@ -2781,60 +2265,12 @@ PendSV_Handler                                    ./src/stm32f0xx_it.o
 PowerCalc                                         ./src/hard.o
                                                   ./src/main.o
 PowerCalcMean8                                    ./src/hard.o
-RCC_ADCCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_AHBPeriphClockCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_AHBPeriphResetCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_gpio.o
-RCC_APB1PeriphClockCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_APB1PeriphResetCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-RCC_APB2PeriphClockCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_APB2PeriphResetCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-RCC_AdjustHSI14CalibrationValue                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_AdjustHSICalibrationValue                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_BackupResetCmd                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_CECCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_ClearFlag                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_ClearITPendingBit                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_ClockSecuritySystemCmd                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_DeInit                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_GetClocksFreq                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-RCC_GetFlagStatus                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_GetITStatus                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_GetSYSCLKSource                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HCLKConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HSEConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HSI14ADCRequestCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HSI14Cmd                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HSI48Cmd                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_HSICmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_I2CCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
+                                                  ./src/main.o
 RCC_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
-RCC_ITConfig                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_LSEConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_LSEDriveConfig                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_LSICmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_MCOConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_PCLKConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_PLLCmd                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_PLLConfig                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_PREDIV1Config                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_RTCCLKCmd                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_RTCCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_SYSCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_USARTCLKConfig                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_USBCLKConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
-RCC_WaitForHSEStartUp                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
 RTC_IRQHandler                                    ./cmsis_boot/startup/startup_stm32f0xx.o
 RandomGen                                         ./src/dsp.o
 ReadADC1Check                                     ./src/adc.o
 ReadADC1_SameSampleTime                           ./src/adc.o
-ReadMem                                           ./src/flash_program.o
 ReadPcktR                                         ./src/tcp_transceiver.o
 ReadPcktS                                         ./src/tcp_transceiver.o
 ReadUsart1Buffer                                  ./src/uart.o
@@ -2858,34 +2294,6 @@ SIM900USUARIOSIM1                                 ./src/sim900_800.o
 SIM900USUARIOSIM2                                 ./src/sim900_800.o
 SPI1_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
 SPI2_IRQHandler                                   ./cmsis_boot/startup/startup_stm32f0xx.o
-SPI_BiDirectionalLineConfig                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_CRCLengthConfig                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_CalculateCRC                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_Cmd                                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_DataSizeConfig                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_GetCRC                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_GetCRCPolynomial                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_GetReceptionFIFOStatus                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_GetTransmissionFIFOStatus                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_ClearFlag                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_DMACmd                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_DeInit                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_GetFlagStatus                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_GetITStatus                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_ITConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_ReceiveData16                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_I2S_SendData16                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_Init                                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_LastDMATransferCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_NSSInternalSoftwareConfig                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_NSSPulseModeCmd                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_ReceiveData8                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_RxFIFOThresholdConfig                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_SSOutputCmd                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_SendData8                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_StructInit                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_TIModeCmd                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-SPI_TransmitCRC                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
 SVC_Handler                                       ./src/stm32f0xx_it.o
 SendCommandWaitAnswer                             ./src/ESP8266.o
 SendCommandWaitAnswerResetSM                      ./src/ESP8266.o
@@ -2894,7 +2302,6 @@ SetADC1_SampleTime                                ./src/adc.o
 SetSysClockInternalRC                             ./cmsis_boot/system_stm32f0xx.o
 ShowPower                                         ./src/hard.o
                                                   ./src/main.o
-SysTick_CLKSourceConfig                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_misc.o
 SysTick_Handler                                   ./src/stm32f0xx_it.o
 SystemCoreClock                                   ./cmsis_boot/system_stm32f0xx.o
 SystemCoreClockUpdate                             ./cmsis_boot/system_stm32f0xx.o
@@ -2933,58 +2340,8 @@ USART1_IRQHandler                                 ./src/uart.o
 USART2Config                                      ./src/uart.o
                                                   ./src/main.o
 USART2_IRQHandler                                 ./src/uart.o
-USART_AddressDetectionConfig                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_AutoBaudRateCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_AutoBaudRateConfig                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ClearFlag                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ClearITPendingBit                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ClockInit                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ClockStructInit                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_Cmd                                         ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DECmd                                       ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DEPolarityConfig                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DMACmd                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DMAReceptionErrorConfig                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DataInvCmd                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DeInit                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_DirectionModeCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_GetFlagStatus                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_GetITStatus                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_HalfDuplexCmd                               ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ITConfig                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_Init                                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_InvPinCmd                                   ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_IrDACmd                                     ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_IrDAConfig                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_LINBreakDetectLengthConfig                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_LINCmd                                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_MSBFirstCmd                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_MuteModeCmd                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_MuteModeWakeUpConfig                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_OneBitMethodCmd                             ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_OverSampling8Cmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_OverrunDetectionConfig                      ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ReceiveData                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_ReceiverTimeOutCmd                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_RequestCmd                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_STOPModeCmd                                 ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SWAPPinCmd                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SendData                                    ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetAddress                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetAutoRetryCount                           ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetBlockLength                              ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetDEAssertionTime                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetDEDeassertionTime                        ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetGuardTime                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetPrescaler                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SetReceiverTimeOut                          ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SmartCardCmd                                ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_SmartCardNACKCmd                            ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_StopModeWakeUpSourceConfig                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-USART_StructInit                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 UpdateIGrid                                       ./src/hard.o
                                                   ./src/main.o
-UpdateNewCode                                     ./src/flash_program.o
 UpdatePhotoTransistor                             ./src/adc.o
                                                   ./src/main.o
 UpdateRelay                                       ./src/hard.o
@@ -3017,7 +2374,6 @@ Wait_ms                                           ./src/tim.o
 WriteConfigurations                               ./src/flash_program.o
 WriteFlash                                        ./src/flash_program.o
 WritePage                                         ./src/flash_program.o
-Write_Code_To_Memory_FLASH                        ./src/flash_program.o
 __REV                                             ./cmsis_core/core_cm0.o
 __REV16                                           ./cmsis_core/core_cm0.o
 __REVSH                                           ./cmsis_core/core_cm0.o
@@ -3058,15 +2414,11 @@ __aeabi_uidiv                                     /usr/local/sbin/gcc-arm-none-e
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
                                                   ./src/hard.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_spi.o
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_rcc.o
                                                   ./cmsis_boot/system_stm32f0xx.o
                                                   ./src/main.o
 __aeabi_uidivmod                                  /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
-                                                  ../STM32F0xx_StdPeriph_Lib_V1.3.1/Libraries/STM32F0xx_StdPeriph_Driver/src/stm32f0xx_usart.o
 __clzsi2                                          /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_clzsi2.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
@@ -3222,7 +2574,6 @@ memcpy                                            /usr/local/sbin/gcc-arm-none-e
                                                   ./src/main.o
 memmove                                           /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
-memory_backup                                     ./src/flash_program.o
 memset                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memset.o)
                                                   ./src/tcp_transceiver.o
 min_igrid                                         ./src/hard.o
@@ -3244,7 +2595,6 @@ pckt_finish                                       ./src/ESP8266.o
 pckt_gps_ready                                    ./src/uart.o
 pckt_start                                        ./src/ESP8266.o
 photo_index                                       ./src/adc.o
-pmem                                              ./src/flash_program.o
 power_vect                                        ./src/main.o
 prepare_json_pkt                                  ./src/main.o
 prestadorSimSelect                                ./src/sim900_800.o
@@ -3284,12 +2634,10 @@ rx1buff                                           ./src/main.o
 rx2buff                                           ./src/main.o
                                                   ./src/ESP8266.o
                                                   ./src/uart.o
-s1                                                ./src/main.o
-s2                                                ./src/main.o
-sac                                               ./src/main.o
-sac_aux                                           ./src/main.o
 saved_mode                                        ./src/main.o
 secs                                              ./src/main.o
+send_energy                                       ./src/main.o
+                                                  ./src/sim900_800.o
 seq_ready                                         ./src/main.o
                                                   ./src/adc.o
 show_power_index                                  ./src/main.o
