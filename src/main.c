@@ -67,8 +67,8 @@ volatile unsigned char rx1buff[SIZEOF_DATA];
 ////static unsigned char data_back[10];
 //volatile unsigned char data[SIZEOF_DATA];
 
-// ------- Externals de los timers -------
-// volatile unsigned char switches_timer = 0;
+// ------- Externals para filtros -------
+unsigned short mains_voltage_filtered;
 //
 //
 // volatile unsigned short scroll1_timer = 0;
@@ -209,7 +209,7 @@ int main(void)
 	unsigned char i, ii;
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
 	unsigned char resp = RESP_CONTINUE;
-	// unsigned short power_int, power_dec;
+	unsigned char need_to_save = 0;
 	// unsigned short wh_int, wh_dec;
 	// float fcalc = 1.0;
 	unsigned short power, last_power;
@@ -301,14 +301,7 @@ int main(void)
 	param_struct.acumm_wh = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_wh;
 	if (param_struct.acumm_wh != 0xFFFFFFFF)
 	{
-		//memoria no vacia
-		strncpy( param_struct.num_reportar,
-					((parameters_typedef *) (char *) PAGE63)->num_reportar,
-					sizeof(param_struct.num_reportar));
-
-		param_struct.acumm_w2s = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_w2s;
-		param_struct.acumm_w2s_index = ((parameters_typedef *) (unsigned short *) PAGE63)->acumm_w2s_index;
-		param_struct.timer_reportar = ((parameters_typedef *) (unsigned char *) PAGE63)->timer_reportar;
+		GetFlashConf (&param_struct);
 	}
 	else
 	{
@@ -572,7 +565,7 @@ int main(void)
 				break;
 
 			case SET_ZERO_CURRENT:
-				if (!timer_standby)
+				if ((!timer_standby) && (mains_voltage_filtered > CONNECT_VOLTAGE))
 				{
 					if (i < 32)
 					{
@@ -595,9 +588,10 @@ int main(void)
 				break;
 
 			case SET_COUNTERS_AND_PHONE0:
-				acum_secs = 0;
-				acum_secs_index = 0;
-				acum_hours = 0;
+				//cargo contadores desde la flash
+				acum_secs = param_struct.acumm_w2s;
+				acum_secs_index = param_struct.acumm_w2s_index;
+				acum_hours = param_struct.acumm_wh;
 
 				counters_mode = 0;
 				LED_OFF;
@@ -648,6 +642,7 @@ int main(void)
 #endif
 						// RelayOn();
 						main_state = LAMP_ON;
+						lamp_on_state = init_airplane0;
 						tt_relay_on_off = 10000;
 						Usart2Send("PRENDIDO\r\n");
 						FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
@@ -799,7 +794,7 @@ int main(void)
 #endif
 									lamp_on_state = init_airplane0;
 									counters_mode = 0;
-									Usart2Send("APAGADO");
+									Usart2Send("APAGADO\r\n");
 									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
 									tt_relay_on_off = 10000;
 									RelayOff();
@@ -882,6 +877,7 @@ int main(void)
 							acum_secs += power;
 							acum_secs_index++;
 							show_power_index++;
+							need_to_save = 1;			//aviso que en algun momento hay que guardar
 
 							if (acum_secs_index >= 1800)
 							{
@@ -894,6 +890,22 @@ int main(void)
 						}
 						timer_meas = 200;		//10 veces 200ms
 					}
+				}
+				break;	//termina LAMP_ON
+
+			case GO_TO_MAINS_FAILURE:
+				//apago el gsm
+				FuncsGSMShutdown ();
+				main_state = MAINS_FAILURE;
+				//espero 10 segundos como minimo
+				timer_standby = 10000;
+				Usart2Send("LOW MAINS VOLTAGE\r\n");
+				break;
+
+			case MAINS_FAILURE:
+				if ((!timer_standby) && (mains_voltage_filtered > CONNECT_VOLTAGE))
+				{
+					main_state = MAIN_INIT;
 				}
 				break;
 
@@ -908,6 +920,29 @@ int main(void)
 			seq_ready = 0;
 			UpdateVGrid ();
 			UpdateIGrid ();
+		}
+
+		//reviso si hay problemas de alimentacion
+		if ((main_state > SET_ZERO_CURRENT) && (main_state < GO_TO_MAINS_FAILURE))		//TODO: si es un glitch deberia grabar y seguir
+		{
+			if (Mains_Glitch() || (mains_voltage_filtered < DISCONNECT_VOLTAGE))
+			{
+				if (need_to_save)
+				{
+					RelayOffFast ();
+					//update de memoria
+					param_struct.acumm_w2s = acum_secs;
+					param_struct.acumm_w2s_index = acum_secs_index;
+					param_struct.acumm_wh = acum_hours;
+
+					if (WriteConfigurations(&param_struct))
+						Usart2Send("Saved OK!\r\n");
+					else
+						Usart2Send("Mem Error!\r\n");
+					need_to_save = 0;
+				}
+				main_state = GO_TO_MAINS_FAILURE;
+			}
 		}
 
 		//Cosas que no dependen del estado del programa

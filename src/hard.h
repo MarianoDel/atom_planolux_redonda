@@ -198,9 +198,9 @@ typedef enum
 	START_GSM,
 	CONFIG_GSM,
 	WELCOME_GSM,
- //  	LAMP_TO_ON,
 	LAMP_ON,
-	// LAMP_TO_OFF
+	GO_TO_MAINS_FAILURE,
+	MAINS_FAILURE
 
 } main_state_t;
 
@@ -252,17 +252,22 @@ enum Relay_State {
 
 };
 
-
+//--- Temas de la medicion de potencia
 // #define KW			0.01013		//R originales en OPAMP
 #define KW			0.01992		//con los cambos en las R y ajustado en 300W
 // #define MIN_SENSE_POWER		753		//15W con KW
 #define MIN_SENSE_POWER		1506		//30W con KW
 
+//--- Temas con la medicion de tension
+#define GLITCH_VOLTAGE			764		//equivale a 100Vp 0.616V V_Sense
+#define DISCONNECT_VOLTAGE		1786		//equivale 160V 1.44V V_Sense
+#define CONNECT_VOLTAGE			2233		//equivale 180V 1.8V V_Sense
 
 
 /* Module Functions ------------------------------------------------------------*/
 void RelayOn (void);
 void RelayOff (void);
+void RelayOffFast (void);
 void UpdateRelay (void);
 unsigned char RelayIsOn (void);
 unsigned char RelayIsOff (void);

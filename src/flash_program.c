@@ -303,16 +303,14 @@ unsigned char WritePage(unsigned int * p, uint32_t p_addr, unsigned char with_lo
 }
 
 
-unsigned char WriteConfigurations (void)
+unsigned char WriteConfigurations (parameters_typedef * p_param)
 {
-	parameters_typedef * p_param;
-
-	ErasePage(PAGE31,0);
+	ErasePage(PAGE63,0);
 
 	//update en memoria
-	p_param = &param_struct;
+	//p_param = &param_struct;
 
-	if (WriteFlash((unsigned int *) p_param, PAGE31, 1, sizeof(parameters_typedef)) == FAILED)
+	if (WriteFlash((unsigned int *) p_param, PAGE63, 1, (sizeof(parameters_typedef) >> 2)) == FAILED)
 		return FAILED;
 
 	return PASSED;
@@ -341,4 +339,17 @@ unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_l
 			return FAILED;
 	}
 	return PASSED;
+}
+
+void GetFlashConf (parameters_typedef * p_ram)
+{
+	//memoria no vacia
+	strncpy( p_ram->num_reportar,
+				((parameters_typedef *) (char *) PAGE63)->num_reportar,
+				sizeof(param_struct.num_reportar));
+
+	p_ram->acumm_w2s = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_w2s;
+	p_ram->acumm_w2s_index = ((parameters_typedef *) (unsigned short *) PAGE63)->acumm_w2s_index;
+	p_ram->timer_reportar = ((parameters_typedef *) (unsigned char *) PAGE63)->timer_reportar;
+
 }

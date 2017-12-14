@@ -1542,6 +1542,7 @@ CONF_AT_CONFIG_8B	src/ESP8266.h	/^	CONF_AT_CONFIG_8B$/;"	e	enum:EspConfigState
 CONF_INIT	src/ESP8266.h	/^	CONF_INIT = 0,$/;"	e	enum:EspConfigState
 CONNACK	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	CONNECT = 1, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL,$/;"	e	enum:msgTypes
 CONNECT	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	CONNECT = 1, CONNACK, PUBLISH, PUBACK, PUBREC, PUBREL,$/;"	e	enum:msgTypes
+CONNECT_VOLTAGE	src/hard.h	264;"	d
 CORELIBDIR	Makefile	/^CORELIBDIR = .\/cmsis_core$/;"	m
 COUNTDOWN_H	paho.mqtt.embedded-c/MQTTClient/src/arduino/Countdown.h	18;"	d
 CP	Makefile	/^CP   = $(TRGT)objcopy$/;"	m
@@ -1793,6 +1794,7 @@ DIER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t DIER;            \/*!< TIM DMA\/in
 DINCDIR	Makefile	/^DINCDIR = .\/src$/;"	m
 DISABLE	cmsis_boot/stm32f0xx.h	/^typedef enum {DISABLE = 0, ENABLE = !DISABLE} FunctionalState;$/;"	e	enum:__anon32
 DISCONNECT	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.h	/^	PINGREQ, PINGRESP, DISCONNECT$/;"	e	enum:msgTypes
+DISCONNECT_VOLTAGE	src/hard.h	263;"	d
 DIVISOR	src/main.c	189;"	d	file:
 DIVISOR_PHOTO	src/adc.c	40;"	d	file:
 DLIBDIR	Makefile	/^DLIBDIR =$/;"	m
@@ -2322,8 +2324,10 @@ GET_IP_CHECK	src/ESP8266.h	/^	GET_IP_CHECK$/;"	e	enum:EspGetIPState
 GET_IP_INIT	src/ESP8266.h	/^	GET_IP_INIT = 0,$/;"	e	enum:EspGetIPState
 GET_IP_RST	src/ESP8266.h	/^	GET_IP_RST,$/;"	e	enum:EspGetIPState
 GET_IP_WAIT_ANS	src/ESP8266.h	/^	GET_IP_WAIT_ANS,$/;"	e	enum:EspGetIPState
+GLITCH_VOLTAGE	src/hard.h	262;"	d
 GOING_AT_MODE	src/ESP8266.h	42;"	d
 GOOD	src/synchro.h	/^	GOOD,			\/\/2$/;"	e	enum:Answers
+GO_TO_MAINS_FAILURE	src/hard.h	/^	GO_TO_MAINS_FAILURE,$/;"	e	enum:__anon8
 GPIOA	cmsis_boot/stm32f0xx.h	1001;"	d
 GPIOA_BASE	cmsis_boot/stm32f0xx.h	939;"	d
 GPIOA_CLK	src/gpio.h	28;"	d
@@ -2799,6 +2803,7 @@ GSMbuffRtaCommand	src/sim900_800.c	/^char GSMbuffRtaCommand[buffUARTGSMrx_dimens
 GSMbuffStatus	src/sim900_800.c	/^char GSMbuffStatus[32];$/;"	v
 GSMnumSMS	src/sim900_800.c	/^unsigned char GSMnumSMS = 1;$/;"	v
 GTPR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t GTPR;   \/*!< USART Guard time and prescaler register,  Address offset: 0x10 *\/$/;"	m	struct:__anon61
+GetFlashConf	src/flash_program.c	/^void GetFlashConf (parameters_typedef * p_ram)$/;"	f
 GetHysteresis	src/hard.c	/^unsigned short GetHysteresis (unsigned char hours_past)$/;"	f
 GetIGrid	src/hard.c	/^unsigned short GetIGrid (void)$/;"	f
 GetIGrid	src/synchro.c	/^unsigned short GetIGrid (void)$/;"	f
@@ -3048,6 +3053,7 @@ MAINMENU_SHOW_STANDALONE_2	src/main_menu.h	18;"	d
 MAINMENU_SHOW_STANDALONE_3	src/main_menu.h	19;"	d
 MAINMENU_SHOW_STANDALONE_SELECTED	src/main_menu.h	29;"	d
 MAINMENU_SHOW_STANDALONE_SELECTED_1	src/main_menu.h	30;"	d
+MAINS_FAILURE	src/hard.h	/^	MAINS_FAILURE$/;"	e	enum:__anon8
 MAIN_AT_CONFIG_2B	src/hard.h	154;"	d
 MAIN_ERROR	src/hard.h	155;"	d
 MAIN_GROUPED	src/hard.h	158;"	d
@@ -3176,6 +3182,7 @@ MQTT_LOGGING_H	paho.mqtt.embedded-c/MQTTClient/src/MQTTLogging.h	18;"	d
 MQTT_TASK	paho.mqtt.embedded-c/MQTTClient-C/src/samples/FreeRTOS/MQTTEcho.c	15;"	d	file:
 MQTTstrlen	paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.c	/^int MQTTstrlen(MQTTString mqttstring)$/;"	f
 MSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t              MSR;                 \/*!< CAN master status register,          Address offset: 0x04          *\/$/;"	m	struct:__anon39
+Mains_Glitch	src/hard.c	/^unsigned char Mains_Glitch (void)$/;"	f
 Message	paho.mqtt.embedded-c/MQTTClient/src/MQTTClient.h	/^struct Message$/;"	s	namespace:MQTT
 MessageData	paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.h	/^typedef struct MessageData$/;"	s
 MessageData	paho.mqtt.embedded-c/MQTTClient-C/src/MQTTClient.h	/^} MessageData;$/;"	t	typeref:struct:MessageData
@@ -4060,6 +4067,7 @@ ReadUsart2Buffer	src/uart.c	/^unsigned char ReadUsart2Buffer (unsigned char * bo
 RelayIsOff	src/hard.c	/^unsigned char RelayIsOff (void)$/;"	f
 RelayIsOn	src/hard.c	/^unsigned char RelayIsOn (void)$/;"	f
 RelayOff	src/hard.c	/^void RelayOff (void)$/;"	f
+RelayOffFast	src/hard.c	/^void RelayOffFast (void)$/;"	f
 RelayOn	src/hard.c	/^void RelayOn (void)$/;"	f
 Relay_State	src/hard.h	/^enum Relay_State {$/;"	g
 Reset_Handler	cmsis_boot/startup/startup_stm32f0xx.s	/^Reset_Handler:$/;"	l
@@ -5054,7 +5062,7 @@ WWDG_TypeDef	cmsis_boot/stm32f0xx.h	/^} WWDG_TypeDef;$/;"	t	typeref:struct:__ano
 Wait_ms	src/tim.c	/^void Wait_ms (unsigned short wait)$/;"	f
 WifiIPStack	paho.mqtt.embedded-c/MQTTClient/src/arduino/WifiIPStack.h	/^    WifiIPStack()$/;"	f	class:WifiIPStack
 WifiIPStack	paho.mqtt.embedded-c/MQTTClient/src/arduino/WifiIPStack.h	/^class WifiIPStack $/;"	c
-WriteConfigurations	src/flash_program.c	/^unsigned char WriteConfigurations (void)$/;"	f
+WriteConfigurations	src/flash_program.c	/^unsigned char WriteConfigurations (parameters_typedef * p_param)$/;"	f
 WriteFlash	src/flash_program.c	/^unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char len_in_4)$/;"	f
 WritePage	src/flash_program.c	/^unsigned char WritePage(unsigned int * p, uint32_t p_addr, unsigned char with_lock)$/;"	f
 _BIT_SHIFT	cmsis_core/core_cm0.h	798;"	d
@@ -5409,6 +5417,10 @@ main	paho.mqtt.embedded-c/MQTTPacket/samples/qos0pub.c	/^int main(int argc, char
 main	paho.mqtt.embedded-c/MQTTPacket/test/test1.c	/^int main(int argc, char** argv)$/;"	f
 main	src/main.c	/^int main(void)$/;"	f
 main_state_t	src/hard.h	/^} main_state_t;$/;"	t	typeref:enum:__anon8
+mains_vector	src/hard.c	/^unsigned short mains_vector[8];$/;"	v
+mains_voltage_filtered	src/main.c	/^unsigned short mains_voltage_filtered;$/;"	v
+mains_voltage_index	src/hard.c	/^unsigned char mains_voltage_index = 0;$/;"	v
+mains_with_glitch	src/hard.c	/^unsigned char mains_with_glitch = 0;$/;"	v
 max_igrid	src/hard.c	/^unsigned short max_igrid_last, max_igrid, min_igrid_last, min_igrid;$/;"	v
 max_igrid	src/synchro.c	/^unsigned short max_igrid = 0;$/;"	v
 max_igrid_last	src/hard.c	/^unsigned short max_igrid_last, max_igrid, min_igrid_last, min_igrid;$/;"	v

@@ -17,12 +17,16 @@
 extern unsigned short timer_relay;
 extern volatile unsigned short adc_ch[];
 extern unsigned short zero_current;
+extern unsigned short mains_voltage_filtered;
 
 
 /* Global variables ------------------------------------------------------------*/
 //unsigned char relay_state = 0;
 enum Relay_State relay_state = ST_OFF;
 unsigned char last_edge;
+unsigned char mains_with_glitch = 0;
+unsigned char mains_voltage_index = 0;
+unsigned short mains_vector[8];
 
 unsigned short max_igrid_last, max_igrid, min_igrid_last, min_igrid;
 unsigned short max_vgrid_last, max_vgrid, min_vgrid_last, min_vgrid;
@@ -51,6 +55,13 @@ void RelayOff (void)
 		relay_state = ST_WAIT_OFF;
 		timer_relay = TT_RELAY;
 	}
+}
+
+//Pide desconectar el relay fast
+void RelayOffFast (void)
+{
+	RELAY_OFF;
+	relay_state = ST_OFF;
 }
 
 //Revisa el estado del relay
@@ -230,30 +241,54 @@ unsigned char GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 3
 //Hay que llamarla sincronizado con las muestras, entran 312 en un ciclo
 void UpdateVGrid (void)
 {
-    //miro la ultima medicion
-    if (vgrid_update_samples < 350)    //312 un ciclo de 20ms
-    {
-        //reviso si es un maximo
-        if (V_Sense > max_vgrid)
-            max_vgrid = V_Sense;
+	//miro la ultima medicion
+	if (vgrid_update_samples < 350)    //312 un ciclo de 20ms
+	{
+		//reviso si es un maximo
+	   if (V_Sense > max_vgrid)
+			max_vgrid = V_Sense;
 
-      //   //reviso si es un minimo
-      //   if (V_Sense < min_vgrid)
-      //       min_vgrid = V_Sense;
+	   //   //reviso si es un minimo
+	   //   if (V_Sense < min_vgrid)
+	   //       min_vgrid = V_Sense;
 
-        vgrid_update_samples++;
-    }
-    else
-    {
-        //paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
-        max_vgrid_last = max_vgrid;
-        min_vgrid_last = min_vgrid;
-        max_vgrid = 0;
-        min_vgrid = 0;
+	     vgrid_update_samples++;
+	 }
+	 else
+	 {
+		 //paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
+		 max_vgrid_last = max_vgrid;
+		min_vgrid_last = min_vgrid;
+		max_vgrid = 0;
+		min_vgrid = 0;
 		//   max_vgrid = 2048;
-      //   min_vgrid = 2048;
-        vgrid_update_samples = 0;
+		//   min_vgrid = 2048;
+		vgrid_update_samples = 0;
+
+		//reviso si es un glitch
+		if (max_vgrid_last < GLITCH_VOLTAGE)
+			mains_with_glitch = 1;
+		else
+			mains_with_glitch = 0;
+
+		//filtro de alimentacion
+		if (mains_voltage_index < 8)
+		{
+			mains_vector[mains_voltage_index] = max_vgrid_last;
+			mains_voltage_index++;
+		}
+		else
+		{
+			mains_voltage_filtered = MAFilter8(mains_vector);
+			mains_voltage_index = 0;
+			mains_vector[0] = max_vgrid_last;
+		}
     }
+}
+
+unsigned char Mains_Glitch (void)
+{
+	return mains_with_glitch;
 }
 
 //Hay que llamarla sincronizado con las muestras, entran 312 en un ciclo

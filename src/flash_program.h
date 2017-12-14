@@ -98,7 +98,8 @@ FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data);
 FLASH_Status FLASH_WaitForLastOperation(uint32_t Timeout);
 FLASH_Status FLASH_GetStatus(void);
 
-unsigned char WriteConfigurations (void);
+unsigned char WriteConfigurations (parameters_typedef *);
 unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char len_in_4);
+void GetFlashConf (parameters_typedef * );
 
 #endif
