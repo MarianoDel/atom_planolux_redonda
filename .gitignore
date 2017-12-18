@@ -1,12 +1,8 @@
-*.bin
-*.elf
-*.hex
-*.map
-*.o
-*.o.d
+#files to not save
 *.lst
-dimmer_model.*
-rdm_responder.*
-transceiver.*
-#rdm_util.*	##la gregue al proyecto 30-03-2016
+*.o
+*.elf
+*.map
+*.bin
 .tags
+*.zip

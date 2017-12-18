@@ -611,6 +611,8 @@ void GSMReceive (void)
 					GSMSendCommandFlag = 4;
 				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"ATOK", (sizeof("ATOK") - 1)))
 					GSMSendCommandFlag = 4;
+				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"ATE0OK", (sizeof("ATE0OK") - 1)))
+					GSMSendCommandFlag = 4;
 				if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"OK", (sizeof("OK") - 1)))
 					GSMSendCommandFlag = 4;
 			}
@@ -656,11 +658,14 @@ void GSMReceive (void)
 
 		//respuestas no esperadas
 		//primero reviso flags
-		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"Call Ready", (sizeof("Call Ready") - 1)))
+		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"+CPIN: ", (sizeof("+CPIN: ") - 1)))
 		{
 			FuncsGSMMessageFlags (GSM_RESET_FLAG);
-			FuncsGSMMessageFlags (GSM_SET_CALL);
+			FuncsGSMMessageFlags (GSM_SET_CPIN);
 		}
+
+		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"Call Ready", (sizeof("Call Ready") - 1)))
+			FuncsGSMMessageFlags (GSM_SET_CALL);
 
 		if(!strncmp((const char *)&buffUARTGSMrx2[0], (const char *)"SMS Ready", (sizeof("SMS Ready") - 1)))
 			FuncsGSMMessageFlags (GSM_SET_SMS);

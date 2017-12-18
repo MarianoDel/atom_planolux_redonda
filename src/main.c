@@ -47,7 +47,7 @@
 #endif
 
 //Para Hardware de GSM
-#if (defined USE_GSM) || (defined USE_GSM_GATEWAY)
+#if (defined USE_GSM) || (defined USE_GSM_GATEWAY) || (defined USE_ONLY_POWER_SENSE)
 #include "sim900_800.h"
 #include "funcs_gsm.h"
 #endif
@@ -219,7 +219,7 @@ int main(void)
 	unsigned int acum_secs, acum_hours;
 	unsigned char show_power = 0;
 
-#ifdef USE_REDONDA_BASIC
+#if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
 	main_state_t main_state = MAIN_INIT;
 	unsigned char reportar_SMS = 0;
 	unsigned char sended = 0;
@@ -401,9 +401,7 @@ int main(void)
 	// USART1Config();
 	AdcConfig();		//recordar habilitar sensor en adc.h
 
-#ifdef WITH_1_TO_10_VOLTS
-	TIM_3_Init ();					//lo tuilizo para 1 a 10V y para synchro ADC
-#endif
+	TIM_3_Init ();					//lo utilizo para 1 a 10V y para synchro ADC
 
 	TIM_16_Init();					//o utilizo para synchro de relay
 	TIM16Enable();
@@ -532,7 +530,8 @@ int main(void)
 //--- FIN Programa de pruebas synchro de Relay -----
 
 
-//--- Programa de pruebas I meas -----
+//--- Programa de Redonda Basic - Produccion - -----
+
 	while (1)
 	{
 		switch (main_state)
@@ -581,13 +580,13 @@ int main(void)
 					{
 						zero_current_loc >>= 5;
 						zero_current = zero_current_loc;
-						main_state = SET_COUNTERS_AND_PHONE0;
+						main_state = SET_COUNTERS_AND_PHONE;
 						i = 0;
 					}
 				}
 				break;
 
-			case SET_COUNTERS_AND_PHONE0:
+			case SET_COUNTERS_AND_PHONE:
 				//cargo contadores desde la flash
 				acum_secs = param_struct.acumm_w2s;
 				acum_secs_index = param_struct.acumm_w2s_index;
@@ -596,38 +595,8 @@ int main(void)
 				counters_mode = 0;
 				LED_OFF;
 
-				//espero que el telefono este libre
-				//TODO: timeout aca
-				if (FuncsGSMStateAsk() == gsm_state_ready)
-				{
-					Usart2Send((char *) (const char *) "Reports by SMS\r\n");
-					main_state = SET_COUNTERS_AND_PHONE1;
-
-					//pido imei
-					s_lcd[0] = '\0';
-					FuncsGSMCommandAnswer ("AT+GSN\r\n" , s_lcd);
-				}
-				break;
-
-			case SET_COUNTERS_AND_PHONE1:
-				//espero que el telefono este libre
-				if (FuncsGSMStateAsk() == gsm_state_ready)
-				{
-					i = strlen(s_lcd);
-					strncpy(param_struct.imei, s_lcd, (i - 2));
-					Usart2Send("IMEI: ");
-					Usart2Send(param_struct.imei);
-					Usart2Send("\r\n");
-
-					//mando SMS con mi info
-					strcpy(s_lcd, "IMEI: ");
-					strcat(s_lcd, param_struct.imei);
-					strcat(s_lcd, ", ACTIVO");
-
-					FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
-					// FuncsGSMSendSMS("forro", param_struct.num_reportar);
-					main_state = LAMP_OFF;
-				}
+				Update_TIM3_CH1 (0);		//fin de la prueba de synchro
+				main_state = LAMP_OFF;
 				break;
 
 			case LAMP_OFF:
@@ -700,9 +669,8 @@ int main(void)
 #endif
 								{
 									main_state = LAMP_OFF;
-#ifdef WITH_1_TO_10_VOLTS
 									Update_TIM3_CH1 (0);
-#endif
+
 									lamp_on_state = init_airplane0;
 									counters_mode = 0;
 									Usart2Send("APAGADO\r\n");
@@ -789,9 +757,8 @@ int main(void)
 #endif
 								{
 									main_state = LAMP_OFF;
-#ifdef WITH_1_TO_10_VOLTS
 									Update_TIM3_CH1 (0);
-#endif
+
 									lamp_on_state = init_airplane0;
 									counters_mode = 0;
 									Usart2Send("APAGADO\r\n");
@@ -808,6 +775,7 @@ int main(void)
 										show_power_index = 0;
 										counters_mode = 2;		//paso al modo memoria de medicion
 										lamp_on_state = meas_reporting0;
+										LED_OFF;
 									}
 #ifdef WITH_1_TO_10_VOLTS
 									one_to_ten = GetNew1to10 (GetPhoto());
@@ -821,17 +789,32 @@ int main(void)
 					case meas_reporting0:
 						ShowPower(s_lcd, power, acum_hours, acum_secs);
 						Usart2Send(s_lcd);
-						FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
-						lamp_on_state = meas_reporting1;
+						resp = FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+						if (resp == resp_gsm_error)
+							lamp_on_state = meas_reporting1;
+						else
+							lamp_on_state = meas_reporting2;
+
 						break;
 
 					case meas_reporting1:
 						if (meas_end)		//me sincronizo nuevamente con la medicion
 						{
 							meas_end = 0;
+							LED_ON;
+							counters_mode = 1;
+							lamp_on_state = meas_meas;
+						}
+						break;
+
+					case meas_reporting2:
+						if (meas_end)		//me sincronizo nuevamente con la medicion
+						{
+							meas_end = 0;
 
 							if (FuncsGSMStateAsk() == gsm_state_ready)
 							{
+								LED_ON;
 								counters_mode = 1;
 								lamp_on_state = meas_meas;
 							}
@@ -897,6 +880,8 @@ int main(void)
 				//apago el gsm
 				FuncsGSMShutdown ();
 				main_state = MAINS_FAILURE;
+				Update_TIM3_CH1 (0);
+
 				//espero 10 segundos como minimo
 				timer_standby = 10000;
 				Usart2Send("LOW MAINS VOLTAGE\r\n");
@@ -953,117 +938,239 @@ int main(void)
 #endif
 	}	//end while 1
 
-//--- FIN Programa de pruebas I meas -----
+//---------- Fin Programa de Produccion Redonda Basic--------//
+#endif	//USE_REDONDA_BASIC
+
+
+
+//--- Programa Solo medicion de potencia -----
+#ifdef USE_ONLY_POWER_SENSE
+	// USART1Config();
+	AdcConfig();		//recordar habilitar sensor en adc.h
+
+	TIM_3_Init ();					//lo utilizo para 1 a 10V y para synchro ADC
+
+	TIM_16_Init();					//o utilizo para synchro de relay
+	TIM16Enable();
+
+	Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Only Power\r\n");
+
+	for (i = 0; i < 16; i++)
+	{
+		if (LED)
+			LED_OFF;
+		else
+			LED_ON;
+
+		Wait_ms (250);
+	}
+
+
+	timer_standby = 2000;
+	FuncsGSMReset();
+	Usart1Mode(USART_GSM_MODE);
 
 	while (1)
 	{
 		switch (main_state)
 		{
 			case MAIN_INIT:
-				RelayOff();
-				LED_OFF;
-				FillPhotoBuffer();
-#ifdef WITH_TEMP_CONTROL
-				FillTempBuffer();
-#endif
-#ifdef WITH_1_TO_10_VOLTS
-				Update_TIM3_CH1 (0);
-#endif
+				Update_TIM3_CH1 (10);		//lo uso para ver diff entre synchro adc con led
 				main_state = SYNCHRO_ADC;
-#ifdef ADC_WITH_INT
+				ADC1->CR |= ADC_CR_ADSTART;
 				seq_ready = 0;
-#endif
 				break;
 
 			case SYNCHRO_ADC:
-#ifdef ADC_WITH_INT
-				if (seq_ready)
-#endif
+				if (seq_ready)					//TODO ojo aca seq_ready se usa fuera del main switch
 				{
+					Usart2Send((char *) (const char *) "Getted\r\n");
 					main_state = SET_ZERO_CURRENT;
+					timer_standby = 8000;
+					zero_current_loc = 0;
+					i = 0;
 				}
 				break;
 
 			case SET_ZERO_CURRENT:
-				main_state = LAMP_OFF;
-				break;
-
-			case LAMP_OFF:
-				if (!tt_relay_on_off)
+				if ((!timer_standby) && (mains_voltage_filtered > CONNECT_VOLTAGE))
 				{
-					if (GetPhoto() > VOLTAGE_PHOTO_ON)
+					if (i < 32)
 					{
-						main_state = LAMP_ON;
-						tt_relay_on_off = 10000;
-	#ifdef WITH_1_TO_10_VOLTS
-						Update_TIM3_CH1 (PWM_MIN);
-	#endif
-
-						RelayOn();
-						LED_ON;
-	#ifdef WITH_HYST
-						hours = 0;
-	#endif
+						if (seq_ready)		//TODO ojo aca seq_ready se usa fuera del main switch
+						{
+							seq_ready = 0;
+							zero_current_loc += I_Sense;
+							i++;
+							timer_standby = 2;	//cargo valor zero_current en 64ms
+						}
+					}
+					else
+					{
+						zero_current_loc >>= 5;
+						zero_current = zero_current_loc;
+						FuncsGSMShutdownAlways();
+						main_state = SET_COUNTERS_AND_PHONE0;
+						i = 0;
 					}
 				}
+				break;
+
+			case SET_COUNTERS_AND_PHONE0:
+				//cargo contadores desde la flash
+				acum_secs = param_struct.acumm_w2s;
+				acum_secs_index = param_struct.acumm_w2s_index;
+				acum_hours = param_struct.acumm_wh;
+
+				counters_mode = 0;
+				LED_OFF;
+
+				//espero que el telefono este libre
+				if (FuncsGSMStateAsk() == gsm_state_stop_always)
+				{
+					Usart2Send((char *) (const char *) "Phone Shutdown\r\n");
+					main_state = SET_COUNTERS_AND_PHONE1;
+				}
+				break;
+
+			case SET_COUNTERS_AND_PHONE1:
+				LED_ON;
+				Usart2Send("PRENDIDO\r\n");
+				Update_TIM3_CH1 (PWM_MAX);
+				main_state = LAMP_ON;
 				break;
 
 			case LAMP_ON:
-				if (!tt_relay_on_off)
+				switch (lamp_on_state)
 				{
-	#ifdef WITH_HYST		//con Hysteresis apaga casi en el mismo punto en el que prende
-					hyst = GetHysteresis (hours);
-					if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
-	#else
-					if (GetPhoto() < VOLTAGE_PHOTO_OFF)
-	#endif
-					{
-						main_state = LAMP_OFF;
-	#ifdef WITH_1_TO_10_VOLTS
-						Update_TIM3_CH1 (0);
-	#endif
-						tt_relay_on_off = 10000;
-						RelayOff();
-						LED_OFF;
-					}
+					case init_airplane0:
+						lamp_on_state++;
+						break;
+
+					case init_airplane1:
+						lamp_on_state++;
+						break;
+
+					case meas_init:
+						RelayOn();
+						lamp_on_state = meas_meas;
+						counters_mode = 1;
+						timer_meas = 200;		//le doy 200ms de buffer a la medicion
+						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
+						timer_rep = param_struct.timer_reportar * 30;
+						break;
+
+					case meas_meas:
+						if (meas_end)		//termino una vuelta de mediciones, generalmente 2 segundos
+						{
+							meas_end = 0;
+
+							//No apago, tengo que reportar?
+							if (show_power_index >= timer_rep)
+							{
+								show_power_index = 0;
+								counters_mode = 2;		//paso al modo memoria de medicion
+								lamp_on_state = meas_reporting0;
+								LED_OFF;
+							}
+						}
+						break;
+
+					case meas_reporting0:
+						ShowPower(s_lcd, power, acum_hours, acum_secs);
+						Usart2Send(s_lcd);
+						lamp_on_state = meas_reporting1;
+						break;
+
+					case meas_reporting1:
+						if (meas_end)		//me sincronizo nuevamente con la medicion
+						{
+							meas_end = 0;
+							LED_ON;
+							counters_mode = 1;
+							lamp_on_state = meas_meas;
+						}
+						break;
+
+					default:
+						lamp_on_state = init_airplane0;
+						break;
 				}
 
-	#ifdef WITH_1_TO_10_VOLTS
-				if (main_state == LAMP_ON)
+				if (counters_mode)	//si esta activo el modo de contadores mido
 				{
-					one_to_ten = GetNew1to10 (GetPhoto());
-					Update_TIM3_CH1 (one_to_ten);
+					if (!timer_meas)	//update cada 200ms
+					{
+						if (i < SIZEOF_POWER_VECT)
+						{
+							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
+							i++;
+						}
+						else
+						{		//termine de cargar el vector, guardo muestro info
+							i = 0;
+
+							if (counters_mode == 1)	//mido normalmente
+							{
+								power = PowerCalcMean8(power_vect);
+								// power = 9871;	//100w forzados para evaluar contadores
+														//9871 * KW = 100
+								if (power < MIN_SENSE_POWER)	//minimo de medicion
+									power = 0;
+
+								last_power = power;
+							}
+
+							if (counters_mode == 2)	//no mido solo update de lo viejo
+								power = last_power;
+
+							acum_secs += power;
+							acum_secs_index++;
+							show_power_index++;
+							need_to_save = 1;			//aviso que en algun momento hay que guardar
+
+							if (acum_secs_index >= 1800)
+							{
+								acum_hours += (acum_secs / 1800);	//lo convierto a Wh, para no perder bits en cada cuenta
+								acum_secs = 0;
+								acum_secs_index = 0;
+							}
+							//cuando termino una medicion completa aviso con meas_end
+							meas_end = 1;
+						}
+						timer_meas = 200;		//10 veces 200ms
+					}
 				}
-	#endif
+				break;	//termina LAMP_ON
+
+			case GO_TO_MAINS_FAILURE:
+				break;
+
+			case MAINS_FAILURE:
 				break;
 
 			default:
 				main_state = MAIN_INIT;
 				break;
-		}
+		}	//fin switch main_state
 
-		if (!timer_standby)
+		//Cosas que dependen de las muestras
+		if (seq_ready)
 		{
-#ifdef WITH_TEMP_CONTROL
-			sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), GetPhoto());
-#else
-			sprintf(s_lcd, "photo: %d\r\n", GetPhoto());
-#endif
-			//sprintf(s_lcd, "temp: %d, photo: %d\r\n", GetTemp(), ReadADC1_SameSampleTime (ADC_CH1));
-			Usart2Send(s_lcd);
-			timer_standby = 2000;
+			seq_ready = 0;
+			UpdateVGrid ();
+			UpdateIGrid ();
 		}
 
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();
-#ifdef WITH_TEMP_CONTROL
-		UpdateTemp();
+#ifdef USE_GSM
+		FuncsGSM();
 #endif
-		UpdatePhotoTransistor();
 	}	//end while 1
-//---------- Fin Programa de Procduccion Redonda Basic--------//
-#endif	//USE_REDONDA_BASIC
 
+//--- FIN Programa de pruebas I meas -----
+#endif
 
 #ifdef USE_MQTT_LIB
 	MQTTPacket_connectData data = MQTTPacket_connectData_initializer;

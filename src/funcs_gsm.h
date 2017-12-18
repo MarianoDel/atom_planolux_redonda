@@ -10,9 +10,14 @@
 typedef enum {
 	gsm_state_reset = 0,
 	gsm_state_verify_at,
+	gsm_state_wait_cpin,
+	gsm_state_echo_disable,
+	gsm_state_sms_mode,
+	gsm_state_sms_character,
 	gsm_state_verify_fully_func,
 	gsm_state_wait_reg,
 	gsm_state_verify_reg,
+	gsm_state_get_imei,
 	gsm_state_ready,
 	gsm_state_sending_conf,
 	gsm_state_sending_sms,
@@ -22,7 +27,9 @@ typedef enum {
 	gsm_state_connected,
 	gsm_state_disconnected,
 	gsm_state_shutdown,
-	gsm_state_stop_wait
+	gsm_state_stop_wait,
+	gsm_state_shutdown_always,
+	gsm_state_stop_always
 
 } t_GsmState;
 
@@ -39,6 +46,7 @@ typedef enum {
 #define GSM_RESET_FLAG		0x8000
 #define GSM_SET_CALL			0x0001
 #define GSM_SET_SMS			0x0002
+#define GSM_SET_CPIN			0x0004
 #define GSM_SET_POWER_DOWN	0x4000
 
 
@@ -49,6 +57,7 @@ void FuncsGSMReset (void);
 unsigned char FuncsGSMReady (void);
 unsigned char FuncsGSMStateAsk (void);
 void FuncsGSMShutdown (void);
+void FuncsGSMShutdownAlways (void);
 unsigned char FuncsGSMSendSMS (char *, char *);
 void FuncsGSMMessageFlags (unsigned short);
 unsigned short FuncsGSMMessageFlagsAsk (void);

@@ -55,7 +55,7 @@ Archive member included to satisfy reference by file (symbol)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
                               ./src/tcp_transceiver.o (strncmp)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
-                              ./src/main.o (strncpy)
+                              ./src/flash_program.o (strncpy)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
                               /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o) (_strtol_r)
 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-ctype_.o)
@@ -114,6 +114,7 @@ VoltagePhoto        0x40              ./src/adc.o
 p_NUM               0x4               ./src/funcs_gsm.o
 GSMIPadd            0x10              ./src/sim900_800.o
 buffUARTGSMrx2      0x100             ./src/sim900_800.o
+s_msg               0x64              ./src/funcs_gsm.o
 gps_buff            0x80              ./src/gps_vktel.o
 GSMStartTime        0x2               ./src/sim900_800.o
 prx                 0x4               ./src/ESP8266.o
@@ -819,10 +820,12 @@ Discarded input sections
  .text          0x00000000        0x0 ./src/funcs_gsm.o
  .data          0x00000000        0x0 ./src/funcs_gsm.o
  .bss           0x00000000        0x0 ./src/funcs_gsm.o
+ .text.FuncsGSMShutdownAlways
+                0x00000000       0x14 ./src/funcs_gsm.o
  .text.FuncsGSMReady
                 0x00000000       0x18 ./src/funcs_gsm.o
- .text.FuncsGSMMessageFlagsAsk
-                0x00000000        0xc ./src/funcs_gsm.o
+ .text.FuncsGSMCommandAnswer
+                0x00000000       0x38 ./src/funcs_gsm.o
  .text          0x00000000       0x14 ./cmsis_boot/startup/startup_stm32f0xx.o
  .data          0x00000000        0x0 ./cmsis_boot/startup/startup_stm32f0xx.o
  .bss           0x00000000        0x0 ./cmsis_boot/startup/startup_stm32f0xx.o
@@ -1050,7 +1053,7 @@ END GROUP
                 0x08000000                g_pfnVectors
                 0x080000c4                . = ALIGN (0x4)
 
-.text           0x080000c4     0x4d84
+.text           0x080000c4     0x4f7c
                 0x080000c4                . = ALIGN (0x4)
  *(.text)
  .text          0x080000c4      0x114 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
@@ -1107,387 +1110,385 @@ END GROUP
                 0x08001134       0xec ./src/main.o
  .text.SysTick_Config
                 0x08001220       0x48 ./src/main.o
- .text.main     0x08001268      0x880 ./src/main.o
+ .text.main     0x08001268      0x7ec ./src/main.o
                 0x08001268                main
  .text.TimingDelay_Decrement
-                0x08001ae8       0xec ./src/main.o
-                0x08001ae8                TimingDelay_Decrement
+                0x08001a54       0xec ./src/main.o
+                0x08001a54                TimingDelay_Decrement
  .text.SystemInit
-                0x08001bd4       0x88 ./cmsis_boot/system_stm32f0xx.o
-                0x08001bd4                SystemInit
+                0x08001b40       0x88 ./cmsis_boot/system_stm32f0xx.o
+                0x08001b40                SystemInit
  .text.SetSysClockInternalRC
-                0x08001c5c       0xac ./cmsis_boot/system_stm32f0xx.o
-                0x08001c5c                SetSysClockInternalRC
- .text._sbrk    0x08001d08       0x34 ./cmsis_boot/syscalls/syscalls.o
-                0x08001d08                _sbrk
+                0x08001bc8       0xac ./cmsis_boot/system_stm32f0xx.o
+                0x08001bc8                SetSysClockInternalRC
+ .text._sbrk    0x08001c74       0x34 ./cmsis_boot/syscalls/syscalls.o
+                0x08001c74                _sbrk
  .text.NMI_Handler
-                0x08001d3c        0x4 ./src/stm32f0xx_it.o
-                0x08001d3c                NMI_Handler
+                0x08001ca8        0x4 ./src/stm32f0xx_it.o
+                0x08001ca8                NMI_Handler
  .text.HardFault_Handler
-                0x08001d40        0x4 ./src/stm32f0xx_it.o
-                0x08001d40                HardFault_Handler
+                0x08001cac        0x4 ./src/stm32f0xx_it.o
+                0x08001cac                HardFault_Handler
  .text.SVC_Handler
-                0x08001d44        0x4 ./src/stm32f0xx_it.o
-                0x08001d44                SVC_Handler
+                0x08001cb0        0x4 ./src/stm32f0xx_it.o
+                0x08001cb0                SVC_Handler
  .text.PendSV_Handler
-                0x08001d48        0x4 ./src/stm32f0xx_it.o
-                0x08001d48                PendSV_Handler
+                0x08001cb4        0x4 ./src/stm32f0xx_it.o
+                0x08001cb4                PendSV_Handler
  .text.SysTick_Handler
-                0x08001d4c        0xc ./src/stm32f0xx_it.o
-                0x08001d4c                SysTick_Handler
+                0x08001cb8        0xc ./src/stm32f0xx_it.o
+                0x08001cb8                SysTick_Handler
  .text.GPIO_Config
-                0x08001d58      0x118 ./src/gpio.o
-                0x08001d58                GPIO_Config
- .text.EXTIOff  0x08001e70       0x18 ./src/gpio.o
-                0x08001e70                EXTIOff
+                0x08001cc4      0x118 ./src/gpio.o
+                0x08001cc4                GPIO_Config
+ .text.EXTIOff  0x08001ddc       0x18 ./src/gpio.o
+                0x08001ddc                EXTIOff
  .text.Update_TIM3_CH1
-                0x08001e88       0x20 ./src/tim.o
-                0x08001e88                Update_TIM3_CH1
- .text.Wait_ms  0x08001ea8       0x2c ./src/tim.o
-                0x08001ea8                Wait_ms
+                0x08001df4       0x20 ./src/tim.o
+                0x08001df4                Update_TIM3_CH1
+ .text.Wait_ms  0x08001e14       0x2c ./src/tim.o
+                0x08001e14                Wait_ms
  .text.TIM3_IRQHandler
-                0x08001ed4       0x1c ./src/tim.o
-                0x08001ed4                TIM3_IRQHandler
+                0x08001e40       0x1c ./src/tim.o
+                0x08001e40                TIM3_IRQHandler
  .text.TIM_3_Init
-                0x08001ef0       0xa0 ./src/tim.o
-                0x08001ef0                TIM_3_Init
+                0x08001e5c       0xa0 ./src/tim.o
+                0x08001e5c                TIM_3_Init
  .text.TIM14_IRQHandler
-                0x08001f90       0x1c ./src/tim.o
-                0x08001f90                TIM14_IRQHandler
+                0x08001efc       0x1c ./src/tim.o
+                0x08001efc                TIM14_IRQHandler
  .text.TIM16_IRQHandler
-                0x08001fac       0x1c ./src/tim.o
-                0x08001fac                TIM16_IRQHandler
+                0x08001f18       0x1c ./src/tim.o
+                0x08001f18                TIM16_IRQHandler
  .text.TIM_16_Init
-                0x08001fc8       0x48 ./src/tim.o
-                0x08001fc8                TIM_16_Init
+                0x08001f34       0x48 ./src/tim.o
+                0x08001f34                TIM_16_Init
  .text.TIM16Enable
-                0x08002010       0x18 ./src/tim.o
-                0x08002010                TIM16Enable
+                0x08001f7c       0x18 ./src/tim.o
+                0x08001f7c                TIM16Enable
  .text.TIM17_IRQHandler
-                0x08002028       0x1c ./src/tim.o
-                0x08002028                TIM17_IRQHandler
+                0x08001f94       0x1c ./src/tim.o
+                0x08001f94                TIM17_IRQHandler
  .text.NVIC_EnableIRQ
-                0x08002044       0x2c ./src/adc.o
+                0x08001fb0       0x2c ./src/adc.o
  .text.NVIC_SetPriority
-                0x08002070       0xec ./src/adc.o
+                0x08001fdc       0xec ./src/adc.o
  .text.AdcConfig
-                0x0800215c       0xc0 ./src/adc.o
-                0x0800215c                AdcConfig
+                0x080020c8       0xc0 ./src/adc.o
+                0x080020c8                AdcConfig
  .text.ADC1_COMP_IRQHandler
-                0x0800221c       0x78 ./src/adc.o
-                0x0800221c                ADC1_COMP_IRQHandler
+                0x08002188       0x78 ./src/adc.o
+                0x08002188                ADC1_COMP_IRQHandler
  .text.ADCGetCalibrationFactor
-                0x08002294       0x5c ./src/adc.o
-                0x08002294                ADCGetCalibrationFactor
+                0x08002200       0x5c ./src/adc.o
+                0x08002200                ADCGetCalibrationFactor
  .text.UpdatePhotoTransistor
-                0x080022f0       0x60 ./src/adc.o
-                0x080022f0                UpdatePhotoTransistor
+                0x0800225c       0x60 ./src/adc.o
+                0x0800225c                UpdatePhotoTransistor
  .text.GetPhoto
-                0x08002350       0x6c ./src/adc.o
-                0x08002350                GetPhoto
+                0x080022bc       0x6c ./src/adc.o
+                0x080022bc                GetPhoto
  .text.NVIC_EnableIRQ
-                0x080023bc       0x2c ./src/uart.o
+                0x08002328       0x2c ./src/uart.o
  .text.NVIC_SetPriority
-                0x080023e8       0xec ./src/uart.o
+                0x08002354       0xec ./src/uart.o
  .text.Usart1Mode
-                0x080024d4      0x10c ./src/uart.o
-                0x080024d4                Usart1Mode
+                0x08002440      0x10c ./src/uart.o
+                0x08002440                Usart1Mode
  .text.ReadUsart1Buffer
-                0x080025e0       0x78 ./src/uart.o
-                0x080025e0                ReadUsart1Buffer
+                0x0800254c       0x78 ./src/uart.o
+                0x0800254c                ReadUsart1Buffer
  .text.USART1_IRQHandler
-                0x08002658      0x118 ./src/uart.o
-                0x08002658                USART1_IRQHandler
+                0x080025c4      0x118 ./src/uart.o
+                0x080025c4                USART1_IRQHandler
  .text.USART2_IRQHandler
-                0x08002770       0xc4 ./src/uart.o
-                0x08002770                USART2_IRQHandler
+                0x080026dc       0xc4 ./src/uart.o
+                0x080026dc                USART2_IRQHandler
  .text.Usart2Send
-                0x08002834       0x2c ./src/uart.o
-                0x08002834                Usart2Send
+                0x080027a0       0x2c ./src/uart.o
+                0x080027a0                Usart2Send
  .text.Usart2SendUnsigned
-                0x08002860       0x60 ./src/uart.o
-                0x08002860                Usart2SendUnsigned
+                0x080027cc       0x60 ./src/uart.o
+                0x080027cc                Usart2SendUnsigned
  .text.Usart1Send
-                0x080028c0       0x2c ./src/uart.o
-                0x080028c0                Usart1Send
+                0x0800282c       0x2c ./src/uart.o
+                0x0800282c                Usart1Send
  .text.Usart1SendUnsigned
-                0x080028ec       0x60 ./src/uart.o
-                0x080028ec                Usart1SendUnsigned
+                0x08002858       0x60 ./src/uart.o
+                0x08002858                Usart1SendUnsigned
  .text.USART2Config
-                0x0800294c       0x98 ./src/uart.o
-                0x0800294c                USART2Config
+                0x080028b8       0x98 ./src/uart.o
+                0x080028b8                USART2Config
  .text.USART1Config
-                0x080029e4       0x6c ./src/uart.o
-                0x080029e4                USART1Config
+                0x08002950       0x6c ./src/uart.o
+                0x08002950                USART1Config
  .text.ErasePage
-                0x08002a50       0x30 ./src/flash_program.o
-                0x08002a50                ErasePage
+                0x080029bc       0x30 ./src/flash_program.o
+                0x080029bc                ErasePage
  .text.FLASH_Unlock
-                0x08002a80       0x28 ./src/flash_program.o
-                0x08002a80                FLASH_Unlock
+                0x080029ec       0x28 ./src/flash_program.o
+                0x080029ec                FLASH_Unlock
  .text.FLASH_ErasePage
-                0x08002aa8       0x78 ./src/flash_program.o
-                0x08002aa8                FLASH_ErasePage
+                0x08002a14       0x78 ./src/flash_program.o
+                0x08002a14                FLASH_ErasePage
  .text.FLASH_Lock
-                0x08002b20       0x14 ./src/flash_program.o
-                0x08002b20                FLASH_Lock
+                0x08002a8c       0x14 ./src/flash_program.o
+                0x08002a8c                FLASH_Lock
  .text.FLASH_ProgramWord
-                0x08002b34       0xb0 ./src/flash_program.o
-                0x08002b34                FLASH_ProgramWord
+                0x08002aa0       0xb0 ./src/flash_program.o
+                0x08002aa0                FLASH_ProgramWord
  .text.FLASH_WaitForLastOperation
-                0x08002be4       0x58 ./src/flash_program.o
-                0x08002be4                FLASH_WaitForLastOperation
+                0x08002b50       0x58 ./src/flash_program.o
+                0x08002b50                FLASH_WaitForLastOperation
  .text.FLASH_GetStatus
-                0x08002c3c       0x60 ./src/flash_program.o
-                0x08002c3c                FLASH_GetStatus
+                0x08002ba8       0x60 ./src/flash_program.o
+                0x08002ba8                FLASH_GetStatus
  .text.WriteConfigurations
-                0x08002c9c       0x30 ./src/flash_program.o
-                0x08002c9c                WriteConfigurations
+                0x08002c08       0x30 ./src/flash_program.o
+                0x08002c08                WriteConfigurations
  .text.WriteFlash
-                0x08002ccc       0xc8 ./src/flash_program.o
-                0x08002ccc                WriteFlash
+                0x08002c38       0xc8 ./src/flash_program.o
+                0x08002c38                WriteFlash
  .text.GetFlashConf
-                0x08002d94       0x3c ./src/flash_program.o
-                0x08002d94                GetFlashConf
+                0x08002d00       0x3c ./src/flash_program.o
+                0x08002d00                GetFlashConf
  .text.MAFilter8
-                0x08002dd0       0x98 ./src/dsp.o
-                0x08002dd0                MAFilter8
- .text.RelayOn  0x08002e68       0x24 ./src/hard.o
-                0x08002e68                RelayOn
+                0x08002d3c       0x98 ./src/dsp.o
+                0x08002d3c                MAFilter8
+ .text.RelayOn  0x08002dd4       0x24 ./src/hard.o
+                0x08002dd4                RelayOn
  .text.RelayOff
-                0x08002e8c       0x24 ./src/hard.o
-                0x08002e8c                RelayOff
+                0x08002df8       0x24 ./src/hard.o
+                0x08002df8                RelayOff
  .text.RelayOffFast
-                0x08002eb0       0x18 ./src/hard.o
-                0x08002eb0                RelayOffFast
+                0x08002e1c       0x18 ./src/hard.o
+                0x08002e1c                RelayOffFast
  .text.RelayIsOn
-                0x08002ec8       0x28 ./src/hard.o
-                0x08002ec8                RelayIsOn
+                0x08002e34       0x28 ./src/hard.o
+                0x08002e34                RelayIsOn
  .text.RelayIsOff
-                0x08002ef0       0x28 ./src/hard.o
-                0x08002ef0                RelayIsOff
+                0x08002e5c       0x28 ./src/hard.o
+                0x08002e5c                RelayIsOff
  .text.UpdateRelay
-                0x08002f18      0x170 ./src/hard.o
-                0x08002f18                UpdateRelay
+                0x08002e84      0x170 ./src/hard.o
+                0x08002e84                UpdateRelay
  .text.GetHysteresis
-                0x08003088       0x50 ./src/hard.o
-                0x08003088                GetHysteresis
- .text.GetNew1to10
-                0x080030d8       0x68 ./src/hard.o
-                0x080030d8                GetNew1to10
+                0x08002ff4       0x50 ./src/hard.o
+                0x08002ff4                GetHysteresis
  .text.UpdateVGrid
-                0x08003140       0xe4 ./src/hard.o
-                0x08003140                UpdateVGrid
+                0x08003044       0xe4 ./src/hard.o
+                0x08003044                UpdateVGrid
  .text.Mains_Glitch
-                0x08003224        0xc ./src/hard.o
-                0x08003224                Mains_Glitch
+                0x08003128        0xc ./src/hard.o
+                0x08003128                Mains_Glitch
  .text.UpdateIGrid
-                0x08003230       0x90 ./src/hard.o
-                0x08003230                UpdateIGrid
+                0x08003134       0x90 ./src/hard.o
+                0x08003134                UpdateIGrid
  .text.GetVGrid
-                0x080032c0       0x28 ./src/hard.o
-                0x080032c0                GetVGrid
+                0x080031c4       0x28 ./src/hard.o
+                0x080031c4                GetVGrid
  .text.GetIGrid
-                0x080032e8       0x28 ./src/hard.o
-                0x080032e8                GetIGrid
+                0x080031ec       0x28 ./src/hard.o
+                0x080031ec                GetIGrid
  .text.PowerCalc
-                0x08003310       0x30 ./src/hard.o
-                0x08003310                PowerCalc
+                0x08003214       0x30 ./src/hard.o
+                0x08003214                PowerCalc
  .text.PowerCalcMean8
-                0x08003340      0x170 ./src/hard.o
-                0x08003340                PowerCalcMean8
+                0x08003244      0x170 ./src/hard.o
+                0x08003244                PowerCalcMean8
  .text.ShowPower
-                0x080034b0      0x12c ./src/hard.o
-                0x080034b0                ShowPower
+                0x080033b4      0x12c ./src/hard.o
+                0x080033b4                ShowPower
  .text.ESPPreParser2
-                0x080035dc       0x5c ./src/ESP8266.o
-                0x080035dc                ESPPreParser2
+                0x080034e0       0x5c ./src/ESP8266.o
+                0x080034e0                ESPPreParser2
  .text.GSMProcess
-                0x08003638       0x5c ./src/sim900_800.o
-                0x08003638                GSMProcess
+                0x0800353c       0x5c ./src/sim900_800.o
+                0x0800353c                GSMProcess
  .text.GSM_Start
-                0x08003694       0xfc ./src/sim900_800.o
-                0x08003694                GSM_Start
+                0x08003598       0xfc ./src/sim900_800.o
+                0x08003598                GSM_Start
  .text.GSM_Start_Stop_ResetSM
-                0x08003790       0x10 ./src/sim900_800.o
-                0x08003790                GSM_Start_Stop_ResetSM
+                0x08003694       0x10 ./src/sim900_800.o
+                0x08003694                GSM_Start_Stop_ResetSM
  .text.GSM_Stop
-                0x080037a0       0xbc ./src/sim900_800.o
-                0x080037a0                GSM_Stop
+                0x080036a4       0xbc ./src/sim900_800.o
+                0x080036a4                GSM_Stop
  .text.GSM_Delay
-                0x0800385c       0x70 ./src/sim900_800.o
-                0x0800385c                GSM_Delay
+                0x08003760       0x70 ./src/sim900_800.o
+                0x08003760                GSM_Delay
  .text.GSMReceive
-                0x080038cc      0x290 ./src/sim900_800.o
-                0x080038cc                GSMReceive
+                0x080037d0      0x2c4 ./src/sim900_800.o
+                0x080037d0                GSMReceive
  .text.GSMSendCommand
-                0x08003b5c      0x10c ./src/sim900_800.o
-                0x08003b5c                GSMSendCommand
+                0x08003a94      0x10c ./src/sim900_800.o
+                0x08003a94                GSMSendCommand
  .text.GSMSendSMS
-                0x08003c68      0x18c ./src/sim900_800.o
-                0x08003c68                GSMSendSMS
+                0x08003ba0      0x18c ./src/sim900_800.o
+                0x08003ba0                GSMSendSMS
  .text.GSMTimeoutCounters
-                0x08003df4       0xf8 ./src/sim900_800.o
-                0x08003df4                GSMTimeoutCounters
+                0x08003d2c       0xf8 ./src/sim900_800.o
+                0x08003d2c                GSMTimeoutCounters
  .text.GSMReceivSMS
-                0x08003eec      0x274 ./src/sim900_800.o
-                0x08003eec                GSMReceivSMS
+                0x08003e24      0x274 ./src/sim900_800.o
+                0x08003e24                GSMReceivSMS
  .text.FuncsGSM
-                0x08004160      0x30c ./src/funcs_gsm.o
-                0x08004160                FuncsGSM
+                0x08004098      0x5f8 ./src/funcs_gsm.o
+                0x08004098                FuncsGSM
  .text.FuncsGSMReset
-                0x0800446c       0x14 ./src/funcs_gsm.o
-                0x0800446c                FuncsGSMReset
+                0x08004690       0x14 ./src/funcs_gsm.o
+                0x08004690                FuncsGSMReset
  .text.FuncsGSMSendSMS
-                0x08004480       0x38 ./src/funcs_gsm.o
-                0x08004480                FuncsGSMSendSMS
+                0x080046a4       0x38 ./src/funcs_gsm.o
+                0x080046a4                FuncsGSMSendSMS
  .text.FuncsGSMShutdown
-                0x080044b8       0x14 ./src/funcs_gsm.o
-                0x080044b8                FuncsGSMShutdown
+                0x080046dc       0x14 ./src/funcs_gsm.o
+                0x080046dc                FuncsGSMShutdown
  .text.FuncsGSMStateAsk
-                0x080044cc        0xc ./src/funcs_gsm.o
-                0x080044cc                FuncsGSMStateAsk
+                0x080046f0        0xc ./src/funcs_gsm.o
+                0x080046f0                FuncsGSMStateAsk
  .text.FuncsGSMMessageFlags
-                0x080044d8       0x48 ./src/funcs_gsm.o
-                0x080044d8                FuncsGSMMessageFlags
- .text.FuncsGSMCommandAnswer
-                0x08004520       0x38 ./src/funcs_gsm.o
-                0x08004520                FuncsGSMCommandAnswer
+                0x080046fc       0x48 ./src/funcs_gsm.o
+                0x080046fc                FuncsGSMMessageFlags
+ .text.FuncsGSMMessageFlagsAsk
+                0x08004744        0xc ./src/funcs_gsm.o
+                0x08004744                FuncsGSMMessageFlagsAsk
  .text.Reset_Handler
-                0x08004558       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x08004558                Reset_Handler
+                0x08004750       0x44 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x08004750                Reset_Handler
  .text.Default_Handler
-                0x0800459c        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
-                0x0800459c                TIM1_CC_IRQHandler
-                0x0800459c                PVD_IRQHandler
-                0x0800459c                I2C1_IRQHandler
-                0x0800459c                SPI1_IRQHandler
-                0x0800459c                TIM6_DAC_IRQHandler
-                0x0800459c                EXTI2_3_IRQHandler
-                0x0800459c                I2C2_IRQHandler
-                0x0800459c                RTC_IRQHandler
-                0x0800459c                EXTI4_15_IRQHandler
-                0x0800459c                RCC_IRQHandler
-                0x0800459c                DMA1_Channel1_IRQHandler
-                0x0800459c                Default_Handler
-                0x0800459c                CEC_IRQHandler
-                0x0800459c                DMA1_Channel4_5_IRQHandler
-                0x0800459c                TIM15_IRQHandler
-                0x0800459c                EXTI0_1_IRQHandler
-                0x0800459c                SPI2_IRQHandler
-                0x0800459c                TS_IRQHandler
-                0x0800459c                WWDG_IRQHandler
-                0x0800459c                TIM2_IRQHandler
-                0x0800459c                DMA1_Channel2_3_IRQHandler
-                0x0800459c                FLASH_IRQHandler
-                0x0800459c                TIM1_BRK_UP_TRG_COM_IRQHandler
- .text.memcpy   0x0800459e       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
-                0x0800459e                memcpy
- .text.sprintf  0x080045b0       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
-                0x080045b0                sprintf
-                0x080045b0                siprintf
- .text.strcat   0x080045f4       0x1a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
-                0x080045f4                strcat
- .text.strcpy   0x0800460e       0x10 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
-                0x0800460e                strcpy
- .text.strncmp  0x0800461e       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
-                0x0800461e                strncmp
- .text.strncpy  0x08004642       0x26 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
-                0x08004642                strncpy
- .text._free_r  0x08004668       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
-                0x08004668                _free_r
+                0x08004794        0x2 ./cmsis_boot/startup/startup_stm32f0xx.o
+                0x08004794                TIM1_CC_IRQHandler
+                0x08004794                PVD_IRQHandler
+                0x08004794                I2C1_IRQHandler
+                0x08004794                SPI1_IRQHandler
+                0x08004794                TIM6_DAC_IRQHandler
+                0x08004794                EXTI2_3_IRQHandler
+                0x08004794                I2C2_IRQHandler
+                0x08004794                RTC_IRQHandler
+                0x08004794                EXTI4_15_IRQHandler
+                0x08004794                RCC_IRQHandler
+                0x08004794                DMA1_Channel1_IRQHandler
+                0x08004794                Default_Handler
+                0x08004794                CEC_IRQHandler
+                0x08004794                DMA1_Channel4_5_IRQHandler
+                0x08004794                TIM15_IRQHandler
+                0x08004794                EXTI0_1_IRQHandler
+                0x08004794                SPI2_IRQHandler
+                0x08004794                TS_IRQHandler
+                0x08004794                WWDG_IRQHandler
+                0x08004794                TIM2_IRQHandler
+                0x08004794                DMA1_Channel2_3_IRQHandler
+                0x08004794                FLASH_IRQHandler
+                0x08004794                TIM1_BRK_UP_TRG_COM_IRQHandler
+ .text.memcpy   0x08004796       0x12 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+                0x08004796                memcpy
+ .text.sprintf  0x080047a8       0x44 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+                0x080047a8                sprintf
+                0x080047a8                siprintf
+ .text.strcat   0x080047ec       0x1a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+                0x080047ec                strcat
+ .text.strcpy   0x08004806       0x10 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
+                0x08004806                strcpy
+ .text.strncmp  0x08004816       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
+                0x08004816                strncmp
+ .text.strncpy  0x0800483a       0x26 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+                0x0800483a                strncpy
+ .text._free_r  0x08004860       0x8c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+                0x08004860                _free_r
  .text._malloc_r
-                0x080046f4       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
-                0x080046f4                _malloc_r
+                0x080048ec       0xac /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+                0x080048ec                _malloc_r
  .text.__ssputs_r
-                0x080047a0       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
-                0x080047a0                __ssputs_r
+                0x08004998       0xc4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08004998                __ssputs_r
  .text._svfprintf_r
-                0x08004864      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
-                0x08004864                _svfprintf_r
-                0x08004864                _svfiprintf_r
+                0x08004a5c      0x1fc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08004a5c                _svfprintf_r
+                0x08004a5c                _svfiprintf_r
  .text._printf_common
-                0x08004a60       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x08004a60                _printf_common
+                0x08004c58       0xdc /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08004c58                _printf_common
  .text._printf_i
-                0x08004b3c      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x08004b3c                _printf_i
- .text._sbrk_r  0x08004d80       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
-                0x08004d80                _sbrk_r
- .text.memchr   0x08004da4       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
-                0x08004da4                memchr
- .text.memmove  0x08004dba       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
-                0x08004dba                memmove
+                0x08004d34      0x244 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08004d34                _printf_i
+ .text._sbrk_r  0x08004f78       0x24 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+                0x08004f78                _sbrk_r
+ .text.memchr   0x08004f9c       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+                0x08004f9c                memchr
+ .text.memmove  0x08004fb2       0x2a /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+                0x08004fb2                memmove
  .text._realloc_r
-                0x08004de4       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
-                0x08004de4                _realloc_r
+                0x08004fdc       0x4c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+                0x08004fdc                _realloc_r
  .text._malloc_usable_size_r
-                0x08004e30       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
-                0x08004e30                _malloc_usable_size_r
+                0x08005028       0x16 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+                0x08005028                _malloc_usable_size_r
  *(.glue_7)
- .glue_7        0x08004e46        0x0 linker stubs
+ .glue_7        0x0800503e        0x0 linker stubs
  *(.glue_7t)
- .glue_7t       0x08004e46        0x0 linker stubs
+ .glue_7t       0x0800503e        0x0 linker stubs
  *(.eh_frame)
  *(.init)
  *(.fini)
-                0x08004e48                . = ALIGN (0x4)
- *fill*         0x08004e46        0x2 
-                0x08004e48                _etext = .
+                0x08005040                . = ALIGN (0x4)
+ *fill*         0x0800503e        0x2 
+                0x08005040                _etext = .
 
-.vfp11_veneer   0x08004e48        0x0
- .vfp11_veneer  0x08004e48        0x0 linker stubs
+.vfp11_veneer   0x08005040        0x0
+ .vfp11_veneer  0x08005040        0x0 linker stubs
 
-.v4_bx          0x08004e48        0x0
- .v4_bx         0x08004e48        0x0 linker stubs
+.v4_bx          0x08005040        0x0
+ .v4_bx         0x08005040        0x0 linker stubs
 
-.iplt           0x08004e48        0x0
- .iplt          0x08004e48        0x0 ./src/main.o
+.iplt           0x08005040        0x0
+ .iplt          0x08005040        0x0 ./src/main.o
 
-.rodata         0x08004e48      0x62c
-                0x08004e48                . = ALIGN (0x4)
+.rodata         0x08005040      0x638
+                0x08005040                . = ALIGN (0x4)
  *(.rodata)
- .rodata        0x08004e48      0x1cb ./src/main.o
- *fill*         0x08005013        0x1 
- .rodata        0x08005014       0x1b ./src/hard.o
- *fill*         0x0800502f        0x1 
- .rodata        0x08005030      0x272 ./src/sim900_800.o
- *fill*         0x080052a2        0x2 
- .rodata        0x080052a4       0x6c ./src/funcs_gsm.o
- .rodata        0x08005310       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
- .rodata        0x08005350       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
+ .rodata        0x08005040      0x17f ./src/main.o
+ *fill*         0x080051bf        0x1 
+ .rodata        0x080051c0       0x1b ./src/hard.o
+ *fill*         0x080051db        0x1 
+ .rodata        0x080051dc      0x282 ./src/sim900_800.o
+ *fill*         0x0800545e        0x2 
+ .rodata        0x08005460       0x95 ./src/funcs_gsm.o
+ *fill*         0x080054f5        0x3 
+ .rodata        0x080054f8       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
+ .rodata        0x08005538       0x40 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
  *(.rodata*)
- .rodata.main   0x08005390       0x48 ./src/main.o
+ .rodata.main   0x08005578       0x48 ./src/main.o
  .rodata.UpdateRelay
-                0x080053d8       0x18 ./src/hard.o
+                0x080055c0       0x18 ./src/hard.o
  .rodata.GSM_IPSTATE
-                0x080053f0        0x7 ./src/sim900_800.o
-                0x080053f0                GSM_IPSTATE
- *fill*         0x080053f7        0x1 
+                0x080055d8        0x7 ./src/sim900_800.o
+                0x080055d8                GSM_IPSTATE
+ *fill*         0x080055df        0x1 
  .rodata.GSM_SENDOK
-                0x080053f8        0x8 ./src/sim900_800.o
-                0x080053f8                GSM_SENDOK
+                0x080055e0        0x8 ./src/sim900_800.o
+                0x080055e0                GSM_SENDOK
  .rodata.FuncsGSM
-                0x08005400       0x3c ./src/funcs_gsm.o
+                0x080055e8       0x58 ./src/funcs_gsm.o
  .rodata.str1.1
-                0x0800543c        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
+                0x08005640        0x2 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-impure.o)
  .rodata.str1.1
-                0x0800543e       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                0x08005642       0x11 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
  .rodata.str1.1
-                0x0800544f       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
-                0x08005474                . = ALIGN (0x4)
- *fill*         0x08005471        0x3 
+                0x08005653       0x22 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+                0x08005678                . = ALIGN (0x4)
+ *fill*         0x08005675        0x3 
 
-.rel.dyn        0x08005474        0x0
- .rel.iplt      0x08005474        0x0 ./src/main.o
+.rel.dyn        0x08005678        0x0
+ .rel.iplt      0x08005678        0x0 ./src/main.o
 
 .ARM.extab
  *(.ARM.extab* .gnu.linkonce.armextab.*)
 
-.ARM            0x08005474        0x0
-                0x08005474                __exidx_start = .
+.ARM            0x08005678        0x0
+                0x08005678                __exidx_start = .
  *(.ARM.exidx*)
-                0x08005474                __exidx_end = .
+                0x08005678                __exidx_end = .
 
 .memParams      0x08007c00        0x0
                 0x08007c00                . = ALIGN (0x4)
@@ -1495,25 +1496,25 @@ END GROUP
  *(memParams1)
                 0x08007c00                . = ALIGN (0x4)
 
-.preinit_array  0x08005474        0x0
+.preinit_array  0x08005678        0x0
                 [!provide]                PROVIDE (__preinit_array_start, .)
  *(.preinit_array*)
                 [!provide]                PROVIDE (__preinit_array_end, .)
 
-.init_array     0x08005474        0x0
+.init_array     0x08005678        0x0
                 [!provide]                PROVIDE (__init_array_start, .)
  *(SORT(.init_array.*))
  *(.init_array*)
                 [!provide]                PROVIDE (__init_array_end, .)
 
-.fini_array     0x08005474        0x0
+.fini_array     0x08005678        0x0
                 [!provide]                PROVIDE (__fini_array_start, .)
  *(SORT(.fini_array.*))
  *(.fini_array*)
                 [!provide]                PROVIDE (__fini_array_end, .)
-                0x08005474                _sidata = LOADADDR (.data)
+                0x08005678                _sidata = LOADADDR (.data)
 
-.data           0x20000000       0x68 load address 0x08005474
+.data           0x20000000       0x68 load address 0x08005678
                 0x20000000                . = ALIGN (0x4)
                 0x20000000                _sdata = .
  *(.data)
@@ -1533,11 +1534,11 @@ END GROUP
                 0x20000068                . = ALIGN (0x4)
                 0x20000068                _edata = .
 
-.igot.plt       0x20000068        0x0 load address 0x080054dc
+.igot.plt       0x20000068        0x0 load address 0x080056e0
  .igot.plt      0x20000068        0x0 ./src/main.o
                 0x20000068                . = ALIGN (0x4)
 
-.bss            0x20000068      0x970 load address 0x080054dc
+.bss            0x20000068      0x9d4 load address 0x080056e0
                 0x20000068                _sbss = .
                 0x20000068                __bss_start__ = _sbss
  *(.bss)
@@ -1705,26 +1706,27 @@ END GROUP
                 0x20000964                GSMbuffStatus
                 0x20000984                GSMReadSMSrepIn
                 0x200009a4                GSMReadSMScommand
- COMMON         0x200009c4       0x10 ./src/funcs_gsm.o
+ COMMON         0x200009c4       0x74 ./src/funcs_gsm.o
                 0x200009c4                p_MSG
                 0x200009c8                p_NUM
-                0x200009cc                p_CMD
-                0x200009d0                p_RESP
- COMMON         0x200009d4        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
-                0x200009d4                errno
-                0x200009d8                . = ALIGN (0x4)
-                0x200009d8                _ebss = .
-                0x200009d8                __bss_end__ = _ebss
+                0x200009cc                s_msg
+                0x20000a30                p_CMD
+                0x20000a34                p_RESP
+ COMMON         0x20000a38        0x4 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+                0x20000a38                errno
+                0x20000a3c                . = ALIGN (0x4)
+                0x20000a3c                _ebss = .
+                0x20000a3c                __bss_end__ = _ebss
 
 ._user_heap_stack
-                0x200009d8      0x400 load address 0x080054dc
-                0x200009d8                . = ALIGN (0x4)
+                0x20000a3c      0x400 load address 0x080056e0
+                0x20000a3c                . = ALIGN (0x4)
                 [!provide]                PROVIDE (end, .)
-                0x200009d8                PROVIDE (_end, .)
-                0x200009d8                . = (. + _Min_Heap_Size)
-                0x20000dd8                . = (. + _Min_Stack_Size)
- *fill*         0x200009d8      0x400 
-                0x20000dd8                . = ALIGN (0x4)
+                0x20000a3c                PROVIDE (_end, .)
+                0x20000a3c                . = (. + _Min_Heap_Size)
+                0x20000e3c                . = (. + _Min_Stack_Size)
+ *fill*         0x20000a3c      0x400 
+                0x20000e3c                . = ALIGN (0x4)
 
 /DISCARD/
  libc.a(*)
@@ -1834,24 +1836,24 @@ END GROUP
                 0x00000833       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 OUTPUT(Template_F050_rom.elf elf32-littlearm)
 
-.debug_info     0x00000000     0x5db2
- .debug_info    0x00000000      0xd76 ./src/main.o
- .debug_info    0x00000d76      0x34f ./cmsis_boot/system_stm32f0xx.o
- .debug_info    0x000010c5      0x44a ./cmsis_boot/syscalls/syscalls.o
- .debug_info    0x0000150f       0xe1 ./src/stm32f0xx_it.o
- .debug_info    0x000015f0      0x353 ./src/gpio.o
- .debug_info    0x00001943      0x9e8 ./src/tim.o
- .debug_info    0x0000232b      0x7d4 ./src/adc.o
- .debug_info    0x00002aff      0xa7c ./src/uart.o
- .debug_info    0x0000357b      0x592 ./src/flash_program.o
- .debug_info    0x00003b0d      0x220 ./src/dsp.o
- .debug_info    0x00003d2d      0x88b ./src/hard.o
- .debug_info    0x000045b8      0x73c ./src/ESP8266.o
- .debug_info    0x00004cf4      0xd18 ./src/sim900_800.o
- .debug_info    0x00005a0c      0x325 ./src/funcs_gsm.o
- .debug_info    0x00005d31       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_info     0x00000000     0x5eca
+ .debug_info    0x00000000      0xdb7 ./src/main.o
+ .debug_info    0x00000db7      0x34f ./cmsis_boot/system_stm32f0xx.o
+ .debug_info    0x00001106      0x44a ./cmsis_boot/syscalls/syscalls.o
+ .debug_info    0x00001550       0xe1 ./src/stm32f0xx_it.o
+ .debug_info    0x00001631      0x353 ./src/gpio.o
+ .debug_info    0x00001984      0x9e8 ./src/tim.o
+ .debug_info    0x0000236c      0x7d4 ./src/adc.o
+ .debug_info    0x00002b40      0xa7c ./src/uart.o
+ .debug_info    0x000035bc      0x592 ./src/flash_program.o
+ .debug_info    0x00003b4e      0x220 ./src/dsp.o
+ .debug_info    0x00003d6e      0x850 ./src/hard.o
+ .debug_info    0x000045be      0x73c ./src/ESP8266.o
+ .debug_info    0x00004cfa      0xd18 ./src/sim900_800.o
+ .debug_info    0x00005a12      0x437 ./src/funcs_gsm.o
+ .debug_info    0x00005e49       0x81 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_abbrev   0x00000000     0x1590
+.debug_abbrev   0x00000000     0x15ce
  .debug_abbrev  0x00000000      0x23e ./src/main.o
  .debug_abbrev  0x0000023e      0x152 ./cmsis_boot/system_stm32f0xx.o
  .debug_abbrev  0x00000390       0xe7 ./cmsis_boot/syscalls/syscalls.o
@@ -1865,8 +1867,8 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_abbrev  0x00000e88      0x232 ./src/hard.o
  .debug_abbrev  0x000010ba      0x1d0 ./src/ESP8266.o
  .debug_abbrev  0x0000128a      0x1ca ./src/sim900_800.o
- .debug_abbrev  0x00001454      0x12a ./src/funcs_gsm.o
- .debug_abbrev  0x0000157e       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
+ .debug_abbrev  0x00001454      0x168 ./src/funcs_gsm.o
+ .debug_abbrev  0x000015bc       0x12 ./cmsis_boot/startup/startup_stm32f0xx.o
 
 .debug_loc      0x00000000     0x1067
  .debug_loc     0x00000000       0xd2 ./src/main.o
@@ -1879,10 +1881,10 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_loc     0x000004f6      0x258 ./src/uart.o
  .debug_loc     0x0000074e      0x1cc ./src/flash_program.o
  .debug_loc     0x0000091a       0xac ./src/dsp.o
- .debug_loc     0x000009c6      0x138 ./src/hard.o
- .debug_loc     0x00000afe      0x265 ./src/ESP8266.o
- .debug_loc     0x00000d63      0x238 ./src/sim900_800.o
- .debug_loc     0x00000f9b       0xcc ./src/funcs_gsm.o
+ .debug_loc     0x000009c6      0x118 ./src/hard.o
+ .debug_loc     0x00000ade      0x265 ./src/ESP8266.o
+ .debug_loc     0x00000d43      0x238 ./src/sim900_800.o
+ .debug_loc     0x00000f7b       0xec ./src/funcs_gsm.o
 
 .debug_aranges  0x00000000      0x638
  .debug_aranges
@@ -1906,13 +1908,13 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_aranges
                 0x00000378       0x40 ./src/dsp.o
  .debug_aranges
-                0x000003b8       0x98 ./src/hard.o
+                0x000003b8       0x90 ./src/hard.o
  .debug_aranges
-                0x00000450       0xc0 ./src/ESP8266.o
+                0x00000448       0xc0 ./src/ESP8266.o
  .debug_aranges
-                0x00000510       0xa0 ./src/sim900_800.o
+                0x00000508       0xa0 ./src/sim900_800.o
  .debug_aranges
-                0x000005b0       0x60 ./src/funcs_gsm.o
+                0x000005a8       0x68 ./src/funcs_gsm.o
  .debug_aranges
                 0x00000610       0x28 ./cmsis_boot/startup/startup_stm32f0xx.o
 
@@ -1927,58 +1929,58 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_ranges  0x000001f8       0x80 ./src/uart.o
  .debug_ranges  0x00000278       0x70 ./src/flash_program.o
  .debug_ranges  0x000002e8       0x30 ./src/dsp.o
- .debug_ranges  0x00000318       0x88 ./src/hard.o
- .debug_ranges  0x000003a0       0xb0 ./src/ESP8266.o
- .debug_ranges  0x00000450       0x90 ./src/sim900_800.o
- .debug_ranges  0x000004e0       0x50 ./src/funcs_gsm.o
+ .debug_ranges  0x00000318       0x80 ./src/hard.o
+ .debug_ranges  0x00000398       0xb0 ./src/ESP8266.o
+ .debug_ranges  0x00000448       0x90 ./src/sim900_800.o
+ .debug_ranges  0x000004d8       0x58 ./src/funcs_gsm.o
  .debug_ranges  0x00000530       0x20 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_line     0x00000000     0x234a
- .debug_line    0x00000000      0x31d ./src/main.o
- .debug_line    0x0000031d      0x1df ./cmsis_boot/system_stm32f0xx.o
- .debug_line    0x000004fc      0x158 ./cmsis_boot/syscalls/syscalls.o
- .debug_line    0x00000654       0x8c ./src/stm32f0xx_it.o
- .debug_line    0x000006e0      0x150 ./src/gpio.o
- .debug_line    0x00000830      0x2c9 ./src/tim.o
- .debug_line    0x00000af9      0x285 ./src/adc.o
- .debug_line    0x00000d7e      0x2dc ./src/uart.o
- .debug_line    0x0000105a      0x2ad ./src/flash_program.o
- .debug_line    0x00001307       0xc5 ./src/dsp.o
- .debug_line    0x000013cc      0x306 ./src/hard.o
- .debug_line    0x000016d2      0x40a ./src/ESP8266.o
- .debug_line    0x00001adc      0x684 ./src/sim900_800.o
- .debug_line    0x00002160      0x165 ./src/funcs_gsm.o
- .debug_line    0x000022c5       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
+.debug_line     0x00000000     0x23ba
+ .debug_line    0x00000000      0x316 ./src/main.o
+ .debug_line    0x00000316      0x1df ./cmsis_boot/system_stm32f0xx.o
+ .debug_line    0x000004f5      0x158 ./cmsis_boot/syscalls/syscalls.o
+ .debug_line    0x0000064d       0x8c ./src/stm32f0xx_it.o
+ .debug_line    0x000006d9      0x150 ./src/gpio.o
+ .debug_line    0x00000829      0x2c9 ./src/tim.o
+ .debug_line    0x00000af2      0x285 ./src/adc.o
+ .debug_line    0x00000d77      0x2dc ./src/uart.o
+ .debug_line    0x00001053      0x2ad ./src/flash_program.o
+ .debug_line    0x00001300       0xc5 ./src/dsp.o
+ .debug_line    0x000013c5      0x2ec ./src/hard.o
+ .debug_line    0x000016b1      0x40a ./src/ESP8266.o
+ .debug_line    0x00001abb      0x688 ./src/sim900_800.o
+ .debug_line    0x00002143      0x1f2 ./src/funcs_gsm.o
+ .debug_line    0x00002335       0x85 ./cmsis_boot/startup/startup_stm32f0xx.o
 
-.debug_str      0x00000000     0x2201
- .debug_str     0x00000000      0xa2f ./src/main.o
-                                0xac8 (size before relaxing)
- .debug_str     0x00000a2f      0x12f ./cmsis_boot/system_stm32f0xx.o
+.debug_str      0x00000000     0x228e
+ .debug_str     0x00000000      0xaed ./src/main.o
+                                0xb8b (size before relaxing)
+ .debug_str     0x00000aed      0x12f ./cmsis_boot/system_stm32f0xx.o
                                 0x2e1 (size before relaxing)
- .debug_str     0x00000b5e      0x13b ./cmsis_boot/syscalls/syscalls.o
+ .debug_str     0x00000c1c      0x13b ./cmsis_boot/syscalls/syscalls.o
                                 0x2eb (size before relaxing)
- .debug_str     0x00000c99       0x5c ./src/stm32f0xx_it.o
+ .debug_str     0x00000d57       0x5c ./src/stm32f0xx_it.o
                                 0x1c9 (size before relaxing)
- .debug_str     0x00000cf5       0x43 ./src/gpio.o
+ .debug_str     0x00000db3       0x43 ./src/gpio.o
                                 0x28a (size before relaxing)
- .debug_str     0x00000d38      0x1bf ./src/tim.o
+ .debug_str     0x00000df6      0x1bf ./src/tim.o
                                 0x656 (size before relaxing)
- .debug_str     0x00000ef7      0x11a ./src/adc.o
+ .debug_str     0x00000fb5      0x11a ./src/adc.o
                                 0x5b8 (size before relaxing)
- .debug_str     0x00001011      0x16a ./src/uart.o
+ .debug_str     0x000010cf      0x16a ./src/uart.o
                                 0x65d (size before relaxing)
- .debug_str     0x0000117b      0x199 ./src/flash_program.o
+ .debug_str     0x00001239      0x199 ./src/flash_program.o
                                 0x406 (size before relaxing)
- .debug_str     0x00001314       0x8e ./src/dsp.o
+ .debug_str     0x000013d2       0x8e ./src/dsp.o
                                 0x21f (size before relaxing)
- .debug_str     0x000013a2      0x244 ./src/hard.o
-                                0x564 (size before relaxing)
- .debug_str     0x000015e6      0x4ca ./src/ESP8266.o
+ .debug_str     0x00001460      0x22e ./src/hard.o
+                                0x548 (size before relaxing)
+ .debug_str     0x0000168e      0x4ca ./src/ESP8266.o
                                 0x661 (size before relaxing)
- .debug_str     0x00001ab0      0x5f5 ./src/sim900_800.o
+ .debug_str     0x00001b58      0x5f5 ./src/sim900_800.o
                                 0x8ea (size before relaxing)
- .debug_str     0x000020a5      0x15c ./src/funcs_gsm.o
-                                0x431 (size before relaxing)
+ .debug_str     0x0000214d      0x141 ./src/funcs_gsm.o
+                                0x568 (size before relaxing)
 
 .comment        0x00000000       0x6e
  .comment       0x00000000       0x6e ./src/main.o
@@ -1997,7 +1999,7 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .comment       0x0000006e       0x6f ./src/sim900_800.o
  .comment       0x0000006e       0x6f ./src/funcs_gsm.o
 
-.debug_frame    0x00000000     0x13c4
+.debug_frame    0x00000000     0x13cc
  .debug_frame   0x00000000       0xa4 ./src/main.o
  .debug_frame   0x000000a4       0x6c ./cmsis_boot/system_stm32f0xx.o
  .debug_frame   0x00000110       0xc0 ./cmsis_boot/syscalls/syscalls.o
@@ -2008,39 +2010,39 @@ OUTPUT(Template_F050_rom.elf elf32-littlearm)
  .debug_frame   0x000004f4      0x198 ./src/uart.o
  .debug_frame   0x0000068c      0x154 ./src/flash_program.o
  .debug_frame   0x000007e0       0x7c ./src/dsp.o
- .debug_frame   0x0000085c      0x160 ./src/hard.o
- .debug_frame   0x000009bc      0x1f4 ./src/ESP8266.o
- .debug_frame   0x00000bb0      0x1b8 ./src/sim900_800.o
- .debug_frame   0x00000d68       0xd0 ./src/funcs_gsm.o
- .debug_frame   0x00000e38       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
- .debug_frame   0x00000e58       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
- .debug_frame   0x00000e80       0x38 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
- .debug_frame   0x00000eb8       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
- .debug_frame   0x00000ee8       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
- .debug_frame   0x00000f08       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
- .debug_frame   0x00000f34       0x3c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
- .debug_frame   0x00000f70       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
- .debug_frame   0x00000f9c       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
- .debug_frame   0x00000fc8       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
- .debug_frame   0x00000ff4       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
- .debug_frame   0x00001020       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
- .debug_frame   0x00001050       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
- .debug_frame   0x00001080       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
- .debug_frame   0x000010a8       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
- .debug_frame   0x000010f8       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
- .debug_frame   0x00001120       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
- .debug_frame   0x00001140       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
- .debug_frame   0x0000116c       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
- .debug_frame   0x00001198       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
- .debug_frame   0x000011c4       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
- .debug_frame   0x000011f0       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
- .debug_frame   0x00001264       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
- .debug_frame   0x000012b8       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
- .debug_frame   0x000012e4       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
- .debug_frame   0x00001304       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
- .debug_frame   0x0000132c       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
- .debug_frame   0x0000135c       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
- .debug_frame   0x000013a4       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
+ .debug_frame   0x0000085c      0x14c ./src/hard.o
+ .debug_frame   0x000009a8      0x1f4 ./src/ESP8266.o
+ .debug_frame   0x00000b9c      0x1b8 ./src/sim900_800.o
+ .debug_frame   0x00000d54       0xec ./src/funcs_gsm.o
+ .debug_frame   0x00000e40       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_udivsi3.o)
+ .debug_frame   0x00000e60       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(_fixunssfsi.o)
+ .debug_frame   0x00000e88       0x38 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(mulsf3.o)
+ .debug_frame   0x00000ec0       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(subsf3.o)
+ .debug_frame   0x00000ef0       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(fixsfsi.o)
+ .debug_frame   0x00000f10       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsisf.o)
+ .debug_frame   0x00000f3c       0x3c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(muldf3.o)
+ .debug_frame   0x00000f78       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatsidf.o)
+ .debug_frame   0x00000fa4       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(floatunsidf.o)
+ .debug_frame   0x00000fd0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(truncdfsf2.o)
+ .debug_frame   0x00000ffc       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(eqsf2.o)
+ .debug_frame   0x00001028       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(gesf2.o)
+ .debug_frame   0x00001058       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/armv6-m/libgcc.a(lesf2.o)
+ .debug_frame   0x00001088       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
+ .debug_frame   0x000010b0       0x50 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sprintf.o)
+ .debug_frame   0x00001100       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+ .debug_frame   0x00001128       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
+ .debug_frame   0x00001148       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncmp.o)
+ .debug_frame   0x00001174       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+ .debug_frame   0x000011a0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-freer.o)
+ .debug_frame   0x000011cc       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-mallocr.o)
+ .debug_frame   0x000011f8       0x74 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+ .debug_frame   0x0000126c       0x54 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-vfprintf_i.o)
+ .debug_frame   0x000012c0       0x2c /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-sbrkr.o)
+ .debug_frame   0x000012ec       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memchr-stub.o)
+ .debug_frame   0x0000130c       0x28 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memmove.o)
+ .debug_frame   0x00001334       0x30 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
+ .debug_frame   0x00001364       0x48 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-reent.o)
+ .debug_frame   0x000013ac       0x20 /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-msizer.o)
 
 Cross Reference Table
 
@@ -2097,7 +2099,6 @@ FillPhotoBuffer                                   ./src/adc.o
 FuncsGSM                                          ./src/funcs_gsm.o
                                                   ./src/main.o
 FuncsGSMCommandAnswer                             ./src/funcs_gsm.o
-                                                  ./src/main.o
 FuncsGSMMessageFlags                              ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
 FuncsGSMMessageFlagsAsk                           ./src/funcs_gsm.o
@@ -2108,6 +2109,7 @@ FuncsGSMSendSMS                                   ./src/funcs_gsm.o
                                                   ./src/main.o
 FuncsGSMShutdown                                  ./src/funcs_gsm.o
                                                   ./src/main.o
+FuncsGSMShutdownAlways                            ./src/funcs_gsm.o
 FuncsGSMStateAsk                                  ./src/funcs_gsm.o
                                                   ./src/main.o
 GPIO_Config                                       ./src/gpio.o
@@ -2197,8 +2199,6 @@ GetFlashConf                                      ./src/flash_program.o
 GetHysteresis                                     ./src/hard.o
                                                   ./src/main.o
 GetIGrid                                          ./src/hard.o
-                                                  ./src/main.o
-GetNew1to10                                       ./src/hard.o
                                                   ./src/main.o
 GetPhoto                                          ./src/adc.o
                                                   ./src/main.o
@@ -2612,6 +2612,7 @@ memcmp                                            /usr/local/sbin/gcc-arm-none-e
 memcpy                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-memcpy-stub.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-reallocr.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-nano-svfprintf.o)
+                                                  ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTSerializePublish.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
@@ -2634,6 +2635,7 @@ p_NUM                                             ./src/funcs_gsm.o
 p_RESP                                            ./src/funcs_gsm.o
 p_channel                                         ./src/adc.o
 param_struct                                      ./src/main.o
+                                                  ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
 pckt_finish                                       ./src/ESP8266.o
 pckt_gps_ready                                    ./src/uart.o
@@ -2678,6 +2680,7 @@ rx1buff                                           ./src/main.o
 rx2buff                                           ./src/main.o
                                                   ./src/ESP8266.o
                                                   ./src/uart.o
+s_msg                                             ./src/funcs_gsm.o
 saved_mode                                        ./src/main.o
 secs                                              ./src/main.o
 send_energy                                       ./src/main.o
@@ -2711,6 +2714,7 @@ str_conf9                                         ./src/gps_vktel.o
 str_factory                                       ./src/gps_vktel.o
 str_save                                          ./src/gps_vktel.o
 strcat                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcat.o)
+                                                  ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
                                                   ./src/main.o
 strcpy                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strcpy.o)
@@ -2718,6 +2722,7 @@ strcpy                                            /usr/local/sbin/gcc-arm-none-e
                                                   ./src/ESP8266.o
                                                   ./src/tcp_transceiver.o
 strlen                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strlen.o)
+                                                  ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
                                                   ./src/tcp_transceiver.o
@@ -2730,10 +2735,10 @@ strncmp                                           /usr/local/sbin/gcc-arm-none-e
                                                   ./paho.mqtt.embedded-c/MQTTPacket/src/MQTTPacket.o
                                                   ./src/tcp_transceiver.o
 strncpy                                           /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strncpy.o)
+                                                  ./src/funcs_gsm.o
                                                   ./src/sim900_800.o
                                                   ./src/tcp_transceiver.o
                                                   ./src/flash_program.o
-                                                  ./src/main.o
 strtol                                            /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-strtol.o)
                                                   /usr/local/sbin/gcc-arm-none-eabi-5_2-2015q4/bin/../lib/gcc/arm-none-eabi/5.2.1/../../../../arm-none-eabi/lib/armv6-m/libc_nano.a(lib_a-atoi.o)
 take_temp_sample                                  ./src/main.o

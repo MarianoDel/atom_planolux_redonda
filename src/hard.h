@@ -15,10 +15,10 @@
 #define VER_1_1		//mismo pinout que VER_1_0
 
 //-------- Type of Program ----------------
-//#define USE_MQTT_LIB
+// #define USE_ONLY_POWER_SENSE
 //#define USE_GPS
 // #define USE_GSM_GATEWAY
-//estos dos van juntos
+//OJO --- los dos que siguen van juntos
 #define USE_GSM
 #define USE_REDONDA_BASIC
 
@@ -33,7 +33,7 @@
 #define VOLTAGE_PHOTO_ON	3722
 
 //-------- Type of Program and Features ----------------
-#define WITH_1_TO_10_VOLTS
+// #define WITH_1_TO_10_VOLTS
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
 // #define USE_WITH_SYNC				//usa circuito sync por flanco (modificacion en Hardware)
@@ -53,16 +53,14 @@
 #endif
 
 //-------- PWM Conf ------------------------
-#ifdef WITH_1_TO_10_VOLTS
 #define PWM_MAX	255
 #define PWM_80		204
 #define PWM_60		153
 #define PWM_40		102
 #define PWM_20		52
 #define PWM_MIN	26
-#endif
 
-#endif
+#endif	//USE_REDONDA_BASIC
 
 //-------- End Of Defines For Configuration ------
 
@@ -186,14 +184,13 @@ typedef enum {
 #endif
 
 //ESTADOS DEL PROGRAMA PRINCIPAL USE_REDONDA_BASIC
-#ifdef USE_REDONDA_BASIC
+#if defined USE_REDONDA_BASIC || defined USE_ONLY_POWER_SENSE
 typedef enum
 {
 	MAIN_INIT = 0,
 	SYNCHRO_ADC,
 	SET_ZERO_CURRENT,
-	SET_COUNTERS_AND_PHONE0,
-	SET_COUNTERS_AND_PHONE1,
+	SET_COUNTERS_AND_PHONE,
   	LAMP_OFF,
 	START_GSM,
 	CONFIG_GSM,
@@ -213,6 +210,7 @@ typedef enum
 	meas_meas,
 	meas_reporting0,
 	meas_reporting1,
+	meas_reporting2,
   	meas_go_airplane
 
 } lamp_on_state_t;
@@ -259,9 +257,16 @@ enum Relay_State {
 #define MIN_SENSE_POWER		1506		//30W con KW
 
 //--- Temas con la medicion de tension
-#define GLITCH_VOLTAGE			764		//equivale a 100Vp 0.616V V_Sense
-#define DISCONNECT_VOLTAGE		1786		//equivale 160V 1.44V V_Sense
-#define CONNECT_VOLTAGE			2233		//equivale 180V 1.8V V_Sense
+//MUESTRA A (BV)
+// #define GLITCH_VOLTAGE			764		//equivale a 100V 0.616V V_Sense
+// #define DISCONNECT_VOLTAGE		1786		//equivale 160V 1.44V V_Sense
+// #define CONNECT_VOLTAGE			2233		//equivale 180V 1.8V V_Sense
+
+//MUESTRA B KIRNO	15-12-2017
+#define CONNECT_VOLTAGE			2035		//equivale 180V 1.64V V_Sense
+#define DISCONNECT_VOLTAGE		1662		//equivale 160V 1.34V V_Sense
+#define GLITCH_VOLTAGE			636		//equivale a 100V 0.512V V_Sense
+
 
 
 /* Module Functions ------------------------------------------------------------*/

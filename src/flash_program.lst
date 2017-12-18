@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccrC5DLw.s 			page 1
+ARM GAS  /tmp/ccfi8svf.s 			page 1
 
 
    1              		.syntax unified
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
   55              		.align	2
   56              		.global	EraseAllMemory_FLASH
   57              		.code	16
-ARM GAS  /tmp/ccrC5DLw.s 			page 2
+ARM GAS  /tmp/ccfi8svf.s 			page 2
 
 
   58              		.thumb_func
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
   50:src/flash_program.c **** //}
   51:src/flash_program.c **** 
   52:src/flash_program.c **** unsigned char EraseAllMemory_FLASH(void)
-ARM GAS  /tmp/ccrC5DLw.s 			page 3
+ARM GAS  /tmp/ccfi8svf.s 			page 3
 
 
   53:src/flash_program.c **** {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
   64:src/flash_program.c **** 	else
   65:src/flash_program.c **** 		return FAILED;
  106              		.loc 1 65 0
-ARM GAS  /tmp/ccrC5DLw.s 			page 4
+ARM GAS  /tmp/ccfi8svf.s 			page 4
 
 
  107 003a 0023     		movs	r3, #0	@ D.5006,
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  140 000c 1A80     		strh	r2, [r3]	@ tmp120, i
  141 000e 14E0     		b	.L8	@
  142              	.L9:
-ARM GAS  /tmp/ccrC5DLw.s 			page 5
+ARM GAS  /tmp/ccfi8svf.s 			page 5
 
 
   87:src/flash_program.c **** 	{
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
   93:src/flash_program.c **** {
  189              		.loc 1 93 0
  190              		.cfi_startproc
-ARM GAS  /tmp/ccrC5DLw.s 			page 6
+ARM GAS  /tmp/ccfi8svf.s 			page 6
 
 
  191 0000 00B5     		push	{lr}	@
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  105:src/flash_program.c **** void FLASH_Unlock(void)
  106:src/flash_program.c **** {
  234              		.loc 1 106 0
-ARM GAS  /tmp/ccrC5DLw.s 			page 7
+ARM GAS  /tmp/ccfi8svf.s 			page 7
 
 
  235              		.cfi_startproc
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  124:src/flash_program.c ****   *         FLASH_ERROR_PROGRAM, FLASH_ERROR_WRP, FLASH_COMPLETE or FLASH_TIMEOUT.
  125:src/flash_program.c ****   */
  126:src/flash_program.c **** FLASH_Status FLASH_ErasePage(uint32_t Page_Address)
-ARM GAS  /tmp/ccrC5DLw.s 			page 8
+ARM GAS  /tmp/ccfi8svf.s 			page 8
 
 
  127:src/flash_program.c **** {
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  314              		.loc 1 138 0
  315 003c 0D4B     		ldr	r3, .L21	@ D.5014,
  316 003e 0D4A     		ldr	r2, .L21	@ D.5014,
-ARM GAS  /tmp/ccrC5DLw.s 			page 9
+ARM GAS  /tmp/ccfi8svf.s 			page 9
 
 
  317 0040 1269     		ldr	r2, [r2, #16]	@ D.5015, _16->CR
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  360              	FLASH_Lock:
  361              	.LFB25:
  150:src/flash_program.c **** 
-ARM GAS  /tmp/ccrC5DLw.s 			page 10
+ARM GAS  /tmp/ccfi8svf.s 			page 10
 
 
  151:src/flash_program.c **** /**
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  393              	.LCFI7:
  394              		.cfi_def_cfa_offset 8
  395              		.cfi_offset 4, -8
-ARM GAS  /tmp/ccrC5DLw.s 			page 11
+ARM GAS  /tmp/ccfi8svf.s 			page 11
 
 
  396              		.cfi_offset 14, -4
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  187:src/flash_program.c **** 
  188:src/flash_program.c ****     /* Wait for last operation to be completed */
  189:src/flash_program.c ****     status = FLASH_WaitForLastOperation(FLASH_ER_PRG_TIMEOUT);
-ARM GAS  /tmp/ccrC5DLw.s 			page 12
+ARM GAS  /tmp/ccfi8svf.s 			page 12
 
 
  437              		.loc 1 189 0
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  477 008c 8A43     		bics	r2, r1	@ D.5020, tmp161
  478 008e 1A61     		str	r2, [r3, #16]	@ D.5020, _29->CR
  479 0090 05E0     		b	.L27	@
-ARM GAS  /tmp/ccrC5DLw.s 			page 13
+ARM GAS  /tmp/ccfi8svf.s 			page 13
 
 
  480              	.L28:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  514              		.cfi_startproc
  515 0000 10B5     		push	{r4, lr}	@
  516              	.LCFI9:
-ARM GAS  /tmp/ccrC5DLw.s 			page 14
+ARM GAS  /tmp/ccfi8svf.s 			page 14
 
 
  517              		.cfi_def_cfa_offset 8
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  559              	.L34:
  234:src/flash_program.c ****   }
  235:src/flash_program.c **** 
-ARM GAS  /tmp/ccrC5DLw.s 			page 15
+ARM GAS  /tmp/ccfi8svf.s 			page 15
 
 
  236:src/flash_program.c ****   if(Timeout == 0x00 )
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  597 0004 0733     		adds	r3, r3, #7	@ tmp121,
  598 0006 0422     		movs	r2, #4	@ tmp122,
  599 0008 1A70     		strb	r2, [r3]	@ tmp123, FLASHstatus
-ARM GAS  /tmp/ccrC5DLw.s 			page 16
+ARM GAS  /tmp/ccfi8svf.s 			page 16
 
 
  253:src/flash_program.c **** 
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  638              	.L42:
  269:src/flash_program.c ****       }
  270:src/flash_program.c ****       else
-ARM GAS  /tmp/ccrC5DLw.s 			page 17
+ARM GAS  /tmp/ccfi8svf.s 			page 17
 
 
  271:src/flash_program.c ****       {
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  682 000c 1A70     		strb	r2, [r3]	@ tmp128, with_lock
  282:src/flash_program.c **** 	unsigned short i;
  283:src/flash_program.c **** 	unsigned int * p_verif;
-ARM GAS  /tmp/ccrC5DLw.s 			page 18
+ARM GAS  /tmp/ccfi8svf.s 			page 18
 
 
  284:src/flash_program.c **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  725 0052 6B46     		mov	r3, sp	@ tmp166,
  726 0054 0733     		adds	r3, r3, #7	@ tmp144,
  727 0056 1B78     		ldrb	r3, [r3]	@ tmp145, with_lock
-ARM GAS  /tmp/ccrC5DLw.s 			page 19
+ARM GAS  /tmp/ccfi8svf.s 			page 19
 
 
  728 0058 002B     		cmp	r3, #0	@ tmp145,
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  773 00a0 1B88     		ldrh	r3, [r3]	@ tmp158, i
  774 00a2 FE2B     		cmp	r3, #254	@ tmp158,
  775 00a4 E1D9     		bls	.L53	@,
-ARM GAS  /tmp/ccrC5DLw.s 			page 20
+ARM GAS  /tmp/ccfi8svf.s 			page 20
 
 
  301:src/flash_program.c **** 	}
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  817 001e 01D1     		bne	.L55	@,
  314:src/flash_program.c **** 		return FAILED;
  818              		.loc 1 314 0
-ARM GAS  /tmp/ccrC5DLw.s 			page 21
+ARM GAS  /tmp/ccfi8svf.s 			page 21
 
 
  819 0020 0023     		movs	r3, #0	@ D.5032,
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  324:src/flash_program.c **** 	p_verif = (unsigned int *) p_addr;
  864              		.loc 1 324 0
  865 0018 029B     		ldr	r3, [sp, #8]	@ tmp134, p_addr
-ARM GAS  /tmp/ccrC5DLw.s 			page 22
+ARM GAS  /tmp/ccfi8svf.s 			page 22
 
 
  866 001a 0493     		str	r3, [sp, #16]	@ tmp134, p_verif
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  910 0064 6B46     		mov	r3, sp	@ tmp179,
  911 0066 0733     		adds	r3, r3, #7	@ tmp152,
  912 0068 1B78     		ldrb	r3, [r3]	@ tmp153, with_lock
-ARM GAS  /tmp/ccrC5DLw.s 			page 23
+ARM GAS  /tmp/ccfi8svf.s 			page 23
 
 
  913 006a 002B     		cmp	r3, #0	@ tmp153,
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  958 00b2 1B78     		ldrb	r3, [r3]	@ tmp167, len_in_4
  959 00b4 9BB2     		uxth	r3, r3	@ D.5034, tmp166
  960 00b6 1622     		movs	r2, #22	@ tmp168,
-ARM GAS  /tmp/ccrC5DLw.s 			page 24
+ARM GAS  /tmp/ccfi8svf.s 			page 24
 
 
  961 00b8 6A44     		add	r2, r2, sp	@ tmp168,
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1003 0016 019B     		ldr	r3, [sp, #4]	@ tmp118, p_ram
  1004 0018 DA64     		str	r2, [r3, #76]	@ D.5039, p_ram_1(D)->acumm_w2s
  352:src/flash_program.c **** 	p_ram->acumm_w2s_index = ((parameters_typedef *) (unsigned short *) PAGE63)->acumm_w2s_index;
-ARM GAS  /tmp/ccrC5DLw.s 			page 25
+ARM GAS  /tmp/ccfi8svf.s 			page 25
 
 
  1005              		.loc 1 352 0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1056 002c 22020000 		.4byte	.LASF0
  1057 0030 02       		.uleb128 0x2
  1058 0031 01       		.byte	0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 26
+ARM GAS  /tmp/ccfi8svf.s 			page 26
 
 
  1059 0032 08       		.byte	0x8
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1113 009b 02       		.uleb128 0x2
  1114 009c 04       		.byte	0x4
  1115 009d 07       		.byte	0x7
-ARM GAS  /tmp/ccrC5DLw.s 			page 27
+ARM GAS  /tmp/ccfi8svf.s 			page 27
 
 
  1116 009e 44000000 		.4byte	.LASF13
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1170 0106 435200   		.ascii	"CR\000"
  1171 0109 04       		.byte	0x4
  1172 010a 4D02     		.2byte	0x24d
-ARM GAS  /tmp/ccrC5DLw.s 			page 28
+ARM GAS  /tmp/ccfi8svf.s 			page 28
 
 
  1173 010c A2000000 		.4byte	0xa2
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1227 0173 07       		.uleb128 0x7
  1228 0174 95030000 		.4byte	.LASF22
  1229 0178 03       		.byte	0x3
-ARM GAS  /tmp/ccrC5DLw.s 			page 29
+ARM GAS  /tmp/ccfi8svf.s 			page 29
 
 
  1230 0179 07       		.uleb128 0x7
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1284 01dc 7E000000 		.4byte	0x7e
  1285 01e0 02       		.byte	0x2
  1286 01e1 23       		.byte	0x23
-ARM GAS  /tmp/ccrC5DLw.s 			page 30
+ARM GAS  /tmp/ccfi8svf.s 			page 30
 
 
  1287 01e2 4C       		.uleb128 0x4c
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1341 0248 00       		.byte	0
  1342 0249 12       		.uleb128 0x12
  1343 024a 01       		.byte	0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 31
+ARM GAS  /tmp/ccfi8svf.s 			page 31
 
 
  1344 024b C1020000 		.4byte	.LASF44
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1398 02b6 00       		.byte	0
  1399 02b7 18       		.uleb128 0x18
  1400 02b8 04       		.byte	0x4
-ARM GAS  /tmp/ccrC5DLw.s 			page 32
+ARM GAS  /tmp/ccfi8svf.s 			page 32
 
 
  1401 02b9 7E000000 		.4byte	0x7e
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1455 0328 3D010000 		.4byte	.LASF46
  1456 032c 01       		.byte	0x1
  1457 032d 7E       		.byte	0x7e
-ARM GAS  /tmp/ccrC5DLw.s 			page 33
+ARM GAS  /tmp/ccfi8svf.s 			page 33
 
 
  1458 032e 90000000 		.4byte	0x90
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1512 0394 8A020000 		.4byte	.LASF47
  1513 0398 01       		.byte	0x1
  1514 0399 AE       		.byte	0xae
-ARM GAS  /tmp/ccrC5DLw.s 			page 34
+ARM GAS  /tmp/ccfi8svf.s 			page 34
 
 
  1515 039a 86010000 		.4byte	0x186
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1569 0409 13       		.uleb128 0x13
  1570 040a 3A030000 		.4byte	.LASF56
  1571 040e 01       		.byte	0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 35
+ARM GAS  /tmp/ccfi8svf.s 			page 35
 
 
  1572 040f FC       		.byte	0xfc
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1626 0477 B7020000 		.4byte	0x2b7
  1627 047b 02       		.byte	0x2
  1628 047c 91       		.byte	0x91
-ARM GAS  /tmp/ccrC5DLw.s 			page 36
+ARM GAS  /tmp/ccfi8svf.s 			page 36
 
 
  1629 047d 70       		.sleb128 -16
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1683 04ef 1E       		.uleb128 0x1e
  1684 04f0 18020000 		.4byte	.LASF43
  1685 04f4 01       		.byte	0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 37
+ARM GAS  /tmp/ccfi8svf.s 			page 37
 
 
  1686 04f5 3F01     		.2byte	0x13f
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1740 055c 01       		.byte	0x1
  1741 055d 73050000 		.4byte	0x573
  1742 0561 01       		.byte	0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 38
+ARM GAS  /tmp/ccfi8svf.s 			page 38
 
 
  1743 0562 23       		.uleb128 0x23
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1797 001c 03       		.uleb128 0x3
  1798 001d 0E       		.uleb128 0xe
  1799 001e 00       		.byte	0
-ARM GAS  /tmp/ccrC5DLw.s 			page 39
+ARM GAS  /tmp/ccfi8svf.s 			page 39
 
 
  1800 001f 00       		.byte	0
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1854 0055 00       		.byte	0
  1855 0056 00       		.byte	0
  1856 0057 08       		.uleb128 0x8
-ARM GAS  /tmp/ccrC5DLw.s 			page 40
+ARM GAS  /tmp/ccfi8svf.s 			page 40
 
 
  1857 0058 28       		.uleb128 0x28
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1911 008e 03       		.uleb128 0x3
  1912 008f 0E       		.uleb128 0xe
  1913 0090 3A       		.uleb128 0x3a
-ARM GAS  /tmp/ccrC5DLw.s 			page 41
+ARM GAS  /tmp/ccfi8svf.s 			page 41
 
 
  1914 0091 0B       		.uleb128 0xb
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  1968 00c7 01       		.byte	0x1
  1969 00c8 49       		.uleb128 0x49
  1970 00c9 13       		.uleb128 0x13
-ARM GAS  /tmp/ccrC5DLw.s 			page 42
+ARM GAS  /tmp/ccfi8svf.s 			page 42
 
 
  1971 00ca 01       		.uleb128 0x1
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2025 0101 00       		.byte	0
  2026 0102 14       		.uleb128 0x14
  2027 0103 2E       		.uleb128 0x2e
-ARM GAS  /tmp/ccrC5DLw.s 			page 43
+ARM GAS  /tmp/ccfi8svf.s 			page 43
 
 
  2028 0104 01       		.byte	0x1
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2082 013b 34       		.uleb128 0x34
  2083 013c 00       		.byte	0
  2084 013d 03       		.uleb128 0x3
-ARM GAS  /tmp/ccrC5DLw.s 			page 44
+ARM GAS  /tmp/ccfi8svf.s 			page 44
 
 
  2085 013e 08       		.uleb128 0x8
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2139 0175 3B       		.uleb128 0x3b
  2140 0176 0B       		.uleb128 0xb
  2141 0177 27       		.uleb128 0x27
-ARM GAS  /tmp/ccrC5DLw.s 			page 45
+ARM GAS  /tmp/ccfi8svf.s 			page 45
 
 
  2142 0178 0C       		.uleb128 0xc
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2196 01b0 01       		.uleb128 0x1
  2197 01b1 12       		.uleb128 0x12
  2198 01b2 01       		.uleb128 0x1
-ARM GAS  /tmp/ccrC5DLw.s 			page 46
+ARM GAS  /tmp/ccfi8svf.s 			page 46
 
 
  2199 01b3 40       		.uleb128 0x40
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2253 01ea 34       		.uleb128 0x34
  2254 01eb 00       		.byte	0
  2255 01ec 03       		.uleb128 0x3
-ARM GAS  /tmp/ccrC5DLw.s 			page 47
+ARM GAS  /tmp/ccfi8svf.s 			page 47
 
 
  2256 01ed 0E       		.uleb128 0xe
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2310 0224 00       		.byte	0
  2311 0225 23       		.uleb128 0x23
  2312 0226 05       		.uleb128 0x5
-ARM GAS  /tmp/ccrC5DLw.s 			page 48
+ARM GAS  /tmp/ccfi8svf.s 			page 48
 
 
  2313 0227 00       		.byte	0
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2367 0036 7D       		.byte	0x7d
  2368 0037 00       		.sleb128 0
  2369 0038 02000000 		.4byte	.LCFI2
-ARM GAS  /tmp/ccrC5DLw.s 			page 49
+ARM GAS  /tmp/ccfi8svf.s 			page 49
 
 
  2370 003c 4A000000 		.4byte	.LFE21
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2424 00c0 B0000000 		.4byte	.LFE26
  2425 00c4 0200     		.2byte	0x2
  2426 00c6 7D       		.byte	0x7d
-ARM GAS  /tmp/ccrC5DLw.s 			page 50
+ARM GAS  /tmp/ccfi8svf.s 			page 50
 
 
  2427 00c7 18       		.sleb128 24
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2481 014c 02000000 		.4byte	.LCFI14
  2482 0150 0200     		.2byte	0x2
  2483 0152 7D       		.byte	0x7d
-ARM GAS  /tmp/ccrC5DLw.s 			page 51
+ARM GAS  /tmp/ccfi8svf.s 			page 51
 
 
  2484 0153 00       		.sleb128 0
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2538 000b 00       		.byte	0
  2539 000c 0000     		.2byte	0
  2540 000e 0000     		.2byte	0
-ARM GAS  /tmp/ccrC5DLw.s 			page 52
+ARM GAS  /tmp/ccfi8svf.s 			page 52
 
 
  2541 0010 00000000 		.4byte	.LFB20
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2595 0060 00000000 		.4byte	.LFB32
  2596 0064 3C000000 		.4byte	.LFE32
  2597 0068 00000000 		.4byte	0
-ARM GAS  /tmp/ccrC5DLw.s 			page 53
+ARM GAS  /tmp/ccfi8svf.s 			page 53
 
 
  2598 006c 00000000 		.4byte	0
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2625      00
  2626              	.LASF5:
  2627 007f 5F5F7569 		.ascii	"__uint16_t\000"
-ARM GAS  /tmp/ccrC5DLw.s 			page 54
+ARM GAS  /tmp/ccfi8svf.s 			page 54
 
 
  2627      6E743136 
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2652              	.LASF18:
  2653 0111 57525052 		.ascii	"WRPR\000"
  2653      00
-ARM GAS  /tmp/ccrC5DLw.s 			page 55
+ARM GAS  /tmp/ccfi8svf.s 			page 55
 
 
  2654              	.LASF52:
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2674 0218 77697468 		.ascii	"with_lock\000"
  2674      5F6C6F63 
  2674      6B00
-ARM GAS  /tmp/ccrC5DLw.s 			page 56
+ARM GAS  /tmp/ccfi8svf.s 			page 56
 
 
  2675              	.LASF0:
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2702 02b1 696D6569 		.ascii	"imei\000"
  2702      00
  2703              	.LASF49:
-ARM GAS  /tmp/ccrC5DLw.s 			page 57
+ARM GAS  /tmp/ccfi8svf.s 			page 57
 
 
  2704 02b6 464C4153 		.ascii	"FLASH_Lock\000"
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2726              	.LASF33:
  2727 037b 64756D6D 		.ascii	"dummy1\000"
  2727      793100
-ARM GAS  /tmp/ccrC5DLw.s 			page 58
+ARM GAS  /tmp/ccfi8svf.s 			page 58
 
 
  2728              	.LASF63:
@@ -3467,45 +3467,45 @@ ARM GAS  /tmp/ccrC5DLw.s 			page 1
  2747 03ff 4641494C 		.ascii	"FAILED\000"
  2747      454400
  2748              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 5.2.1 20151202 (release) [ARM/embedded-5-bran
-ARM GAS  /tmp/ccrC5DLw.s 			page 59
+ARM GAS  /tmp/ccfi8svf.s 			page 59
 
 
 DEFINED SYMBOLS
                             *ABS*:00000000 flash_program.c
-     /tmp/ccrC5DLw.s:55     .text.EraseAllMemory_FLASH:00000000 $t
-     /tmp/ccrC5DLw.s:60     .text.EraseAllMemory_FLASH:00000000 EraseAllMemory_FLASH
-     /tmp/ccrC5DLw.s:187    .text.ErasePage:00000000 ErasePage
-     /tmp/ccrC5DLw.s:117    .text.EraseAllMemory_FLASH:00000044 $d
-     /tmp/ccrC5DLw.s:122    .text.BackupPage:00000000 $t
-     /tmp/ccrC5DLw.s:127    .text.BackupPage:00000000 BackupPage
-     /tmp/ccrC5DLw.s:182    .text.ErasePage:00000000 $t
-     /tmp/ccrC5DLw.s:232    .text.FLASH_Unlock:00000000 FLASH_Unlock
-     /tmp/ccrC5DLw.s:270    .text.FLASH_ErasePage:00000000 FLASH_ErasePage
-     /tmp/ccrC5DLw.s:360    .text.FLASH_Lock:00000000 FLASH_Lock
-     /tmp/ccrC5DLw.s:227    .text.FLASH_Unlock:00000000 $t
-     /tmp/ccrC5DLw.s:258    .text.FLASH_Unlock:0000001c $d
-     /tmp/ccrC5DLw.s:265    .text.FLASH_ErasePage:00000000 $t
-     /tmp/ccrC5DLw.s:511    .text.FLASH_WaitForLastOperation:00000000 FLASH_WaitForLastOperation
-     /tmp/ccrC5DLw.s:350    .text.FLASH_ErasePage:00000074 $d
-     /tmp/ccrC5DLw.s:355    .text.FLASH_Lock:00000000 $t
-     /tmp/ccrC5DLw.s:378    .text.FLASH_Lock:00000010 $d
-     /tmp/ccrC5DLw.s:383    .text.FLASH_ProgramWord:00000000 $t
-     /tmp/ccrC5DLw.s:388    .text.FLASH_ProgramWord:00000000 FLASH_ProgramWord
-     /tmp/ccrC5DLw.s:501    .text.FLASH_ProgramWord:000000ac $d
-     /tmp/ccrC5DLw.s:506    .text.FLASH_WaitForLastOperation:00000000 $t
-     /tmp/ccrC5DLw.s:588    .text.FLASH_GetStatus:00000000 FLASH_GetStatus
-     /tmp/ccrC5DLw.s:583    .text.FLASH_GetStatus:00000000 $t
-     /tmp/ccrC5DLw.s:657    .text.FLASH_GetStatus:0000005c $d
-     /tmp/ccrC5DLw.s:662    .text.WritePage:00000000 $t
-     /tmp/ccrC5DLw.s:667    .text.WritePage:00000000 WritePage
-     /tmp/ccrC5DLw.s:788    .text.WriteConfigurations:00000000 $t
-     /tmp/ccrC5DLw.s:793    .text.WriteConfigurations:00000000 WriteConfigurations
-     /tmp/ccrC5DLw.s:843    .text.WriteFlash:00000000 WriteFlash
-     /tmp/ccrC5DLw.s:833    .text.WriteConfigurations:0000002c $d
-     /tmp/ccrC5DLw.s:838    .text.WriteFlash:00000000 $t
-     /tmp/ccrC5DLw.s:977    .text.GetFlashConf:00000000 $t
-     /tmp/ccrC5DLw.s:982    .text.GetFlashConf:00000000 GetFlashConf
-     /tmp/ccrC5DLw.s:1027   .text.GetFlashConf:00000038 $d
+     /tmp/ccfi8svf.s:55     .text.EraseAllMemory_FLASH:00000000 $t
+     /tmp/ccfi8svf.s:60     .text.EraseAllMemory_FLASH:00000000 EraseAllMemory_FLASH
+     /tmp/ccfi8svf.s:187    .text.ErasePage:00000000 ErasePage
+     /tmp/ccfi8svf.s:117    .text.EraseAllMemory_FLASH:00000044 $d
+     /tmp/ccfi8svf.s:122    .text.BackupPage:00000000 $t
+     /tmp/ccfi8svf.s:127    .text.BackupPage:00000000 BackupPage
+     /tmp/ccfi8svf.s:182    .text.ErasePage:00000000 $t
+     /tmp/ccfi8svf.s:232    .text.FLASH_Unlock:00000000 FLASH_Unlock
+     /tmp/ccfi8svf.s:270    .text.FLASH_ErasePage:00000000 FLASH_ErasePage
+     /tmp/ccfi8svf.s:360    .text.FLASH_Lock:00000000 FLASH_Lock
+     /tmp/ccfi8svf.s:227    .text.FLASH_Unlock:00000000 $t
+     /tmp/ccfi8svf.s:258    .text.FLASH_Unlock:0000001c $d
+     /tmp/ccfi8svf.s:265    .text.FLASH_ErasePage:00000000 $t
+     /tmp/ccfi8svf.s:511    .text.FLASH_WaitForLastOperation:00000000 FLASH_WaitForLastOperation
+     /tmp/ccfi8svf.s:350    .text.FLASH_ErasePage:00000074 $d
+     /tmp/ccfi8svf.s:355    .text.FLASH_Lock:00000000 $t
+     /tmp/ccfi8svf.s:378    .text.FLASH_Lock:00000010 $d
+     /tmp/ccfi8svf.s:383    .text.FLASH_ProgramWord:00000000 $t
+     /tmp/ccfi8svf.s:388    .text.FLASH_ProgramWord:00000000 FLASH_ProgramWord
+     /tmp/ccfi8svf.s:501    .text.FLASH_ProgramWord:000000ac $d
+     /tmp/ccfi8svf.s:506    .text.FLASH_WaitForLastOperation:00000000 $t
+     /tmp/ccfi8svf.s:588    .text.FLASH_GetStatus:00000000 FLASH_GetStatus
+     /tmp/ccfi8svf.s:583    .text.FLASH_GetStatus:00000000 $t
+     /tmp/ccfi8svf.s:657    .text.FLASH_GetStatus:0000005c $d
+     /tmp/ccfi8svf.s:662    .text.WritePage:00000000 $t
+     /tmp/ccfi8svf.s:667    .text.WritePage:00000000 WritePage
+     /tmp/ccfi8svf.s:788    .text.WriteConfigurations:00000000 $t
+     /tmp/ccfi8svf.s:793    .text.WriteConfigurations:00000000 WriteConfigurations
+     /tmp/ccfi8svf.s:843    .text.WriteFlash:00000000 WriteFlash
+     /tmp/ccfi8svf.s:833    .text.WriteConfigurations:0000002c $d
+     /tmp/ccfi8svf.s:838    .text.WriteFlash:00000000 $t
+     /tmp/ccfi8svf.s:977    .text.GetFlashConf:00000000 $t
+     /tmp/ccfi8svf.s:982    .text.GetFlashConf:00000000 GetFlashConf
+     /tmp/ccfi8svf.s:1027   .text.GetFlashConf:00000038 $d
                      .debug_frame:00000010 $d
 
 UNDEFINED SYMBOLS
