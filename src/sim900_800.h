@@ -57,5 +57,6 @@ char GSMConfigPDPGPRS (char sim, char *ptrAPN, char *ptrUSER, char *ptrKEY , cha
 void GSMProcess (void);
 void GSMReceivSMS (void);
 #define UARTGSMSend(X)	Usart1Send(X)
+unsigned char SMSLeft (void);
 
 #endif

@@ -15,8 +15,7 @@
 extern parameters_typedef param_struct;
 #define num_tel_rep		param_struct.num_reportar
 #define timer_rep			param_struct.timer_reportar
-// #define send_energy		param_struct.send_energy_flag
-extern unsigned char send_energy;
+#define send_energy		param_struct.send_energy_flag
 
 
 //UART GSM.
@@ -91,7 +90,7 @@ unsigned char prestadorSimTime = 250;
 
 //Recepcion de SMS.
 unsigned char GSMCantSMS = 0;
-unsigned char GSMCantSMS2 = 0;
+// unsigned char GSMCantSMS2 = 0;
 unsigned char GSMnumSMS = 1;
 char GSMReadSMSState = 0;
 char GSMReadSMScommand[32];
@@ -1649,15 +1648,13 @@ void GSMReceivSMS (void)
 			case 2:
 				i = GSMSendCommand ("AT+CMGDA=\"DEL READ\"\r\n", 25000, 0, &GSMbuffRtaCommand[0]);
 
-				if (i == 2)
+				//modificacion 19-12-17, si no logre borrar igual dejo vacios sms
+				//ademas uso GSMCantSMS como flag para seguir trabajando
+				if (i != 1)
 				{
 					GSMReadSMSState = 0;
 					GSMCantSMS = 0;
 				}
-
-				if (i > 2)
-					GSMReadSMSState = 0;
-
 				break;
 
 			default:
@@ -2340,4 +2337,9 @@ char GSMConfigPDPGPRS (char sim, char *ptrAPN, char *ptrUSER, char *ptrKEY , cha
 	}
 
 	return 1;
+}
+
+unsigned char SMSLeft (void)
+{
+	return GSMCantSMS;
 }

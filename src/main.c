@@ -79,21 +79,19 @@ unsigned short mains_voltage_filtered;
 // //volatile unsigned short standalone_menu_timer;
 // volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-unsigned short timer_rep = 0;
+// unsigned short timer_rep = 0;
+#define timer_rep (param_struct.timer_reportar * 30)
 // volatile unsigned char timer_wifi_bright = 0;
 
-#ifdef USE_REDONDA_BASIC
+#if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
 volatile unsigned short timer_relay = 0;			//para relay default (si no hay synchro)
 
 volatile unsigned short tt_take_photo_sample;
-volatile unsigned short tt_relay_on_off;
 #endif
 
 
 unsigned char saved_mode;
 
-
-unsigned char send_energy = 0;
 // ------- Externals del o para el ADC -------
 #ifdef ADC_WITH_INT
 volatile unsigned short adc_ch[3];
@@ -197,7 +195,7 @@ unsigned short vpote [LARGO_FILTRO + 1];
 
 //--- Private Definitions ---//
 #define num_tel_rep		param_struct.num_reportar
-
+#define send_energy		param_struct.send_energy_flag
 
 //-------------------------------------------//
 // @brief  Main program.
@@ -360,10 +358,12 @@ int main(void)
 			Usart2Send((char *) (const char *) "Start OK\r\n");
 			timer_standby = 0;
 		}
-		else
 
 		if (i > 1)
+		{
 			Usart2Send((char *) (const char *) "Start NOK\r\n");
+			Usart2Send((char *) (const char *) "Please reboot!\r\n");
+		}
 	}
 
 	Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
@@ -600,26 +600,22 @@ int main(void)
 				break;
 
 			case LAMP_OFF:
-				if (!tt_relay_on_off)
+				if (GetPhoto() > VOLTAGE_PHOTO_ON)
 				{
-					if (GetPhoto() > VOLTAGE_PHOTO_ON)
-					{
 #ifdef WITH_1_TO_10_VOLTS
-						Update_TIM3_CH1 (PWM_MIN);
+					Update_TIM3_CH1 (PWM_MIN);
 #else
-						Update_TIM3_CH1 (PWM_MAX);
+					Update_TIM3_CH1 (PWM_MAX);
 #endif
-						// RelayOn();
-						main_state = LAMP_ON;
-						lamp_on_state = init_airplane0;
-						tt_relay_on_off = 10000;
-						Usart2Send("PRENDIDO\r\n");
-						FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
-						LED_ON;
+					// RelayOn();
+					main_state = LAMP_ON;
+					lamp_on_state = init_airplane0;
+					Usart2Send("PRENDIDO\r\n");
+					FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
+					LED_ON;
 #ifdef WITH_HYST
-						hours = 0;
+					hours = 0;
 #endif
-					}
 				}
 				break;
 
@@ -659,40 +655,42 @@ int main(void)
 						{
 							meas_end = 0;
 
-							if (!tt_relay_on_off)
-							{
 #ifdef WITH_HYST			//con Hysteresis apaga casi en el mismo punto en el que prende
-								hyst = GetHysteresis (hours);
-								if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+							hyst = GetHysteresis (hours);
+							if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
 #else
-								if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+							if (GetPhoto() < VOLTAGE_PHOTO_OFF)
 #endif
-								{
-									main_state = LAMP_OFF;
-									Update_TIM3_CH1 (0);
+							{
+								main_state = LAMP_OFF;
+								Update_TIM3_CH1 (0);
 
-									lamp_on_state = init_airplane0;
-									counters_mode = 0;
-									Usart2Send("APAGADO\r\n");
-									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
-									tt_relay_on_off = 10000;
-									RelayOff();
-									LED_OFF;
-								}
-								else
+								lamp_on_state = init_airplane0;
+								counters_mode = 0;
+								Usart2Send("APAGADO\r\n");
+								FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+								RelayOff();
+								LED_OFF;
+							}
+							else
+							{
+								//No apago, tengo que reportar?
+								if (show_power_index >= timer_rep)
 								{
-									//No apago, tengo que reportar?
-									if (show_power_index >= timer_rep)
-									{
-										show_power_index = 0;
-										counters_mode = 2;		//paso al modo memoria de medicion
-										lamp_on_state = meas_reporting0;
-									}
-#ifdef WITH_1_TO_10_VOLTS
-									one_to_ten = GetNew1to10 (GetPhoto());
-									Update_TIM3_CH1 (one_to_ten);
-#endif
+									show_power_index = 0;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									lamp_on_state = meas_reporting0;
 								}
+								else if ((send_energy) && (!SMSLeft()))
+								{
+									send_energy = 0;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									lamp_on_state = meas_reporting0;
+								}
+#ifdef WITH_1_TO_10_VOLTS
+								one_to_ten = GetNew1to10 (GetPhoto());
+								Update_TIM3_CH1 (one_to_ten);
+#endif
 							}
 						}
 						break;
@@ -739,7 +737,7 @@ int main(void)
 						counters_mode = 1;
 						timer_meas = 200;		//le doy 200ms de buffer a la medicion
 						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
-						timer_rep = param_struct.timer_reportar * 30;
+						// timer_rep = (param_struct.timer_reportar * 30);
 						break;
 
 					case meas_meas:
@@ -747,41 +745,45 @@ int main(void)
 						{
 							meas_end = 0;
 
-							if (!tt_relay_on_off)
-							{
 #ifdef WITH_HYST			//con Hysteresis apaga casi en el mismo punto en el que prende
-								hyst = GetHysteresis (hours);
-								if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+							hyst = GetHysteresis (hours);
+							if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
 #else
-								if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+							if (GetPhoto() < VOLTAGE_PHOTO_OFF)
 #endif
-								{
-									main_state = LAMP_OFF;
-									Update_TIM3_CH1 (0);
+							{
+								main_state = LAMP_OFF;
+								Update_TIM3_CH1 (0);
 
-									lamp_on_state = init_airplane0;
-									counters_mode = 0;
-									Usart2Send("APAGADO\r\n");
-									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
-									tt_relay_on_off = 10000;
-									RelayOff();
+								lamp_on_state = init_airplane0;
+								counters_mode = 0;
+								Usart2Send("APAGADO\r\n");
+								FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+								RelayOff();
+								LED_OFF;
+							}
+							else
+							{
+								//No apago, tengo que reportar?
+								if (show_power_index >= timer_rep)
+								{
+									show_power_index = 0;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									lamp_on_state = meas_reporting0;
 									LED_OFF;
 								}
-								else
+								else if ((send_energy) && (!SMSLeft()))
 								{
-									//No apago, tengo que reportar?
-									if (show_power_index >= timer_rep)
-									{
-										show_power_index = 0;
-										counters_mode = 2;		//paso al modo memoria de medicion
-										lamp_on_state = meas_reporting0;
-										LED_OFF;
-									}
-#ifdef WITH_1_TO_10_VOLTS
-									one_to_ten = GetNew1to10 (GetPhoto());
-									Update_TIM3_CH1 (one_to_ten);
-#endif
+									send_energy = 0;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									lamp_on_state = meas_reporting0;
+									LED_OFF;
 								}
+#ifdef WITH_1_TO_10_VOLTS
+								one_to_ten = GetNew1to10 (GetPhoto());
+								Update_TIM3_CH1 (one_to_ten);
+#endif
+
 							}
 						}
 						break;
@@ -834,13 +836,15 @@ int main(void)
 				{
 					if (!timer_meas)	//update cada 200ms
 					{
-						if (i < SIZEOF_POWER_VECT)
+						if (i < (SIZEOF_POWER_VECT - 1))
 						{
 							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
 							i++;
 						}
 						else
-						{		//termine de cargar el vector, guardo muestro info
+						{
+							//cargo la ultima posicion del vector y muestro info
+							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
 							i = 0;
 
 							if (counters_mode == 1)	//mido normalmente
@@ -930,6 +934,15 @@ int main(void)
 			}
 		}
 
+		//reviso si me pidieron reportar y no tengo luz prendida
+		if ((send_energy) && (main_state != LAMP_ON) && (!SMSLeft()))
+		{
+			send_energy = 0;
+			ShowPower(s_lcd, 0, acum_hours, acum_secs);	//si entre por aca la pi es 0
+			Usart2Send(s_lcd);
+			FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+		}
+
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();
 		UpdatePhotoTransistor();
@@ -1010,13 +1023,14 @@ int main(void)
 						zero_current_loc >>= 5;
 						zero_current = zero_current_loc;
 						FuncsGSMShutdownAlways();
-						main_state = SET_COUNTERS_AND_PHONE0;
+						Usart2Send("Wait Phone Shutdown\r\n");
+						main_state = SET_COUNTERS_AND_PHONE;
 						i = 0;
 					}
 				}
 				break;
 
-			case SET_COUNTERS_AND_PHONE0:
+			case SET_COUNTERS_AND_PHONE:
 				//cargo contadores desde la flash
 				acum_secs = param_struct.acumm_w2s;
 				acum_secs_index = param_struct.acumm_w2s_index;
@@ -1029,15 +1043,11 @@ int main(void)
 				if (FuncsGSMStateAsk() == gsm_state_stop_always)
 				{
 					Usart2Send((char *) (const char *) "Phone Shutdown\r\n");
-					main_state = SET_COUNTERS_AND_PHONE1;
+					LED_ON;
+					Usart2Send("PRENDIDO\r\n");
+					Update_TIM3_CH1 (PWM_MAX);
+					main_state = LAMP_ON;
 				}
-				break;
-
-			case SET_COUNTERS_AND_PHONE1:
-				LED_ON;
-				Usart2Send("PRENDIDO\r\n");
-				Update_TIM3_CH1 (PWM_MAX);
-				main_state = LAMP_ON;
 				break;
 
 			case LAMP_ON:
@@ -1057,7 +1067,7 @@ int main(void)
 						counters_mode = 1;
 						timer_meas = 200;		//le doy 200ms de buffer a la medicion
 						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
-						timer_rep = param_struct.timer_reportar * 30;
+						// timer_rep = param_struct.timer_reportar * 30;
 						break;
 
 					case meas_meas:
@@ -1086,9 +1096,11 @@ int main(void)
 						if (meas_end)		//me sincronizo nuevamente con la medicion
 						{
 							meas_end = 0;
-							LED_ON;
 							counters_mode = 1;
 							lamp_on_state = meas_meas;
+							LED_ON;
+							ShowPower(s_lcd, power, acum_hours, acum_secs);
+							Usart2Send(s_lcd);
 						}
 						break;
 
@@ -1101,13 +1113,15 @@ int main(void)
 				{
 					if (!timer_meas)	//update cada 200ms
 					{
-						if (i < SIZEOF_POWER_VECT)
+						if (i < (SIZEOF_POWER_VECT - 1))
 						{
 							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
 							i++;
 						}
 						else
-						{		//termine de cargar el vector, guardo muestro info
+						{
+							//cargo la ultima posicion del vector y muestro info
+							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
 							i = 0;
 
 							if (counters_mode == 1)	//mido normalmente
@@ -1435,8 +1449,6 @@ void TimingDelay_Decrement(void)
 	if (tt_take_photo_sample)
 		tt_take_photo_sample--;
 
-	if (tt_relay_on_off)
-		tt_relay_on_off--;
 #endif
 
 #ifdef ADC_WITH_TEMP_SENSE

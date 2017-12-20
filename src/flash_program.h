@@ -73,8 +73,9 @@ typedef enum
 
  	unsigned char timer_reportar;	//83
 
+	unsigned char send_energy_flag;	//84
  	//dummys para completar
- 	unsigned char dummy1;			//84
+ // 	unsigned char dummy1;			//84
  	// unsigned char dummy2;			//83
  	// unsigned char dummy3;			//84
 

@@ -15,19 +15,22 @@
 #define VER_1_1		//mismo pinout que VER_1_0
 
 //-------- Type of Program ----------------
-// #define USE_ONLY_POWER_SENSE
 //#define USE_GPS
 // #define USE_GSM_GATEWAY
 //OJO --- los dos que siguen van juntos
 #define USE_GSM
 #define USE_REDONDA_BASIC
+//OJO --- los dos que siguen van juntos
+// #define USE_GSM
+// #define USE_ONLY_POWER_SENSE
+
 
 //#define WIFI_TO_MQTT_BROKER
 //#define USE_CERT_PROGRAM
 //#define USE_PROD_PROGRAM
-// #define DEBUG_ON
+#define DEBUG_ON
 
-#ifdef USE_REDONDA_BASIC
+#if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
 //-------- Voltage Conf ------------------------
 #define VOLTAGE_PHOTO_OFF	3322
 #define VOLTAGE_PHOTO_ON	3722
@@ -252,7 +255,9 @@ enum Relay_State {
 
 //--- Temas de la medicion de potencia
 // #define KW			0.01013		//R originales en OPAMP
-#define KW			0.01992		//con los cambos en las R y ajustado en 300W
+// #define KW			0.01992		//con los cambos en las R y ajustado en 300W MUESTRA A
+// #define KW			0.02131		//midiendo desde 50 a 300W en MUESTRA A ajustado con python "ajuste_potencia.py" 19-12-17
+#define KW			0.02119		//midiendo a 300W en MUESTRA A con programa USE_ONLY_POWER_SENSE 19-12-17
 // #define MIN_SENSE_POWER		753		//15W con KW
 #define MIN_SENSE_POWER		1506		//30W con KW
 
