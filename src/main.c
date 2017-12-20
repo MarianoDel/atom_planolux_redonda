@@ -194,8 +194,7 @@ unsigned short vpote [LARGO_FILTRO + 1];
 
 
 //--- Private Definitions ---//
-#define num_tel_rep		param_struct.num_reportar
-#define send_energy		param_struct.send_energy_flag
+
 
 //-------------------------------------------//
 // @brief  Main program.
@@ -683,7 +682,7 @@ int main(void)
 								}
 								else if ((send_energy) && (!SMSLeft()))
 								{
-									send_energy = 0;
+									send_energy_reset;
 									counters_mode = 2;		//paso al modo memoria de medicion
 									lamp_on_state = meas_reporting0;
 								}
@@ -774,7 +773,7 @@ int main(void)
 								}
 								else if ((send_energy) && (!SMSLeft()))
 								{
-									send_energy = 0;
+									send_energy_reset;
 									counters_mode = 2;		//paso al modo memoria de medicion
 									lamp_on_state = meas_reporting0;
 									LED_OFF;
@@ -937,8 +936,17 @@ int main(void)
 		//reviso si me pidieron reportar y no tengo luz prendida
 		if ((send_energy) && (main_state != LAMP_ON) && (!SMSLeft()))
 		{
-			send_energy = 0;
+			send_energy_reset;
 			ShowPower(s_lcd, 0, acum_hours, acum_secs);	//si entre por aca la pi es 0
+			Usart2Send(s_lcd);
+			FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+		}
+
+		//reviso si me pidieron reportar un OK de configuracion
+		if ((send_sms_ok) && (!SMSLeft()))
+		{
+			send_sms_ok_reset;
+			strcpy(s_lcd, "Conf OK!");
 			Usart2Send(s_lcd);
 			FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
 		}

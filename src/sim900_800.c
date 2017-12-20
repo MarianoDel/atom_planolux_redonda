@@ -13,9 +13,6 @@
 
 //PARAMETROS
 extern parameters_typedef param_struct;
-#define num_tel_rep		param_struct.num_reportar
-#define timer_rep			param_struct.timer_reportar
-#define send_energy		param_struct.send_energy_flag
 
 
 //UART GSM.
@@ -1612,6 +1609,8 @@ void GSMReceivSMS (void)
 								if (colon_index > 2)
 									num_tel_rep[colon_index - 2] = '\0';
 
+								send_sms_ok_set;
+
 							}
 
 							if (!strncmp(pToAnswer, (const char *)"TIMER:", sizeof ("TIMER:") -1))
@@ -1621,11 +1620,15 @@ void GSMReceivSMS (void)
 								colon_index += *(pToAnswer + 7) - 48;
 
 								if ((colon_index > 1) && (colon_index <= 60))
+								{
 									timer_rep = colon_index;
+									send_sms_ok_set;
+								}
+
 							}
 
 							if (!strncmp(pToAnswer, (const char *)"ENERGIA:", sizeof ("ENERGIA:") -1))
-								send_energy = 1;
+								send_energy_set;
 
 						}
 

@@ -82,6 +82,16 @@ typedef enum
  } parameters_typedef;
 
 
+#define timer_rep			param_struct.timer_reportar
+#define num_tel_rep		param_struct.num_reportar
+
+#define send_energy			(param_struct.send_energy_flag & 0x01)
+#define send_energy_set		(param_struct.send_energy_flag |= 0x01)
+#define send_energy_reset	(param_struct.send_energy_flag &= 0xFE)
+#define send_sms_ok			(param_struct.send_energy_flag & 0x02)
+#define send_sms_ok_set		(param_struct.send_energy_flag |= 0x02)
+#define send_sms_ok_reset	(param_struct.send_energy_flag &= 0xFD)
+
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 //-------- Functions -------------

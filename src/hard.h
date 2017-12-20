@@ -28,7 +28,7 @@
 //#define WIFI_TO_MQTT_BROKER
 //#define USE_CERT_PROGRAM
 //#define USE_PROD_PROGRAM
-#define DEBUG_ON
+// #define DEBUG_ON
 
 #if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
 //-------- Voltage Conf ------------------------
