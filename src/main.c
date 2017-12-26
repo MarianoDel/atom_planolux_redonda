@@ -79,7 +79,6 @@ unsigned short mains_voltage_filtered;
 // //volatile unsigned short standalone_menu_timer;
 // volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-// unsigned short timer_rep = 0;
 #define timer_rep (param_struct.timer_reportar * 30)
 // volatile unsigned char timer_wifi_bright = 0;
 
@@ -616,6 +615,20 @@ int main(void)
 					hours = 0;
 #endif
 				}
+
+				//me piden prender forzado
+				if (diag_prender)
+				{
+					Update_TIM3_CH1 (PWM_MAX);
+					main_state = LAMP_ON;
+					lamp_on_state = init_airplane0;
+					Usart2Send("PRENDIDO\r\n");
+					FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
+					LED_ON;
+#ifdef WITH_HYST
+					hours = 0;
+#endif
+				}
 				break;
 
 			case LAMP_ON:
@@ -674,7 +687,7 @@ int main(void)
 							else
 							{
 								//No apago, tengo que reportar?
-								if (show_power_index >= timer_rep)
+								if ((timer_rep != 0) && (show_power_index >= timer_rep))
 								{
 									show_power_index = 0;
 									counters_mode = 2;		//paso al modo memoria de medicion
@@ -736,7 +749,6 @@ int main(void)
 						counters_mode = 1;
 						timer_meas = 200;		//le doy 200ms de buffer a la medicion
 						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
-						// timer_rep = (param_struct.timer_reportar * 30);
 						break;
 
 					case meas_meas:
@@ -746,9 +758,9 @@ int main(void)
 
 #ifdef WITH_HYST			//con Hysteresis apaga casi en el mismo punto en el que prende
 							hyst = GetHysteresis (hours);
-							if (GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))
+							if ((GetPhoto() < (VOLTAGE_PHOTO_ON - hyst))  && (!diag_prender))		//NO ESTOY EN DIAGNOSTICO
 #else
-							if (GetPhoto() < VOLTAGE_PHOTO_OFF)
+							if ((GetPhoto() < VOLTAGE_PHOTO_OFF) && (!diag_prender))		//NO ESTOY EN DIAGNOSTICO
 #endif
 							{
 								main_state = LAMP_OFF;
@@ -763,12 +775,27 @@ int main(void)
 							}
 							else
 							{
-								//No apago, tengo que reportar?
-								if (show_power_index >= timer_rep)
+								//No apago, tengo que reportar? o estoy en DIAGNOSTICO
+								if ((timer_rep != 0) && (show_power_index >= timer_rep))
 								{
-									show_power_index = 0;
-									counters_mode = 2;		//paso al modo memoria de medicion
-									lamp_on_state = meas_reporting0;
+									if (diag_prender)	//termine el diagnostico
+									{
+										diag_prender_reset;
+										main_state = LAMP_OFF;
+										Update_TIM3_CH1 (0);
+										lamp_on_state = init_airplane0;
+										counters_mode = 0;
+										Usart2Send("APAGADO\r\n");
+										FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+										RelayOff();
+									}
+									else
+									{
+										show_power_index = 0;
+										counters_mode = 2;		//paso al modo memoria de medicion
+										ShowPower(s_lcd, power, acum_hours, acum_secs);
+										lamp_on_state = meas_reporting0;
+									}
 									LED_OFF;
 								}
 								else if ((send_energy) && (!SMSLeft()))
@@ -778,6 +805,15 @@ int main(void)
 									lamp_on_state = meas_reporting0;
 									LED_OFF;
 								}
+								else if ((send_sms_ok) && (!SMSLeft()))
+								{
+									send_sms_ok_reset;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									strcpy(s_lcd, "Conf OK!");
+									lamp_on_state = meas_reporting0;
+									LED_OFF;
+								}
+
 #ifdef WITH_1_TO_10_VOLTS
 								one_to_ten = GetNew1to10 (GetPhoto());
 								Update_TIM3_CH1 (one_to_ten);
@@ -787,8 +823,7 @@ int main(void)
 						}
 						break;
 
-					case meas_reporting0:
-						ShowPower(s_lcd, power, acum_hours, acum_secs);
+					case meas_reporting0:	//mando msj en s_lcd al numero de reporte
 						Usart2Send(s_lcd);
 						resp = FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
 						if (resp == resp_gsm_error)
@@ -933,22 +968,26 @@ int main(void)
 			}
 		}
 
-		//reviso si me pidieron reportar y no tengo luz prendida
-		if ((send_energy) && (main_state != LAMP_ON) && (!SMSLeft()))
+		//respuestas cuando tengo lampara apagada (las otras slen sincronizadas con la medicion)
+		if (main_state != LAMP_ON)
 		{
-			send_energy_reset;
-			ShowPower(s_lcd, 0, acum_hours, acum_secs);	//si entre por aca la pi es 0
-			Usart2Send(s_lcd);
-			FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
-		}
+			//reviso si me pidieron reportar
+			if ((send_energy) && (!SMSLeft()))
+			{
+				send_energy_reset;
+				ShowPower(s_lcd, 0, acum_hours, acum_secs);	//si entre por aca la pi es 0
+				Usart2Send(s_lcd);
+				FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+			}
 
-		//reviso si me pidieron reportar un OK de configuracion
-		if ((send_sms_ok) && (!SMSLeft()))
-		{
-			send_sms_ok_reset;
-			strcpy(s_lcd, "Conf OK!");
-			Usart2Send(s_lcd);
-			FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+			//reviso si me pidieron reportar un OK de configuracion
+			if ((send_sms_ok) && (!SMSLeft()))
+			{
+				send_sms_ok_reset;
+				strcpy(s_lcd, "Conf OK!");
+				Usart2Send(s_lcd);
+				FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+			}
 		}
 
 		//Cosas que no dependen del estado del programa
@@ -1084,7 +1123,7 @@ int main(void)
 							meas_end = 0;
 
 							//No apago, tengo que reportar?
-							if (show_power_index >= timer_rep)
+							if ((timer_rep != 0) && (show_power_index >= timer_rep))
 							{
 								show_power_index = 0;
 								counters_mode = 2;		//paso al modo memoria de medicion

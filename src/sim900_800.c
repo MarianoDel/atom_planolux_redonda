@@ -1619,16 +1619,26 @@ void GSMReceivSMS (void)
 								colon_index += (*(pToAnswer + 6) - 48) * 10;
 								colon_index += *(pToAnswer + 7) - 48;
 
-								if ((colon_index > 1) && (colon_index <= 60))
+								if ((*(pToAnswer + 6) == 'F') && (*(pToAnswer + 7) == 'F'))
+								{
+									timer_rep = 0;
+									send_sms_ok_set;
+								}
+								else if ((colon_index > 1) && (colon_index <= 60))
 								{
 									timer_rep = colon_index;
 									send_sms_ok_set;
 								}
-
 							}
 
 							if (!strncmp(pToAnswer, (const char *)"ENERGIA:", sizeof ("ENERGIA:") -1))
 								send_energy_set;
+
+							if (!strncmp(pToAnswer, (const char *)"PRENDER:", sizeof ("PRENDER:") -1))
+								diag_prender_set;
+
+							if (!strncmp(pToAnswer, (const char *)"APAGAR:", sizeof ("APAGAR:") -1))
+								diag_apagar_set;
 
 						}
 

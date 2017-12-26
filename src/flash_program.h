@@ -92,6 +92,14 @@ typedef enum
 #define send_sms_ok_set		(param_struct.send_energy_flag |= 0x02)
 #define send_sms_ok_reset	(param_struct.send_energy_flag &= 0xFD)
 
+#define diag_prender			(param_struct.send_energy_flag & 0x10)
+#define diag_prender_set		(param_struct.send_energy_flag |= 0x10)
+#define diag_prender_reset	(param_struct.send_energy_flag &= 0xEF)
+#define diag_apagar			(param_struct.send_energy_flag & 0x20)
+#define diag_apagar_set		(param_struct.send_energy_flag |= 0x20)
+#define diag_apagar_reset	(param_struct.send_energy_flag &= 0xDF)
+
+
 typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 //-------- Functions -------------
