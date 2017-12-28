@@ -8,7 +8,8 @@
 #include <string.h>
 
 
-#define MAX_STARTUP_ERRORS		5
+// #define MAX_STARTUP_ERRORS		5		//a veces tarda mas en registrar
+#define MAX_STARTUP_ERRORS		10		//lo paso a 10
 
 //--- Externals variables ---//
 extern parameters_typedef param_struct;
@@ -176,19 +177,26 @@ void FuncsGSM (void)
 
 			if (resp == 2)
 			{
+				resp = 3;
 				if (!strncmp(s_msg, "+CREG: 0,1", sizeof("+CREG: 0,1") - 1))
-					gsm_state = gsm_state_get_imei;		//equipo registrado
+				{
+					gsm_state = gsm_state_dell_all;		//equipo registrado
+					resp = 2;
+				}
+
 				if (!strncmp(s_msg, "+CREG: 0,5", sizeof("+CREG: 0,5") - 1))
-					gsm_state = gsm_state_get_imei;		//equipo registrado con roaming
+				{
+					gsm_state = gsm_state_dell_all;		//equipo registrado con roaming
+					resp = 2;
+				}
 
-				if (!strncmp(s_msg, "+CREG: 0,2", sizeof("+CREG: 0,2") - 1))
-					resp = 3;		//equipo buscando nueva empresa
-				if (!strncmp(s_msg, "+CREG: 0,3", sizeof("+CREG: 0,3") - 1))
-					resp = 3;		//equipo mal o no registrado
 
-				//ver como resolverlo a futuro
-				if (gsm_state == gsm_state_ready)
-					gsm_error_counter = 0;
+				//ya tengo la resp = 3 por default
+				// if (!strncmp(s_msg, "+CREG: 0,2", sizeof("+CREG: 0,2") - 1))
+				// 	resp = 3;		//equipo buscando nueva empresa
+				// if (!strncmp(s_msg, "+CREG: 0,3", sizeof("+CREG: 0,3") - 1))
+				// 	resp = 3;		//equipo mal o no registrado
+
 			}
 
 			if (resp > 2)
@@ -198,6 +206,24 @@ void FuncsGSM (void)
 					gsm_error_counter++;
 					gsm_state = gsm_state_wait_reg;
 				}
+				else
+				{
+					gsm_state = gsm_state_shutdown;
+				}
+				GSM_Start_Stop_ResetSM ();
+			}
+			break;
+
+		case gsm_state_dell_all:
+			resp = GSMSendCommand ("AT+CMGDA=\"DEL ALL\"\r\n", 25000, 0, &s_msg[0]);
+
+			if (resp == 2)
+				gsm_state = gsm_state_get_imei;
+
+			if (resp > 2)
+			{
+				if (gsm_error_counter < MAX_STARTUP_ERRORS)
+					gsm_error_counter++;
 				else
 				{
 					GSM_Start_Stop_ResetSM ();

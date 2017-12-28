@@ -1631,14 +1631,14 @@ void GSMReceivSMS (void)
 								}
 							}
 
-							if (!strncmp(pToAnswer, (const char *)"ENERGIA:", sizeof ("ENERGIA:") -1))
-								send_energy_set;
-
 							if (!strncmp(pToAnswer, (const char *)"PRENDER:", sizeof ("PRENDER:") -1))
 								diag_prender_set;
 
 							if (!strncmp(pToAnswer, (const char *)"APAGAR:", sizeof ("APAGAR:") -1))
 								diag_apagar_set;
+
+							if (!strncmp(pToAnswer, (const char *)"ENERGIA:", sizeof ("ENERGIA:") -1))
+								send_energy_set;
 
 						}
 

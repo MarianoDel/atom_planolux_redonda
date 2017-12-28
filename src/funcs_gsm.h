@@ -17,6 +17,7 @@ typedef enum {
 	gsm_state_verify_fully_func,
 	gsm_state_wait_reg,
 	gsm_state_verify_reg,
+	gsm_state_dell_all,
 	gsm_state_get_imei,
 	gsm_state_ready,
 	gsm_state_sending_conf,
