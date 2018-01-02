@@ -26,6 +26,7 @@ typedef enum {
 	gsm_state_idle,
 	gsm_state_connecting,
 	gsm_state_connected,
+	gsm_state_reading_sms,
 	gsm_state_disconnected,
 	gsm_state_shutdown,
 	gsm_state_stop_wait,

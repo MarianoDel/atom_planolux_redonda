@@ -58,7 +58,7 @@
 // ------- Externals del Puerto serie  -------
 volatile unsigned char tx2buff[SIZEOF_DATA];
 volatile unsigned char rx2buff[SIZEOF_DATA];
-/**
+
 
 volatile unsigned char tx1buff[SIZEOF_DATA];
 volatile unsigned char rx1buff[SIZEOF_DATA];
@@ -790,6 +790,7 @@ int main(void)
 										Usart2Send("APAGADO\r\n");
 										FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
 										RelayOff();
+										LED_OFF;
 									}
 									else
 									{
@@ -804,7 +805,21 @@ int main(void)
 								{
 									send_energy_reset;
 									counters_mode = 2;		//paso al modo memoria de medicion
+									ShowPower(s_lcd, power, acum_hours, acum_secs);
 									lamp_on_state = meas_reporting0;
+									LED_OFF;
+								}
+								else if ((diag_apagar) && (!SMSLeft()))
+								{
+									diag_apagar_reset;
+									diag_prender_reset;
+									main_state = LAMP_OFF;
+									Update_TIM3_CH1 (0);
+									lamp_on_state = init_airplane0;
+									counters_mode = 0;
+									Usart2Send("APAGADO\r\n");
+									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+									RelayOff();
 									LED_OFF;
 								}
 								else if ((send_sms_ok) && (!SMSLeft()))
@@ -959,6 +974,7 @@ int main(void)
 					param_struct.acumm_w2s = acum_secs;
 					param_struct.acumm_w2s_index = acum_secs_index;
 					param_struct.acumm_wh = acum_hours;
+					param_struct.send_energy_flag = 0;	//limpio flags
 
 					if (WriteConfigurations(&param_struct))
 						Usart2Send("Saved OK!\r\n");

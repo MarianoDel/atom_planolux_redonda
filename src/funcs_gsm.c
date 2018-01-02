@@ -267,7 +267,11 @@ void FuncsGSM (void)
 
 		case gsm_state_ready:
 
-		//TODO: reviar aca contador de errores
+			//TODO: reviar aca contador de errores
+			break;
+
+		case gsm_state_reading_sms:
+			//TODO: poner aca timeout???
 			break;
 
 		case gsm_state_sending_sms:
@@ -339,12 +343,12 @@ void FuncsGSM (void)
 	GSMProcess ();		//lee bytes del puerto serie y avisa con flag la terminacion del msj
 	GSMReceive ();		//usa el flag para analizar las respuestas
 
-	if (gsm_state == gsm_state_ready)	//me fijo si tengo SMS para leer
+	if ((gsm_state == gsm_state_ready) || (gsm_state == gsm_state_reading_sms))	//me fijo si tengo SMS para leer
 	{
 		GSMReceivSMS ();
 
 		if (SMSLeft())
-			gsm_state = gsm_reading_sms;
+			gsm_state = gsm_state_reading_sms;
 		else
 			gsm_state = gsm_state_ready;
 	}
