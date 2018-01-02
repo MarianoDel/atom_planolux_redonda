@@ -58,6 +58,7 @@
 // ------- Externals del Puerto serie  -------
 volatile unsigned char tx2buff[SIZEOF_DATA];
 volatile unsigned char rx2buff[SIZEOF_DATA];
+/**
 
 volatile unsigned char tx1buff[SIZEOF_DATA];
 volatile unsigned char rx1buff[SIZEOF_DATA];
@@ -623,6 +624,7 @@ int main(void)
 					main_state = LAMP_ON;
 					lamp_on_state = init_airplane0;
 					Usart2Send("PRENDIDO\r\n");
+					//TODO: ver de enviar solo si no hay cola de recepcion!!!!, meterlo directo en la funcion FuncsGSMSendSMS
 					FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
 					LED_ON;
 #ifdef WITH_HYST

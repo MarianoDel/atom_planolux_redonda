@@ -339,7 +339,18 @@ void FuncsGSM (void)
 	GSMProcess ();		//lee bytes del puerto serie y avisa con flag la terminacion del msj
 	GSMReceive ();		//usa el flag para analizar las respuestas
 
-	GSMReceivSMS ();	//si existen SMS los leo aca! TODO: por ahora
+	if (gsm_state == gsm_state_ready)	//me fijo si tengo SMS para leer
+	{
+		GSMReceivSMS ();
+
+		if (SMSLeft())
+			gsm_state = gsm_reading_sms;
+		else
+			gsm_state = gsm_state_ready;
+	}
+
+
+
 
 	// if (gsm_error_counter > 4)
 	// {
