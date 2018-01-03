@@ -28,6 +28,14 @@
 #define I_Sense		adc_ch[2]
 #endif
 
+#define VECT_SAMPLES		80
+
+//------------ Lock for Samples -----------
+#define LOCK_STANDBY							0
+#define LOCK_READY_TO_TAKE_SAMPLES		1
+#define LOCK_SAMPLES_TAKEN					2
+#define LOCK_PROCESSING						3
+
 
 #define RCC_ADC_CLK 		(RCC->APB2ENR & 0x00000200)
 #define RCC_ADC_CLK_ON 		RCC->APB2ENR |= 0x00000200
@@ -157,5 +165,7 @@ void UpdatePhotoTransistor(void);
 unsigned short GetPhoto (void);
 void FillTempBuffer (void);
 void FillPhotoBuffer (void);
+unsigned short PowerCalcWithSamples (void);
+void ADCStartSampling (void);
 
 #endif /* ADC_H_ */

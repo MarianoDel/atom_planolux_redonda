@@ -7,7 +7,11 @@
 #include "adc.h"
 #include "stm32f0xx.h"
 #include "hard.h"
-// #include "dsp.h"
+
+#ifdef DEBUG_ON
+#include "uart.h"
+#include <stdio.h>
+#endif
 
 
 //--- VARIABLES EXTERNAS ---//
@@ -42,6 +46,16 @@ unsigned short VoltagePhoto [SIZEOF_PHOTO_TRANS];
 unsigned char photo_index = 0;
 unsigned short last_photo = 0;
 unsigned char new_photo_sample = 0;
+
+// ------- de los filtros y mediciones -------
+#ifdef POWER_MEAS_WITH_SAMPLES
+unsigned short isense [VECT_SAMPLES];
+unsigned short vsense [VECT_SAMPLES];
+
+int power_aux [VECT_SAMPLES];
+volatile unsigned char lock_vect = LOCK_STANDBY;
+volatile unsigned char power_vector_index = 0;
+#endif
 
 
 
@@ -85,7 +99,10 @@ void AdcConfig (void)
 	//ADC1->CFGR1 |= ADC_CFGR1_DMAEN | ADC_CFGR1_DMACFG;
 
 	//set sampling time
-	ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
+	ADC1->SMPR |= ADC_SampleTime_239_5Cycles;
+	// ADC1->SMPR |= ADC_SampleTime_71_5Cycles;
+	// ADC1->SMPR |= ADC_SampleTime_55_5Cycles;
+	// ADC1->SMPR |= ADC_SampleTime_41_5Cycles;		//17.39 son SP 420
 	// ADC1->SMPR |= ADC_SampleTime_28_5Cycles;		//17.39 son SP 420
 	//ADC1->SMPR |= ADC_SampleTime_7_5Cycles;		//17.36 de salida son SP 420 pero a veces pega
 													//las dos int (usar DMA?) y pierde el valor intermedio
@@ -112,6 +129,9 @@ void AdcConfig (void)
 	//calibrar ADC
 	ADCGetCalibrationFactor();
 
+#ifdef POWER_MEAS_WITH_SAMPLES
+	power_vector_index = 0;
+#endif
 	// Enable ADC1
 	ADC1->CR |= ADC_CR_ADEN;
 }
@@ -133,7 +153,34 @@ void ADC1_COMP_IRQHandler (void)
 			*p_channel = ADC1->DR;		//
 			if (p_channel < &adc_ch[2])
 				p_channel++;
+
+			seq_ready = 0;		//lo agrego por si el main no blanquea la secuencia
 		}
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+		if ((seq_ready) && (lock_vect == LOCK_READY_TO_TAKE_SAMPLES))
+		{
+			LED_ON;
+			//cargo 2 vectores, V e I de 80 posiciones cada uno (circular) sampleado de 4KHz
+			isense[power_vector_index] = I_Sense;
+			vsense[power_vector_index] = V_Sense;
+
+			if (power_vector_index < (VECT_SAMPLES - 1))
+				power_vector_index++;
+			else
+			{
+				LED_OFF;
+				//termine de cargar el vector, aviso que esta listo
+				lock_vect = LOCK_SAMPLES_TAKEN;
+				power_vector_index = 0;
+/////////
+				// Usart2Send("y");
+
+
+			}
+
+		}
+#endif
 
 		//clear pending
 		ADC1->ISR |= ADC_IT_EOC | ADC_IT_EOSEQ;
@@ -348,3 +395,72 @@ unsigned short GetPhoto (void)
 
     return last_photo;
 }
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+//devuelve la potencia activa de los vectores de mustras isense y vsense
+unsigned short PowerCalcWithSamples (void)
+{
+	char s [10];
+	unsigned char i;
+	int aux1 = 0;
+
+	lock_vect = LOCK_PROCESSING;
+	//promedio isense para conocer zero current
+	for (i = 0; i < VECT_SAMPLES; i++)
+		aux1 += isense[i];
+
+	aux1 = aux1 / VECT_SAMPLES;
+	// aux1 = 2048;
+
+	sprintf(s, "z%d ", aux1);
+	Usart2Send(s);
+
+	//en power_aux pongo la corriente sin offset
+	for (i = 0; i < VECT_SAMPLES; i++)
+		power_aux[i] = isense[i] - (unsigned short) aux1;
+
+	//multiplico para conocer pact
+	for (i = 0; i < VECT_SAMPLES; i++)
+	{
+		aux1 = power_aux[i] * vsense[i];
+		// aux1 >>= 8;
+		aux1 >>= 5;
+		// aux1 = aux1 / 32;
+		power_aux[i] = aux1;
+	}
+
+	//integro pact
+	aux1 = 0;
+	for (i = 0; i < VECT_SAMPLES; i++)
+		aux1 += power_aux[i];
+
+	aux1 = aux1 / VECT_SAMPLES;
+
+	if (aux1 < 0)		//recorto errores negativos
+		aux1 = 0;
+
+	lock_vect = LOCK_STANDBY;
+
+#ifdef DEBUG_ON
+	// sprintf(s, "p%d ", aux1);
+	// Usart2Send(s);
+		// Usart2Send("n ");
+#endif
+
+	return (unsigned short) aux1;
+}
+
+void ADCStartSampling (void)
+{
+	if (lock_vect == LOCK_STANDBY)
+	{
+// #ifdef DEBUG_ON
+// 			// sprintf(s, "z%d ", aux1);
+// 			// Usart2Send(s);
+		// Usart2Send("s");
+// #endif
+		lock_vect = LOCK_READY_TO_TAKE_SAMPLES;
+	}
+}
+
+#endif

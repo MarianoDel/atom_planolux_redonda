@@ -171,9 +171,19 @@ volatile unsigned char hours = 0;
 volatile unsigned char minutes = 0;
 #endif
 
-#define SIZEOF_POWER_VECT		10
-
+#ifdef POWER_MEAS_WITH_SAMPLES
+#define SIZEOF_POWER_VECT		32			//este lo dejo igual porque quiere mediciones cada 2 segundos
+													//aunque en realidad es MA32
+#define SIZEOF_POWER_VECT_INDEX		10
 unsigned short power_vect [SIZEOF_POWER_VECT];
+#endif
+
+#ifdef POWER_MEAS_PEAK_TO_PEAK
+#define SIZEOF_POWER_VECT		10
+unsigned short power_vect [SIZEOF_POWER_VECT];
+#endif
+
+
 
 //--- FUNCIONES DEL MODULO ---//
 void TimingDelay_Decrement(void);
@@ -986,7 +996,7 @@ int main(void)
 			}
 		}
 
-		//respuestas cuando tengo lampara apagada (las otras slen sincronizadas con la medicion)
+		//respuestas cuando tengo lampara apagada (las otras salen sincronizadas con la medicion)
 		if (main_state != LAMP_ON)
 		{
 			//reviso si me pidieron reportar
@@ -1033,6 +1043,14 @@ int main(void)
 
 	Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Only Power\r\n");
 
+#ifdef POWER_MEAS_PEAK_TO_PEAK
+	Usart2Send((char *) (const char *) "Power Meas Peak to Peak\r\n");
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+	Usart2Send((char *) (const char *) "Power Meas Taking Samples\r\n");
+#endif
+
 	for (i = 0; i < 16; i++)
 	{
 		if (LED)
@@ -1071,27 +1089,35 @@ int main(void)
 				break;
 
 			case SET_ZERO_CURRENT:
-				if ((!timer_standby) && (mains_voltage_filtered > CONNECT_VOLTAGE))
+				// if ((!timer_standby) && (mains_voltage_filtered > CONNECT_VOLTAGE))
+				// {
+				// 	if (i < 32)
+				// 	{
+				// 		if (seq_ready)		//TODO ojo aca seq_ready se usa fuera del main switch
+				// 		{
+				// 			seq_ready = 0;
+				// 			zero_current_loc += I_Sense;
+				// 			i++;
+				// 			timer_standby = 2;	//cargo valor zero_current en 64ms
+				// 		}
+				// 	}
+				// 	else
+				// 	{
+				// 		zero_current_loc >>= 5;
+				// 		zero_current = zero_current_loc;
+						// FuncsGSMShutdownAlways();
+						// Usart2Send("Wait Phone Shutdown\r\n");
+						// main_state = SET_COUNTERS_AND_PHONE;
+						// i = 0;
+				// 	}
+				// }
+
+				if (!timer_standby)
 				{
-					if (i < 32)
-					{
-						if (seq_ready)		//TODO ojo aca seq_ready se usa fuera del main switch
-						{
-							seq_ready = 0;
-							zero_current_loc += I_Sense;
-							i++;
-							timer_standby = 2;	//cargo valor zero_current en 64ms
-						}
-					}
-					else
-					{
-						zero_current_loc >>= 5;
-						zero_current = zero_current_loc;
-						FuncsGSMShutdownAlways();
-						Usart2Send("Wait Phone Shutdown\r\n");
-						main_state = SET_COUNTERS_AND_PHONE;
-						i = 0;
-					}
+					FuncsGSMShutdownAlways();
+					Usart2Send("Wait Phone Shutdown\r\n");
+					main_state = SET_COUNTERS_AND_PHONE;
+					i = 0;
 				}
 				break;
 
@@ -1108,76 +1134,21 @@ int main(void)
 				if (FuncsGSMStateAsk() == gsm_state_stop_always)
 				{
 					Usart2Send((char *) (const char *) "Phone Shutdown\r\n");
-					LED_ON;
 					Usart2Send("PRENDIDO\r\n");
 					Update_TIM3_CH1 (PWM_MAX);
 					main_state = LAMP_ON;
+					RelayOn();
+					counters_mode = 1;
+					LED_ON;
 				}
 				break;
 
 			case LAMP_ON:
-				switch (lamp_on_state)
-				{
-					case init_airplane0:
-						lamp_on_state++;
-						break;
-
-					case init_airplane1:
-						lamp_on_state++;
-						break;
-
-					case meas_init:
-						RelayOn();
-						lamp_on_state = meas_meas;
-						counters_mode = 1;
-						timer_meas = 200;		//le doy 200ms de buffer a la medicion
-						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
-						// timer_rep = param_struct.timer_reportar * 30;
-						break;
-
-					case meas_meas:
-						if (meas_end)		//termino una vuelta de mediciones, generalmente 2 segundos
-						{
-							meas_end = 0;
-
-							//No apago, tengo que reportar?
-							if ((timer_rep != 0) && (show_power_index >= timer_rep))
-							{
-								show_power_index = 0;
-								counters_mode = 2;		//paso al modo memoria de medicion
-								lamp_on_state = meas_reporting0;
-								LED_OFF;
-							}
-						}
-						break;
-
-					case meas_reporting0:
-						ShowPower(s_lcd, power, acum_hours, acum_secs);
-						Usart2Send(s_lcd);
-						lamp_on_state = meas_reporting1;
-						break;
-
-					case meas_reporting1:
-						if (meas_end)		//me sincronizo nuevamente con la medicion
-						{
-							meas_end = 0;
-							counters_mode = 1;
-							lamp_on_state = meas_meas;
-							LED_ON;
-							ShowPower(s_lcd, power, acum_hours, acum_secs);
-							Usart2Send(s_lcd);
-						}
-						break;
-
-					default:
-						lamp_on_state = init_airplane0;
-						break;
-				}
-
 				if (counters_mode)	//si esta activo el modo de contadores mido
 				{
 					if (!timer_meas)	//update cada 200ms
 					{
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 						if (i < (SIZEOF_POWER_VECT - 1))
 						{
 							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
@@ -1216,7 +1187,49 @@ int main(void)
 							}
 							//cuando termino una medicion completa aviso con meas_end
 							meas_end = 1;
+							ShowPower(s_lcd, power, acum_hours, acum_secs);
+							Usart2Send(s_lcd);
 						}
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+						//pasaron los 200ms
+						power = MAFilter32(PowerCalcWithSamples(), power_vect);
+
+						if (i < (SIZEOF_POWER_VECT_INDEX - 1))
+							i++;
+						else
+						{
+							i = 0;
+							if (counters_mode == 1)	//mido normalmente
+							{
+								if (power < MIN_SENSE_POWER)	//minimo de medicion
+									power = 0;
+
+								last_power = power;
+							}
+
+							if (counters_mode == 2)	//no mido solo update de lo viejo
+								power = last_power;
+
+							acum_secs += power;
+							acum_secs_index++;
+							show_power_index++;
+							need_to_save = 1;			//aviso que en algun momento hay que guardar
+
+							if (acum_secs_index >= 1800)
+							{
+								acum_hours += (acum_secs / 1800);	//lo convierto a Wh, para no perder bits en cada cuenta
+								acum_secs = 0;
+								acum_secs_index = 0;
+							}
+							//cuando termino una medicion completa aviso con meas_end
+							meas_end = 1;
+							ShowPower(s_lcd, power, acum_hours, acum_secs);
+							Usart2Send(s_lcd);
+						}
+#endif
+
 						timer_meas = 200;		//10 veces 200ms
 					}
 				}
@@ -1234,12 +1247,12 @@ int main(void)
 		}	//fin switch main_state
 
 		//Cosas que dependen de las muestras
-		if (seq_ready)
-		{
-			seq_ready = 0;
-			UpdateVGrid ();
-			UpdateIGrid ();
-		}
+		// if (seq_ready)
+		// {
+		// 	seq_ready = 0;
+		// // 	UpdateVGrid ();
+		// // 	UpdateIGrid ();
+		// }
 
 		//Cosas que no dependen del estado del programa
 		UpdateRelay ();

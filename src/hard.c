@@ -90,11 +90,11 @@ unsigned char RelayIsOff (void)
 void UpdateRelay (void)
 {
 	unsigned char edge = 0;
-#ifndef USE_WITH_SYNC
+#ifdef USE_WITH_ADC_SYNC
 	unsigned short sample = 0;
 #endif
 
-#ifdef USE_WITH_SYNC
+#ifdef USE_WITH_EDGE_SYNC
 	if ((!last_edge) && (SYNC))		//flanco ascendente detector
 	{									//senoidal arriba
 //		edge = 1;
@@ -108,7 +108,9 @@ void UpdateRelay (void)
 		last_edge = 0;
 		SYNCP_OFF;
 	}
-#else
+#endif
+
+#ifdef USE_WITH_ADC_SYNC
 	//sample = ReadADC1_SameSampleTime(ADC_CH0);
 	sample = V_Sense;			//tengo los samples en adc_ch[]
 
@@ -128,6 +130,9 @@ void UpdateRelay (void)
 			edge = 1;
 			last_edge = 0;
 			SYNCP_OFF;
+#ifdef POWER_MEAS_WITH_SAMPLES
+			ADCStartSampling();
+#endif
 		}
 	}
 #endif

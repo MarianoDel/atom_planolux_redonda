@@ -18,11 +18,11 @@
 //#define USE_GPS
 // #define USE_GSM_GATEWAY
 //OJO --- los dos que siguen van juntos
-#define USE_GSM
-#define USE_REDONDA_BASIC
-//OJO --- los dos que siguen van juntos
 // #define USE_GSM
-// #define USE_ONLY_POWER_SENSE
+// #define USE_REDONDA_BASIC
+//OJO --- los dos que siguen van juntos
+#define USE_GSM
+#define USE_ONLY_POWER_SENSE
 
 
 //#define WIFI_TO_MQTT_BROKER
@@ -39,11 +39,18 @@
 // #define WITH_1_TO_10_VOLTS
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
-// #define USE_WITH_SYNC				//usa circuito sync por flanco (modificacion en Hardware)
+
+//-------- Type of Sync with Mains ----------------
+// #define USE_WITH_EDGE_SYNC				//usa circuito sync por flanco (modificacion en Hardware)
+#define USE_WITH_ADC_SYNC				//usa al adc para determinar flancos
 
 //-------- Kind of Reports Sended ----------------
 #define REPORTS_NORMAL_MODE
 // #define REPORTS_AIRPLANE_MODE
+
+//-------- Type of Power Measurement ----------------
+// #define POWER_MEAS_PEAK_TO_PEAK
+#define POWER_MEAS_WITH_SAMPLES
 
 //-------- Others Configurations depending on the formers ------------
 //-------- Hysteresis Conf ------------------------
@@ -237,8 +244,8 @@ typedef enum
 #define TT_DELAYED_OFF		6660		//para relay placa redonda
 #define TT_DELAYED_ON		7000		//para relay placa redonda
 
-#define ADC_THRESHOLD		1024		//threshold para deteccion de flanco
-#define ADC_NOISE				50		//threshold para ruido de ADC
+#define ADC_THRESHOLD		1024		//0.825V threshold para deteccion de flanco
+#define ADC_NOISE				50		//0.04V threshold para ruido de ADC
 #endif
 #define TT_RELAY			60		//timeout de espera antes de pegar o despegar el relay por default
 
@@ -254,12 +261,21 @@ enum Relay_State {
 };
 
 //--- Temas de la medicion de potencia
+#ifdef POWER_MEAS_WITH_SAMPLES
+#define KW			0.01441		//midiendo a 300W en MUESTRA B con programa USE_ONLY_POWER_SENSE 19-12-17
+
+#define MIN_SENSE_POWER		60		//5W con KW
+#endif
+
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 // #define KW			0.01013		//R originales en OPAMP
 // #define KW			0.01992		//con los cambos en las R y ajustado en 300W MUESTRA A
 // #define KW			0.02131		//midiendo desde 50 a 300W en MUESTRA A ajustado con python "ajuste_potencia.py" 19-12-17
 #define KW			0.02119		//midiendo a 300W en MUESTRA A con programa USE_ONLY_POWER_SENSE 19-12-17
+
 // #define MIN_SENSE_POWER		753		//15W con KW
 #define MIN_SENSE_POWER		1506		//30W con KW
+#endif
 
 //--- Temas con la medicion de tension
 //MUESTRA A (BV)

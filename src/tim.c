@@ -108,11 +108,21 @@ void TIM_3_Init (void)
 	TIM3->CCMR1 = 0x0060;			//CH1 PWM mode 2
 	TIM3->CCMR2 = 0x0000;			//
 	TIM3->CCER |= TIM_CCER_CC1E;	//CH1 enable on pin
-	TIM3->ARR = 255;
-	//TIM3->ARR = 1023;		//para probar parte baja de placa mosfet (comparar con placa china)
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+	TIM3->ARR = 1000;			//seteo en 4KHz para muestreo ADC
 	TIM3->CNT = 0;
 	//TIM3->PSC = 0;
 	TIM3->PSC = 11;
+#endif
+
+#ifdef POWER_MEAS_PEAK_TO_PEAK
+	TIM3->ARR = 255;			//seteo en 15686Hz
+	TIM3->CNT = 0;
+	//TIM3->PSC = 0;
+	TIM3->PSC = 11;
+#endif
+
 	//TIM3->EGR = TIM_EGR_UG;
 
 	// Enable timer ver UDIS

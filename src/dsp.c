@@ -66,7 +66,7 @@ unsigned short MAFilter8 (unsigned short * vsample)
 
 unsigned short MAFilter32 (unsigned short new_sample, unsigned short * vsample)
 {
-	unsigned short total_ma;
+	unsigned int total_ma;
 
 	total_ma = new_sample + *(vsample) + *(vsample + 1) + *(vsample + 2) + *(vsample + 3) + *(vsample + 4) + *(vsample + 5) + *(vsample + 6);
 	total_ma += *(vsample + 7) + *(vsample + 8) + *(vsample + 9) + *(vsample + 10) + *(vsample + 11) + *(vsample + 12) + *(vsample + 13) + *(vsample + 14);
@@ -108,7 +108,7 @@ unsigned short MAFilter32 (unsigned short new_sample, unsigned short * vsample)
 	*(vsample + 1) = *(vsample);
 	*(vsample) = new_sample;
 
-	return total_ma >> 5;
+	return (unsigned short) (total_ma >> 5);
 }
 
 //Filtro circular, recibe
