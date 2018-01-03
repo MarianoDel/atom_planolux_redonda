@@ -18,17 +18,18 @@
 //#define USE_GPS
 // #define USE_GSM_GATEWAY
 //OJO --- los dos que siguen van juntos
-// #define USE_GSM
-// #define USE_REDONDA_BASIC
-//OJO --- los dos que siguen van juntos
 #define USE_GSM
-#define USE_ONLY_POWER_SENSE
+#define USE_REDONDA_BASIC
+//OJO --- los dos que siguen van juntos
+// #define USE_GSM
+// #define USE_ONLY_POWER_SENSE
 
 
 //#define WIFI_TO_MQTT_BROKER
 //#define USE_CERT_PROGRAM
 //#define USE_PROD_PROGRAM
 #define DEBUG_ON
+#define DEBUG_MEAS_ON
 
 #if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
 //-------- Voltage Conf ------------------------
@@ -36,7 +37,7 @@
 #define VOLTAGE_PHOTO_ON	3722
 
 //-------- Type of Program and Features ----------------
-// #define WITH_1_TO_10_VOLTS
+#define WITH_1_TO_10_VOLTS
 #define WITH_HYST
 // #define WITH_TEMP_CONTROL
 
@@ -51,6 +52,8 @@
 //-------- Type of Power Measurement ----------------
 // #define POWER_MEAS_PEAK_TO_PEAK
 #define POWER_MEAS_WITH_SAMPLES
+// #define POWER_MEAS_WITH_SAMPLES_MA32
+#define POWER_MEAS_WITH_SAMPLES_BESTOF_10
 
 //-------- Others Configurations depending on the formers ------------
 //-------- Hysteresis Conf ------------------------
@@ -63,12 +66,23 @@
 #endif
 
 //-------- PWM Conf ------------------------
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 #define PWM_MAX	255
 #define PWM_80		204
 #define PWM_60		153
 #define PWM_40		102
 #define PWM_20		52
 #define PWM_MIN	26
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+#define PWM_MAX	1000
+#define PWM_80		800
+#define PWM_60		600
+#define PWM_40		400
+#define PWM_20		200
+#define PWM_MIN	100
+#endif
 
 #endif	//USE_REDONDA_BASIC
 
@@ -262,9 +276,9 @@ enum Relay_State {
 
 //--- Temas de la medicion de potencia
 #ifdef POWER_MEAS_WITH_SAMPLES
-#define KW			0.01441		//midiendo a 300W en MUESTRA B con programa USE_ONLY_POWER_SENSE 19-12-17
-
-#define MIN_SENSE_POWER		60		//5W con KW
+#define KW			0.01246		//midiendo a 52W en MUESTRA B con programa USE_ONLY_POWER_SENSE 3-1-18
+//midiendo a 300W en MUESTRA B con programa USE_ONLY_POWER_SENSE 3-1-18
+#define MIN_SENSE_POWER		160		//2W con KW
 #endif
 
 #ifdef POWER_MEAS_PEAK_TO_PEAK
@@ -284,8 +298,9 @@ enum Relay_State {
 // #define CONNECT_VOLTAGE			2233		//equivale 180V 1.8V V_Sense
 
 //MUESTRA B KIRNO	15-12-2017
-#define CONNECT_VOLTAGE			2035		//equivale 180V 1.64V V_Sense
-#define DISCONNECT_VOLTAGE		1662		//equivale 160V 1.34V V_Sense
+#define CONNECT_VOLTAGE			1898		//equivale 180V 1.58V V_Sense
+// #define DISCONNECT_VOLTAGE		1662		//equivale 160V 1.34V V_Sense
+#define DISCONNECT_VOLTAGE		1500		//equivale 160V 1.34V V_Sense
 #define GLITCH_VOLTAGE			636		//equivale a 100V 0.512V V_Sense
 
 
@@ -298,7 +313,7 @@ void UpdateRelay (void);
 unsigned char RelayIsOn (void);
 unsigned char RelayIsOff (void);
 unsigned short GetHysteresis (unsigned char);
-unsigned char GetNew1to10 (unsigned short);
+unsigned short GetNew1to10 (unsigned short);
 void UpdateVGrid (void);
 void UpdateIGrid (void);
 unsigned short GetVGrid (void);

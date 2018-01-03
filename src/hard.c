@@ -218,10 +218,11 @@ unsigned short GetHysteresis (unsigned char hours_past)
 #endif
 
 #ifdef WITH_1_TO_10_VOLTS
-unsigned char GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 373 puntos
+unsigned short GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 373 puntos
 {
 	unsigned short new_light = 0;
 
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 	if (light > VOLTAGE_PHOTO_ON)
 	{
 		new_light = light - VOLTAGE_PHOTO_ON;
@@ -230,6 +231,24 @@ unsigned char GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 3
 
 	if (new_light > 255)
 		new_light = 255;
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+	//uso 373 puntos dividido en 6 segmentos 62 puntos
+	if (light > 4033)
+		new_light = PWM_MAX;
+	else if (light > 3971)
+		new_light = PWM_80;
+	else if (light > 3909)
+		new_light = PWM_60;
+	else if (light > 3847)
+		new_light = PWM_40;
+	else if (light > 3785)
+		new_light = PWM_20;
+	else
+		new_light = PWM_MIN;
+
+#endif
 
 	// if (light < VOLTAGE_PHOTO_ON)
 	// 	new_light = PWM_MIN;
@@ -239,7 +258,7 @@ unsigned char GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 3
 	// 	new_light += PWM_MIN;
 	// }
 
-	return (unsigned char) new_light;
+	return new_light;
 }
 #endif
 
@@ -247,7 +266,13 @@ unsigned char GetNew1to10 (unsigned short light)	//prendo en 3722 a 4095 tengo 3
 void UpdateVGrid (void)
 {
 	//miro la ultima medicion
+#ifdef POWER_MEAS_WITH_SAMPLES
+	if (vgrid_update_samples < 90)    //80 un ciclo de 20ms
+#endif
+
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 	if (vgrid_update_samples < 350)    //312 un ciclo de 20ms
+#endif
 	{
 		//reviso si es un maximo
 	   if (V_Sense > max_vgrid)

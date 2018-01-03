@@ -172,9 +172,17 @@ volatile unsigned char minutes = 0;
 #endif
 
 #ifdef POWER_MEAS_WITH_SAMPLES
-#define SIZEOF_POWER_VECT		32			//este lo dejo igual porque quiere mediciones cada 2 segundos
-													//aunque en realidad es MA32
+
+#ifdef POWER_MEAS_WITH_SAMPLES_MA32
+#define SIZEOF_POWER_VECT		32			//aunque en realidad es MA32
+#define SIZEOF_POWER_VECT_INDEX		10		//este lo dejo igual porque quiere mediciones cada 2 segundos
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES_BESTOF_10
+#define SIZEOF_POWER_VECT		10
 #define SIZEOF_POWER_VECT_INDEX		10
+#endif
+
 unsigned short power_vect [SIZEOF_POWER_VECT];
 #endif
 
@@ -238,7 +246,7 @@ int main(void)
 	unsigned short hyst;
 #endif
 #ifdef WITH_1_TO_10_VOLTS
-	unsigned char one_to_ten;
+	unsigned short one_to_ten;
 #endif
 
 #else		//USE_REDONDA_BASIC
@@ -536,6 +544,21 @@ int main(void)
 	//
 	// 	UpdateRelay ();
 	// }
+
+	// ADC1->CR |= ADC_CR_ADSTART;
+	// while (1)
+	// {
+	// 	if (!timer_standby)
+	// 	{
+	// 		timer_standby = 2000;
+	// 		UpdatePhotoTransistor();
+	// 		one_to_ten = GetNew1to10 (GetPhoto());
+	// 		sprintf (s_lcd, "pwm%d photo%d\r\n", one_to_ten, GetPhoto());
+	// 		Usart2Send(s_lcd);
+	// 		Update_TIM3_CH1 (one_to_ten);
+	// 	}
+	// }
+
 //--- FIN Programa de pruebas synchro de Relay -----
 
 
@@ -842,8 +865,11 @@ int main(void)
 								}
 
 #ifdef WITH_1_TO_10_VOLTS
-								one_to_ten = GetNew1to10 (GetPhoto());
-								Update_TIM3_CH1 (one_to_ten);
+								if (diag_prender)		//si estoy en diagnostico no dimmerizo
+								{
+									one_to_ten = GetNew1to10 (GetPhoto());
+									Update_TIM3_CH1 (one_to_ten);
+								}
 #endif
 
 							}
@@ -897,6 +923,7 @@ int main(void)
 				{
 					if (!timer_meas)	//update cada 200ms
 					{
+#ifdef POWER_MEAS_PEAK_TO_PEAK
 						if (i < (SIZEOF_POWER_VECT - 1))
 						{
 							power_vect[i] = PowerCalc (GetVGrid(), GetIGrid());
@@ -936,6 +963,56 @@ int main(void)
 							//cuando termino una medicion completa aviso con meas_end
 							meas_end = 1;
 						}
+#endif
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+						//pasaron los 200ms
+#ifdef POWER_MEAS_WITH_SAMPLES_MA32
+						power = MAFilter32(PowerCalcWithSamples(), power_vect);
+#endif
+#ifdef POWER_MEAS_WITH_SAMPLES_BESTOF_10
+						power_vect[i] = PowerCalcWithSamples();
+#endif
+						if (i < (SIZEOF_POWER_VECT_INDEX - 1))
+						{
+							i++;
+						}
+						else
+						{
+#ifdef POWER_MEAS_WITH_SAMPLES_BESTOF_10
+							power = PowerCalcMean8(power_vect);
+#endif
+							i = 0;
+							if (counters_mode == 1)	//mido normalmente
+							{
+								if (power < MIN_SENSE_POWER)	//minimo de medicion
+									power = 0;
+
+								last_power = power;
+							}
+
+							if (counters_mode == 2)	//no mido solo update de lo viejo
+								power = last_power;
+
+							acum_secs += power;
+							acum_secs_index++;
+							show_power_index++;
+							need_to_save = 1;			//aviso que en algun momento hay que guardar
+
+							if (acum_secs_index >= 1800)
+							{
+								acum_hours += (acum_secs / 1800);	//lo convierto a Wh, para no perder bits en cada cuenta
+								acum_secs = 0;
+								acum_secs_index = 0;
+							}
+							//cuando termino una medicion completa aviso con meas_end
+							meas_end = 1;
+#ifdef DEBUG_MEAS_ON
+						ShowPower(s_lcd, power, acum_hours, acum_secs);
+						Usart2Send(s_lcd);
+#endif
+						}
+#endif
 						timer_meas = 200;		//10 veces 200ms
 					}
 				}
@@ -992,6 +1069,8 @@ int main(void)
 						Usart2Send("Mem Error!\r\n");
 					need_to_save = 0;
 				}
+				if (Mains_Glitch())
+					Usart2Send("Mains Glitch\r\n");
 				main_state = GO_TO_MAINS_FAILURE;
 			}
 		}
@@ -1194,12 +1273,21 @@ int main(void)
 
 #ifdef POWER_MEAS_WITH_SAMPLES
 						//pasaron los 200ms
+#ifdef POWER_MEAS_WITH_SAMPLES_MA32
 						power = MAFilter32(PowerCalcWithSamples(), power_vect);
-
+#endif
+#ifdef POWER_MEAS_WITH_SAMPLES_BESTOF_10
+						power_vect[i] = PowerCalcWithSamples();
+#endif
 						if (i < (SIZEOF_POWER_VECT_INDEX - 1))
+						{
 							i++;
+						}
 						else
 						{
+#ifdef POWER_MEAS_WITH_SAMPLES_BESTOF_10
+							power = PowerCalcMean8(power_vect);
+#endif
 							i = 0;
 							if (counters_mode == 1)	//mido normalmente
 							{
