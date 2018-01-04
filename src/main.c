@@ -1,4 +1,4 @@
-timer_for_reports/**
+/**
   ******************************************************************************
   * @file    Template_2/main.c
   * @author  Nahuel
@@ -138,22 +138,12 @@ extern volatile char buffUARTGSMrx2[];
 parameters_typedef param_struct;
 
 //--- VARIABLES GLOBALES ---//
-unsigned short show_power_index = 0;	//lo uso como timer sincronizado con la mediciontick 2 secs.
-
-//para las mediciones
-// unsigned int power_2secs_acum = 0;
-// unsigned char power_2secs_index = 0;
-// unsigned short power_minutes = 0;
-// unsigned char power_minutes_index = 0;
-// unsigned short power_hours = 0;
+unsigned short show_power_index = 0;	//lo uso como timer sincronizado con la medicion, tick 2 secs.
+unsigned short show_power_index_debug = 0;
 
 //para los msjs GSM
 char gsmNUM [20];
 char gsmMSG [180];
-
-
-
-
 
 
 // ------- de los timers -------
@@ -163,9 +153,6 @@ volatile unsigned short tcp_kalive_timer;
 //volatile unsigned char display_timer;
 volatile unsigned char timer_meas;
 
-//volatile unsigned char door_filter;
-//volatile unsigned char take_sample;
-//volatile unsigned char move_relay;
 #ifdef WITH_HYST
 volatile unsigned short secs = 0;
 volatile unsigned char hours = 0;
@@ -202,12 +189,12 @@ extern void EXTI4_15_IRQHandler(void);
 #define DMX_TIMEOUT	20
 
 //--- FILTROS DE SENSORES ---//
-#define LARGO_FILTRO 16
-#define DIVISOR      4   //2 elevado al divisor = largo filtro
+// #define LARGO_FILTRO 16
+// #define DIVISOR      4   //2 elevado al divisor = largo filtro
 //#define LARGO_FILTRO 32
 //#define DIVISOR      5   //2 elevado al divisor = largo filtro
-unsigned short vtemp [LARGO_FILTRO + 1];
-unsigned short vpote [LARGO_FILTRO + 1];
+// unsigned short vtemp [LARGO_FILTRO + 1];
+// unsigned short vpote [LARGO_FILTRO + 1];
 
 //--- FIN DEFINICIONES DE FILTRO ---//
 
@@ -784,6 +771,8 @@ int main(void)
 						RelayOn();
 						lamp_on_state = meas_meas;
 						counters_mode = 1;
+						show_power_index = 0;
+						show_power_index_debug = 0;
 						timer_meas = 200;		//le doy 200ms de buffer a la medicion
 						//esto en realidad es un indice de 2 segundos de tick, la info esta en minutos
 						break;
@@ -815,7 +804,7 @@ int main(void)
 								//No apago, tengo que reportar? o estoy en DIAGNOSTICO
 								if (diag_prender)		//en diagnostico
 								{
-									if ((timer_for_debugs != 0) && (show_power_index >= timer_for_debugs))
+									if ((timer_for_debugs != 0) && (show_power_index_debug >= timer_for_debugs))
 									{
 										//termine el diagnostico
 										diag_prender_reset;
@@ -955,6 +944,7 @@ int main(void)
 							acum_secs += power;
 							acum_secs_index++;
 							show_power_index++;
+							show_power_index_debug++;
 							need_to_save = 1;			//aviso que en algun momento hay que guardar
 
 							if (acum_secs_index >= 1800)
@@ -1000,6 +990,7 @@ int main(void)
 							acum_secs += power;
 							acum_secs_index++;
 							show_power_index++;
+							show_power_index_debug++;
 							need_to_save = 1;			//aviso que en algun momento hay que guardar
 
 							if (acum_secs_index >= 1800)
