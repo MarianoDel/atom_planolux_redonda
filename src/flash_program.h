@@ -63,27 +63,29 @@ typedef enum
  //OJO esta estructuras deben estar alineadas en 4 bytes
  typedef struct parameters {
 
- 	char num_reportar [24];			//24
- 	char imei [24];					//48
- 	char num_propio [24];			//72
+ 	char num_reportar [20];			//20
+ 	char imei [24];					//44
+ 	char num_propio [20];			//64
 
- 	unsigned int acumm_wh;				//76
- 	unsigned int acumm_w2s;				//80
- 	unsigned short acumm_w2s_index;	//82
+ 	unsigned int acumm_wh;				//68
+ 	unsigned int acumm_w2s;				//72
+ 	unsigned short acumm_w2s_index;	//74
 
- 	unsigned char timer_reportar;	//83
+ 	unsigned char timer_reportar;		//75
+	unsigned char timer_pruebas;			//76
 
-	unsigned char send_energy_flag;	//84
+	unsigned char send_energy_flag;	//77
  	//dummys para completar
- // 	unsigned char dummy1;			//84
- 	// unsigned char dummy2;			//83
- 	// unsigned char dummy3;			//84
+ 	unsigned char dummy1;			//78
+ 	unsigned char dummy2;			//79
+ 	unsigned char dummy3;			//80
 
  } parameters_typedef;
 
 
-#define timer_rep			param_struct.timer_reportar
-#define num_tel_rep		param_struct.num_reportar
+#define timer_rep				param_struct.timer_reportar
+#define timer_debug			param_struct.timer_pruebas
+#define num_tel_rep			param_struct.num_reportar
 
 #define send_energy			(param_struct.send_energy_flag & 0x01)
 #define send_energy_set		(param_struct.send_energy_flag |= 0x01)

@@ -1,4 +1,4 @@
-/**
+timer_for_reports/**
   ******************************************************************************
   * @file    Template_2/main.c
   * @author  Nahuel
@@ -80,7 +80,8 @@ unsigned short mains_voltage_filtered;
 // //volatile unsigned short standalone_menu_timer;
 // volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-#define timer_rep (param_struct.timer_reportar * 30)
+#define timer_for_reports (param_struct.timer_reportar * 30)
+#define timer_for_debugs (param_struct.timer_pruebas * 30)
 // volatile unsigned char timer_wifi_bright = 0;
 
 #if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
@@ -325,6 +326,7 @@ int main(void)
 		param_struct.acumm_w2s = 0;
 		param_struct.acumm_w2s_index = 0;
 		param_struct.timer_reportar = 2;
+		param_struct.timer_pruebas = 10;
 		//el timer a reportar esta n minutos, yo tengo tick cada 2 segundos
 
 		strcpy( param_struct.num_reportar, "1149867843");	//segunda sim de claro
@@ -722,7 +724,7 @@ int main(void)
 							else
 							{
 								//No apago, tengo que reportar?
-								if ((timer_rep != 0) && (show_power_index >= timer_rep))
+								if ((timer_for_reports != 0) && (show_power_index >= timer_for_reports))
 								{
 									show_power_index = 0;
 									counters_mode = 2;		//paso al modo memoria de medicion
@@ -811,10 +813,11 @@ int main(void)
 							else
 							{
 								//No apago, tengo que reportar? o estoy en DIAGNOSTICO
-								if ((timer_rep != 0) && (show_power_index >= timer_rep))
+								if (diag_prender)		//en diagnostico
 								{
-									if (diag_prender)	//termine el diagnostico
+									if ((timer_for_debugs != 0) && (show_power_index >= timer_for_debugs))
 									{
+										//termine el diagnostico
 										diag_prender_reset;
 										main_state = LAMP_OFF;
 										Update_TIM3_CH1 (0);
@@ -825,13 +828,14 @@ int main(void)
 										RelayOff();
 										LED_OFF;
 									}
-									else
-									{
-										show_power_index = 0;
-										counters_mode = 2;		//paso al modo memoria de medicion
-										ShowPower(s_lcd, power, acum_hours, acum_secs);
-										lamp_on_state = meas_reporting0;
-									}
+								}
+
+								if ((timer_for_reports != 0) && (show_power_index >= timer_for_reports))
+								{
+									show_power_index = 0;
+									counters_mode = 2;		//paso al modo memoria de medicion
+									ShowPower(s_lcd, power, acum_hours, acum_secs);
+									lamp_on_state = meas_reporting0;
 									LED_OFF;
 								}
 								else if ((send_energy) && (!SMSLeft()))
@@ -871,7 +875,6 @@ int main(void)
 									Update_TIM3_CH1 (one_to_ten);
 								}
 #endif
-
 							}
 						}
 						break;

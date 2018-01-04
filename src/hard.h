@@ -321,5 +321,6 @@ unsigned short GetIGrid (void);
 unsigned short PowerCalc (unsigned short, unsigned short);
 unsigned short PowerCalcMean8 (unsigned short * p);
 void ShowPower (char *, unsigned short, unsigned int, unsigned int);
+unsigned char Mains_Glitch (void);
 
 #endif /* HARD_H_ */

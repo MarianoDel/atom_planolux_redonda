@@ -1631,6 +1631,24 @@ void GSMReceivSMS (void)
 								}
 							}
 
+							if (!strncmp(pToAnswer, (const char *)"TIMERD:", sizeof ("TIMERD:") -1))
+							{
+								colon_index = 0;
+								colon_index += (*(pToAnswer + 7) - 48) * 10;
+								colon_index += *(pToAnswer + 8) - 48;
+
+								if ((*(pToAnswer + 7) == 'F') && (*(pToAnswer + 8) == 'F'))
+								{
+									timer_debug = 0;
+									send_sms_ok_set;
+								}
+								else if ((colon_index > 1) && (colon_index <= 60))
+								{
+									timer_debug = colon_index;
+									send_sms_ok_set;
+								}
+							}
+
 							if (!strncmp(pToAnswer, (const char *)"PRENDER:", sizeof ("PRENDER:") -1))
 								diag_prender_set;
 
