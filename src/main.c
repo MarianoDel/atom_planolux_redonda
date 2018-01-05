@@ -858,7 +858,7 @@ int main(void)
 								}
 
 #ifdef WITH_1_TO_10_VOLTS
-								if (diag_prender)		//si estoy en diagnostico no dimmerizo
+								if (!diag_prender)		//si estoy en diagnostico no dimmerizo
 								{
 									one_to_ten = GetNew1to10 (GetPhoto());
 									Update_TIM3_CH1 (one_to_ten);
