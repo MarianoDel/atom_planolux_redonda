@@ -1,23 +1,15 @@
-/**
-  ******************************************************************************
-  * @file    Template_2/main.h
-  * @author  Nahuel
-  * @version V1.0
-  * @date    22-August-2014
-  * @brief   Header for gpio module
-  ******************************************************************************
-  * @attention
-  *
-  *
-  *
-  ******************************************************************************
-  */
+//---------------------------------------------
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### GPIO.H ################################
+//---------------------------------------------
 
-/* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F0X_GPIO_H
-#define __STM32F0X_GPIO_H
-
-//#include "stm32f0xx.h"
+// Define to prevent recursive inclusion ---------------------------------------
+#ifndef _GPIO_H_
+#define _GPIO_H_
 
 //--- Exported types ---//
 //--- Exported constants ---//

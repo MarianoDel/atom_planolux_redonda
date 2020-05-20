@@ -67,6 +67,10 @@
     CLOSED: [2020-05-20 Wed 20:40]
     - cambio comentarios, el codigo lo dejo todo original
 
+*** DONE Modulo gpio
+    CLOSED: [2020-05-20 Wed 20:43]
+    - cambio comentarios, el codigo lo dejo todo original
+
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes
     arm-none-eabi-size Magneto_GTK_rom.elf
