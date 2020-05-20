@@ -1,12 +1,23 @@
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### FUNCS_GSM.H ##################################
+//----------------------------------------------------
 
-/* Define to prevent recursive inclusion -------------------------------------*/
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef _FUNCS_GSM_H_
 #define _FUNCS_GSM_H_
 
+// Includes for Configurations -------------------------------------------------
 #include "hard.h"
 #include "stm32f0xx.h"
 
-//--- Exported types ---//
+
+// Exported Types --------------------------------------------------------------
 typedef enum {
 	gsm_state_reset = 0,
 	gsm_state_verify_at,
@@ -43,7 +54,7 @@ typedef enum {
 
 } t_RespGsm;
 
-//--- Exported macro ---//
+// Exported Constants ----------------------------------------------------------
 //FLAGS de string del gsm
 #define GSM_RESET_FLAG		0x8000
 #define GSM_SET_CALL			0x0001
@@ -53,7 +64,7 @@ typedef enum {
 
 
 
-//--- Exported functions ---//
+// Exported Functions ----------------------------------------------------------
 void FuncsGSM (void);
 void FuncsGSMReset (void);
 unsigned char FuncsGSMReady (void);
