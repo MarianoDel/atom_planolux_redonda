@@ -1,8 +1,21 @@
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### SIM900_800.H #################################
+//----------------------------------------------------
+
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef _SIM900_800_H_
 #define _SIM900_800_H_
 
+// Includes for Configuration --------------------------------------------------
 #include "hard.h"
 #include "stm32f0xx.h"
+
 
 //#define buffUARTGSMrx_dimension 512
 #define buffUARTGSMrx_dimension 256
