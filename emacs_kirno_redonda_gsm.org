@@ -14,9 +14,9 @@
 
 ** DONE Crear primero bin y revisar tamanios
    CLOSED: [2020-05-20 Wed 15:29]
-arm-none-eabi-size Template_F030_rom.elf
+   arm-none-eabi-size Template_F050_rom.elf
    text    data     bss     dec     hex filename
-   8020     100    1180    9300    2454 Template_F030_rom.elf
+  24504     104    4100   28708    7024 Template_F050_rom.elf
    
 ** DONE Utilizar nuevo Makefile
    CLOSED: [2020-05-20 Wed 16:18]
