@@ -1,10 +1,14 @@
-/*
- * synchro.h
- *
- *  Created on: 02/12/2015
- *      Author: Mariano
- */
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### SYNCHRO.H ####################################
+//----------------------------------------------------
 
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef SYNCHRO_H_
 #define SYNCHRO_H_
 
