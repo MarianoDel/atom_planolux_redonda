@@ -1,10 +1,14 @@
-/*
- * tcp_transceiver.h
- *
- *  Created on: 13/06/2016
- *      Author: Mariano
- */
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### TCP_TRANSCEIVER.H ############################
+//----------------------------------------------------
 
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef TCP_TRANSCEIVER_H_
 #define TCP_TRANSCEIVER_H_
 
