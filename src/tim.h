@@ -1,24 +1,20 @@
-/**
-  ******************************************************************************
-  * @file    Template_2/main.h
-  * @author  Nahuel
-  * @version V1.0
-  * @date    22-August-2014
-  * @brief   Header for tim module
-  ******************************************************************************
-  * @attention
-  *
-  *
-  *
-  ******************************************************************************
-  */
+//---------------------------------------------
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### TIM.H ################################
+//---------------------------------------------
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __STM32F0X_TIM_H
-#define __STM32F0X_TIM_H
+#ifndef __TIM_H
+#define __TIM_H
 
 //--- Exported types ---//
+
 //--- Exported constants ---//
+
 //--- Exported macro ---//
 #define RCC_TIM1_CLK 		(RCC->APB2ENR & 0x00000800)
 #define RCC_TIM1_CLK_ON 	RCC->APB2ENR |= 0x00000800
