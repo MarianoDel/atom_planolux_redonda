@@ -28,14 +28,11 @@
 ** TODO Quitar LibST de donde se pueda
    - usar emacs_arduino y emacs_stretcher_F103
 
-*** para usar usart.c usart.h desde emacs_stretcher_F103
-    - armo un modulo de comm para quitar el codigo de comunicaciones
-      entre MotherBoard, PC y antennas del modulo uart y poder usar
-      modulo nuevo
-    - con el nuevo modulo mismo tamanio de codigo
-    - con el cambio uart -> usart mejoro algo de codigo
+*** Modulo uart
+    - uart.c uart.h desde emacs_dexel_rgb_6ch
+    - hago un backup de los archivos uart_bkp.*
 
-*** con modulo usart ver los pines alternativos, son distintos segun hardware
+*** TODO con modulo usart ver los pines alternativos, son distintos segun hardware
 *** TODO FALTA PROBAR ANTERIOR
 
 *** TODO migro modulo timer
