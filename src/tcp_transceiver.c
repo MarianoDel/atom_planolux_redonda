@@ -13,9 +13,9 @@
 #include <string.h>
 #include <stdio.h>
 #include <stdlib.h>
-#include "main_menu.h"
 #include "ESP8266.h"
 #include "uart.h"
+#include "hard.h"
 
 
 // Externals -------------------------------------------------------------------
@@ -57,7 +57,7 @@ enum TcpMessages CheckTCPMessage(char * d,
 
     if ((*d == 'r') && (*(d + 2) == ','))
     {
-        if (ReadPcktR((unsigned char *) d, 1, new_room_bright, bytes) == RESP_OK)
+        if (ReadPcktR((unsigned char *) d, 1, new_room_bright, bytes) == resp_ok)
         {
             strcpy ((char *) d, (char *) (d + *bytes));
             return ROOM_BRIGHT;
@@ -113,7 +113,7 @@ void TCPProcess (void)
 {
     //char * ptcp; a global
     unsigned char i;
-    unsigned char resp = RESP_CONTINUE;
+    unsigned char resp = resp_continue;
 
     switch (tcp_tx_state)
     {
@@ -132,7 +132,7 @@ void TCPProcess (void)
 
     case TCP_TX_READY_TO_SEND:
         //tengo el puntero al buffer que quiero enviar
-        //pido la transmision al ESP, me contesta RESP_OK, RESP_CONTINUE, RESP_TIMEOUT
+        //pido la transmision al ESP, me contesta resp_ok, resp_continue, resp_timeout
         //veo despues que hago en cada caso
         ESP_SendDataResetSM();
         tcp_tx_state++;
@@ -142,7 +142,7 @@ void TCPProcess (void)
         //me quedo esperando el signo de envio o timeout
         resp = ESP_SendData(0, (unsigned char *) ptcp);
 
-        if (resp == RESP_OK)
+        if (resp == resp_ok)
         {
             //termino de enviar limpio buffer
             *(ptcp+1) = 0;
@@ -151,7 +151,7 @@ void TCPProcess (void)
             tcp_tx_state = TCP_TX_IDLE;
         }
 
-        if (resp == RESP_NOK)
+        if (resp == resp_nok)
         {
             //no encontro el SEND OK  limpio buffer
             //TODO: ver despues si no debo intentar un par de veces mas antes de descartar
@@ -161,7 +161,7 @@ void TCPProcess (void)
             tcp_tx_state = TCP_TX_IDLE;
         }
 
-        if (resp == RESP_TIMEOUT)
+        if (resp == resp_timeout)
         {
             //no pudo enviar  limpio buffer
             //TODO: ver despues si no debo intentar un par de veces mas antes de descartar
@@ -256,7 +256,7 @@ unsigned char TCPSendData (unsigned char port, char * data)
     char * p;
     unsigned char length = 0;
     unsigned char i;
-    unsigned char resp = RESP_NOK;
+    unsigned char resp = resp_nok;
 
     //aca reviso si el puerto esta conectado
     if ((port >= 0) && (port <= 4))
@@ -276,7 +276,7 @@ unsigned char TCPSendData (unsigned char port, char * data)
             *p = port;
             *(p+1) = length;
             strcpy ((p+2), data);
-            resp = RESP_OK;
+            resp = resp_ok;
         }
     }
 
@@ -288,7 +288,7 @@ unsigned char TCPSendDataSocket (unsigned char length, unsigned char * data)
 {
     char * p;
     unsigned char i;
-    unsigned char resp = RESP_NOK;
+    unsigned char resp = resp_nok;
 
     unsigned char port = 0;
     //aca reviso si el puerto esta conectado
@@ -311,7 +311,7 @@ unsigned char TCPSendDataSocket (unsigned char length, unsigned char * data)
             //strcpy ((p+2), (char *) data);
             for (i = 0; i < length; i++)
                 *(p + 2 + i) = *(data + i);
-            resp = RESP_OK;
+            resp = resp_ok;
         }
     }
 
@@ -323,10 +323,10 @@ unsigned char ReadPcktR(unsigned char * p, unsigned short own_addr, unsigned cha
     unsigned char new_shine;
 
     if (*(p+2) != ',')
-        return RESP_NOK;
+        return resp_nok;
 
     if (GetValue(p + 3) == 0xffff)
-        return RESP_NOK;
+        return resp_nok;
 
     new_shine = GetValue(p + 3);
 
@@ -371,7 +371,7 @@ unsigned char ReadPcktR(unsigned char * p, unsigned short own_addr, unsigned cha
     else
         *len = 7;
 
-    return RESP_OK;
+    return resp_ok;
 }
 
 //en S me llega un parametro particular
@@ -499,7 +499,7 @@ unsigned char IpIsValid (char * ip)
                 else if (!dot3)
                     dot3 = i;
                 else
-                    return RESP_NOK;
+                    return resp_nok;
             }
         }
     }
@@ -509,7 +509,7 @@ unsigned char IpIsValid (char * ip)
 
     //me fijo si tiene los tres .
     if ((dot1 == 0) || (dot2 == 0) || (dot3 == 0))
-        return RESP_NOK;
+        return resp_nok;
 
     size1 = dot1;
     size2 = dot2 - dot1 - 1;
@@ -518,30 +518,30 @@ unsigned char IpIsValid (char * ip)
 
     //me fijo que no tengan mucho espacio
     if ((size1 > 3) || (size2 > 3) || (size3 > 3) || (size4 > 3))
-        return RESP_NOK;
+        return resp_nok;
 
     //los puntos son validos, ahora reviso los numeros
     memset (s_octet, '\0', sizeof(s_octet));
     strncpy (s_octet, ip, size1);
-    if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
-        return RESP_NOK;
+    if (OctetIsValid (s_octet, &new_val) == resp_nok)
+        return resp_nok;
 
     memset (s_octet, '\0', sizeof(s_octet));
     strncpy (s_octet, ip + dot1 + 1, size2);
-    if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
-        return RESP_NOK;
+    if (OctetIsValid (s_octet, &new_val) == resp_nok)
+        return resp_nok;
 
     memset (s_octet, '\0', sizeof(s_octet));
     strncpy (s_octet, ip + dot2 + 1, size3);
-    if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
-        return RESP_NOK;
+    if (OctetIsValid (s_octet, &new_val) == resp_nok)
+        return resp_nok;
 
     memset (s_octet, '\0', sizeof(s_octet));
     strncpy (s_octet, ip + dot3 + 1, size4);
-    if (OctetIsValid (s_octet, &new_val) == RESP_NOK)
-        return RESP_NOK;
+    if (OctetIsValid (s_octet, &new_val) == resp_nok)
+        return resp_nok;
 
-    return RESP_OK;
+    return resp_ok;
 }
 
 unsigned char OctetIsValid (char * ip, unsigned char * octet_val)
@@ -564,7 +564,7 @@ unsigned char OctetIsValid (char * ip, unsigned char * octet_val)
     if (dot == 0)
     {
         *octet_val = 0;
-        return RESP_NOK;
+        return resp_nok;
     }
 
 
@@ -586,11 +586,11 @@ unsigned char OctetIsValid (char * ip, unsigned char * octet_val)
     if ((new_val < 0) || (new_val > 255))
     {
         *octet_val = 0;
-        return RESP_NOK;
+        return resp_nok;
     }
 
     *octet_val = new_val;
-    return RESP_OK;
+    return resp_ok;
 }
 
 

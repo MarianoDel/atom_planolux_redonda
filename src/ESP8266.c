@@ -7,8 +7,8 @@
 
 #include "ESP8266.h"
 #include "uart.h"
-#include "main_menu.h"
 #include "stm32f0xx.h"
+#include "hard.h"
 
 #include <string.h>
 #include <stdio.h>
@@ -43,7 +43,7 @@ enum EspConfigState esp_config_state = CONF_INIT;
 //OJO OJO OJO no esta terminada y no se si se necesita
 unsigned char ESP_EnableNewConn (unsigned char p)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	if (p == CMD_RESET)
 	{
@@ -78,7 +78,7 @@ void ESP_SendConfigResetSM (void)
 //Configura como cliente WiFi
 unsigned char ESP_SendConfigClient (void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (esp_config_state)
 	{
@@ -90,10 +90,10 @@ unsigned char ESP_SendConfigClient (void)
 		case CONF_ASK_AT:
 			resp = ESPToATMode(CMD_PROC);
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_0;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -105,10 +105,10 @@ unsigned char ESP_SendConfigClient (void)
 		case CONF_AT_CONFIG_0B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CWMODE_CUR=1\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_1;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -119,14 +119,14 @@ unsigned char ESP_SendConfigClient (void)
 			break;
 
 		case CONF_AT_CONFIG_1B:
-			if ((esp_answer == RESP_TIMEOUT) || (!esp_timeout))
+			if ((esp_answer == resp_timeout) || (!esp_timeout))
 			{
-				resp = RESP_TIMEOUT;
+				resp = resp_timeout;
 			}
 
-			if (esp_answer == RESP_READY)
+			if (esp_answer == resp_ready)
 			{
-				esp_answer = RESP_NO_ANSWER;		//blanqueo esp_answer
+				esp_answer = resp_no_answer;		//blanqueo esp_answer
 				esp_config_state = CONF_AT_CONFIG_2;
 			}
 			break;
@@ -139,15 +139,15 @@ unsigned char ESP_SendConfigClient (void)
 			if (strncmp((char *)rx2buff, (const char *) "OK", (sizeof((const char *) "OK") - 1)) == 0)
 			{
 				//tengo link e IP
-				//resp = RESP_OK;
-				resp = RESP_CONTINUE;
+				//resp = resp_ok;
+				resp = resp_continue;
 				esp_config_state = CONF_AT_CONFIG_3;	//avanzo
 			}
 
 			if (strncmp((char *)rx2buff, (const char *) "FAIL", (sizeof((const char *) "FAIL") - 1)) == 0)
 			{
 				//tengo algun error
-				resp = RESP_NOK;
+				resp = resp_nok;
 			}
 
 
@@ -181,10 +181,10 @@ unsigned char ESP_SendConfigClient (void)
 		case CONF_AT_CONFIG_3B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CWDHCP_CUR=1,1\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_4;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -210,7 +210,7 @@ unsigned char ESP_SendConfigClient (void)
 
 unsigned char ESP_SendConfigAP (void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (esp_config_state)
 	{
@@ -222,10 +222,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_ASK_AT:
 			resp = ESPToATMode(CMD_PROC);
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_0;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -237,10 +237,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_AT_CONFIG_0B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CWMODE_CUR=2\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_1;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -252,10 +252,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_AT_CONFIG_1B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CWSAP_CUR=\"KIRNO_WIFI\",\"12345678\",5,3\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_2;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -267,10 +267,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_AT_CONFIG_2B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CWDHCP_CUR=0,1\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_3;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -282,10 +282,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_AT_CONFIG_3B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CIPAP_CUR=\"192.168.1.254\"\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_4;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -297,10 +297,10 @@ unsigned char ESP_SendConfigAP (void)
 		case CONF_AT_CONFIG_4B:
 			resp = SendCommandWaitAnswer((const char *) "AT+CIPMUX=1\r\n");
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = CONF_AT_CONFIG_5;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -331,7 +331,7 @@ void ESP_OpenSocketResetSM (void)
 //Configura como cliente WiFi
 unsigned char ESP_OpenSocket (void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (esp_config_state)
 	{
@@ -352,7 +352,7 @@ unsigned char ESP_OpenSocket (void)
 			//resp = SendCommandWaitAnswer((const char *) "AT+CIPSTART=\"TCP\",\"192.168.0.100\",1883\r\n");
 			resp = SendCommandWaitAnswer((const char *) "AT+CIPSTART=0,\"TCP\",\"192.168.0.100\",1883\r\n");
 
-			if ((resp == RESP_OK) || (resp == RESP_READY))
+			if ((resp == resp_ok) || (resp == resp_ready))
 			{
 				//ajusto buffer
 				//unsigned char len = sizeof ((const char *) "AT+CIPSTART=\"TCP\",\"192.168.0.102\",1883");	//me da 4 que loco??
@@ -363,20 +363,20 @@ unsigned char ESP_OpenSocket (void)
 				//reviso respuestas
 //				if (strncmp((char *) rx2buff, (char *) (const char *) "CONNECTOK", sizeof ((const char *) "CONNECTOK") - 1) == 0)
 				if (strncmp((char *) rx2buff, (char *) (const char *) "0,CONNECTOK", sizeof ((const char *) "0,CONNECTOK") - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else if (strncmp((char *)rx2buff, (char *) (const char *) "ALREADY CONNECTED", sizeof ((const char *) "ALREADY CONNECTED") - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else
 				{
-					resp = RESP_CONTINUE;
+					resp = resp_continue;
 					esp_timeout = TT_AT_3SEG;
 					esp_config_state++;
 				}
 			}
 
-			if ((resp == RESP_NOK) || (resp == RESP_TIMEOUT))
+			if ((resp == resp_nok) || (resp == resp_timeout))
 			{
-				resp = RESP_NOK;
+				resp = resp_nok;
 				esp_config_state = OPEN_SOCKET_INIT;
 			}
 
@@ -385,7 +385,7 @@ unsigned char ESP_OpenSocket (void)
 
 		case OPEN_SOCKET_WAIT_OK:
 			//me quedo esperando el ok de envio o timeout
-			if (esp_answer == RESP_READY)
+			if (esp_answer == resp_ready)
 			{
 				//reviso si se conecto en el buffer
 				ESPPreParser((unsigned char *)rx2buff);
@@ -393,18 +393,18 @@ unsigned char ESP_OpenSocket (void)
 				//reviso respuestas
 //				if (strncmp((char *) (const char *) "CONNECTOK", (char *)rx2buff, (sizeof ((const char *) "CONNECTOK")) - 1) == 0)
 				if (strncmp((char *) (const char *) "0,CONNECTOK", (char *)rx2buff, (sizeof ((const char *) "0,CONNECTOK")) - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else if (strncmp((char *) (const char *) "ALREADY CONNECTED", (char *)rx2buff, (sizeof ((const char *) "ALREADY CONNECTED")) - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else
-					resp = RESP_NOK;
+					resp = resp_nok;
 			}
 
 			if (!esp_timeout)
 			{
 				//tengo timeout, no pude abrir socket
-				//resp = RESP_TIMEOUT;
-				resp = RESP_NOK;
+				//resp = resp_timeout;
+				resp = resp_nok;
 			}
 
 			break;
@@ -423,11 +423,11 @@ void ESP_SendDataResetSM (void)
 }
 
 //resetar primero la maquina de estados con ESP_SendDataResetSM()
-//contesta RESP_CONTINUE, RESP_TIMEOUT, RESP_NOK o RESP_OK
+//contesta resp_continue, resp_timeout, resp_nok o resp_ok
 //el bufftcpsend de transmision es port,lenght,data
 unsigned char ESP_SendData (unsigned char port, unsigned char * pbuf)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 	char a [30];
 
 	switch (esp_config_state)
@@ -446,38 +446,38 @@ unsigned char ESP_SendData (unsigned char port, unsigned char * pbuf)
 			sprintf (a, "AT+CIPSEND=%i,%i\r\n", *pbuf, *(pbuf+1));
 			resp = SendCommandWaitAnswer(a);
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 				SendCommandWithAnswer((char *)(pbuf + 2));		//blanquea esp_answer
 				esp_timeout = TT_AT_3SEG;
 				esp_config_state++;
 			}
 
 			//tengo timeout, termino transmision
-			//resp = RESP_TIMEOUT;
+			//resp = resp_timeout;
 			break;
 
 		case SEND_DATA_WAIT_SEND_OK:
 			//me quedo esperando el ok de envio o timeout
-			if (esp_answer == RESP_READY)
+			if (esp_answer == resp_ready)
 			{
 				//reviso si tengo SEND OK en el buffer
 				ESPPreParser((unsigned char *)rx2buff);
 
 				//si me recibe los bytes doy como el paquete enviado
 				if (strncmp((char *) (const char *) "Recv ", (char *)rx2buff, (sizeof ((const char *) "Recv ")) - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else if (strncmp((char *) (const char *) "SEND OK", (char *)rx2buff, (sizeof ((const char *) "SEND OK")) - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 				else
-					resp = RESP_NOK;
+					resp = resp_nok;
 			}
 
 			if (!esp_timeout)
 			{
 				//tengo timeout, termino transmision
-				resp = RESP_TIMEOUT;
+				resp = resp_timeout;
 			}
 			break;
 
@@ -491,7 +491,7 @@ unsigned char ESP_SendData (unsigned char port, unsigned char * pbuf)
 
 unsigned char ESP_GetIP (char * s_ip)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 	unsigned char i;
 
 	switch (esp_config_state)
@@ -514,10 +514,10 @@ unsigned char ESP_GetIP (char * s_ip)
 //
 //			OK
 
-			if (resp == RESP_OK)
+			if (resp == resp_ok)
 			{
 				esp_config_state = GET_IP_CHECK;
-				resp = RESP_CONTINUE;
+				resp = resp_continue;
 			}
 			break;
 
@@ -536,7 +536,7 @@ unsigned char ESP_GetIP (char * s_ip)
 			}
 
 			esp_config_state = GET_IP_INIT;
-			resp = RESP_OK;
+			resp = resp_ok;
 			break;
 
 		default:
@@ -548,10 +548,10 @@ unsigned char ESP_GetIP (char * s_ip)
 }
 
 //con CMD_RESET hace reset de la maquina, con CMD_PROC recorre la rutina
-//contesta RESP_CONTINUE, RESP_TIMEOUT, RESP_NOK o RESP_OK
+//contesta resp_continue, resp_timeout, resp_nok o resp_ok
 unsigned char ESPToATMode (unsigned char p)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	if (p == CMD_RESET)
 	{
@@ -579,10 +579,10 @@ unsigned char ESPToATMode (unsigned char p)
 			break;
 
 		case COMM_AT_ANSWER:
-			if ((esp_answer == RESP_TIMEOUT) || (!esp_timeout))
+			if ((esp_answer == resp_timeout) || (!esp_timeout))
 			{
 				if (esp_timeout_cnt >= 3)
-					resp = RESP_TIMEOUT;
+					resp = resp_timeout;
 				else
 				{
 					esp_timeout_cnt++;
@@ -590,14 +590,14 @@ unsigned char ESPToATMode (unsigned char p)
 				}
 			}
 
-			if (esp_answer == RESP_READY)
+			if (esp_answer == resp_ready)
 			{
 				//esp_command_state = COMM_WAIT_PARSER;
 				ESPPreParser((unsigned char *)rx2buff);
 
 				resp = ESPVerifyVersion((unsigned char *)rx2buff);
 
-				if (resp == RESP_OK)
+				if (resp == resp_ok)
 					esp_mode = AT_MODE;
 				else
 					esp_mode = UNKNOW_MODE;
@@ -618,11 +618,11 @@ void SendCommandWaitAnswerResetSM (void)
 }
 
 //Envia un comando al ESP y espera revisar la respuesta
-//Contesta RESP_TIMEOUT, RESP_CONTINUE, RESP_NOK, RESP_OK
+//Contesta resp_timeout, resp_continue, resp_nok, resp_ok
 unsigned char SendCommandWaitAnswer (const char * comm)	//blanquea esp_answer
 {
 	unsigned char i, length = 0;
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 	char s_comm [80];
 
 	switch (esp_command_state)
@@ -634,14 +634,14 @@ unsigned char SendCommandWaitAnswer (const char * comm)	//blanquea esp_answer
 			break;
 
 		case COMM_WAIT_ANSWER:
-			if ((esp_answer == RESP_TIMEOUT) || (!esp_timeout))
+			if ((esp_answer == resp_timeout) || (!esp_timeout))
 			{
-				resp = RESP_TIMEOUT;
+				resp = resp_timeout;
 			}
 
-			if (esp_answer == RESP_READY)
+			if (esp_answer == resp_ready)
 			{
-				esp_answer = RESP_NO_ANSWER;				//blanqueo esp_answer aunque aca no lo necesite
+				esp_answer = resp_no_answer;				//blanqueo esp_answer aunque aca no lo necesite
 				esp_command_state = COMM_VERIFY_ANSWER;
 			}
 			break;
@@ -661,21 +661,21 @@ unsigned char SendCommandWaitAnswer (const char * comm)	//blanquea esp_answer
 
 			ESPPreParser((unsigned char *)rx2buff);
 
-			resp = RESP_NOK;
+			resp = resp_nok;
 			if (strncmp(s_comm, (char *)rx2buff, length) == 0)
 			{
-				resp = RESP_READY;		//si no pega las respuestas comunes igual aviso que el comando era correcto
+				resp = resp_ready;		//si no pega las respuestas comunes igual aviso que el comando era correcto
 				if ((*(rx2buff + length) == 'O') && (*(rx2buff + length + 1) == 'K'))
-					resp = RESP_OK;
+					resp = resp_ok;
 
 				if (strncmp((char *) (const char *) "no change OK", (char *)(rx2buff + length), (sizeof ((const char *) "no change OK")) - 1) == 0)
-					resp = RESP_OK;
+					resp = resp_ok;
 
 				if (*(rx2buff + length) == '>')
-					resp = RESP_OK;
+					resp = resp_ok;
 
 				if (*(rx2buff + length) == '+')		//es una respuesta con informacion adicional
-					resp = RESP_OK;					//que queda cargada en rx2buff
+					resp = resp_ok;					//que queda cargada en rx2buff
 			}
 			break;
 
@@ -691,7 +691,7 @@ unsigned char SendCommandWaitAnswer (const char * comm)	//blanquea esp_answer
 //blanquea esp_answer
 void SendCommandWithAnswer(const char * str)
 {
-	esp_answer = RESP_NO_ANSWER;
+	esp_answer = resp_no_answer;
 	SerialSend((char *) str);
 }
 
@@ -714,7 +714,7 @@ void ESP_ATProcess (void)
 		at_start = 0;
 		at_finish = 0;
 		*prx = '\0';				//ESTO es un peligro no se donde quedo apuntado
-		esp_answer = RESP_READY;	//aviso que tengo una respuesta para revisar
+		esp_answer = resp_ready;	//aviso que tengo una respuesta para revisar
 	}
 
 	if ((pckt_start) && (pckt_finish) && (!esp_mini_timeout))
@@ -722,7 +722,7 @@ void ESP_ATProcess (void)
 		pckt_start = 0;
 		pckt_finish = 0;
 		*prx = '\0';				//ESTO es un peligro no se donde quedo apuntado
-		esp_unsolicited_pckt = RESP_READY;	//aviso que tengo una respuesta para revisar
+		esp_unsolicited_pckt = resp_ready;	//aviso que tengo una respuesta para revisar
 	}
 }
 
@@ -761,7 +761,7 @@ void ESP_ATModeRx (unsigned char d)
 			//recibi demasiados bytes juntos
 			//salgo por error
 			prx = rx2buff;
-			esp_answer = RESP_NOK;
+			esp_answer = resp_nok;
 		}
 	}
 	else if (pckt_start)
@@ -777,7 +777,7 @@ void ESP_ATModeRx (unsigned char d)
 			//recibi demasiados bytes juntos
 			//salgo por error
 			prx = (unsigned char *) bufftcp;
-			esp_unsolicited_pckt = RESP_NOK;
+			esp_unsolicited_pckt = resp_nok;
 		}
 	}
 
@@ -846,9 +846,9 @@ unsigned char ESPVerifyVersion(unsigned char * d)
 	{
 		//ahora reviso solo algunos valores
 		if ((*(d+6) == 'A') && (*(d+9) == 'v') && (*(d+16) == ':'))
-			return RESP_OK;
+			return resp_ok;
 	}
-	return RESP_NOK;
+	return resp_nok;
 }
 
 void CheckVersion (char * answer)
@@ -858,7 +858,7 @@ void CheckVersion (char * answer)
 	comp = strncmp (answer, (const char *) "VER 1.8", (sizeof ((const char *) "VER 1.8")) - 1);
 
 	if (comp == 0)
-		esp_answer = RESP_OK;
+		esp_answer = resp_ok;
 	else
-		esp_answer = RESP_NOK;
+		esp_answer = resp_nok;
 }

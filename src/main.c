@@ -23,7 +23,7 @@
 #include "core_cm0.h"
 #include "adc.h"
 #include "flash_program.h"
-#include "main_menu.h"
+// #include "main_menu.h"
 #include "synchro.h"
 
 
@@ -205,7 +205,7 @@ int main(void)
 {
 	unsigned char i, ii;
 	unsigned char bytes_remain, bytes_read, need_ack = 0;
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 	unsigned char need_to_save = 0;
 	// unsigned short wh_int, wh_dec;
 	// float fcalc = 1.0;

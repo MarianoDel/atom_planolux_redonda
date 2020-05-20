@@ -6,8 +6,8 @@
  */
 
 #include "gps_vktel.h"
-#include "main_menu.h"
 #include "uart.h"
+#include "hard.h"
 
 
 #define gps_mini_timeout	usart1_mini_timeout
@@ -69,10 +69,10 @@ unsigned char str_save [] = Save_Changes_String_Cmd;
 
 
 //Inicio del GPS
-//contesta RESP_CONTNUE o RESP_OK
+//contesta RESP_CONTNUE o resp_ok
 unsigned char GPSStart(void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (gps_state)
 	{
@@ -103,7 +103,7 @@ unsigned char GPSStart(void)
 		case GPS_INIT4:
 			if (!gps_timeout)
 			{
-				resp = RESP_OK;
+				resp = resp_ok;
 				gps_state = GPS_INIT;
 			}
 			break;
@@ -143,10 +143,10 @@ void GPSConfigResetSM(void)
 }
 
 //Configuracion inicial del GPS
-//contesta RESP_CONTNUE o RESP_OK
+//contesta RESP_CONTNUE o resp_ok
 unsigned char GPSConfig(void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (gps_state)
 	{
@@ -261,7 +261,7 @@ unsigned char GPSConfig(void)
 				Usart1SendUnsigned(str_save, sizeof(str_save));
 //				gps_timeout = 100;
 //				gps_state++;
-				resp = RESP_OK;
+				resp = resp_ok;
 				gps_state = GPS_INIT;
 			}
 			break;
@@ -275,10 +275,10 @@ unsigned char GPSConfig(void)
 }
 
 //Configuracion de Factoty Default GPS
-//contesta RESP_CONTNUE o RESP_OK
+//contesta RESP_CONTNUE o resp_ok
 unsigned char GPSResetFactory(void)
 {
-	unsigned char resp = RESP_CONTINUE;
+	unsigned char resp = resp_continue;
 
 	switch (gps_state)
 	{
@@ -294,7 +294,7 @@ unsigned char GPSResetFactory(void)
 				Usart1SendUnsigned(str_save, sizeof(str_save));
 //				gps_timeout = 100;
 //				gps_state++;
-				resp = RESP_OK;
+				resp = resp_ok;
 				gps_state = GPS_INIT;
 			}
 			break;
