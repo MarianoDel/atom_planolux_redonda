@@ -28,17 +28,20 @@
 ** TODO Quitar LibST de donde se pueda
    - usar emacs_arduino y emacs_stretcher_F103
 
-*** Modulo uart
+*** TODO Modulo uart
     - uart.c uart.h desde emacs_dexel_rgb_6ch
     - hago un backup de los archivos uart_bkp.*
 
 *** TODO con modulo usart ver los pines alternativos, son distintos segun hardware
 *** TODO FALTA PROBAR ANTERIOR
 
-*** TODO migro modulo timer
-    - ojo hay un monton de pwm que no estan en este modulo
-    - paso todas las funciones pwm al nuevomodulo timer, compila OK, genera OK
-    - borro archivos modulo pwm
+*** DONE Modulo tim
+    CLOSED: [2020-05-20 Wed 19:13]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo it
+    CLOSED: [2020-05-20 Wed 19:19]
+    - cambio comentarios, el codigo lo dejo todo original
 
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes

@@ -68,7 +68,7 @@ SRC  = ./src/main.c
 SRC += $(BOOTDIR)/system_stm32f0xx.c
 SRC += $(BOOTDIR)/syscalls/syscalls.c
 
-SRC += ./src/stm32f0xx_it.c
+SRC += ./src/it.c
 SRC += ./src/gpio.c
 SRC += ./src/tim.c
 # SRC += ./src/spi.c
