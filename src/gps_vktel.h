@@ -1,13 +1,18 @@
-/*
- * gps_vktel.h
- *
- *  Created on: 27/10/2016
- *      Author: Mariano
- */
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### GPS_VKTEK.H ##################################
+//----------------------------------------------------
 
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef GPS_VKTEL_H_
 #define GPS_VKTEL_H_
 
+// Includes for Configurations -------------------------------------------------
 #include "hard.h"
 #include "stm32f0xx.h"
 
@@ -85,6 +90,8 @@ typedef enum  {
 #define GPSStartResetSM GPSConfigResetSM
 #define GPSResetFactoryResetSM GPSConfigResetSM
 
+
+// Module exported Functions ---------------------------------------------------
 unsigned char GPSStart(void);
 unsigned char GPSConfig(void);
 void GPSConfigResetSM (void);
@@ -93,3 +100,6 @@ void GPSProcess (void);
 unsigned char GPSResetFactory(void);
 
 #endif /* GPS_VKTEL_H_ */
+
+//--- end of file ---//
+

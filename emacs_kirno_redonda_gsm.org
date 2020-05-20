@@ -59,6 +59,14 @@
     CLOSED: [2020-05-20 Wed 20:10]
     - tenia las constantes de respuestas, las paso a hard.h
 
+*** DONE Modulo hard
+    CLOSED: [2020-05-20 Wed 20:32]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo gps_vktel
+    CLOSED: [2020-05-20 Wed 20:40]
+    - cambio comentarios, el codigo lo dejo todo original
+
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes
     arm-none-eabi-size Magneto_GTK_rom.elf

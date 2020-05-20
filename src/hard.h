@@ -1,10 +1,14 @@
-/*
- * hard.h
- *
- *  Created on: 28/11/2013
- *      Author: Mariano
- */
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### HARD.H #######################################
+//----------------------------------------------------
 
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef HARD_H_
 #define HARD_H_
 
@@ -324,7 +328,7 @@ typedef enum {
 } resp_t;
 
 
-/* Module Functions ------------------------------------------------------------*/
+// Module Exported Functions ---------------------------------------------------
 void RelayOn (void);
 void RelayOff (void);
 void RelayOffFast (void);
