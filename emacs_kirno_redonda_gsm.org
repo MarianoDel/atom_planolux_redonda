@@ -75,13 +75,24 @@
     CLOSED: [2020-05-20 Wed 20:50]
     - cambio comentarios, el codigo lo dejo todo original
 
-*** Modulo flash_program
+*** DONE Modulo flash_program
+    CLOSED: [2020-05-21 Thu 08:43]
     - cambio comentarios
     - cambio param_struct por mem_conf, en main sim900_800 y funcs_gsm
     - el codigo ahora es mas chico
     arm-none-eabi-size Template_F050_rom.elf
     text    data     bss     dec     hex filename
     24596     108    4100   28804    7084 Template_F050_rom.elf
+
+*** DONE Modulo dsp
+    CLOSED: [2020-05-21 Thu 09:05]
+    - lo copio directamente de emacs_half_bridge
+    - le agrego un ma8 circular
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24476     108    4108   28692    7014 Template_F050_rom.elf
+
 
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes

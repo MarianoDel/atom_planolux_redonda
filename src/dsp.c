@@ -1,9 +1,10 @@
-/*
- * dsp.c
- *
- *  Created on: 02/12/2015
- *      Author: Mariano
- */
+//---------------------------------------------
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### DSP.C #################################
+//---------------------------------------------
 
 #include "dsp.h"
 
@@ -14,133 +15,307 @@
 
 /* Externals variables ---------------------------------------------------------*/
 
+/* Global variables ---------------------------------------------------------*/
 
+/* Module Definitions ---------------------------------------------------------*/
 
 /* Module functions ---------------------------------------------------------*/
 
 unsigned short RandomGen (unsigned int seed)
 {
-	unsigned int random;
+    unsigned int random;
 
-	//Random Generator
-	srand (seed);
-	random = rand();
+    //Random Generator
+    srand (seed);
+    random = rand();
 
-	return (unsigned short) random;
+    return (unsigned short) random;
 
 }
-unsigned short MAFilterFast (unsigned short new_sample, unsigned short * vsample)
+
+#ifdef USE_MA8_U16_CIRCULAR
+//set de punteros y vaciado del filtro
+//recibe:
+// puntero a estructura de datos del filtro "ma8_u16_data_obj_t *"
+void MA8_U16Circular_Reset (ma8_u16_data_obj_t * p_data)
 {
-	unsigned int total_ma;
+    unsigned char i;
+    
+    for (i = 0; i < 8; i++)
+        p_data->v_ma[i] = 0;
 
-	//Kernel mejorado ver 2
-	//si el vector es de 0 a 7 (+1) sumo todas las posiciones entre 1 y 8, acomodo el nuevo vector entre 0 y 7
-
-	total_ma = new_sample + *(vsample) + *(vsample + 1) + *(vsample + 2);
-	*(vsample + 2) = *(vsample + 1);
-	*(vsample + 1) = *(vsample);
-	*(vsample) = new_sample;
-
-	return total_ma >> 2;
+    p_data->p_ma = p_data->v_ma;
+    p_data->total_ma = 0;
 }
 
-//unsigned short MAFilter8 (unsigned short new_sample, unsigned short * vsample)
-unsigned short MAFilter8 (unsigned short * vsample)
+//Filtro circular, necesito activar previamente con MA16_U16Circular_Reset()
+//recibe:
+// puntero a estructura de datos del filtro "ma8_u16_data_obj_t *"
+// nueva mustra "new_sample"
+//contesta:
+// resultado del filtro
+unsigned short MA8_U16Circular (ma8_u16_data_obj_t *p_data, unsigned short new_sample)
 {
-	unsigned int total_ma;
+    p_data->total_ma -= *(p_data->p_ma);
+    p_data->total_ma += new_sample;
+    *(p_data->p_ma) = new_sample;
 
-	//Kernel mejorado ver 2
-	//si el vector es de 0 a 7 (+1) sumo todas las posiciones entre 1 y 8, acomodo el nuevo vector entre 0 y 7
+    if (p_data->p_ma < ((p_data->v_ma) + 7))
+        p_data->p_ma += 1;
+    else
+        p_data->p_ma = p_data->v_ma;
 
-	total_ma = *(vsample) + *(vsample + 1) + *(vsample + 2) + *(vsample + 3) + *(vsample + 4) + *(vsample + 5) + *(vsample + 6) + *(vsample + 7);
-	*(vsample + 7) = *(vsample + 6);
-	*(vsample + 6) = *(vsample + 5);
-	*(vsample + 5) = *(vsample + 4);
-	*(vsample + 4) = *(vsample + 3);
-	*(vsample + 3) = *(vsample + 2);
-	*(vsample + 2) = *(vsample + 1);
-	*(vsample + 1) = *(vsample);
-
-	return (unsigned short) (total_ma >> 3);
+    return (unsigned short) (p_data->total_ma >> 3);    
 }
 
-unsigned short MAFilter32 (unsigned short new_sample, unsigned short * vsample)
+unsigned short MA8_U16Circular_Only_Calc (ma8_u16_data_obj_t *p_data)
 {
-	unsigned int total_ma;
-
-	total_ma = new_sample + *(vsample) + *(vsample + 1) + *(vsample + 2) + *(vsample + 3) + *(vsample + 4) + *(vsample + 5) + *(vsample + 6);
-	total_ma += *(vsample + 7) + *(vsample + 8) + *(vsample + 9) + *(vsample + 10) + *(vsample + 11) + *(vsample + 12) + *(vsample + 13) + *(vsample + 14);
-	total_ma += *(vsample + 15) + *(vsample + 16) + *(vsample + 17) + *(vsample + 18) + *(vsample + 19) + *(vsample + 20) + *(vsample + 21) + *(vsample + 22);
-	total_ma += *(vsample + 23) + *(vsample + 24) + *(vsample + 25) + *(vsample + 26) + *(vsample + 27) + *(vsample + 28) + *(vsample + 29) + *(vsample + 30);
-
-	*(vsample + 30) = *(vsample + 29);
-	*(vsample + 29) = *(vsample + 28);
-	*(vsample + 28) = *(vsample + 27);
-	*(vsample + 27) = *(vsample + 26);
-	*(vsample + 26) = *(vsample + 25);
-	*(vsample + 25) = *(vsample + 24);
-	*(vsample + 24) = *(vsample + 23);
-
-	*(vsample + 23) = *(vsample + 22);
-	*(vsample + 22) = *(vsample + 21);
-	*(vsample + 21) = *(vsample + 20);
-	*(vsample + 20) = *(vsample + 19);
-	*(vsample + 19) = *(vsample + 18);
-	*(vsample + 18) = *(vsample + 17);
-	*(vsample + 17) = *(vsample + 16);
-	*(vsample + 16) = *(vsample + 15);
-
-	*(vsample + 15) = *(vsample + 14);
-	*(vsample + 14) = *(vsample + 13);
-	*(vsample + 13) = *(vsample + 12);
-	*(vsample + 12) = *(vsample + 11);
-	*(vsample + 11) = *(vsample + 10);
-	*(vsample + 10) = *(vsample + 9);
-	*(vsample + 9) = *(vsample + 8);
-	*(vsample + 8) = *(vsample + 7);
-
-	*(vsample + 7) = *(vsample + 6);
-	*(vsample + 6) = *(vsample + 5);
-	*(vsample + 5) = *(vsample + 4);
-	*(vsample + 4) = *(vsample + 3);
-	*(vsample + 3) = *(vsample + 2);
-	*(vsample + 2) = *(vsample + 1);
-	*(vsample + 1) = *(vsample);
-	*(vsample) = new_sample;
-
-	return (unsigned short) (total_ma >> 5);
+    return (unsigned short) (p_data->total_ma >> 3);
 }
+#endif    //USE_MA8_U16_CIRCULAR
 
-//Filtro circular, recibe
-//new_sample, p_vec_samples: vector donde se guardan todas las muestras
-//p_vector: puntero que recorre el vector de muestras, p_sum: puntero al valor de la sumatoria de muestras
-//devuelve resultado del filtro
-unsigned short MAFilter32Circular (unsigned short new_sample, unsigned short * p_vec_samples, unsigned char * index, unsigned int * p_sum)
+#ifdef USE_MA16_U16_CIRCULAR
+//set de punteros y vaciado del filtro
+//recibe:
+// puntero a estructura de datos del filtro "ma16_u16_data_obj_t *"
+void MA16_U16Circular_Reset (ma16_u16_data_obj_t * p_data)
 {
-	unsigned int total_ma;
-	unsigned short * p_vector;
+    unsigned char i;
+    
+    for (i = 0; i < 16; i++)
+        p_data->v_ma[i] = 0;
 
-	p_vector = (p_vec_samples + *index);
-
-	//agrego la nueva muestra al total guardado
-	total_ma = *p_sum + new_sample;
-
-	//guardo el nuevo sample y actualizo el puntero
-	*p_vector = new_sample;
-	if (p_vector < (p_vec_samples + 31))
-	{
-		p_vector++;
-		*index += 1;
-	}
-	else
-	{
-		p_vector = p_vec_samples;
-		*index = 0;
-	}
-
-	//resto la muestra - 32 (es la apuntada por el puntero porque es circular)
-	total_ma -= *p_vector;
-	*p_sum = (unsigned short) total_ma;
-
-	return total_ma >> 5;
+    p_data->p_ma = p_data->v_ma;
+    p_data->total_ma = 0;
 }
+
+//Filtro circular, necesito activar previamente con MA16_U16Circular_Reset()
+//recibe:
+// puntero a estructura de datos del filtro "ma16_u16_data_obj_t *"
+// nueva mustra "new_sample"
+//contesta:
+// resultado del filtro
+unsigned short MA16_U16Circular (ma16_u16_data_obj_t *p_data, unsigned short new_sample)
+{
+    p_data->total_ma -= *(p_data->p_ma);
+    p_data->total_ma += new_sample;
+    *(p_data->p_ma) = new_sample;
+
+    if (p_data->p_ma < ((p_data->v_ma) + 15))
+        p_data->p_ma += 1;
+    else
+        p_data->p_ma = p_data->v_ma;
+
+    return (unsigned short) (p_data->total_ma >> 4);    
+}
+
+unsigned short MA16_U16Circular_Only_Calc (ma16_u16_data_obj_t *p_data)
+{
+    return (unsigned short) (p_data->total_ma >> 4);
+}
+
+#endif    //USE_MA16_U16_CIRCULAR
+
+
+#ifdef USE_MA32_U8_CIRCULAR
+//set de punteros y vaciado del filtro
+//recibe:
+// puntero a estructura de datos del filtro "ma32_u8_data_obj_t *"
+void MA32_U8Circular_Reset (ma32_u8_data_obj_t * p_data)
+{
+    unsigned char i;
+    
+    for (i = 0; i < 32; i++)
+        p_data->v_ma[i] = 0;
+
+    p_data->p_ma = p_data->v_ma;
+    p_data->total_ma = 0;
+}
+
+//Filtro circular, necesito activar previamente con MA32_U8Circular_Reset()
+//recibe:
+// puntero a estructura de datos del filtro "ma32_u8_data_obj_t *"
+// nueva mustra "new_sample"
+//contesta:
+// resultado del filtro
+unsigned char MA32_U8Circular (ma32_u8_data_obj_t *p_data, unsigned char new_sample)
+{
+    p_data->total_ma -= *(p_data->p_ma);
+    p_data->total_ma += new_sample;
+    *(p_data->p_ma) = new_sample;
+
+    if (p_data->p_ma < ((p_data->v_ma) + 31))
+        p_data->p_ma += 1;
+    else
+        p_data->p_ma = p_data->v_ma;
+
+    return (unsigned char) (p_data->total_ma >> 5);    
+}
+
+unsigned char MA32_U8Circular_Only_Calc (ma32_u8_data_obj_t *p_data)
+{
+    return (unsigned char) (p_data->total_ma >> 5);
+}
+
+#endif    //USE_MA32_U8_CIRCULAR
+
+
+#ifdef USE_MA32_U16_CIRCULAR
+//set de punteros y vaciado del filtro
+//recibe:
+// puntero a estructura de datos del filtro "ma32_u16_data_obj_t *"
+void MA32_U16Circular_Reset (ma32_u16_data_obj_t * p_data)
+{
+    unsigned char i;
+    
+    for (i = 0; i < 32; i++)
+        p_data->v_ma[i] = 0;
+
+    p_data->p_ma = p_data->v_ma;
+    p_data->total_ma = 0;
+}
+
+//Filtro circular, necesito activar previamente con MA32_U16Circular_Reset()
+//recibe:
+// puntero a estructura de datos del filtro "ma32_u16_data_obj_t *"
+// nueva mustra "new_sample"
+//contesta:
+// resultado del filtro
+unsigned short MA32_U16Circular (ma32_u16_data_obj_t *p_data, unsigned short new_sample)
+{
+    p_data->total_ma -= *(p_data->p_ma);
+    p_data->total_ma += new_sample;
+    *(p_data->p_ma) = new_sample;
+
+    if (p_data->p_ma < ((p_data->v_ma) + 31))
+        p_data->p_ma += 1;
+    else
+        p_data->p_ma = p_data->v_ma;
+
+    return (unsigned short) (p_data->total_ma >> 5);    
+}
+
+unsigned short MA32_U16Circular_Only_Calc (ma32_u16_data_obj_t *p_data)
+{
+    return (unsigned short) (p_data->total_ma >> 5);
+}
+
+#endif    //USE_MA32_U16_CIRCULAR
+
+#ifdef USE_PID_CONTROLLERS
+// #define PID_CONSTANT_DIVIDER    10    //todos se dividen por 1024
+// #define PID_CONSTANT_DIVIDER    8    //todos se dividen por 256
+#define PID_CONSTANT_DIVIDER    7    //todos se dividen por 128
+// #define PID_CONSTANT_DIVIDER    6    //todos se dividen por 64
+
+
+short PID (pid_data_obj_t * p)
+{
+    int acc = 0;
+    short error = 0;
+    short d = 0;
+
+    unsigned short k1 = 0;
+    unsigned short k2 = 0;
+    unsigned short k3 = 0;
+    
+    short val_k1 = 0;
+    short val_k2 = 0;
+    short val_k3 = 0;
+
+    k1 = p->kp + p->ki + p->kd;
+    k2 = p->kp + p->kd + p->kd;
+    k3 = p->kd;
+    
+    error = p->setpoint - p->sample;
+
+    //K1
+    acc = k1 * error;
+    val_k1 = acc / 128;
+
+    //K2
+    acc = k2 * p->error_z1;
+    val_k2 = acc / 128;
+
+    //K3
+    acc = k3 * p->error_z2;
+    val_k3 = acc / 128;
+
+    d = p->last_d + val_k1 - val_k2 + val_k3;
+
+    //Update PID variables
+    p->error_z2 = p->error_z1;
+    p->error_z1 = error;
+    p->last_d = d;
+
+    return d;
+}
+
+void PID_Flush_Errors (pid_data_obj_t * p)
+{
+    p->last_d = 0;
+    p->error_z1 = 0;
+    p->error_z2 = 0;
+}
+
+short PID_Small_Ki (pid_data_obj_t * p)
+{
+    int acc = 0;
+    short error = 0;
+    short d = 0;
+
+    unsigned short k1_small = 0;
+    unsigned short k2 = 0;
+    unsigned short k3 = 0;
+    
+    short val_k1 = 0;
+    short val_k2 = 0;
+    short val_k3 = 0;
+
+    // k1 = p->kp + p->ki + p->kd;
+    k2 = p->kp + p->kd + p->kd;
+    k3 = p->kd;
+    
+    error = p->setpoint - p->sample;
+
+    //K1 -- desarmo K1 para mayor definicion del integral
+    p->ki_accumulator += p->ki * error;
+    k1_small = p->kp + p->kd;
+    acc = k1_small * error + p->ki_accumulator;
+
+    if ((p->ki_accumulator > 127) || (p->ki_accumulator < -127))
+        p->ki_accumulator = 0;
+    
+    val_k1 = acc / 128;
+
+    //K2
+    acc = k2 * p->error_z1;
+    val_k2 = acc / 128;
+
+    //K3
+    acc = k3 * p->error_z2;
+    val_k3 = acc / 128;
+
+    d = p->last_d + val_k1 - val_k2 + val_k3;
+
+    //Update PID variables
+    p->error_z2 = p->error_z1;
+    p->error_z1 = error;
+    p->last_d = d;
+
+    return d;
+}
+
+
+void PID_Small_Ki_Flush_Errors (pid_data_obj_t * p)
+{
+    p->last_d = 0;
+    p->ki_accumulator = 0;
+    p->error_z1 = 0;
+    p->error_z2 = 0;
+}
+
+
+#endif    //USE_PID_CONTROLLERS
+
+//--- end of file ---//

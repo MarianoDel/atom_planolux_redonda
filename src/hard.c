@@ -30,8 +30,7 @@ extern unsigned short mains_voltage_filtered;
 enum Relay_State relay_state = ST_OFF;
 unsigned char last_edge;
 unsigned char mains_with_glitch = 0;
-unsigned char mains_voltage_index = 0;
-unsigned short mains_vector[8];
+ma8_u16_data_obj_t mains_filter;
 
 unsigned short max_igrid_last, max_igrid, min_igrid_last, min_igrid;
 unsigned short max_vgrid_last, max_vgrid, min_vgrid_last, min_vgrid;
@@ -274,49 +273,39 @@ void UpdateVGrid (void)
 #endif
 
 #ifdef POWER_MEAS_PEAK_TO_PEAK
-	if (vgrid_update_samples < 350)    //312 un ciclo de 20ms
+    if (vgrid_update_samples < 350)    //312 un ciclo de 20ms
 #endif
-	{
-            //reviso si es un maximo
-            if (V_Sense > max_vgrid)
-                max_vgrid = V_Sense;
+    {
+        //reviso si es un maximo
+        if (V_Sense > max_vgrid)
+            max_vgrid = V_Sense;
 
-            //   //reviso si es un minimo
-            //   if (V_Sense < min_vgrid)
-            //       min_vgrid = V_Sense;
+        //   //reviso si es un minimo
+        //   if (V_Sense < min_vgrid)
+        //       min_vgrid = V_Sense;
 
-            vgrid_update_samples++;
-        }
+        vgrid_update_samples++;
+    }
+    else
+    {
+        //paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
+        max_vgrid_last = max_vgrid;
+        min_vgrid_last = min_vgrid;
+        max_vgrid = 0;
+        min_vgrid = 0;
+        //   max_vgrid = 2048;
+        //   min_vgrid = 2048;
+        vgrid_update_samples = 0;
+
+        //reviso si es un glitch
+        if (max_vgrid_last < GLITCH_VOLTAGE)
+            mains_with_glitch = 1;
         else
-        {
-            //paso un ciclo y un octavo completo, seguro tengo maximo y minimos cargados
-            max_vgrid_last = max_vgrid;
-            min_vgrid_last = min_vgrid;
-            max_vgrid = 0;
-            min_vgrid = 0;
-            //   max_vgrid = 2048;
-            //   min_vgrid = 2048;
-            vgrid_update_samples = 0;
+            mains_with_glitch = 0;
 
-            //reviso si es un glitch
-            if (max_vgrid_last < GLITCH_VOLTAGE)
-                mains_with_glitch = 1;
-            else
-                mains_with_glitch = 0;
-
-            //filtro de alimentacion
-            if (mains_voltage_index < 8)
-            {
-                mains_vector[mains_voltage_index] = max_vgrid_last;
-                mains_voltage_index++;
-            }
-            else
-            {
-                mains_voltage_filtered = MAFilter8(mains_vector);
-                mains_voltage_index = 0;
-                mains_vector[0] = max_vgrid_last;
-            }
-        }
+        //filtro de alimentacion
+        mains_voltage_filtered = MA8_U16Circular(&mains_filter, max_vgrid_last);
+    }
 }
 
 
@@ -427,7 +416,9 @@ unsigned short PowerCalcMean8 (unsigned short * p)
         }
     }
 
-    power = MAFilter8 (p);
+    //TODO: esto es un vector de 10 donde descarto extremos y calculo el promedio
+    //rehacer el filtro
+    // power = MAFilter8 (p);
     return power;
 }
 

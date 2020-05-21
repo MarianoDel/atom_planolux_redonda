@@ -11,7 +11,6 @@
 // Includes --------------------------------------------------------------------
 #include "synchro.h"
 #include "hard.h"
-//#include "dsp.h"
 #include "gpio.h"
 #include "adc.h"
 #include "stm32f0xx.h"
