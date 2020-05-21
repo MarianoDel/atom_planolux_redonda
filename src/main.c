@@ -73,8 +73,8 @@ unsigned short mains_voltage_filtered;
 // //volatile unsigned short standalone_menu_timer;
 // volatile unsigned char grouped_master_timeout_timer;
 volatile unsigned short take_temp_sample = 0;
-#define timer_for_reports (param_struct.timer_reportar * 30)
-#define timer_for_debugs (param_struct.timer_pruebas * 30)
+#define timer_for_reports (mem_conf.timer_reportar * 30)
+#define timer_for_debugs (mem_conf.timer_pruebas * 30)
 // volatile unsigned char timer_wifi_bright = 0;
 
 #if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
@@ -128,7 +128,10 @@ unsigned char usart2_pckt_bytes;
 extern volatile char buffUARTGSMrx2[];
 #endif
 
-parameters_typedef param_struct;
+// ------- Externals de la Memoria y los modos -------
+parameters_typedef * pmem = (parameters_typedef *) (unsigned int *) FLASH_PAGE_FOR_BKP;	//en flash
+parameters_typedef mem_conf;
+
 
 //--- VARIABLES GLOBALES ---//
 unsigned short show_power_index = 0;	//lo uso como timer sincronizado con la medicion, tick 2 secs.
@@ -294,22 +297,18 @@ int main(void)
 
 	//--- Leo los parametros de memoria ---//
 #ifdef USE_REDONDA_BASIC
-	param_struct.acumm_wh = ((parameters_typedef *) (unsigned int *) PAGE63)->acumm_wh;
-	if (param_struct.acumm_wh != 0xFFFFFFFF)
-	{
-		GetFlashConf (&param_struct);
-	}
-	else
-	{
-		//memoria vacia
-		param_struct.acumm_wh = 0;
-		param_struct.acumm_w2s = 0;
-		param_struct.acumm_w2s_index = 0;
-		param_struct.timer_reportar = 2;
-		param_struct.timer_pruebas = 10;
-		//el timer a reportar esta n minutos, yo tengo tick cada 2 segundos
+        memcpy(&mem_conf, pmem, sizeof(parameters_typedef));
+	if (mem_conf.acumm_wh == 0xFFFFFFFF)
+        {
+            //memoria vacia
+            mem_conf.acumm_wh = 0;
+            mem_conf.acumm_w2s = 0;
+            mem_conf.acumm_w2s_index = 0;
+            mem_conf.timer_reportar = 2;
+            mem_conf.timer_pruebas = 10;
+            //el timer a reportar esta n minutos, yo tengo tick cada 2 segundos
 
-		strcpy( param_struct.num_reportar, "1149867843");	//segunda sim de claro
+            strcpy( mem_conf.num_reportar, "1149867843");	//segunda sim de claro
 	}
 #endif
 
@@ -602,9 +601,9 @@ int main(void)
 
 			case SET_COUNTERS_AND_PHONE:
 				//cargo contadores desde la flash
-				acum_secs = param_struct.acumm_w2s;
-				acum_secs_index = param_struct.acumm_w2s_index;
-				acum_hours = param_struct.acumm_wh;
+				acum_secs = mem_conf.acumm_w2s;
+				acum_secs_index = mem_conf.acumm_w2s_index;
+				acum_hours = mem_conf.acumm_wh;
 
 				counters_mode = 0;
 				LED_OFF;
@@ -625,7 +624,7 @@ int main(void)
 					main_state = LAMP_ON;
 					lamp_on_state = init_airplane0;
 					Usart2Send("PRENDIDO\r\n");
-					FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
+					FuncsGSMSendSMS("PRENDIDO", mem_conf.num_reportar);
 					LED_ON;
 #ifdef WITH_HYST
 					hours = 0;
@@ -640,7 +639,7 @@ int main(void)
 					lamp_on_state = init_airplane0;
 					Usart2Send("PRENDIDO\r\n");
 					//TODO: ver de enviar solo si no hay cola de recepcion!!!!, meterlo directo en la funcion FuncsGSMSendSMS
-					FuncsGSMSendSMS("PRENDIDO", param_struct.num_reportar);
+					FuncsGSMSendSMS("PRENDIDO", mem_conf.num_reportar);
 					LED_ON;
 #ifdef WITH_HYST
 					hours = 0;
@@ -697,7 +696,7 @@ int main(void)
 								lamp_on_state = init_airplane0;
 								counters_mode = 0;
 								Usart2Send("APAGADO\r\n");
-								FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+								FuncsGSMSendSMS("APAGADO", mem_conf.num_reportar);
 								RelayOff();
 								LED_OFF;
 							}
@@ -738,7 +737,7 @@ int main(void)
 							{
 								ShowPower(s_lcd, power, acum_hours, acum_secs);
 								Usart2Send(s_lcd);
-								FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+								FuncsGSMSendSMS(s_lcd, mem_conf.num_reportar);
 							}
 							lamp_on_state = init_airplane0;
 						}
@@ -788,7 +787,7 @@ int main(void)
 								lamp_on_state = init_airplane0;
 								counters_mode = 0;
 								Usart2Send("APAGADO\r\n");
-								FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+								FuncsGSMSendSMS("APAGADO", mem_conf.num_reportar);
 								RelayOff();
 								LED_OFF;
 							}
@@ -806,7 +805,7 @@ int main(void)
 										lamp_on_state = init_airplane0;
 										counters_mode = 0;
 										Usart2Send("APAGADO\r\n");
-										FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+										FuncsGSMSendSMS("APAGADO", mem_conf.num_reportar);
 										RelayOff();
 										LED_OFF;
 									}
@@ -837,7 +836,7 @@ int main(void)
 									lamp_on_state = init_airplane0;
 									counters_mode = 0;
 									Usart2Send("APAGADO\r\n");
-									FuncsGSMSendSMS("APAGADO", param_struct.num_reportar);
+									FuncsGSMSendSMS("APAGADO", mem_conf.num_reportar);
 									RelayOff();
 									LED_OFF;
 								}
@@ -863,7 +862,7 @@ int main(void)
 
 					case meas_reporting0:	//mando msj en s_lcd al numero de reporte
 						Usart2Send(s_lcd);
-						resp = FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+						resp = FuncsGSMSendSMS(s_lcd, mem_conf.num_reportar);
 						if (resp == resp_gsm_error)
 							lamp_on_state = meas_reporting1;
 						else
@@ -1045,12 +1044,12 @@ int main(void)
 				{
 					RelayOffFast ();
 					//update de memoria
-					param_struct.acumm_w2s = acum_secs;
-					param_struct.acumm_w2s_index = acum_secs_index;
-					param_struct.acumm_wh = acum_hours;
-					param_struct.send_energy_flag = 0;	//limpio flags
+					mem_conf.acumm_w2s = acum_secs;
+					mem_conf.acumm_w2s_index = acum_secs_index;
+					mem_conf.acumm_wh = acum_hours;
+					mem_conf.send_energy_flag = 0;	//limpio flags
 
-					if (WriteConfigurations(&param_struct))
+					if (WriteConfigurations())
 						Usart2Send("Saved OK!\r\n");
 					else
 						Usart2Send("Mem Error!\r\n");
@@ -1071,7 +1070,7 @@ int main(void)
 				send_energy_reset;
 				ShowPower(s_lcd, 0, acum_hours, acum_secs);	//si entre por aca la pi es 0
 				Usart2Send(s_lcd);
-				FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+				FuncsGSMSendSMS(s_lcd, mem_conf.num_reportar);
 			}
 
 			//reviso si me pidieron reportar un OK de configuracion
@@ -1080,7 +1079,7 @@ int main(void)
 				send_sms_ok_reset;
 				strcpy(s_lcd, "Conf OK!");
 				Usart2Send(s_lcd);
-				FuncsGSMSendSMS(s_lcd, param_struct.num_reportar);
+				FuncsGSMSendSMS(s_lcd, mem_conf.num_reportar);
 			}
 		}
 
@@ -1189,9 +1188,9 @@ int main(void)
 
 			case SET_COUNTERS_AND_PHONE:
 				//cargo contadores desde la flash
-				acum_secs = param_struct.acumm_w2s;
-				acum_secs_index = param_struct.acumm_w2s_index;
-				acum_hours = param_struct.acumm_wh;
+				acum_secs = mem_conf.acumm_w2s;
+				acum_secs_index = mem_conf.acumm_w2s_index;
+				acum_hours = mem_conf.acumm_wh;
 
 				counters_mode = 0;
 				LED_OFF;

@@ -75,6 +75,14 @@
     CLOSED: [2020-05-20 Wed 20:50]
     - cambio comentarios, el codigo lo dejo todo original
 
+*** Modulo flash_program
+    - cambio comentarios
+    - cambio param_struct por mem_conf, en main sim900_800 y funcs_gsm
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24596     108    4100   28804    7084 Template_F050_rom.elf
+
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes
     arm-none-eabi-size Magneto_GTK_rom.elf

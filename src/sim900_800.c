@@ -22,7 +22,7 @@
 
 
 // Externals -------------------------------------------------------------------
-extern parameters_typedef param_struct;
+extern parameters_typedef mem_conf;
 //Config SIM900.
 extern char SIM900APNSIM1[64];
 extern char SIM900USUARIOSIM1[20];

@@ -17,7 +17,7 @@
 
 
 // Externals -------------------------------------------------------------------
-extern parameters_typedef param_struct;
+extern parameters_typedef mem_conf;
 
 // Globals ---------------------------------------------------------------------
 t_GsmState gsm_state = gsm_state_reset;
@@ -247,18 +247,18 @@ void FuncsGSM (void)
         if (resp == 2)
         {
             i = strlen(s_msg);
-            strncpy(param_struct.imei, s_msg, (i - 2));
+            strncpy(mem_conf.imei, s_msg, (i - 2));
             Usart2Send("IMEI: ");
-            Usart2Send(param_struct.imei);
+            Usart2Send(mem_conf.imei);
             Usart2Send("\r\n");
 
             //mando SMS con mi info
             strcpy(s_msg, "IMEI: ");
-            strcat(s_msg, param_struct.imei);
+            strcat(s_msg, mem_conf.imei);
             strcat(s_msg, ", ACTIVO");
 
             p_MSG = s_msg;
-            p_NUM = param_struct.num_reportar;
+            p_NUM = mem_conf.num_reportar;
             gsm_state = gsm_state_sending_sms;
         }
 

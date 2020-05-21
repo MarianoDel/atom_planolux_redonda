@@ -15,10 +15,7 @@
 #include "stm32f0xx.h"
 
 // Configurations Defines ------------------------------------------------------
-//- Where to Backup ------------------------------------------------------------
-#define FLASH_PAGE_FOR_BKP PAGE60    //dejo la 61 libre para dummy
 
-//- Data Struct to Backup ------------------------------------------------------
  //OJO esta estructuras deben estar alineadas en 4 bytes
 typedef struct parameters {
 
@@ -42,25 +39,24 @@ typedef struct parameters {
 } parameters_typedef;
 
 
-#define timer_rep				mem_conf.timer_reportar
-#define timer_debug			mem_conf.timer_pruebas
-#define num_tel_rep			mem_conf.num_reportar
+#define timer_rep				param_struct.timer_reportar
+#define timer_debug			param_struct.timer_pruebas
+#define num_tel_rep			param_struct.num_reportar
 
-#define send_energy			(mem_conf.send_energy_flag & 0x01)
-#define send_energy_set		(mem_conf.send_energy_flag |= 0x01)
-#define send_energy_reset	(mem_conf.send_energy_flag &= 0xFE)
-#define send_sms_ok			(mem_conf.send_energy_flag & 0x02)
-#define send_sms_ok_set		(mem_conf.send_energy_flag |= 0x02)
-#define send_sms_ok_reset	(mem_conf.send_energy_flag &= 0xFD)
+#define send_energy			(param_struct.send_energy_flag & 0x01)
+#define send_energy_set		(param_struct.send_energy_flag |= 0x01)
+#define send_energy_reset	(param_struct.send_energy_flag &= 0xFE)
+#define send_sms_ok			(param_struct.send_energy_flag & 0x02)
+#define send_sms_ok_set		(param_struct.send_energy_flag |= 0x02)
+#define send_sms_ok_reset	(param_struct.send_energy_flag &= 0xFD)
 
-#define diag_prender			(mem_conf.send_energy_flag & 0x10)
-#define diag_prender_set		(mem_conf.send_energy_flag |= 0x10)
-#define diag_prender_reset	(mem_conf.send_energy_flag &= 0xEF)
-#define diag_apagar			(mem_conf.send_energy_flag & 0x20)
-#define diag_apagar_set		(mem_conf.send_energy_flag |= 0x20)
-#define diag_apagar_reset	(mem_conf.send_energy_flag &= 0xDF)
+#define diag_prender			(param_struct.send_energy_flag & 0x10)
+#define diag_prender_set		(param_struct.send_energy_flag |= 0x10)
+#define diag_prender_reset	(param_struct.send_energy_flag &= 0xEF)
+#define diag_apagar			(param_struct.send_energy_flag & 0x20)
+#define diag_apagar_set		(param_struct.send_energy_flag |= 0x20)
+#define diag_apagar_reset	(param_struct.send_energy_flag &= 0xDF)
 
-//- End of Data Struct to Backup -----------------------------------------------
 
 // Define the STM32F10x FLASH Page Size depending on the used STM32 device
 // si es mayor a 128K la pagina es de 2KB, sino 1KB
@@ -82,8 +78,6 @@ typedef struct parameters {
 #define PAGE30			((uint32_t)0x08007800)
 #define PAGE31			((uint32_t)0x08007C00)
 
-#define PAGE60			((uint32_t)0x0800F000)
-#define PAGE61			((uint32_t)0x0800F400)
 #define PAGE63			((uint32_t)0x0800FC00)
 
 
@@ -125,10 +119,21 @@ typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;
 
 
 // Module exported Functions ---------------------------------------------------
-unsigned char WriteConfigurations (void);
+unsigned char ReadMem (void);
+unsigned char EraseAllMemory_FLASH(void);
+void BackupPage(unsigned int *, unsigned int *);
+void ErasePage(uint32_t , unsigned char );
+
+//de libreria st las tiene #include "stm32f0xx_flash.h"
+void FLASH_Unlock(void);
+FLASH_Status FLASH_ErasePage(uint32_t Page_Address);
+void FLASH_Lock(void);
+FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data);
+FLASH_Status FLASH_WaitForLastOperation(uint32_t Timeout);
+FLASH_Status FLASH_GetStatus(void);
+
+unsigned char WriteConfigurations (parameters_typedef *);
 unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char len_in_4);
+void GetFlashConf (parameters_typedef * );
 
-#endif    /* _FLASH_PROGRAM_H_ */
-
-//--- end of file ---//
-
+#endif
