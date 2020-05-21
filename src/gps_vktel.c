@@ -101,7 +101,8 @@ unsigned char GPSStart(void)
     case GPS_INIT3:
         if (!gps_timeout)
         {
-            Usart1SendSingle(0xFF);
+            unsigned char to_send = 0xFF;
+            Usart1SendUnsigned(&to_send, 1);
             gps_timeout = 2;
             gps_state++;
         }

@@ -615,9 +615,9 @@ void GSMReceive (void)
     //---- Comunicacion con modulo GSM ----//
     if (PacketReadyUARTGSM)
     {
-        ESPPreParser2(buffUARTGSMrx2, buffUARTGSMrx2);
+        ESPPreParser2((unsigned char *)buffUARTGSMrx2, (unsigned char *)buffUARTGSMrx2);
 #ifdef DEBUG_ON
-        Usart2Send(buffUARTGSMrx2);
+        Usart2Send((char *)buffUARTGSMrx2);
         Usart2Send("\r\n");
 #endif
 

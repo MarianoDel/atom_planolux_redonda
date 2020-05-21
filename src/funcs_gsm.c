@@ -425,8 +425,6 @@ unsigned char FuncsGSMStateAsk (void)
 
 void FuncsGSMMessageFlags (unsigned short flag)
 {
-    unsigned short temp;
-
     //veo si es un reset flag
     if (flag & GSM_RESET_FLAG)
         GSMFlags &= flag;

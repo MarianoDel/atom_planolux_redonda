@@ -18,6 +18,11 @@
 // Exported Constants ----------------------------------------------------------
 #define ESP8266_PRESENT
 
+#define SIZEOF_DATA256	256
+#define SIZEOF_BUFFTCP	SIZEOF_DATA
+
+
+
 //--- Configuracion puerto serie -----------------------------//
 #define SerialSend(X)		Usart2Send(X)
 

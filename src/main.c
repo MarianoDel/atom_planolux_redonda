@@ -205,7 +205,6 @@ extern void EXTI4_15_IRQHandler(void);
 int main(void)
 {
     unsigned char i, ii;
-    unsigned char bytes_remain, bytes_read, need_ack = 0;
     unsigned char resp = resp_continue;
     unsigned char need_to_save = 0;
     // unsigned short wh_int, wh_dec;
@@ -215,12 +214,9 @@ int main(void)
 
     unsigned short acum_secs_index;
     unsigned int acum_secs, acum_hours;
-    unsigned char show_power = 0;
 
 #if (defined USE_REDONDA_BASIC) || (defined USE_ONLY_POWER_SENSE)
     main_state_t main_state = MAIN_INIT;
-    unsigned char reportar_SMS = 0;
-    unsigned char sended = 0;
     lamp_on_state_t lamp_on_state = init_airplane0;
     unsigned char counters_mode = 0;
     unsigned char meas_end = 0;
@@ -342,11 +338,11 @@ int main(void)
     }
 
     Wait_ms (3000);
-    Usart2Send((char *) (const char *) "GSM GATEWAY.. Cambio a GSM\r\n");
+    Usart2Send("GSM GATEWAY.. Cambio a GSM\r\n");
     Usart1Mode (USART_GSM_MODE);
 
     //mando start al gsm
-    Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
+    Usart2Send("Reset y Start GSM\r\n");
     //GPSStartResetSM ();
     timer_standby = 60000;		//doy 1 minuto para prender modulo
     while (timer_standby)
@@ -354,18 +350,18 @@ int main(void)
         i = GSM_Start();
         if (i == 1)
         {
-            Usart2Send((char *) (const char *) "Start OK\r\n");
+            Usart2Send("Start OK\r\n");
             timer_standby = 0;
         }
 
         if (i > 1)
         {
-            Usart2Send((char *) (const char *) "Start NOK\r\n");
-            Usart2Send((char *) (const char *) "Please reboot!\r\n");
+            Usart2Send("Start NOK\r\n");
+            Usart2Send("Please reboot!\r\n");
         }
     }
 
-    Usart2Send((char *) (const char *) "GSM GATEWAY Listo para empezar\r\n");
+    Usart2Send("GSM GATEWAY Listo para empezar\r\n");
 
     while (1)
     {
@@ -1435,7 +1431,7 @@ int main(void)
 
 
     //mando start al gsm
-    Usart2Send((char *) (const char *) "Reset y Start GSM\r\n");
+    Usart2Send("Reset y Start GSM\r\n");
     //GPSStartResetSM ();
     timer_standby = 60000;		//doy 1 minuto para prender modulo
     while (timer_standby)
@@ -1443,16 +1439,16 @@ int main(void)
         i = GSM_Start();
         if (i == 2)
         {
-            Usart2Send((char *) (const char *) "Start OK\r\n");
+            Usart2Send("Start OK\r\n");
             timer_standby = 0;
         }
 
         if (i == 4)
-            Usart2Send((char *) (const char *) "Start NOK\r\n");
+            Usart2Send("Start NOK\r\n");
     }
 
     //mando conf al gsm
-    Usart2Send((char *) (const char *) "Config al GSM\r\n");
+    Usart2Send("Config al GSM\r\n");
     //GPSConfigResetSM ();
 
     i = 0;
@@ -1464,7 +1460,7 @@ int main(void)
             i = 0;
         else if (ii > 2)
         {
-            Usart2Send((const char*) "Error en configuracion\r\n");
+            Usart2Send("Error en configuracion\r\n");
             while (1);
         }
 
@@ -1474,7 +1470,7 @@ int main(void)
         if (gsm_pckt_ready)
         {
             gsm_pckt_ready = 0;
-            Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
+            Usart2SendUnsigned((unsigned char *)buffUARTGSMrx2, gsm_pckt_bytes);
         }
 
         if (LIGHT)
@@ -1489,7 +1485,7 @@ int main(void)
         if (gsm_pckt_ready)
         {
             gsm_pckt_ready = 0;
-            Usart2SendUnsigned(buffUARTGSMrx2, gsm_pckt_bytes);
+            Usart2SendUnsigned((unsigned char *)buffUARTGSMrx2, gsm_pckt_bytes);
         }
 
         GSMProcess();
@@ -1566,34 +1562,31 @@ int main(void)
 
 void prepare_json_pkt (uint8_t * buffer)
 {
-      int32_t d1 = 1, d2 = 2, d3 = 3, d4 = 4, d5 = 5, d6 = 6;
-      char tempbuff[40];
-      volatile float HUMIDITY_Value;
-      volatile float TEMPERATURE_Value;
-      volatile float PRESSURE_Value;
+    int32_t d1 = 1, d2 = 2, d3 = 3, d4 = 4, d5 = 5, d6 = 6;
+    char tempbuff[40];
+    // volatile float HUMIDITY_Value, TEMPERATURE_Value, PRESSURE_Value;
 
 
+    strcpy((char *)buffer,"{\"d\":{\"myName\":\"Nucleo\"");
+    // BSP_HUM_TEMP_GetTemperature((float *)&TEMPERATURE_Value);
+    // floatToInt(TEMPERATURE_Value, &d1, &d2, 2);
+    sprintf(tempbuff, ",\"A_Temperature\":%lu.%lu",d1, d2);
+    strcat((char *)buffer,tempbuff);
 
-      strcpy((char *)buffer,"{\"d\":{\"myName\":\"Nucleo\"");
-//      BSP_HUM_TEMP_GetTemperature((float *)&TEMPERATURE_Value);
-//      floatToInt(TEMPERATURE_Value, &d1, &d2, 2);
-      sprintf(tempbuff, ",\"A_Temperature\":%lu.%lu",d1, d2);
-      strcat((char *)buffer,tempbuff);
+    // BSP_HUM_TEMP_GetHumidity((float *)&HUMIDITY_Value);
+    // floatToInt(HUMIDITY_Value, &d3, &d4, 2);
+    sprintf(tempbuff, ",\"A_Humidity\":%lu.%lu",d3,d4 );
+    strcat(  (char *)buffer,tempbuff);
 
-//      BSP_HUM_TEMP_GetHumidity((float *)&HUMIDITY_Value);
-//      floatToInt(HUMIDITY_Value, &d3, &d4, 2);
-      sprintf(tempbuff, ",\"A_Humidity\":%lu.%lu",d3,d4 );
-      strcat(  (char *)buffer,tempbuff);
-
-//      BSP_PRESSURE_GetPressure((float *)&PRESSURE_Value);
-//      floatToInt(PRESSURE_Value, &d5, &d6, 2);
-      sprintf(tempbuff, ",\"A_Pressure\":%lu.%lu",d5,d6 );
-      strcat((char *)buffer,tempbuff);
+    // BSP_PRESSURE_GetPressure((float *)&PRESSURE_Value);
+    // floatToInt(PRESSURE_Value, &d5, &d6, 2);
+    sprintf(tempbuff, ",\"A_Pressure\":%lu.%lu",d5,d6 );
+    strcat((char *)buffer,tempbuff);
 
 
-      strcat((char *)buffer,"}}");
+    strcat((char *)buffer,"}}");
 
-      return;
+    return;
 }
 
 void TimingDelay_Decrement(void)

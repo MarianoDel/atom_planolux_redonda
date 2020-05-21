@@ -14,6 +14,7 @@
 #include "stm32f0xx.h"
 #include "adc.h"
 #include "dsp.h"
+#include "uart.h"
 
 #include <stdio.h>
 
