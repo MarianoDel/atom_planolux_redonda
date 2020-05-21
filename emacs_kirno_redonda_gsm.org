@@ -84,10 +84,11 @@
     text    data     bss     dec     hex filename
     24596     108    4100   28804    7084 Template_F050_rom.elf
 
-*** TODO Modulo dsp
+*** DONE Modulo dsp
+    CLOSED: [2020-05-21 Thu 10:31]
     - lo copio directamente de emacs_half_bridge
     - le agrego un ma8 circular
-    - le tengo que activar el filtro al inicio
+    - le tengo que activar el filtro al inicio, lo hago en hard
     - el codigo ahora es mas chico
     arm-none-eabi-size Template_F050_rom.elf
     text    data     bss     dec     hex filename
@@ -97,9 +98,20 @@
     CLOSED: [2020-05-21 Thu 09:08]
     - lo renombro a bkp, parece que nadie lo usa, pero lo dejo por las dudas
 
-*** Modulo adc
+*** DONE Modulo adc
+    CLOSED: [2020-05-21 Thu 10:23]
     - lo copio directamente de emacs_half_bridge
     - lo tengo que cambiar a uso por dma
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24016     108    4108   28232    6e48 Template_F050_rom.elf
+
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24112     108    4108   28328    6ea8 Template_F050_rom.elf
+
+
 
 *** TODO Migro el modulo de clock general a startup_src
     - codigo antes
