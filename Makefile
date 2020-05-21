@@ -73,6 +73,7 @@ SRC += ./src/gpio.c
 SRC += ./src/tim.c
 # SRC += ./src/spi.c
 SRC += ./src/adc.c
+SRC += ./src/dma.c
 SRC += ./src/uart.c
 SRC += ./src/flash_program.c
 SRC += ./src/dsp.c
