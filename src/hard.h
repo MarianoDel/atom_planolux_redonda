@@ -308,6 +308,12 @@ enum Relay_State {
 #define GLITCH_VOLTAGE			636		//equivale a 100V 0.512V V_Sense
 
 
+//------------ Lock for Samples -----------
+#define LOCK_STANDBY							0
+#define LOCK_READY_TO_TAKE_SAMPLES		1
+#define LOCK_SAMPLES_TAKEN					2
+#define LOCK_PROCESSING						3
+
 
 typedef enum {
     resp_ok = 0,
