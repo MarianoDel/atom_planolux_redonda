@@ -245,12 +245,6 @@ typedef enum
 
 #endif
 
-// #define SIZEOF_DATA1	512
-// #define SIZEOF_DATA		256
-// #define SIZEOF_DATA512	SIZEOF_DATA1
-// #define SIZEOF_DATA256	SIZEOF_DATA
-// #define SIZEOF_BUFFTCP	SIZEOF_DATA
-
 
 //--- Temas con el sync de relay
 //#define TT_DELAYED_OFF		5600		//para relay metab
