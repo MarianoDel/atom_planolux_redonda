@@ -23,7 +23,7 @@ extern unsigned short timer_relay;
 extern volatile unsigned short adc_ch[];
 extern unsigned short zero_current;
 extern unsigned short mains_voltage_filtered;
-
+extern volatile unsigned short tt_take_photo_sample;
 
 // Globals ---------------------------------------------------------------------
 //unsigned char relay_state = 0;
@@ -445,5 +445,115 @@ void ShowPower (char * pstr, unsigned short pi, unsigned int e_acum_hours, unsig
 
 }
 
+void UpdatePhotoTransistor(void)
+{
+	//hago update cada 1 seg
+	if (!tt_take_photo_sample)
+	{
+		tt_take_photo_sample = 1000;
+
+		// VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
+		VoltagePhoto [photo_index] = Light_Sense;
+
+		if (photo_index < (SIZEOF_PHOTO_TRANS - 1))
+			photo_index++;
+		else
+			photo_index = 0;
+
+		new_photo_sample = 1;
+	}
+}
+
+void FillPhotoBuffer (void)
+{
+	unsigned char i;
+	unsigned short dummy;
+
+	// dummy = ReadADC1_SameSampleTime(ADC_CH1);
+	dummy = Light_Sense;
+
+	for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
+		 VoltagePhoto[i] = dummy;
+
+}
+
+//devuelve el valor promedio del PhotoTransistor
+//si existen nuevas muestras hace la cuenta, sino contesta el ultimo valor calculado
+unsigned short GetPhoto (void)
+{
+    unsigned char i;
+    unsigned int t = 0;
+
+    if (new_photo_sample)
+    {
+        for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
+        {
+            t += VoltagePhoto[i];
+        }
+
+        last_photo = t >> DIVISOR_PHOTO;
+        new_photo_sample = 0;
+    }
+
+    return last_photo;
+}
+
+#ifdef POWER_MEAS_WITH_SAMPLES
+//devuelve la potencia activa de los vectores de mustras isense y vsense
+unsigned short PowerCalcWithSamples (void)
+{
+#ifdef DEBUG_MEAS_ON
+	char s [10];
+#endif	
+	unsigned char i;
+	int aux1 = 0;
+
+	lock_vect = LOCK_PROCESSING;
+	//promedio isense para conocer zero current
+	for (i = 0; i < VECT_SAMPLES; i++)
+		aux1 += isense[i];
+
+	aux1 = aux1 / VECT_SAMPLES;
+	// aux1 = 2048;
+
+#ifdef DEBUG_MEAS_ON
+	sprintf(s, "z%d ", aux1);
+	Usart2Send(s);
+#endif
+
+	//en power_aux pongo la corriente sin offset
+	for (i = 0; i < VECT_SAMPLES; i++)
+		power_aux[i] = isense[i] - (unsigned short) aux1;
+
+	//multiplico para conocer pact
+	for (i = 0; i < VECT_SAMPLES; i++)
+	{
+		aux1 = power_aux[i] * vsense[i];
+		// aux1 >>= 8;
+		aux1 >>= 5;
+		// aux1 = aux1 / 32;
+		power_aux[i] = aux1;
+	}
+
+	//integro pact
+	aux1 = 0;
+	for (i = 0; i < VECT_SAMPLES; i++)
+		aux1 += power_aux[i];
+
+	aux1 = aux1 / VECT_SAMPLES;
+
+	if (aux1 < 0)		//recorto errores negativos
+		aux1 = 0;
+
+	lock_vect = LOCK_STANDBY;
+
+#ifdef DEBUG_MEAS_ON
+	// sprintf(s, "p%d ", aux1);
+	// Usart2Send(s);
+		// Usart2Send("n ");
+#endif
+
+	return (unsigned short) aux1;
+}
 
 //--- end of file ---//

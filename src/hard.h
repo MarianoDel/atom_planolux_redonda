@@ -346,4 +346,10 @@ unsigned short PowerCalcMean8 (unsigned short * p);
 void ShowPower (char *, unsigned short, unsigned int, unsigned int);
 unsigned char Mains_Glitch (void);
 
+void UpdatePhotoTransistor(void);
+unsigned short GetPhoto (void);
+void FillTempBuffer (void);
+void FillPhotoBuffer (void);
+unsigned short PowerCalcWithSamples (void);
+
 #endif /* HARD_H_ */
