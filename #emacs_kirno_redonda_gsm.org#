@@ -1,0 +1,180 @@
+* Migrar a emacs y repositorio github atom -> emacs
+** DONE Cambio primero el nombre de repositorio
+   CLOSED: [2020-05-20 Wed 15:28]
+   - de git_use.org
+
+*** USOS MAS COMUNES - 2 Nuevo Nombre de Proyecto con repositorio/archivos/historia anteriores
+   tengo eclipse_vapore en git y github y quiero emacs_vapore
+
+   1. sincronizo todo antes de empezar
+   2. una vez que tengo git status nothing to commit
+   3. cambio el nombre del repositorio en github en el repositorio settings
+   4. hago un nuevo clone del nuevo repositorio github que contiene toda la historia
+   5. ahora puedo remover los directorios viejos del disco
+
+** DONE Crear primero bin y revisar tamanios
+   CLOSED: [2020-05-20 Wed 15:29]
+   arm-none-eabi-size Template_F050_rom.elf
+   text    data     bss     dec     hex filename
+  24504     104    4100   28708    7024 Template_F050_rom.elf
+   
+** DONE Utilizar nuevo Makefile
+   CLOSED: [2020-05-20 Wed 16:18]
+   - usar global
+   - cargar todos los archivos para flash de micro
+   - utilizar configuracion del README de blue pill
+   - revisar diferencias .gitignore
+
+** TODO Quitar LibST de donde se pueda
+   - usar emacs_arduino y emacs_stretcher_F103
+
+*** TODO Modulo uart
+    - uart.c uart.h desde emacs_dexel_rgb_6ch
+    - hago un backup de los archivos uart_bkp.*
+
+*** TODO con modulo usart ver los pines alternativos, son distintos segun hardware
+*** TODO FALTA PROBAR ANTERIOR
+
+*** DONE Modulo tim
+    CLOSED: [2020-05-20 Wed 19:13]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo it
+    CLOSED: [2020-05-20 Wed 19:19]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo tcp_transceiver
+    CLOSED: [2020-05-20 Wed 19:39]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo synchro
+    CLOSED: [2020-05-20 Wed 19:46]
+    - cambio comentarios, el codigo lo dejo todo original, borro codigo comentado
+
+*** DONE Modulo sim900_800
+    CLOSED: [2020-05-20 Wed 19:57]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE quito main_menu.h
+    CLOSED: [2020-05-20 Wed 20:10]
+    - tenia las constantes de respuestas, las paso a hard.h
+
+*** DONE Modulo hard
+    CLOSED: [2020-05-20 Wed 20:32]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo gps_vktel
+    CLOSED: [2020-05-20 Wed 20:40]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo gpio
+    CLOSED: [2020-05-20 Wed 20:43]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo funcs_gsm
+    CLOSED: [2020-05-20 Wed 20:50]
+    - cambio comentarios, el codigo lo dejo todo original
+
+*** DONE Modulo flash_program
+    CLOSED: [2020-05-21 Thu 08:43]
+    - cambio comentarios
+    - cambio param_struct por mem_conf, en main sim900_800 y funcs_gsm
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24596     108    4100   28804    7084 Template_F050_rom.elf
+
+*** DONE Modulo dsp
+    CLOSED: [2020-05-21 Thu 10:31]
+    - lo copio directamente de emacs_half_bridge
+    - le agrego un ma8 circular
+    - le tengo que activar el filtro al inicio, lo hago en hard
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24476     108    4108   28692    7014 Template_F050_rom.elf
+
+*** DONE Header constants.h
+    CLOSED: [2020-05-21 Thu 09:08]
+    - lo renombro a bkp, parece que nadie lo usa, pero lo dejo por las dudas
+
+*** DONE Modulo adc
+    CLOSED: [2020-05-21 Thu 10:23]
+    - lo copio directamente de emacs_half_bridge
+    - lo tengo que cambiar a uso por dma
+    - el codigo ahora es mas chico
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24016     108    4108   28232    6e48 Template_F050_rom.elf
+
+    arm-none-eabi-size Template_F050_rom.elf
+    text    data     bss     dec     hex filename
+    24112     108    4108   28328    6ea8 Template_F050_rom.elf
+
+
+
+*** TODO Migro el modulo de clock general a startup_src
+    - codigo antes
+    arm-none-eabi-size Magneto_GTK_rom.elf
+    text    data     bss     dec     hex filename
+    73728     112   22916   96756   179f4 Magneto_GTK_rom.elf
+
+    - agrego hard.h en src por las definiciones de clock, despues lo debo juntar con GTK_Hard.h
+    - tambien quito dumb function SystemInit() del main (prototipo y definicion)
+
+    - despues de implementar
+    arm-none-eabi-size Magneto_GTK_rom.elf
+    text    data     bss     dec     hex filename
+    73144     112   22916   96172   177ac Magneto_GTK_rom.elf
+    
+    - ahora pruebo de quitar rcc de libST pero no puedo porque el adc lo sigue usando
+    - esta dificil porque en emacs_arduino y en emacs_stertcher no esta implementado el adc sin libST
+
+*** migro modulo gpio que no estaba quitando los inits de las primeras funciones de main
+    - quito Tamper_Config del GTK_Hard.c
+    - quito stm32gpio del makefile OK
+
+*** TODO No funciona nada!!!!
+    - aparentemente se esta llamando dos veces a SystemInit() una desde el startup assembler
+      y otra dentro de main
+
+*** TODO no sale la libST
+    stm32f10x_conf.h la pide stm32f10x.h con el STD_PERIPH_DRIVER desde el Makefile 
+    para usar assert_params
+    - la logre sacar, hay que probar todo
+
+*** TODO flash_program tambien usa libST
+    - la unica funcion de flash_program es FLASH_Program (se usa en el cmd save,)
+    - el resto son funciones de GTK_Estructura (Channel_Load)
+    - el comando load, llama a Session_Load de GTK_Estructura que a su vez llama readDataFromFlash
+
+*** TODO Probar lo anterior - FLASH - !!!!
+    - pruebo enviando comandos, pido grabar apago y prendo equipo y reviso si esta todo ok
+    - parece que graba ok, pero cuando lee...
+    - 3 duration OK
+    - 2 signal NOK
+    - 2 state_of_stage NOK
+
+      PUEDE SER POR TAMANIO DEL BUFFER A LA PC???
+**** graba bien muestra mal, aumento el tamanio del buffer de la PC
+     - cambio tamanio de buffer a SIZEOF_PC_TXDATA y SIZEOF_PC_RXDATA
+       en el envio de Usart1SendUnsigned y en USART1_IRQHandler
+     - Ahora esta OK!
+      
+*** TODO migro modulo adc, le agrego dma
+    - GTK_Signal usa Session_Current_Limit_control que llama al adc
+    - como ahora va a ser por DMA lo debo corregir, lo dejo como pendiente
+    - comentadolo compila ok
+     
+*** TODO Session_Current_Limit_control
+    - le armo funciones de muestreo adc que se activan con USE_ADC_SAMPLE_BY_SAMPLE
+
+** TODO Armar nuevos modelos de archivos en modulos
+   - .h .c con nuevo modelo
+   - arme modulo comms, mejore usart, de modulos base gpio y dma, mejore adc
+   - falta ver si finalmente hago algo para antenas
+
+** TODO Upgrade del repositorio remoto GitHub
+   - pasar a emacs...
+
+     

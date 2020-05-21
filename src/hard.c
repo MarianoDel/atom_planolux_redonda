@@ -59,6 +59,13 @@ volatile unsigned char power_vector_index = 0;
 
 
 // Module Functions ------------------------------------------------------------
+// Initial setup for filters and pointers
+void HARD_Initial_Setup (void)
+{
+    MA8_U16Circular_Reset(&mains_filter);
+}
+
+
 void RelayOn (void)
 {
     if (!RelayIsOn())
@@ -152,7 +159,7 @@ void UpdateRelay (void)
             last_edge = 0;
             SYNCP_OFF;
 #ifdef POWER_MEAS_WITH_SAMPLES
-            ADCStartSampling();
+            StartSampling();
 #endif
         }
     }
@@ -466,33 +473,34 @@ void ShowPower (char * pstr, unsigned short pi, unsigned int e_acum_hours, unsig
 
 void UpdatePhotoTransistor(void)
 {
-	//hago update cada 1 seg
-	if (!tt_take_photo_sample)
-	{
-		tt_take_photo_sample = 1000;
+    //hago update cada 1 seg
+    if (!tt_take_photo_sample)
+    {
+        tt_take_photo_sample = 1000;
 
-		// VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
-		VoltagePhoto [photo_index] = Light_Sense;
+        // VoltagePhoto [photo_index] = ReadADC1_SameSampleTime(ADC_CH1);
+        VoltagePhoto [photo_index] = Light_Sense;
 
-		if (photo_index < (SIZEOF_PHOTO_TRANS - 1))
-			photo_index++;
-		else
-			photo_index = 0;
+        if (photo_index < (SIZEOF_PHOTO_TRANS - 1))
+            photo_index++;
+        else
+            photo_index = 0;
 
-		new_photo_sample = 1;
-	}
+        new_photo_sample = 1;
+    }
 }
+
 
 void FillPhotoBuffer (void)
 {
-	unsigned char i;
-	unsigned short dummy;
+    unsigned char i;
+    unsigned short dummy;
 
-	// dummy = ReadADC1_SameSampleTime(ADC_CH1);
-	dummy = Light_Sense;
+    // dummy = ReadADC1_SameSampleTime(ADC_CH1);
+    dummy = Light_Sense;
 
-	for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
-		 VoltagePhoto[i] = dummy;
+    for (i = 0; i < SIZEOF_PHOTO_TRANS; i++)
+        VoltagePhoto[i] = dummy;
 
 }
 
@@ -574,6 +582,21 @@ unsigned short PowerCalcWithSamples (void)
 
 	return (unsigned short) aux1;
 }
+
+
+void StartSampling (void)
+{
+    if (lock_vect == LOCK_STANDBY)
+    {
+// #ifdef DEBUG_MEAS_ON
+// 			// sprintf(s, "z%d ", aux1);
+// 			// Usart2Send(s);
+        // Usart2Send("s");
+// #endif
+        lock_vect = LOCK_READY_TO_TAKE_SAMPLES;
+    }
+}
+
 #endif
 
 //--- end of file ---//

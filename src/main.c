@@ -273,6 +273,8 @@ int main(void)
         }
     }
 
+    HARD_Initial_Setup();
+
 
     //ADC Configuration
 //	AdcConfig();

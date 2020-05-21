@@ -357,5 +357,7 @@ unsigned short GetPhoto (void);
 void FillTempBuffer (void);
 void FillPhotoBuffer (void);
 unsigned short PowerCalcWithSamples (void);
+void StartSampling (void);
+void HARD_Initial_Setup (void);
 
 #endif /* HARD_H_ */
