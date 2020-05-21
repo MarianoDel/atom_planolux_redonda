@@ -407,24 +407,24 @@ int main(void)
     ADC1->CR |= ADC_CR_ADSTART;
     //end of ADC & DMA
         
-    Usart2Send((char *) (const char *) "\r\nKirno Placa Redonda - Basic V1.0\r\n");
-    Usart2Send((char *) (const char *) "  Features:\r\n");
+    Usart2Send("\r\nKirno Placa Redonda - Basic V1.0\r\n");
+    Usart2Send("  Features:\r\n");
 #ifdef WITH_1_TO_10_VOLTS
-    Usart2Send((char *) (const char *) "  Dimmer 1 to 10V\r\n");
+    Usart2Send("  Dimmer 1 to 10V\r\n");
 #endif
 #ifdef WITH_HYST
-    Usart2Send((char *) (const char *) "  Night Hysteresis\r\n");
+    Usart2Send("  Night Hysteresis\r\n");
 #endif
 #ifdef WITH_TEMP_CONTROL
-    Usart2Send((char *) (const char *) "  Temp Control\r\n");
+    Usart2Send("  Temp Control\r\n");
 #endif
 #ifdef USE_WITH_SYNC
-    Usart2Send((char *) (const char *) "  Sync by Edges\r\n");
+    Usart2Send("  Sync by Edges\r\n");
 #else
-    Usart2Send((char *) (const char *) "  Sync by ADC\r\n");
+    Usart2Send("  Sync by ADC\r\n");
 #endif
 #ifdef USE_GSM
-    Usart2Send((char *) (const char *) "  Uses GSM for SMS data\r\n");
+    Usart2Send("  Uses GSM for SMS data\r\n");
 #endif
 
 
