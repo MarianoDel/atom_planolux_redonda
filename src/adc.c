@@ -8,13 +8,13 @@
 // #### ADC.C #################################
 //---------------------------------------------
 
-/* Includes ------------------------------------------------------------------*/
+// Includes --------------------------------------------------------------------
 #include "adc.h"
 #include "stm32f0xx.h"
 #include "hard.h"
 
 
-/* Externals ------------------------------------------------------------------*/
+// Externals -------------------------------------------------------------------
 extern volatile unsigned short adc_ch [];
 
 
@@ -26,7 +26,7 @@ extern volatile unsigned char seq_ready;
 extern volatile unsigned short tt_take_temp_sample;
 #endif
 
-/* Globals ------------------------------------------------------------------*/
+// Globals ---------------------------------------------------------------------
 #ifdef ADC_WITH_INT
 volatile unsigned short * p_channel;
 #endif
@@ -40,7 +40,7 @@ unsigned char new_temp_sample = 0;
 #endif
 
 
-/* Module Functions -----------------------------------------------------------*/
+// Module Functions ------------------------------------------------------------
 //Single conversion mode (CONT=0)
 //In Single conversion mode, the ADC performs a single sequence of conversions,
 //converting all the channels once.

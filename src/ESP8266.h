@@ -1,15 +1,21 @@
-/*
- * ESP8266.h
- *
- *  Created on: 26/04/2016
- *      Author: Mariano
- */
+//----------------------------------------------------
+// #### PROYECTO KIRNO REDONDA GSM - Custom Board ####
+// ##
+// ## @Author: Med
+// ## @Editor: Emacs - ggtags
+// ## @TAGS:   Global
+// ##
+// #### ESP8266.H ####################################
+//----------------------------------------------------
 
+// Define to prevent recursive inclusion ---------------------------------------
 #ifndef ESP8266_H_
 #define ESP8266_H_
 
+// Includes for Configurations -------------------------------------------------
 #include "hard.h"
 
+// Exported Constants ----------------------------------------------------------
 #define ESP8266_PRESENT
 
 //--- Configuracion puerto serie -----------------------------//
@@ -45,6 +51,7 @@
 #define USART_CALLER	0
 #define PROCESS_CALLER	1
 
+// Exported Types --------------------------------------------------------------
 enum EspConfigState
 {
 	CONF_INIT = 0,
@@ -107,7 +114,7 @@ enum EspTranspState
 	TRANSP_GOTRANSP_WAIT
 };
 
-//--- Funciones del Modulo -----------------------------------//
+// Exported Functions ----------------------------------------------------------
 void CheckVersion (char *);
 //void SendCommandWithAnswer(const char *, void (*pCall) (char *));
 void SendCommandWithAnswer(const char *);
@@ -133,6 +140,8 @@ unsigned char ESP_GetIP (char *);
 unsigned char ESP_OpenSocket (void);
 void ESP_OpenSocketResetSM (void);
 
-#endif /* HLK_RM04_H_ */
+#endif /* ESP8266_H_ */
+
+//--- end of file ---//
 
 
