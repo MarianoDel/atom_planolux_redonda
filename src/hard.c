@@ -38,6 +38,25 @@ unsigned short igrid_update_samples;
 unsigned short vgrid_update_samples;
 
 
+// ------- del PhotoTransistor -------
+#define SIZEOF_PHOTO_TRANS		32
+#define DIVISOR_PHOTO			5
+unsigned short VoltagePhoto [SIZEOF_PHOTO_TRANS];
+unsigned char photo_index = 0;
+unsigned short last_photo = 0;
+unsigned char new_photo_sample = 0;
+
+// ------- de los filtros y mediciones -------
+#ifdef POWER_MEAS_WITH_SAMPLES
+#define VECT_SAMPLES		80
+unsigned short isense [VECT_SAMPLES];
+unsigned short vsense [VECT_SAMPLES];
+
+int power_aux [VECT_SAMPLES];
+volatile unsigned char lock_vect = LOCK_STANDBY;
+volatile unsigned char power_vector_index = 0;
+#endif
+
 
 // Module Functions ------------------------------------------------------------
 void RelayOn (void)
@@ -555,5 +574,6 @@ unsigned short PowerCalcWithSamples (void)
 
 	return (unsigned short) aux1;
 }
+#endif
 
 //--- end of file ---//
